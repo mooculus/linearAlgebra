@@ -1,0 +1,468 @@
+\documentclass[11pt,notitlepage]{article}
+\usepackage{amsmath, amsthm, amssymb,todonotes, enumerate,color,pigpen,mathtools}
+\usepackage{graphicx}%authblk
+\usepackage[v2]{xy}
+\xyoption{all}
+\topmargin  = -1cm
+\textwidth  = 16cm \textheight = 24cm
+\voffset-.75cm\hoffset=-1.7cm
+\parindent  = 0pt
+\pdfpageheight 11in
+\pagestyle{empty}
+%\flushbottom
+%\renewcommand\Authfont{\scshape}
+%\renewcommand\Affilfont{\small}
+
+\numberwithin{equation}{section}
+
+\theoremstyle{plain}
+\newtheorem{theorem}[equation]{Theorem}
+\newtheorem*{thm}{Theorem}
+\newtheorem{proposition}[equation]{Proposition}
+\newtheorem{lemma}[equation]{Lemma}
+\newtheorem{corollary}[equation]{Corollary}
+\newtheorem{conjecture}[equation]{Conjecture}
+
+\theoremstyle{definition}
+\newtheorem{definition}[equation]{Definition}
+\newtheorem{example}[equation]{Example}
+\newtheorem{exercise}[equation]{Exercise}
+\newtheorem{remark}[equation]{Remark}
+\newtheorem{observation}[equation]{Observation}
+\newtheorem{question}[equation]{Question}
+\newtheorem*{ques}{Question}
+\newtheorem{construction}[equation]{Construction}
+\newtheorem{claim}[equation]{Claim}
+
+
+\newcommand\wt{\widetilde}
+\newcommand\ov{\overline}
+\newcommand\inj{\rightarrowtail}
+\newcommand\surj{\twoheadrightarrow}
+\newcommand{\harpoon}{\overset{\rightharpoonup}}
+
+\newenvironment{amatrix}[1]{%
+  \left[\begin{array}{@{}*{#1}{c}|c@{}}
+}{%
+  \end{array}\right]
+}
+
+\begin{document}
+
+
+\title{Linear Algebra - Topic 3}
+\author{}
+\maketitle
+\vskip.3in
+
+
+\section{Vector spaces}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{$\mathbb R^n$} Recall from above that $\mathbb R^{m\times n}$ denotes the set of all $m\times n$ matrices with real entries, and that the elements of this set are called row resp.\ column vectors when $m=1$ resp.\ $n=1$. Our convention will be to denote $\mathbb R^{m\times 1}$ as simply $\mathbb R^m$. In other words, a {\it real m-dimensional vector} will always refer to an $m\times 1$ real column vector (for reasons of spatial economy, though, when writing an element of $\mathbb R^m$ in coordinate form, we will often express it as the transpose of a row vector).
+\vskip.2in
+
+From the definition of matrix addition and scalar multiplication, we see that we can i) add two vectors together, and ii) multiply a vector by a scalar, with the result being a (possibly different) vector in the same space that we started with. In other words,
+\vskip.1in
+
+\begin{itemize}
+\item[[C1]] (Closure under vector addition) Given ${\bf v}, {\bf w}\in\mathbb R^n$, ${\bf v} + {\bf w}\in\mathbb R^n$.
+\item[[C2]] (Closure under scalar multiplication) Given ${\bf v}\in\mathbb R^n$ and $\alpha\in\mathbb R$, $\alpha{\bf v}\in\mathbb R^n$.
+\end{itemize}
+\vskip.1in
+
+Moreover, the space $\mathbb R^n$ equipped with these two operations satisfies certain fundamental properties. In what follows, $\bf u$, $\bf v$, $\bf w$ denote arbitrary vectors in $\mathbb R^n$, while $\alpha,\beta$ represent arbitrary scalars in $\mathbb R$.
+
+\begin{itemize}
+\item[[A1]] (Commutativity of addition) ${\bf v} + {\bf w} = {\bf w} + {\bf v}$.
+\item[[A2]] (Associativity of addition) $({\bf u} + {\bf v}) + {\bf w} = {\bf u} + ({\bf v} + {\bf w})$.
+\item[[A3]] (Existence of a zero vector) There is a vector ${\bf z}$ with ${\bf z} + {\bf v} = {\bf v} + {\bf z} = {\bf v}$.
+\item[[A4]] (Existence of additive inverses) For each $\bf v$, there is a vector $-{\bf v}$ with ${\bf v} + (-{\bf v}) = (-{\bf v}) + {\bf v} = {\bf z}$.
+\item[[A5]] (Distributivity of scalar multiplication over vector addition) $\alpha({\bf v} + {\bf w}) = \alpha{\bf v} + \alpha{\bf w}$.
+\item[[A6]] (Distributivity of scalar addition over scalar multiplication) $(\alpha + \beta){\bf v} = \alpha{\bf v} + \beta{\bf v}$.
+\item[[A7]] (Associativity of scalar multiplication) $(\alpha \beta){\bf v}) = (\alpha(\beta {\bf v})$.
+\item[[A8]] (Scalar multiplication with 1 is the identity) $1{\bf v} = {\bf v}$.
+\end{itemize}
+\vskip.2in
+
+We should briefly mention why $\mathbb R^n$ satisfies these properties. First, the definition of matrix addition and scalar multiplication imply [C1] and [C2]. The properties [A1] - [A8], excepting [A3] and [A4],are  a consequence of Theorem \ref{thm:matalg}. The so-called {\it existential} properties (referring to the fact they claim the existence of certain vectors) follow by direct observation. 
+\vskip.2in
+These properties isolate the fundamental algebraic structure of $\mathbb R^n$, and lead to the following definition (one of the most central in all of linear algebra).
+\vskip.3in
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Definition of a vector space}
+
+\begin{definition} A {\it vector space} is a set $V$ equipped with two operations - vector addition \lq\lq$+$\rq\rq\ and scalar multiplication \lq\lq$\cdot$\rq\rq - which satisfy the closure axioms for $V$:
+\begin{itemize}
+\item[[C1]] (Closure under vector addition) Given ${\bf v}, {\bf w}\in V$, ${\bf v} + {\bf w}\in V$.
+\item[[C2]] (Closure under scalar multiplication) Given ${\bf v}\in V$ and a scalar $\alpha$, $\alpha{\bf v}\in V$.
+\end{itemize}
+together with the eight {\it vector space axioms} [A1] - [A8].
+\end{definition}
+
+In this way, a vector space should properly be represented as a triple $(V,+,\cdot)$, to emphasize the fact that the algebraic structure depends not just on the underlying set of vectors, but on the choice of operations representing addition and scalar multiplication.
+\vskip.2in
+
+\begin{example} Let $V = \mathbb R^{m\times n}$, the space of $m\times n$ matrices, with addition given by matrix addition and scalar multiplication as defined for matrices. Then $(\mathbb R^{m\times n},+,\cdot)$ is a vector space. Again, as with $\mathbb R^n$, the closure axioms are seen to be satisfied as a direct consequence of the definitions, while the other properties follow from Theorem \ref{thm:matalg} together with direct construction of the $m\times n$ \lq\lq zero vector\rq\rq\ $0^{m\times n}$, as well as additive inverses as indicated in [A4].
+\end{example}
+
+Before proceeding to other examples, we need to discuss an important point regarding how theorems about vector spaces are typically proven. In any system of mathematics, one operates with a certain set of assumptions, called {\it axioms}, together with various results previously proven (possibly in other areas of mathematics) and which one is allowed to assume true without further verification.
+\vskip.2in
+
+In the case of {\it vector spaces over $\mathbb R$} (i.e. where the scalars are real numbers), the standing assumption is that the above list of ten properties hold for the real numbers. The fastidious reader will note that this was already assumed in the proof of Theorem \ref{thm:matalg}; in fact the proof of that theorem would have been impossible without such an assumption. To illustrate how this foundational assumption applies in a different context, we consider the space
+\[
+F[a,b] = \ \text{the space of real-valued functions on the closed interval }[a,b]
+\]
+Recall that i) a function is completely determined by the values it takes on the elements of its domain, and therefore ii) two functions $f, g$ are {\it equal} iff they have the same domain and $f(x) = g(x)$ for all elements $x$ in their common domain. So in order to show two functions $f$ and $g$ on the closed interval $[a,b]$ are equal, it suffices to verify that $f(c) = g(c)$ for all $a\le c\le b$.
+\vskip.2in
+
+Next recall that the sum of two functions is given by
+\[
+(f+g)(x) := f(x) + g(x)
+\]
+while the scalar multiple $\alpha f$ of the function $f$ is given by
+\[
+(\alpha f)(x) := \alpha(f(x))
+\]
+
+\begin{theorem} Equipped with addition and scalar multiplication as just defined, $(F[a,b],+,\cdot)$ is a vector space.
+\end{theorem}
+
+
+\begin{proof} One begins by verifying the two closure axioms. If $f,g\in F[a,b]$, they are real-valued functions with common domain $[a,b]$; hence their sum is defined by the above equation, and has the same domain, making $f+g$ a function in $F[a,b]$. Similarly, if $f\in F[a,b]$ and $\alpha\in\mathbb R$, then multiplying $f$ by $\alpha$ leaves the domain unchanged, so $\alpha f\in F[a,b]$.
+\vskip.2in
+The eight vector space axioms [A1] - [A8] are of two types. The third and fourth are {\it existential} - they assert the existence of the zero element and additive inverses, respectively. To verify these, one simply has to produce the candidate satisfying the requisite properties. The remaining six are {\it universal}. They involve statements which hold for all collections of vectors for which the given equality makes sense. We will verify each of the eight axioms in detail. This example, then, can be used as a template for how to proceed in other cases with verification that a proposed candidate vector space is in fact one. 
+\vskip.2in
+
+[A1]: For all $f,g\in F[a,b]$ and $x\in [a,b]$,
+\begin{align*}
+(f+g)(x) &= f(x) + g(x)\quad\text{by definition of addition for functions}\\
+             &= g(x) + f(x)\quad\text{by commutativity of addition for real numbers}\\
+             &=(g+f)(x)\quad\text{by definition of addition for real numbers}
+\end{align*}
+\vskip.2in
+
+[A2]: For all $f,g,h\in F[a,b]$ and $x\in [a,b]$,
+\begin{align*}
+((f+g)+h)(x) &= (f+g)(x) + h(x)\quad\text{by definition of addition for functions}\\
+                     &= (f(x) + g(x)) + h(x)\quad\text{by definition of addition for functions}\\
+                     &=f(x) + (g(x)) + h(x))\quad\text{by associativity of addition for real numbers}\\
+                     &=f(x) + (g+h)(x)\quad\text{by definition of addition for functions}\\
+                     &= (f+(g+h))(x)\quad\text{by definition of addition for functions}
+\end{align*}
+\vskip.2in
+
+[A3]: Define $z\in F[a,b]$ by $z(x) = 0, a\le x\le b$. Then for all $f\in F[a,b]$ and $x\in [a,b]$, 
+\begin{align*}
+(z+f)(x) &= z(x) + f(x)\quad\text{by definition of addition for functions}\\
+             &= 0 + f(x)\quad\text{by definition of $z$}\\
+             &= f(x)\quad\text{by the defining property of $0\in\mathbb R$}\\
+             &= f(x) + 0\quad\text{by the defining property of $0\in\mathbb R$}\\
+             &= f(x) + z(x)\quad\text{by definition of $z$}\\
+             &= (f + z)(x)\quad\text{by definition of addition for functions}
+\end{align*}
+\vskip.2in
+
+[A4]: For each $f\in F[a,b]$, define $(-f)(x) := -(f(x))$ (note the different placement of parentheses on the two sides of the equation). Then for all $f\in F[a,b]$ and $x\in [a,b]$, 
+\begin{align*}
+(f + (-f))(x) &= f(x) + (-f)(x)\quad\text{by definition of addition for functions}\\
+             &= f(x) + (-f(x))\quad\text{by definition of $(-f)$}\\
+             &= 0\quad\text{by the property of additive inverses in $\mathbb R$}\\
+             &= z(x)\quad\text{by the definition of $z\in F[a,b]$}\\
+             &= 0\quad\text{by the definition of $z\in F[a,b]$}\\
+             &= -f(x) + f(x)\quad\text{by the property of additive inverses in $\mathbb R$}\\
+             &= ((-f) + f)(x)\quad\text{by definition of addition for functions}
+\end{align*}
+\vskip.2in
+
+[A5]: For all $f,g\in F[a,b]$ and $\alpha, x\in [a,b]$,
+\begin{align*}
+(\alpha (f+g))(x) &= \alpha((f+g)(x))\quad\text{by definition of scalar multiplication for functions}\\
+             &= \alpha(f(x) + g(x))\quad\text{by definition of addition for functions}\\
+             &= \alpha f(x) + \alpha g(x)\quad\text{by distributivity of multiplication over addition in $\mathbb R$}\\
+             &= (\alpha f)(x) + (\alpha g)(x)\quad\text{by definition of scalar multiplication for functions}\\
+             &= ((\alpha f) + (\alpha g))(x)\quad\text{by definition of addition for functions}
+\end{align*}
+\vskip.2in
+
+[A6]: For all $f\in F[a,b]$ and $\alpha,\beta, x\in [a,b]$,
+\begin{align*}
+((\alpha +\beta)f)(x) &= (\alpha +\beta)f(x)\quad\text{by definition of scalar multiplication for functions}\\
+             &= \alpha f(x) + \beta f(x)\quad\text{by distributivity of multiplication over addition in $\mathbb R$}\\
+             &= (\alpha f)(x) + (\beta f)(x)\quad\text{by definition of scalar multiplication for functions}\\
+             &= ((\alpha f) + (\beta f))(x)\quad\text{by definition of addition for functions}
+\end{align*}
+\vskip.2in
+
+[A7]: For all $f\in F[a,b]$ and $\alpha,\beta, x\in [a,b]$,
+\begin{align*}
+((\alpha \beta)f)(x) &= (\alpha \beta)f(x)\quad\text{by definition of scalar multiplication for functions}\\
+             &= \alpha(\beta f(x))\quad\text{by associativity of multiplication in $\mathbb R$}\\
+             &= \alpha ((\beta f)(x))\quad\text{by definition of scalar multiplication for functions}\\
+             &= (\alpha(\beta f))(x)\quad\text{by definition of scalar multiplication for functions}
+\end{align*}
+\vskip.2in
+
+[A8]: For all $f\in F[a,b]$ and $x\in [a,b]$,
+\begin{align*}
+(1\cdot f)(x) &= 1\cdot f(x)\quad\text{by definition of scalar multiplication for functions}\\
+                     &= f(x)\quad\text{by the multiplicative property of $1\in\mathbb R$}
+\end{align*}
+\end{proof}
+\vskip.2in
+
+\begin{exercise} Show that $(\mathbb R^{m\times n}, +,\cdot)$ is a vector space, where \lq\lq +\rq\rq\ denotes matrix addition, and \lq\lq$\cdot$\rq\rq\ denotes scalar multiplication for matrices (hint: use the results of Theorem \ref{thm:matalg}).
+\end{exercise}
+\vskip.3in
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\subsection{Linear combinations and linear independence} The operation of forming linear combinations of vectors is at the heart of Linear Algebra; it is, arguably, the central construct of the entire subject. And yet, it is relatively straightforward to describe.
+\vskip.2in
+
+\begin{definition} Let $(V,+,\cdot)$ be a vector space, and ${\bf v}_1,\dots, {\bf v}_n\in V$ a collection of $n$ vectors in $V$. Then a {\it linear combination} of ${\bf v}_1,\dots,{\bf v}_n$ is a sum of scalar multiples of these vectors; in other words, a sum of the form
+\begin{equation}
+\alpha_1{\bf v}_1 + \alpha_2{\bf v}_2 +\dots + \alpha_n{\bf v}_n
+\end{equation}
+for some choice of scalars $\alpha_1,\alpha_2,\dots,\alpha_n$. A vector ${\bf v}$ is a linear combination of ${\bf v}_1,\dots,{\bf v}_n$ if it can be written in this form. 
+\end{definition}
+
+\begin{example} Suppose ${\bf v}_1 = [1\ 0\ 0]^T, {\bf v}_2 = [0\ 1\ 0]^T\in\mathbb R^3$ (we have written these column vectors as transposed row vectors). Then ${\bf v} = [2\ 5\ 0]^T = 2{\bf v}_1 + 5{\bf v}_2$, so ${\bf v}$ is a linear combination of ${\bf v}_1,{\bf v}_2$. On the other hand, ${\bf w} = [0\ 0\ 1]^T$ is {\it not} a linear combination of ${\bf v}_1,{\bf v}_2$, since the $(3,1)$-entry of ${\bf w}$ is non-zero, while any linear combination of ${\bf v}_1,{\bf v}_2$ would have a $(3,1)$-entry equal to $0$, regardless of the choice of scalars for coefficients.
+\end{example}
+
+In general, given vectors ${\bf v}_1,{\bf v}_2,\dots,{\bf v}_n$, it can be quite difficult to determine simply by inspection whether or not some other vector ${\bf v}$ is or is not a linear combination of the given collection. One of our goals, discussed in detail below, will be to establish some systematic way of answering this question.
+
+\begin{definition} A collection of vectors ${\bf v}_1,\dots,{\bf v}_n$ is {\it linearly independent} if
+\begin{equation}
+\alpha_1{\bf v}_1 + \alpha_2{\bf v}_2 +\dots + \alpha_n{\bf v}_n = {\bf z}\qquad \boldsymbol{\Longleftrightarrow}\qquad \alpha_1 = \alpha_2 = \dots = \alpha_n = 0
+\end{equation}
+In other words, the only linear combination of the vectors that produces the zero vector is the {\it trivial} combination, where each coefficient $\alpha_i = 0$.
+\end{definition}
+
+Call $\{{\bf v}_1,\dots,{\bf v}_n\}$ {\it vectorwise independent} if no vector in the set can be written as a linear combination of the remaining vectors in the set. The following lemma records the equivalence of these two concepts.
+
+
+\begin{lemma}\label{lemma:indep} A collection of vectors $\{{\bf v}_1,\dots,{\bf v}_n\}$ is linearly independent iff it is vectorwise independent.
+\end{lemma}
+
+\begin{proof} Suppose $\alpha_1{\bf v}_1 + \alpha_2{\bf v}_2 +\dots + \alpha_n{\bf v}_n = {\bf z}$ is a linear combination of $\{{\bf v}_1,\dots,{\bf v}_n\}$ equalling the zero vector. If $\alpha_i\ne 0$ for some $1\le i\le n$, then this linear relation may be rewritten as
+\[
+{\bf v}_i = \frac{-\alpha_1}{\alpha_i}{\bf v}_1 + \frac{-\alpha_2}{\alpha_i}{\bf v}_2 +\dots + \frac{-\alpha_{i-1}}{\alpha_i}{\bf v}_{i-1} + \frac{-\alpha_{i+1}}{\alpha_i}{\bf v}_{i+1}+\dots + \frac{-\alpha_n}{\alpha_i}{\bf v}_n 
+\]
+from which we see that linear dependence implies the set is not vectorwise independent, or (via the contrapositive), (vectorwise independence)$\Rightarrow$(linear independence). On the other hand, suppose the vectors are vectorwise dependent. Thus there must exist an index $i$ and scalars $\beta_j, j\ne i$ such that
+\[
+{\bf v}_i = \beta_1{\bf v}_1 + \beta_2{\bf v}_2 +\dots + \beta_{i-1}{\bf v}_{i-1} + \beta_{i+1}{\bf v}_{i+1}+\dots + \beta_n{\bf v}_n 
+\]
+or, equivalently
+\[
+{\bf z} = \beta_1{\bf v}_1 + \beta_2{\bf v}_2 +\dots + \beta_{i-1}{\bf v}_{i-1} - {\bf v}_i + \beta_{i+1}{\bf v}_{i+1}+\dots + \beta_n{\bf v}_n 
+\]
+from which we see that (vectorwise dependence)$\Rightarrow$(linear dependence) or, again by contraposition, (linear independence)$\Rightarrow$(vectorwise independence).
+\end{proof}
+\vskip.2in
+
+Most linear algebra texts do not discuss the notions of linear combinations and linear dependence when the number of vectors involved is infinite. However, there are a number of benefits of being able to extending to this case. Thus, suppose $\{{\bf v}_\alpha\}$ is an arbitrary (possibly infinite) collection of vectors.
+
+\begin{definition} A {\it linear combination} of a collection of vectors $S = \{{\bf v}_\alpha\}\subset V$ is a sum which can be written as a linear combination of some {\it finite} subset of $S$ (alternatively, a sum of the form $\sum \lambda_\alpha {\bf v}_{\alpha}$ where $\lambda_\alpha = 0$ except for {\it finitely} many $\alpha$).
+\end{definition}
+
+Similarly,
+
+\begin{definition} A collection of vectors $S = \{{\bf v}_\alpha\}\subset V$ is {\it linearly independent} resp.\ {\it vectorwise independent} iff every finite subset of vectors in $S$ is linearly independent resp.\ vectorwise independent (as defined above).
+\end{definition}
+
+\begin{exercise} State and prove the generalization of Lemma \ref{lemma:indep} for arbitrary collections of vectors.
+\end{exercise}
+
+\vskip.3in
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\subsection{Subspaces} If $V = \{V,+,\cdot\}$ is a vector space, then $W\subseteq V$ is called a {\it subspace} of $V$ if the restriction to $W$ of the sum and scalar product operations of $V$ make $W$ a vector space. It might seem that, in order to show some collection of vectors in $V$ form a subspace, one would have to go through the entire list of axioms checking each one. In fact, one only needs to check the closure axioms.
+
+\begin{theorem} Let $W$ be a subset of vectors in $V$, which satisfy the two closure axioms C1 and C2 with respect to the operations on $V$. Then $W$ is a subspace of $V$.
+\end{theorem}
+
+\begin{proof} As we have already observed, the vector space axioms A1 - A8 fall into two types: {\it existential} (claiming the existence of certain vectors), and {\it universal} (indicating some property is universally true). Of these eight axioms, all but A3 and A4 are of the second type. These are automatically satisfied for vectors in $W$, because they hold for the larger space $V$ in which $W$ lies. In other words, for these six axioms, there is nothing to prove. 
+\vskip.2in
+
+The issue is with A3 and A4. To this end, we first show
+
+\begin{claim} For any vector ${\bf v}\in V$, ${\bf z} = 0{\bf v}$. In addition, $-{\bf v} = (-1){\bf v}$.
+\end{claim}
+In other words, the zero vector of $V$ can be realized by taking any vector in $V$ and multiplying it by the scalar $0$, while the additive inverse of any vector can be gotten by multiplying it by the scalar $-1$.
+
+\begin{proof} Fix ${\bf v}\in V$. Then
+\[
+{\bf v} + 0{\bf v} = 1{\bf v} + 0{\bf v} = (1+0){\bf v} = 1{\bf v} = {\bf v}
+\]
+so adding $-{\bf v}$ to both sides gives
+\[
+0{\bf v} = z + 0{\bf v} = (-{\bf v} + {\bf v}) + 0{\bf v} = -{\bf v} + ({\bf v} + 0{\bf v}) = -{\bf v} + {\bf v} = z
+\]
+verifying the first claim. Knowing this, we then have
+\[
+(-1){\bf v} + {\bf v} = (-1){\bf v} + 1{\bf v} = (-1+1){\bf v} = 0{\bf v} = z
+\]
+implying $(-1){\bf v} = -{\bf v}$ by the uniqueness of the additive inverse indicated by A4. 
+\end{proof}
+
+Axioms A3 and A4 then follow immediately for $W$, by virtue of the fact that $W$ is closed under scalar multiplication.
+\end{proof}
+
+There are some important and basic constructions that allow one to define subspaces.
+
+\subsubsection{Spanning sets} If $S = \{{\bf v}_1,\dots, {\bf v}_n\}\subset V$ is a (finite) collection of vectors in a vector space $V$, then the {\it span} of $S$ is the set of all linear combinations of the vectors in $S$. That is
+\[
+Span(S) := \{\alpha_1{\bf v}_1 + \alpha_2{\bf v}_2 +\dots +\alpha_n{\bf v}_n\ |\ \alpha_i\in\mathbb R\}
+\] 
+
+\begin{remark} If $S = \{{\bf v}_i\ |\ i\in\mathbb N\}$ is a countably infinite set of vectors, then the (linear, algebraic) span of the vectors is defined to be
+\[
+Span\{{\bf v}_i\ |\ i\in\mathbb N\} := \left\{\sum_i\alpha_i{\bf v}_i\ |\ \text{all but finitely many of the }\alpha_i\text{ are zero}\right\}
+\]
+the definition can be extended to arbitrarily large sets of vectors using a slightly different method of extension. Thus, if $S\subseteq V$ is an arbitrary set of vectors in $V$, then
+\[
+Span(S) := \underset{T\text{ finite}}{\underset{T\subseteq S}{\bigcup}} Span(T)
+\]
+\end{remark}
+
+In other words, for any subset $S\subset V$, $Span(S) =$ the set of all linear combinations of elements of $S$.
+
+\begin{definition} If $V$ is a vector space, and $S$ a set of vectors in $V$, then we say that $S$ is a {\it spanning set} for $V$ if $V = Span(S)$.
+\end{definition}
+
+\begin{exercise} Show that for any (non-empty) set of vectors $S\subset V$, $Span(S)$ is a subset of $V$ (in other words, it is closed under the addition and scalar multiplication operations coming from $V$). Your argument should work for general sets $S$ without any assumptions on cardinality.
+\end{exercise}
+
+\begin{lemma} Every vector space $V$ has a spanning set.
+\end{lemma}
+
+\begin{proof} Because we allow spanning sets to be arbitrarily large, we can take $S = V$ and observe that $V = Span(V)$ for trivial reasons.
+\end{proof}
+
+This lemma suggests that spanning sets are not only not unique, they can have vastly different sizes. For example, $\mathbb R^2$ is spanned by $\{{\bf e}_1, {\bf e}_2\}$. It is also spanned by the set $\mathbb R^2$ itself, which is much larger. It is natural to ask how small a spanning set can be. This leads to
+
+\begin{definition} $S$ is a {\it minimal spanning set} for $V$ if
+\begin{itemize} 
+\item $V = Span(S)$, and
+\item For any proper subset $T\subsetneq S$, $Span(T)\subsetneq V$.
+\end{itemize}
+\end{definition}
+
+
+Minimal spanning sets play a very important role in the study of vector spaces, and are discussed in greater detail below.
+\vskip.3in
+
+\subsubsection{Nullspaces} If $A$ is an $m\times n$ matrix with entries in $\mathbb R$, the {\it nullspace of A} is the set
+\[
+N(A) := \{{\bf x}\in\mathbb R^n\ |\ A*{\bf x} = {\bf 0}\}\subset \mathbb R^n
+\]
+In other words, $N(A)$ is the set of all solutions to the homogeneous matrix equation $A*{\bf x} = {\bf 0}$.
+
+\begin{lemma} For any $m\times n$ matrix $A$ with entries in $\mathbb R$, $N(A)$ is a subspace of $\mathbb R^n$.
+\end{lemma}
+
+\begin{proof} Note that ${\bf 0}\in N(A)$. So we need to show that $N(A)$ satisfies the two closure axioms.
+\vskip.1in
+
+{\bf\underbar{C1}} Suppose ${\bf v}, {\bf w}\in N(A)$. Then
+\[
+A*({\bf v} + {\bf w}) = A*{\bf v} + A*{\bf w} = {\bf 0} + {\bf 0} = {\bf 0}
+\]
+Hence $N(A)$ is closed under addition.
+\vskip.1in
+
+{\bf\underbar{C2}} Suppose $\alpha\in\mathbb R$ and ${\bf v}\in N(A)$. Then
+\[
+A*(\alpha{\bf v}) = \alpha(A*{\bf v}) = \alpha{\bf 0} = {\bf 0} 
+\]
+Hence $N(A)$ is closed under scalar multiplication. This completes the proof.
+\end{proof}
+\vskip.3in
+
+
+\subsubsection{Row space, column space, and codomain} Let $A\in \mathbb R^{m\times n}$. One may construct from $A$ various different subspaces, each of which is important in its own right.
+\vskip.2in
+
+{\bf\underbar{The row space of $A$}} Each row of $A$ is a $1\times n$ vector in $\mathbb R^{1\times n}$, and the row space is the span of this collection of vectors:
+\[
+Row(A) := Span\{A(i,:)\}_{1\le i\le m}\subseteq \mathbb R^{1\times n}
+\]
+
+Similarly one has
+\vskip.2in
+
+{\bf\underbar{The column space of $A$}} Each column of $A$ is an $m\times 1$ vector in $\mathbb R^{m\times 1} = \mathbb R^m$, and the column space is the span of this collection of vectors:
+\[
+Col(A) := Span\{A(:,j)\}_{1\le i\le n}\subseteq \mathbb R^{m}
+\]
+
+Finally, the 
+\vskip.2in
+
+{\bf\underbar{The codomain, or range of $A$}} (viewed as a linear transformation, defined below) is
+\[
+Range(A) := \{{\bf b}\in\mathbb R^m\ |\ A*{\bf x} = {\bf b}\ \text{ is consistent}\}\subseteq \mathbb R^m
+\]
+
+In analogy to the nullspace, we have
+
+\begin{lemma} For any real $m\times n$ matrix $A$, $Row(A)$ is a subspace of $\mathbb R^{1\times n}$, while $Col(A) = Range(A)$ is a subspace of $\mathbb R^m$.
+\end{lemma}
+
+\begin{proof} The span of any collection of vectors is a subspace of the space in which they lie. Now we have seen that for any ${\bf x} = [x_1\ x_2\dots x_n]^T\in \mathbb R^n$,
+\[
+A*{\bf x} = \sum_{j=1}^n x_j A(:,j)\in\mathbb R^m
+\]
+This equality identifies the range and column space of $A$.
+\end{proof}
+\vskip.3in
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\subsection{Bases and dimension} A set of vectors $S = \{{\bf v}_\alpha\}\subset V$ is a {\it basis} for $V$ if
+\begin{itemize}
+\item it spans $V$ and
+\item it is linearly independent.
+\end{itemize}
+
+The concept of a basis makes perfect sense regardless of the number of vectors in $S$
+\vskip.2in
+
+{\bf\underbar{Fundamental Properties}}
+
+\begin{itemize}
+\item[[B1]] $S = \{{\bf v}_\alpha\}\subset V$ is a basis for $V$ iff it is a minimal spanning set for $V$.
+\item[[B2]] Every non-zero vector space $V$ admits a basis.
+\item[[B3]] If $S = \{{\bf v}_\alpha\}$ and $T = \{{\bf w}_\beta\}$ are two bases for $V$, then $|S|=|T|$.
+\end{itemize}
+\vskip.2in
+
+{\bf\underbar{Proof of B1}}\, Suppose $S$ is a basis for $V$. Then it certainly spans $V$. If it were not a minimal spanning set, it would mean there is a vector ${\bf v}_0\in S$ which is in the span of $S\backslash\{{\bf v}_0\}$, which in turn would mean that ${\bf v}_0$ could be written as a linear combination of vectors in $S\backslash\{{\bf v}_0\}$. Thus the original set $S$ would not be vectorwise independent, which by the above exercise is a contradiction. Hence it must be minimal.
+\vskip.1in
+In the other direction, suppose it is a minimal spanning set. If it were not linearly independent, then by the same exercise it would not be vectorwise independent, so there would exist some vector ${\bf v}_1\in S$ which could be written as a linear combination of the other vectors in $S$. Then $Span(S) = Span(S\backslash\{{\bf v}_1\}$, contradicting the fact that $S$ is minimal. Hence $S$ not only spans but must also be linearly independent.\hfill$\square$
+\vskip.2in
+
+{\bf\underbar{Proof of B2}}\, Given the first property, there are two different ways one can go about constructing a basis. We present both. Note: they do require familiarity with the operations of union and intersection for sets.
+\vskip.05in
+
+\underbar{Method 1} Let $T_s = \{S\subset V\ |\ V = Span(S)\}$. We can partially order $T_s$ by defining $S\le S'$ if $S'\subset S$. Every chain is clearly bounded above as a set by $\empty$ (even though the bound is not an element of $T_s$). Choose a totally ordered subset of $T_s$; by Zorn's Lemma it contains a maximal element $S_m\in T_s$. Maximality with respect to this total ordering means $S_m$ is a minimal spanning set, hence a basis by {\bf B1}.
+\vskip.05in
+
+\underbar{Method 2} Let $T_l = \{S\subset V\ |\ S\ \text{is linearly independent}\}$, and partially order $T_l$ by $S\le S'$ iff $S\subset S'$. Again, every chain has an upper bound $S=V$ (which again will not be in $T_l$). Choose a totally ordered subset of $T_l$ and let $S_l$ be a maximal element, implying it is a maximal linearly independent subset of $V$, hence a basis.
+\vskip.2in
+
+The third property will require a bit more work; its proof will be deferred until later.
+
+
+
+
+\end{document}
