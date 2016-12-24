@@ -1,0 +1,634 @@
+\section{Inner product spaces}
+
+\subsection{The dot product in $\mathbb R^n$} Consider $\mathbb R^n$ equipped with its standard basis (so that vectors in $\mathbb R^n$ are canonically identified with their $n\times 1$ coordinate representations). Then given ${\bf v} = [v_1\ v_2\ \dots\ v_n], {\bf w} = [w_1\ w_2\ \dots\ w_n]^T\in\mathbb R^n$, their {\it dot product} (also referred to as {\it scalar product}) is given by
+\[
+{\bf v}\cdot{\bf w} := {\bf v}^T*{\bf w} = \sum_{i=1}^n v_iw_i
+\]
+
+This operation on pairs of vectors satisfies three basic properties
+
+\begin{enumerate}
+\item[(IP1)] It is symmetric:
+\[
+{\bf v}\cdot {\bf w} = {\bf w}\cdot {\bf v}
+\]
+\item[(IP2)] It is bilinear:
+\begin{gather*}
+(\alpha_1{\bf v}_1 + \alpha_2{\bf v}_2)\cdot {\bf w} = \alpha_1{\bf v}_1\cdot{\bf w} + \alpha_2{\bf v}_2\cdot{\bf w}\\
+{\bf v}\cdot (\beta_1{\bf w}_1 + \beta_2{\bf w}_2) = \beta_1{\bf v}\cdot{\bf w}_1 + \beta_2{\bf v}\cdot{\bf w}_2
+\end{gather*}
+\item[(IP3)] It is positive non-degenerate:
+\[
+{\bf v}\cdot {\bf v}\ge 0;\quad {\bf v}\cdot {\bf v} = 0\,\text{ iff } {\bf v} = {\bf 0}
+\]
+\end{enumerate}
+\vskip.2in
+
+Note that the standard {\it Euclidean norm} of $\bf v$  (also referred to as the $\ell^2$-norm) is closely related to the dot product; precisely
+\begin{equation}
+\|{\bf v}\| = \|{\bf v}\|_2 = \sqrt{v_1^2 + v_2^2 +\dots v_n^2} = ({\bf v}\cdot {\bf v})^{\frac12}
+\end{equation}
+
+Its essential features are
+
+\begin{enumerate}
+\item[(N1)] It is positive definite:
+\[
+\|{\bf v}\|\ge 0;\quad \|{\bf v}\| = 0 \text{ iff } {\bf v} = 0
+\]
+\item[(N2)] It satisfies the triangle inequality (for norms):
+\[
+\|{\bf v} + {\bf w}\|\le \|{\bf v}\| + \|{\bf w}\|
+\]
+\end{enumerate}
+\vskip.2in
+
+This is the norm used in $\mathbb R^n$ to define the standard Euclidean {\it metric}, which is the conventional way to measure the distance between two vectors:
+\begin{equation}
+d({\bf v},{\bf w}) := \|{\bf v} - {\bf w}\|_2
+\end{equation}
+
+Again, this distance function - or metric - satisfies three basic properties, which are direct consequences of the ones above.
+
+\begin{enumerate}
+\item[(M1)] It is symmetric:
+\[
+d({\bf v},{\bf w}) = d({\bf w},{\bf v})
+\]
+\item[(M2)] It is positive non-degenerate:
+\[
+d({\bf v},{\bf w})\ge 0\,\,\forall {\bf v}, {\bf w}\in\mathbb R^n;\text{ moreover } d({\bf v},{\bf w}) = 0\,\text{ iff } {\bf v} = {\bf w}
+\]
+\item[(M3]) It satisfies the triangle inequality (for metrics):
+\[
+d({\bf u},{\bf w})\le d({\bf u},{\bf v}) + d({\bf v},{\bf w})\quad\forall {\bf u}, {\bf v}, {\bf w}\in\mathbb R^n
+\]
+\end{enumerate}
+\vskip.2in
+
+So the i) dot product, ii) Euclidean norm, and iii) Euclidean distance are all closely related. In fact, any one of them determines the other two. Obviously, the dot product determines the norm, and the norm determines the distance. But also one has
+
+\begin{itemize} 
+\item the equality
+\[
+{\bf v}\cdot {\bf w} = \frac12(\|{\bf v} + {\bf w}\|^2 - \|{\bf v}\|^2 - \|{\bf w}\|^2)
+\]
+so that one can also recover the dot product from the norm;
+\item $\|{\bf v}\| = d({\bf v}, {\bf 0})$, so $d(_-,_-)$ and $\|_-\|$ determine each other.
+\end{itemize}
+\vskip.3in
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Symmetric bilinear pairings on $\mathbb R^n$, and their representation} The dot product defined in the previous section is a specific example of a {\it bilinear, symmetric pairing}. We consider these properties in sequence.
+\vskip.2in
+
+A {\it bilinear pairing} on $\mathbb R^n$ is a map $P:\mathbb R^n\times\mathbb R^n\to \mathbb R$ which simply satisfies property (IP2). A {\it symmetric bilinear pairing} is a bilinear pairing that also satisfies (IP1). These pairings admit a straightforward matrix representation, not unlike the matrix representation of linear transformations discussed previously. Again, we assume we are looking at coordinate vectors with respect to the standard basis for $\mathbb R^n$.
+
+\begin{theorem}\label{thm:matrep} For any bilinear pairing $P$ on $\mathbb R^n$, there is a unique $n\times n$ matrix $A_P$ such that
+\[
+P({\bf v},{\bf w}) = {\bf v}^T*A_P*{\bf w}
+\]
+Moreover, if $P$ is symmetric then so is $A_P$. Conversely, any $n\times n$ matrix $A$, determines a unique bilinear pairing $P_A$ on $\mathbb R^n$ by
+\[
+P_A({\bf v}, {\bf w}) = {\bf v}^T*A*{\bf w}
+\]
+which is symmetric precisely when $A$ is.
+\end{theorem}
+
+\begin{proof} Because it is bilinear, $P$ is uniquely characterized by its values on ordered pairs of basis vectors; moreover two bilinear pairings $P, P'$ are equal precisely if $P({\bf e}_i,{\bf e}_j) = P'({\bf e}_i,{\bf e}_j)$ for all pairs $1\le i,j\le n$ . So define $A_P$ be the $n\times n$ matrix with $(i,j)^{th}$ entry given by
+\[
+A_P(i,j) := P({\bf e}_i,{\bf e}_j),\quad 1\le i,j\le n
+\]
+By construction, the pairing $({\bf v},{\bf w})\mapsto {\bf v}^T*A_P*{\bf w}$ is bilinear, and agrees with $P$ on ordered pairs of basis vectors. Thus the two agree everywhere. This establishes a 1-1 correspondence (bilinear pairings on $\mathbb R^n$) $\Leftrightarrow$ ($n\times n$ matrices). Again, by construction, the matrix $A_P$ will be symmetric  iff $P$ is. Thus this correspondence restricts to a 1-1 correspondence (symmetric bilinear pairings on $\mathbb R^n$) $\Leftrightarrow$ ($n\times n$ symmetric matrices).
+\end{proof}
+
+\begin{definition} An {\it inner product} on $\mathbb R^n$ is a symmetric bilinear pairing $P$ that is also positive definite:
+\[
+P({\bf v}, {\bf v})\ge 0;\quad P({\bf v}, {\bf v}) = 0\,\text{ iff } {\bf v} = {\bf 0}
+\]
+\end{definition}
+
+In other words, it also satisfies property (IP3). However, unlike properties (IP1) and (IP2), (IP3) is harder to translate into properties of the representing matrix. In fact, this last property will only come into focus after we have covered eigenspaces and diagonalizability for symmetric matrices, which is done below.
+\vskip.3in
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Orthogonal vectors and subspaces in $\mathbb R^n$} The concept of orthogonality is dependent on the choice of inner product. So assume first that we are working with the standard dot product in $\mathbb R^n$. We say two vectors $\bf v$, $\bf w$ are {\it orthogonal} if they are non-zero and ${\bf v}\cdot{\bf w} = 0$; we indicate this by writing ${\bf v}\perp {\bf w}$. Orthogonality with respect to this standard inner product corresponds to our usual notion of {\it perpendicular} (as we shall see below). More generally, a collection of non-zero vectors $\{{\bf v}_i\}$ is said to be orthogonal if they are pairwise orthogonal; in other words, ${\bf v}_i\cdot{\bf v}_j = 0$ for all $i\ne j$.
+\vskip.2in
+
+The notion of orthogonality extends to subspaces. Thus if $V,W\subset\mathbb R^n$ are two non-zero subspaces, we say $V$ and $W$ are {\it orthogonal} ($V\perp W$) if ${\bf v}\cdot{\bf w} = 0\,\,\forall{\bf v}\in V, {\bf w}\in W$. As with a collection of vectors, a collection of subspaces $\{V_i\}$ is orthogonal iff it is pairwise orthogonal: $V_i\perp V_j\,\,\forall i\ne j$.
+\vskip.2in
+
+\begin{example} Let $V = Span\{[2\,\, 3]^T\}, W = Span\{[ 3\,\, (-2)]^T\}\subset \mathbb R^2$. Then it is easy to check that $V$ and $W$ are orthogonal (geometrically, they are represented by two lines in $\mathbb R^2$ passing through the origin and forming a $90^\circ$ angle between them).
+\end{example}
+\vskip.2in
+
+If $W\subset\mathbb R^n$ is a subspace, its {\it orthogonal complement} is given by $W^\perp := \{{\bf v}\in\mathbb R^n\ |\ {\bf v}\cdot{\bf w} = 0\,\forall {\bf w}\in W\}$. $W^\perp$ is the largest subspace of $\mathbb R^n$ for which every non-zero vector in the subspace is orthogonal to every non-zero vector in $W$. 
+\vskip.2in
+
+\begin{exercise} Show that for any subspace $W$, $W = \left(W^\perp\right)^\perp$.
+\end{exercise}
+\vskip.2in
+Orthogonality is connected to the property of linear independence.
+
+\begin{lemma} If $\{{\bf v}_1,\dots,{\bf v}_m\}$ is an orthogonal set of vectors in $\mathbb R^n$, then it is linearly independent.
+\end{lemma}
+
+\begin{proof} Suppose there exist scalars $\alpha_i$ with $\alpha_1{\bf v}_1 +\dots \alpha_m{\bf v}_m = {\bf 0}$. Then for each $i$ one has
+\[
+{\bf 0} = {\bf v}_i\cdot{\bf 0} = {\bf v}_i\cdot (\alpha_1{\bf v}_1 +\dots \alpha_m{\bf v}_m) = \alpha_i({\bf v}_i\cdot{\bf v}_i)
+\]
+which implies $\alpha_i=0$ as ${\bf v}_i\cdot{\bf v}_i = \|{\bf v}_i\|^2 > 0$.
+\end{proof}
+\vskip.2in
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Orthonormal vectors and orthogonal matrices} An orthogonal set of vectors $\{{\bf u}_1, {\bf u}_2,\dots,{\bf u}_n\}$ is said to be {\it orthonormal} if $\|{\bf u}_i\| = 1, 1\le i\le n$. Clearly, given an orthogonal set of vectors $\{{\bf v}_1, {\bf v}_2,\dots,{\bf v}_n\}$, one can orthonormalize it by setting ${\bf u}_i = {\bf v}_i/\|{\bf v}_i\|$ for each $i$. Orthonormal bases in $\mathbb R^n$ ``look" like the standard basis, up to rotation of some type.
+\vskip.2in
+
+We call an $n\times n$ matrix $A$ {\it orthogonal} if the columns of $A$ form an orthonormal set of vectors\footnote{One might expect such a matrix to be called orthonormal.}.
+
+\begin{exercise} Show that an $n\times n$ matrix $A$ is orthogonal iff $A^T*A = I$.
+\end{exercise}
+
+\begin{lemma} An $n\times n$ matrix $A$ is orthogonal iff 
+\[
+{\bf v}\cdot{\bf w} = (A*{\bf v})\cdot (A*{\bf w})
+\]
+for all ${\bf v}, {\bf w}\in\mathbb R^n$.
+\end{lemma}
+
+\begin{proof} By Theorem \ref{thm:matrep}, we see that two matrices $A,B$ satsify the property
+\[
+{\bf v}^T*A^T*A*{\bf w} = (A*{\bf v})\cdot (A*{\bf w}) = (B*{\bf v})\cdot (B*{\bf w}) = {\bf v}^T*B^T*B*{\bf w}\qquad\forall {\bf v}, {\bf w}\in\mathbb R^n
+\]
+iff $A^T*A=B^T*B$. The hypothesis of the lemma can be restated as 
+\[
+(A*{\bf v})\cdot (A*{\bf w}) = (I*{\bf v})\cdot (I*{\bf w})\qquad\forall {\bf v}, {\bf w}\in\mathbb R^n
+\]
+implying $A^T*A=I^T*I = I$, which by the previous exercise is equivalent to $A$ being orthogonal.
+\end{proof}
+
+The notion of orthogonality for matrices is a special example of a linear transformation preserving a given inner product, which we will discuss in more detail below.
+\vskip.3in
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Projections onto subspaces and Gram-Schmidt orthogonalization} We know that every non-zero vector space admits a basis. It is natural then to ask: {\it does every non-zero inner product space admit an orthogonal basis}? The answer is: yes, it does. In fact, given a basis for an inner product space, there is a systematic way to convert it into an orthogonal basis. And this method simultaneously provides a method for projecting a vector onto a subspace. Again, we discuss the procedure first for $\mathbb R^n$ equipped with its standard scalar product, then show how this naturally extends to more general inner product spaces.
+\vskip.2in
+
+\subsubsection{Projection onto 1-dimensional subspaces} Suppose $W = Span\{{\bf v}\}$ is a 1-dimensional subspace of $\mathbb R^n$ (so that ${\bf v}\ne {\bf 0}$). Then given ${\bf w}\in\mathbb R^n$, we define the {\it projection of $\bf w$ onto $W$} to be
+\[
+pr_W({\bf w}) := \left(\frac{{\bf v}\cdot {\bf w}}{{\bf v}\cdot{\bf v}}\right) {\bf v}
+\]
+Note that this quantity makes sense, as ${\bf v}\ne {\bf 0}$ implies ${\bf v}\cdot{\bf v} > 0$.
+
+\begin{proposition} The vector $pr_W({\bf w})$ depends only on the vector $\bf w$ and the subspace $W$. In other words, it does not depend on the choice of basis for $W$.
+\end{proposition}
+
+\begin{proof} Any other basis vector for $W$ can be written as $\alpha{\bf v}$ for some $\alpha\ne 0$. Then
+\[
+\left(\frac{\alpha{\bf v}\cdot {\bf w}}{\alpha{\bf v}\cdot\alpha{\bf v}}\right) {\alpha\bf v} = \left(\frac{\alpha^2}{\alpha^2}\right)\left(\frac{{\bf v}\cdot {\bf w}}{{\bf v}\cdot{\bf v}}\right) {\bf v} = \left(\frac{{\bf v}\cdot {\bf w}}{{\bf v}\cdot{\bf v}}\right) {\bf v}
+\]
+\end{proof}
+
+The vector $pr_W({\bf w})$ represents {\it the $W$-component of ${\bf w}$} (in texts, this projection is also referred to as the {\it component of $\bf w$ in the direction of $\bf v$}. We prefer the subspace interpretation, as it makes clear the independence on the choice of basis element).
+\vskip.2in
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Gram-Schmidt orthogonalization} Let $\{{\bf v}_1,{\bf v}_2,\dots,{\bf v}_n\}$ be a basis for $\mathbb R^n$. We will give an inductive procedure for constructing an orthogonal basis for $\mathbb R^n$ from this original set.
+\vskip.2in
+
+First, some notation. Let $W_i := Span\{{\bf v}_1,\dots,{\bf v}_i\}$ be the span of the first $i$ vectors in the set. Since any subset of linearly independent vectors is linearly independent, we see that $Dim(W_i) = i, 1\le i\le n$, with $W_n = \mathbb R^n$. 
+\vskip.2in
+
+Now $\{{\bf v}_1\}$ is an orthogonal basis for $W_1$, since it has only one element. We set ${\bf u}_1 = {\bf v}_1$, and consider the vector ${\bf v}_2$. This need not be orthogonal to ${\bf v}_1$, but it cannot be simply a scalar multiple of ${\bf v}_1$ either, since that would imply that the set $\{{\bf v}_1, {\bf v}_2\}$ was linearly dependent, contradicting what we know.
+\vskip.2in
+
+So we define
+\[
+{\bf u}_2 := {\bf v}_2 - pr_{W_1}({\bf v}_2)
+\]
+
+As we have just observed, ${\bf u}_2\ne {\bf 0}$.
+
+\begin{exercise} Compute the dot product ${\bf u}_1\cdot{\bf u}_2$, and confirm it is zero. Also, verify that $Span(\{{\bf u}_1,{\bf u}_2\}) = Span(\{{\bf v}_1,{\bf v}_2\})$. Conclude that $\{{\bf u}_1,{\bf u}_2\}$ is an orthonormal basis for $W_2$.
+\end{exercise}
+\vskip.2in
+
+We now suppose that we have constructed an orthogonal basis $\{{\bf u}_1,\dots,{\bf u}_m\}$ for $W_m$. We need to show how to this can be extended to $W_{m+1}$ if $m<n$. First, for ${\bf v}\in\mathbb R^n$, we define the projection of ${\bf v}$ onto $W_m$ to be
+\[
+pr_{W_m}({\bf v}) := \sum_{i=1}^m \left(\frac{{\bf u}_i\cdot {\bf v}}{{\bf u}_i\cdot{\bf u}_i}\right){\bf u}_i\in W_m
+\]
+
+Again, if ${\bf v}\notin W_m$, then ${\bf v}\ne pr_{W_m}({\bf v})$ and so their difference will not be zero. As abov, we then set
+\[
+{\bf u}_{m+1} = {\bf v}_{m+1} - pr_{W_m}({\bf v}_{m+1})
+\]
+ The same arguments used in the previous exercise show
+
+\begin{proposition} If $m < n$, then $\{{\bf u}_1,\dots,{\bf u}_m,{\bf u}_{m+1}\}$ is an orthogonal basis for $W_{m+1}$.
+\end{proposition}
+
+Continuing in this fashion, we eventually reach the case $m=n$ at which point the algorithm is complete. Note that this procedure depends not only on the basis but also on the {\it order} in which we list the basis elements - changing the order will (most of the time) result in a different orthogonal basis for $\mathbb R^n$. Note also that this procedure works just as well if we start with a subspace of $\mathbb R^n$, together with a basis for that subspace. Summarizing
+
+\begin{theorem} For any subspace $W$ of $\mathbb R^n$ and basis $S = \{{\bf v}_1,\dots,{\bf v}_m\}$ for that subspace, the Gram-Schmidt algorithm produces an orthogonal basis $\{{\bf u}_1,\dots,{\bf u}_m\}$ for $W$, which depends only on the ordering of the initial basis elements in $S$. Given this orthogonal basis for $W$ and an arbitrary vector ${\bf v}\in\mathbb R^n$, the projection of $\bf v$ onto $W$, or the $W$-component of $\bf v$ is given by
+\[
+pr_W({\bf v}) := \sum_{i=1}^m \left(\frac{{\bf u}_i\cdot {\bf v}}{{\bf u}_i\cdot{\bf u}_i}\right){\bf u}_i
+\] 
+\end{theorem}
+
+The reason for calling this projection the $W$-component of $bf v$ is more or less clear, since the equation
+\[
+{\bf v} = pr_W({\bf v}) + ({\bf v} - pr_W({\bf v}))
+\]
+decomposes $bf v$ as a sum of i) its component in $W$, and ii) its component in $W^\perp$. As we have seen above, $\mathbb R^n = W\oplus W^\perp$, so this sum decomposition of $\bf v$ is {\it unique}. In other words,
+
+\begin{corollary} For any non-zero subspace $W\subset\mathbb R^n$, $pr_W({\bf v})$ is the unique vector in $W$ for which the difference ${\bf v} - pr_W({\bf v})$ lies in $W^\perp$.
+\end{corollary}
+
+As we are about to see,  this is equivalent to saying that it is the vector in $W$ {\it closest} to $\bf v$, where distance is in terms of the standard Euclidean distance for $\mathbb R^n$ based on the scalar product.
+\vskip.3in
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Least-squares approximations} The setup is as before: we are given a subspace $W\subset\mathbb R^n$ and a vector ${\bf v}\in\mathbb R^n$. The questions are then:
+\begin{itemize}
+\item[(LS1)] Is there a vector ${\bf w}_{\bf v}\in W$ satisfying the property that $\|{\bf w}_{\bf v} - {\bf v}\|\le \|{\bf w} - {\bf v}\|$ for all ${\bf w}\in W$?
+\item[(LS2)] If such a vector exists, is it unique?
+\end{itemize}
+
+As one might imagine from the previous section, the answer is ``yes". More precisely, the vector in $W$ we are looking for is exactly the projection of $\bf v$ onto $W$:
+
+\begin{proposition} ${\bf w}_{\bf v} = pr_W({\bf v})$.
+\end{proposition}
+
+\begin{proof} Write ${\bf v} - pr_W({\bf v})$ as ${\bf w}_m$. Let ${\bf w}\in W$ be an arbitrary vector, and let ${\bf w}_p := pr_W({\bf v}) - {\bf w}$. Then ${\bf w}_m\cdot{\bf w}_p = 0$, so one has
+\[
+\|{\bf v} - {\bf w}\|^2 = \|{\bf w}_m + {\bf w}_p\|^2 = ({\bf w}_m + {\bf w}_p)\cdot ({\bf w}_m + {\bf w}_p) = {\bf w}_m\cdot{\bf w}_m + {\bf w}_p\cdot{\bf w}_p = \|{\bf w}_m\|^2 + \|{\bf w}_p\|^2\ge \|{\bf w}_m\|^2
+\]
+This shows that the projection satisfies (LS1). However we have already shown that the projection of $\bf v$ onto $W$ is unique, so (LS2) follows as well.
+\end{proof}
+\vskip.2in
+
+The vector ${\bf v}_m = pr_W({\bf v})$ is referred to as {\it the least-squares approximation of ${\bf v}$ by a vector in $W$}, because $pr_W({\bf v})$ satisfies the property that $\|{\bf v}-pr_W({\bf v})\|^2$, which is computed as a sum of squares of differences in coordinates,  is minimized. This turns out to have an important application to finding the best approximation to a system of equations in the event no actual solution exists. We discuss this next.
+\vskip.3in
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Least-squares solutions and the Fundamental Subspaces theorem} Suppose we are given a matrix equation $A*{\bf x} = {\bf b}$ with $\bf x$ a vector variable taking values in $\mathbb R^n$, and $\bf b$ a fixed vector in $\mathbb R^m$ (implying that $A$ is an $m\times n$ matrix). The consistency theorem for systems of equations tells us that the equation is consistent precisely when $\bf b$ is in the span of the columns of $A$, or alternatively, when ${\bf b}\in C(A)$. But what if it is not? In other words, the system is inconsistent? Up until now we have simply left it at that; inconsistency was the end of the story.
+\vskip.2in
+
+But it is not. Because whether or not the original system is consistent, one can always find a solution to the related equation
+\begin{equation}\label{eqn:lss}
+A*{\bf x} = pr_{C(A)}({\bf b})
+\end{equation}
+because the projection $pr_{C(A)}({\bf b})$ of $\bf b$ onto the column space of $A$ will always be in the column space of $A$ regardless of whether or not the original vector $\bf b$ is.
+\vskip.2in
+
+The question then becomes: given that we know (\ref{eqn:lss}) has at least one solution, how do we go about finding it (or them)? The starting point for answering that question is the following theorem, often referred to as the Fundamental Subspaces theorem (originally proven by Gauss)
+
+\begin{theorem}\label{thm:fst} For any $m\times n$ matrix $A$, there are equalities
+\begin{itemize}
+\itemsep.01in
+\item $C(A)^\perp = N(A^T)$
+\item $C(A) = N(A^T)^\perp$
+\item $C(A^T)^\perp = N(A)$
+\item $C(A^T) = N(A)^\perp$
+\end{itemize}
+\end{theorem}
+
+
+\begin{proof} Because the theorem is stated for all matrices, and because $(W^\perp)^\perp = W$ for any subspace $W$, the second, third and fourth statements are consequences of the first, and is suffices to verify that case. To see this, we recall that $C(A)$ is the subspace of $\mathbb R^m$ spanned by the columns of $A$; then ${\bf v}\in C(A)^\perp$ iff $A(:,i)\cdot {\bf v} = 0$ for all $1\le i\le n$ iff $A^T(i,:)*{\bf v} = A(:,i)^T*{\bf v} = 0$ for all $1\le i\le n$ iff ${\bf v}\in N(A^T)$.
+\end{proof}
+\vskip.2in
+
+Write ${\bf b}'$ for $pr_{C(A)}({\bf b})$. Then
+\begin{itemize}
+\itemsep.005in
+\item[] $A*{\bf x} = {\bf b}'$
+\item[$\Leftrightarrow$] $A*{\bf x} -{\bf b}\in C(A)^\perp$ (as ${\bf b}'$ is the unique vector in $C(A)$ with ${\bf b}' - {\bf b}\in C(A)^\perp$)
+\item[$\Leftrightarrow$] $A*{\bf x} -{\bf b}\in N(A^T)$ (by Theorem \ref{thm:fst})
+\item[$\Leftrightarrow$] $ A^T*A*{\bf x} - A^T*{\bf b} = A^T*(A*{\bf x} -{\bf b}) = {\bf 0}$
+\item[$\Leftrightarrow$] $A^T*A*{\bf x} = A^T*{\bf b}$
+\end{itemize}
+\vskip.2in
+
+This last equation $A^T*A*{\bf x} = A^T*{\bf b}$ has the same set of solutions as the equation that started the sequence, namely $A*{\bf x} = {\bf b}'$, and is therefore {\it always consistent}. It is derived from our original equation $A*{\bf x} = {\bf b}$ by simply multiplying both sides on the left by $A^T$, and is often referred to as the {\it associated normal equation} of the original matrix equation from which it was derived.
+\vskip.2in
+
+This yields a straightforward procedure for finding the {\it least-squares solution} to our original equation $A*{\bf x} = {\bf b}$; i.e., a solution to the associated normal equation $A^T*A*{\bf x} = A^T*{\bf b}$, which by the above is equivalent to a solution to the related equation $A*{\bf x} = pr_{C(A)}({\bf b})$. Note that the original equation is consistent precisely when ${\bf b}\in C(A)$, or equivalently when ${\bf b} = pr_{C(A)}({\bf b})$; in other words, when the {\it least-squares solution is an exact solution}. The advantages to seeking a least-squares solution are i) it always exists (regardless of whether or not the original equation is consistent), and ii) it yields an actual solution whenever an actual solutions exist. Because this procedure finds the least-squares solution {\it first}, it can be also applied to finding the least-squares approximation to $\bf b$ as $pr_{C(A)}({\bf b}) = A*{\bf x}$, where $\bf x$ is a least-squares solution to the original equation. 
+\vskip.2in
+
+The steps are:
+\begin{itemize}
+\item[(Step 1)] Form the associated normal equation $A^T*A*{\bf x} = A^T*{\bf b}$;
+\item[(Step 2)] find the solution(s) to the normal equation by computing $rref([A^T*A\ |\ A^T*{\bf b}])$. These will be the least-squares solution(s) to the original equation;
+\item[(Step 3)] for any least-squares solution ${\bf x}$ from Step 2, compute $A*{\bf x}$. This will yield the least-squares approximation $pr_{C(A)}({\bf b})$ to $\bf b$ by a vector in the column space of $A$.
+\end{itemize}
+\vskip.2in
+
+Again, there will only be {\it one} least-squares approximation to $\bf b$ by a vector in $C(A)$, because we have already seen such a vector is unique. However, the set of least-squares solutions to the original equation may not be unique. Thus another consequence of this theory is
+
+\begin{corollary} The value of $A*{\bf x}$ remains constant as $\bf x$ ranges over the set of least-squares solutions to the matrix equation $A*{\bf x} = {\bf b}$.
+\end{corollary}
+
+A final question then remains; when will there be a {\it unique} least-squares solution? We say that the matrix $A$ has {\it full column rank} (or just {\it full rank} when there is no confusion) if the columns of $A$ are linearly independent; namely that $rank(A) = n$. If $A$ is $m\times n$, this imposes the constraint that $m\ge n$ (otherwise the rank would have to be less than $n$ the number of columns). A useful fact about the ranks of matrices (which we do not prove here) is
+
+\begin{lemma} For any matrix $A$, $rank(A) = rank(A^T*A)$. In particular, $A$ has full column rank iff $A^T*A$ is non-singular.
+\end{lemma}
+
+As the normal equation is always consistent, we see
+
+\begin{corollary} $A^T*A*{\bf x} = A^T*{\bf b}$ will have a unique solution precisely when $N(A^T*A) = \{{\bf 0}\}$, which happens iff $A^T*A$ is non-singular. In this case, the unique least-squares solution is given by
+\[
+{\bf x} = (A^T*A)^{-1}*A^T*{\bf b}
+\]
+and the least-squares approximation to $\bf b$ by a vector in the column space of $A$ is
+\[
+pr_{C(A)}({\bf b}) = A*{\bf x} = A*(A^T*A)^{-1}*A^T*{\bf b}
+\]
+\end{corollary}
+\vskip.3in
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Applications of least-squares solutions} There are many important applications of least-squares. We present two.
+
+\subsubsection{Projection onto a subspace} The corollary stated at the end of the previous section indicates an alternative, and more computationally efficient method of computing the projection of a vector onto a subspace $W$ of $\mathbb R^n$. Previously we had to first establish an orthogonal basis for $W$. But given any basis $\{{\bf v}_1,\dots,{\bf v}_m\}$ for $W$, we can avoid first orthogonalizing the basis by
+
+\begin{itemize}
+\item Concatenating the basis vectors to form the matrix $A$ with $A(:,i) = {\bf v}_i,1\le i\le m$,
+\item then for any vector ${\bf v}\in\mathbb R^n$, computing the projection of $\bf v$ onto $W = C(A)$ as
+\[
+pr_W({\bf v}) = A*(A^T*A)^{-1}*A^T*{\bf v}
+\]
+\end{itemize}
+
+\begin{exercise} If $A$ has maximal rank, verify that $B = A*(A^T*A)^{-1}*A^T$ satisfies the identity $B*B = B$ (a matrix satisfying such an identity is called a {\it projection matrix}, since the linear transformation it defines on $\mathbb R^n$ corresponds exactly to projection onto its range $C(B)$).
+\end{exercise}
+\vskip.2in
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Polynomial data fitting} We suppose given $n$ points $\{(x_1,y_1), (x_2,y_2),\dots,(x_n,y_n)\}$ in the plane $\mathbb R^2$, with distinct $x$-coordinates (in practice, such sets of points can arise as data based on the measurement of some quantity - recorded as the $y$-coordinate - as a function of some parameter recorded as the $x$-coordinate). Then we would like to find the equation of the line that {\it best fits} these points (by exactly what measurement the line represents a best possible fit is explained below). if we write the equation of the line as $y = l(x) = c_0 + c_1x$ for indeterminants $c_0, c_1$, then what we are looking for is a {\it least-squares solution} to the $n\times 2$ system of equations
+\begin{align*}
+c_0 + c_1 x_1 &= y_1\\
+c_0 + c_1 x_2 &= y_2\\
+&\vdots\\
+c_0 + c_1 x_n &= y_n
+\end{align*}
+
+Note that, in this system, the $x_i$ and $y_j$ are constants, and we are trying to solve for $c_0$ and $c_1$. For $n\le 2$ there will be a solution, but in the overdetermined case there almost always fails to be one. Hence the need to work in the least-squares setting.
+\vskip.2in
+
+\begin{example} We wish to find the least-squares fit by a linear equation to the set of points $(2,3), (4,6), (7,10), (9,14)$. This problem can be represented by the matrix equation
+\[
+A1*{\bf c} = {\bf y}
+\]
+Where $A1 = \begin{bmatrix} 1 & 2\\1 & 4\\1 & 7\\1 & 9\end{bmatrix}$, ${\bf c} = \begin{bmatrix}c_0\\c_1\end{bmatrix}$, and ${\bf y} = \begin{bmatrix} 3\\6\\10\\14\end{bmatrix}$. We note that this matrix is full rank. Therefore least-squares solution is unique and given by
+\[
+{\bf c} = (A1^T*A1)^{-1}*A1^T*{\bf y} = \begin{bmatrix}-.18966\\ 1.53448\end{bmatrix}
+\]
+Thus the desired equation is given by
+\[
+l(x) = -.18966 + 1.53448 x
+\]
+We can also measure the degree to which this comes close to being an actual solution (which would only exist if the points were colinear). Given $\bf c$, the vector
+\[
+{\bf y}_1 := A1*{\bf c} = \begin{bmatrix} 2.8793\\ 5.9483\\ 10.5517\\ 13.6207\end{bmatrix}
+\]
+is (by the above) the least-squares approximation to $\bf y$ by a vector in the column space of $A1$ (accurate to 4 decimal places). The accuracy can then be estimated by the distance of this approximation to the original vector $\bf y$:
+\[
+e_1 := \|{\bf y} - {\bf y}_1\| = 0.68229
+\]
+\end{example}
+
+The last computation in this example indicates what is being minimized when one fits data points in this way. 
+
+\begin{remark} Using least-squares linear approximation techniques to find the best linear fit to a set of $n$ data points $\{(x_1,y_1), (x_2,y_2),\dots,(x_n,y_n)\}$ results in the equation of a line $l(x) = c_0 + c_1(x)$ which minimizes the sum of the squares of the {\it vertical} distances from the given points to the line:
+\[
+\sum_{i=1}^n (y_i - l(x_i))^2
+\]
+Note that, unless the line is horizontal, the vertical distance will be slightly larger than the {\it actual} distance, which is measured in the direction orthogonal to the line, and minimizing the sum of squares of those distances would correspond geometrically to what one might normally think of as constituting a least-squares fit. However, the computation needed to find the best fit with respect to this sum is quite a bit more involved,. This linear algebraic approach provides a simple and efficient method for finding a good approximation by a line which will be exact whenever the points are colinear.
+\end{remark}
+
+The setup above provides a method for finding not just linear approximations, but higher order ones as well. The linear algebra is essentially the same. To illustrate,
+
+\begin{example} Suppose instead we were asked to find the least-squares fit by a {\it quadratic} equation to the same set set of points $(2,3), (4,6), (7,10), (9,14)$. As before, this problem can be represented by the matrix equation
+\[
+A2*{\bf c} = {\bf y}
+\]
+Where $A2 = \begin{bmatrix} 1 & 2 & 4\\1 & 4 & 16\\1 & 7 & 49\\1 & 9 & 81\end{bmatrix}$, ${\bf c} = \begin{bmatrix}c_0\\c_1\\c_2\end{bmatrix}$, and ${\bf y} = \begin{bmatrix} 3\\6\\10\\14\end{bmatrix}$. We note that the matrix $A_2$ is again full rank (it has rank 3). Therefore least-squares solution is unique and given by
+\[
+{\bf c} = (A2^T*A2)^{-1}*A2^T*{\bf y} = \begin{bmatrix} 0.960345\\ 0.984483\\0.050000\end{bmatrix}
+\]
+Thus the desired equation is given by
+\[
+q(x) = 0.960345 + 0.984483 x + 0.050000 x^2
+\]
+Measuring the degree to which this comes close to being an actual solution (which would only exist if the points all lay on the same quadratic graph), we compute
+\[
+{\bf y}_2 := A2*{\bf c} = \begin{bmatrix} 3.1293\\ 5.6983\\ 10.3017\\ 13.8707\end{bmatrix}
+\]
+is (by the above) the least-squares approximation to $\bf y$ by a vector in the column space of $A2$ (accurate to 4 decimal places). The accuracy can then be estimated by the distance of this approximation to the original vector $\bf y$:
+\[
+e_2 := \|{\bf y} - {\bf y}_2\| = 0.46424
+\]
+As with the linear fit, the quantity being minimized is the sum of squares of vertical distances of the original points to the graph of this quadratic function. Notice the modest improvement; from $0.68229$ to $0.46424$. Because the column space of $A2$ contains the columns space of $A1$, the least-squares approximation ${\bf y}_2$ has to be at least as good as the linear one ${\bf y}_1$, and almost always will be closer to the original vector $\bf y$.
+\end{example}
+
+We will illustrate our final point by looking at what happens if we go one degree higher.
+
+\begin{example} We will find the least-squares fit by a {\it cubic} equation to the same set set of points $(2,3), (4,6), (7,10), (9,14)$. As before, this problem can be represented by the matrix equation
+\[
+A3*{\bf c} = {\bf y}
+\]
+Where $A3 = \begin{bmatrix} 1 & 2 & 4\\1 & 4 & 16\\1 & 7 & 49\\1 & 9 & 81\\8 & 64 & 343 & 729\end{bmatrix}$, ${\bf c} = \begin{bmatrix}c_0\\c_1\\c_2\\c_3\end{bmatrix}$, and ${\bf y} = \begin{bmatrix} 3\\6\\10\\14\end{bmatrix}$. The matrix $A_3$ is still full rank (it has rank 34). Therefore least-squares solution is unique and given by
+\[
+{\bf c} = (A3^T*A3)^{-1}*A3^T*{\bf y} = \begin{bmatrix} -1.6\\ 2.890476\\-0.342857\\0.023810\end{bmatrix}
+\]
+Thus the desired equation is given by
+\[
+f(x) = -1.6 + 2.890476 x + -0.342857 x^2 + 0.023810 x^3
+\]
+However, now when we compute the least-squares approximation we get
+\[
+{\bf y}_3 := A3*{\bf c} = \begin{bmatrix} 3\\ 6\\ 10\\ 14\end{bmatrix}
+\]
+which is not just an approximation but rather the vector $\bf y$ on the nose; $e_3 = 0$.. In other words, given these four points, {\it there is a unique cubic equation which fits the points exactly}. Inspecting the computation more carefully, we see why: the matrix $A3$ is both full rank and {\it square}. In other words, non-singular. In this case the system of equations is no longer over determined but rather balanced. And with a non-singular coefficient matrix, we get a unique solution. Symbolically, this can be seen by noting that the non-singularity of $A3$ results in a simplified expression for $\bf c$, confirming it is indeed an exact solution:
+\[
+{\bf c} = (A3^T*A3)^{-1}*A3^T*{\bf y} = A3^{-1}*(A3^T)^{-1}*A3^T*{\bf y} = A3^{-1}*y
+\]
+\end{example}
+
+This set of examples, in which we compute successively higher order approximations to a set of $n$ data points until we finally arrive at an exact fit, is part of a more general phenomenon, which we record without proof by the following theorem.
+
+\begin{theorem} Given $n$ points in $\mathbb R^2$ with distinct $x$-coordinates $\{(x_1,y_1), (x_2,y_2),\dots,(x_n,y_n)\}$, the least-squares fit by a polynomial of degree $k$ is computed by finding the least-squares solution to the matrix equation
+\[
+A_k*{\bf c} = {\bf y}
+\]
+where ${\bf y} = [y_1\ y_2\ \dots y_n]$ and  $A_k$ is the $n\times (k+1)$ matrix with $A_k(i,j) = x_i^{j-1}$. The matrix $A_k$ will have full column rank for all $k\le (n-1)$, and so the least-squares solution $\bf c$ is unique and given by
+\[
+[c_0\ c_1\ \dots c_k]^T = {\bf c} = (A_k^T*A_k)^{-1}*A_k^T*{\bf y}
+\]
+with degree $k$ polynomial least-squares fit given by
+\[
+p_k(x) = \sum_{i=0}^k c_i x^i
+\]
+Because $A_{n-1}$  is non-singular, there will be a polynomial of degree at most $(n-1)$ which fits the points exactly. Moreover, the polynomial of degree at most $(n-1)$ which accomplishes this will be unique.
+\end{theorem}
+\vskip.3in
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\subsection{The complex scalar product in $\mathbb C^n$} We consider first the analogue of the scalar, or dot product for $\mathbb C^n$. Recall first that if $[z_1\ z_2\dots z_n] = {\bf v}\in\mathbb C^n$, then the {\it conjugate} of $\bf v$ is the vector that results from applying complex conjugation degreewise 
+\[
+\ov{\bf v} := [\ov{z_1}\ \ov{z_2}\ \dots \ov{z_n}]
+\]
+Then the scalar product for $\mathbb C^n$ is given by
+\[
+{\bf v}\cdot {\bf w} := \ov{\bf w}^T*{\bf v}
+\]
+
+The properties for this pairing differ slightly than the corresponding ones for the real case, for reasons that will become clear shortly. They are
+
+\begin{enumerate}
+\item[(HIP1)] It is conjugate-symmetric:
+\[
+{\bf v}\cdot {\bf w} = \ov{{\bf w}\cdot {\bf v}}
+\]
+\item[(HIP2)] It is linea in the first variable and conjugate linear in the second:
+\begin{gather*}
+(\alpha_1{\bf v}_1 + \alpha_2{\bf v}_2)\cdot {\bf w} = \alpha_1{\bf v}_1\cdot{\bf w} + \alpha_2{\bf v}_2\cdot{\bf w}\\
+{\bf v}\cdot (\beta_1{\bf w}_1 + \beta_2{\bf w}_2) = \ov{\beta_1}{\bf v}\cdot{\bf w}_1 + \ov{\beta_2}{\bf v}\cdot{\bf w}_2
+\end{gather*}
+\item[(HIP3)] It is positive non-degenerate:
+\[
+\mathbb R\ni {\bf v}\cdot {\bf v}\ge 0;\quad {\bf v}\cdot {\bf v} = 0\,\text{ iff } {\bf v} = {\bf 0}
+\]
+\end{enumerate}
+\vskip.2in
+
+\begin{remark} It is the third property that accounts for the need to use $\ov{\bf w}^T*{\bf v}$ rather than ${\bf w}^T*{\bf v}$. In fact, this need already exists for $\mathbb C = \mathbb C^1$. For if $z = a + bi$ is a complex number, its {it norm} is computed as $\sqrt{a^2 + b^2} = \sqrt{z\cdot\ov{z}}$.
+\end{remark}
+
+An inner product on a complex vector space satisfying these three properties is usually referred to as a {\it Hermitian} inner product, the one just defined for $\mathbb C^n$ being the {\it standard} Hermitian inner product, or complex scalar product.
+\vskip.2in
+
+ As in the real case, the {\it norm} of ${\bf v}\in\mathbb C^n$  (also referred to as the $\ell^2$-norm) is closely related to the complex scalar product; precisely
+\begin{equation}
+\|{\bf v}\| = \|{\bf v}\|_2 =  ({\bf v}\cdot {\bf v})^{\frac12}
+\end{equation}
+
+This norm on complex $n$-space satisfies the same two properties as before:
+
+\begin{enumerate}
+\item[(N1)] It is positive definite:
+\[
+\|{\bf v}\|\ge 0;\quad \|{\bf v}\| = 0 \text{ iff } {\bf v} = 0
+\]
+\item[(N2)] It satisfies the triangle inequality (for norms):
+\[
+\|{\bf v} + {\bf w}\|\le \|{\bf v}\| + \|{\bf w}\|
+\]
+\end{enumerate}
+\vskip.2in
+
+This norm on $\mathbb C^n$ defines the standard {\it metric}, which is the standard way to measure the distance between two vectors in complex $n$-space:
+\begin{equation}
+d({\bf v},{\bf w}) := \|{\bf v} - {\bf w}\|
+\end{equation}
+
+This distance function - or metric - satisfies the same three basic properties as it does in the real case:
+
+\begin{enumerate}
+\item[(M1)] It is symmetric:
+\[
+d({\bf v},{\bf w}) = d({\bf w},{\bf v})
+\]
+\item[(M2)] It is positive non-degenerate:
+\[
+d({\bf v},{\bf w})\ge 0\,\,\forall {\bf v}, {\bf w}\in\mathbb C^n;\text{ moreover } d({\bf v},{\bf w}) = 0\,\text{ iff } {\bf v} = {\bf w}
+\]
+\item[(M3]) It satisfies the triangle inequality (for metrics):
+\[
+d({\bf u},{\bf w})\le d({\bf u},{\bf v}) + d({\bf v},{\bf w})\quad\forall {\bf u}, {\bf v}, {\bf w}\in\mathbb C^n
+\]
+\end{enumerate}
+\vskip.2in
+
+So the i) complex scalar product, ii) standard complex norm, and iii) complex distance are all related; moreover as in the real case the norm and distance functions determine one another. However, in the complex case it is no longer true that one can recover the inner product from the norm. It is only the real part that can be expressed this way:
+\[
+Re({\bf v}\cdot{\bf w}) = \frac12({\bf w}\cdot{\bf v} + {\bf v}\cdot {\bf w}) = \frac12(\|{\bf v} + {\bf w}\|^2 - \|{\bf v}\|^2 - \|{\bf w}\|^2)
+\]
+\vskip.3in
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Conjugate-symmetric sesquilinear pairings on $\mathbb C^n$, and their representation} The complex scalar product defined in the previous section is a specific example of a {\it sesquilinear, conjugate-symmetric pairing}. We consider these properties in sequence.
+\vskip.2in
+
+A {\it sesquilinear pairing} on $\mathbb C^n$ is a map $P:\mathbb C^n\times\mathbb C^n\to \mathbb C$ which satisfies property (HIP2), namely it is linear in the first variable and conjugate linear in the second\footnote{this is the standard convention in mathematical literature. Many physics texts, however, reverse this, making the first variable conjugate linear instead.}. A {\it conjugate-symmetric sesquilinear pairing} is a sesquilinear pairing that also satisfies (HIP1). These pairings admit a matrix representation as in the real case discussed above. Again, we assume we are looking at coordinate vectors with respect to the standard basis for $\mathbb C^n$.
+\vskip.2in
+
+Before stating the result, we need to record
+
+\begin{definition} For a complex matrix $A$, the {\it conjugate-transpose of $A$} is $A^* = \ov{A}^T$; $A^*(i,j) = \ov{A(j,i)}$. An $n\times n$ complex matrix is {\it Hermitian} if $A^* = A$.
+\end{definition}
+
+\begin{theorem}\label{thm:matrepcomp} For any sesquilinear pairing $P$ on $\mathbb C^n$, there is a unique $n\times n$ matrix $A_P$ such that
+\[
+P({\bf v},{\bf w}) = \ov{\bf w}^T*A_P*{\bf v} = {\bf w}^**A_P*{\bf v}
+\]
+Moreover, if $P$ is conjugate-symmetric then $A_P$ is Hermitian. Conversely, any $n\times n$ matrix $A$, determines a unique sesquilinear pairing $P_A$ on $\mathbb R^n$ by
+\[
+P_A({\bf v}, {\bf w}) = \ov{\bf w}^T*A*{\bf v} = {\bf w}^**A_P*{\bf v}
+\]
+which is conjugate-symmetric precisely when $A$ is Hermitian.
+\end{theorem}
+
+\begin{proof} The proof is essentially the same as in the real case, with some minor modifications. $P$ is uniquely characterized by its values on ordered pairs of basis vectors; moreover two bilinear pairings $P, P'$ are equal precisely if $P({\bf e}_i,{\bf e}_j) = P'({\bf e}_i,{\bf e}_j)$ for all pairs $1\le i,j\le n$ . So define $A_P$ be the $n\times n$ matrix with $(i,j)^{th}$ entry given by
+\[
+A_P(j,i) := P({\bf e}_i,{\bf e}_j),\quad 1\le i,j\le n
+\]
+By construction, the pairing $({\bf v},{\bf w})\mapsto \ov{\bf w}^T*A_P*{\bf v}$ is sesquilinear, and agrees with $P$ on ordered pairs of basis vectors. Thus the two agree everywhere. This establishes a 1-1 correspondence (sesquilinear pairings on $\mathbb C^n$) $\Leftrightarrow$ ($n\times n$ complex matrices). By construction, the matrix $A_P$ will be conjugate-symmetric  iff $P^T = \ov{P}$, or equivalently if $P$ is Hermitian. Thus this correspondence restricts to a 1-1 correspondence (conjugate-symmetric sesquilinear pairings on $\mathbb C^n$) $\Leftrightarrow$ ($n\times n$ Hermitian matrices).
+\end{proof}
+
+\begin{definition} A {\it Hermitian inner product} on $\mathbb C^n$ is a conjugate-symmetric sesquilinear pairing $P$ that is also positive definite:
+\[
+P({\bf v}, {\bf v})\ge 0;\quad P({\bf v}, {\bf v}) = 0\,\text{ iff } {\bf v} = {\bf 0}
+\]
+\end{definition}
+
+In other words, it also satisfies property (HIP3). As in the real case, proper understanding of this last property will require a discussion of eigenspaces and diagonalizability for symmetric - and more generally Hermitian - matrices.
+\vskip.3in
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Unitary matrices} A set of $n$ vectors in $\mathbb C^n$ is {\it orthogonal} if it is so with respect to the standard complex scalar product, and {\it orthonormal} if in addition each vector has norm 1. Similarly, one has the complex analogue of a matrix being orthogonal.
+
+\begin{definition} An $n\times n$ complex matrix $U$ is {\it unitary} if $U^**U = I$, or equivalently if $U^{-1} = U^*$.
+\end{definition}
+
+Just as orthogonal matrices are exactly those that preserve the dot product, we have
+
+\begin{lemma} A complex $n\times n$ matrix is unitary iff
+\[
+{\bf w}^**{\bf v} = {\bf v}\cdot {\bf w} = (U*{\bf v})\cdot (U*{\bf w})\qquad\forall {\bf v},{\bf w}\in\mathbb C^n
+\]
+\end{lemma}
+
+\begin{proof} Essentially the same as in the real case; by Theorem \ref{thm:matrepcomp} of the previous section we see that the hypothesis on $U$ implies $U^**U = I^**I = I$.
+\end{proof}
+
+Unitary matrices are special examples of linear transformations which preserve Hermitian inner products. More on this below.
+\vskip.5in
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

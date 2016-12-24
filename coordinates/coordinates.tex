@@ -1,0 +1,76 @@
+{Coordinate systems}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\subsection{Coordinate vectors} From the beginning we have adopted the convention that vectors in $\mathbb R^n$ are represented by $n\times 1$ matrices - column vectors - with entries in $\mathbb R$. Another, equivalent way to arrive at such a description is to start with the {standard basis} $\underline{e} := \{{\bf e}^n_1, {\bf e}^n_2,\dots, {\bf e}^n_n\}$, viewed simply as a lnearly independent set, and then define $\mathbb R^n$ to be the span of these basis vectors. In this way, we realize that when writing down an $n\times 1$ column vector representing ${\bf v}$, we are simply recording (in columnar form) the coefficients that occur when representing $\bf v$ as a linear combination of standard basis vectors:
+\[
+{\bf v} = [a_1\ a_2\dots a_n]^T\quad \Leftrightarrow\quad {\bf v} = a_1 {\bf e}^n_1 + a_2{\bf e}^n_2 +\dots + a_n{\bf e}^n_n
+\]
+We notice now that this can be done not just for the standard basis in $\mathbb R^n$, but for {\it any} basis in any vector space. For the purposes of this section and what follows, we will only be concerned with such representations in {\it finite dimensional} vector spaces (or subspaces). 
+
+\begin{definition} If $\underline{b} = \{ {\bf u}_1, {\bf u}_2, \dots, {\bf u}_n\}$ is a basis for a (finite dimensional) vector space $V$, and ${\bf v}\in\mathbb V$, the {\it coordinate representation} ${}_{\underline{b}}{\bf v}$ of ${\bf v}$ with respect to the basis $\underline{b}$ is the $n\times 1$ column vector which records the unique set of coefficients needed to represent $\bf v$ as a linear combination of the basis vectors in $\underline{b}$:
+\[
+{}_{\underline{b}}{\bf v} = [a_1\ a_2\dots a_n]^T\quad \Leftrightarrow\quad {\bf v} = a_1 {\bf u}_1 + a_2{\bf u}_2 +\dots + a_n{\bf u}_n
+\]
+\end{definition}
+
+It is important here to distinguish between i) a vector ${\bf v}\in V$ and ii) its coordinate representation with respect to a particular basis for $V$. For that reason, vectors in $\mathbb R^n$ - written as $n\times 1$ column vectors - may some times be written with the decoration indicating that we are really looking at the representation of the vector with respect to the standard basis.
+\vskip.2in
+
+\begin{example} Let ${\bf v}\in\mathbb R^n$ with ${}_{\underline{e}}{\bf v} = [2\ 3\ -1]^T$, and let $\{{\bf u}_1, {\bf u}_2, {\bf u}_3\}$ be the basis of $\mathbb R^3$ given by
+\[
+{}_{\underline{e}}{\bf u}_1 = [1\ 1\ 0]^T,\quad {}_{\underline{e}}{\bf u}_2 = [1\ 0\ 1]^T,\quad {}_{\underline{e}}{\bf u}_3 = [0\ 1\ 1]^T
+\]
+We wish to determine ${}_{\underline{b}}{\bf v}$, the coordinate representation of $\bf v$ with respect to the basis $\underline{b}$. In other words, solve for the coefficients in the vector equation
+\[
+{\bf v} = x_1 {\bf u}_1 + x_2{\bf u}_2  + x_3{\bf u}_3
+\]
+Referring back to the consistency theorem for systems of equations, we see that solving for ${\bf x} = [x_1\ x_2\ x_3]^T$ is equivalent to solving for $\bf x$ in the matrix equation $A*{\bf x} = {}_{\underline{e}}{\bf v}^T$, where $A$ is the $3\times 3$ matrix whose columns are $\{{\bf u}_1, {\bf u}_2,{\bf u}_3\}$, or more precisely $\{{}_{\underline{e}}{\bf u}_1, {}_{\underline{e}}{\bf u}_2,{}_{\underline{e}}{\bf u}_3\}$:
+\[
+\begin{bmatrix}
+1 & 1 & 0\\
+1 & 0 & 1\\
+0 & 1 & 1
+\end{bmatrix}
+*
+\begin{bmatrix}
+x_1\\
+x_2\\
+x_3
+\end{bmatrix} =
+\begin{bmatrix}
+2\\
+3\\
+-1
+\end{bmatrix}
+\]
+Forming the ACM and putting it into reduced row echelon form yields
+\[
+rref\left(
+\begin{amatrix}{3}
+1 & 1 & 0 & 2\\
+1 & 0 & 1 & 3\\
+0 & 1 & 1 & -1
+\end{amatrix}
+\right)
+=
+\begin{amatrix}{3}
+1 & 0 & 0 & 3\\
+0 & 1 & 0 & -1\\
+0 & 0 & 1 & 0
+\end{amatrix}
+\]
+from which we see that
+\[
+{\bf x} = [3\ -1\ 0]^T = {}_{\underline{b}}{\bf v}
+\]
+\end{example}
+
+This last example illustrates one of the basic computations we will want to be able to do; given the coordinate description of a vector with respect to one basis, find its coordinate representation with respect to a (specified) different basis. Of course one needs to know a bit more about the second basis. But given that information, we would want a systematic way to proceed. It turns out that this is most easily answered within the more general framework of linear transformations and their matrix representations, which we discuss next.
+\vskip.5in
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+

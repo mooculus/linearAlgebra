@@ -1,0 +1,490 @@
+\section{Eigenvalues and eigenvectors}
+
+\subsection{Definition} If $A$ is an $m\times n$ matrix, $\bf v$ an $n\times 1$ non-zero vector, we say that $\bf v$ is {\it an eigenvector of A with eigenvalue $\lambda$} if one has the identity
+\[
+A*{\bf v} = \lambda{\bf v}
+\]
+In other words, if multiplying $\bf v$ on the left by the matrix $A$ has the same effect as multiplying it by the scalar $\lambda$. We note first that, in order for this to be at all  possible, $A*{\bf v}$ must also be an $n\times 1$ vector; in other words, $A$ must be a {\it square} matrix.
+\vskip.2in
+
+Given a square matrix, then, the {\it eigenvalue problem} is to find a complete description of the eigenvalues and associated eigenvectors for that matrix. Our goal in this section is to determine a systematic way of doing this.
+\vskip.2in
+
+Before proceeding with examples, we note that
+
+\begin{proposition} If $\bf v$ is an eigenvalue of a matrix $A$, the eigenvector associated with it is unique.
+\end{proposition}
+
+\begin{proof} Suppose $\lambda_1{\bf v} = A*{\bf v} = \lambda_2{\bf v}$. Then $\lambda_1{\bf v} - \lambda_2{\bf v} = (\lambda_1 - \lambda_2){\bf v} = {\bf 0}$. But since ${\bf v}\ne {\bf 0}$, the only way this could happen is if the coefficient $(\lambda_1 - \lambda_2)$ is equal to zero, or equivalently, if $\lambda_1 = \lambda_2$.
+\end{proof}
+\vskip.2in
+
+\begin{example} Let $A = I^{n\times n}$ be the $n\times n$ identity matrix. Then for any ${\bf v}\in\mathbb R^n$, one has $A*{\bf v} = I*{\bf v} = {\bf v} = 1{\bf v}$. So in this case, we see that {\it every non-zero vector in $\mathbb R^n$ is an eigenvector of $A$ with corresponding eigenvalue $1$}.
+\end{example}
+
+[Additional examples to be included here]
+\vskip.2in
+
+In order to understand more clearly what it is we are looking for, we consider a reformulation of the defining equation above. First, we note that the scalar product $\lambda{\bf v}$ can be rewritten as a matrix product
+\[
+\lambda{\bf v} = (\lambda I)*{\bf v}
+\]
+From this we have the following equivalent statements:
+\[
+A*{\bf v} = \lambda{\bf v}\quad\Leftrightarrow\quad A*{\bf v} = (\lambda I)*{\bf v}\quad\Leftrightarrow\quad (A - \lambda I)*{\bf v} = {\bf 0}\quad\Leftrightarrow\quad {\bf v}\in N(A - \lambda I)
+\]
+
+Thus
+
+\begin{observation}\label{obs:eigen} A non-zero vector $\bf v$ is an eigenvector of $A$ with eigenvalue $\lambda$ if and only if it lies in the nullspace of the matrix $A-\lambda I$. In particular, in order for such an vector to exist, the matrix $A-\lambda I$ must be singular.
+\end{observation}
+\vskip.2in
+
+This suggests that in order to solve the eigenvalue problem, we should first determine the values $\lambda$ for which $A - \lambda I$ is singular; then, for each such $\lambda$, determine a basis for the nullspace of $A - \lambda I$. In other words, {\it eigenvalues first, then eigenvectors}. And to do this we will need an effective tool for determining when a square matrix is singular. This brings us to the determinant, discussed in the next section.
+\vskip.3in
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{The determinant} The determinant of a matrix exists whenever the matrix is square, and whenever entries can be added and multiplied. Thus determinants exist for more than just matrices of numbers; for example, a square matrix whose entries are real-valued functions has a well-defined determinant.
+\vskip.2in
+
+There are different ways to define it. We present two.
+\vskip.2in
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Cofactor expansion} If $A$ is an $n\times n$ matrix, with $n > 1$, we define the $(i,j)^{th}$ minor of $A$ to be $M_{ij}(A)$ to be the $(n-1)\times(n-1)$ matrix derived from $A$ by deleting the $i^{th}$ row and $j^{th}$ column. For example,
+\vskip.2in
+
+[include example here]
+\vskip.2in
+ In this framework one proceeds with an {\it inductive} or {\it recursive} definition. In such a definition, we give an explicit formula in the case $n=1$, and that prior to defining the determinant for $n\times n$ matirices, that the determinant {\it has already been given for $(n-1)\times(n-1)$ matrices}. For indices $1\le i,j\le n$, define the $(i,j)^{th}$ cofactor of $A$ to be
+\[
+A_{ij} = (-1)^{i+j}Det(M_{ij}(A))
+\]
+Then
+
+\begin{definition} Id $A = [a]$ is a $1\times 1$ matrix, then $Det(A) = a$. For $n > 1$, $Det(A) = \sum_{j=1}^n A(1,j)A_{1j}$
+\end{definition}
+
+This is sometimes also referred to as {\it cofactor expansion along the first row}.
+\vskip.2in
+\begin{example} Suppose A = $\begin{bmatrix} 2 & 3\\1 & -4\end{bmatrix}$. Then $M_{11}(A) = [-4], M_{12}(A) = [1]$, so $A_{11} = (-1)^{1+1}(-4) = -4$ and $A_{12} = (-1)^{1+2}(1) = -1$. Then $Det(A) = A(1,1)A_{11} + A(1,2)A_{12} = (2)(-4) + (3)(-1) = -11$.
+\end{example}
+\vskip.2in
+
+More generally, 
+
+\begin{example} Suppose $A = \begin{bmatrix} a_{11} & a_{12}\\a_{21} & a_{22}\end{bmatrix}$. Then $M_{11}(A) = [a_{22}], M_{12}(A) = [a_{21}]$, so $A_{11} = (-1)^{1+1}(a_{22}) = a_{22}$ and $A_{12} = (-1)^{1+2}(a_{21}) = a_{21}$. Then 
+\[
+Det(A) = A(1,1)A_{11} + A(1,2)A_{12} = a_{11}a_{22} - a_{12}a_{21}
+\]
+\end{example}
+\vskip.2in
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Combinatorial definition} Let $S_n = \{1,2,\dots,n\}$ be the set consisting of the intergers between $1$ and $n$ inclusive. We denote by $\Sigma_n$ the set of maps $\sigma:S_n\xrightarrow{\cong} S_n$ of $S_n$ to itself which are {\it isomorphisms}, meaning that they are 1-1 and onto. An element $\sigma\in\Sigma_n$ should be thought of as a {\it reordering} of the elements of $S_n$, with $\Sigma_n$ consisting of all such reorderings. Elements of $\Sigma_n$ can be {\it multiplied} (with multiplication given by composition), and with respect to that multiplication every element $\sigma\in\Sigma_n$ has an inverse $\sigma^{-1}\in\Sigma_n$ satisfying $\sigma \sigma^{-1} = Id$. A set satisfying these properties is called a {\it group}, and $\Sigma_n$ is typically referred to as {\it the permutation group on n letters}.
+\vskip.2in
+Among the elements of $\Sigma_n$ are permutations of a particularly simple type, called {\it transpositions}. The permutation which switches two numbers $i$ and $j$, while leaving all others fixed, will be labeled $\tau_{ij}$ (note: $\tau_{ij}$ is often written as $(i,j)$, however this can be confused with the coordinate notation for points in $\mathbb R^2$, hence our choice not to use it).
+\vskip.2in
+It is not hard to see that any permutation $\sigma\in\Sigma_n$ can be written as a product of transpositions:
+\[
+\sigma = \tau_{i_1,j_1}\tau_{i_2,j_2}\dots\tau_{i_m,j_m}
+\]
+The way of doing so is far from unique, but it turns out that - given $\sigma$ - the {\it number} of transpositions used rewriting $\sigma$ in this fashion is {\it always even or always odd}. This allows for the definition of the {\it sign} of a permutation:
+
+\begin{definition} For $\sigma\in\Sigma_n$, the sign of $\sigma$, denoted by $sgn(\sigma)$ is given by
+\[
+sgn(\sigma) := (-1)^m\quad\text{if } \sigma = \tau_{i_1,j_1}\tau_{i_2,j_2}\dots\tau_{i_m,j_m}
+\]
+where the product on the right is a product of transpositions.
+\end{definition}
+
+With this concept established, the determinant may alternatively be defined as
+
+\begin{definition} For an $n\times n$ matrix $A$, 
+\[
+Det(A) = \sum_{\sigma\in\Sigma_n}sgn(\sigma) A(1,\sigma(1))A(2,\sigma(2))\dots A(n,\sigma(n))
+\]
+\end{definition}
+\vskip.2in
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Properties of the determinant} The determinant satisfies a number of useful properties, among them
+
+\begin{itemize}
+\item For any two square matrices $A,B$ of the same dimensions, $Det(A*B) = Det(A)Det(B)$.
+\item $A$ is singular iff $Det(A) = 0$.
+\item If $A$ is triangular (either upper or lower), then $Det(A) = A(1,1)A(2,2)\dots A(n,n) =$ the product of the diagonal entries.
+\item $Det(A) = Det(A^T)$.
+\end{itemize}
+\vskip.3in
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{The characteristic polynomial} The object is to establish algebraic criteria for determining exactly when a real number can occur as an eigenvalue of $A$. This leads us to
+
+\begin{definition} For an $n\times n$ matrix $A$, the {\it characteristic polynomial of $A$} is given by
+\[
+p_A(t) := Det(A - tI)
+\]
+\end{definition}
+Note the matrix here is not strictly numerical. Precisely, $(A-tI)(i,j) = \begin{cases} A(i,j)\,\,\text{if } i\ne j\\A(i,i) - t\,\,\text{if }i=j\end{cases}$. However, the determinant of such a matrix (using either one of the two equivalent definitions given above) is still well-defined.
+\vskip.2in
+In Observation \ref{obs:eigen} we noted that $\lambda$ is an eigenvalue of $A$ iff $A-\lambda I$ is singular. By the properties of the determinant listed above, we see that $A-\lambda I$ is singular iff its determinant is equal to zero. In other words,
+
+\begin{lemma} $\lambda$ is an eigenvalue of $A$ iff $p_A(\lambda) = 0$; that is, $\lambda$ is a root of the characteristic polynomial $p_A(t)$ of $A$.
+\end{lemma}
+\vskip.2in
+
+\begin{example} Consider the matrix $A = \begin{bmatrix} 2 & 2\\1 & 3\end{bmatrix}$. Then $p_A(t) = Det\left(\begin{bmatrix} (2-t) & 3\\1 & (-4-t)\end{bmatrix}\right) = (2-t)(3-t) - 2 = t^2 - 5t + 4 = (t-1)(t-4)$, indicating that there are two eigenvalues; $\lambda = 1$ and $\lambda=4$.
+\end{example}
+\vskip.2in
+
+\begin{example} Consider the matrix $A = \begin{bmatrix} 2 & -4\\1 & 3\end{bmatrix}$. Then $p_A(t) = Det\left(\begin{bmatrix} (2-t) & 3\\1 & (-4-t)\end{bmatrix}\right) = (2-t)(3-t) + 4 = t^2 - 5t + 10$. In this case the quadratic formula shows that there are no {\it real} roots. There are, however, complex roots (how exactly one handles this case is dicsussed below).
+\end{example}
+\vskip.2in
+
+The following is an immediate consequence of the definition of $p_A(t)$, and basic properties of polynomials.
+
+\begin{lemma} If $A$ is an $n\times n$ matrix, then $p_A(t)$ is a polynomial of degree $n$. Consequently, $A$ can have at most $n$ distinct eigenvalues.
+\end{lemma}
+\vskip.3in
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Eigenspaces} As we saw above, $\lambda$ is an eigenvalue of $A$ iff $N(A-\lambda I)\ne 0$, with the non-zero vectors in this nullspace comprising the set of eigenvectors of $A$ with eigenvalue $\lambda$.
+
+\begin{definition} The eigenspace of $A$ corresponding to an eigenvalue $\lambda$ is $E_\lambda (A) := N(A-\lambda I)$.
+\end{definition}
+
+\begin{exercise} Suppose $A = \begin{bmatrix} 2 & 0\\0 & 3\end{bmatrix}$. Show that $p_A(t) = (2-t)(3-t)$, so that the two possible eigenvalues of $A$ are $\lambda = 2$ and $\lambda = 3$. Then show the two corresponding eigenspaces for these eigenvalues are $E_2(A) = Span\{{\bf e}_1\}$, $E_3(A) = Span\{{\bf e}_2\}$.
+\end{exercise}
+
+Note that the dimension of the eigenspace corresponding to a given eigenvalue must be at least 1, since eigenspaces must contain non-zero vectors by definition.
+\vskip.3in
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\subsection{Direct sum decomposition} A vector space $V$ can be written as a {\it direct sum} of two subspaces $W_1, W_2$ if
+\begin{itemize}
+\item Every ${\bf v}\in V$ can be written as ${\bf v} = {\bf w}_1 + {\bf w}_2$ for ${\bf w}_i\in W_i$;
+\item $W_1\cap W_2 = \{{\bf 0}\}$.
+\end{itemize}
+
+Another way of expressing this is to say that every vector in $V$ can be written {\it uniquely} as a sum of i) a vector in $W_1$ and ii) a vector in $W_2$. If $V$ is a direct sum of $W_1$ and $W_2$, we write $V = W_1\oplus W_2$. 
+\vskip.2in
+
+
+A similar description applies more generally to an $m$-fold direct sum: $V$ is a direct sum of subspaces $W_i$, $1\le i\le m$ if
+\begin{itemize}
+\item Every ${\bf v}\in V$ can be written as ${\bf v} = \sum_{i=1}^m{\bf w}_i$ for ${\bf w}_i\in W_i$;
+\item $W_1\cap (W_2\oplus W_3\oplus\dots \oplus W_n) = \{{\bf 0}\}$.
+\end{itemize}
+
+If such is the case, we write either $V = \bigoplus_{i=1}^m W_i$, or $V = W_1\oplus W_2\oplus\dots \oplus W_m$. 
+
+\begin{exercise} Show that if $\{{\bf u}_1,\dots, {\bf u}_m\}$ is a linearly independent set of vectors in $W_1$, $\{{\bf v}_1,\dots, {\bf v}_n\}$ a linearly independent set of vectors in $W_2$, and $W_i\subset V$ with $W_1\cap W_2 = \{{\bf 0}\}$, then $\{{\bf u}_1,\dots, {\bf u}_m,{\bf v}_1,\dots, {\bf v}_n\}$ is linearly independent.
+\end{exercise}
+\vskip.2in
+
+\begin{exercise} Suppose $W$ is a subspace of $R^n$ (equipped with its standard inner product). Show that $\mathbb R^n = W\oplus W^{\perp}$
+\end{exercise}
+
+Direct sum decomposition applies just as well to subspaces of $\mathbb R^n$. Define $E(A)\subset\mathbb R^n$ to be the supspace of $\mathbb R^n$ spanned by the eigenvectors of $A$ (this may or may not be all of $\mathbb R^n$). As we have seen, the number of distinct possible eigenvalues of $A$ is at most $n$ when $A$ is an $n\times n$ matrix. In particular, it is finite.
+
+\begin{theorem} Given a real $n\times n$ matrix $A$, let $\lambda_1,\dots,\lambda_m$ be the distinct real eigenvalues of $A$. Then 
+\[
+E(A) = E_{\lambda_1}(A)\oplus E_{\lambda_2}(A)\oplus\dots\oplus E_{\lambda_m}(A)
+\]
+\end{theorem}
+
+\begin{proof} For $m=1$ the statement is trivially true. So suppose that $m=2$, and ${\bf v}\in E_{\lambda_1}(A)\cap E_{\lambda_2}(A)$ with $\lambda_1\ne \lambda_2$. Then
+\[
+A*{\bf v} = \lambda_1{\bf v} = \lambda_2{\bf v}
+\]
+implying $(\lambda_1 - \lambda_2){\bf v} = {\bf 0}$. As $\lambda_1 - \lambda_2\ne 0$, this implies ${\bf v} = {\bf 0}$.
+\vskip.2in
+
+Inductively we can assume that the span of the union of the eigenspaces $\{E_{\lambda_i}(A)\}_{i=2}^m$ is the direct sum of these subspaces.  We wish to show that $E_{\lambda_1}(A)\cap (E_{\lambda_2}(A)\oplus\dots\oplus E_{\lambda_m}(A)) = {\bf 0}$. So let ${\bf v}_1\in E_{\lambda_1}(A)\cap (E_{\lambda_2}(A)\oplus\dots\oplus E_{\lambda_m}(A))$. Then 
+\[
+{\bf v}_1 = {\bf v}_2 + {\bf v}_3 +\dots + {\bf v}_m
+\]
+where $A*{\bf v}_i = \lambda_i{\bf v}_i, 1\le i\le m$. Multiplying the above equality on the left by $A$ gives
+\[
+\lambda_1({\bf v}_2 + {\bf v}_3 +\dots + {\bf v}_m) = \lambda_1{\bf v}_1 = A*{\bf v}_1 = A*({\bf v}_2 + {\bf v}_3 +\dots + {\bf v}_m) = \lambda_2{\bf v}_2 + \lambda_3{\bf v}_3 +\dots + \lambda_m{\bf v}_m
+\]
+Subtracting gives
+\[
+(\lambda_1 - \lambda_2){\bf v}_2 + (\lambda_1 - \lambda_3){\bf v}_3 +\dots + (\lambda_1 - \lambda_m){\bf v}_m = {\bf 0}
+\]
+As the eigenvalues are distinct, the coefficient $(\lambda_1 - \lambda_i)$ is non-zero for each $2\le i\le m$. Then
+\[
+{\bf v}_i = \left(\frac{-1}{(\lambda_1 - \lambda_i)}\right)\Big((\lambda_1 - \lambda_2){\bf v}_2  (\lambda_1 - \lambda_3){\bf v}_3 \dots + (\lambda_1 - \lambda_{i-1}){\bf v}_{i-1} + (\lambda_1 -\lambda_{i+1}){\bf v}_{i+1}\dots +(\lambda_1 - \lambda_m){\bf v}_m\Big)
+\]
+Induction allows us to assume
+\[
+E_{\lambda_i}(A)\cap\left(E_{\lambda_2}(A)\oplus E_{\lambda_3}(A)\oplus\dots\oplus E_{\lambda_{i-1}}(A)\oplus E_{\lambda_{i+1}}(A)\oplus\dots\oplus E_{\lambda_m}(A)\right) = {\bf 0}
+\]
+which together with the last equation implies ${\bf v}_i = {\bf 0}$ for all $2\le i\le m$. As ${\bf v}_1 = \sum_{i=2}^m {\bf v}_i$ we conclude finally that ${\bf v}_1 = {\bf 0}$. Since ${\bf v}_1$ was taken to be an arbitrary element of $E_{\lambda_1}(A)\cap (E_{\lambda_2}(A)\oplus\dots\oplus E_{\lambda_m}(A))$ this shows the intersection must be zero, completing the proof.
+\end{proof}
+
+In the case $E(A) = \mathbb R^n$, this yields a direct sum decomposition of $\mathbb R^n$ into eigenspaces of $A$, which is a very useful thing to know (in the cases it occurs). We investigate this question next.
+\vskip.3in
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Similarity and diagonalization} Two square matrices $A$ and $B$ are said to be {\it similar} if there exists an invertible matrix $S$ such that
+\[
+B = S*A*S^{-1}
+\]
+The matrix $S$ appearing in this equation is referred to as a {\it similarity matrix}. Similarity represents an important {\it equivalence relation} on the vector space of square matrices of a given dimension. A number of important aspects of a square matrix remain unchanged under this relation.
+
+\begin{lemma} If $A$ and $B$ are similar, then $p_A(t) = p_B(t)$. In particular, $Det(A) = Det(B)$.
+\end{lemma}
+
+\begin{proof} Choose $S$ such that $B = S*A*S^{-1}$. Then the equality of the characteristic polynomials follows from the sequence of equalities
+\[
+\begin{split}
+p_B(t) = Det(B - tI) &= Det(S*A*S^{-1} - tI)\\
+&= Det(S*A*S^{-1} - S*(tI)*S^{-1})\\
+&= Det(S*(A - tI)*S^{-1})\\
+&= Det(S)*Det(A - tI)*Det(S^{-1})\\
+&= Det(S)*Det(S)^{-1}*Det(A - tI) = Det(A - tI) = p_A(t)
+\end{split}
+\]
+\end{proof}
+
+Thus similar matrices have the same eigenvalues, occuring with the same multiplicity. Moreover, their eigenvectors are related.
+
+\begin{exercise} If $B = S*A*S^{-1}$, and ${\bf v}$ is an eigenvector of $A$ with eigenvalue $\lambda$, show that $S*{\bf v}$ is an eigenvalue of $B$ with eigenvalue $\lambda$. More generally, slow that if $L_S:\mathbb R^n\to \mathbb R^n$ is the linear transformation $L_S({\bf w}) = S*{\bf w}$, show that $L_S$ induces an isomorphism on eigenspaces $L_S:E_{\lambda}(A)\xrightarrow{\cong} E_{\lambda}(B)$ for all eigenvalues $\lambda$.
+\end{exercise}
+
+In the previous section we considered the question: when does $\mathbb R^n$ decompose as a direct sum of eigenspaces of a matrix $A$? To answer this, we consider first the case when $A = D$ a diagonal matrix with $D(i,i) = \lambda_i, 1\le i\le n$. For such a matrix, each standard basis vector ${\bf e}_i$ is an eigenvector, as $D*{\bf e}_i = \lambda_i{\bf e}_i$ for each $1\le i\le n$. So for such a matrix one has an evident direct sum decomposition
+\[
+\mathbb R^n = \bigoplus_{\lambda} E_{\lambda}(A),\quad E_{\lambda}(A) = Span\{{\bf e}_i\ |\ \lambda_i = \lambda\}
+\]
+\vskip.2in
+
+We say that $A$ is {\it diagonalizable} if $A$ is similar to a diagonal matrix.
+
+\begin{theorem} Given $A$, the following statements are equivalent:
+\begin{enumerate}
+\item $\mathbb R^n$ has a basis consisting of eigenvectors of $A$.
+\item $\mathbb R^n$ can be written as a direct sum of eigenspaces of $A$.
+\item $A$ is diagonalizable.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof} Statements (1) and (2) are clearly equivalent. It will suffice then to show that statement (2) is equivalent to statement (3). Suppose first that $A$ is diagonalizable, in other words that there is a matrix $S$ such that $A = S*D*S^{-1}$. Multiplying both sides of this equation on the right by $S$ yields
+\[
+A*S = S*D
+\]
+The $i^{th}$ column of $A*S$ is $A*(S(:,i))$, while the $i^{th}$ column of $S*D$ is $\lambda_i S(:,i)$ where $\lambda_i = D(i,i)$ represents the $i^{th}$ diagonal element of $D$. In othe words, we have an equality
+\[
+A*S(:,i) = \lambda_i S(:,i),\quad 1\le i\le n
+\]
+implying the columns of $S$ are eigenvectors of $A$. The $n\times n$ matrix $S$ is invertible, so must have rank $n$. This means the  set of column vectors $\{S(:,1), S(:,2),\dots, S(:,n)\}$ are linearly independent, and therefore form a basis for $\mathbb R^n$.
+\vskip.2in
+
+On the other hand, if $\{{\bf v}_1,\dots, {\bf v}_n\}$ is a basis of $\mathbb R^n$ with $A*{\bf v}_i = \lambda_i {\bf v}_i, 1\le i\le n$, then concatenating the vectors in the basis forms a matrix 
+\[
+S := [{\bf v}_1\ {\bf v}_2\ \dots {\bf v}_n]
+\]
+whose $i^{th}$ column is the $i^{th}$ eigenvector ${\bf v}_i$. If we now define $D$ to be the diagonal matrix with $D(i,i) = \lambda_i$, then (as above) one has
+\[
+A*S = S*D
+\]
+By construction the set of columns of $S$ are linearly independent, and so $S$ is invertible. So we may multiply both sides of this last equation on the right by $S^{-1}$, yielding
+\[
+A = S*D*S^{-1}
+\]
+implying that $A$ is diagonalizable. This completes the proof.
+\end{proof}
+
+Many matrices are diagonalizable, but there are also many that are not. The following exercise illustrates a class of matrices that won't be.
+
+\begin{exercise} Show that $A = \begin{bmatrix} 1 & 1\\0 & 1\end{bmatrix}$ is not diagonalizable, by i) finding the single eigenvalue $\lambda_1$ for the matrix, and then ii) showing $E_{\lambda_1}(A)$ has dimension 1 (and this cannot be all of $\mathbb R^2$).
+\end{exercise}
+
+Of course, this discussion so far has been concerned with the case of real matrices and real eigenvalues. Some matrices have no eigenvalues over the real numbers. To illustrate
+
+\begin{example} Let $A = \begin{bmatrix} 0 & 1\\-1 & 0\end{bmatrix}$. Then charactericstic polynomial of $A$ is $p_A(t) = t^2 + 1$, which is an irreducible quadratic polynomial with no real roots. Thus $A$ has no eigenvectors in $\mathbb R^2$.
+\end{example}
+
+What should be done with such matrices? The answer is that even if one is primarily concerned with real matrices and working over the real numbers, there are cases where one needs to enlarge the set of scalars to $\mathbb C$. This is one of those cases.
+\vskip.3in
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Complex eigenvalues and eigenvectors} 
+All of the constructions we have done so far over $\mathbb R$ extend naturally to $\mathbb C$, with some slight adjustment for the case of inner products (we will discuss this in more detail below). For now, the main reason for considering complex numbers has to do with the factorization of polynomials. The key result one want to know (whose proof involves techniques well beyond the scope of linear algebra) is
+
+\begin{theorem} {\rm ( The Fundamental Theorem of Algebra)} Any non-constant polynomial $p(z)$ with complex coefficients has a complex root. Consequently, any non-constant polynomial with real or complex coefficients can be factored over $\mathbb C$ into a product of linear terms
+\[
+p(z) = c(z - r_1)(z - r_2)\dots (z - r_n),\qquad c,r_1,r_2,\dots,r_n\in\mathbb C
+\]
+\end{theorem}
+\vskip.3in
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Geometric vs algebraic multiplicity} The identity matrix $\begin{bmatrix} 1 & 0\\0 & 1\end{bmatrix}$ is obviously diagonalizable (it is diagonal to start with), and $\mathbb R^2$ has a basis consisting of eigenvectors of $I$, namely the standard basis $\{{\bf e}_1, {\bf e}_2\}$. On the other hand, we have seen that $\begin{bmatrix} 1 & 1\\0 & 1\end{bmatrix}$ is not, even though it has the same characteristic polynomial as $I$. This example tells us, among other things, that the characteristic polynomial alone does not determine whether or not a given matrix is diagonalizable. As it turns out, this problem can be studied one eigenvalue at a time.
+\vskip.2in
+
+Let $A$ be an arbitrary $n\times n$ matrix, and $\lambda$ an eigenvalue of $A$. The {\it geometric multiplicity} of $\lambda$ is defined as
+\[
+m_g(\lambda) := Dim(E_{\lambda}(A))
+\]
+while its {\it algebraic multiplicity} is the mutiplicity of $\lambda$ viewed as a root of $p_A(t)$ (as defined in the previous section).
+
+\begin{theorem}\label{thm:geoalg} For all square matrices $A$ and eigenvalues $\lambda$, $m_g(\lambda)\le m_a(\lambda)$. Moreover, this holds over both $\mathbb R$ and $\mathbb C$ (in other words, both for real matrices with real eigenvalues, or more generally complex matrices with complex eigenvalues)
+\end{theorem}
+
+The proof of this result will be deferred until later. For now we record an important consequence. Let $\lambda_1,\dots,\lambda_k$ denote the (distinct) eigenvalues of the $n\times n$ matrix $A$. Then (working over $\mathbb C$ if needed) we can write the characteristic polynomial of $A$ as
+\[
+p_A(t) = (-1)^n(t-\lambda_1)^{m_1}(t-\lambda_2)^{m_2}\dots (t-\lambda_k)^{m_k}
+\]
+where $m_i = m_a(\lambda_i$ is the algebraic multiplicity of $\lambda_i$. From this factorization, we see that the sum of the algebraic multiplicities must equal the degree of $p_A(t)$, which equals $n$:
+\[
+\sum_{i=1}^k m_a(\lambda_i) = \sum_{i=1}^k m_i = n
+\]
+By the above theorem we have
+
+\begin{theorem} Over $\mathbb C$ the matrix $A$ is diagonalizable iff for each eigenvalue $\lambda$ one has $m_g(\lambda) = m_a(\lambda)$. If $A$ is a real matrix and $p_A(t)$ factors over $\mathbb R$ into a product of linear terms, then the same holds over $\mathbb R$. 
+\end{theorem}
+
+\begin{proof}We start with the complex case, as working over $\mathbb C$ guaranteees complete factorization of $p_A(t)$. By Theorem \ref{thm:geoalg}, $\sum_i m_g(\lambda_i)\le \sum_i m_a(\lambda_i) = n$; moreover, since $0\le m_g(\lambda_i)\le m_a(\lambda_i)$ for each $i$, we have that $\sum_i m_g(\lambda_i) = n$ iff $m_g(\lambda_i) = m_a(\lambda_i)$ for each $i$. But $\sum_i m_g(\lambda_i) = Dim(E(A)$ (over $\mathbb C$), and $A$ is diagonalizable iff $Dim(E(A)) = n$. This proves the result over $\mathbb C$.
+\vskip.2in
+
+If $A$ is a real matrix and the factorization of $p_A(t)$ over $\mathbb C$ yields only real eigenvectors, then $p_A(t)$ factors completely into linear terms over $\mathbb R$, and the above argument can be repeated in this case to arrive at the same conclusion over $\mathbb R$.
+\end{proof}
+
+An $n\times n$ matrix $A$ is called {\it defective} if the sum of the geometric multiplicities over $\mathbb C$ is strictly less than $n$. Our last theorem shows that this happens iff there is some eigenvalue $\lambda$ of $A$ for which $m_g(\lambda) < m_a(\lambda)$.
+The {\it deficiency} of a particular eigenvalue is then represented by the difference $m_a(\lambda) - m_g(\lambda)$. This can be arbitrarily large, as the next exercise illustrates.
+
+\begin{exercise} Let $T_n$ be the $n\times n$ matrix with $T(i,j) = \begin{cases} 1\quad\text{if } i\le j\\ 0\quad\text{otherwise}\end{cases}$. Show that the eigenvalue $\lambda = 1$ has algebraic multiplicity $n$, but geometric multiplicity $1$.
+\end{exercise}
+
+On the other hand, for almost all matrices (from a statistical point of view), factorization of $p_A(t)$ into linear terms leads to $n$ distinct eigenvalues, which therefore must each have multiplicity equal to 1. Since the geometric multiplicity of a given eigenvalue must be {\it at least} 1 (as the corresponding eigenspace must be non-zero), we see that {\it any eigenvalue with algebraic multiplicity 1 cannot be deficient}. Hence $\sum_i m_g(\lambda_i) = n$ in this case, hence
+
+\begin{corollary} Any $n\times n$ matrix with $n$ distinct eigenvalues is diagonalizable over $\mathbb C$. If the matrix and its eigenvalues are all real, the same statement is true over $\mathbb R$.
+\end{corollary}
+\vskip.3in
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Shur's Theorem} Recall that a complex matrix $U$ is unitary if $U^* = U$. 
+
+\begin{theorem} Let $A$ be a complex $n\times n$ matrix. Then there is a unitary matrix $U$ and upper triangular matrix $T$ such that
+\[
+U^**A*U = T
+\]
+\end{theorem}
+
+\begin{proof} By the Fundamental Theorem of Algebra $p_A(t)$ factors completely over $\mathbb C$ into linear terms. In particular, $A$ must have at least one eigenvalue.  Let $\lambda_1$ be an eigenvalue of $A$, and ${\bf v}_1$ a corresponding eigenvector with norm 1. Let $W_1 = Span\{{\bf v}_1\}^\perp$ be the orthogonal complement of the span of ${\bf v}_1$. Write $L_1:\mathbb C^n\to\mathbb C^n$ for the linear transformation ${\bf v}\mapsto A*{\bf v}$. Now consider the linear transformation
+\[
+L_2:W_1\inj\mathbb C^n\xrightarrow{L_1}\mathbb C^n\surj \mathbb C^n/Span\{{\bf v}_1\}\cong W_1
+\]
+By induction on dimension, we can assume the subspace $W_1\subset\mathbb C^n$ admits a complex orthonormal basis $\{{\bf v}_2,\dots, {\bf v}_n\}$ such that $L_2({\bf v}_i)\subset Span\{{\bf v}_2,\dots,{\bf v}_i\}, 2\le i\le n$. In other words, for each $2\le i\le n$ we have
+\[
+L_2({\bf v}_i) = \sum_{j=2}^i\alpha_{i,j}{\bf v}_j
+\]
+This means that the composition $L_2':W_1\inj\mathbb C^n\xrightarrow{L_1}\mathbb C^n$ on the vectors $\{{\bf v}_2,\dots, {\bf v}_n\}$ is given by
+\[
+L_1({\bf v}_i) = L_2'({\bf v}_i) = \sum_{j=1}^i\alpha_{i,j}{\bf v}_j
+\]
+for some choice of complex scalars $\alpha_{1,j}$. Setting $\alpha_{1,1} = \lambda_1$, we see that
+\[
+A*{\bf v}_i = \sum_{j=1}^i\alpha_{i,j}{\bf v}_j,\qquad 1\le i\le n
+\]
+Let $U = [{\bf v}_1\ {\bf v}_2\dots {\bf v}_n]$ be the concatenation of the vectors ${\bf v}_i, 1\le i\le n$ and $T$ the upper triangular matrix with $T(i,j) = \alpha_{i,j}, 1\le i\le j\le n$. Then $U$ is unitary, and last equation can then be written in matrix form as
+\[
+A*U = U*T
+\]
+Multiplying both sides on the left by $U^* = U^{-1}$ gives the desired equation
+\[
+U^**A*U = T
+\]
+\end{proof}
+
+The main corrolary to Shur's theorem is 
+
+\begin{corollary} If $A$ is an $n\times n$ Hermitian matrix, then $A$ is diagonalizable (i.e., $\mathbb C^n$ has a basis consisting of eigenvectors of $A$). Moreover, all of the eigenvalues of $A$ are real.
+\end{corollary}
+
+\begin{proof} By Shur's Theorem, there exists a unitary $U$ and upper triangular $T$ with $U^**A*U = T$. But $A$ is Hermitian, so $A = A^*$. Then
+\begin{align*}
+T^* &= \left(U^**A*U\right)^*\\
+        &= U^**A^**U\\
+        &= U^**A*U = T
+\end{align*}
+But as $T$ is upper triangular, the identity $T = T^*$ implies not only that $T$ is diagonal, but that the diagonal elements remain invariant under complex conjugation; i.e., are real numbers. Thus Shur's equation may be rewritten in this case as $U^**A*U = D$ where $D$ is a real diagonal matrix, or alternatively,
+\[
+A*U = U*D
+\]
+But this last equation implies $A*U(i,:) = \lambda_i U(i,:), 1\le i\le n$, where $\lambda_i = D(i,i)$. As the columns of $U$ are orthonormal, they form a basis for $\mathbb C^n$, implying the result.
+\end{proof}
+
+As a special case, when $A$ is a real $n\times n$ matrix, then it is Hermitian iff it is symmetric. Thus, viewing it as a complex matrix with purely real entries, we have
+
+\begin{corollary} If $A$ is an $n\times n$ real symmetric matrix, then it is diagonalizable and all of its eigenvalues are real.
+\end{corollary}
+
+We are now in a position to return to the question of how to decide when a sesquilinear conjugate-symmetric (complex) pairing - which in the real case reduces to a symmetric bilinear pairing - actually represents an inner product; in other words, is positive definite.
+
+\begin{theorem} Let $<_-,_->:\mathbb C^n\times\mathbb C^n\to \mathbb C, ({\bf v}, {\bf w})\mapsto <{\bf v}, {\bf w}>$ be a sesquilinear conjugate-symmetric pairing on $\mathbb C^n$, represented (with respect to the standard basis) by the Hermitian matrix $A$. Then $<_-,_->$ is positive-definite iff all of the eigenvalues of $A$ are positive (equivalently, iff $A$ is similar to a diagonal matrix $D$ with positive diagonal entries).
+\end{theorem}
+
+\begin{proof} Let $\{{\bf v}_1, {\bf v}_2, \dots, {\bf v}_n\}$ be an orthonormal basis for $\mathbb C^n$ consisting of eigenvectors of $A$, with $A*{\bf v}_i = \lambda_i{\bf v}_i, \lambda_i\in\mathbb R$ (this basis exists by the corollary above). If ${\bf v} = \sum\alpha_i{\bf v}_i$, then 
+\[
+<{\bf v}, {\bf v}> = {\bf v}^**A*{\bf v} = \sum_i|\alpha_i|^2\lambda_i
+\]
+It is easily seen that this sum satisfies condition (HIP3) iff $\lambda_i > 0\,\,\forall 1\le i\le n$.
+\end{proof}
+\vskip.2in
+
+A slightly more general class of Hermitian matrices are those that are {\it non-negative definite}, meaning that their eigenvalues are all non-negative. Now suppose $A$ is an arbitrary $n\times n$ complex matrix, and $B = A^**A$. Then clearly $B^* = (A^**A)^* = A^**A = B$ implying $B$ is Hermitian.
+
+\begin{lemma} For any $n\times n$ matrix $A$, the matrix $B = A^**A$ is non-negative definite. Moreover, $B$ is positive definite iff $A$ is non-singular.
+\end{lemma}
+
+\begin{proof} Since $\mathbb C^n$ admits an orthonormal basis consisting of eigenvectors of $B$, it suffices to show that the eigenvalues of $B$ are non-negative. Let $\bf v$ be an eigenvector of $B$ with eigenvalue $\lambda$. Then
+\[
+\lambda\|{\bf v}\|^2 = \lambda({\bf v}^**{\bf v}) = {\bf v}^**B*{\bf v} = {\bf v}^**(A^**A)*{\bf v} = (A*{\bf v})^**(A*{\bf v}) = \|A*{\bf v}\|^2\ge 0
+\]
+As $\|{\bf v}\|^2 > 0$ this implies $\lambda\ge 0$. Also, as we have already seen, $B$ is non-singular iff $0$ is not an eigenvalue of $B$. But $Det(B) = |Det(A)|^2$. Hence $B$ is non-singular iff $A$ is.
+\end{proof}
+\vskip.3in
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Normal matrices} The identity $U^**A*U = T$ can be expressed as saying that $A$ is {\it unitarily similar} to the triangular matrix $T$ (in other words, the similarity matrix is not just invertible, but unitary). It is reasonable to ask whether of not a complex matrix $A$ is unitarily similar to a diagonal matrix, or alternatively, whether or not $\mathbb C^n$ admits an orthonormal basis consisting of eigenvectors of $A$.
+\vskip.2in
+
+\begin{definition} $A$ is {\it normal} if $A^**A = A*A^*$.
+\end{definition}
+
+\begin{lemma} $A$ is normal iff $A$ is unitarily diagonalizable.
+\end{lemma}
+
+\begin{proof} Shur's identity can be rewritten as $A = U*T*U^*$ ($U$ unitary and $T$ triangular). Then $A$ normal implies
+\[
+(U*T*U^*)*(U*T*U^*)^* = (U*T*U^*)^**(U*T*U^*)
+\]
+Recalling that $(C*D)^* = D^**C^*$, and that unitary means $U^**U = I$, the above identity simplifies to
+\[
+U*T*T^**U^* = U*T^**T*U^*\quad\Leftarrow\quad T*T^* = T^**T
+\]
+One can check that this last condition implies $T$ must be a diagonal matrix (in other words, the only triangular matrix which is also normal is a diagonal one. Note, though, that $T$ need not have real entries).
+\vskip.2in
+
+Conversely, if $T$ is diagonal, then $T$ is normal (as we just noted), and $A$ is unitarily similar to a normal matrix, which implies it too is normal.
+\end{proof}
+\vskip.5in
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

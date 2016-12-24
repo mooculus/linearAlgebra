@@ -1,0 +1,112 @@
+{Linear Transformations}
+
+\subsection{Definition} Suppose $V$ and $W$ are vector spaces (of arbitrary dimension). A {\it function} $f:V\to W$ is (as we recall) a rule which associates to each ${\bf v}\in V$ a unique vector $f({\bf v})\in W$. We will call such a function a {\it linear transformation} if it commutes with the linear sturucture in the domain and range:
+
+\begin{gather}
+f({\bf v} + {\bf w}) = f({\bf v}) + f({\bf w})\qquad\forall {\bf v,w}\in V\\
+f(\alpha{\bf v}) = \alpha f({\bf v})\qquad\qquad\forall \alpha\in\mathbb R, {\bf v}\in V
+\end{gather}
+
+In other words, $f$ takes sums to sums and scalar products to scalar products. These two properties can be combined into one, using linear combinations. Precisely, $f$ is a linear transformation if
+
+\begin{equation}
+f(\alpha{\bf v} + \beta{\bf w}) = \alpha f({\bf v}) + \beta f({\bf w})\qquad\forall \alpha,\beta\in\mathbb R, {\bf v}, {\bf w}\in V
+\end{equation}
+
+\begin{exercise} Show that $f$ is a linear transformation iff
+\[
+f(\alpha_1{\bf v}_1 +\dots \alpha_n{\bf v}_n) = \alpha_1 f({\bf v}_1) +\dots \alpha_n f({\bf v}_n)\qquad\forall \alpha_i\in\mathbb R, {\bf v}_i\in V
+\]
+\end{exercise}
+
+As a consequence of this exercise, we have
+
+\begin{corollary} If $f: V\to W$ is a linear transformation, then it is uniquely determined by its values on a basis for $V$. Conversely, if $S := \{{\bf v}_1,\dots {\bf v}_n\}$ is a basis for $V$ and $g:S\to W$ is a function from the set $S$ to $W$, then $g$ extends uniquely to a linear transformation $f:V\to W$ with $f({\bf v}_i) = g({\bf v}_i), 1\le i\le n$. Thus, if $f_1, f_2:V\to W$ are two linear transformations which agree on a basis for $V$, then $f_1 = f_2$.
+\end{corollary}
+
+We will often denote a linear transformation between two vector spaces by the letter $L$, when wanting to emphasize its linear nature.
+\vskip.3in
+
+\subsection{Matrix representations of transformations} Suppose $V = \mathbb R^n, W = \mathbb R^m$, and $L_A:V\to W$ is given by 
+\[
+L_A({\bf v}) = A*{\bf v}
+\]
+for some $m\times n$ real matrix $A$. Then it follows immediately from the properties of matrix algebra that $L_A$ is a linear transformation. Conversely, suppose the linear transformation $L$ is given. If we define a matrix by
+\[
+A_L = [L({\bf e}_1)\ L({\bf e}_2)\ \dots L({\bf e}_n)]
+\]
+that is, the $m\times n$ matrix with $A(:,i) = L({\bf e}_i),\, 1\le i\le n$. Then by construction
+\[
+A_L*({\bf e}_i) = A(:,i) = L({\bf e}_i),\, 1\le i\le n
+\]
+so that ${\bf v}\mapsto L({\bf v})$ and ${\bf v}\mapsto A_L*{\bf v}$ are two linear transformations which agree on a basis for $\mathbb R^n$, which by the previous corollary implies
+\[
+L({\bf v}) = A_L*({\bf v})\qquad \forall{\bf v}\in \mathbb R^n
+\]
+Because of this, the matrix $A_L$ is referred to as a {\it matrix representation} of $L$. Note that this representation is with respecto to the standard basis for $\mathbb R^n$ and $\mathbb R^m$.
+\vskip.2in
+
+We see now that the same type of representation applies for arbitrary vector spaces {\it once a basis has been fixed for both the domain and target}. Thus, given
+\begin{itemize}
+\item A vector space $V$ with basis $S = \{{\bf v}_1,\dots,{\bf v}_n\}$,
+\item a vector space $W$ with basis $T = \{{\bf w}_1,\dots,{\bf w}_m\}$, and
+\item a linear transformation $L:V\to W$
+\end{itemize} 
+we could ask if there is a similar reprensentation of $L$ in terms of a matrix (which depends on these two choices of bases). The answer is given by
+
+\begin{theorem}\label{thm:matrep} For any ${\bf v}\in V$
+\[
+{}_TL({\bf v}) = {}_TL_S*{}_S{\bf v}
+\]
+where ${}_SL_T$ is the $m\times n$ matrix defined  by
+\[
+{}_TL_S = [{}_TL({\bf v}_1)\ {}_TL({\bf v}_2)\ \dots\ {}_TL({\bf v}_n)]
+\]
+\end{theorem}
+
+\begin{proof} Again by the above corollary it suffices to verify the equality for basis vectors. But ${}_S{\bf v}_i$ is the $n\times 1$ coordinate vector identical to the basis vector ${\bf e}_i$ for $\mathbb R^n$. From this we get
+\[
+{}_TL({\bf v}_i) = {}_TL_S(:,i) = {}_TL_S*{}_S{\bf v}_i,\qquad 1\le i\le n
+\]
+completing the proof.
+\end{proof}
+\vskip.3in
+
+\subsection{Change of basis} Suppose now that $V$ is an $n$-dimensional vector space equipped with two bases $S_1 = \{{\bf v}_1,{\bf v}_2,\dots,{\bf v}_n\}$ and $S_2 = \{{\bf w}_1, {\bf w}_2,\dots,{\bf w}_n\}$ (we are assuming here the fact, listed above, that any two bases for $V$ must have the same number of elements). Taking $L=Id$, Theorem \ref{thm:matrep} yields the equation
+\begin{equation}\label{eqn:basechange}
+{}_{S_2}({\bf v}) = {}_{S_2}(Id*{\bf v}) = {}_{S_2}Id_{S_1}*{}_{S_1}{\bf v}
+\end{equation}
+where 
+\begin{equation}\label{eqn:basechangematrix}
+{}_{S_2}Id_{S_1} = [{}_{S_2}{\bf v}_1\ {}_{S_2}{\bf v}_2\ \dots\ {}_{S_2}{\bf v}_n]
+\end{equation}
+The matrix ${}_{S_2}Id_{S_1}$ is referred to as a {\it base transition matrix}, and written as ${}_{S_2}T_{S_1}$. In words, equations (\ref{eqn:basechange}) and (\ref{eqn:basechangematrix}) tells us that {\it in order to compute the coordinate vector ${}_{S_2}{\bf v}$ from ${}_{S_1}{\bf v}$, we multiply ${}_{S_1}{\bf v}$ on the left by the $n\times n$ matrix whose $i^{th}$ column is the coordinate vector of ${\bf v}_i$ with respect to the basis $S_2$}.
+\vskip.2in
+
+\begin{theorem} Suppose $S_i,1\le i\le 3$ are three bases for $V$. Then one has the following equalities
+\begin{itemize}
+\item ${}_{S_3}T_{S_1} = {}_{S_3}T_{S_2}*{}_{S_2}T_{S_1}$
+\item ${}_{S_i}T_{S_i} = Id$
+\item ${}_{S_i}T_{S_j} = \left({}_{S_j}T_{S_i}\right)^{-1}$
+\end{itemize}
+\end{theorem}
+
+\begin{exercise} Verify these three properties (notice that the second and third properties are closely related, in light of the first. Note also that the third property verifies that base transition matrices are always non-singular).
+\end{exercise}
+
+\begin{example} [to be included]
+
+\end{example}
+
+\begin{exercise} Let $S_1,S_2$ be two bases for $V$, and $L:V\to V$ a linear transformation from $V$ to itself. We can consider The representations ${}_{S_1}L_{S_1}$ and ${}_{S_2}L_{S_2}$ of $L$ with respect to the bases $S_1$ and $S_2$. Using the above identities, show that
+\[
+{}_{S_1}L_{S_1} = A*{}_{S_2}L_{S_2}*A^{-1}
+\]
+where $A = {}_{S_1}T_{S_2}$.
+\end{exercise}
+
+Square matrices $B,C$ which satisfy the equality $B = A*C*A^{-1}$ are called {\it similar}. This is an important relation between square matrices, and plays a prominent role in the theory of eigenvalues and eigenvectors.
+\vskip.5in
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -1,61 +1,3 @@
-\documentclass[11pt,notitlepage]{article}
-\usepackage{amsmath, amsthm, amssymb,todonotes, enumerate,color,pigpen,mathtools}
-\usepackage{graphicx}%authblk
-\usepackage[v2]{xy}
-\xyoption{all}
-\topmargin  = -1cm
-\textwidth  = 16cm \textheight = 24cm
-\voffset-.75cm\hoffset=-1.7cm
-\parindent  = 0pt
-\pdfpageheight 11in
-\pagestyle{empty}
-%\flushbottom
-%\renewcommand\Authfont{\scshape}
-%\renewcommand\Affilfont{\small}
-
-\numberwithin{equation}{section}
-
-\theoremstyle{plain}
-\newtheorem{theorem}[equation]{Theorem}
-\newtheorem*{thm}{Theorem}
-\newtheorem{proposition}[equation]{Proposition}
-\newtheorem{lemma}[equation]{Lemma}
-\newtheorem{corollary}[equation]{Corollary}
-\newtheorem{conjecture}[equation]{Conjecture}
-
-\theoremstyle{definition}
-\newtheorem{definition}[equation]{Definition}
-\newtheorem{example}[equation]{Example}
-\newtheorem{exercise}[equation]{Exercise}
-\newtheorem{remark}[equation]{Remark}
-\newtheorem{observation}[equation]{Observation}
-\newtheorem{question}[equation]{Question}
-\newtheorem*{ques}{Question}
-\newtheorem{construction}[equation]{Construction}
-\newtheorem{claim}[equation]{Claim}
-
-
-\newcommand\wt{\widetilde}
-\newcommand\ov{\overline}
-\newcommand\inj{\rightarrowtail}
-\newcommand\surj{\twoheadrightarrow}
-\newcommand{\harpoon}{\overset{\rightharpoonup}}
-
-\newenvironment{amatrix}[1]{%
-  \left[\begin{array}{@{}*{#1}{c}|c@{}}
-}{%
-  \end{array}\right]
-}
-
-\begin{document}
-
-
-\title{Linear Algebra - Topic 3}
-\author{}
-\maketitle
-\vskip.3in
-
-
 \section{Vector spaces}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -246,7 +188,7 @@ In other words, the only linear combination of the vectors that produces the zer
 Call $\{{\bf v}_1,\dots,{\bf v}_n\}$ {\it vectorwise independent} if no vector in the set can be written as a linear combination of the remaining vectors in the set. The following lemma records the equivalence of these two concepts.
 
 
-\begin{lemma}\label{lemma:indep} A collection of vectors $\{{\bf v}_1,\dots,{\bf v}_n\}$ is linearly independent iff it is vectorwise independent.
+\begin{lemma} A collection of vectors $\{{\bf v}_1,\dots,{\bf v}_n\}$ is linearly independent iff it is vectorwise independent.
 \end{lemma}
 
 \begin{proof} Suppose $\alpha_1{\bf v}_1 + \alpha_2{\bf v}_2 +\dots + \alpha_n{\bf v}_n = {\bf z}$ is a linear combination of $\{{\bf v}_1,\dots,{\bf v}_n\}$ equalling the zero vector. If $\alpha_i\ne 0$ for some $1\le i\le n$, then this linear relation may be rewritten as
@@ -263,21 +205,6 @@ or, equivalently
 \]
 from which we see that (vectorwise dependence)$\Rightarrow$(linear dependence) or, again by contraposition, (linear independence)$\Rightarrow$(vectorwise independence).
 \end{proof}
-\vskip.2in
-
-Most linear algebra texts do not discuss the notions of linear combinations and linear dependence when the number of vectors involved is infinite. However, there are a number of benefits of being able to extending to this case. Thus, suppose $\{{\bf v}_\alpha\}$ is an arbitrary (possibly infinite) collection of vectors.
-
-\begin{definition} A {\it linear combination} of a collection of vectors $S = \{{\bf v}_\alpha\}\subset V$ is a sum which can be written as a linear combination of some {\it finite} subset of $S$ (alternatively, a sum of the form $\sum \lambda_\alpha {\bf v}_{\alpha}$ where $\lambda_\alpha = 0$ except for {\it finitely} many $\alpha$).
-\end{definition}
-
-Similarly,
-
-\begin{definition} A collection of vectors $S = \{{\bf v}_\alpha\}\subset V$ is {\it linearly independent} resp.\ {\it vectorwise independent} iff every finite subset of vectors in $S$ is linearly independent resp.\ vectorwise independent (as defined above).
-\end{definition}
-
-\begin{exercise} State and prove the generalization of Lemma \ref{lemma:indep} for arbitrary collections of vectors.
-\end{exercise}
-
 \vskip.3in
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -332,8 +259,6 @@ Span(S) := \underset{T\text{ finite}}{\underset{T\subseteq S}{\bigcup}} Span(T)
 \]
 \end{remark}
 
-In other words, for any subset $S\subset V$, $Span(S) =$ the set of all linear combinations of elements of $S$.
-
 \begin{definition} If $V$ is a vector space, and $S$ a set of vectors in $V$, then we say that $S$ is a {\it spanning set} for $V$ if $V = Span(S)$.
 \end{definition}
 
@@ -387,40 +312,31 @@ Hence $N(A)$ is closed under scalar multiplication. This completes the proof.
 \vskip.3in
 
 
-\subsubsection{Row space, column space, and codomain} Let $A\in \mathbb R^{m\times n}$. One may construct from $A$ various different subspaces, each of which is important in its own right.
-\vskip.2in
-
-{\bf\underbar{The row space of $A$}} Each row of $A$ is a $1\times n$ vector in $\mathbb R^{1\times n}$, and the row space is the span of this collection of vectors:
-\[
-Row(A) := Span\{A(i,:)\}_{1\le i\le m}\subseteq \mathbb R^{1\times n}
-\]
-
-Similarly one has
-\vskip.2in
-
-{\bf\underbar{The column space of $A$}} Each column of $A$ is an $m\times 1$ vector in $\mathbb R^{m\times 1} = \mathbb R^m$, and the column space is the span of this collection of vectors:
-\[
-Col(A) := Span\{A(:,j)\}_{1\le i\le n}\subseteq \mathbb R^{m}
-\]
-
-Finally, the 
-\vskip.2in
-
-{\bf\underbar{The codomain, or range of $A$}} (viewed as a linear transformation, defined below) is
+\subsubsection{Codomains} Let $A$ be as above. Then the {\it codomain} or {\it range} of $A$ (viewed as a linear transformation, defined below) is
 \[
 Range(A) := \{{\bf b}\in\mathbb R^m\ |\ A*{\bf x} = {\bf b}\ \text{ is consistent}\}\subseteq \mathbb R^m
 \]
 
 In analogy to the nullspace, we have
 
-\begin{lemma} For any real $m\times n$ matrix $A$, $Row(A)$ is a subspace of $\mathbb R^{1\times n}$, while $Col(A) = Range(A)$ is a subspace of $\mathbb R^m$.
+\begin{lemma} For any real $m\times n$ matrix $A$, $Range(A)$ is a subspace of $\mathbb R^m$.
 \end{lemma}
 
-\begin{proof} The span of any collection of vectors is a subspace of the space in which they lie. Now we have seen that for any ${\bf x} = [x_1\ x_2\dots x_n]^T\in \mathbb R^n$,
+\begin{proof} Again, we first note that ${\bf 0}\in Range(A)$, as $A*{\bf 0} = {\bf 0}$. As for the closure axioms,
+\vskip.1in
+
+{\bf\underbar{C1}} Suppose ${\bf v}, {\bf w}\in Range(A)$. Choose ${\bf x},{\bf y}\in\mathbb R^n$ satsifying $A*{\bf x} = {\bf v}, A*{\bf y} = {\bf w}$. Then
 \[
-A*{\bf x} = \sum_{j=1}^n x_j A(:,j)\in\mathbb R^m
+A*({\bf x} + {\bf y}) = A*{\bf x} + A*{\bf y} = {\bf v} + {\bf w}
 \]
-This equality identifies the range and column space of $A$.
+implying $Range(A)$ is closed under addition.
+\vskip.1in
+
+{\bf\underbar{C2}} Suppose $\alpha\in\mathbb R$ and $A*{\bf x} = {\bf v}\in Range(A)$. Then
+\[
+A*(\alpha{\bf x}) = \alpha(A*{\bf x}) = \alpha{\bf v} 
+\]
+implying $N(A)$ is closed under scalar multiplication.
 \end{proof}
 \vskip.3in
 
@@ -428,21 +344,20 @@ This equality identifies the range and column space of $A$.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\subsection{Bases and dimension} A set of vectors $S = \{{\bf v}_\alpha\}\subset V$ is a {\it basis} for $V$ if
+\subsection{Bases and dimension} A set of vectors $S = \{{\bf v}_1,\dots, {\bf v}_n\}\subset V$ is a {\it basis} for $V$ if
 \begin{itemize}
 \item it spans $V$ and
 \item it is linearly independent.
 \end{itemize}
 
-The concept of a basis makes perfect sense regardless of the number of vectors in $S$
 \vskip.2in
 
 {\bf\underbar{Fundamental Properties}}
 
 \begin{itemize}
-\item[[B1]] $S = \{{\bf v}_\alpha\}\subset V$ is a basis for $V$ iff it is a minimal spanning set for $V$.
+\item[[B1]] $S = \{{\bf v}_1,\dots, {\bf v}_n\}\subset V$ is a basis for $V$ iff it is a minimal spanning set for $V$.
 \item[[B2]] Every non-zero vector space $V$ admits a basis.
-\item[[B3]] If $S = \{{\bf v}_\alpha\}$ and $T = \{{\bf w}_\beta\}$ are two bases for $V$, then $|S|=|T|$.
+\item[[B3]] If $S = \{{\bf v}_1,\dots, {\bf v}_n\}$ and $T = \{{\bf w}_1,\dots, {\bf w}_m\}$ are two bases for $V$, then $m=n$.
 \end{itemize}
 \vskip.2in
 
@@ -461,8 +376,24 @@ In the other direction, suppose it is a minimal spanning set. If it were not lin
 \vskip.2in
 
 The third property will require a bit more work; its proof will be deferred until later.
+\vskip.3in
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Vector spaces over $\mathbb C$} The complex numbers $\mathbb C$ are formed from the real numbers by adjoining $i = \sqrt{-1}$, so that $i^2 = -1$. Every complex number can b written uniquely as $z = a + bi$ where $a,b\in\mathbb R$. Every complex number has both a {\it real} and {\it imaginary} part, defined as
+\[
+Re(a+bi) = a,\qquad Im(a+bi) = b
+\]
+For $z = a + bi$, we recall its {\it conjugate} is defined to be $\ov{z} := a - bi$. The real numbers embed naturally in $\mathbb C$ as those whose {\it imaginary} component is zero: $\mathbb R\ni a\mapsto a + 0i\in\mathbb C$. Alternatively $\mathbb R$ identifies with those $z\in\mathbb C$ satisfying $z = \ov{z}$.
+\vskip.2in
+
+A {\it vector space over $\mathbb C$} satisfies exactly the same axioms as a vector space over $\mathbb R$, the one difference being that scalars are allowed to be compBeyond that, all of the constructions and definitions over $\mathbb R$ given above extend without change to working over $\mathbb C$.. In analogy to $\mathbb R^n$ we have $\mathbb C^n$, which can be viewed as the complex vector space generated by the same standard basis vectors we had for $\mathbb R^n$; vectors in $\mathbb C^n$ are naturally represented by $n\times 1$ column vectors with entries in $\mathbb C$:
+\[
+\mathbb C^n := \{[z_1\ z_2\ \dots z_n]^T\ |\ z_i\in\mathbb C\}
+\]
+In cases which involve both real and complex scalars, one has to take care as to which set of numbers one is working over, because this will make a difference when computing quantities such as dimension. To illustrate, $\mathbb C^1$ is a vector space over $\mathbb C$ with dimension $1$. On the other hand, because $\mathbb R\subset\mathbb C$, we could also consider $\mathbb C^1$ as a vector space over $\mathbb R$ by {\it restriction of scalars}; in other words, by only allowing scalar multiplication by real numbers. Over $\mathbb R$, $\mathbb C^1$ has dimension 2, not 1, with basis $\{[1], [i]\}$. Because of this it is not unusual (when discussing dimension) to emphasize the {\it base field} when there is any possibility of confusion or abiguity. In general, for any finite dimensional vector space $V$ over $\mathbb C$, if $Dim_{\mathbb C}(V) = n$ then $Dim_{\mathbb R}(V) = 2n$.
+\vskip.5in
 
 
-
-
-\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
