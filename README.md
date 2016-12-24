@@ -1,6 +1,10 @@
-# A Ximera Xandbox
+# This is Linear Algebra
 
-This is a sandbox for exploring Ximera.
+This represents the first draft of the OSU Department of Mathematics'
+online Linear Algebra course. The sections below includes everything
+covered in the standard Math 2568 course, and a bit more. Later drafts
+will incorporate additional topics from applied linear algebra and
+differential equations.
 
 1. Edit [first.tex](./first.tex).  As you edit, you can use `pdflatex` to see the PDF version of your handout.
 2. Go to the [Ximera website](http://ximera.osu.edu/), login, click on your name, click on Profile.  Generate a key and secret.
@@ -16,4 +20,6 @@ git push
 7. Publish your worksheet to ximera.osu.edu with `xake publish`
 8. Append `/first` to the URL that xake prints out.
 
-Ximera is still a work in progress and there may be bugs.  Please e-mail Jim Fowler or add an [issue](https://github.com/kisonecat/ximera/issues) to the bug tracker.
+Ximera is still a work in progress and there may be bugs.
+
+Please e-mail Jim Fowler or add an [issue](https://github.com/kisonecat/ximera/issues) to the bug tracker.
