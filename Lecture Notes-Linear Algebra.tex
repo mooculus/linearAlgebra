@@ -1333,6 +1333,15 @@ The matrix ${}_{S_2}Id_{S_1}$ is referred to as a {\it base transition matrix}, 
 \begin{example} [to be included]
 
 \end{example}
+
+\begin{exercise} Let $S_1,S_2$ be two bases for $V$, and $L:V\to V$ a linear transformation from $V$ to itself. We can consider The representations ${}_{S_1}L_{S_1}$ and ${}_{S_2}L_{S_2}$ of $L$ with respect to the bases $S_1$ and $S_2$. Using the above identities, show that
+\[
+{}_{S_1}L_{S_1} = A*{}_{S_2}L_{S_2}*A^{-1}
+\]
+where $A = {}_{S_1}T_{S_2}$.
+\end{exercise}
+
+Square matrices $B,C$ which satisfy the equality $B = A*C*A^{-1}$ are called {\it similar}. This is an important relation between square matrices, and plays a prominent role in the theory of eigenvalues and eigenvectors.
 \vskip.5in
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1423,7 +1432,7 @@ so that one can also recover the dot product from the norm;
 \subsection{Symmetric bilinear pairings on $\mathbb R^n$, and their representation} The dot product defined in the previous section is a specific example of a {\it bilinear, symmetric pairing}. We consider these properties in sequence.
 \vskip.2in
 
-A {\it bilinear pairing} on $\mathbb R^n$ is a map $P:\mathbb R^n\times\mathbb R^n\to \mathbb R$ which simply satisfies property (IP2). A {\it symmetric bilinear pairing} is a bilinear pairing that also satisfies (IP1). These pairings admit a straightforward matrix representation, not unlike the matrix representation of linear transformations discussed previously. Again, we assume we are loooking at coordinate vectors with respect to the standard basis for $\mathbb R^n$.
+A {\it bilinear pairing} on $\mathbb R^n$ is a map $P:\mathbb R^n\times\mathbb R^n\to \mathbb R$ which simply satisfies property (IP2). A {\it symmetric bilinear pairing} is a bilinear pairing that also satisfies (IP1). These pairings admit a straightforward matrix representation, not unlike the matrix representation of linear transformations discussed previously. Again, we assume we are looking at coordinate vectors with respect to the standard basis for $\mathbb R^n$.
 
 \begin{theorem}\label{thm:matrep} For any bilinear pairing $P$ on $\mathbb R^n$, there is a unique $n\times n$ matrix $A_P$ such that
 \[
@@ -1709,13 +1718,13 @@ pr_W({\bf v}) = A*(A^T*A)^{-1}*A^T*{\bf v}
 \]
 \end{itemize}
 
-\begin{exercise} If $A$ has maximal rank, verify that $B = A*(A^T*A)^{-1}*A^T$ satisfies the identity $B*B = B$ (a matrix satisfying such an identity is called a {\it projection matrix}, since the linear transformation it defines on $\mathbb R^n$ corresponds exactly to projecton onto its range $C(B)$).
+\begin{exercise} If $A$ has maximal rank, verify that $B = A*(A^T*A)^{-1}*A^T$ satisfies the identity $B*B = B$ (a matrix satisfying such an identity is called a {\it projection matrix}, since the linear transformation it defines on $\mathbb R^n$ corresponds exactly to projection onto its range $C(B)$).
 \end{exercise}
 \vskip.2in
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsubsection{Polynomial data fitting} We suppose given $n$ points $\{(x_1,y_1), (x_2,y_2),\dots,(x_n,y_n)\}$ in the plane $\mathbb R^2$, with distinc $x$-coordinates (in practice, such sets of points can arise as data based on the measurement of some quantity - recorded as the $y$-coordinate - as a funtion of some parameter recorded as the $x$-coordinate). Then we would like to find the equation of the line that {\it best fits} these points (by exactly what measurement the line represents a best possible fit is explained below). if we write the equation of the line as $y = l(x) = c_0 + c_1x$ for indeterminants $c_0, c_1$, then what we are lookiing for is a {\it least-squares solution} to the $n\times 2$ system of equations
+\subsubsection{Polynomial data fitting} We suppose given $n$ points $\{(x_1,y_1), (x_2,y_2),\dots,(x_n,y_n)\}$ in the plane $\mathbb R^2$, with distinct $x$-coordinates (in practice, such sets of points can arise as data based on the measurement of some quantity - recorded as the $y$-coordinate - as a function of some parameter recorded as the $x$-coordinate). Then we would like to find the equation of the line that {\it best fits} these points (by exactly what measurement the line represents a best possible fit is explained below). if we write the equation of the line as $y = l(x) = c_0 + c_1x$ for indeterminants $c_0, c_1$, then what we are looking for is a {\it least-squares solution} to the $n\times 2$ system of equations
 \begin{align*}
 c_0 + c_1 x_1 &= y_1\\
 c_0 + c_1 x_2 &= y_2\\
@@ -1742,7 +1751,7 @@ We can also measure the degree to which this comes close to being an actual solu
 \[
 {\bf y}_1 := A1*{\bf c} = \begin{bmatrix} 2.8793\\ 5.9483\\ 10.5517\\ 13.6207\end{bmatrix}
 \]
-is (by the above) the least-squares approximation to $\bf y$ by a vector in the column space of $A1$ (accurate to 4 decimal places). The accuracy can then be estiamted by the distance of this approximation to the original vector $\bf y$:
+is (by the above) the least-squares approximation to $\bf y$ by a vector in the column space of $A1$ (accurate to 4 decimal places). The accuracy can then be estimated by the distance of this approximation to the original vector $\bf y$:
 \[
 e_1 := \|{\bf y} - {\bf y}_1\| = 0.68229
 \]
@@ -1754,7 +1763,7 @@ The last computation in this example indicates what is being minimized when one 
 \[
 \sum_{i=1}^n (y_i - l(x_i))^2
 \]
-Note that, unless the line is horizontal, the vertical distance will be slightly larger than the {\it actual} distance, which is measured in the direction orthogonal to the line, and minimizing the sum of squares of those distances would correspond geometrically to what one might normally think of as consituting a least-squares fit. However, the computation needed to find the best fit with respect to this sum is quite a bit more involved,. This linear algebraic approach provides a simple and efficient method for finding a good approximation by a line which will be exact whenever the points are colinear.
+Note that, unless the line is horizontal, the vertical distance will be slightly larger than the {\it actual} distance, which is measured in the direction orthogonal to the line, and minimizing the sum of squares of those distances would correspond geometrically to what one might normally think of as constituting a least-squares fit. However, the computation needed to find the best fit with respect to this sum is quite a bit more involved,. This linear algebraic approach provides a simple and efficient method for finding a good approximation by a line which will be exact whenever the points are colinear.
 \end{remark}
 
 The setup above provides a method for finding not just linear approximations, but higher order ones as well. The linear algebra is essentially the same. To illustrate,
@@ -1775,7 +1784,7 @@ Measuring the degree to which this comes close to being an actual solution (whic
 \[
 {\bf y}_2 := A2*{\bf c} = \begin{bmatrix} 3.1293\\ 5.6983\\ 10.3017\\ 13.8707\end{bmatrix}
 \]
-is (by the above) the least-squares approximation to $\bf y$ by a vector in the column space of $A2$ (accurate to 4 decimal places). The accuracy can then be estiamted by the distance of this approximation to the original vector $\bf y$:
+is (by the above) the least-squares approximation to $\bf y$ by a vector in the column space of $A2$ (accurate to 4 decimal places). The accuracy can then be estimated by the distance of this approximation to the original vector $\bf y$:
 \[
 e_2 := \|{\bf y} - {\bf y}_2\| = 0.46424
 \]
@@ -1806,7 +1815,7 @@ which is not just an approximation but rather the vector $\bf y$ on the nose; $e
 \]
 \end{example}
 
-This set of examples, in which we compute sucessively higher order approximations to a set of $n$ data points until we finally arrive at an exact fit, is part of a more general phenomenon, which we record without proof by the following theorem.
+This set of examples, in which we compute successively higher order approximations to a set of $n$ data points until we finally arrive at an exact fit, is part of a more general phenomenon, which we record without proof by the following theorem.
 
 \begin{theorem} Given $n$ points in $\mathbb R^2$ with distinct $x$-coordinates $\{(x_1,y_1), (x_2,y_2),\dots,(x_n,y_n)\}$, the least-squares fit by a polynomial of degree $k$ is computed by finding the least-squares solution to the matrix equation
 \[
@@ -1827,7 +1836,7 @@ Because $A_{n-1}$  is non-singular, there will be a polynomial of degree at most
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\subsection{The complex scalar product in $\mathbb C^n$} We consider first the analogue of the scalar, or dot product for $\mathbb C^n$. Recal first that if $[z_1\ z_2\dots z_n] = {\bf v}\in\mathbb C^n$, then the {\it conjugate} of $\bf v$ is the vector that results from applying complex conjugation degreewise 
+\subsection{The complex scalar product in $\mathbb C^n$} We consider first the analogue of the scalar, or dot product for $\mathbb C^n$. Recall first that if $[z_1\ z_2\dots z_n] = {\bf v}\in\mathbb C^n$, then the {\it conjugate} of $\bf v$ is the vector that results from applying complex conjugation degreewise 
 \[
 \ov{\bf v} := [\ov{z_1}\ \ov{z_2}\ \dots \ov{z_n}]
 \]
@@ -1843,7 +1852,7 @@ The properties for this pairing differ slightly than the corresponding ones for 
 \[
 {\bf v}\cdot {\bf w} = \ov{{\bf w}\cdot {\bf v}}
 \]
-\item[(HIP2)] It is linea in the first variable and conjugate linear in the secondr:
+\item[(HIP2)] It is linea in the first variable and conjugate linear in the second:
 \begin{gather*}
 (\alpha_1{\bf v}_1 + \alpha_2{\bf v}_2)\cdot {\bf w} = \alpha_1{\bf v}_1\cdot{\bf w} + \alpha_2{\bf v}_2\cdot{\bf w}\\
 {\bf v}\cdot (\beta_1{\bf w}_1 + \beta_2{\bf w}_2) = \ov{\beta_1}{\bf v}\cdot{\bf w}_1 + \ov{\beta_2}{\bf v}\cdot{\bf w}_2
@@ -1914,7 +1923,7 @@ Re({\bf v}\cdot{\bf w}) = \frac12({\bf w}\cdot{\bf v} + {\bf v}\cdot {\bf w}) = 
 \subsection{Conjugate-symmetric sesquilinear pairings on $\mathbb C^n$, and their representation} The complex scalar product defined in the previous section is a specific example of a {\it sesquilinear, conjugate-symmetric pairing}. We consider these properties in sequence.
 \vskip.2in
 
-A {\it sesquilinear pairing} on $\mathbb C^n$ is a map $P:\mathbb C^n\times\mathbb C^n\to \mathbb C$ which satisfies property (HIP2), namely it is linear in the first variable and conjugate linear in the second\footnote{this is the standard convention in mathematical literature. Many physics texts, however, reverse this, making the first variable conjugate linear instead.}. A {\it conjugate-symmetric sesquilinear pairing} is a sesquilinear pairing that also satisfies (HIP1). These pairings admit a matrix representation as in the real case discussed above. Again, we assume we are loooking at coordinate vectors with respect to the standard basis for $\mathbb C^n$.
+A {\it sesquilinear pairing} on $\mathbb C^n$ is a map $P:\mathbb C^n\times\mathbb C^n\to \mathbb C$ which satisfies property (HIP2), namely it is linear in the first variable and conjugate linear in the second\footnote{this is the standard convention in mathematical literature. Many physics texts, however, reverse this, making the first variable conjugate linear instead.}. A {\it conjugate-symmetric sesquilinear pairing} is a sesquilinear pairing that also satisfies (HIP1). These pairings admit a matrix representation as in the real case discussed above. Again, we assume we are looking at coordinate vectors with respect to the standard basis for $\mathbb C^n$.
 \vskip.2in
 
 Before stating the result, we need to record
@@ -1933,7 +1942,7 @@ P_A({\bf v}, {\bf w}) = \ov{\bf w}^T*A*{\bf v} = {\bf w}^**A_P*{\bf v}
 which is conjugate-symmetric precisely when $A$ is Hermitian.
 \end{theorem}
 
-\begin{proof} The proof is essentially the same as in the real case, with some minor modificatons. $P$ is uniquely characterized by its values on ordered pairs of basis vectors; moreover two bilinear pairings $P, P'$ are equal precisely if $P({\bf e}_i,{\bf e}_j) = P'({\bf e}_i,{\bf e}_j)$ for all pairs $1\le i,j\le n$ . So define $A_P$ be the $n\times n$ matrix with $(i,j)^{th}$ entry given by
+\begin{proof} The proof is essentially the same as in the real case, with some minor modifications. $P$ is uniquely characterized by its values on ordered pairs of basis vectors; moreover two bilinear pairings $P, P'$ are equal precisely if $P({\bf e}_i,{\bf e}_j) = P'({\bf e}_i,{\bf e}_j)$ for all pairs $1\le i,j\le n$ . So define $A_P$ be the $n\times n$ matrix with $(i,j)^{th}$ entry given by
 \[
 A_P(j,i) := P({\bf e}_i,{\bf e}_j),\quad 1\le i,j\le n
 \]
@@ -2000,7 +2009,7 @@ Before proceeding with examples, we note that
 [Additional examples to be included here]
 \vskip.2in
 
-In order to understand more clearly what it is we are looking for, we consider a reformulationn of the defining equation above. First, we note that the scalar product $\lambda{\bf v}$ can be rewritten as a matrix product
+In order to understand more clearly what it is we are looking for, we consider a reformulation of the defining equation above. First, we note that the scalar product $\lambda{\bf v}$ can be rewritten as a matrix product
 \[
 \lambda{\bf v} = (\lambda I)*{\bf v}
 \]
@@ -2033,7 +2042,7 @@ There are different ways to define it. We present two.
 
 [include example here]
 \vskip.2in
- In this framework one proceeds with an {\it inductive} or {\it recursive} definition. In such a definition, we give an eplicit formula in the case $n=1$, and that  theprior to defining the determinant for $n\times n$ matirices, that the determinant {\it has already been given for $(n-1)\times(n-1)$ matrices}. For indices $1\le i,j\le n$, define the $(i,j)^{th}$ cofactor of $A$ to be
+ In this framework one proceeds with an {\it inductive} or {\it recursive} definition. In such a definition, we give an explicit formula in the case $n=1$, and that prior to defining the determinant for $n\times n$ matirices, that the determinant {\it has already been given for $(n-1)\times(n-1)$ matrices}. For indices $1\le i,j\le n$, define the $(i,j)^{th}$ cofactor of $A$ to be
 \[
 A_{ij} = (-1)^{i+j}Det(M_{ij}(A))
 \]
@@ -2042,7 +2051,7 @@ Then
 \begin{definition} Id $A = [a]$ is a $1\times 1$ matrix, then $Det(A) = a$. For $n > 1$, $Det(A) = \sum_{j=1}^n A(1,j)A_{1j}$
 \end{definition}
 
-This is sometimes also referrred to as {\it cofactor expansion along the first row}.
+This is sometimes also referred to as {\it cofactor expansion along the first row}.
 \vskip.2in
 \begin{example} Suppose A = $\begin{bmatrix} 2 & 3\\1 & -4\end{bmatrix}$. Then $M_{11}(A) = [-4], M_{12}(A) = [1]$, so $A_{11} = (-1)^{1+1}(-4) = -4$ and $A_{12} = (-1)^{1+2}(1) = -1$. Then $Det(A) = A(1,1)A_{11} + A(1,2)A_{12} = (2)(-4) + (3)(-1) = -11$.
 \end{example}
@@ -2420,14 +2429,59 @@ We are now in a position to return to the question of how to decide when a sesqu
 \]
 It is easily seen that this sum satisfies condition (HIP3) iff $\lambda_i > 0\,\,\forall 1\le i\le n$.
 \end{proof}
+\vskip.2in
+
+A slightly more general class of Hermitian matrices are those that are {\it non-negative definite}, meaning that their eigenvalues are all non-negative. Now suppose $A$ is an arbitrary $n\times n$ complex matrix, and $B = A^**A$. Then clearly $B^* = (A^**A)^* = A^**A = B$ implying $B$ is Hermitian.
+
+\begin{lemma} For any $n\times n$ matrix $A$, the matrix $B = A^**A$ is non-negative definite. Moreover, $B$ is positive definite iff $A$ is non-singular.
+\end{lemma}
+
+\begin{proof} Since $\mathbb C^n$ admits an orthonormal basis consisting of eigenvectors of $B$, it suffices to show that the eigenvalues of $B$ are non-negative. Let $\bf v$ be an eigenvector of $B$ with eigenvalue $\lambda$. Then
+\[
+\lambda\|{\bf v}\|^2 = \lambda({\bf v}^**{\bf v}) = {\bf v}^**B*{\bf v} = {\bf v}^**(A^**A)*{\bf v} = (A*{\bf v})^**(A*{\bf v}) = \|A*{\bf v}\|^2\ge 0
+\]
+As $\|{\bf v}\|^2 > 0$ this implies $\lambda\ge 0$. Also, as we have already seen, $B$ is non-singular iff $0$ is not an eigenvalue of $B$. But $Det(B) = |Det(A)|^2$. Hence $B$ is non-singular iff $A$ is.
+\end{proof}
 \vskip.3in
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\subsection{Normal matrices} The identity $U^**A*U = T$ can be expressed as saying that $A$ is {\it unitarily similar} to the triangular matrix $T$ (in other words, the similarity matrix is not just invertible, but unitary). It is reasonable to ask whether of not a complex matrix $A$ is unitarily similar to a diagonal matrix, or alternatively, whether or not $\mathbb C^n$ admits an orthonormal basis consisting of eigenvectors of $A$.
+\vskip.2in
+
+\begin{definition} $A$ is {\it normal} if $A^**A = A*A^*$.
+\end{definition}
+
+\begin{lemma} $A$ is normal iff $A$ is unitarily diagonalizable.
+\end{lemma}
+
+\begin{proof} Shur's identity can be rewritten as $A = U*T*U^*$ ($U$ unitary and $T$ triangular). Then $A$ normal implies
+\[
+(U*T*U^*)*(U*T*U^*)^* = (U*T*U^*)^**(U*T*U^*)
+\]
+Recalling that $(C*D)^* = D^**C^*$, and that unitary means $U^**U = I$, the above identity simplifies to
+\[
+U*T*T^**U^* = U*T^**T*U^*\quad\Leftarrow\quad T*T^* = T^**T
+\]
+One can check that this last condition implies $T$ must be a diagonal matrix (in other words, the only triangular matrix which is also normal is a diagonal one. Note, though, that $T$ need not have real entries).
+\vskip.2in
+
+Conversely, if $T$ is diagonal, then $T$ is normal (as we just noted), and $A$ is unitarily similar to a normal matrix, which implies it too is normal.
+\end{proof}
 \vskip.5in
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Singular value decomposition} A reasonable question to ask is whether or not there is an identity that generalizes Shur's identity in the case of normal matrices. The answer is provided by the following theorem.
+
+\begin{thm} (Singular Value Decomposition) Let $A$ be an $m\times n$ matrix. Then there exists an $m\times m$ unitary matrix $U$, $n\times n$ unitary matrix $V$, and $m\times n$ diagonal matrix $\Sigma$ with
+\[
+A = U*\Sigma*V
+\]
+\end{thm}
+
+We will defer proof of this theorem to the latter part of this section. Our primary purpose will be to put the terminology in context, and investigate some of its more important applications (of which there are many).
 
 
 \end{document}
