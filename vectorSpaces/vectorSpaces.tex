@@ -17,15 +17,15 @@
 From the definition of matrix addition and scalar multiplication, we see that we can i) add two vectors together, and ii) multiply a vector by a scalar, with the result being a (possibly different) vector in the same space that we started with. In other words,
 \vskip.1in
 
-\begin{itemize}
+\begin{description}
 \item[[C1]] (Closure under vector addition) Given ${\bf v}, {\bf w}\in\mathbb R^n$, ${\bf v} + {\bf w}\in\mathbb R^n$.
 \item[[C2]] (Closure under scalar multiplication) Given ${\bf v}\in\mathbb R^n$ and $\alpha\in\mathbb R$, $\alpha{\bf v}\in\mathbb R^n$.
-\end{itemize}
+\end{description}
 \vskip.1in
 
 Moreover, the space $\mathbb R^n$ equipped with these two operations satisfies certain fundamental properties. In what follows, $\bf u$, $\bf v$, $\bf w$ denote arbitrary vectors in $\mathbb R^n$, while $\alpha,\beta$ represent arbitrary scalars in $\mathbb R$.
 
-\begin{itemize}
+\begin{description}
 \item[[A1]] (Commutativity of addition) ${\bf v} + {\bf w} = {\bf w} + {\bf v}$.
 \item[[A2]] (Associativity of addition) $({\bf u} + {\bf v}) + {\bf w} = {\bf u} + ({\bf v} + {\bf w})$.
 \item[[A3]] (Existence of a zero vector) There is a vector ${\bf z}$ with ${\bf z} + {\bf v} = {\bf v} + {\bf z} = {\bf v}$.
@@ -34,7 +34,7 @@ Moreover, the space $\mathbb R^n$ equipped with these two operations satisfies c
 \item[[A6]] (Distributivity of scalar addition over scalar multiplication) $(\alpha + \beta){\bf v} = \alpha{\bf v} + \beta{\bf v}$.
 \item[[A7]] (Associativity of scalar multiplication) $(\alpha \beta){\bf v}) = (\alpha(\beta {\bf v})$.
 \item[[A8]] (Scalar multiplication with 1 is the identity) $1{\bf v} = {\bf v}$.
-\end{itemize}
+\end{description}
 \vskip.2in
 
 We should briefly mention why $\mathbb R^n$ satisfies these properties. First, the definition of matrix addition and scalar multiplication imply [C1] and [C2]. The properties [A1] - [A8], excepting [A3] and [A4],are  a consequence of Theorem \ref{thm:matalg}. The so-called {\it existential} properties (referring to the fact they claim the existence of certain vectors) follow by direct observation. 
@@ -47,10 +47,10 @@ These properties isolate the fundamental algebraic structure of $\mathbb R^n$, a
 \subsection{Definition of a vector space}
 
 \begin{definition} A {\it vector space} is a set $V$ equipped with two operations - vector addition \lq\lq$+$\rq\rq\ and scalar multiplication \lq\lq$\cdot$\rq\rq - which satisfy the closure axioms for $V$:
-\begin{itemize}
+\begin{description}
 \item[[C1]] (Closure under vector addition) Given ${\bf v}, {\bf w}\in V$, ${\bf v} + {\bf w}\in V$.
 \item[[C2]] (Closure under scalar multiplication) Given ${\bf v}\in V$ and a scalar $\alpha$, $\alpha{\bf v}\in V$.
-\end{itemize}
+\end{description}
 together with the eight {\it vector space axioms} [A1] - [A8].
 \end{definition}
 
@@ -353,7 +353,9 @@ implying $N(A)$ is closed under scalar multiplication.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\subsection{Bases and dimension} A set of vectors $S = \{{\bf v}_1,\dots, {\bf v}_n\}\subset V$ is a {\it basis} for $V$ if
+\subsection{Bases and dimension}
+
+A set of vectors $S = \{{\bf v}_1,\dots, {\bf v}_n\}\subset V$ is a {\it basis} for $V$ if
 \begin{itemize}
 \item it spans $V$ and
 \item it is linearly independent.
@@ -363,11 +365,11 @@ implying $N(A)$ is closed under scalar multiplication.
 
 {\bf\underbar{Fundamental Properties}}
 
-\begin{itemize}
+\begin{description}
 \item[[B1]] $S = \{{\bf v}_1,\dots, {\bf v}_n\}\subset V$ is a basis for $V$ iff it is a minimal spanning set for $V$.
 \item[[B2]] Every non-zero vector space $V$ admits a basis.
 \item[[B3]] If $S = \{{\bf v}_1,\dots, {\bf v}_n\}$ and $T = \{{\bf w}_1,\dots, {\bf w}_m\}$ are two bases for $V$, then $m=n$.
-\end{itemize}
+\end{description}
 \vskip.2in
 
 {\bf\underbar{Proof of B1}}\, Suppose $S$ is a basis for $V$. Then it certainly spans $V$. If it were not a minimal spanning set, it would mean there is a vector ${\bf v}_0\in S$ which is in the span of $S\backslash\{{\bf v}_0\}$, which in turn would mean that ${\bf v}_0$ could be written as a linear combination of vectors in $S\backslash\{{\bf v}_0\}$. Thus the original set $S$ would not be vectorwise independent, which by the above exercise is a contradiction. Hence it must be minimal.
