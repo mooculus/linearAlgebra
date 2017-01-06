@@ -1,3 +1,51 @@
+\usepackage{amsmath, amsthm, amssymb,todonotes, enumerate,color,pigpen,mathtools}
+\usepackage{graphicx}%authblk
+\usepackage[v2]{xy}
+\xyoption{all}
+\topmargin  = -1cm
+\textwidth  = 16cm \textheight = 24cm
+\voffset-.75cm\hoffset=-1.7cm
+\parindent  = 0pt
+\pdfpageheight 11in
+\pagestyle{empty}
+%\flushbottom
+%\renewcommand\Authfont{\scshape}
+%\renewcommand\Affilfont{\small}
+
+\numberwithin{equation}{section}
+
+\theoremstyle{plain}
+\newtheorem{theorem}[equation]{Theorem}
+\newtheorem*{thm}{Theorem}
+\newtheorem{proposition}[equation]{Proposition}
+\newtheorem{lemma}[equation]{Lemma}
+\newtheorem{corollary}[equation]{Corollary}
+\newtheorem{conjecture}[equation]{Conjecture}
+
+\theoremstyle{definition}
+\newtheorem{definition}[equation]{Definition}
+\newtheorem{example}[equation]{Example}
+\newtheorem{exercise}[equation]{Exercise}
+\newtheorem{remark}[equation]{Remark}
+\newtheorem{observation}[equation]{Observation}
+\newtheorem{question}[equation]{Question}
+\newtheorem*{ques}{Question}
+\newtheorem{construction}[equation]{Construction}
+\newtheorem{claim}[equation]{Claim}
+
+
+\newcommand\wt{\widetilde}
+\newcommand\ov{\overline}
+\newcommand\inj{\rightarrowtail}
+\newcommand\surj{\twoheadrightarrow}
+\newcommand{\harpoon}{\overset{\rightharpoonup}}
+
+\newenvironment{amatrix}[1]{%
+  \left[\begin{array}{@{}*{#1}{c}|c@{}}
+}{%
+  \end{array}\right]
+}
+
 \newcommand{\definedTerm}[1]{\textbf{#1}}
 
 % These macros are automatically generated from the "macros"
