@@ -1,4 +1,11 @@
-\section{Inner product spaces}
+\documentclass{ximera}
+\title{Inner product spaces}
+
+\begin{document}
+\begin{abstract}
+  The concept of an inner product generalizes the concept of dot product.
+\end{abstract}
+\maketitle
 
 \subsection{The dot product in $\mathbb R^n$} Consider $\mathbb R^n$ equipped with its standard basis (so that vectors in $\mathbb R^n$ are canonically identified with their $n\times 1$ coordinate representations). Then given ${\bf v} = [v_1\ v_2\ \dots\ v_n], {\bf w} = [w_1\ w_2\ \dots\ w_n]^T\in\mathbb R^n$, their {\it dot product} (also referred to as {\it scalar product}) is given by
 \[
@@ -7,7 +14,7 @@
 
 This operation on pairs of vectors satisfies three basic properties
 
-\begin{enumerate}
+\begin{description}
 \item[(IP1)] It is symmetric:
 \[
 {\bf v}\cdot {\bf w} = {\bf w}\cdot {\bf v}
@@ -21,7 +28,7 @@ This operation on pairs of vectors satisfies three basic properties
 \[
 {\bf v}\cdot {\bf v}\ge 0;\quad {\bf v}\cdot {\bf v} = 0\,\text{ iff } {\bf v} = {\bf 0}
 \]
-\end{enumerate}
+\end{description}
 \vskip.2in
 
 Note that the standard {\it Euclidean norm} of $\bf v$  (also referred to as the $\ell^2$-norm) is closely related to the dot product; precisely
@@ -632,3 +639,5 @@ Unitary matrices are special examples of linear transformations which preserve H
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}
