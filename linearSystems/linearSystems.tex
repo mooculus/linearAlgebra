@@ -1,4 +1,13 @@
-\section{Linear Systems of equations} 
+\documentclass{ximera}
+\title{Linear Systems of equations}
+
+\begin{document}
+
+\begin{abstract}
+  Linear systems
+\end{abstract}
+
+\maketitle
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -64,11 +73,11 @@ Also,
 
 Given a system of equations, how can we find its solution set? The answer is by finding a simpler but equivalent system for which the solution set is easily read off. The method used for finding this simpler system is called {\it row reduction}, and the operations used to perform row reduction are called {\it row operations}, of which there are three types. 
 \vskip.1in
-\begin{enumerate}
+\begin{description}
 \item[[{\bf Type I}]] Switching two rows;
 \item[[\bf{Type II}]] Multiplying a row by a non-zero scalar $\alpha$;
 \item [[\bf{Type III}]]Adding a multiple of one row to another distinct row.
-\end{enumerate} 
+\end{description} 
 \vskip.1in
 It is quite easy to see the the first two types of row operations won't change the solution set, and it can also be shown that the third doesn't either. We'll say that two systems of the same dimensions are {\it row equivalent} if one can be gotten from the other by a sequence of row operations. The following theorem tells us about when this happens.
 
@@ -207,14 +216,14 @@ In the process of putting the ACM in reduced row echelon form, it is often desir
 
 At this point, we see that the reduced row echelon form of the ACM allows us to solve the system. However, we have not discussed how the transition to that form is accomplished. The following algorithm describes that process (this appears as steps 1 - 6 on p. 20 of the text).
 \vskip.2in
-\begin{enumerate}
+\begin{description}
 \item[{\bf Step 1}] Determine the left-most column containing a non-zero entry (it exists if the matrix is non-zero).
 \item[{\bf Step 2}] If needed, perform a type I operation so that the first non-zero column has a non-zero entry in the first row.
 \item[{\bf Step 3}] If needed, perform a type II operation to make that first non-zero entry 1 (the leading 1 in the first row).
 \item[{\bf Step 4}] Perform type III operations to make the entries below this leading 1 equal to 0.
 \item[{\bf Step 5}] Repeat the previous four steps on the submatrix consisting of all except the first row, until reaching the end of the rows.
 \item[{\bf Step 6}] For each row containing a leading 1, proceed upward using type III operations to  make zero any entry appearing above a leading 1.
-\end{enumerate}
+\end{description}
 \vskip.2in
 To summarize,
 
@@ -225,3 +234,5 @@ To summarize,
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}
