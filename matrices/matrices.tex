@@ -1,0 +1,465 @@
+\section{Matrices}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Matrix Operations (algebraic and otherwise)} We begin by recalling some notation and terminology regarding matrices. A {\it matrix} will mean a rectangular array whose entries are of the same type. Thus, we could have an array of real numbers, complex numbers, functions, or even matrices. An {\it $m\times n$ matrix} will refer to one which has $m$ rows and $n$ columns, and the {\it collection of all $m\times n$ matrices of real numbers} will be denoted by $\mathbb R^{m\times n}$. We adopt the convention, used by MATLAB, in which the $(i,j)^{th}\ entry$ of the matrix $A$ (that in row $i$ and column $j$) is denoted by $A(i,j)$. Also, following MATLAB notation, we will write the $i^{th}$ row as $A(i,:)$, and the $j^{th}$ column as $A(:,j)$. Before getting to the operations themselves, we first record
+
+\begin{definition} Two matrices $A$ and $B$ are {\it equal} if $A(i,j) = B(i,j)$ for all $i,j$.
+\end{definition}
+Note that this equality forces $A$ and $B$ to have the same dimensions, because if they had different dimensions, there would have to be a choice of indices $(i,j)$ for which one side of the equation exists, but the other does not. Thus, equality can be reformulated as saying: $A$ and $B$ have the same dimensions, and the same entry in each place.
+\vskip.2in
+Matrix algebra uses three different types of operations.
+\vskip.1in
+
+{\bf\underbar{Matrix Addition}} If $A$ and $B$ have the same dimensions, then the sum $A+B$ is given by\footnote{ In what follows, the symbol \lq\lq$:=$\rq\rq\ is used to indicate that the expression to the left of the symbol is {\it defined to be} what appears to the right of the symbol.}
+\[
+(A+B)(i,j) := A(i,j) + B(i,j)
+\]
+
+Note that the dimensions of $A+B$ are the same as those of (both) $A$ and $B$.
+\vskip.1in
+
+{\bf\underbar{Scalar Multiplication}} If $A$ is a matrix and $\alpha$ a scalar, the {scalar product} of $\alpha$ with $A$ is given by
+\[
+(\alpha A)(i,j) := (\alpha)A(i,j)
+\]
+There are no restrictions on the dimension of $A$ for this operation to be defined.
+\vskip.1in
+
+{\bf\underbar{Matrix Multiplication}} This is the most complicated of the three operations. If $A$ is $m\times n$ and $B$ is $p\times q$, then in order for the product $A*B$ to be defined, we require that $n = p$; this condition is expressed by saying that {\it the internal dimensions agree}. In this case
+\[
+(A*B)(i,k) := \sum_{j=1}^n A(i,j)B(j,k)
+\]
+The dimensions of the product are $m\times q$.
+\vskip.1in
+
+These different types of products may both be viewed as extensions of ordinary multiplication of real numbers. In fact, if we identify numerical $1\times 1$ matrices with scalars, then in that dimension the two product operations both correspond to ordinary multiplication. It is important to note that matrix multiplication can be performed whenever the sum of products appearing on the right-hand side is well-defined; in other words, for more than just numerical matrices. This fact will come into play later on.
+\vskip.2in
+
+The operations for matrix algebra satisfy similar properties to those for addition and multiplication of real numbers. The following theorem lists those properties. In each case, the expression on the left is defined iff that on the right is also defined.
+
+\begin{theorem}\label{thm:matalg} Let $A,B,C$ denote matrices, and $\alpha,\beta$ scalars.
+
+\begin{enumerate}
+\item $A+B = B+A$ (commutativity of addition);
+\item $A+(B+C) = (A+B)+C$ (associativity of addition);
+\item $\alpha(A+B) = \alpha A + \alpha B$ (scalar multiplication distributes over matrix addition);
+\item $A*(B+C) = A*B + A*C$ (matrix multiplication left-distributes over matrix addition);
+\item $(A+B)*C = A*C + B*C$ (matrix multiplication right-distributes over matrix addition);
+\item $(\alpha\beta)A = \alpha(\beta A)$ (associativity of scalar multiplication);
+\item $A*(B*C) = (A*B)*C$ (associativity of matrix multiplication).
+\end{enumerate}
+\end{theorem}
+
+This theorem is proven by showing that, in each case, the matrix on the left has the same $(i,j)^{th}$ entry as the one on the right. However, as with any proof, one needs to be clear from the beginning exactly what one is allowed to {\it assume} as being true. In this case, we have i) the definition of what it means for two matrices to be equal, ii) the explicit definition of each operation, and iii) the corresponding properties for addition and multiplication for real numbers (which will be taken as axioms for this proof). To see how this works, let's verify the first equality. 
+
+\begin{proof} (of 3.2.1)
+\begin{align*}
+(A+B)(i,j) &= A(i,j) + B(i,j)\qquad{\rm by\ the\ definition\ of\ matrix\ addition}\\
+                &= B(i,j) + A(i,j)\qquad{\rm by\ commutativity\ of\ addition\ for\ real\ numbers}\\
+               &= (B+A)(i,j)\qquad\quad\ {\rm by\ the\ definition\ of\ matrix\ addition}
+\end{align*}
+\end{proof}
+
+Notice that the proof consists of a sequence of equalities, beginning with the left-hand side of the equation we wish to verify, and ending with the right-hand side of that equation. Moreover, each equality in the sequence is justified by either a definition, or an axiom. Not all of the equalities are that easy; some may require more steps. To illustrate a more involved proof, we will verify property 7 (probably the most difficult to prove of the properties listed).
+
+\begin{proof} (of 3.2.7) In this proof, $i,j,k,l$ will be used as indices (the reason for using four different indices will become apparent).
+\begin{alignat*}{3}
+(A*(B*C))(i,l)  =& \sum_j A(i,j)(B*C)(j,l)&&\qquad{\rm by\ the\ definition\ of\ matrix\ multiplication}&\\
+                =& \sum_j A(i,j)\left(\sum_k B(j,k)C(k,l)\right)&&\qquad{\rm by\ the\ definition\ of\ matrix\ multiplication}&\\
+                =& \sum_j\left(\sum_k A(i,j)\Big(B(j,k)C(k,l)\Big)\right)&&\qquad{\rm by\ property\ 4\ for\ real\ numbers}&\\
+                =& \sum_j\left(\sum_k \Big(A(i,j)(B(j,k)\Big)C(k,l)\right)&&\qquad{\rm by\ property\ 7\ for\ real\ numbers}&\\
+                =& \sum_k\left(\sum_j \Big(A(i,j)(B(j,k)\Big)C(k,l)\right)&&\qquad{\rm by\ property\ 1\ for\ real\ numbers}&\\
+                =& \sum_k\left(\Big(\sum_j A(i,j)(B(j,k)\Big)C(k,l)\right)&&\qquad{\rm by\ property\ 5\ for\ real\ numbers}&\\
+                =& \sum_k\left(\sum_k (A*B)(i,k)C(k,l)\right)&&\qquad{\rm by\ the\ definition\ of\ matrix\ multiplication}&\\
+                =& ((A*B)*C)(i,l)&&\qquad{\rm by\ the\ definition\ of\ matrix\ multiplication}&\\
+\end{alignat*}
+\end{proof}
+\vskip.2in
+
+\begin{exercise} Using the above two proofs as models, prove properties (3.2.2) - (3.2.6).
+\end{exercise}
+
+Before moving on to considering equations, we introduce a few more matrix operations.
+
+\begin{definition} The {\it transpose} of the matrix $A$, written as $A^T$, is always defined, and given by
+\[
+\left(A^T\right)(i,j) := A(j,i)
+\]
+\end{definition}
+The way this operation relates to the algebraic operations defined above is described by the next theorem.
+
+\begin{theorem} Let $A$ and $B$ be matrices. Then
+\begin{enumerate}
+\item $(A+B)^T = A^T + B^T$;
+\item $(A*B)^T = B^T*A^T$;
+\item $\left(A^T\right)^T = A$.
+\end{enumerate}
+\end{theorem}
+
+\begin{exercise} Verify these properties in the same manner as in the previous exercise.
+\end{exercise}
+
+Also, one can concatenate matrices. Specifically,
+
+\begin{definition} If $A$ is $m\times n$ and $B$ is $m\times p$, then the {\it horizontal} concatenation of $A$ and $B$ is written as
+\[
+\begin{bmatrix} 
+A & B
+\end{bmatrix};
+\] 
+it is the $m\times (n+p)$ matrix where $A$ appears as the left-most $m\times n$ block, and $B$ appears as the right-most $m\times p$ block. Similarly, if $C$ is $q\times n$, then the {\it vertical concatenation} of $A$ and $C$ is written as
+\[
+\begin{bmatrix} 
+A\\ C
+\end{bmatrix};
+\]
+It is the $(m+q)\times n$ matrix where $A$ appears in the upper $m\times n$ block, and $C$ in the lower $q\times n$ block.
+\end{definition}
+Concatenation can be done multiple times. Any matrix $A$ can be viewed as 
+\begin{itemize}
+\item the horizontal concatenation of its columns, and
+\item the vertical concatenation of its rows.
+\end{itemize}
+
+In what follows, the horizontal type of concatenation will be used much more often than vertical one; for that reason {\it concatenation} (direction unspecified) will refer to {\it horizontal concatenation}. The following exercise will allow the reader to better understand how concatenation interacts with the algebraic operations, and the transpose. It is not an exhaustive list.
+
+\begin{exercise} Let $A, B, C, D$ denote matrices all with the same number of rows. Show that
+\begin{enumerate}
+\item If the pairs $A,C$ and $B,D$ the same number of columns as well, then
+\[
+\begin{bmatrix} A & B\end{bmatrix} + \begin{bmatrix} C & D\end{bmatrix} = \begin{bmatrix} (A+C) & (B+D)\end{bmatrix}.
+\]
+\item With respect to products, one has
+\[
+A*\begin{bmatrix} B & C\end{bmatrix} = \begin{bmatrix} A*B & A*C\end{bmatrix}.
+\]
+\item With respect to transpose, one has
+\[
+\begin{bmatrix} A & B\end{bmatrix}^T = \begin{bmatrix} A^T \\ B^T\end{bmatrix}
+\]
+\end{enumerate}
+\end{exercise}
+
+Finally, we discuss the identity matrix and inverses. Recall that a {\it number} $\alpha$ is invertible if there is another number $\beta$ such that $\alpha\beta = 1$. A similar notion exists for matrices. To explain it, we first need to define the matrix equivalent of the number \lq\lq 1".
+
+\begin{definition} The {\it identity matrix} $I = I^{n\times n}$ is the $n\times n$ matrix with $I(i,j) = \begin{cases}1\ \ \rm{if}\ i=j\\0\ \ \rm{if}\ i\ne j\end{cases}$.
+\end{definition}
+
+In most cases the dimension of $I$ will not be indicated, as it will be uniquely determined by the manner in which it is being used. For example, if it appears as a term in a matrix product, then its dimension is assumed to be the one which makes the product well-defined. This rule applies for the following 
+
+\begin{proposition} For any matrix $A$, $I*A = A$ and $A*I = A$
+\end{proposition}
+
+\begin{exercise} Verify these two equalities.
+\end{exercise}
+
+\begin{definition} An $m\times n$ matrix $A$ is {\it invertible} if there is an $n\times m$ matrix $B$ satisfying
+\[
+A*B = I^{m\times m}, B*A = I^{n\times n}
+\]
+\end{definition}
+
+Apriori, is seems there is no dimensional restriction on a matrix for it to be invertible. However, the following theorem clarifies the situation. The reason for why it is true will become clear later on when we discuss the rank of a matrix.
+
+\begin{theorem} A matrix $A$ can only be invertible if it is square ($m = n$). In this case $A*B =I$ iff $B*A = I$ (every one-sided inverse is a two-sided inverse).
+\end{theorem}
+
+\begin{exercise} Show that the inverse of an invertible matrix is unique.
+\end{exercise}
+
+Given this, we will refer to {\it the} inverse of an invertible matrix $A$, and write it as $A^{-1}$. An alternative term for invertible is {\it non-singular} (so {\it singular} is equivalent to being  {\it non-invertible}). Two important questions are: under what conditions is a square matrix non-singular? And if a matrix is non-singular, how can one find its inverse? These questions are answered by 
+
+\begin{theorem} Let $A$ be an $n\times n$ matrix. Then either
+\begin{itemize}
+\item $rref(A) = I$, which happens precisely when $A$ is non-singular;
+\item the bottom row of $rref(A)$ is entirely zero, which happens precisely when $A$ is singular.
+\end{itemize}
+Moreover, when $A$ is non-singular, one has
+\[
+rref([A\ \ I]) = [I\ \ A^{-1}]
+\]
+\end{theorem}
+
+\begin{exercise} Using the above theorem, show that the only matrix which is both invertible and in reduced row echelon form is the identity matrix (of a given dimension).
+
+\end{exercise}
+\vskip.3in
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Matrix equations}
+
+A matrix with one row is called a {\it row} vector, and if it has one column a {\it column} vector. The term {\it vector}, for now, will refer to a column vector. Matrices and vectors can be used to rewrite systems of equations as a single equation, and there are advantages to doing this. To begin with, notice that the system appearing in (\ref{eqn:sys}) can be expressed as the single {\it vector equation}
+\begin{equation}\label{eqn:vec1}
+\begin{bmatrix}
+a_{11}x_1\ \  + &a_{12}x_2\ \  + &{}\ldots{}\ \  + &a_{1n}x_n\\ 
+a_{21}x_1\ \  + &a_{22}x_2\ \  + &{}\ldots{}\ \  + & a_{2n}x_n\\
+\vdots\ \  &  \vdots\ \  &  {}\ldots{}\ \  &  \vdots\\
+a_{m1}x_1\ \  + &a_{m2}x_2\ \  + &{}\ldots{}\ \  + &a_{mn}x_n 
+\end{bmatrix}
+=
+\begin{bmatrix}
+b_1\\
+b_2\\
+\vdots\\
+b_m
+\end{bmatrix}
+\end{equation}
+The vector on the left above consists of entries which are linear homogeneous functions in the variables $x_1,x_2,\dots,x_n$. A {\it solution} to this vector equation will be exactly what it was before; and assignment of values to the variables $x_1,x_2,\dots,x_n$ which make the equation true. 
+\vskip.2in
+
+Now the expression on the left in (\ref{eqn:vec1}) can be written as a sum of its components, where the $x_i$ component can be derived by setting all of the other variables to zero. The result is 
+\begin{equation}\label{eqn:vec2}
+\begin{bmatrix}
+a_{11}x_1\\ 
+a_{21}x_1\\
+\vdots\\
+a_{m1}x_1
+\end{bmatrix} +
+\begin{bmatrix}
+a_{12}x_2\\ 
+a_{22}x_2\\
+\vdots\\
+a_{m2}x_2
+\end{bmatrix} +\dots +
+\begin{bmatrix}
+a_{1n}x_n\\ 
+a_{2n}x_n\\
+\vdots\\
+a_{mn}x_n
+\end{bmatrix}
+=
+\begin{bmatrix}
+b_1\\
+b_2\\
+\vdots\\
+b_m
+\end{bmatrix}
+\end{equation}
+Next we observe that the $i^{th}$ component, which involves only $x_i$, can be factored as
+\begin{equation}\label{eqn:veci}
+\begin{bmatrix}
+a_{1i}x_i\\ 
+a_{2i}x_i\\
+\vdots\\
+a_{mi}x_i
+\end{bmatrix}
+=
+x_i\begin{bmatrix}
+a_{1i}\\ 
+a_{2i}\\
+\vdots\\
+a_{mi}
+\end{bmatrix}
+\end{equation}
+Using this, the vector equation (\ref{eqn:vec2}) may be rewritten as
+\begin{equation}\label{eqn:vec3}
+x_1\begin{bmatrix}
+a_{11}\\ 
+a_{21}\\
+\vdots\\
+a_{m1}
+\end{bmatrix} +
+x_2\begin{bmatrix}
+a_{12}\\ 
+a_{22}\\
+\vdots\\
+a_{m2}
+\end{bmatrix} +\dots +
+x_n\begin{bmatrix}
+a_{1n}\\ 
+a_{2n}\\
+\vdots\\
+a_{mn}
+\end{bmatrix}
+=
+\begin{bmatrix}
+b_1\\
+b_2\\
+\vdots\\
+b_m
+\end{bmatrix}
+\end{equation}
+The left-hand side of this last equation leads us to one of the central constructions in all of Linear Algebra.
+
+\begin{definition} Given a collection of vectors $\{v_1,v_2,\dots,v_n\}$, a {\it linear combination} of these vectors is a sum of the form
+\[
+\alpha_1v_1 + \alpha_2v_2 +\dots + \alpha_nv_n
+\]
+where the coefficients $\alpha_i$ are scalars.
+\end{definition}
+In words, it is {\it a sum of scalar multiples of the vectors} $v_1,v_2,\dots v_n$. Now the expression on the left of (\ref{eqn:vec3}) is a linear combination of sorts, but where the coefficients are scalar-valued variables rather than actual scalars. So for any assignment of values to the variables $x_1,x_2,\dots x_n$ we get an actual linear combination.
+\vskip.2in
+
+Finally, going back to equation (\ref{eqn:vec1}) we observe that the left-hand side can be written as $A*{\bf x}$, where $A$ is the $m\times n$ {\it coefficient matrix}
+\begin{equation}
+\label{eqn:coeff}
+A = \begin{bmatrix}
+a_{11}  &a_{12} &{}\ldots{} &a_{1n}\\ 
+a_{21} &a_{22} &{}\ldots{} & a_{2n}\\
+\vdots\ \  &  \vdots\ \  &  {}\ldots{}\ \  &  \vdots\\
+a_{m1} &a_{m2} &{}\ldots{} &a_{mn} 
+\end{bmatrix}
+\end{equation}
+and ${\bf x}$ is the $n\times 1$ vector variable
+\begin{equation}
+\label{eqn:coeff}
+{\bf x} = \begin{bmatrix}
+x_1\\ 
+x_2\\
+\vdots\\
+x_n 
+\end{bmatrix}
+\end{equation}
+which leads to our final equivalent form of (\ref{eqn:vec1}), referred to as the {\it matrix equation associated to the system of equations}:
+\begin{equation}\label{eqn:mat}
+A*{\bf x} = {\bf b}
+\end{equation}
+where ${\bf b}$ is the vector ${\bf b} := [b_1\  b_2\ \dots\  b_m]^T$. As with (\ref{eqn:vec1}), a solution is an assignment of a particular numerical vector to $\bf x$ making the equation true, and matrix equation is {\it consistent} iff such an {\bf x} exists. Summarizing
+
+\begin{theorem} The system of equations appearing in (\ref{eqn:sys}) is equivalently represented by the vector equations appearing in (\ref{eqn:vec1}), (\ref{eqn:vec2}), (\ref{eqn:vec3}), as well as the matrix equation (\ref{eqn:mat}). Moreover, the system is consistent precisely when the vector {\bf b} can be written as a linear combination of the columns of the coefficient matrix $A$. 
+\end{theorem}
+
+\begin{proof} The only point needing verification is the last statement. But this follows from (\ref{eqn:vec3}), which can be more succinctly written as
+\[
+x_1 A(:,1) + x_2 A(:,2) +\dots x_n A(:,n) = {\bf b}
+\]
+ since any solution will yield a particular set of values for $x_1,x_2,\dots,x_n$ to take as scalars on the left so that the resulting linear combination produces {\bf b}, while a particular linear combination which results in {\bf b} would in turn produce a solution to (\ref{eqn:vec3}).
+\end{proof}
+
+The last part of this theorem is sometimes called the {\it consistency theorem for systems of equations}. We will occasionally refer to it in this way. 
+\vskip.2in
+
+Finally, we consider the case of a matrix equation
+\begin{equation}\label{eqn:inv}
+A*{\bf x} = {\bf b}
+\end{equation}
+when $A$ is invertible. If we assume ${\bf x}_0$ is a solution, we can multiply both sides of the equation on the left by $A^{-1}$ to get
+\[
+{\bf x}_0 = I*{\bf x}_0 = (A^{-1}*A)*{\bf x}_0 = A^{-1}*(A*{\bf x}_0) = A^{-1}*{\bf b}
+\]
+On the other hand, if we take $x = A^{-1}*{\bf b}$ and substitute into equation (\ref{eqn:inv}), we get
+\[
+A*(A^{-1}*{\bf b}) = (A*A^{-1})*{\bf b} = I*{\bf b} = {\bf b}
+\]
+In other words, we have shown
+
+\begin{theorem} If $A$ is an invertible $n\times n$ matrix, then for any $n\times 1$ vector ${\bf b}$ and $n\times 1$ vector variable ${\bf x}$, the matrix equation
+\[
+A*{\bf x} = {\bf b}
+\]
+is consistent, and has a unique solution given by ${\bf x} = A^{-1}*{\bf b}$.
+\end{theorem}
+\vskip.3in
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{The superposition principle} Given a matrix equation $A*{\bf x} = {\bf b}$, its {\it associated homogeneous equation} is $A*{\bf x} = {\bf 0}$ (resulting from replacing $\bf b$ by $\bf 0$). Note that consistency status may change in passing from an arbitrary non-homogeneous equation to its associated counterpart. However, if the original system is consistent, there is an important relation between the two solution sets, which is a manifestation of the {\it superposition principle}.
+\vskip.2in
+
+To see this, note that if ${\bf x}', {\bf x}''$ are two solutions to the equation $A*{\bf x} = {\bf b}$, then 
+\[
+A*({\bf x}' - {\bf x}'') = A*{\bf x}' - A*{\bf x}'' = {\bf b} - {\bf b} = {\bf 0}
+\]
+so $({\bf x}' - {\bf x}'')$ is a solution to the associated homogeneous equation. On the other hand, given a solution ${\bf x}_h$ to the associated homogeneous equation, and a solution ${\bf x}$ to the original equation, we see
+\[
+A*({\bf x}_h + {\bf x}) = A*{\bf x}_h + A*{\bf x} = {\bf 0} + {\bf b} = {\bf b}
+\]
+so ${\bf x}_h + {\bf x}$ is again a solution to the original equation. Thus
+
+\begin{thm} (Superposition Principle) Suppose $A*{\bf x} = {\bf b}$ is a consistent matrix equation, with ${\bf x}_p$ a particular solution to the equation. Then the set of solutions to the original equation can be expressed as
+\[
+\{{\bf x}_h + {\bf x}_p\ |\ {\bf x}_h\in S_0\}
+\]
+where $S_0$ denotes the set of solutions to the associated homogeneous equation.
+\end{thm}
+\vskip.3in
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Elementary matrices} As we have seen, systems of equations - or equivalently matrix equations - are solved by i) forming the ACM associated with the set of equations and ii) applying row operations to the ACM until it is in reduced row echelon form.
+\vskip.2in
+It turns out these row operations can be realized by left multiplication by a certain type of matrix, and these matrices have uses beyond that of performing row operations. To explain how matrix multiplication comes into play, let us write $\cal R(_-)$ for a particular row operation on $m\times n$ matrices, so that the given operation is represented by $A\mapsto {\cal R}(A)$. It turns out that for any of the three types of row operations we have considered above, one has the identity
+\[
+{\cal R}(A) = {\cal R}(I*A) = {\cal R}(I)*A
+\]
+In other words, {\it the row operation ${\cal R}(_-)$, applied to $A$, can be realized in terms of left multiplication by the $m\times m$ matrix ${\cal R}(I)$ gotten by applying $\cal R$ to the $m\times m$ identity matrix}.
+\vskip.2in
+
+As one would then expect, one has - for each row operation - a corresponding {\it elementary matrix} derived from the identity matrix of the appropriate dimension by application of that given operation.
+\vskip.2in
+
+These matrices, and the notation used to define them, can be recorded in an expanded version of the table above in which we indicated the types of operations and their representation:
+\vskip.2in
+
+\begin{center}
+    \begin{tabular}{|c|c|c|c|}\hline\hline
+    \phantom{x} & \phantom{x} & \phantom{x} & \phantom{x}\\
+    \Large{Type} &\Large{What it does} &\Large{Indicated by} & \Large{Elementary matrix}\\ \hline
+    \phantom{x} & {\large Switches} & \phantom{\Huge X} & \phantom{X}\\
+    \large{Type I} &{\large $i^{th}$ and $j^{th}$} & {\large $R_i\leftrightarrow R_j$} & {\large ${\cal R}(I) = P_{ij}$}\\ 
+    \phantom{x} & {\large rows} & \phantom{x} & \phantom{x}\\ \hline
+    \phantom{x} &{\large Multiplies} & \phantom{\Huge X} & \phantom{x}\\
+    \large{Type II} &{\large $i^{th}$ row} & {\large $r\cdot R_i$} & {\large ${\cal R}(I) = D_i(r)$}\\
+    \phantom{x} & {\large by $r\ne 0$} & \phantom{x} & \phantom{x}\\ \hline
+    \phantom{x} &{\large Adds} & \phantom{\Huge X} & \phantom{x}\\
+    \large{Type III} &{\large $a$ times the $i^{th}$ row} & {\large $a\cdot R_i$ added to $R_j$} & {\large ${\cal R}(I) = E_{ji}(a)$}\\
+    \phantom{x} & {\large to the $j^{th}$ row} & \phantom{x} & \phantom{x}\\\hline\hline
+    \end{tabular}
+    \end{center}
+\vskip.2in
+
+[Examples to be included]
+\vskip.3in
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Column operations} In an analogous fashion, one can also perform column operations on a matrix. As with row operations there are three types, and each type can be achieved via {\it right} multiplication with the corresponding matrix. In other words, if ${\cal C}(_-)$ indicates the given column operation, then for each type one has
+\[
+{\cal C}(A) = {\cal C}(A*I) = A*{\cal C}(I)
+\]
+Denoting the $k^{th}$ column by $C_k$, we have
+\vskip.2in
+
+\begin{center}
+    \begin{tabular}{|c|c|c|c|}\hline\hline
+    \phantom{x} & \phantom{x} & \phantom{x} & \phantom{x}\\
+    \Large{Type} &\Large{What it does} &\Large{Indicated by} & \Large{Elementary matrix}\\ \hline
+    \phantom{x} & {\large Switches} & \phantom{\Huge X} & \phantom{X}\\
+    \large{Type I} &{\large $i^{th}$ and $j^{th}$} & {\large $C_i\leftrightarrow C_j$} & {\large ${\cal C}(I) = P_{ij}$}\\ 
+    \phantom{x} & {\large colmns} & \phantom{x} & \phantom{x}\\ \hline
+    \phantom{x} &{\large Multiplies} & \phantom{\Huge X} & \phantom{x}\\
+    \large{Type II} &{\large $i^{th}$ column} & {\large $r\cdot C_i$} & {\large ${\cal C}(I) = D_i(r)$}\\
+    \phantom{x} & {\large by $r\ne 0$} & \phantom{x} & \phantom{x}\\ \hline
+    \phantom{x} &{\large Adds} & \phantom{\Huge X} & \phantom{x}\\
+    \large{Type III} &{\large $a$ times the $i^{th}$ column} & {\large $a\cdot C_i$ added to $C_j$} & {\large ${\cal C}(I) = E_{ij}(a)$}\\
+    \phantom{x} & {\large to the $j^{th}$ column} & \phantom{x} & \phantom{x}\\\hline\hline
+    \end{tabular}
+    \end{center}
+\vskip.2in
+
+[Examples to be included]
+\vskip.2in
+
+Each elementary matrix is invertible, and of the same type. The following indicates how each elementary matrix behaves under i) inversion and ii) transposition:
+\begin{gather*}
+P_{ij}^{-1} = P_{ij},\qquad P_{ij}^T = P_{ij}\\
+D_i(r)^{-1} = D_i(r^{-1}),\qquad D_i(r)^T = D_i(r)\\
+E_{ij}(a)^{-1} = E_{ij}(-a),\qquad E_{ij}(a)^T = E_{ji}(a)
+\end{gather*}
+
+This is useful in problems where one wants to express the inverse of a matrix explicitly as a product of elementary matrices.
+
+
+
+
+
+
+
+\vskip.5in
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
