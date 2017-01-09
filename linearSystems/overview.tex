@@ -1,0 +1,81 @@
+\documentclass{ximera}
+\input{../preamble.tex}
+\title{Overview on linear systems}
+
+\begin{document}
+
+\begin{abstract}
+  Our journey through linear algebra begins with linear systems.
+\end{abstract}
+
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{definition}
+  A \dfn{linear function in one variable} is of the form $f(x) = ax+b$ where $x$ is a variable and $a,b$ are numbers (or \dfn{scalars} as they are referred to in linear algebra). It is \dfn{homogeneous} if $b=0$. Similarly, a \dfn{linear function in n variables} is one of the form
+  \[
+    f(x_1,x_2,\dots,x_n) = a_1x_1 + a_2x_2 + \dots a_nx_n + b
+  \]
+  where the $x_i$ are variables (or unknowns) and the $a_i$ are scalars. Again, the linear function is called \dfn{homogeneous} if the constant term $b$ is zero. Next, a \dfn{linear equation in n variables} is one of the form
+  \[
+    a_1x_1 + a_2x_2 + \dots a_nx_n =  b
+  \]
+  where the expression on the left is a linear homogeneous function in $n$ variables, and the term on the right is a constant.
+\end{definition}
+
+\begin{example}
+  Consider
+  \begin{equation}
+    3x_1 - 7x_2 + 11x_3 = 14.
+  \end{equation}
+  This is a linear equation in three variables: $x_1, x_2$, and
+  $x_3$. A \dfn{solution} to a linear equation is an assignment of
+  values to each of the variables appearing which makes the equation
+  hold true.
+
+  We see
+  \[
+    x_1 = 1, x_2 = 0, x_3 = 1
+  \]
+  is a solution to this linear equation, because when substituted into the left-hand side it results in the value 14.
+\end{example}
+
+\begin{definition}
+  A \dfn{system of equations} is a collection of linear equations in the same set of variables, or unknowns
+  \begin{alignat*}{5}\tag{2.2}\label{eqn:sys}
+    a_{11}x_1 &&+ a_{12}x_2 && + {}\ldots{} && + a_{1n}x_n && =  b_1 &\\
+    a_{21}x_1 + && a_{22}x_2 + &&  {}\ldots{} && + a_{2n}x_n &&  = b_2 &\\
+    \vdots &&  \vdots &&  {}\ldots{} &&  \vdots &&   \vdots &\\
+    a_{m1}x_1 &&+ a_{m2}x_2 && + {}\ldots{} && + a_{mn}x_n && =  b_m &
+  \end{alignat*}
+  and a \dfn{solution} to that system is an assignment of values to the variables which make \dfn{each equation} hold true.
+\end{definition}
+
+\begin{example}
+  Note that systems of equations, or even a single equation, need to have a solution. To illustrate, consider the equation
+  \[
+    0x_1 + 0x_2 + 0x_3 = 4
+  \]
+  Obviously, any set of values substituted into the left-hand side of
+  this equation will produce the value zero, which is not equal to
+  4. But even non-zero systems might not have a solution. As an
+  example, consider
+  \begin{alignat*}{3}
+    x_1 && - 2x_2 && =& \phantom{1}7 \\
+    2x_1 && - 4x_2 && =& 16 
+  \end{alignat*}
+  The left-hand side of the second equation is twice that of the first. So if we take any solution of the first equation and plug in those values on the left-hand side of the second equation, we will always get $2*7 = 14\ne 16$. Therefore, these two equations will never be simultaneously satisfied, and so the system doesn't have a solution.
+\end{example}
+
+\begin{definition}
+A system which has at least one solution is called \dfn{consistent}. If it doesn't have any solutions it is called \dfn{inconsistent}.
+\end{definition}
+
+In the following activities, the main questions we need to answer are the following.
+\begin{itemize}
+\item Given a system of equations, does it have one or more solutions (in other words is it consistent)?
+\item If it is consistent, what are the solutions?
+\end{itemize}
+
+\end{document}
