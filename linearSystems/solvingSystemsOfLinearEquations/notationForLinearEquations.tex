@@ -10,8 +10,11 @@
 \end{abstract}
 \maketitle
 
+To begin with, some terminology. 
+
 \begin{definition}
-  A system of linear equations is a collection of $m$ equations in the variable quantities $x_1,\,x_2,\,x_3,\ldots,x_n$ of the form,
+  A \dfn{system of linear equations} is a collection of $m$ equations
+  in the variable quantities $x_1,\,x_2,\,x_3,\ldots,x_n$ of the form,
   \begin{align*}
     a_{11}x_1+a_{12}x_2+a_{13}x_3+\dots+a_{1n}x_n&=b_1\\
     a_{21}x_1+a_{22}x_2+a_{23}x_3+\dots+a_{2n}x_n&=b_2\\
@@ -19,8 +22,20 @@
                                                  &\vdots\\
     a_{m1}x_1+a_{m2}x_2+a_{m3}x_3+\dots+a_{mn}x_n&=b_m
   \end{align*}
-  where the values of $a_{ij}$, $b_i$ and $x_j$, $1\leq i\leq m$, $1\leq j\leq n$, are from the set of complex numbers.
+  where the values of $a_{ij}$, $b_i$ and $x_j$, $1\leq i\leq m$,
+  $1\leq j\leq n$, are from the set of complex numbers.
+
+  A system consisting of $m$ equations in the same collection of $n$
+  unknowns is referred to as an $m\times n$ system, which reads as:
+  ``m-by-n system.''
 \end{definition}
+
+The number of rows $m$ and the number of columns $n$ are called the {\it dimensions} of the system. The system is said to be
+\begin{itemize}
+\item \dfn{underdetermined} if $m < n$ (less equations than unknowns);
+\item \dfn{overdetermined} if $m > n$ (more equations than unknowns); and
+\item \dfn{balanced} if $m = n$ (same number of equations as unknowns).
+\end{itemize}
 
 \begin{example}
   Given the system of linear equations,

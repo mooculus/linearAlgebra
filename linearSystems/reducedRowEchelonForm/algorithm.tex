@@ -1,0 +1,39 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Algorithm for Row Reduction}
+
+\begin{document}
+\begin{abstract}
+  We summarize the algorithm for performing row reduction.
+\end{abstract}
+\maketitle
+
+At this point, we see that the reduced row echelon form of the ACM
+allows us to solve the system. However, we have not discussed how the
+transition to that form is accomplished. The following algorithm
+describes that process.
+
+\begin{description}
+\item[{\bf Step 1}] Determine the left-most column containing a non-zero entry (it exists if the matrix is non-zero).
+\item[{\bf Step 2}] If needed, perform a type I operation so that the first non-zero column has a non-zero entry in the first row.
+\item[{\bf Step 3}] If needed, perform a type II operation to make that first non-zero entry 1 (the leading 1 in the first row).
+\item[{\bf Step 4}] Perform type III operations to make the entries below this leading 1 equal to 0.
+\item[{\bf Step 5}] Repeat the previous four steps on the submatrix consisting of all except the first row, until reaching the end of the rows.
+\item[{\bf Step 6}] For each row containing a leading 1, proceed upward using type III operations to  make zero any entry appearing above a leading 1.
+\end{description}
+
+To summarize,
+
+\begin{theorem} Every system of equations is uniquely represented by
+  its associated augmented coefficient matrix (ACM), and every ACM
+  results from a unique system of equations, up to a labeling of the
+  indeterminates. The solution set to the system can be determined by
+  i) putting the ACM in reduced row echelon form (rref), and ii)
+  reading off the solution(s) from the resulting matrix. Moreover, the
+  computation of rref(ACM) can be performed in a systematic fashion,
+  by following the algorithmic procedure listed above.
+\end{theorem}
+
+\end{document}

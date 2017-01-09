@@ -1,0 +1,36 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Notation for Row Operations}
+
+\begin{document}
+\begin{abstract}
+  We summarize the notation to keep track of the precise row operations being used.
+\end{abstract}
+\maketitle
+
+In the process of putting the ACM in reduced row echelon form, it is
+often desirable to keep track of the precise row operations being
+used. For this, some notation is useful. The following summarizes the
+notation we have used in class.
+
+\section{Type I operation}
+
+\textbf{What it does:} switches $i^{th}$ and $j^{th}$ rows.
+
+\textbf{Indicated by:} $R_i\leftrightarrow R_j$
+
+\section{Type II operation}
+
+\textbf{What it does:} multiplies $i^{th}$ row by $r\ne 0$.
+
+\textbf{Indicated by:}  $r\cdot R_i$
+
+\section{Type III operation}
+
+\textbf{What it does:} adds $a$ times the $i^{th}$ row to the $j^{th}$ row
+
+\textbf{Indicated by:} $R_j := R_j + a\cdot R_i$ or ``$a\cdot R_i$ added to $R_j$''
+
+\end{document}

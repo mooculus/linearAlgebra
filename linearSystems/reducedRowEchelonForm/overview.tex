@@ -1,0 +1,159 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Plan for Row Reduction}
+
+\begin{document}
+\begin{abstract}
+  We row reduce a matrix by performing row operations, in order to
+  find a simpler but equivalent system for which the solution set is
+  easily read off.
+\end{abstract}
+\maketitle
+
+Given a system of equations, how can we find its solution set? The
+answer is by finding a simpler but equivalent system for which the
+solution set is easily read off. The method used for finding this
+simpler system is called \dfn{row reduction}, and the operations used
+to perform row reduction are called \dfn{row operations}, of which
+there are three types.  \vskip.1in
+\begin{description}
+\item[Type I] Switching two rows;
+\item[Type II] Multiplying a row by a non-zero scalar $\alpha$;
+\item[Type III] Adding a multiple of one row to another distinct row.
+\end{description} 
+
+It is quite easy to see the the first two types of row operations
+won't change the solution set, and it can also be shown that the third
+doesn't either. We'll say that two systems of the same dimensions are
+\dfn{row equivalent} if one can be gotten from the other by a sequence
+of row operations. The following theorem tells us about when this
+happens.
+
+\begin{theorem}
+  Two systems of the same dimensions are row equivalent if and only if
+  they are equivalent.
+\end{theorem}
+
+Now to proceed in an efficient manner, it will be convenient to
+represent a system in terms of its essential information. This is
+accomplished by means of the \dfn{augmented coefficient matrix} or
+\dfn{ACM} corresponding to a given system. Starting with the
+$m\times n$ system, the augmented coefficient matrix is given by
+\[
+A = 
+\begin{amatrix}{4}
+a_{11} &a_{12} &{}\ldots{} &a_{1n} &b_1 \\
+a_{21} &a_{22} &{}\ldots{} &a_{2n} &b_2 \\
+\vdots &\vdots &{}\ldots{} &\vdots &\vdots \\
+a_{m1} &a_{m2} &{}\ldots{} &a_{mn} &b_m 
+\end{amatrix}
+\]
+This is a matrix with $m$ rows and $(n+1)$ columns. Executing a number
+of row operations and then computing the ACM gives the same result as
+first forming the ACM and performing the row operations on that
+matrix. Because the ACM contains all of the information relevant for
+solving the system, and is less cumbersome to work with, we will
+always form the ACM \textit{first}, and perform row operations on that
+matrix.
+
+The simplified form in which we would like to get our matrix is
+referred to as \dfn{reduced row echelon form}. This is a term which
+applies to matrices in general, not just augmented coefficient
+matrices.
+
+\begin{definition} A matrix $B$ of numbers is in \dfn{row-echelon form} if
+\begin{itemize}
+\item Every row of zeros lies below every non-zero row;
+\item the left-most non-zero entry of a non-zero row is 1 (called a \dfn{leading} 1);
+\item if both row $k$ and row $(k+1)$ are non-zero, the leading 1 in row $(k+1)$ appears to the right of the leading row in row $k$.
+\end{itemize}
+It is in \dfn{reduced row-echelon form} if in addition to being in row echelon form it satisfies the property
+\begin{itemize}
+\item In every column that contains a leading 1, that leading 1 is the only non-zero entry.
+\end{itemize}
+\end{definition}
+
+\begin{example} Consider the three matrices
+\[
+A = \begin{bmatrix}
+1 & 2 & -1 & 4\\
+0 & 0 & 1 & 3\\
+0 & 1 & 0 & 2
+\end{bmatrix},\qquad
+B = \begin{bmatrix}
+1 & 2 & 3 & 4\\
+0 & 1 & 5 & 7\\
+0 & 0 & 0 & 1
+\end{bmatrix},\qquad
+C = \begin{bmatrix}
+1 & 0 & 0 & 4\\
+0 & 1 & 0 & 3\\
+0 & 0 & 1 & 1
+\end{bmatrix}
+\]
+\end{example}
+
+The matrix $A$ is not in row echelon form, while $B$ is in row echelon but not reduced row echelon form, and $C$ is in reduced row echelon form (the reader should check this, and understand why for each example). The main fact we will need to know is
+
+\begin{theorem} Every matrix of numbers is row-equivalent to one which is in reduced row echelon form.
+\end{theorem}
+
+The reduced row echelon form of a matrix is unique; for that reason we will refer to {\it the} reduced row echelon form of a matrix $A$, and write it as $rref(A)$. When $A$ is the ACM of a system of equations, $rref(A)$ tells us essentially everything we would like to know about the original system. The way it does this is summarized by the next result.
+
+\begin{theorem} Let $A$ be the ACM of an $m\times n$ system of equations. Then the system
+\begin{itemize}
+\item is inconsistent precisely when $rref(A)$ contains a row of the form
+\[
+[0\ \ 0\ \ 0\ \ 0\ \dots\ \ 0\ \ |\ \ 1];
+\]
+\item has a unique solution precisely when each column of $rref(A)$ except the right-most column contains a leading 1;
+\item has infinitely many solutions when it is i) consistent, and ii) at least one of the first n columns of $rref(A)$ does not contain a leading 1.
+\end{itemize}
+In the last case, the solution set is parametrized by the variables appearing in the original system which are indexed by the columns of $rref(A)$ to the left of the bar which do not contain a leading 1.
+\end{theorem}
+
+It is important to note that when $A$ is the ACM of a system, $rref(A)$ is the ACM of another system equivalent to the original one, which is the reduced row echelon form of the original system. In this reduced row echelon form, it {\it is} possible for an equation to consist of all zeros. If it does, we do not delete it from the system, because we want to maintain the original dimensions.
+
+\begin{example} The rref of the ACM is given by
+\[
+rref(A) = 
+\begin{amatrix}{4}
+1 & 2 & 3 & 0 & 5\\
+0 & 0 & 0 & 1 & 7 \\
+0 & 0 & 0 & 0 & 1
+\end{amatrix}
+\]
+In this case, we would conclude that the system is {\it inconsistent}, because of the last row (to understand why a row like this makes the system inconsistent, the reader should write down the equation to which it corresponds, and see what they can say about solutions to that single equation).
+\end{example}
+\vskip.2in
+\begin{example} The rref of the ACM is given by
+\[
+rref(A) = 
+\begin{amatrix}{4}
+1 & 0 & 0 & 0 & 5\\
+0 & 1 & 0 & 0 & -2 \\
+0 & 0 & 1 & 0 & 4\\
+0 & 0 & 0 & 1 & 10
+\end{amatrix}
+\]
+
+In this case, every column to the left of the bar dividing the {\it coefficient matrix} from the augmented part contains a leading 1. Hence there is a unique solution (the reader should write down the equations corresponding to this ACM, and see how those equations actually give the exact solution).
+\end{example} 
+\vskip.2in
+
+\begin{example} The rref of the ACM is given by
+\[
+rref(A) = 
+\begin{amatrix}{4}
+1 & 0 & 0 & 3 & 7\\
+0 & 1 & 0 & 1 & 5 \\
+0 & 0 & 1 & 2 & 2\\
+0 & 0 & 0 & 0 & 0
+\end{amatrix}
+\]
+Here we have a $4\times 4$ system which has infinitely many solutions; this is seen by noting i) it is consistent, and ii) the fourth column does not contains a leading 1 (the reader should write down the four equations corresponding to this matrix and then rewrite each equation so that they express the original four variables $x_1,x_2,x_3,x_4$ as linear functions in $x_4$, which is the independent parameter in this case. Since we only have one parameter, the result is a \dfn{one-parameter family of solutions}).
+\end{example}
+
+\end{document}
