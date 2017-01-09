@@ -1,0 +1,175 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Null Space of a Nonsingular Matrix}
+
+\begin{document}
+\begin{abstract}
+  Nonsingular matrices and their null spaces are intimately related,
+  as the next two examples illustrate.
+\end{abstract}
+\maketitle
+
+\begin{example}
+  The \wordChoice{\choice{nonsingular}\choice[correct]{singular}} matrix
+  \[
+    A = \begin{bmatrix}
+      1 & -1 & 2 \\
+      2 & 1 & 1 \\
+      1 & 1 & 0 
+    \end{bmatrix}
+  \]
+  row-reduces to
+  \[
+    \begin{bmatrix}
+      \leading{1} & 0 & 1 \\
+      0 & \leading{1} & -1 \\
+      0 & 0 & 0 
+    \end{bmatrix}.
+  \]
+  The null space of $A$ is the set of solutions to the homogeneous
+  system of equations $\homosystem{A}$; the null space consists of 
+  \begin{multipleChoice}
+    \choice{a single vector.}
+    \choice[correct]{an infinite set of vectors.}
+  \end{multipleChoice}
+\end{example}
+
+\begin{example}
+  The \wordChoice{\choice[correct]{nonsingular}\choice{singular}} matrix
+  \[
+    B = \begin{bmatrix}
+      -7&-6&- 12\\
+      5&5&7 \\
+      1&0&4
+    \end{bmatrix},
+  \]
+  row-reduces to
+  \[
+    \begin{bmatrix}
+      \leading{1}&0&0 \\
+      0&\leading{1}&0 \\
+      0&0&\leading{1}
+    \end{bmatrix},
+  \]
+  The null space of $B$ is the set of solutions to the homogeneous
+  system of equations $\homosystem{B}$; the null space consists of 
+  \begin{multipleChoice}
+    \choice[correct]{a single vector.}
+    \choice{an infinite set of vectors.}
+  \end{multipleChoice}
+\end{example}
+
+These two examples illustrate the next theorem, which is another equivalence.
+
+\begin{theorem}[Nonsingular Matrices have Trivial Null Spaces]
+\label{theorem:NMTNS}
+
+Suppose that $A$ is a square matrix.  Then $A$ is nonsingular if and only if the null space of $A$ is the set containing only the zero vector, i.e.,  $\nsp{A}=\set{\zerovector}$.
+
+\begin{proof}
+  The null space of a square \textit{matrix}, $A$, is equal to the set
+  of solutions to the homogeneous \textit{system}, $\homosystem{A}$.
+  A \textit{matrix} is nonsingular if and only if the set of solutions
+  to the homogeneous \textit{system}, $\linearsystem{A}{\zerovector}$,
+  has only a trivial solution.  These two observations may be chained
+  together to construct the two proofs necessary for each half of this
+  theorem.
+\end{proof}
+\end{theorem}
+
+The next theorem pulls a lot of big ideas together, and it tells us
+that we can learn much about solutions to a system of linear equations
+with a square coefficient matrix by just examining a similar
+homogeneous system.
+
+\begin{theorem}[Nonsingular Matrices and Unique Solutions]
+  \label{theorem:NMUS}
+  Suppose that $A$ is a square matrix.  $A$ is a nonsingular matrix if
+  and only if the system $\linearsystem{A}{\vect{b}}$ has a unique
+  solution for every choice of the constant vector $\vect{b}$.
+
+  \begin{proof}
+    $(\Leftarrow)$ The hypothesis for this half of the proof is that
+    the system $\linearsystem{A}{\vect{b}}$ has a unique solution for
+    \textit{every} choice of the constant vector $\vect{b}$.  We will
+    make a very specific choice for $\vect{b}$:
+    $\vect{b}=\zerovector$.  Then we know that the system
+    $\linearsystem{A}{\zerovector}$ has a unique solution.  But this
+    is precisely the definition of what it means for $A$ to be
+    nonsingular (\ref{definition:NM}).  That almost seems too easy!
+    Notice that we have not used the full power of our hypothesis, but
+    there is nothing that says we must use a hypothesis to its
+    fullest.
+
+    $(\Rightarrow)$ We assume that $A$ is nonsingular of size
+    $n\times n$, so we know there is a sequence of row operations that
+    will convert $A$ into the identity matrix $I_n$
+    (\ref{theorem:NMRRI}).  Form the augmented matrix
+    $A^\prime=\augmented{A}{\vect{b}}$ and apply this same sequence of
+    row operations to $A^\prime$.  The result will be the matrix
+    $B^\prime=\augmented{I_n}{\vect{c}}$, which is in reduced
+    row-echelon form with $r=n$.  Then the augmented matrix $B^\prime$
+    represents the (extremely simple) system of equations
+    $x_i=\vectorentry{\vect{c}}{i}$, $1\leq i\leq n$.  The vector
+    $\vect{c}$ is clearly a solution, so the system is consistent
+    (\ref{definition:CS}).  With a consistent system, we use
+    \ref{theorem:FVCS} to count free variables.  We find that there
+    are $n-r=n-n=0$ free variables, and so we therefore know that the
+    solution is unique.  (This half of the proof was suggested by Asa
+    Scherer.)
+\end{proof}
+\end{theorem}
+
+This theorem helps to explain part of our interest in nonsingular
+matrices.  If a matrix is nonsingular, then no matter what vector of
+constants we pair it with, using the matrix as the coefficient matrix
+will \textit{always} yield a linear system of equations with a
+solution, and the solution is unique.  To determine if a matrix has
+this property (nonsingularity) it is enough to just solve one linear
+system, the homogeneous system with the matrix as coefficient matrix
+and the zero vector as the vector of constants (or any other vector of
+constants, see <acroref type="exercise" acro="MM.T10" />).
+
+Formulating the negation of the second part of this theorem is a good
+exercise.  A singular matrix has the property that for \textit{some}
+value of the vector $\vect{b}$, the system
+$\linearsystem{A}{\vect{b}}$ does not have a unique solution (which
+means that it has no solution or infinitely many solutions).  We will
+be able to say more about this case later (see the discussion
+following \ref{theorem:PSPHS}).
+
+Square matrices that are nonsingular have a long list of interesting
+properties, which we will start to catalog in the following,
+recurring, theorem.  Of course, singular matrices will then have all
+of the opposite properties.  The following theorem is a list of
+equivalences.
+
+\begin{theorem}[Nonsingular Matrix Equivalences, Round 1]
+  Suppose that $A$ is a square matrix.  The following are equivalent.
+  \begin{enumerate}
+  \item $A$ is nonsingular.
+  \item $A$ row-reduces to the identity matrix.
+  \item The null space of $A$ contains only the zero vector, $\nsp{A}=\set{\zerovector}$.
+  \item The linear system $\linearsystem{A}{\vect{b}}$ has a unique solution for every possible choice of $\vect{b}$.
+  \end{enumerate}
+  
+  \begin{proof}
+    The statement that $A$ is nonsingular is equivalent to each of the
+    subsequent statements by, in turn, \ref{theorem:NMRRI},
+    \ref{theorem:NMTNS} and \ref{theorem:NMUS}.  So the statement of
+    this theorem is just a convenient way to organize all these
+    results.
+  \end{proof}
+\end{theorem}
+
+\begin{warning}
+  You may have wondered why we refer to a matrix as
+  \textit{nonsingular} when it creates systems of equations with
+  \textit{single} solutions (\ref{theorem:NMUS})!  I have wondered the
+  same thing.  We will have an opportunity to address this later\ldots
+  %when we get to \ref{theorem:SMZD}.  Can you wait that long?
+\end{warning}
+
+\end{document}

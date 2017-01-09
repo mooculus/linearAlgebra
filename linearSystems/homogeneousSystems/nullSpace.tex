@@ -1,0 +1,173 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Null Space}
+
+\begin{document}
+\begin{abstract}
+  The set of solutions to a homogeneous system is of enough interest to warrant its own name.  
+\end{abstract}
+\maketitle
+
+\begin{question}
+  What is true of the solution set for a homogeneous system of
+  equations?
+
+  \begin{multipleChoice}
+    \choice{The solution set is $\varnothing$.}
+    \choice[correct]{The solution set contains $\vect{0}$.}
+  \end{multipleChoice}
+
+  \begin{feedback}[correct]
+    The set of solutions to a homogeneous system is never empty; since
+    the set of solutions to a homogeneous system consists of vectors
+    which make the left hand sides of the equations equal to zero, and
+    because ``null'' is another word for ``zero,'' we call this set of
+    solutions the ``null space.''
+  \end{feedback}
+\end{question}
+
+We define the ``null space'' as a property of the coefficient matrix,
+not as a property of some system of equations.
+
+\begin{definition}[Null Space of a Matrix]
+  The \dfn{null space} of a matrix $A$, denoted $\nsp{A}$, is the set
+  of all the vectors that are solutions to the homogeneous system
+  $\homosystem{A}$.
+\end{definition}
+
+\begin{example}
+  Consider the homogeneous system
+  \begin{align*}
+    x_1 +4x_2  - x_4  + 7x_6 - 9x_7 &= 0\\
+    2x_1 + 8x_2 - x_3 + 3x_4 + 9x_5 - 13x_6 + 7x_7 &= 0\\
+    2x_3 -3x_4 -4x_5 +12x_6 -8x_7 &= 0\\
+    -x_1  - 4x_2 + 2x_3 +4x_4 + 8x_5 - 31x_6 + 37x_7 &= 0,
+  \end{align*}
+  Here are two solutions written as solution vectors.
+  \begin{align*}
+    \vect{x}=\colvector{3\\0\\-5\\-6\\0\\0\\1}&&
+    \vect{y}=\colvector{-4\\1\\-3\\-2\\1\\1\\1}
+  \end{align*}
+  We can say that they are in the null space of the coefficient matrix
+  for the system of equations.
+
+  Is the vector
+  \[
+    \vect{z}=\colvector{1\\0\\0\\0\\0\\0\\2}
+  \]
+  in the null space?
+
+  \begin{multipleChoice}
+    \choice[correct]{No.}
+    \choice{Yes.}
+  \end{multipleChoice}
+
+  \begin{feedback}
+    The vector $\vect{z}$ is not a solution to the homogeneous system.  For example, it fails to make the first equation true.
+  \end{feedback}
+\end{example}
+
+Here are two (prototypical) examples of the computation of the null space of a matrix.
+
+\begin{example}[Computing a null space]
+  Let us compute the null space of
+  \[
+    A=\begin{bmatrix}
+      2 & -1 & 7 & -3 & -8 \\
+      1 & 0 & 2 & 4 & 9 \\
+      2 & 2 & -2 & -1 & 8
+    \end{bmatrix}
+  \]
+  which we write as $\nsp{A}$.  We simply desire to solve the
+  homogeneous system $\homosystem{A}$.  So we row-reduce the augmented
+  matrix to obtain
+  \[
+    \begin{bmatrix}
+      \leading{1} & 0 & 2 & 0 & 1 & 0 \\
+      0 & \leading{1} & -3 & 0 & 4 & 0 \\
+      0 & 0 & 0 & \leading{1} & 2 & 0
+    \end{bmatrix}
+  \]
+  The variables (of the homogeneous system) $x_3$ and $x_5$ are free
+  (since columns 1, 2 and \answer{4} are pivot columns), so we arrange
+  the equations represented by the matrix in reduced row-echelon form
+  to
+  \begin{align*}
+    x_1&=-2x_3-x_5\\
+    x_2&=\answer{3}x_3-4x_5\\
+    x_4&=-2x_5\\
+  \end{align*}
+  So we can write the infinite solution set as sets using column vectors,
+  \[
+    \nsp{A}=\setparts{
+      \colvector{-2x_3-x_5\\3x_3-4x_5\\x_3\\-2x_5\\x_5}
+    }{
+      x_3,\,x_5\in\complexes
+    }
+  \]
+\end{example}
+
+\begin{example}[Computing a null space again]
+  Let us compute the null space of
+  \[
+    C=\begin{bmatrix}
+      -4 & 6 & 1 \\
+      -1 & 4 & 1 \\
+      5 & 6 & 7 \\
+      4 & 7 & 1
+    \end{bmatrix}
+  \]
+  which we write as $\nsp{C}$.   We simply desire to solve the homogeneous system $\homosystem{C}$.  So we row-reduce the augmented matrix to obtain
+  \[
+    \begin{bmatrix}
+      \leading{1} & 0 & 0 & 0 \\
+      0 & \leading{1} & 0 & 0 \\
+      0 & 0 & \leading{1} & 0 \\
+      0 & 0 & 0 & 0
+    \end{bmatrix}
+  \]
+  How many free variables are there?
+  \begin{multipleChoice}
+    \choice[correct]{0}
+    \choice{1}
+    \choice{2}
+    \choice{3}
+  \end{multipleChoice}
+  
+  \begin{feedback}[correct]
+    There are no free variables in the homogeneous system represented
+    by the row-reduced matrix, so there is only the trivial solution,
+    the zero vector, $\zerovector$.  So we can write the (trivial)
+    solution set as
+    \[
+      \nsp{C}=\set{\zerovector}=\set{\colvector{0\\0\\0}}
+    \]
+  \end{feedback}
+\end{example}
+
+\begin{question}
+  Suppose a homogeneous system of equations has 13 variables and 8
+  equations.  How many solutions will it have?
+
+  \begin{multipleChoice}
+    \choice{No solutions.}
+    \choice{Exactly one solution.}
+    \choice[correct]{Infinitely many solutions.}
+  \end{multipleChoice}
+
+  \begin{hint}
+    A homogeneous system of equations with 13 variables and 8
+    equations is necessarily consistent, because $\vect{0}$ is a
+    solution.
+  \end{hint}
+
+  \begin{hint}
+    Moreover, there will be free variables, and since we can assign
+    any (of infinitely many possible!) values to a free variable,
+    there will be infinitely many solutions.
+  \end{hint}
+\end{question}
+
+\end{document}

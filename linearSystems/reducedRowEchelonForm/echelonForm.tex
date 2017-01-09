@@ -1,0 +1,191 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Reduced Row-Echelon Form}
+
+\begin{document}
+\begin{abstract}
+  What is this ``simpler'' form for a matrix, and just how do we get it?
+\end{abstract}
+\maketitle
+
+The preceding example amply illustrates the definitions and theorems
+we have seen so far.  But it still leaves two questions unanswered.
+Exactly what is this ``simpler'' form for a matrix, and just how do we
+get it?  Here is the answer to the first question, a definition of
+reduced row-echelon form.
+
+\begin{definition}[Reduced Row-Echelon Form]
+A matrix is in \dfn{reduced row-echelon form} if it meets all of the following conditions:
+\begin{enumerate}
+\item If there is a row where every entry is zero, then this row lies below any other row that contains a nonzero entry.
+\item The leftmost nonzero entry of a row is equal to 1.
+\item The leftmost nonzero entry of a row is the only nonzero entry in its column.
+\item Consider any two different leftmost nonzero entries, one located in row $i$, column $j$ and the other located in row $s$, column $t$.  If $s>i$, then $t>j$.
+\end{enumerate}
+A row of only zero entries is called a \dfn{zero row} and the leftmost nonzero entry of a nonzero row is a \dfn{leading 1}.  A column containing a leading 1 will be called a \dfn{pivot column}.  The number of nonzero rows will be denoted by $r$, which is also equal to the number of leading 1's and the number of pivot columns.
+\end{definition}
+
+The set of column indices for the pivot columns will be denoted by $D=\set{d_1,\,d_2,\,d_3,\,\ldots,\,d_r}$ where
+$d_1<d_2<d_3<\cdots<d_r$,
+while the columns that are not pivot columns will be denoted as $F=\set{f_1,\,f_2,\,f_3,\,\ldots,\,f_{n-r}}$ where
+$f_1<f_2<f_3<\cdots<f_{n-r}$.
+
+The principal feature of reduced row-echelon form is the pattern of
+leading 1's guaranteed by conditions (2) and (4), reminiscent of a
+flight of geese, or steps in a staircase, or water cascading down a
+mountain stream.
+
+There are a number of new terms and notation introduced in this
+definition, which should make you suspect that this is an important
+definition.  Given all there is to digest here, we will mostly save
+the use of $D$ and $F$ until later.
+However, one important point to make here is that all of these terms
+and notation apply to a matrix.  Sometimes we will employ these terms
+and sets for an augmented matrix, and other times it might be a
+coefficient matrix.  So always give some thought to exactly which type
+of matrix you are analyzing.
+
+\begin{example}
+  Consider the matrix $C$.
+  \[
+    C=
+    \begin{bmatrix}
+      1&-3&0&6&0&0&-5&9\\
+      0&0&0&0&1&0&3&-7\\
+      0&0&0&0&0&1&7&3\\
+      0&0&0&0&0&0&0&0\\
+      0&0&0&0&0&0&0&0
+    \end{bmatrix}.
+  \]
+  Is it in reduced row-echelon form?
+  \begin{multipleChoice}
+    \choice[correct]{Yes.}
+    \choice{No.}
+  \end{multipleChoice}
+  
+  \begin{feedback}
+    It \textbf{is} in row-echelon form.  This matrix has two zero rows and three pivot columns.
+  \end{feedback}
+  
+  So $r=\answer{3}$.  Columns 1, 5, and \answer{6} are the three pivot columns, so $D=\set{1,\,5,\,6}$ and then $F=\set{2,\,3,\,4,\,7,\,8}$.
+\end{example}
+
+\begin{example}
+  Consider the matrix $E$.
+  \[
+    E=
+    \begin{bmatrix}
+      1&0&-3&0&6&0&7&-5&9\\
+      0&0&0&5&0&1&0&3&-7\\
+      0&0&0&0&0&0&0&0&0\\
+      0&1&0&0&0&0&0&-4&2\\
+      0&0&0&0&0&0&1&7&3\\
+      0&0&0&0&0&0&0&0&0
+    \end{bmatrix}.
+  \]
+  Is it in reduced row-echelon form?
+  \begin{multipleChoice}
+    \choice{Yes.}
+    \choice[correct]{No.}
+  \end{multipleChoice}
+\end{example}
+
+\begin{theorem}[Row-Equivalent Matrix in Echelon Form]
+  Suppose $A$ is a matrix.  Then there is a matrix $B$ so that
+  \begin{enumerate}
+  \item $A$ and $B$ are row-equivalent.
+  \item $B$ is in reduced row-echelon form.
+  \end{enumerate}
+
+\begin{proof}
+Suppose that $A$ has $m$ rows and $n$ columns.  We will describe a process for converting $A$ into $B$ via row operations.  This procedure is known as \dfn{Gauss-Jordan elimination}.  Tracing through this procedure will be easier if you recognize that $i$ refers to a row that is being converted, $j$ refers to a column that is being converted, and $r$ keeps track of the number of nonzero rows.  Here we go.
+
+Begin by setting $j=0$ and $r=0$.  Then
+\begin{enumerate}
+\item Increase $j$ by 1.  If $j$ now equals $n+1$, then stop.
+\item Examine the entries of $A$ in column $j$ located in rows $r+1$ through $m$.  If all of these entries are zero, then go to Step~(a).
+\item Choose a row from rows $r+1$ through $m$ with a nonzero entry in column $j$.  Let $i$ denote the index for this row.
+\item Increase $r$ by 1.
+\item Use the first row operation to swap rows $i$ and $r$.
+\item Use the second row operation to convert the entry in row $r$ and column $j$ to a 1.
+\item Use the third row operation with row $r$ to convert every other entry of column $j$ to zero.
+\item Go to Step~(a).
+\end{enumerate}
+
+The result of this procedure is that the matrix $A$ is converted to a
+matrix in reduced row-echelon form, which we will refer to as $B$.  We
+need to now prove this claim by showing that the converted matrix is
+in row-echelon form.  First, the matrix is only converted through row
+operations, so $A$ and $B$ are row-equivalent.
+
+It is a bit more work to be certain that $B$ is in reduced row-echelon
+form.  We claim that as we begin Step~(a), the first $j$ columns of the
+matrix are in reduced row-echelon form with $r$ nonzero rows.
+Certainly this is true at the start when $j=\answer{0}$, since the
+matrix has no columns and so vacuously meets the conditions of being
+in row-reduced echelon form with $r=0$ nonzero rows.
+
+In Step~(a) we increase $j$ by 1 and begin to work with the next column.
+There are two possible outcomes for Step~(b).  Suppose that every entry
+of column $j$ in rows $r+1$ through $m$ is zero.  Then with no changes
+we recognize that the first $j$ columns of the matrix has its first
+$r$ rows still in reduced-row echelon form, with the final $m-r$ rows
+still all zero.
+
+Suppose instead that the entry in row $i$ of column $j$ is nonzero.
+Notice that since $r+1\leq i\leq m$, we know the first $j-1$ entries
+of this row are all zero.  Now, in Step~(d) we increase $r$ by 1, and
+then embark on building a new nonzero row.  In Step~(e) we swap row
+$r$ and row $i$.  In the first $j$ columns, the first $r-1$ rows
+remain in reduced row-echelon form after the swap.  In Step~(f) we
+multiply row $r$ by a nonzero scalar, creating a 1 in the entry in
+column $\answer{j}$ of row $\answer{i}$, and not changing any other
+rows.  This new leading 1 is the first nonzero entry in its row, and
+is located to the right of all the leading 1's in the preceding $r-1$
+rows.  With Step~(g) we insure that every entry in the column with
+this new leading 1 is now zero, as required for reduced row-echelon
+form.  Also, rows $r+1$ through $m$ are now all zeros in the first $j$
+columns, so we now only have one new nonzero row, consistent with our
+increase of $r$ by one.  Furthermore, since the first $j-1$ entries of
+row $r$ are zero, the employment of the third row operation does not
+destroy any of the necessary features of rows $1$ through $r-1$ and
+rows $r+1$ through $m$, in columns $1$ through $j-1$.
+
+So at this stage, the first $j$ columns of the matrix are in reduced
+row-echelon form.  When Step~(a) finally increases $j$ to $\answer{n+1}$, then
+the procedure is completed and the full $n$ columns of the matrix are
+in reduced row-echelon form, with the value of $r$ correctly recording
+the number of nonzero rows.
+\end{proof}
+\end{theorem}
+
+So now we can put it all together.  Begin with a system of linear
+equations, and represent the system by its augmented matrix.  Use row
+operations to convert this matrix into reduced row-echelon form, using
+the procedure outlined in the proof.  We can always accomplish this,
+and that the result is row-equivalent to the original augmented
+matrix.  Since the matrix in reduced-row echelon form has the same
+solution set, we can analyze the row-reduced version instead of the
+original matrix, viewing it as the augmented matrix of a different
+system of equations.  The beauty of augmented matrices in reduced
+row-echelon form is that the solution sets to the systems they
+represent can be easily determined.
+
+We will see through the course that almost every interesting property
+of a matrix can be discerned by looking at a row-equivalent matrix in
+reduced row-echelon form.  For this reason it is important to know
+that the matrix $B$ is guaranteed to exist by the theorem is also
+unique.
+
+\begin{theorem}[Reduced Row-Echelon Form is Unique]
+Suppose that $A$ is an $m\times n$ matrix and that $B$ and $C$ are $m\times n$ matrices that are row-equivalent to $A$ and in reduced row-echelon form.  Then $B=C$.
+
+\begin{proof}
+There is a long proof (that does not depend on induction) in \href{the textbook}{http://linear.ups.edu/html/section-RREF.html\#theorem-RREFU}.  A shorter proof, using induction, is also available in \href{a short paper}{http://www.maa.org/sites/default/files/Yuster19807.pdf}.
+\end{proof}
+\end{theorem}
+
+
+\end{document}

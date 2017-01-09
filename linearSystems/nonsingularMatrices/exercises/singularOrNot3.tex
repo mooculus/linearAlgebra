@@ -1,0 +1,43 @@
+\documentclass{ximera}
+
+\input{../../../preamble.tex}
+
+\begin{document}
+
+\begin{exercise}
+  The matrix
+  \[
+    \begin{bmatrix}
+      -1 & 2 & 0 & 3 \\
+      1 & -3 & -2 & 4 \\
+      -2 & 0 & 4 & 3 \\
+      -3 & 1 & -2 & 3
+    \end{bmatrix}
+  \]
+  \begin{multipleChoice}
+    \choice{is singular.}
+    \choice[correct]{is nonsingular.}
+  \end{multipleChoice}
+
+  \begin{feedback}[correct]
+    The matrix row-reduces to
+    \[
+      \begin{bmatrix}
+        \leading{1} & 0 & 0 & 0 \\
+        0 & \leading{1} & 0 & 0 \\
+        0 & 0 & \leading{1} & 0 \\
+        0 & 0 & 0 & \leading{1}
+      \end{bmatrix}
+    \]
+    Since this is the $4\times 4$ identity matrix, the matrix is nonsingular.
+  \end{feedback}
+\end{exercise}
+
+\end{document}
+
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

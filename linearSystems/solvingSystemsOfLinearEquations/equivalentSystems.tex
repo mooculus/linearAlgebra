@@ -1,0 +1,232 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Equivalent Systems and Equation Operations}
+
+\begin{document}
+\begin{abstract}
+  Sometimes different looking systems of equations have the same solution sets.
+\end{abstract}
+\maketitle
+
+With all this talk about finding solution sets for systems of linear
+equations, you might be ready to begin learning how to find these
+solution sets yourself.  We begin with our first definition that takes
+a common word and gives it a very precise meaning in the context of
+systems of linear equations.
+
+\begin{definition}
+  Two systems of linear equations are \definedTerm{equivalent} if
+  their solution sets are equal.
+\end{definition}
+
+Notice here that the two systems of equations could \textit{look} very
+different (i.e., not be the same systems on the nose), but still have
+equal solution sets, and we would then call the systems equivalent.
+Two linear equations in two variables might be plotted as two lines
+that intersect in a single point.  A different system, with three
+equations in two variables might have a plot that is three lines, all
+intersecting at a common point, with this common point identical to
+the intersection point for the first system---even though the second
+system has more equations!  By our definition, we could then say these
+two very different looking systems of equations are equivalent, since
+they have identical solution sets.  It is really like a weaker form of
+equality, where we allow the systems to be different in some respects,
+but we use the term equivalent to highlight the situation when their
+solution sets are equal.
+
+With this definition, we can begin to describe our strategy for
+solving linear systems.  Given a system of linear equations that looks
+difficult to solve, we would like to have an \textit{equivalent}
+system that is easy to solve.  Since the systems will have equal
+solution sets, we can solve the ``easy'' system and get the solution
+set to the ``difficult'' system.  Here come the tools for making this
+strategy viable.
+
+\begin{definition}[Equation Operations]
+  Given a system of linear equations, the following three operations will transform the system into a different one, and each operation is known as an \definedTerm{equation operation}.
+  \begin{enumerate}
+  \item Swap the locations of two equations in the list of equations.
+  \item Multiply each term of an equation by a nonzero quantity.
+  \item Multiply each term of one equation by some quantity, and add these terms to a second equation, on both sides of the equality.  Leave the first equation the same after this operation, but replace the second equation by the new one.
+  \end{enumerate}
+\end{definition}
+
+These descriptions might seem a bit vague, but the proof or the
+examples that follow should make it clear what is meant by each.  We
+will shortly prove a key theorem about equation operations and
+solutions to linear systems of equations.
+
+\begin{theorem}[Equation Operations Preserve Solution Sets]
+  If we apply one of the three equation operations to a system of
+  linear equations, then the original system and the transformed
+  system are equivalent.
+\end{theorem}
+
+This theorem is the necessary tool to complete our strategy for
+solving systems of equations.  We will use equation operations to move
+from one system to another, all the while keeping the solution set the
+same.  With the right sequence of operations, we will arrive at a
+simpler equation to solve.  The next two examples illustrate this
+idea, while saving some of the details for later.
+
+\begin{example}
+  Let's solve the following system by a sequence of equation operations:
+  \begin{align*}
+    x_1+2x_2+2x_3&=4,\\
+    x_1+3x_2+3x_3&=5,\\
+    2x_1+6x_2+5x_3&=6.
+  \end{align*}
+
+  \begin{exercise}
+    Multiply Equation~1 by $-1$ and add the result to Equation~2 to get
+    \begin{align*}
+      x_1+2x_2+2x_3&=4\\
+      \answer{0}x_1+\answer{1}x_2+ \answer{1} x_3&=1\\
+      2x_1+6x_2+5x_3&=6
+    \end{align*}
+    Multiply Equation~1 by $-2$ and add the result to Equation~3:
+    \begin{align*}
+      x_1+2x_2+2x_3&=4\\
+      0x_1+1x_2+ 1x_3&=1\\
+      0x_1+2x_2+1x_3&=-2
+    \end{align*}
+    Multiply Equation~2 by $-2$ and add the result to Equation~3:
+    \begin{align*}
+      x_1+2x_2+2x_3&=4\\
+      0x_1+1x_2+ 1x_3&=1\\
+      \answer{0}x_1+\answer{0}x_2-1x_3&=\answer{-4}
+    \end{align*}
+    Multiply Equation~3 by $-1$:
+    \begin{align*}
+      x_1+2x_2+2x_3&=4\\
+      0x_1+1x_2+ 1x_3&=1\\
+      0x_1+0x_2+1x_3&=\answer{4},
+    \end{align*}
+    which can be written more clearly as
+    \begin{align*}
+      x_1+2x_2+2x_3&=4\\
+      x_2+ x_3&=1\\
+      x_3&=4.
+    \end{align*}
+  \end{exercise}
+
+  \begin{question}
+    This is now a very easy system of equations to solve.  The third
+    equation requires that $x_3=\answer{4}$ to be true.  Making this substitution
+    into Equation~2 we arrive at $x_2=\answer{-3}$, and finally, substituting
+    these values of $x_2$ and $x_3$ into Equation~1, we find that
+    $x_1=\answer{2}$.
+    
+    Note too that this is the only solution to this final system of
+    equations, since we were forced to choose these values to make the
+    equations true.  Since we performed equation operations on each
+    system to obtain the next one in the list, all of the systems listed
+    here are all equivalent to each other by the above theorem.
+  \end{question}
+
+  \begin{question}
+    Therefore \[
+      (x_1,\,x_2,\,x_3)=(2,-3,4)
+    \]
+    is \wordChoice{\choice{a}\choice[correct]{the unique}} solution to
+    the \textit{original} system of equations---and all of the other
+    intermediate systems of equations listed as we transformed one
+    into another.
+  \end{question}
+\end{example}
+
+\begin{example}
+  The following system of equations made an appearance earlier when we
+  listed \textit{one} of its solutions.  Let's find all of the
+  solutions to this system.  Do not concern yourself too much about
+  why we choose this particular sequence of equation operations.
+  
+  \begin{exercise}
+    \begin{align*}
+      x_1+2x_2 +0x_3+ x_4&= 7\\
+      x_1+x_2+x_3-x_4&=3\\
+      3x_1+x_2+5x_3-7x_4&=1
+    \end{align*}
+    Multiply Equation~1 by $\answer{-1}$ and add the result to Equation~2:
+    \begin{align*}
+      x_1+2x_2 +0x_3+ x_4&= 7\\
+      0x_1-x_2+x_3-2x_4&=-4\\
+      3x_1+x_2+5x_3-7x_4&=1
+    \end{align*}
+    Multiply Equation~1 by $-3$ and add the result to Equation~3:
+    \begin{align*}
+      x_1+2x_2 +0x_3+ x_4&= 7\\
+      0x_1-x_2+x_3-2x_4&=-4\\
+      0x_1-5x_2+5x_3-10x_4&=\answer{-20}
+    \end{align*}
+    Multiply Equation~2 by $-5$ and add the result to Equation~3:
+    \begin{align*}
+      x_1+2x_2 +0x_3+ x_4&= 7\\
+      0x_1-x_2+x_3-2x_4&=-4\\
+      0x_1+0x_2+0x_3+0x_4&=0
+    \end{align*}
+    Replace Equation~2 by $\answer{-1}$ times Equation~2:
+    \begin{align*}
+      x_1+2x_2 +0x_3+ x_4&= 7\\
+      0x_1+x_2-x_3+2x_4&=4\\
+      0x_1+0x_2+0x_3+0x_4&=0
+    \end{align*}
+    Multiply Equation~2 by $-2$ and add the result to Equation~1:
+    \begin{align*}
+      x_1+0x_2 +2x_3-3x_4&= -1\\
+      0x_1+x_2-x_3+2x_4&=4\\
+      0x_1+0x_2+0x_3+0x_4&=0,
+    \end{align*}
+    which can be written more clearly as
+    \begin{align*}
+      x_1+2x_3 - 3x_4&= -1\\
+      x_2-x_3+2x_4&=4\\
+      0&=\answer{0}
+    \end{align*}
+
+    \begin{question}
+      What does that last equation, $0=0$, even mean?  It means that we
+      can choose \textit{any} values for $x_1$, $x_2$, $x_3$, $x_4$ and
+      this equation $0=0$ will be true, so we only need to consider
+      further the first two equations, since the third is true no matter
+      what!  We can analyze the second equation without consideration of
+      the variable $x_1$.  It would appear that there is considerable
+      latitude in how we can choose $x_2$, $x_3$, $x_4$ and make this
+      equation true.  Let us choose $x_3$ and $x_4$ to be
+      \textit{anything} we please, say $x_3=a$ and $x_4=b$.
+      
+      Now we can take these arbitrary values for $x_3$ and $x_4$, substitute them in Equation~1, to obtain
+      \begin{align*}
+        x_1+2a - 3b&= -1\\
+        x_1&=-1-2a+3b
+      \end{align*}
+      Similarly, Equation~2 becomes
+      \begin{align*}
+        x_2-a+2b&=4\\
+        x_2&=\answer{4 +a -2 b}
+      \end{align*}
+      
+      \begin{question}
+        So our arbitrary choices of values for $x_3$ and $x_4$ ($a$ and
+        $b$) translate into specific values of $x_1$ and $x_2$.  For
+        instance, suppose we choose $a=5$ and $b=-2$, then we compute
+        \begin{align*}
+          x_1&=-1-2(5)+3(-2)=-17\\
+          x_2&=4+5-2(-2)=13
+        \end{align*}
+        and you can verify that $(x_1,\,x_2,\,x_3,\,x_4)=(-17,\,13,\,\answer{5},\,\answer{-2})$ makes all three equations true.  The entire solution set is written as
+        \[
+          S=\setparts{(-1-2a+3b,\,4 +a-2b,\,a,\,b)}{ a\in\CC,\,b\in\CC}.
+        \]
+      \end{question}
+      
+    \end{question}
+    
+  \end{exercise}
+  
+\end{example}
+
+
+\end{document}

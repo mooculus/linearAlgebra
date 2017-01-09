@@ -1,0 +1,137 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Identity matrix}
+
+\begin{document}
+\begin{abstract}
+  Row reduction makes it easy to recognize a nonsingular matrix.
+\end{abstract}
+\maketitle
+
+\begin{definition}[Identity Matrix]
+The $m\times m$ \dfn{identity matrix}, $I_m$, is defined by
+\begin{align*}
+  \matrixentry{I_m}{ij}&=
+                         \begin{cases}
+                           1 & i=j\\
+                           0 & i\neq j
+                         \end{cases}
+                               \quad\quad
+                               1\leq i,\,j\leq m
+\end{align*}
+\end{definition}
+
+\begin{example}[An identity matrix]
+  The $4\times 4$ identity matrix is
+  \[
+    I_4=
+    \begin{bmatrix}
+      1&\answer{0}&0&0\\
+      0&\answer{1}&0&0\\
+      0&\answer{0}&1&0\\
+      0&\answer{0}&0&1
+    \end{bmatrix}.
+  \]
+\end{example}
+
+\begin{question}
+  Notice that an identity matrix is square, and
+  \begin{multipleChoice}
+    \choice{is not in reduced row-echelon form.}
+    \choice[correct]{is in reduced row-echelon form.}
+  \end{multipleChoice}
+  
+  \begin{feedback}[correct]
+    Also, every column is a pivot column, and every possible pivot column
+    appears once.
+
+    We mentioned above that an identity matrix is in reduced row-echelon
+    form.  What happens if we try to row-reduce a matrix that is already
+    in reduced row-echelon form?  By the uniqueness of the result, there
+    should be no change.
+  \end{feedback}
+\end{question}
+
+\begin{theorem}[Nonsingular Matrices Row Reduce to the Identity matrix]
+  \label{theorem:NMRRI}
+  Suppose that $A$ is a square matrix and $B$ is a row-equivalent
+  matrix in reduced row-echelon form.  Then $A$ is nonsingular if and
+  only if $B$ is the identity matrix.
+
+\begin{proof}
+  $(\Leftarrow)$ Suppose $B$ is the identity matrix.  When the
+  augmented matrix $\augmented{A}{\zerovector}$ is row-reduced, the
+  result is $\augmented{B}{\zerovector}=\augmented{I_n}{\zerovector}$.
+  The number of nonzero rows is equal to the number of variables in
+  the linear system of equations $\linearsystem{A}{\zerovector}$, so
+  $n=r$ and \ref{theorem:FVCS} gives $n-r=0$ free variables.  Thus,
+  the homogeneous system $\homosystem{A}$ has just $\answer{1}$
+  solution, which must be the trivial solution.  This is exactly the
+  definition of a nonsingular matrix.
+
+  $(\Rightarrow)$ If $A$ is nonsingular, then the homogeneous system
+  $\linearsystem{A}{\zerovector}$ has a unique solution, and has no
+  free variables in the description of the solution set.  The
+  homogeneous system is consistent (\ref{theorem:HSC}) so
+  \ref{theorem:FVCS} applies and tells us there are $n-r$ free
+  variables.  Thus, $n-r=0$, and so $n=r$.  So $B$ has $\answer{n}$
+  pivot columns among its total of $n$ columns.  This is enough to
+  force $B$ to be the $n\times n$ identity matrix $I_n$.
+\end{proof}
+\end{theorem}
+
+Notice that since this theorem is an equivalence it will always allow
+us to determine if a matrix is either nonsingular or singular.
+
+\begin{example}
+  \[
+    A = \begin{bmatrix}
+      1 & -1 & 2 \\
+      2 & 1 & 1 \\
+      1 & 1 & 0  
+    \end{bmatrix}
+  \]
+  row-reduces to
+  \[
+    \begin{bmatrix}
+      \leading{1} & 0 & 1 \\
+      0 & \leading{1} & -1 \\
+      0 & 0 & 0 
+    \end{bmatrix}.
+  \]
+  Since this row-reduced matrix
+  \wordChoice{\choice{is}\choice[correct]{is not}} the $3\times 3$
+  identity matrix, the above theorem tells us that $A$ is a
+  \wordChoice{\choice{nonsingular}\choice[correct]{singular}} matrix.
+\end{example}
+
+\begin{example}
+  The matrix
+  \[
+    B = \begin{bmatrix}
+      -7&-6&- 12\\
+      5&5&7 \\
+      1&0&4
+    \end{bmatrix},
+  \]
+  row-reduces to
+  \[
+    \begin{bmatrix}
+      \leading{1}&0&0 \\
+      0&\leading{1}&0 \\
+      0&0&\leading{1}
+    \end{bmatrix},
+  \]
+  which \wordChoice{\choice[correct]{is}\choice{is not}} the $3\times 3$
+  identity matrix, so the above theorem tells us that $A$ is a
+  \wordChoice{\choice[correct]{nonsingular}\choice{singular}} matrix.
+\end{example}
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
