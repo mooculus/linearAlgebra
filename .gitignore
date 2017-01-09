@@ -6,6 +6,10 @@
 *.log
 *.out
 *.toc
+*.sagetex.sout
+*.sagetex.scmd
+*.sagetex.sage.py
+*.sagetex.sage
 *.synctex.gz
 *.jax
 *.oc
