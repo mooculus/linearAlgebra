@@ -1,3 +1,41 @@
+\usepackage{amsmath, amsthm, amssymb,todonotes,color,pigpen,mathtools}
+\usepackage{graphicx}%authblk
+
+\newcommand{\definedTerm}[1]{\textbf{#1}}
+\newcommand{\dfn}[1]{\textbf{#1}}
+
+%\usepackage[v2]{xy}
+%\xyoption{all}
+%\topmargin  = -1cm
+%\textwidth  = 16cm \textheight = 24cm
+%\voffset-.75cm\hoffset=-1.7cm
+%\parindent  = 0pt
+%\pdfpageheight 11in
+%\pagestyle{empty}
+%\flushbottom
+%\renewcommand\Authfont{\scshape}
+%\renewcommand\Affilfont{\small}
+
+\numberwithin{equation}{section}
+
+\theoremstyle{plain}
+
+%\newtheorem{construction}[equation]{Construction}
+%\newtheorem{claim}[equation]{Claim}
+
+
+\newcommand\wt{\widetilde}
+\newcommand\ov{\overline}
+\newcommand\inj{\rightarrowtail}
+\newcommand\surj{\twoheadrightarrow}
+\newcommand{\harpoon}{\overset{\rightharpoonup}}
+
+\newenvironment{amatrix}[1]{%
+  \left[\begin{array}{@{}*{#1}{c}|c@{}}
+}{%
+  \end{array}\right]
+}
+
 % These macros are automatically generated from the "macros"
 % XML element.  Make permanent edits there.
 %
@@ -453,17 +491,3 @@
 %  Usage: \hadamardinverse{matrix-expression}
 \newcommand{\hadamardinverse}[1]{\widehat{#1}}
 
-\newcommand{\definedTerm}[1]{\textbf{#1}}
-\newcommand{\dfn}[1]{\textbf{#1}}
-
-\newcommand{\wt}{\widetilde}
-\newcommand{\ov}{\overline}
-\newcommand{\inj}{\rightarrowtail}
-\newcommand{\surj}{\twoheadrightarrow}
-\newcommand{\harpoon}{\overset{\rightharpoonup}}
-
-\newenvironment{amatrix}[1]{%
-  \left[\begin{array}{@{}*{#1}{c}|c@{}}
-}{%
-  \end{array}\right]
-}
