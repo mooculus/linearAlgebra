@@ -1,0 +1,57 @@
+\documentclass{ximera}
+\input{../preamble.tex}
+\title{Elementary Matrices}
+\author{Crichton Ogle}
+
+\begin{document}
+\begin{abstract}
+  Sums of solution to homogeneous systems are also solutions.
+\end{abstract}
+\maketitle
+
+As we have seen, systems of equations---or equivalently matrix
+equations---are solved by i) forming the ACM associated with the set
+of equations and ii) applying row operations to the ACM until it is in
+reduced row echelon form.
+
+It turns out these row operations can be realized by left
+multiplication by a certain type of matrix, and these matrices have
+uses beyond that of performing row operations. To explain how matrix
+multiplication comes into play, let us write $\cal R(_-)$ for a
+particular row operation on $m\times n$ matrices, so that the given
+operation is represented by $A\mapsto {\cal R}(A)$. It turns out that
+for any of the three types of row operations we have considered above,
+one has the identity
+\[
+{\cal R}(A) = {\cal R}(I*A) = {\cal R}(I)*A
+\]
+In other words, {\it the row operation ${\cal R}(_-)$, applied to $A$, can be realized in terms of left multiplication by the $m\times m$ matrix ${\cal R}(I)$ gotten by applying $\cal R$ to the $m\times m$ identity matrix}.
+
+As one would then expect, one has - for each row operation - a
+corresponding {\it elementary matrix} derived from the identity matrix
+of the appropriate dimension by application of that given operation.
+
+These matrices, and the notation used to define them, can be recorded
+in an expanded version of the table above in which we indicated the
+types of operations and their representation:
+
+\begin{center}
+    \begin{tabular}{|c|c|c|c|}\hline\hline
+    \phantom{x} & \phantom{x} & \phantom{x} & \phantom{x}\\
+    \Large{Type} &\Large{What it does} &\Large{Indicated by} & \Large{Elementary matrix}\\ \hline
+    \phantom{x} & {\large Switches} & \phantom{\Huge X} & \phantom{X}\\
+    \large{Type I} &{\large $i^{th}$ and $j^{th}$} & {\large $R_i\leftrightarrow R_j$} & {\large ${\cal R}(I) = P_{ij}$}\\ 
+    \phantom{x} & {\large rows} & \phantom{x} & \phantom{x}\\ \hline
+    \phantom{x} &{\large Multiplies} & \phantom{\Huge X} & \phantom{x}\\
+    \large{Type II} &{\large $i^{th}$ row} & {\large $r\cdot R_i$} & {\large ${\cal R}(I) = D_i(r)$}\\
+    \phantom{x} & {\large by $r\ne 0$} & \phantom{x} & \phantom{x}\\ \hline
+    \phantom{x} &{\large Adds} & \phantom{\Huge X} & \phantom{x}\\
+    \large{Type III} &{\large $a$ times the $i^{th}$ row} & {\large $a\cdot R_i$ added to $R_j$} & {\large ${\cal R}(I) = E_{ji}(a)$}\\
+    \phantom{x} & {\large to the $j^{th}$ row} & \phantom{x} & \phantom{x}\\\hline\hline
+    \end{tabular}
+    \end{center}
+\vskip.2in
+
+%BADBAD: Examples to be included
+
+\end{document}

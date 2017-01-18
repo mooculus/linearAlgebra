@@ -1,0 +1,33 @@
+\documentclass{ximera}
+\input{../preamble.tex}
+\title{The Superposition Principle}
+\author{Crichton Ogle}
+
+\begin{document}
+\begin{abstract}
+  Sums of solution to homogeneous systems are also solutions.
+\end{abstract}
+\maketitle
+
+ Given a matrix equation $A*{\bf x} = {\bf b}$, its {\it associated homogeneous equation} is $A*{\bf x} = {\bf 0}$ (resulting from replacing $\bf b$ by $\bf 0$). Note that consistency status may change in passing from an arbitrary non-homogeneous equation to its associated counterpart. However, if the original system is consistent, there is an important relation between the two solution sets, which is a manifestation of the {\it superposition principle}.
+\vskip.2in
+
+To see this, note that if ${\bf x}', {\bf x}''$ are two solutions to the equation $A*{\bf x} = {\bf b}$, then 
+\[
+A*({\bf x}' - {\bf x}'') = A*{\bf x}' - A*{\bf x}'' = {\bf b} - {\bf b} = {\bf 0}
+\]
+so $({\bf x}' - {\bf x}'')$ is a solution to the associated homogeneous equation. On the other hand, given a solution ${\bf x}_h$ to the associated homogeneous equation, and a solution ${\bf x}$ to the original equation, we see
+\[
+A*({\bf x}_h + {\bf x}) = A*{\bf x}_h + A*{\bf x} = {\bf 0} + {\bf b} = {\bf b}
+\]
+so ${\bf x}_h + {\bf x}$ is again a solution to the original equation. Thus
+
+\begin{theorem}[Superposition Principle] Suppose $A*{\bf x} = {\bf b}$ is a consistent matrix equation, with ${\bf x}_p$ a particular solution to the equation. Then the set of solutions to the original equation can be expressed as
+\[
+\{{\bf x}_h + {\bf x}_p\ |\ {\bf x}_h\in S_0\}
+\]
+where $S_0$ denotes the set of solutions to the associated homogeneous equation.
+\end{theorem}
+
+
+\end{document}

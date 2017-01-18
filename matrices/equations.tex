@@ -1,0 +1,174 @@
+\documentclass{ximera}
+\input{../preamble.tex}
+\title{Matrix Equations}
+\author{Crichton Ogle}
+
+\begin{document}
+\begin{abstract}
+  Matrices and vectors can be used to rewrite systems of equations as a single equation, and there are advantages to doing this.
+\end{abstract}
+\maketitle
+
+A matrix with one row is called a {\it row} vector, and if it has one column a {\it column} vector. The term {\it vector}, for now, will refer to a column vector. Matrices and vectors can be used to rewrite systems of equations as a single equation, and there are advantages to doing this. To begin with, notice that the system appearing in (\ref{eqn:sys}) can be expressed as the single {\it vector equation}
+\begin{equation}\label{eqn:vec1}
+\begin{bmatrix}
+a_{11}x_1\ \  + &a_{12}x_2\ \  + &{}\ldots{}\ \  + &a_{1n}x_n\\ 
+a_{21}x_1\ \  + &a_{22}x_2\ \  + &{}\ldots{}\ \  + & a_{2n}x_n\\
+\vdots\ \  &  \vdots\ \  &  {}\ldots{}\ \  &  \vdots\\
+a_{m1}x_1\ \  + &a_{m2}x_2\ \  + &{}\ldots{}\ \  + &a_{mn}x_n 
+\end{bmatrix}
+=
+\begin{bmatrix}
+b_1\\
+b_2\\
+\vdots\\
+b_m
+\end{bmatrix}
+\end{equation}
+The vector on the left above consists of entries which are linear homogeneous functions in the variables $x_1,x_2,\dots,x_n$. A {\it solution} to this vector equation will be exactly what it was before; and assignment of values to the variables $x_1,x_2,\dots,x_n$ which make the equation true. 
+\vskip.2in
+
+Now the expression on the left in (\ref{eqn:vec1}) can be written as a sum of its components, where the $x_i$ component can be derived by setting all of the other variables to zero. The result is 
+\begin{equation}\label{eqn:vec2}
+\begin{bmatrix}
+a_{11}x_1\\ 
+a_{21}x_1\\
+\vdots\\
+a_{m1}x_1
+\end{bmatrix} +
+\begin{bmatrix}
+a_{12}x_2\\ 
+a_{22}x_2\\
+\vdots\\
+a_{m2}x_2
+\end{bmatrix} +\dots +
+\begin{bmatrix}
+a_{1n}x_n\\ 
+a_{2n}x_n\\
+\vdots\\
+a_{mn}x_n
+\end{bmatrix}
+=
+\begin{bmatrix}
+b_1\\
+b_2\\
+\vdots\\
+b_m
+\end{bmatrix}
+\end{equation}
+Next we observe that the $i^{th}$ component, which involves only $x_i$, can be factored as
+\begin{equation}\label{eqn:veci}
+\begin{bmatrix}
+a_{1i}x_i\\ 
+a_{2i}x_i\\
+\vdots\\
+a_{mi}x_i
+\end{bmatrix}
+=
+x_i\begin{bmatrix}
+a_{1i}\\ 
+a_{2i}\\
+\vdots\\
+a_{mi}
+\end{bmatrix}
+\end{equation}
+Using this, the vector equation (\ref{eqn:vec2}) may be rewritten as
+\begin{equation}\label{eqn:vec3}
+x_1\begin{bmatrix}
+a_{11}\\ 
+a_{21}\\
+\vdots\\
+a_{m1}
+\end{bmatrix} +
+x_2\begin{bmatrix}
+a_{12}\\ 
+a_{22}\\
+\vdots\\
+a_{m2}
+\end{bmatrix} +\dots +
+x_n\begin{bmatrix}
+a_{1n}\\ 
+a_{2n}\\
+\vdots\\
+a_{mn}
+\end{bmatrix}
+=
+\begin{bmatrix}
+b_1\\
+b_2\\
+\vdots\\
+b_m
+\end{bmatrix}
+\end{equation}
+The left-hand side of this last equation leads us to one of the central constructions in all of Linear Algebra.
+
+\begin{definition} Given a collection of vectors $\{v_1,v_2,\dots,v_n\}$, a {\it linear combination} of these vectors is a sum of the form
+\[
+\alpha_1v_1 + \alpha_2v_2 +\dots + \alpha_nv_n
+\]
+where the coefficients $\alpha_i$ are scalars.
+\end{definition}
+In words, it is {\it a sum of scalar multiples of the vectors} $v_1,v_2,\dots v_n$. Now the expression on the left of (\ref{eqn:vec3}) is a linear combination of sorts, but where the coefficients are scalar-valued variables rather than actual scalars. So for any assignment of values to the variables $x_1,x_2,\dots x_n$ we get an actual linear combination.
+\vskip.2in
+
+Finally, going back to equation (\ref{eqn:vec1}) we observe that the left-hand side can be written as $A*{\bf x}$, where $A$ is the $m\times n$ {\it coefficient matrix}
+\begin{equation}
+\label{eqn:coeff}
+A = \begin{bmatrix}
+a_{11}  &a_{12} &{}\ldots{} &a_{1n}\\ 
+a_{21} &a_{22} &{}\ldots{} & a_{2n}\\
+\vdots\ \  &  \vdots\ \  &  {}\ldots{}\ \  &  \vdots\\
+a_{m1} &a_{m2} &{}\ldots{} &a_{mn} 
+\end{bmatrix}
+\end{equation}
+and ${\bf x}$ is the $n\times 1$ vector variable
+\begin{equation}
+\label{eqn:coeff}
+{\bf x} = \begin{bmatrix}
+x_1\\ 
+x_2\\
+\vdots\\
+x_n 
+\end{bmatrix}
+\end{equation}
+which leads to our final equivalent form of (\ref{eqn:vec1}), referred to as the {\it matrix equation associated to the system of equations}:
+\begin{equation}\label{eqn:mat}
+A*{\bf x} = {\bf b}
+\end{equation}
+where ${\bf b}$ is the vector ${\bf b} := [b_1\  b_2\ \dots\  b_m]^T$. As with (\ref{eqn:vec1}), a solution is an assignment of a particular numerical vector to $\bf x$ making the equation true, and matrix equation is {\it consistent} iff such an {\bf x} exists. Summarizing
+
+\begin{theorem} The system of equations appearing in (\ref{eqn:sys}) is equivalently represented by the vector equations appearing in (\ref{eqn:vec1}), (\ref{eqn:vec2}), (\ref{eqn:vec3}), as well as the matrix equation (\ref{eqn:mat}). Moreover, the system is consistent precisely when the vector {\bf b} can be written as a linear combination of the columns of the coefficient matrix $A$. 
+\end{theorem}
+
+\begin{proof} The only point needing verification is the last statement. But this follows from (\ref{eqn:vec3}), which can be more succinctly written as
+\[
+x_1 A(:,1) + x_2 A(:,2) +\dots x_n A(:,n) = {\bf b}
+\]
+ since any solution will yield a particular set of values for $x_1,x_2,\dots,x_n$ to take as scalars on the left so that the resulting linear combination produces {\bf b}, while a particular linear combination which results in {\bf b} would in turn produce a solution to (\ref{eqn:vec3}).
+\end{proof}
+
+The last part of this theorem is sometimes called the {\it consistency theorem for systems of equations}. We will occasionally refer to it in this way. 
+
+
+Finally, we consider the case of a matrix equation
+\begin{equation}\label{eqn:inv}
+A*{\bf x} = {\bf b}
+\end{equation}
+when $A$ is invertible. If we assume ${\bf x}_0$ is a solution, we can multiply both sides of the equation on the left by $A^{-1}$ to get
+\[
+{\bf x}_0 = I*{\bf x}_0 = (A^{-1}*A)*{\bf x}_0 = A^{-1}*(A*{\bf x}_0) = A^{-1}*{\bf b}
+\]
+On the other hand, if we take $x = A^{-1}*{\bf b}$ and substitute into equation (\ref{eqn:inv}), we get
+\[
+A*(A^{-1}*{\bf b}) = (A*A^{-1})*{\bf b} = I*{\bf b} = {\bf b}
+\]
+In other words, we have shown
+
+\begin{theorem} If $A$ is an invertible $n\times n$ matrix, then for any $n\times 1$ vector ${\bf b}$ and $n\times 1$ vector variable ${\bf x}$, the matrix equation
+\[
+A*{\bf x} = {\bf b}
+\]
+is consistent, and has a unique solution given by ${\bf x} = A^{-1}*{\bf b}$.
+\end{theorem}
+
+\end{document}

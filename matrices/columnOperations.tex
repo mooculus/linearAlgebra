@@ -1,0 +1,56 @@
+\documentclass{ximera}
+\input{../preamble.tex}
+\title{Column Operations}
+\author{Crichton Ogle}
+
+\begin{document}
+\begin{abstract}
+  Analogous to row operations, one can perform column operations.
+\end{abstract}
+\maketitle
+
+In an analogous fashion, one can also perform column operations on a
+matrix. As with row operations there are three types, and each type
+can be achieved via {\it right} multiplication with the corresponding
+matrix. In other words, if ${\cal C}(_-)$ indicates the given column
+operation, then for each type one has
+\[
+{\cal C}(A) = {\cal C}(A*I) = A*{\cal C}(I)
+\]
+Denoting the $k^{th}$ column by $C_k$, we have
+
+\begin{center}
+    \begin{tabular}{|c|c|c|c|}\hline\hline
+    \phantom{x} & \phantom{x} & \phantom{x} & \phantom{x}\\
+    \Large{Type} &\Large{What it does} &\Large{Indicated by} & \Large{Elementary matrix}\\ \hline
+    \phantom{x} & {\large Switches} & \phantom{\Huge X} & \phantom{X}\\
+    \large{Type I} &{\large $i^{th}$ and $j^{th}$} & {\large $C_i\leftrightarrow C_j$} & {\large ${\cal C}(I) = P_{ij}$}\\ 
+    \phantom{x} & {\large colmns} & \phantom{x} & \phantom{x}\\ \hline
+    \phantom{x} &{\large Multiplies} & \phantom{\Huge X} & \phantom{x}\\
+    \large{Type II} &{\large $i^{th}$ column} & {\large $r\cdot C_i$} & {\large ${\cal C}(I) = D_i(r)$}\\
+    \phantom{x} & {\large by $r\ne 0$} & \phantom{x} & \phantom{x}\\ \hline
+    \phantom{x} &{\large Adds} & \phantom{\Huge X} & \phantom{x}\\
+    \large{Type III} &{\large $a$ times the $i^{th}$ column} & {\large $a\cdot C_i$ added to $C_j$} & {\large ${\cal C}(I) = E_{ij}(a)$}\\
+    \phantom{x} & {\large to the $j^{th}$ column} & \phantom{x} & \phantom{x}\\\hline\hline
+    \end{tabular}
+    \end{center}
+\vskip.2in
+
+% BADBAD: [Examples to be included]
+
+Each elementary matrix is invertible, and of the same type. The
+following indicates how each elementary matrix behaves under i)
+inversion and ii) transposition:
+\begin{align}
+P_{ij}^{-1} = P_{ij},&\qquad P_{ij}^T = P_{ij}\\
+D_i(r)^{-1} = D_i(r^{-1}),&\qquad D_i(r)^T = D_i(r)\\
+E_{ij}(a)^{-1} = E_{ij}(-a),&\qquad E_{ij}(a)^T = E_{ji}(a)
+\end{align}
+
+This is useful in problems where one wants to express the inverse of a
+matrix explicitly as a product of elementary matrices.
+
+
+
+
+\end{document}
