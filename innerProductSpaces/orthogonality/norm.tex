@@ -1,0 +1,158 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Norm}
+
+\begin{document}
+\begin{abstract}
+  Geometrically, the length of a vector is a key concept.
+\end{abstract}
+\maketitle
+
+If treating linear algebra in a more geometric fashion, the length of
+a vector occurs naturally, and is what you would expect from its name.
+With complex numbers, we will define a similar function.  Recall that
+if $c$ is a complex number, then $\modulus{c}$ denotes its modulus.
+
+\begin{definition}[Norm of a Vector]
+  The \dfn{norm} of the vector $\vect{u}$ is the scalar quantity in $\complexes$
+  \[
+    \norm{\vect{u}}=
+    \sqrt{
+      \modulus{\vectorentry{\vect{u}}{1}}^2+
+      \modulus{\vectorentry{\vect{u}}{2}}^2+
+      \modulus{\vectorentry{\vect{u}}{3}}^2+
+      \cdots+
+      \modulus{\vectorentry{\vect{u}}{m}}^2
+    }
+    =
+    \sqrt{\sum_{i=1}^{m}\modulus{\vectorentry{\vect{u}}{i}}^2}
+  \]
+\end{definition}
+
+Computing a norm is also easy to do.
+
+\begin{example}[Computing the norm of some vectors]
+The norm of
+\[
+\vect{u}=\colvector{3+2i\\1-6i\\2+4i\\2+i}
+\]
+is $\answer{5\sqrt{3}}$.
+\begin{hint}
+  \begin{align*}
+    \norm{\vect{u}}&=
+                     \sqrt{\modulus{3+2i}^2+\modulus{1-6i}^2+\modulus{2+4i}^2+\modulus{2+i}^2}\\
+                   &=\sqrt{13+37+20+5}=\sqrt{75}=5\sqrt{3}.
+  \end{align*}
+\end{hint}
+\end{example}
+
+\begin{example}[Computing the norm of more vectors]
+  The norm of
+  \[
+    \vect{v}=\colvector{3\\-1\\2\\4\\-3}
+  \]
+  is $\answer{\sqrt{39}}$.
+  \begin{hint}
+    \[
+      \norm{\vect{v}}=
+      \sqrt{\modulus{3}^2+\modulus{-1}^2+\modulus{2}^2+\modulus{4}^2+\modulus{-3}^2}
+      =\sqrt{3^2+1^2+2^2+4^2+3^2}=\sqrt{39}.
+    \]
+  \end{hint}
+\end{example}
+
+Notice how the norm of a vector with real number entries is just the
+length of the vector.  Inner products and norms are related by the
+following theorem.
+
+\begin{theorem}[Inner Products and Norms]
+\label{theorem:IPN}
+
+Suppose that $\vect{u}$ is a vector in $\complex{m}$.  Then
+$\norm{\vect{u}}^2=\innerproduct{\vect{u}}{\vect{u}}$.
+
+\begin{proof}
+
+  \begin{align*}
+    \norm{\vect{u}}^2 &= \left(\sqrt{\sum_{i=1}^{m}\modulus{\vectorentry{\vect{u}}{i}}^2}\right)^2 \\ 
+    &=\sum_{i=1}^{m}\modulus{\vectorentry{\vect{u}}{i}}^2 \\ 
+    &=\sum_{i=1}^{m}\conjugate{\vectorentry{\vect{u}}{i}}\vectorentry{\vect{u}}{i} \\ 
+    &=\innerproduct{\vect{u}}{\vect{u}} \\ 
+  \end{align*}
+
+\end{proof}
+\end{theorem}
+
+When our vectors have entries only from the real, thend the dot
+product of a vector with itself is equal to the length of the vector
+squared.
+
+\begin{theorem}[Positive Inner Products]
+\label{theorem:PIP}
+
+Suppose that $\vect{u}$ is a vector in $\complex{m}$.  Then
+$\innerproduct{\vect{u}}{\vect{u}}\geq 0$ with equality if and only if
+$\vect{u}=\zerovector$.
+
+\begin{proof}
+  From the proof of \ref{theorem:IPN}  we see that
+  \[
+    \innerproduct{\vect{u}}{\vect{u}}
+    =
+    \modulus{\vectorentry{\vect{u}}{1}}^2+
+    \modulus{\vectorentry{\vect{u}}{2}}^2+
+    \modulus{\vectorentry{\vect{u}}{3}}^2+
+    \cdots+
+    \modulus{\vectorentry{\vect{u}}{m}}^2
+  \]
+  
+  Since each modulus is squared, every term is positive, and the sum
+  must also be positive.  (Notice that in general the inner product is
+  a complex number and cannot be compared with zero, but in the
+  special case of $\innerproduct{\vect{u}}{\vect{u}}$ the result is a
+  real number.)
+
+  The phrase, ``with equality if and only if'' means that we want to
+  show that the statement $\innerproduct{\vect{u}}{\vect{u}}= 0$
+  (i.e., with equality) is equivalent (``if and only if'') to the
+  statement $\vect{u}=\zerovector$.
+
+  If $\vect{u}=\zerovector$, then it is a straightforward computation
+  to see that $\innerproduct{\vect{u}}{\vect{u}}= 0$.  In the other
+  direction, assume that $\innerproduct{\vect{u}}{\vect{u}}= 0$.  As
+  before, $\innerproduct{\vect{u}}{\vect{u}}$ is a sum of moduli.  So
+  we have
+  \[
+    0=\innerproduct{\vect{u}}{\vect{u}}=
+    \modulus{\vectorentry{\vect{u}}{1}}^2+
+    \modulus{\vectorentry{\vect{u}}{2}}^2+
+    \modulus{\vectorentry{\vect{u}}{3}}^2+
+    \cdots+
+    \modulus{\vectorentry{\vect{u}}{m}}^2
+  \]
+
+  Now we have a sum of squares equaling zero, so each term must be
+  zero.  Then by similar logic,
+  $\modulus{\vectorentry{\vect{u}}{i}}=0$ will imply that
+  $\vectorentry{\vect{u}}{i}=0$, since $0+0i$ is the only complex
+  number with zero modulus.  Thus every entry of $\vect{u}$ is zero
+  and so $\vect{u}=\zerovector$, as desired.
+
+\end{proof}
+\end{theorem}
+
+Notice that \ref{theorem:PIP} contains \textit{three} implications:
+\begin{align*}
+  \vect{u}\in\complex{m}&\Rightarrow\innerproduct{\vect{u}}{\vect{u}}\geq 0\\
+  \vect{u}=\zerovector&\Rightarrow\innerproduct{\vect{u}}{\vect{u}}=0\\
+  \innerproduct{\vect{u}}{\vect{u}}=0&\Rightarrow\vect{u}=\zerovector
+\end{align*}
+
+The results contained in \ref{theorem:PIP} are summarized by saying
+``the inner product is \dfn{positive definite}.''
+
+
+\end{document}
+

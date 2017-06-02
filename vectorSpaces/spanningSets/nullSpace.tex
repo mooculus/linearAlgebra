@@ -1,0 +1,332 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Spanning Sets of Null Spaces}
+
+\begin{document}
+\begin{abstract}
+  The null space of a matrix can be expressed as a linear combination,
+  where the scalars are the free variables.
+\end{abstract}
+\maketitle
+
+When a system of equations is homogeneous the solution set can be
+expressed in the form described by \ref{theorem:VFSLS} where the
+vector $\vect{c}$ is the zero vector.  We can essentially ignore this
+vector, so that the remainder of the typical expression for a solution
+looks like an arbitrary linear combination, where the scalars are the
+free variables and the vectors are $\vectorlist{u}{n-r}$.  Which
+sounds a lot like a span.  This is the substance of the next theorem.
+
+\begin{theorem}[Spanning Sets for Null Spaces]
+  \label{theorem:SSNS}Suppose that $A$ is an $m\times n$ matrix, and $B$ is a row-equivalent
+  matrix in reduced row-echelon form.  Suppose that $B$ has $r$ pivot
+  columns, with indices given by
+  $D=\set{d_1,\,d_2,\,d_3,\,\ldots,\,d_r}$, while the $n-r$ non-pivot
+  columns have indices
+  $F=\set{f_1,\,f_2,\,f_3,\,\ldots,\,f_{n-r},\,n+1}$.  Construct the
+  $n-r$ vectors $\vect{z}_j$, $1\leq j\leq n-r$ of size $n$,
+  \[
+    \vectorentry{\vect{z}_j}{i}=
+    \begin{cases}
+      1&\text{if $i\in F$, $i=f_j$}\\
+      0&\text{if $i\in F$, $i\neq f_j$}\\
+      -\matrixentry{B}{k,f_j}&\text{if $i\in D$, $i=d_k$}
+    \end{cases}
+  \]
+  Then the null space of $A$ is given by
+  \[
+    \nsp{A}=\spn{\left\{\vectorlist{z}{n-r}\right\}}
+  \]
+
+  \begin{proof}
+    Consider the homogeneous system with $A$ as a coefficient matrix,
+    $\homosystem{A}$.  Its set of solutions, $S$, is by
+    \ref{definition:NSM}, the null space of $A$, $\nsp{A}$.  Let
+    $B^{\prime}$ denote the result of row-reducing the augmented
+    matrix of this homogeneous system.  Since the system is
+    homogeneous, the final column of the augmented matrix will be all
+    zeros, and after any number of row operations
+    (\ref{definition:RO}), the column will still be all zeros.  So
+    $B^{\prime}$ has a final column that is totally zeros.
+
+    Now apply \ref{theorem:VFSLS} to $B^{\prime}$, after noting that
+    our homogeneous system must be consistent (\ref{theorem:HSC}).
+    The vector $\vect{c}$ has zeros for each entry that has an index
+    in $F$.  For entries with their index in $D$, the value is
+    $-\matrixentry{B^{\prime}}{k,{n+1}}$, but for $B^{\prime}$ any
+    entry in the final column (index $n+1$) is zero.  So
+    $\vect{c}=\zerovector$.  The vectors $\vect{z}_j$,
+    $1\leq j\leq n-r$ are identical to the vectors $\vect{u}_j$,
+    $1\leq j\leq n-r$ described in \ref{theorem:VFSLS}.  Putting it
+    all together and applying \ref{definition:SSCV} in the final step,
+    \begin{align*}
+      \nsp{A}
+      &=S\\
+      &=\setparts{
+        \vect{c}+\alpha_1\vect{u}_1+\alpha_2\vect{u}_2+\alpha_3\vect{u}_3+\cdots+\alpha_{n-r}\vect{u}_{n-r}
+        }{
+        \alpha_1,\,\alpha_2,\,\alpha_3,\,\ldots,\,\alpha_{n-r}\in\complexes
+        }\\
+      &=\setparts{
+        \alpha_1\vect{u}_1+\alpha_2\vect{u}_2+\alpha_3\vect{u}_3+\cdots+\alpha_{n-r}\vect{u}_{n-r}
+        }{
+\alpha_1,\,\alpha_2,\,\alpha_3,\,\ldots,\,\alpha_{n-r}\in\complexes
+        }\\
+      &=\spn{\set{\vectorlist{z}{n-r}}}
+    \end{align*}
+  \end{proof}
+\end{theorem}
+
+Notice that the hypotheses of \ref{theorem:VFSLS} and
+\ref{theorem:SSNS} are slightly different.  In the former, $B$ is the
+row-reduced version of an augmented matrix of a linear system, while
+in the latter, $B$ is the row-reduced version of an arbitrary matrix.
+Understanding this subtlety now will avoid confusion later.
+
+\begin{example}[Spanning set of a null space]
+  Find a set of vectors, $S$, so that the null space of the matrix $A$
+  below is the span of $S$, that is, $\spn{S}=\nsp{A}$.
+  \[
+    A=
+    \begin{bmatrix}
+      1 & 3 & 3 & -1 & -5\\
+      2 & 5 & 7 & 1 & 1\\
+      1 & 1 & 5 & 1 & 5\\
+      -1 & -4 & -2 & 0 & 4
+    \end{bmatrix}
+  \]
+
+  The null space of $A$ is the set of all solutions to the homogeneous
+  system $\homosystem{A}$.  If we find the vector form of the
+  solutions to this homogeneous system (\ref{theorem:VFSLS}) then the
+  vectors $\vect{u}_j$, $1\leq j\leq n-r$ in the linear combination
+  are exactly the vectors $\vect{z}_j$, $1\leq j\leq n-r$ described in
+  \ref{theorem:SSNS}.  So we can mimic \ref{example:VFSAL} to arrive
+  at these vectors (rather than just referring to the formulas in the
+  statement of the theorem).
+
+  Begin by row-reducing $A$.  The result is
+  \[
+    \begin{bmatrix}
+      \leading{1} & 0 & 6 & 0 & 4\\
+      0 & \leading{1} & -1 & 0 & -2\\
+      0 & 0 & 0 & \leading{1} & 3\\
+      0 & 0 & 0 & 0 & 0
+    \end{bmatrix}
+  \]
+
+  With $D=\set{1,\,2,\,4}$ and $F=\set{3,\,5}$ we recognize that $x_3$
+  and $x_5$ are free variables and we can interpret each nonzero row
+  as an expression for the \wordChoice{\choice[correct]{dependent}\choice{free}} variables $x_1$, $x_2$, $x_4$
+  (respectively) in the \wordChoice{\choice{dependent}\choice[correct]{free}} variables $x_3$ and $x_5$.  With this we
+  can write the vector form of a solution vector as
+  \[
+    \colvector{x_1\\x_2\\x_3\\x_4\\x_5}=
+    \colvector{-6x_3-4x_5\\x_3+2x_5\\x_3\\-3x_5\\x_5}=
+    x_3\colvector{-6\\1\\1\\0\\0}+
+    x_5\colvector{-4\\2\\0\\-3\\1}
+  \]
+
+  Then in the notation of \ref{theorem:SSNS},
+  \begin{align*}
+    \vect{z}_1&=\colvector{-6\\1\\1\\0\\0}&
+    \vect{z}_2&=\colvector{-4\\\answer{2}\\0\\-3\\1}
+  \end{align*}
+  and
+  \[
+    \nsp{A}
+    =\spn{\set{\vect{z}_1,\,\vect{z}_2}}
+    =\spn{\set{\colvector{-6\\1\\1\\0\\0},\,\colvector{-4\\2\\0\\-3\\1}}}
+  \]
+\end{example}
+
+\begin{example}[Null space directly as a span]
+  Let us express the null space of $A$ as the span of a set of
+  vectors, applying \ref{theorem:SSNS} as economically as possible,
+  without reference to the underlying homogeneous system of equations
+  (in contrast to \ref{example:SSNS}).
+  \[
+    A=
+    \begin{bmatrix}
+      2 & 1 & 5 & 1 & 5 & 1 \\
+      1 & 1 & 3 & 1 & 6 & -1 \\
+      -1 & 1 & -1 & 0 & 4 & -3 \\
+      -3 & 2 & -4 & -4 & -7 & 0 \\
+      3 & -1 & 5 & 2 & 2 & 3
+    \end{bmatrix}
+  \]
+  Then \ref{theorem:SSNS} creates vectors for the span by first
+  row-reducing the matrix in question.  The row-reduced version of $A$
+  is
+  \[
+    B=
+    \begin{bmatrix}
+      \leading{1} & 0 & 2 & 0 & -1 & 2 \\
+      0 & \leading{1} & 1 & 0 & 3 & -1 \\
+      0 & 0 & 0 & \leading{1} & 4 & -2 \\
+      0 & 0 & 0 & 0 & 0 & 0 \\
+      0 & 0 & 0 & 0 & 0 & 0
+    \end{bmatrix}
+  \]
+  We will mechanically follow the prescription of \ref{theorem:SSNS}.
+  Here we go, in two big steps.
+
+  First, the non-pivot columns have indices $F=\set{3,\,5,\,6}$, so we
+  will construct the $n-r=6-3=3$ vectors with a pattern of zeros and
+  ones dictated by the indices in $F$.  This is the realization of the
+  first two lines of the three-case definition of the vectors
+  $\vect{z}_j$, $1\leq j\leq n-r$.
+  \begin{align*}
+    \vect{z}_1&=\colvector{\\ \\ 1\\ \\0 \\ 0}
+              &
+                \vect{z}_2&=\colvector{\\ \\ 0\\ \\ 1\\ 0}
+              &
+                \vect{z}_3&=\colvector{\\ \\ 0\\ \\ 0\\ 1}
+  \end{align*}
+
+  Each of these vectors arises due to the presence of a column that is
+  not a pivot column.  The remaining entries of each vector are the
+  entries of the non-pivot column, negated, and distributed into the
+  empty slots in order (these slots have indices in the set $D$, so
+  also refer to pivot columns).  This is the realization of the third
+  line of the three-case definition of the vectors $\vect{z}_j$,
+  $1\leq j\leq n-r$.
+  \begin{align*}
+    \vect{z}_1&=\colvector{-2\\ -1\\ 1\\  0 \\0 \\ 0}
+              &
+                \vect{z}_2&=\colvector{1\\ -3\\ 0\\ -4\\ 1\\ 0}
+              &
+                \vect{z}_3&=\colvector{-2\\ 1\\ 0\\ 2\\ 0\\ 1}
+  \end{align*}
+
+  So, by \ref{theorem:SSNS}, we have
+  \[
+    \nsp{A}
+    =
+    \spn{\set{\vect{z}_1,\,\vect{z}_2,\,\vect{z}_3}}
+    =
+    \spn{\set{
+        \colvector{-2\\ -1\\ 1\\  0 \\0 \\ 0},\,
+        \colvector{1\\ -3\\ 0\\ -4\\ 1\\ 0},\,
+        \colvector{-2\\ 1\\ 0\\ 2\\ 0\\ 1}
+      }}
+  \]
+
+  We know that the null space of $A$ is the solution set of the
+  homogeneous system $\homosystem{A}$, but nowhere in this application
+  of \ref{theorem:SSNS} have we found occasion to reference the
+  variables or equations of this system.  These details are all buried
+  in the proof of \ref{theorem:SSNS}.
+\end{example}
+
+Here is an example that will simultaneously exercise the span
+construction and \ref{theorem:SSNS}, while also pointing the way to
+the next section.
+
+\begin{example}[Span of the columns]
+  Begin with the set of four vectors of size $3$
+  \[
+    T=\set{\vect{w}_1,\,\vect{w}_2,\,\vect{w}_3,\,\vect{w}_4}
+    =\set{
+      \colvector{2\\-3\\1},\,
+      \colvector{1\\4\\1},\,
+      \colvector{7\\-5\\4},\,
+      \colvector{-7\\-6\\-5}
+    }
+  \]
+  and consider the infinite set $W=\spn{T}$.  The vectors of $T$ have
+  been chosen as the four columns of the matrix
+  \[
+    D = \begin{bmatrix}
+      2 & 1 & 7 & -7 \\
+      -3 & 4 &  -5 & -6 \\
+      1 & 1 & 4 &  -5 
+    \end{bmatrix}.
+  \]
+  Check that the vector
+  \[
+    \vect{z}_2=\colvector{2\\3\\0\\1}
+  \]
+  is a solution to the homogeneous system $\homosystem{D}$ (it is the
+  vector $\vect{z}_2$ provided by the description of the null space of
+  the coefficient matrix $D$ from \ref{theorem:SSNS}).
+
+  Applying \ref{theorem:SLSLC}, we can write the linear combination,
+  \[
+    2\vect{w}_1+3\vect{w}_2+0\vect{w}_3+1\vect{w}_4=\zerovector
+  \]
+  which we can solve for $\vect{w}_4$,
+  \[
+    \vect{w}_4=(-2)\vect{w}_1+(-3)\vect{w}_2.
+  \]
+  This equation says that whenever we encounter the vector
+  $\vect{w}_4$, we can replace it with a specific linear combination
+  of the vectors $\vect{w}_1$ and $\vect{w}_2$.  So using $\vect{w}_4$
+  in the set $T$, along with $\vect{w}_1$ and $\vect{w}_2$, is
+  excessive.  An example of what we mean here can be illustrated by
+  the computation,
+  \begin{align*}
+    5\vect{w}_1&+(-4)\vect{w}_2+6\vect{w}_3+(-3)\vect{w}_4\\
+               &=5\vect{w}_1+(-4)\vect{w}_2+6\vect{w}_3+(-3)\left((-2)\vect{w}_1+(-3)\vect{w}_2\right)\\
+               &=5\vect{w}_1+(-4)\vect{w}_2+6\vect{w}_3+\left(6\vect{w}_1+9\vect{w}_2\right)\\
+               &=11\vect{w}_1+5\vect{w}_2+6\vect{w}_3
+  \end{align*}
+  
+  So what began as a linear combination of the vectors
+  $\vect{w}_1,\,\vect{w}_2,\,\vect{w}_3,\,\vect{w}_4$ has been reduced
+  to a linear combination of the vectors
+  $\vect{w}_1,\,\vect{w}_2,\,\vect{w}_3$.  A careful proof using our
+  definition of set equality (\ref{definition:SE}) would now allow us
+  to conclude that this reduction is possible for any vector in $W$,
+  so
+  \[
+    W=\spn{\left\{\vect{w}_1,\,\vect{w}_2,\,\vect{w}_3\right\}}
+  \]
+  So the span of our set of vectors, $W$, has not changed, but we have
+  \textit{described} it by the span of a set of \textit{three}
+  vectors, rather than \textit{four}.  Furthermore, we can achieve yet
+  another, similar, reduction.
+
+  Check that the vector
+  \[
+    \vect{z}_1=\colvector{-3\\-1\\1\\0}
+  \]
+  is a solution to the homogeneous system
+  $\linearsystem{D}{\zerovector}$ (it is the vector $\vect{z}_1$
+  provided by the description of the null space of the coefficient
+  matrix $D$ from \ref{theorem:SSNS}).  Applying \ref{theorem:SLSLC},
+  we can write the linear combination,
+  \[
+    (-3)\vect{w}_1+(-1)\vect{w}_2+1\vect{w}_3=\zerovector
+  \]
+  which we can solve for $\vect{w}_3$,
+  \[
+    \vect{w}_3=3\vect{w}_1+1\vect{w}_2
+  \]
+  This equation says that whenever we encounter the vector
+  $\vect{w}_3$, we can replace it with a specific linear combination
+  of the vectors $\vect{w}_1$ and $\vect{w}_2$.  So, as before, the
+  vector $\vect{w}_3$ is not needed in the description of $W$,
+  provided we have $\vect{w}_1$ and $\vect{w}_2$ available.  In
+  particular, a careful proof would show that
+  \[
+    W=\spn{\left\{\vect{w}_1,\,\vect{w}_2\right\}}
+  \]
+  So $W$ began life as the span of a set of four vectors, and we have
+  now shown (utilizing solutions to a homogeneous system) that $W$ can
+  also be described as the span of a set of just two vectors.
+  Convince yourself that we cannot go any further.  In other words, it
+  is not possible to dismiss either $\vect{w}_1$ or $\vect{w}_2$ in a
+  similar fashion and winnow the set down to just one vector.
+
+  What was it about the original set of four vectors that allowed us
+  to declare certain vectors as surplus?  And just which vectors were
+  we able to dismiss?  And why did we have to stop once we had two
+  vectors remaining?  The answers to these questions motivate ``linear
+  independence,'' our next big topic, and so are worth considering
+  carefully \textit{now}.
+\end{example}
+
+\end{document}

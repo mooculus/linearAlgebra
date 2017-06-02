@@ -1,0 +1,275 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Column Spaces and Systems of Equations}
+
+\begin{document}
+\begin{abstract}
+  There is a natural correspondence between solutions to linear systems and linear combinations of the columns of the coefficient matrix.
+\end{abstract}
+\maketitle
+
+A matrix-vector product is a linear combination of the columns of the matrix and this allows us to connect matrix multiplication with systems of equations.
+
+% Row operations are linear combinations of the rows of a matrix, and
+% of course, reduced row-echelon form (\ref{definition:RREF}) is also
+% intimately related to solving systems of equations.  In this section
+% we will formalize these ideas with two key definitions of sets of
+% vectors derived from a matrix.
+
+\begin{definition}[Column Space of a Matrix]
+  Suppose that $A$ is an $m\times n$ matrix with columns
+  $\vectorlist{A}{n}$.  Then the \dfn{column space} of $A$, written
+  $\csp{A}$, is the subset of $\complex{m}$ containing all linear
+  combinations of the columns of $A$,
+  \[
+    \csp{A}=\spn{\set{\vectorlist{A}{n}}}
+  \]
+\end{definition}
+
+Some authors refer to the column space of a matrix as the \dfn{range}
+or \dfn{image}, but we will reserve such terms for use with linear
+transformations (\ref{definition:RLT}).
+
+Upon encountering any new set, the first question we ask is what
+objects are in the set, and which objects are not?  Here is an example
+of one way to answer this question, and it will motivate a theorem
+that will then answer the question precisely.
+
+%BADBAD
+\begin{example}[Column space of a matrix and consistent systems]
+  Consider the linear system
+  \begin{align*}
+    2x_1  + x_2 + 7x_3 - 7x_4 &= 8 \\
+    -3x_1 + 4x_2 -5x_3 - 6x_4 &=  -12 \\
+    x_1 +x_2 + 4x_3 - 5x_4 &=  4
+  \end{align*}
+  and the linear system
+  \begin{align*}
+    2x_1  + x_2 + 7x_3 - 7x_4 &= 2 \\
+    -3x_1 + 4x_2 -5x_3 - 6x_4 &=  3 \\
+    x_1 +x_2 + 4x_3 - 5x_4 &=  2.
+  \end{align*}
+  These two systems are built from the same $3\times 4$ coefficient matrix, namely
+  \begin{align*}
+    A&=\begin{bmatrix}
+      2 & 1 & 7 & -7 \\
+      -3 & 4 &  -5 & -6 \\
+      1 & 1 & 4 &  -5
+    \end{bmatrix}
+  \end{align*}
+  However, only one of the above systems are consistent!  We can
+  explain this difference by employing the column space of the matrix
+  $A$.
+
+  The column vector of constants, $\vect{b}$, from the first linear
+  system is given below, and one solution listed for
+  $\linearsystem{A}{\vect{b}}$ is $\vect{x}$,
+  \begin{align*}
+    \vect{b}&=\colvector{8\\-12\\4}
+            &
+              \vect{x}&=\colvector{7\\8\\1\\3}
+  \end{align*}
+
+  By \ref{theorem:SLSLC}, we can summarize this solution as a linear
+  combination of the columns of $A$ that equals $\vect{b}$,
+  \[
+    7\colvector{2\\-3\\1}+
+    8\colvector{1\\4\\1}+
+    1\colvector{7\\-5\\4}+
+    3\colvector{-7\\-6\\-5}=
+    \colvector{8\\-12\\4}=\vect{b}.
+  \]
+
+  This equation says that $\vect{b}$ is a linear combination of the
+  columns of $A$, and then by \ref{definition:CSM}, we can say that
+  $\vect{b}\in\csp{A}$.
+
+  On the other hand, the second linear system is
+  $\linearsystem{A}{\vect{c}}$, where the vector of constants is
+  \[
+    \vect{c}=\colvector{2\\3\\2}
+  \]
+  and this system of equations is inconsistent.  This means
+  $\vect{c}\not\in\csp{A}$, for if it were, then it would equal a
+  linear combination of the columns of $A$ and \ref{theorem:SLSLC}
+  would lead us to a solution of the system
+  $\linearsystem{A}{\vect{c}}$.
+\end{example}
+
+So if we fix the coefficient matrix, and vary the vector of constants,
+we can sometimes find consistent systems, and sometimes inconsistent
+systems.  The vectors of constants that lead to consistent systems are
+exactly the elements of the column space.  This is the content of the
+next theorem, and since it is an equivalence, it provides an alternate
+view of the column space.
+
+\begin{theorem}[Column Spaces and Consistent Systems]
+  \label{theorem:CSCS}
+  Suppose $A$ is an $m\times n$ matrix and $\vect{b}$ is a vector of
+  size $m$.  Then $\vect{b}\in\csp{A}$ \wordChoice{\choice[correct]{if
+      and only if}\choice{if}\choice{only if}}
+  $\linearsystem{A}{\vect{b}}$ is consistent.
+
+\begin{proof}
+  ($\Rightarrow$) Suppose $\vect{b}\in\csp{A}$.  Then we can write
+  $\vect{b}$ as some linear combination of the
+  \wordChoice{\choice{rows}\choice[correct]{columns}} of $A$.  By
+  \ref{theorem:SLSLC} we can use the scalars from this linear
+  combination to form a solution to $\linearsystem{A}{\vect{b}}$, so
+  this system is consistent.
+
+  ($\Leftarrow$) If $\linearsystem{A}{\vect{b}}$ is
+  \wordChoice{\choice[correct]{consistent}\choice{incorrect}}, there
+  is a solution that may be used with \ref{theorem:SLSLC} to write
+  $\vect{b}$ as a linear combination of the columns of $A$.  This
+  qualifies $\vect{b}$ for membership in $\csp{A}$.
+\end{proof}
+\end{theorem}
+
+This theorem tells us that asking if the system
+$\linearsystem{A}{\vect{b}}$ is consistent is exactly the same
+question as asking if $\vect{b}$ is in the column space of $A$.  Or
+equivalently, it tells us that the column space of the matrix $A$ is
+precisely those vectors of constants, $\vect{b}$, that can be paired
+with $A$ to create a system of linear equations
+$\linearsystem{A}{\vect{b}}$ that is consistent.
+
+Employing \ref{theorem:SLEMM} we can form the chain of equivalences
+\begin{align*}
+  \vect{b}\in\csp{A}
+  \iff
+  \linearsystem{A}{\vect{b}}\text{ is consistent}
+  \iff
+  A\vect{x}=\vect{b}\text{ for some }\vect{x}
+\end{align*}
+
+Thus, an alternative (and popular) definition of the column space of an $m\times n$ matrix $A$ is
+\begin{align*}
+  \csp{A}&=
+           \setparts{
+           \vect{y}\in\complex{m}
+           }{
+           \vect{y}=A\vect{x}\text{ for some }\vect{x}\in\complex{n}
+           }
+           =
+           \setparts{A\vect{x}}{\vect{x}\in\complex{n}}
+           \subseteq\complex{m}
+\end{align*}
+
+We recognize this as saying create \textit{all} the matrix vector
+products possible with the matrix $A$ by letting $\vect{x}$ range over
+all of the possibilities.  By \ref{definition:MVP} we see that this
+means take all possible linear combinations of the columns of $A$
+<mdash /> precisely the definition of the column space
+(\ref{definition:CSM}) we have chosen.
+
+Notice how this formulation of the column space looks very much like
+the definition of the null space of a matrix (\ref{definition:NSM}),
+but for a rectangular matrix the column vectors of $\csp{A}$ and
+$\nsp{A}$ have different sizes, so the sets are very different.
+
+Given a vector $\vect{b}$ and a matrix $A$ it is now very mechanical
+to test if $\vect{b}\in\csp{A}$.  Form the linear system
+$\linearsystem{A}{\vect{b}}$, row-reduce the augmented matrix,
+$\augmented{A}{\vect{b}}$, and test for consistency with
+\ref{theorem:RCLS}.  Here is an example of this procedure.
+
+\begin{example}[Membership in the column space of a matrix]
+  Consider the column space of the $3\times 4$ matrix $A$,
+  \[
+    A=
+    \begin{bmatrix}
+      3 & 2 & 1 & -4\\
+      -1 & 1 & -2 & 3\\
+      2 & -4 & 6 & -8
+    \end{bmatrix}
+  \]
+  We first show that $\vect{v}=\colvector{18\\-6\\12}$ is in the
+  column space of $A$, $\vect{v}\in\csp{A}$.  \ref{theorem:CSCS} says
+  we need only check the consistency of $\linearsystem{A}{\vect{v}}$.
+  Form the augmented matrix and row-reduce,
+  \[
+    \begin{bmatrix}
+      3 & 2 & 1 & -4 & 18\\
+      -1 & 1 & -2 & 3 & -6\\
+      2 & -4 & 6 & -8 & 12
+    \end{bmatrix}
+    \rref
+    \begin{bmatrix}
+      \leading{1} & 0 & 1 & -2 & 6\\
+      0 & \leading{1} & -1 & 1 & 0\\
+      0 & 0 & 0 & 0 & 0
+    \end{bmatrix}
+  \]
+  
+  Since the final column \wordChoice{\choice[correct]{is
+      not}\choice{is}} a pivot column, the system is consistent and
+  therefore by \ref{theorem:CSCS}, $\vect{v}\in\csp{A}$.
+
+  If we wished to demonstrate explicitly that $\vect{v}$ is a linear
+  combination of the columns of $A$, we can find a solution (any
+  solution) of $\linearsystem{A}{\vect{v}}$ and use
+  \ref{theorem:SLSLC} to construct the desired linear combination.
+  For example, set the free variables to $x_3=2$ and $x_4=1$.  Then a
+  solution has $x_2=1$ and $x_1=6$.  Then by \ref{theorem:SLSLC},
+  \[
+    \vect{v}=\colvector{18\\-6\\12}=
+    6\colvector{3\\-1\\2}+
+    1\colvector{2\\1\\-4}+
+    2\colvector{1\\-2\\6}+
+    1\colvector{-4\\3\\-8}
+  \]
+
+  Now we show that $\vect{w}=\colvector{2\\1\\-3}$ is not in the
+  column space of $A$, $\vect{w}\not\in\csp{A}$.  \ref{theorem:CSCS}
+  says we need only check the consistency of
+  $\linearsystem{A}{\vect{w}}$.  Form the augmented matrix and
+  row-reduce,
+  \[
+    \begin{bmatrix}
+      3 & 2 & 1 & -4 & 2\\
+      -1 & 1 & -2 & 3 & 1\\
+      2 & -4 & 6 & -8 & -3
+    \end{bmatrix}
+    \rref
+    \begin{bmatrix}
+      \leading{1} & 0 & 1 & -2 & 0\\
+      0 & \leading{1} & -1 & 1 & 0\\
+      0 & 0 & 0 & 0 & \leading{1}
+    \end{bmatrix}
+  \]
+  and since the final column is a pivot column, \ref{theorem:RCLS}
+  tells us the system is inconsistent and therefore by
+  \ref{theorem:CSCS}, $\vect{w}\not\in\csp{A}$.
+
+\end{example}
+
+\ref{theorem:CSCS} completes a collection of three theorems, and one
+definition, that deserve comment.  Many questions about spans, linear
+independence, null space, column spaces and similar objects can be
+converted to questions about systems of equations (homogeneous or
+not), which we understand well from our previous results, especially
+those in \ref{chapter:SLE}.  These previous results include theorems
+like \ref{theorem:RCLS} which allows us to quickly decide consistency
+of a system, and \ref{theorem:BNS} which allows us to describe
+solution sets for homogeneous systems compactly as the span of a
+linearly independent set of column vectors.
+
+\begin{tabular}{|r|l|}\hline\hline
+  \multicolumn{1}{|l}{\ref{definition:NSM}}&\\\hline
+  Synopsis&Null space is solution set of homogeneous system\\\hline
+  Example&General solution sets described by \ref{theorem:PSPHS}\\\hline\hline
+  \multicolumn{1}{|l}{\ref{theorem:SLSLC}}&\\\hline
+  Synopsis&Solutions for linear combinations with unknown scalars\\\hline
+  Example&Deciding membership in spans\\\hline\hline
+  \multicolumn{1}{|l}{\ref{theorem:SLEMM}}&\\\hline
+  Synopsis&System of equations represented by matrix-vector product\\\hline
+  Example&Solution to $\linearsystem{A}{\vect{b}}$ is $\inverse{A}\vect{b}$ when $A$ is nonsingular\\\hline\hline
+  \multicolumn{1}{|l}{\ref{theorem:CSCS}}&\\\hline
+  Synopsis&Column space vectors create consistent systems\\\hline
+  Example&Deciding membership in column spaces\\\hline\hline
+\end{tabular}
+
+\end{document}

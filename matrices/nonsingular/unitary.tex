@@ -1,0 +1,308 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Unitary Matrices}
+
+\begin{document}
+\begin{abstract}
+  The inverse of a square matrix, and solutions to linear systems with square coefficient matrices, are intimately connected.
+\end{abstract}
+\maketitle
+
+Recall that the adjoint of a matrix is
+$\adjoint{A}=\transpose{\left(\conjugate{A}\right)}$.
+
+\begin{definition}[Unitary Matrices]
+  Suppose that $U$ is a square matrix of size $n$ such that
+  $\adjoint{U}U=I_n$.  Then we say $U$ is \dfn{unitary}.
+\end{definition}
+
+This condition may seem rather far-fetched at first glance.  Would
+there be \textit{any} matrix that behaved this way?  Well, yes, here
+is one.
+
+\begin{example}[Unitary matrix of size 3]
+  Consider
+  \[
+    U=
+    \begin{bmatrix}
+      \frac{1 + i }{{\sqrt{5}}} &
+      \frac{3 + 2\,i }{{\sqrt{55}}} &
+      \frac{2+2i}{\sqrt{22}} \\
+      \frac{1 - i }{{\sqrt{5}}} &
+      \frac{2 + 2\,i }{{\sqrt{55}}} &
+      \frac{-3 + i }{{\sqrt{22}}} \\
+      \frac{i }{{\sqrt{5}}} &
+      \frac{3 - 5\,i }{{\sqrt{55}}} &
+      -\frac{2}{\sqrt{22}}
+    \end{bmatrix}
+  \]
+  The computations get a bit tiresome, but if you work your way through the computation of $\adjoint{U}U$, you \textit{will} arrive at the $3\times 3$ identity matrix $I_3$.
+\end{example}
+
+
+Unitary matrices do not have to look quite so gruesome.  Here is a larger one that is a bit more pleasing.
+
+\begin{example}[Unitary permutation matrix]
+  The matrix
+  \[
+    P=
+    \begin{bmatrix}
+      0&1&0&0&0\\
+      0&0&0&1&0\\
+      1&0&0&0&0\\
+      0&0&0&0&1\\
+      0&0&1&0&0
+    \end{bmatrix}
+  \]
+  is unitary as can be easily checked.  Notice that it is just a rearrangement of the columns of the $5\times 5$ identity matrix, $I_5$ (\ref{definition:IM}).
+
+  An interesting exercise is to build another $5\times 5$ unitary
+  matrix, $R$, using a different rearrangement of the columns of
+  $I_5$.  Then form the product $PR$.  This will be another unitary
+  matrix.  If you were to build all
+  $5!=5\times 4\times 3\times 2\times 1=120$ matrices of this type you
+  would have a set that remains closed under matrix multiplication.
+  It is an example of another algebraic structure known as a
+  \dfn{group} since together the set and the one operation (matrix
+  multiplication here) is closed, associative, has an identity
+  ($I_5$), and inverses (\ref{theorem:UMI}).  Notice though that the
+  operation in this group is not commutative!
+\end{example}
+
+If a matrix $A$ has only real number entries (we say it is a \dfn{real
+  matrix}) then the defining property of being unitary simplifies to
+$\transpose{A}A=I_n$.  In this case we (and everybody else!) call the
+matrix \dfn{orthogonal}, so you may often encounter this term in your
+other reading when the complex numbers are not under consideration.
+
+Unitary matrices have easily computed inverses.  They also have
+columns that form orthonormal sets.  Here are the theorems that show
+us that unitary matrices are not as strange as they might initially
+appear.
+
+\begin{theorem}[Unitary Matrices are Invertible]
+  \label{theorem:UMI}
+  Suppose that $U$ is a unitary matrix of size $n$.  Then $U$ is
+  nonsingular, and $\inverse{U}=\adjoint{U}$.
+
+  \begin{proof}
+    By \ref{definition:UM}, we know that $\adjoint{U}U=I_n$.  The
+    matrix $I_n$ is nonsingular (since it row-reduces easily to $I_n$,
+    \ref{theorem:NMRRI}).  So by \ref{theorem:NPNT}, $U$ and
+    $\adjoint{U}$ are both nonsingular matrices.
+
+    The equation $\adjoint{U}U=I_n$ gets us halfway to an inverse of
+    $U$, and \ref{theorem:OSIS} tells us that then $U\adjoint{U}=I_n$
+    also.  So $U$ and $\adjoint{U}$ are inverses of each other
+    (\ref{definition:MI}).
+
+\end{proof}
+\end{theorem}
+
+\begin{theorem}[Columns of Unitary Matrices are Orthonormal Sets]
+\label{theorem:CUMOS}
+
+Suppose that $S=\set{\vectorlist{A}{n}}$ is the set of columns of a
+square matrix $A$ of size $n$.  Then $A$ is a unitary matrix if and
+only if $S$ is an orthonormal set.
+
+\begin{proof}
+  The proof revolves around recognizing that a typical entry of the product $\adjoint{A}A$ is an inner product of columns of $A$.  Here are the details to support this claim.
+  \begin{align*}
+    \matrixentry{\adjoint{A}A}{ij}
+    &=\sum_{k=1}^{n}\matrixentry{\adjoint{A}}{ik}\matrixentry{A}{kj}
+    &&\ref{theorem:EMP}\\
+    &=\sum_{k=1}^{n}\matrixentry{\transpose{\conjugate{A}}}{ik}\matrixentry{A}{kj}
+    &&\ref{theorem:EMP}\\
+    &=\sum_{k=1}^{n}\matrixentry{\,\conjugate{A}\,}{ki}\matrixentry{A}{kj}
+    &&\ref{definition:TM}\\
+    &=\sum_{k=1}^{n}\conjugate{\matrixentry{A}{ki}}\matrixentry{A}{kj}
+    &&\ref{definition:CCM}\\
+    &=\sum_{k=1}^{n}\conjugate{\vectorentry{\vect{A}_i}{k}}\vectorentry{\vect{A}_j}{k}\\
+    &=\innerproduct{\vect{A}_i}{\vect{A}_j}
+    &&\ref{definition:IP}
+  \end{align*}
+  
+  We now employ this equality in a chain of equivalences,
+  \begin{align*}
+    &\text{$S=\set{\vectorlist{A}{n}}$ is an orthonormal set}\\
+    &\iff \innerproduct{\vect{A}_i}{\vect{A}_j}=
+      \begin{cases}
+        0 &\text{if $i\neq j$}\\
+        1 & \text{if $i=j$}
+      \end{cases}&&\ref{definition:ONS}\\
+    &\iff \matrixentry{\adjoint{A}A}{ij}=
+      \begin{cases}
+        0 &\text{if $i\neq j$}\\
+        1 & \text{if $i=j$}
+      \end{cases}\\
+    &\iff \matrixentry{\adjoint{A}A}{ij}=\matrixentry{I_n}{ij},\ 1\leq i\leq n,\ 1\leq j\leq n
+    &&\ref{definition:IM}\\
+    &\iff \adjoint{A}A=I_n
+    &&\ref{definition:ME}\\
+    &\iff \text{$A$ is a unitary matrix}
+    &&\ref{definition:UM}
+  \end{align*}
+
+\end{proof}
+\end{theorem}
+
+
+\begin{question}
+  Consider
+  \[
+    A=\begin{bmatrix}
+      \frac{1}{\sqrt{22}}\left(4+2i\right) & \frac{1}{\sqrt{374}}\left(5+3i\right) \\
+      \frac{1}{\sqrt{22}}\left(-1-i\right) & \frac{1}{\sqrt{374}}\left(12+14i\right) \\
+    \end{bmatrix}
+  \]
+  Is the matrix $A$ unitary?
+
+  \begin{multipleChoice}
+    \choice[correct]{Yes.}
+    \choice{No.}
+  \end{multipleChoice}
+
+  \begin{feedback}[correct]
+    Consider the first column
+    \[
+      \vec{v} = \begin{bmatrix}\frac{1}{\sqrt{22}}\left(4+2i\right) \\
+        \frac{1}{\sqrt{22}}\left(-1-i\right) 
+    \end{bmatrix}.
+    \]
+    For example, the inner product of $\vec{v}$ with is one, since it is
+    \[
+      \frac{(4+2i)(4-2i)}{22} + \frac{(-1-i)(-1+i)}{22},
+    \]
+    which is
+    \[
+      \frac{20}{22} + \frac{2}{22} = 1.
+    \]
+
+  \end{feedback}
+\end{question}
+
+\begin{example}[Orthonormal set from matrix columns]
+
+  The matrix
+  \[
+    U=
+    \begin{bmatrix}
+      \frac{1 + i }{{\sqrt{5}}} &
+      \frac{3 + 2\,i }{{\sqrt{55}}} &
+      \frac{2+2i}{\sqrt{22}} \\
+      \frac{1 - i }{{\sqrt{5}}} &
+      \frac{2 + 2\,i }{{\sqrt{55}}} &
+      \frac{-3 + i }{{\sqrt{22}}} \\
+      \frac{i }{{\sqrt{5}}} &
+      \frac{3 - 5\,i }{{\sqrt{55}}} &
+      -\frac{2}{\sqrt{22}}
+    \end{bmatrix}
+  \]
+  is a unitary matrix.  By \ref{theorem:CUMOS}, its columns
+  \[
+    \set{
+      \colvector{
+        \frac{1 + i }{{\sqrt{5}}}\\
+        \frac{1 - i }{{\sqrt{5}}}\\
+        \frac{i }{{\sqrt{5}}}
+      },\,
+      \colvector{
+        \frac{3 + 2\,i }{{\sqrt{55}}}\\
+        \frac{2 + 2\,i }{{\sqrt{55}}}\\
+        \frac{3 - 5\,i }{{\sqrt{55}}}
+      },\,
+      \colvector{
+        \frac{2+2i}{\sqrt{22}}\\
+        \frac{-3 + i }{{\sqrt{22}}}\\
+        -\frac{2}{\sqrt{22}}
+      }
+    }
+  \]
+  form an orthonormal set.  You might find checking the six inner
+  products of pairs of these vectors easier than doing the matrix
+  product $\adjoint{U}U$.  Or, because the inner product is
+  anti-commutative (\ref{theorem:IPAC}) you only need check three
+  inner products.
+\end{example}
+
+When using vectors and matrices that only have real number entries,
+orthogonal matrices are those matrices with inverses that equal their
+transpose.  Similarly, the inner product is the familiar dot product.
+Keep this special case in mind as you read the next theorem.
+
+\begin{theorem}[Unitary Matrices Preserve Inner Products]
+  \label{theorem:UMPIP}
+
+  Suppose that $U$ is a unitary matrix of size $n$ and $\vect{u}$ and $\vect{v}$ are two vectors from $\complex{n}$.  Then
+  \begin{align*}
+    \innerproduct{U\vect{u}}{U\vect{v}}&=\innerproduct{\vect{u}}{\vect{v}}
+    &
+    &\text{and}
+    &
+      \norm{U\vect{v}}&=\norm{\vect{v}}
+  \end{align*}
+
+  \begin{proof}
+    \begin{align*}
+      \innerproduct{U\vect{u}}{U\vect{v}}
+      &=\transpose{\left(\conjugate{U\vect{u}}\right)}U\vect{v}
+      &&\ref{theorem:MMIP}\\
+      &=\transpose{\left(\conjugate{U}\conjugate{\vect{u}}\right)}U\vect{v}
+      &&\ref{theorem:MMCC}\\
+      &=\transpose{\conjugate{\vect{u}}}\transpose{\conjugate{U}}U\vect{v}
+      &&\ref{theorem:MMT}\\
+      &=\transpose{\conjugate{\vect{u}}}\adjoint{U}U\vect{v}
+      &&\ref{definition:A}\\
+      &=\transpose{\conjugate{\vect{u}}}I_n\vect{v}
+      &&\ref{definition:UM}\\
+      &=\transpose{\conjugate{\vect{u}}}\vect{v}
+      &&\ref{theorem:MMIM}\\
+      &=\innerproduct{\vect{u}}{\vect{v}}
+      &&\ref{theorem:MMIP}
+    \end{align*}
+    
+    The second conclusion is just a specialization of the first conclusion.
+    \begin{align*}
+      \norm{U\vect{v}}
+      &=\sqrt{\norm{U\vect{v}}^2}\\
+      &=\sqrt{\innerproduct{U\vect{v}}{U\vect{v}}}&&\ref{theorem:IPN}\\
+      &=\sqrt{\innerproduct{\vect{v}}{\vect{v}}}\\
+      &=\sqrt{\norm{\vect{v}}^2}&&\ref{theorem:IPN}\\
+      &=\norm{\vect{v}}
+    \end{align*}
+    
+  \end{proof}
+\end{theorem}
+
+Aside from the inherent interest in this theorem, it makes a bigger
+statement about unitary matrices.  When we view vectors geometrically
+as directions or forces, then the norm equates to a notion of length.
+If we transform a vector by multiplication with a unitary matrix, then
+the length (norm) of that vector stays the same.  If we consider
+column vectors with two or three slots containing only real numbers,
+then the inner product of two such vectors is just the dot product,
+and this quantity can be used to compute the angle between two
+vectors.  When two vectors are multiplied (transformed) by the same
+unitary matrix, their dot product is unchanged and their individual
+lengths are unchanged.  This results in the angle between the two
+vectors remaining unchanged.
+
+
+A ``unitary transformation'' (matrix-vector products with unitary
+matrices) thus preserve geometrical relationships among vectors
+representing directions, forces, or other physical quantities.  In the
+case of a two-slot vector with real entries, this is simply a
+rotation.  These sorts of computations are exceedingly important in
+computer graphics such as games and real-time simulations, especially
+when increased realism is achieved by performing many such
+computations quickly.  We will see unitary matrices again in
+subsequent sections (especially \ref{theorem:OD}) and in each
+instance, consider the interpretation of the unitary matrix as a sort
+of geometry-preserving transformation.  Some authors use the term
+\dfn{isometry} to highlight this behavior.  We will speak loosely of a
+unitary matrix as being a sort of generalized rotation.
+
+\end{document}

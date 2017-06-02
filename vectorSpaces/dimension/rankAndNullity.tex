@@ -1,0 +1,122 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Rank and Nullity of a Matrix}
+
+\begin{document}
+\begin{abstract}
+  The dimensions of the row space, column space, and null space are
+  important quantities associated to a matrix.
+\end{abstract}
+\maketitle
+
+For any matrix, we have seen that we can associate several
+subspaces---the null space (\ref{theorem:NSMS}), the column space
+(\ref{theorem:CSMS}), row space (\ref{theorem:RSMS}) and the left null
+space (\ref{theorem:LNSMS}).  As vector spaces, each of these has a
+dimension, and for the null space and column space, they are important
+enough to warrant names.
+
+\begin{definition}[Nullity Of a Matrix]
+  Suppose that $A$ is an $m\times n$ matrix.  Then the \dfn{nullity}
+  of $A$ is the dimension of the null space of $A$,
+  $\nullity{A}=\dimension{\nsp{A}}$.
+\end{definition}
+
+\begin{definition}[Rank Of a Matrix]
+  Suppose that $A$ is an $m\times n$ matrix.  Then the \dfn{rank} of
+  $A$ is the dimension of the column space of $A$,
+  $\rank{A}=\dimension{\csp{A}}$.
+\end{definition}
+
+\begin{example}[Rank and nullity of a matrix]
+  Let us compute the rank and nullity of
+  \[
+    A=\begin{bmatrix}
+      2 & -4 & -1 & 3 & 2 & 1 & -4\\
+      1 & -2 & 0 & 0 & 4 & 0 & 1\\
+      -2 & 4 & 1 & 0 & -5 & -4 & -8\\
+      1 & -2 & 1 & 1 & 6 & 1 & -3\\
+      2 & -4 & -1 & 1 & 4 & -2 & -1\\
+      -1 & 2 & 3 & -1 & 6 & 3 & -1
+    \end{bmatrix}
+  \]
+
+  To do this, we will first row-reduce the matrix since that will help us determine bases for the null space and column space.
+  \[
+    \begin{bmatrix}
+      \leading{1} & -2 & 0 & 0 & 4 & 0 & 1\\
+      0 & 0 & \leading{1} & 0 & 3 & 0 & -2\\
+      0 & 0 & 0 & \leading{1} & -1 & 0 & -3\\
+      0 & 0 & 0 & 0 & 0 & \leading{1} & 1\\
+      0 & 0 & 0 & 0 & 0 & 0 & 0\\
+      0 & 0 & 0 & 0 & 0 & 0 & 0
+    \end{bmatrix}
+  \]
+
+  From this row-equivalent matrix in reduced row-echelon form we
+  record $D=\set{1,\,3,\,4,\,6}$ and $F=\set{2,\,5,\,7}$.
+
+  For each index in $D$, \ref{theorem:BCS} creates a single basis
+  vector.  In total the basis will have $4$ vectors, so the column
+  space of $A$ will have dimension $4$ and we write
+  $\rank{A}=\answer{4}$.
+
+  For each index in $F$, \ref{theorem:BNS} creates a single basis
+  vector.  In total the basis will have $3$ vectors, so the null space
+  of $A$ will have dimension $3$ and we write
+  $\nullity{A}=\answer{3}$.
+\end{example}
+
+There were no accidents or coincidences in the previous example---with
+the row-reduced version of a matrix in hand, the rank and nullity are
+easy to compute.
+
+\begin{theorem}[Computing Rank and Nullity]
+  \label{theorem:CRN}
+  Suppose that $A$ is an $m\times n$ matrix and $B$ is a
+  row-equivalent matrix in reduced row-echelon form.  Let $r$ denote
+  the number of pivot columns (or the number of nonzero rows).  Then
+  $\rank{A}=r$ and $\nullity{A}=n-r$.
+
+  \begin{proof}
+    \ref{theorem:BCS} provides a basis for the column space by
+    choosing columns of $A$ that that have the same indices as the
+    pivot columns of $B$.  In the analysis of $B$, each leading 1
+    provides one nonzero row and one pivot column.  So there are $r$
+    column vectors in a basis for $\csp{A}$.
+
+    \ref{theorem:BNS} provides a basis for the null space by creating
+    basis vectors of the null space of $A$ from entries of $B$, one
+    basis vector for each column that is \textit{not} a pivot column.
+    So there are $n-r$ column vectors in a basis for $\nullity{A}$.
+  \end{proof}
+\end{theorem}
+
+\begin{question}
+  You may have noticed as that the larger the column space is the
+  \wordChoice{\choice[correct]{smaller}\choice{larger}} the null space
+  is.  A simple corollary states this trade-off succinctly.
+\end{question}
+
+\begin{theorem}[Rank Plus Nullity is Columns]
+  \label{theorem:RPNC}
+
+  Suppose that $A$ is an $m\times n$ matrix.  Then
+  $\rank{A}+\nullity{A}=n$.
+
+  \begin{proof}
+    Let $r$ be the number of nonzero rows in a row-equivalent matrix
+    in reduced row-echelon form.  By \ref{theorem:CRN},
+    \[
+      \rank{A}+\nullity{A}= r+(n-r)=n
+    \]
+  \end{proof}
+\end{theorem}
+
+When we first introduced $r$ as our standard notation for the number
+of nonzero rows in a matrix in reduced row-echelon form you might have
+thought $r$ stood for ``rows.''  Not really---it stands for ``rank''!
+
+\end{document}

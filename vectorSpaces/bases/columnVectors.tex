@@ -1,0 +1,148 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Bases for Spans of Column Vectors}
+
+\begin{document}
+\begin{abstract}
+  We build bases for vector spaces built from column vectors.
+\end{abstract}
+\maketitle
+
+Suppose we have a subspace of $\real{m}$ that is expressed as the span
+of a set of vectors, $S$, and $S$ is not necessarily linearly
+independent, or perhaps not very attractive.  \ref{theorem:REMRS} says
+that row-equivalent matrices have identical row spaces, while
+\ref{theorem:BRS} says the nonzero rows of a matrix in reduced
+row-echelon form are a basis for the row space.  These theorems
+together give us a great computational tool for quickly finding a
+basis for a subspace that is expressed originally as a span.
+
+\begin{example}[Row space basis]
+  When we first defined the span of a set of column vectors, in \ref{example:SCAD} we looked at the set
+  \[
+    W=\spn{\set{
+        \colvector{2\\-3\\1},\,
+        \colvector{1\\4\\1},\,
+        \colvector{7\\-5\\4},\,
+        \colvector{-7\\-6\\-5}
+      }}
+  \]
+  with an eye towards realizing $W$ as the span of a smaller set.  By
+  building relations of linear dependence (though we did not know them
+  by that name then) we were able to remove two vectors and write $W$
+  as the span of the other two vectors.  These two remaining vectors
+  formed a linearly independent set, even though we did not know that
+  at the time.
+
+  Now we know that $W$ is a subspace and must have a basis.  Consider
+  the matrix, $C$, whose rows are the vectors in the spanning set for
+  $W$,
+  \[
+    C=\begin{bmatrix}
+      2 & -3 & 1\\
+      1 & 4 & 1\\
+      7 & -5 & 4\\
+      -7 & -6 & -5
+    \end{bmatrix}
+  \]
+  Then
+  \begin{multipleChoice}
+    \choice[correct]{the row space of $C$ will be $W$, $\rsp{C}=W$.}
+    \choice{the column space of $C$ will be $W$, $\csp{C}=W$.}
+  \end{multipleChoice}
+
+  So if we row-reduce $C$, the nonzero rows of the row-equivalent
+  matrix in reduced row-echelon form will be a basis for $\rsp{C}$,
+  and hence a basis for $W$.  Let us do it: $C$ row-reduces to
+  \[
+    \begin{bmatrix}
+      \leading{1} & 0 & \frac{7}{11}\\
+      0 & \leading{1} & \frac{1}{11}\\
+      0 & 0 & 0\\
+      0 & 0 & 0
+    \end{bmatrix}
+  \]
+  If we convert the two nonzero rows to column vectors then we have a basis,
+  \[
+    B=\set{\colvector{1\\0\\\frac{7}{11}},\,\colvector{0\\1\\\frac{1}{11}}}
+  \]
+  and
+  \[
+    W=\spn{\set{\colvector{1\\0\\\frac{7}{11}},\,\colvector{0\\1\\\frac{1}{11}}}}
+  \]
+  
+  For aesthetic reasons, we might wish to multiply each vector in $B$
+  by $11$, which will not change the spanning or linear independence
+  properties of $B$ as a basis.  Then we can also write
+  \[
+    W=\spn{\set{\colvector{11\\0\\7},\,\colvector{0\\11\\1}}}
+  \]
+
+\end{example}
+
+\ref{example:IAS} provides another example of this flavor, though now
+we can notice that $X$ is a subspace, and that the resulting set of
+three vectors is a basis.  This is such a powerful technique that we
+should do one more example.
+
+
+\begin{example}[Reducing a span]
+  We began with a set of $n=4$ vectors from $\real{5}$,
+  \[
+    R=\set{\vect{v}_1,\,\vect{v}_2,\,\vect{v}_3,\,\vect{v}_4}
+    =
+    \set{
+      \colvector{1\\2\\-1\\3\\2},\,
+      \colvector{2\\1\\3\\1\\2},\,
+      \colvector{0\\-7\\6\\-11\\-2},\,
+      \colvector{4\\1\\2\\1\\6}
+    }\\
+  \]
+  and defined $V=\spn{R}$.  Our goal in that problem was to find a
+  relation of linear dependence on the vectors in $R$, solve the
+  resulting equation for one of the vectors, and re-express $V$ as the
+  span of a set of three vectors.
+
+  Here is another way to accomplish something similar.  The row space
+  of the matrix
+  \[
+    A=\begin{bmatrix}
+      1 & 2 & -1 & 3 & 2\\
+      2 & 1 & 3 & 1 & 2\\
+      0 & -7 & 6 & -11 & -2\\
+      4 & 1 & 2 & 1 & 6
+    \end{bmatrix}
+  \]
+  is equal to $\spn{R}$.  By \ref{theorem:BRS} we can row-reduce this
+  matrix, ignore any zero rows, and use the nonzero rows as column
+  vectors that are a basis for the row space of $A$.  Row-reducing $A$
+  creates the matrix
+  \[
+    \begin{bmatrix}
+      1 & 0 & 0 & -\frac{1}{17} & \frac{30}{17}\\
+      0 & 1 & 0 & \frac{25}{17} & -\frac{2}{17}\\
+      0 & 0 & 1 & -\frac{2}{17} & -\frac{8}{17}\\
+      0 & 0 & 0 & 0 & 0
+    \end{bmatrix}
+  \]
+
+  So
+  \[
+    \set{
+      \colvector{\answer{1}\\0\\0\\-\frac{1}{17}\\\frac{30}{17}},\,
+      \colvector{0\\1\\0\\\frac{25}{17}\\-\frac{2}{17}},\,
+      \colvector{0\\0\\1\\-\frac{2}{17}\\-\frac{8}{17}}
+    }
+  \]
+  is a basis for $V$.  Our theorem tells us this is a basis, there is
+  no need to verify that the subspace spanned by three vectors (rather
+  than four) is the identical subspace, and there is no need to verify
+  that we have reached the limit in reducing the set, since the set of
+  three vectors is guaranteed to be linearly independent.
+
+\end{example}
+
+
+\end{document}

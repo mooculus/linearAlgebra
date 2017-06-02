@@ -1,0 +1,270 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Dimension}
+
+\begin{document}
+\begin{abstract}
+  Dimension is a measure of the size of a vector space.
+\end{abstract}
+\maketitle
+
+Almost every vector space we have encountered has been infinite in
+size (an exception is \ref{example:VSS}).  But some are ``bigger''
+than others.  Dimension, once suitably defined, will be a measure of
+the size of a vector space, and a useful tool for studying its
+properties.  You probably already have a rough notion of what a
+mathematical definition of dimension might be---try to forget these
+imprecise ideas and go with the new ones given here.
+
+\begin{definition}[Dimension]\label{definition:D}
+  Suppose that $V$ is a vector space and $\set{\vectorlist{v}{t}}$ is
+  a basis of $V$.  Then the \dfn{dimension} of $V$ is defined by
+  $\dimension{V}=t$.  If $V$ has no finite bases, we say $V$ has
+  infinite dimension.
+\end{definition}
+
+This is a very simple definition, which belies its power.  Grab a
+basis, any basis, and count up the number of vectors it contains.
+That is the dimension.  However, this simplicity causes a problem.
+Given a vector space, you and I could each construct different bases
+<mdash /> remember that a vector space might have many bases.  And
+what if your basis and my basis had different sizes?  Applying
+\ref{definition:D} we would arrive at different numbers!  With our
+current knowledge about vector spaces, we would have to say that
+dimension is not ``well-defined.''  Fortunately, there is a theorem
+that will correct this problem.
+
+In a strictly logical progression, the next two theorems would
+\textit{precede} the definition of dimension.  Many subsequent
+theorems will trace their lineage back to the following fundamental
+result.
+
+\begin{theorem}[Spanning Sets and Linear Dependence]
+  \label{theorem:SSLD}
+
+  Suppose that $S=\set{\vectorlist{v}{t}}$ is a finite set of vectors
+  which spans the vector space $V$.  Then any set of $t+1$ or more
+  vectors from $V$ is linearly dependent.
+
+\begin{proof}
+  We want to prove that any set of $t+1$ or more vectors from $V$ is
+  linearly dependent.  So we will begin with a totally arbitrary set
+  of vectors from $V$, $R=\set{\vectorlist{u}{m}}$, where
+  $\answer{m}>t$.  We will now construct a nontrivial relation of
+  linear dependence on $R$.
+
+  Each vector $\vectorlist{u}{m}$ can be written as a linear
+  combination of the vectors $\vectorlist{v}{t}$ since $S$ is a
+  spanning set of $V$.  This means there exist scalars $a_{ij}$,
+  $1\leq i\leq t$, $1\leq j\leq m$, so that
+  \begin{align*}
+    \vect{u}_1&=a_{11}\vect{v}_1+a_{21}\vect{v}_2+a_{31}\vect{v}_3+\cdots+a_{t1}\vect{v}_t\\
+    \vect{u}_2&=a_{12}\vect{v}_1+a_{22}\vect{v}_2+a_{32}\vect{v}_3+\cdots+a_{t2}\vect{v}_t\\
+    \vect{u}_3&=a_{13}\vect{v}_1+a_{23}\vect{v}_2+a_{33}\vect{v}_3+\cdots+a_{t3}\vect{v}_t\\
+              &\quad\quad\vdots\\
+    \vect{u}_m&=a_{1m}\vect{v}_1+a_{2m}\vect{v}_2+a_{3m}\vect{v}_3+\cdots+a_{tm}\vect{v}_t
+  \end{align*}
+
+  Now we form, unmotivated, the homogeneous system of $t$ equations in
+  the $m$ variables, $x_1,\,x_2,\,x_3,\,\ldots,\,x_m$, where the
+  coefficients are the just-discovered scalars $a_{ij}$,
+  \begin{align*}
+    a_{11}x_1+a_{12}x_2+a_{13}x_3+\cdots+a_{1m}x_m&=0\\
+    a_{21}x_1+a_{22}x_2+a_{23}x_3+\cdots+a_{2m}x_m&=0\\
+    a_{31}x_1+a_{32}x_2+a_{33}x_3+\cdots+a_{3m}x_m&=0\\
+    \vdots\quad\quad&\\
+    a_{t1}x_1+a_{t2}x_2+a_{t3}x_3+\cdots+a_{tm}x_m&=0\\
+  \end{align*}
+
+  This is a homogeneous system with more variables than equations (our
+  hypothesis is expressed as $m>t$), so by \ref{theorem:HMVEI} there
+  are infinitely many solutions.  Choose a nontrivial solution and
+  denote it by $x_1=c_1,\,x_2=c_2,\,x_3=c_3,\,\ldots,\,x_m=c_m$.  As a
+  solution to the homogeneous system, we then have
+  \begin{align*}
+    a_{11}c_1+a_{12}c_2+a_{13}c_3+\cdots+a_{1m}c_m&=0\\
+    a_{21}c_1+a_{22}c_2+a_{23}c_3+\cdots+a_{2m}c_m&=0\\
+    a_{31}c_1+a_{32}c_2+a_{33}c_3+\cdots+a_{3m}c_m&=0\\
+    \vdots\quad\quad&\\
+    a_{t1}c_1+a_{t2}c_2+a_{t3}c_3+\cdots+a_{tm}c_m&=0\\
+  \end{align*}
+
+  As a collection of nontrivial scalars,
+  $c_1,\,c_2,\,c_3,\,\dots,\,c_m$ will provide the nontrivial relation
+  of linear dependence we desire,
+  \begin{align*}
+    &\lincombo{c}{u}{m}\\
+    &=c_{1}\left(a_{11}\vect{v}_1+a_{21}\vect{v}_2+a_{31}\vect{v}_3+\cdots+a_{t1}\vect{v}_t\right)
+    &&\ref{definition:SSVS}\\
+    &\quad\quad+c_{2}\left(a_{12}\vect{v}_1+a_{22}\vect{v}_2+a_{32}\vect{v}_3+\cdots+a_{t2}\vect{v}_t\right)\\
+    &\quad\quad+c_{3}\left(a_{13}\vect{v}_1+a_{23}\vect{v}_2+a_{33}\vect{v}_3+\cdots+a_{t3}\vect{v}_t\right)\\
+    &\quad\quad\quad\quad\vdots\\
+    &\quad\quad+c_{m}\left(a_{1m}\vect{v}_1+a_{2m}\vect{v}_2+a_{3m}\vect{v}_3+\cdots+a_{tm}\vect{v}_t\right)\\
+    &=c_{1}a_{11}\vect{v}_1+c_{1}a_{21}\vect{v}_2+c_{1}a_{31}\vect{v}_3+\cdots+c_{1}a_{t1}\vect{v}_t
+    &&\ref{property:DVA}\\
+    &\quad\quad+c_{2}a_{12}\vect{v}_1+c_{2}a_{22}\vect{v}_2+c_{2}a_{32}\vect{v}_3+\cdots+c_{2}a_{t2}\vect{v}_t\\
+    &\quad\quad+c_{3}a_{13}\vect{v}_1+c_{3}a_{23}\vect{v}_2+c_{3}a_{33}\vect{v}_3+\cdots+c_{3}a_{t3}\vect{v}_t\\
+    &\quad\quad\quad\quad\vdots\\
+    &\quad\quad+c_{m}a_{1m}\vect{v}_1+c_{m}a_{2m}\vect{v}_2+c_{m}a_{3m}\vect{v}_3+\cdots+c_{m}a_{tm}\vect{v}_t\\
+    &=\left(c_{1}a_{11}+c_{2}a_{12}+c_{3}a_{13}+\cdots+c_{m}a_{1m}\right)\vect{v}_1
+    &&\ref{property:DSA}\\
+    &\quad\quad+\left(c_{1}a_{21}+c_{2}a_{22}+c_{3}a_{23}+\cdots+c_{m}a_{2m}\right)\vect{v}_2\\
+    &\quad\quad+\left(c_{1}a_{31}+c_{2}a_{32}+c_{3}a_{33}+\cdots+c_{m}a_{3m}\right)\vect{v}_3\\
+    &\quad\quad\quad\quad\vdots\\
+    &\quad\quad+\left(c_{1}a_{t1}+c_{2}a_{t2}+c_{3}a_{t3}+\cdots+c_{m}a_{tm}\right)\vect{v}_t\\
+    &=\left(a_{11}c_{1}+a_{12}c_{2}+a_{13}c_{3}+\cdots+a_{1m}c_{m}\right)\vect{v}_1
+    &&\ref{property:CMCN}\\
+    &\quad\quad+\left(a_{21}c_{1}+a_{22}c_{2}+a_{23}c_{3}+\cdots+a_{2m}c_{m}\right)\vect{v}_2\\
+    &\quad\quad+\left(a_{31}c_{1}+a_{32}c_{2}+a_{33}c_{3}+\cdots+a_{3m}c_{m}\right)\vect{v}_3\\
+    &\quad\quad\quad\quad\vdots\\
+    &\quad\quad+\left(a_{t1}c_{1}+a_{t2}c_{2}+a_{t3}c_{3}+\cdots+a_{tm}c_{m}\right)\vect{v}_t\\
+    &=0\vect{v}_1+0\vect{v}_2+0\vect{v}_3+\cdots+0\vect{v}_t
+    &&\text{$c_j$ as solution}\\
+    &=\zerovector+\zerovector+\zerovector+\cdots+\zerovector
+    &&\ref{theorem:ZSSM}\\
+    &=\zerovector
+    &&\ref{property:Z}
+  \end{align*}
+
+  That does it.  $R$ has been undeniably shown to be a linearly
+  \wordChoice{\choice{independent}\choice[correct]{dependent}} set.
+
+  The proof just given has some monstrous expressions in it, mostly
+  owing to the double subscripts present.  Now is a great opportunity
+  to show the value of a more compact notation.  We will rewrite the
+  key steps of the previous proof using summation notation, resulting
+  in a more economical presentation, and even greater insight into the
+  key aspects of the proof.  So here is an alternate proof---study it
+  carefully.
+
+  \textbf{Alternate Proof:} We want to prove that any set of $t+1$ or
+  more vectors from $V$ is linearly dependent.  So we will begin with
+  a totally arbitrary set of vectors from $V$,
+  $R=\setparts{\vect{u}_j}{1\leq j\leq m}$, where $m>t$.  We will now
+  construct a nontrivial relation of linear dependence on $R$.
+
+  Each vector $\vect{u_j}$, $1\leq j\leq m$ can be written as a linear
+  combination of $\vect{v}_i$, $1\leq i\leq t$ since $S$ is a spanning
+  set of $V$.  This means there are scalars $a_{ij}$, $1\leq i\leq t$,
+  $1\leq j\leq m$, so that
+  \begin{align*}
+    \vect{u}_j&=\sum_{i=1}^{t}a_{ij}\vect{v}_i&&1\leq j\leq m
+  \end{align*}
+
+  Now we form, unmotivated, the homogeneous system of $t$ equations in
+  the $m$ variables, $x_j$, $1\leq j\leq m$, where the coefficients
+  are the just-discovered scalars $a_{ij}$,
+  \begin{align*}
+    \sum_{j=1}^{m}a_{ij}x_j=0&&1\leq i\leq t
+  \end{align*}
+  
+  This is a homogeneous system with more variables than equations (our
+  hypothesis is expressed as $m>t$), so by \ref{theorem:HMVEI} there
+  are infinitely many solutions.  Choose one of these solutions that
+  is not trivial and denote it by $x_j=c_j$, $1\leq j\leq m$.  As a
+  solution to the homogeneous system, we then have
+  $\sum_{j=1}^{m}a_{ij}c_{j}=0$ for $1\leq i\leq t$.  As a collection
+  of nontrivial scalars, $c_j$, $1\leq j\leq m$, will provide the
+  nontrivial relation of linear dependence we desire,
+  \begin{align*}
+    \sum_{j=1}^{m}c_{j}\vect{u}_j
+    &=\sum_{j=1}^{m}c_{j}\left(\sum_{i=1}^{t}a_{ij}\vect{v}_i\right)
+    &&\ref{definition:SSVS}\\
+    &=\sum_{j=1}^{m}\sum_{i=1}^{t}c_{j}a_{ij}\vect{v}_i
+    &&\ref{property:DVA}\\
+    &=\sum_{i=1}^{t}\sum_{j=1}^{m}c_{j}a_{ij}\vect{v}_i
+    &&\ref{property:C}\\
+    &=\sum_{i=1}^{t}\sum_{j=1}^{m}a_{ij}c_{j}\vect{v}_i
+    &&\ref{property:CMCN}\\
+    &=\sum_{i=1}^{t}\left(\sum_{j=1}^{m}a_{ij}c_{j}\right)\vect{v}_i
+    &&\ref{property:DSA}\\
+    &=\sum_{i=1}^{t}0\vect{v}_i
+    &&\text{$c_j$ as solution}\\
+    &=\sum_{i=1}^{t}\zerovector
+    &&\ref{theorem:ZSSM}\\
+    &=\zerovector
+    &&\ref{property:Z}
+  \end{align*}
+  
+  That does it.  $R$ is a linearly dependent set.
+
+\end{proof}
+\end{theorem}
+
+Notice how the swap of the two summations is so much easier in the
+third step above, as opposed to all the rearranging and regrouping
+that takes place in the previous proof.  And using only about half the
+space.  And there are no ellipses (\ldots)..
+
+\ref{theorem:SSLD} can be viewed as a generalization of
+\ref{theorem:MVSLD}.  We know that $\complex{m}$ has a basis with $m$
+vectors in it (\ref{theorem:SUVB}), so it is a set of $m$ vectors that
+spans $\complex{m}$.  By \ref{theorem:SSLD}, any set of more than $m$
+vectors from $\complex{m}$ will be linearly dependent.  But this is
+exactly the conclusion we have in \ref{theorem:MVSLD}.  Maybe this is
+not a total shock, as the proofs of both theorems rely heavily on
+\ref{theorem:HMVEI}.  The beauty of \ref{theorem:SSLD} is that it
+applies in any vector space.  We illustrate the generality of this
+theorem, and hint at its power, in the next example.
+
+\begin{example}[Linearly dependent set in $P_4$]
+  We showed that
+  \[
+    S=\set{x-2,\,x^2-4x+4,\,x^3-6x^2+12x-8,\,x^4-8x^3+24x^2-32x+16}
+  \]
+  is a spanning set for $W=\setparts{p(x)}{p\in P_4,\ p(2)=0}$.  So we
+  can apply \ref{theorem:SSLD} to $W$ with $t=4$.  Here is a set of
+  five vectors from $W$, as you may check by verifying that each is a
+  polynomial of degree 4 or less and has $x=2$ as a root,
+  \begin{align*}
+    T&=\set{p_1,\,p_2,\,p_3,\,p_4,\,p_5}\subseteq W\\
+     &\ \\
+    p_1&=x^4-2x^3+2x^2-8x+8\\
+    p_2&=-x^3+6x^2-5x-6\\
+    p_3&=2x^4-5x^3+5x^2-7x+2\\
+    p_4&=-x^4+4x^3-7x^2+6x\\
+    p_5&=4x^3-9x^2+5x-6
+  \end{align*}
+  
+  By \ref{theorem:SSLD} we conclude that $T$ is linearly dependent,
+  with no further computations.
+\end{example}
+
+\ref{theorem:SSLD} is indeed powerful, but our main purpose in proving
+it right now was to make sure that our definition of dimension
+(\ref{definition:D}) is well-defined.  Here is the theorem.
+
+\begin{theorem}[Bases have Identical Sizes]
+  \label{theorem:BIS}
+
+  Suppose that $V$ is a vector space with a finite basis $B$ and a
+  second basis $C$.  Then $B$ and $C$ have the same size.
+
+  \begin{proof}
+    Suppose that $C$ has more vectors than $B$.  (Allowing for the
+    possibility that $C$ is infinite, we can replace $C$ by a subset
+    that has more vectors than $B$.)  As a basis, $B$ is a spanning
+    set for $V$ (\ref{definition:B}), so \ref{theorem:SSLD} says that
+    $C$ is linearly dependent.  However, this contradicts the fact
+    that as a basis $C$ is linearly independent (\ref{definition:B}).
+    So $C$ must also be a finite set, with size less than, or equal
+    to, that of $B$.
+
+    Suppose that $B$ has more vectors than $C$.  As a basis, $C$ is a
+    spanning set for $V$ (\ref{definition:B}), so \ref{theorem:SSLD}
+    says that $B$ is linearly dependent.  However, this contradicts
+    the fact that as a basis $B$ is linearly independent
+    (\ref{definition:B}).  So $C$ cannot be strictly smaller than $B$.
+
+    The only possibility left for the sizes of $B$ and $C$ is for them
+    to be equal.
+  \end{proof}
+\end{theorem}
+
+\ref{theorem:BIS} tells us that if we find one finite basis in a
+vector space, then they all have the same size.  This (finally) makes
+\ref{definition:D} unambiguous.
+
+\end{document}

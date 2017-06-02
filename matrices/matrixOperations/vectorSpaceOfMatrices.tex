@@ -1,0 +1,92 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Vector Space of Matrices}
+
+\begin{document}
+\begin{abstract}
+  With definitions of matrix addition and scalar multiplication we can
+  now state, and prove, several properties of each operation, and some
+  properties that involve their interplay.
+\end{abstract}
+\maketitle
+
+\begin{theorem}[Vector Space Properties of Matrices]
+\label{theorem:VSPM}
+
+Suppose that $M_{mn}$ is the set of all $m\times n$ matrices
+(\ref{definition:VSM}) with addition and scalar multiplication as
+defined in \ref{definition:MA} and \ref{definition:MSM}.  Then
+
+\begin{description}
+\item[Additive Closure, Matrices]
+If $A,\,B\in M_{mn}$, then $A+B\in M_{mn}$.
+\item[Scalar Closure, Matrices]
+If $\alpha\in\complexes$ and $A\in M_{mn}$, then $\alpha A\in M_{mn}$.
+\item[Commutativity, Matrices]
+If $A,\,B\in M_{mn}$, then $A+B=B+A$.
+\item[Additive Associativity, Matrices]
+If $A,\,B,\,C\in M_{mn}$, then $A+\left(B+C\right)=\left(A+B\right)+C$.
+\item[Zero Matrix, Matrices]
+There is a matrix, $\zeromatrix$, called the \dfn{zero matrix}, such that  $A+\zeromatrix=A$  for all $A\in M_{mn}$.
+\item[Additive Inverses, Matrices]
+If $A\in M_{mn}$, then there exists a matrix $-A\in M_{mn}$ so that $A+(-A)=\zeromatrix$.
+\item[Scalar Multiplication Associativity, Matrices]
+If $\alpha,\,\beta\in\complexes$ and $A\in M_{mn}$, then $\alpha(\beta A)=(\alpha\beta)A$.
+\item[Distributivity across Matrix Addition, Matrices]
+If $\alpha\in\complexes$ and $A,\,B\in M_{mn}$, then $\alpha(A+B)=\alpha A+\alpha B$.
+\item[Distributivity across Scalar Addition, Matrices]
+If $\alpha,\,\beta\in\complexes$ and $A\in M_{mn}$, then
+$(\alpha+\beta)A=\alpha A+\beta A$.
+\item[One, Matrices]
+If $A\in M_{mn}$, then $1A=A$.
+\end{description}
+
+\begin{proof}
+  While some of these properties seem very obvious, they all require
+  proof.  However, the proofs are not very interesting, and border on
+  tedious. We will prove one version of distributivity very carefully,
+  and you can test your proof-building skills on some of the others.
+  We will give our new notation for matrix entries a workout here.
+  Compare the style of the proofs here with those given for vectors in
+  \ref{theorem:VSPCV}---while the objects here are more complicated,
+  our notation makes the proofs cleaner.
+
+  To prove that $(\alpha+\beta)A=\alpha A+\beta A$, we need to
+  establish the equality of two matrices.  We need to establish the
+  equality of their entries, one-by-one.  How do we do this, when we
+  do not even know how many entries the two matrices might have?  This
+  is where the notation for matrix entries, given in
+  \ref{definition:M}, comes into play.  Ready?  Here we go.
+
+  For \textit{any} $i$ and $j$, $1\leq i\leq m$, $1\leq j\leq n$,
+  \begin{align*}
+    \matrixentry{(\alpha+\beta)A}{ij}&=
+                                       (\alpha+\beta)\matrixentry{A}{ij} \\ %&&\ref{definition:MSM}\\
+                                     &=\alpha\matrixentry{A}{ij}+\beta\matrixentry{A}{ij}\\ %&&\text{Distributivity in $\complexes$}\\
+                                     &=\matrixentry{\alpha A}{ij}+\matrixentry{\beta A}{ij}\\ %&&\ref{definition:MSM}\\
+                                     &=\matrixentry{\alpha A+\beta A}{ij}\\ %&&\ref{definition:MA}
+  \end{align*}
+
+  There are several things to notice here.  (1) Each equals sign is an
+  equality of scalars (numbers).  (2) The two ends of the equation,
+  being true for any $i$ and $j$, allow us to conclude the equality of
+  the matrices by \ref{definition:ME}.  (3) There are several plus
+  signs, and several instances of juxtaposition.  Identify each one,
+  and state exactly what operation is being represented by each.
+\end{proof}
+\end{theorem}
+
+For now, note the similarities between \ref{theorem:VSPM} about matrices and \ref{theorem:VSPCV} about vectors.
+
+The zero matrix described in this theorem, $\zeromatrix$, is what you would expect---a matrix full of zeros.
+
+\begin{definition}[Zero Matrix]
+  The $m\times n$ \dfn{zero matrix} is written as
+  $\zeromatrix=\zeromatrix_{m\times n}$ and defined by
+  $\matrixentry{\zeromatrix}{ij}=0$, for all $1\leq i\leq m$,
+  $1\leq j\leq n$.
+\end{definition}
+
+\end{document}

@@ -1,0 +1,47 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Composition of Surjective Linear Transformations}
+
+\begin{document}
+\begin{abstract}
+  Surjective functions cannot increase dimension.
+\end{abstract}
+\maketitle
+
+We have already seen how to combine linear transformations to build
+new linear transformations, specifically, how to build the composition
+of two linear transformations (\ref{definition:LTC}).  It will be
+useful later to know that the composition of surjective linear
+transformations is again surjective, so we prove that here.
+
+\begin{theorem}[Composition of Surjective Linear Transformations is Surjective]
+\label{theorem:CSLTS}
+
+Suppose that $\ltdefn{T}{U}{V}$ and $\ltdefn{S}{V}{W}$ are surjective linear transformations.  Then $\ltdefn{(\compose{S}{T})}{U}{W}$ is \wordChoice{\choice{an injective}\choice[correct]{a surjective}} linear transformation.
+
+
+\begin{proof}
+That the composition is a linear transformation was established in \ref{theorem:CLTLT}, so we need only establish that the composition is surjective.  Applying \ref{definition:SLT}, choose $\vect{w}\in W$.
+
+
+
+Because $S$ is surjective, there must be a vector $\vect{v}\in V$, such that $\lteval{S}{\vect{v}}=\vect{w}$.  With the existence of $\vect{v}$ established, that $T$ is surjective guarantees a vector $\vect{u}\in U$ such that $\lteval{T}{\vect{u}}=\vect{v}$.  Now,
+\begin{align*}
+\lteval{\left(\compose{S}{T}\right)}{\vect{u}}&=\lteval{S}{\lteval{T}{\vect{u}}}&&\ref{definition:LTC}\\
+&=\lteval{S}{\vect{v}}&&\text{Definition of $\vect{u}$}\\
+&=\vect{w}&&\text{Definition of $\vect{v}$}
+\end{align*}
+
+
+
+
+This establishes that any element of the codomain ($\vect{w}$) can be created by evaluating $\compose{S}{T}$ with the right input ($\vect{u}$).  Thus, by \ref{definition:SLT}, $\compose{S}{T}$ is surjective.
+
+
+
+\end{proof}
+\end{theorem}
+
+\end{document}

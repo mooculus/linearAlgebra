@@ -1,0 +1,442 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Linear Independence}
+
+\begin{document}
+\begin{abstract}
+  ``Linear independence'' is one of the most fundamental conceptual
+  ideas in linear algebra, along with the notion of a span.
+\end{abstract}
+\maketitle
+
+A solution to a homogeneous system of equations is a linear
+combination of the columns of the coefficient matrix that equals the
+zero vector.  We have used this situation to our advantage to reduce
+the set of vectors used in a span construction from four down to two,
+by declaring certain vectors as surplus.  The next two definitions
+will allow us to formalize this situation.
+
+\begin{definition}[Relation of Linear Dependence for Column Vectors]
+Given a set of vectors $S=\set{\vectorlist{u}{n}}$, a true statement of the form
+\[
+\lincombo{\alpha}{u}{n}=\zerovector
+\]
+is a \dfn{relation of linear dependence} on $S$.  If this statement is formed in a trivial fashion, i.e.,  $\alpha_i=0$, $1\leq i\leq n$, then we say it is the \dfn{trivial relation of linear dependence} on $S$.
+\end{definition}
+
+\begin{definition}[Linear Independence of Column Vectors]
+The set of vectors $S=\set{\vectorlist{u}{n}}$ is \dfn{linearly dependent} if there is a relation of linear dependence on $S$ that is not trivial.  In the case where the \textit{only} relation of linear dependence on $S$ is the trivial one, then $S$ is a \dfn{linearly independent} set of vectors.
+\end{definition}
+
+Notice that a relation of linear dependence is an \textit{equation}.
+Though most of it is a linear combination, it is not a linear
+combination (that would be a vector).  Linear independence is a
+property of a \textit{set} of vectors.  It is easy to take a set of
+vectors, and an equal number of scalars, \textit{all zero}, and form a
+linear combination that equals the zero vector.  When the easy way is
+the \textit{only} way, then we say the set is linearly independent.
+Here are a couple of examples.
+
+\begin{example}%[Linearly dependent set in $\real{5}$]
+Consider the set of $n=4$ vectors from $\real{5}$,
+\[
+S=\set{
+\colvector{2\\-1\\3\\1\\2},\,
+\colvector{1\\2\\-1\\5\\2},\,
+\colvector{2\\1\\-3\\6\\1},\,
+\colvector{-6\\7\\-1\\0\\1}
+}
+\]
+
+To determine linear independence we first form a relation of linear
+dependence,
+\[
+\alpha_1\colvector{2\\-1\\3\\1\\2}+
+\alpha_2\colvector{1\\2\\-1\\5\\2}+
+\alpha_3\colvector{2\\1\\-3\\6\\1}+
+\alpha_4\colvector{-6\\7\\-1\\0\\1}
+=\zerovector
+\]
+
+We know the trivial solution
+$\alpha_1=\alpha_2=\alpha_3=\alpha_4=\answer{0}$ is a solution to this
+equation, but that is of no interest whatsoever.  That is
+\textit{always} the case, no matter what four vectors we might have
+chosen.
+
+We are curious to know if there are other (nontrivial!) solutions.  We
+can find such solutions as solutions to the homogeneous system
+$\homosystem{A}$ where the coefficient matrix has these four vectors
+as columns, which we then row-reduce
+\[
+A=
+\begin{bmatrix}
+2&1&2&-6\\
+-1&2&1&7\\
+3&-1&-3&-1\\
+1&5&6&0\\
+2&2&1&1
+\end{bmatrix}
+\rref
+\begin{bmatrix}
+\leading{1}&0&0&-2\\
+0&\leading{1}&0&4\\
+0&0&\leading{1}&-3\\
+0&0&0&0\\
+0&0&0&0
+\end{bmatrix}
+\]
+We could solve this homogeneous system completely, but for this
+example all we need is one nontrivial solution.  Setting the lone free
+variable to any nonzero value, such as $x_4=1$, yields the nontrivial
+solution
+\[
+\vect{x}=\colvector{\answer{2}\\-4\\3\\1}
+\]
+completing our application of \ref{theorem:SLSLC}, we have
+\[
+2\colvector{2\\-1\\3\\1\\2}+
+(-4)\colvector{1\\2\\-1\\5\\2}+
+3\colvector{2\\1\\-3\\6\\1}+
+1\colvector{-6\\7\\-1\\0\\1}
+=\zerovector
+\]
+
+This is a relation of linear dependence on $S$ that is not trivial, so we conclude that
+\begin{multipleChoice}
+  \choice[correct]{$S$ is linearly dependent.}
+  \choice{$S$ is linearly independent.}
+\end{multipleChoice}
+\end{example}
+
+\begin{example}%[Linearly independent set in $\complex{5}$]
+Consider the set of $n=4$ vectors from $\real{5}$,
+\[
+T=\set{
+\colvector{2\\-1\\3\\1\\2},\,
+\colvector{1\\2\\-1\\5\\2},\,
+\colvector{2\\1\\-3\\6\\1},\,
+\colvector{-6\\7\\-1\\1\\1}
+}
+\]
+To determine linear independence we first form a relation of linear dependence,
+\[
+\alpha_1\colvector{2\\-1\\3\\1\\2}+
+\alpha_2\colvector{1\\2\\-1\\5\\2}+
+\alpha_3\colvector{2\\1\\-3\\6\\1}+
+\alpha_4\colvector{-6\\7\\-1\\1\\1}
+=\zerovector
+\]
+
+We know that $\alpha_1=\alpha_2=\alpha_3=\alpha_4=0$ is a \wordChoice{\choice[correct]{trivial}\choice{nontrivial}} solution to this equation---and that is \textit{always} the case, no matter what four vectors we might have chosen.
+
+We are curious to know if there are other solutions.  We can find such
+solutions as solution to the homogeneous system
+$\linearsystem{B}{\zerovector}$ where the coefficient matrix has these
+four vectors as columns.  Row-reducing this coefficient matrix yields,
+\begin{align*}
+B=
+\begin{bmatrix}
+2&1&2&-6\\
+-1&2&1&7\\
+3&-1&-3&-1\\
+1&5&6&1\\
+2&2&1&1
+\end{bmatrix}
+&\rref
+\begin{bmatrix}
+\leading{1}&0&0&0\\
+0&\leading{1}&0&0\\
+0&0&\leading{1}&0\\
+0&0&0&\leading{1}\\
+0&0&0&0
+\end{bmatrix}
+\end{align*}
+
+From the form of this matrix, we see that there are 
+\begin{multipleChoice}
+  \choice[correct]{no free variables}
+  \choice{two free variables}
+  \choice{four free variables}
+\end{multipleChoice}
+so the solution \wordChoice{\choice{does not exist}\choice[correct]{is unique}}, and because the system is homogeneous, this solution is the trivial solution.  So we now know that there is but one way to combine the four vectors of $T$ into a relation of linear dependence, and that one way is the easy and obvious way.  In this situation we say that 
+\begin{multipleChoice}
+  \choice{the set $T$ is linearly dependent.}
+  \choice[correct]{the set $T$ is linearly independent.}
+\end{multipleChoice}
+\end{example}
+
+These examples relied on solving a homogeneous system of equations to
+determine linear independence.  We can codify this process in a
+time-saving theorem.
+
+\begin{theorem}[Linearly Independent Vectors and Homogeneous Systems]
+\label{theorem:LIVHS}
+Suppose that $S=\set{\vectorlist{v}{n}}\subseteq\complex{m}$ is a set
+of vectors and $A$ is the $m\times n$ matrix whose columns are the
+vectors in $S$.  Then $S$ is a linearly independent set if and only if
+the homogeneous system $\homosystem{A}$ has a unique solution.
+
+
+\begin{proof}
+  ($\Leftarrow$) Suppose that $\homosystem{A}$ has a unique solution.
+  Since it is a homogeneous system, this solution must be the trivial
+  solution $\vect{x}=\zerovector$.  By \ref{theorem:SLSLC}, this means
+  that the only relation of linear dependence on $S$ is the trivial
+  one.  So $S$ is linearly independent.
+
+  ($\Rightarrow$) We will prove the contrapositive.  Suppose that
+  $\linearsystem{A}{\zerovector}$ \wordChoice{\choice[correct]{does
+      not have}\choice{has}} a unique solution.  Since it is a
+  homogeneous system, it is
+  \wordChoice{\choice{inconsistent}\choice[correct]{consistent}}, and
+  so must have \wordChoice{\choice[correct]{infinitely
+      many}\choice{no}} solutions.  One of these infinitely many
+  solutions must be nontrivial (in fact, almost all of them are), so
+  choose one.  By \ref{theorem:SLSLC} this nontrivial solution will
+  give a nontrivial relation of linear dependence on $S$, so we can
+  conclude that $S$ is a linearly dependent set.
+\end{proof}
+\end{theorem}
+
+Since \ref{theorem:LIVHS} is an equivalence, we can use it to determine the linear independence or dependence of any set of column vectors, just by creating a matrix and analyzing the row-reduced form.  Let us illustrate this with two more examples.
+
+\begin{example}%[Linearly independent, homogeneous system]
+  Consider the set of vectors
+  \[
+    S=\set{
+      \colvector{2\\-1\\3\\4\\2},\,
+      \colvector{6\\2\\-1\\3\\4},\,
+      \colvector{4\\3\\-4\\5\\1}
+    }.
+  \]
+  \begin{multipleChoice}
+    \choice[correct]{The set $S$ is linearly independent.}
+    \choice{The set $S$ is linearly dependent.}
+  \end{multipleChoice}
+
+  \begin{explanation}
+    We study the matrix, $A$, whose columns are the vectors in $S$.
+    Specifically, we are interested in the size of the solution set
+    for the homogeneous system $\homosystem{A}$, so we row-reduce $A$.
+    \[
+      A=
+      \begin{bmatrix}
+        2 & 6 & 4\\
+        -1 & 2 & 3\\
+        3 & -1 & -4\\
+        4 & 3 & 5\\
+        2 & 4 & 1
+      \end{bmatrix}
+      \rref
+      \begin{bmatrix}
+        \leading{1} & 0 & 0\\
+        0 & \leading{1} & 0\\
+        0 & 0 & \leading{1}\\
+        0 & 0 & 0\\
+        0 & 0 & 0
+      \end{bmatrix}
+    \]
+    
+    Now, $r=3$, so there are $n-r=3-3=0$ free variables and we see
+    that $\homosystem{A}$ has a unique solution (\ref{theorem:HSC},
+    \ref{theorem:FVCS}).  By \ref{theorem:LIVHS}, the set $S$ is
+    linearly independent.
+  \end{explanation}
+\end{example}
+
+\begin{example}%[Linearly dependent, homogeneous system]
+  Consider the set
+  \[
+    S=\set{
+      \colvector{2\\-1\\3\\4\\2},\,
+      \colvector{6\\2\\-1\\3\\4},\,
+      \colvector{4\\3\\-4\\-1\\2}
+    }.
+  \]
+  \begin{multipleChoice}
+    \choice{The set $S$ is linearly independent.}
+    \choice[correct]{The set $S$ is linearly dependent.}
+  \end{multipleChoice}
+
+  \begin{explanation}
+    We again study the matrix, $A$, whose columns are the vectors in
+    $S$.  Specifically, we are interested in the size of the solution
+    set for the homogeneous system $\homosystem{A}$, so we row-reduce
+    $A$.
+    \[
+      A=
+      \begin{bmatrix}
+        2 & 6 & 4\\
+        -1 & 2 & 3\\
+        3 & -1 & -4\\
+        4 & 3 & -1\\
+        2 & 4 & 2
+      \end{bmatrix}
+      \rref
+      \begin{bmatrix}
+        \leading{1} & 0 & -1\\
+        0 & \leading{1} & 1\\
+        0 & 0 & 0\\
+        0 & 0 & 0\\
+        0 & 0 & 0
+      \end{bmatrix}
+    \]
+    Now, $r=2$, so there are $n-r=3-2=1$ free variables and we see
+    that $\homosystem{A}$ has infinitely many solutions
+    (\ref{theorem:HSC}, \ref{theorem:FVCS}).  By \ref{theorem:LIVHS},
+    the set $S$ is linearly dependent.
+  \end{explanation}
+\end{example}
+
+As an equivalence, \ref{theorem:LIVHS} gives us a straightforward way
+to determine if a set of vectors is linearly independent or dependent.
+
+Review \ref{example:LIHS} and \ref{example:LDHS}.  They are very
+similar, differing only in the last two slots of the third vector.
+This resulted in slightly different matrices when row-reduced, and
+slightly different values of $r$, the number of nonzero rows.  Notice,
+too, that we are less interested in the actual solution set, and more
+interested in its form or size.  These observations allow us to make a
+slight improvement in \ref{theorem:LIVHS}.
+
+\begin{theorem}[Linearly Independent Vectors, $r$ and $n$]
+  \label{theorem:LIVRN} Suppose that
+  \[
+    S=\set{\vectorlist{v}{n}}\subseteq\complex{m}
+  \] is a set of vectors and $A$ is the $m\times n$ matrix whose
+  columns are the vectors in $S$.  Let $B$ be a matrix in reduced
+  row-echelon form that is row-equivalent to $A$ and let $r$ denote
+  the number of pivot columns in $B$.  Then $S$ is linearly
+  independent if and only if $n=r$.
+\begin{proof}
+  \ref{theorem:LIVHS} says the linear independence of $S$ is
+  equivalent to the homogeneous linear system $\homosystem{A}$ having
+  a unique solution.  Since $\homosystem{A}$ is consistent
+  (\ref{theorem:HSC}) we can apply \ref{theorem:CSRN} to see that the
+  solution is unique exactly when $n=r$.
+\end{proof}
+\end{theorem}
+
+So now here is an example of the most straightforward way to determine
+if a set of column vectors is linearly independent or linearly
+dependent.  While this method can be quick and easy, do not forget the
+logical progression from the definition of linear independence through
+homogeneous system of equations which makes it possible.
+
+\begin{example}%[Linearly dependent, $r$ and $n$]
+  Is the set of vectors
+  \[
+    S=\set{
+      \colvector{2\\-1\\3\\1\\0\\3},\,
+      \colvector{9\\-6\\-2\\3\\2\\1},\,
+      \colvector{1\\1\\1\\0\\0\\1},\,
+      \colvector{-3\\1\\4\\2\\1\\2},\,
+      \colvector{6\\-2\\1\\4\\3\\2}
+    }
+  \]
+  linearly independent or linearly dependent?
+
+  The above theorem (\ref{theorem:LIVRN}) suggests we place these
+  vectors into a matrix as columns and analyze the row-reduced version
+  of the matrix,
+  \[
+    \begin{bmatrix}
+      2 & 9 & 1 & -3 & 6\\
+      -1 & -6 & 1 & 1 & -2\\
+      3 & -2 & 1 & 4 & 1\\
+      1 & 3 & 0 & 2 & 4\\
+      0 & 2 & 0 & 1 & 3\\
+      3 & 1 & 1 & 2 & 2
+    \end{bmatrix}
+    \rref
+    \begin{bmatrix}
+      \leading{1} & 0 & 0 & 0 & -1\\
+      0 & \leading{1} & 0 & 0 & 1\\
+      0 & 0 & \leading{1} & 0 & 2\\
+      0 & 0 & 0 & \leading{1} & 1\\
+      0 & 0 & 0 & 0 & 0\\
+      0 & 0 & 0 & 0 & 0
+    \end{bmatrix}
+  \]
+  Therefore
+  \begin{multipleChoice}
+    \choice{The set $S$ is linearly independent.}
+    \choice[correct]{The set $S$ is linearly dependent.}
+  \end{multipleChoice}
+
+  \begin{feedback}[correct]
+    Exactly!  We need only compute that $r=4<5=n$ to recognize, via
+    \ref{theorem:LIVRN} that $S$ is a linearly dependent set.
+  \end{feedback}
+
+\end{example}
+
+\begin{example}%[Large linearly dependent set in $\complex{4}$]
+  Consider the set of $n=9$ vectors from $\complex{4}$,
+  \[
+    R=\set{
+      \colvector{-1\\3\\1\\2},\,
+      \colvector{7\\1\\-3\\6},\,
+      \colvector{1\\2\\-1\\-2},\,
+      \colvector{0\\4\\2\\9},\,
+      \colvector{5\\-2\\4\\3},\,
+      \colvector{2\\1\\-6\\4},\,
+      \colvector{3\\0\\-3\\1},\,
+      \colvector{1\\1\\5\\3},\,
+      \colvector{-6\\-1\\1\\1}
+    }.
+  \]
+
+  To employ \ref{theorem:LIVHS}, we form a $4\times 9$ matrix, $C$, whose columns are the vectors in $R$
+  \[
+    C=
+    \begin{bmatrix}
+      -1&7&1&0&5&2&3&1&-6\\
+      3&1&2&4&-2&1&0&1&-1\\
+      1&-3&-1&2&4&-6&-3&5&1\\
+      2&6&-2&9&3&4&1&3&1
+    \end{bmatrix}.
+  \]
+
+
+  \begin{multipleChoice}
+    \choice{The set $R$ is linearly independent.}
+    \choice[correct]{The set $R$ is linearly dependent.}
+  \end{multipleChoice}
+
+  \begin{feedback}[correct]
+    % <!-- Can do quicker with LIVRN and counting, but want to use HMVEI -->
+    Right!  Here is one method to see why $R$ is linearly dependent.
+    To determine if the homogeneous system $\homosystem{C}$ has a
+    unique solution or not, we would normally row-reduce this matrix.
+    But in this particular example, we can do better.
+    \ref{theorem:HMVEI} tells us that since the system is homogeneous
+    with $n=9$ variables in $m=4$ equations, and $n>m$, there must be
+    infinitely many solutions.  Since there is not a unique solution,
+    \ref{theorem:LIVHS} says the set is linearly dependent.
+  \end{feedback}
+\end{example}
+
+The situation is slick enough to warrant formulating as a theorem.
+
+\begin{theorem}[More Vectors than Size implies Linear Dependence]
+\label{theorem:MVSLD}
+
+Suppose that $S=\set{\vectorlist{u}{n}}\subseteq\complex{m}$ and
+$n>m$. Then $S$ is a linearly dependent set.
+
+\begin{proof}
+  Form the $m\times n$ matrix $A$ whose columns are $\vect{u}_i$,
+  $1\leq i\leq n$.  Consider the homogeneous system $\homosystem{A}$.
+  By \ref{theorem:HMVEI} this system has infinitely many solutions.
+  Since the system does not have a unique solution,
+  \ref{theorem:LIVHS} says the columns of $A$ form a linearly
+  dependent set, as desired.
+\end{proof}
+\end{theorem}
+
+
+\end{document}

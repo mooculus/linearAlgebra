@@ -1,0 +1,305 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Linear Transformations and Linear Combinations}
+
+\begin{document}
+\begin{abstract}
+The interaction between linear transformations and linear combinations lies at the heart of many of the important theorems of linear algebra.
+\end{abstract}
+\maketitle
+
+This theorem says that we can ``push'' linear transformations ``down into'' linear combinations, or ``pull'' linear transformations ``up out'' of linear combinations.  We will have opportunities to both push and pull.
+
+\begin{theorem}[Linear Transformations and Linear Combinations]
+\label{theorem:LTLC}
+
+Suppose that $\ltdefn{T}{U}{V}$ is a linear transformation, $\vectorlist{u}{t}$ are vectors from $U$ and $\scalarlist{a}{t}$ are scalars from $\complexes$.  Then
+\[
+\lteval{T}{\lincombo{a}{u}{t}}
+=
+a_1\lteval{T}{\vect{u}_1}+
+a_2\lteval{T}{\vect{u}_2}+
+a_3\lteval{T}{\vect{u}_3}+\cdots+
+a_t\lteval{T}{\vect{u}_t}
+\]
+
+\begin{proof}
+
+\begin{align*}
+&\lteval{T}{\lincombo{a}{u}{t}}\\
+&\quad\quad=
+\lteval{T}{a_1\vect{u}_1}+
+\lteval{T}{a_2\vect{u}_2}+
+\lteval{T}{a_3\vect{u}_3}+\cdots+
+\lteval{T}{a_t\vect{u}_t}&&\ref{definition:LT}\\
+&\quad\quad=
+a_1\lteval{T}{\vect{u}_1}+
+a_2\lteval{T}{\vect{u}_2}+
+a_3\lteval{T}{\vect{u}_3}+\cdots+
+a_t\lteval{T}{\vect{u}_t}&&\ref{definition:LT}
+\end{align*}
+
+\end{proof}
+\end{theorem}
+
+Some authors, especially in more advanced texts, take the conclusion of \ref{theorem:LTLC} as the defining condition of a linear transformation.  This has the appeal of being a single condition, rather than the two-part condition of \ref{definition:LT}.
+
+Our next theorem says, informally, that it is enough to know how a linear transformation behaves for inputs from any basis of the domain, and \textit{all} the other outputs are described by a linear combination of these few values.  Again, the statement of the theorem, and its proof, are not remarkable, but the insight that goes along with it is very fundamental.
+
+\begin{theorem}[Linear Transformation Defined on a Basis]
+\label{theorem:LTDB}
+
+Suppose $U$ is a vector space with basis $B=\set{\vectorlist{u}{n}}$ and the vector space $V$ contains the vectors $\vectorlist{v}{n}$ (which may not be distinct).   Then there is a unique linear transformation, $\ltdefn{T}{U}{V}$, such that $\lteval{T}{\vect{u}_i}=\vect{v}_i$, $1\leq i\leq n$.
+
+
+\begin{proof}
+To prove the existence of $T$, we construct a function and show that it is a linear transformation (\ref{technique:C}).  Suppose $\vect{w}\in U$ is an arbitrary element of the domain.  Then by \ref{theorem:VRRB} there are unique scalars $\scalarlist{a}{n}$ such that
+\[
+\vect{w}=\lincombo{a}{u}{n}
+\]
+
+Then \textit{define} the function $T$ by
+\[
+\lteval{T}{\vect{w}}=\lincombo{a}{v}{n}
+\]
+
+It should be clear that $T$ behaves as required for $n$ inputs from $B$.  Since the scalars provided by \ref{theorem:VRRB} are unique, there is no ambiguity in this definition, and $T$ qualifies as a function with domain $U$ and codomain $V$ (i.e.,  $T$ is well-defined).  But is $T$ a linear transformation as well?
+
+Let $\vect{x}\in U$ be a second element of the domain, and suppose the scalars provided by \ref{theorem:VRRB} (relative to $B$) are $\scalarlist{b}{n}$.  Then
+\begin{align*}
+\lteval{T}{\vect{w}+\vect{x}}&=
+\lteval{T}{
+a_1\vect{u}_1+
+\cdots+
+a_n\vect{u}_n+
+b_1\vect{u}_1+
+\cdots+
+b_n\vect{u}_n
+}\\
+&=
+\lteval{T}{
+\left(a_1+b_1\right)\vect{u}_1+
+\cdots+
+\left(a_n+b_n\right)\vect{u}_n
+}
+&&\ref{definition:VS}\\
+&=
+\left(a_1+b_1\right)\vect{v}_1+
+\cdots+
+\left(a_n+b_n\right)\vect{v}_n
+&&\text{Definition of $T$}\\
+&=
+a_1\vect{v}_1+
+\cdots+
+a_n\vect{v}_n+
+b_1\vect{v}_1+
+\cdots+
+b_n\vect{v}_n
+&&\ref{definition:VS}\\
+&=\lteval{T}{\vect{w}}+\lteval{T}{\vect{x}}
+\end{align*}
+
+Let $\alpha\in\complexes$ be any scalar.  Then
+\begin{align*}
+\lteval{T}{\alpha\vect{w}}&=
+\lteval{T}{\alpha\left(\lincombo{a}{u}{n}\right)}\\
+&=
+\lteval{T}{\lincombo{\alpha a}{u}{n}}
+&&\ref{definition:VS}\\
+&=\lincombo{\alpha a}{v}{n}
+&&\text{Definition of $T$}\\
+&=\alpha\left(\lincombo{a}{v}{n}\right)
+&&\ref{definition:VS}\\
+&=\alpha\lteval{T}{\vect{w}}
+\end{align*}
+
+So by \ref{definition:LT}, $T$ is a linear transformation.
+
+Is $T$ unique (among all linear transformations that take the $\vect{u}_i$ to the $\vect{v}_i$)?  Applying \ref{technique:U}, we posit the existence of a second linear transformation, $\ltdefn{S}{U}{V}$ such that $\lteval{S}{\vect{u}_i}=\vect{v}_i$, $1\leq i\leq n$.  Again, let $\vect{w}\in U$ represent an arbitrary element of $U$ and let $\scalarlist{a}{n}$ be the scalars provided by \ref{theorem:VRRB} (relative to $B$).  We have,
+\begin{align*}
+\lteval{T}{\vect{w}}&=
+\lteval{T}{\lincombo{a}{u}{n}}
+&&\ref{theorem:VRRB}\\
+&=
+a_1\lteval{T}{\vect{u}_1}+
+a_2\lteval{T}{\vect{u}_2}+
+a_3\lteval{T}{\vect{u}_3}+
+\cdots+
+a_n\lteval{T}{\vect{u}_n}
+&&\ref{theorem:LTLC}\\
+&=
+a_1\vect{v}_1+
+a_2\vect{v}_2+
+a_3\vect{v}_3+
+\cdots+
+a_n\vect{v}_n
+&&\text{Definition of $T$}\\
+&=
+a_1\lteval{S}{\vect{u}_1}+
+a_2\lteval{S}{\vect{u}_2}+
+a_3\lteval{S}{\vect{u}_3}+
+\cdots+
+a_n\lteval{S}{\vect{u}_n}
+&&\text{Definition of $S$}\\
+&=
+\lteval{S}{\lincombo{a}{u}{n}}
+&&\ref{theorem:LTLC}\\
+&=
+\lteval{S}{\vect{w}}
+&&\ref{theorem:VRRB}
+\end{align*}
+
+
+So the output of $T$ and $S$ agree on every input, which means they are equal as functions, $T=S$.  So $T$ is unique.
+
+\end{proof}
+\end{theorem}
+
+You might recall facts from analytic geometry, such as ``any two
+points determine a line'' and ``any three non-collinear points
+determine a parabola.''  \ref{theorem:LTDB} has much of the same feel.
+By specifying the $n$ outputs for inputs from a basis, an entire
+linear transformation is determined.  The analogy is not perfect, but
+the style of these facts are not very dissimilar from
+\ref{theorem:LTDB}.
+
+Notice that the statement of \ref{theorem:LTDB} asserts the
+\textit{existence} of a linear transformation with certain properties,
+while the proof shows us exactly how to define the desired linear
+transformation. The next two examples show how to compute values of
+linear transformations that we create this way.
+
+\begin{example}
+[Linear transformation defined on a basis]
+
+Consider the linear transformation $\ltdefn{T}{\complex{3}}{\complex{2}}$ that is required to have the following three values,
+\begin{align*}
+\lteval{T}{\colvector{1\\0\\0}}=\colvector{2\\1}&&
+\lteval{T}{\colvector{0\\1\\0}}=\colvector{-1\\4}&&
+\lteval{T}{\colvector{0\\0\\1}}=\colvector{6\\0}
+\end{align*}
+
+Because
+\[
+B=\set{
+\colvector{1\\0\\0},\,
+\colvector{0\\1\\0},\,
+\colvector{0\\0\\1}
+}
+\]
+is a basis for $\complex{3}$ (\ref{theorem:SUVB}), \ref{theorem:LTDB} says there is a unique linear transformation $T$ that behaves this way.
+
+How do we compute other values of $T$?  Consider the input
+\[
+\vect{w}=\colvector{2\\-3\\1}=(2)\colvector{1\\0\\0}+(-3)\colvector{0\\1\\0}+(1)\colvector{0\\0\\1}
+\]
+
+Then
+\[
+\lteval{T}{\vect{w}}=(2)\colvector{\answer{2}\\\answer{1}}+ (-3)\colvector{-1\\4}+ (1)\colvector{6\\0}=\colvector{13\\-10}
+\]
+
+Doing it again,
+\[
+\vect{x}=\colvector{5\\2\\-3}=(5)\colvector{1\\0\\0}+(2)\colvector{0\\1\\0}+(-3)\colvector{0\\0\\1}
+\]
+so
+\[
+\lteval{T}{\vect{x}}=(\answer{5})\colvector{2\\1}+ (2)\colvector{-1\\4}+ (-3)\colvector{6\\0}=\colvector{-10\\13}
+\]
+
+
+Any other value of $T$ could be computed in a similar manner.  So
+rather than being given a \textit{formula} for the outputs of $T$, the
+\textit{requirement} that $T$ behave in a certain way for the inputs
+chosen from a basis of the domain, is as sufficient as a formula for
+computing any value of the function.  You might notice some parallels
+between this example and \ref{example:MOLT} or \ref{theorem:MLTCV}.
+
+\end{example}
+
+\begin{example}[Linear transformation defined on a basis]
+
+Consider the linear transformation $\ltdefn{R}{\complex{3}}{\complex{2}}$ with the three values,
+\begin{align*}
+\lteval{R}{\colvector{1\\2\\1}}=\colvector{5\\-1}&&
+\lteval{R}{\colvector{-1\\5\\1}}=\colvector{0\\4}&&
+\lteval{R}{\colvector{3\\1\\4}}=\colvector{2\\3}
+\end{align*}
+
+You can check that
+\[
+D=\set{
+\colvector{1\\2\\1},\,
+\colvector{-1\\5\\1},\,
+\colvector{3\\1\\4}
+}
+\]
+is a basis for $\complex{3}$ (make the vectors the columns of a square matrix and check that the matrix is nonsingular,  \ref{theorem:CNMB}).  By \ref{theorem:LTDB} we know there is a unique linear transformation $R$ with the three specified outputs.  However, we have to work just a bit harder to take an input vector and express it as a linear combination of the vectors in $D$.
+
+For example, consider,
+\[
+\vect{y}=\colvector{8\\-3\\5}
+\]
+
+Then we must first write $\vect{y}$ as a linear combination of the vectors in $D$ and solve for the unknown scalars, to arrive at
+\[
+\vect{y}=\colvector{8\\-3\\5}= (3)\colvector{1\\2\\1}+ (-2)\colvector{-1\\5\\1}+ (1)\colvector{3\\1\\4}
+\]
+
+Then the proof of \ref{theorem:LTDB} gives us
+\[
+\lteval{R}{\vect{y}}=(\answer{3})\colvector{5\\-1}+ (-2)\colvector{0\\4}+ (1)\colvector{2\\3}= \colvector{17\\-8}
+\]
+
+Any other value of $R$ could be computed in a similar manner.
+
+\end{example}
+
+Here is a third example of a linear transformation defined by its action on a basis, only with more abstract vector spaces involved.
+
+
+
+\begin{example}[Linear transformation defined on a basis]
+
+The set $W=\set{p(x)\in P_3\mid p(1)=0, p(3)=0}\subseteq P_3$ is a subspace of the vector space of polynomials $P_3$.  This subspace has $C=\set{3-4x+x^2,\,12-13x+x^3}$ as a basis (check this!).  Suppose we consider the linear transformation $\ltdefn{S}{P_3}{M_{22}}$ with values
+\begin{align*}
+\lteval{S}{3-4x+x^2}=\begin{bmatrix}1&-3\\2&0\end{bmatrix}&&
+\lteval{S}{12-13x+x^3}=\begin{bmatrix}0&1\\1&0\end{bmatrix}
+\end{align*}
+
+
+
+
+By \ref{theorem:LTDB} we know there is a unique linear transformation with these two values.  To illustrate a sample computation of $S$, consider $q(x)=9-6x-5x^2+2x^3$.  Verify that $q(x)$ is an element of $W$ (does it have roots at $x=1$ and $x=3$?), then find the scalars needed to write it as a linear combination of the basis vectors in $C$.  Because
+\[
+q(x)=9-6x-5x^2+2x^3=(-5)(3-4x+x^2)+(2)(12-13x+x^3)
+\]
+
+
+
+
+The proof of \ref{theorem:LTDB} gives us
+\[
+\lteval{S}{q}=(\answer{-5})\begin{bmatrix}1&-3\\2&0\end{bmatrix}
++
+(2)\begin{bmatrix}0&1\\1&0\end{bmatrix}
+=
+\begin{bmatrix}-5&17\\-8&0\end{bmatrix}
+\]
+
+
+And all the other outputs of $S$ could be computed in the same manner.  Every output of $S$ will have a zero in the second row, second column.  Can you see why this is so?
+
+
+\end{example}
+
+Informally, we can describe \ref{theorem:LTDB} by saying ``it is enough to know what a linear transformation does to a basis (of the domain).''
+
+\end{document}
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

@@ -1,0 +1,585 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Row Space of a Matrix}
+
+\begin{document}
+\begin{abstract}
+  The row space is the column space of the transpose.
+\end{abstract}
+\maketitle
+
+The rows of a matrix can be viewed as vectors, since they are just
+lists of numbers, arranged horizontally.  So we will transpose a
+matrix, turning rows into columns, so we can then manipulate rows as
+column vectors.  As a result we will be able to make some new
+connections between row operations and solutions to systems of
+equations.
+
+\begin{definition}[Row Space of a Matrix]
+  Suppose $A$ is an $m\times n$ matrix.  Then the \dfn{row space} of
+  $A$, $\rsp{A}$, is the column space of $\transpose{A}$, i.e.,
+  $\rsp{A}=\csp{\transpose{A}}$.
+\end{definition}
+
+Informally, the row space is the set of all linear combinations of the
+rows of $A$.  However, we write the rows as column vectors, thus the
+necessity of using the transpose to make the rows into columns.
+Additionally, with the row space defined in terms of the column space,
+all of the previous results of this section can be applied to row
+spaces.
+
+Notice that if $A$ is a rectangular $m\times n$ matrix, then
+$\csp{A}\subseteq\complex{m}$, while $\rsp{A}\subseteq\complex{n}$ and
+the two sets are not comparable since they do not even hold objects of
+the same type.
+
+\begin{question}
+  When $A$ is square of size $n$, both $\csp{A}$ and $\rsp{A}$ are
+  subsets of $\complex{n}$.  Then it is usually the case that
+  \begin{multipleChoice}
+    \choice[correct]{$\rsp(A) \neq \csp(A)$}
+    \choice{$\rsp(A) = \csp(A)$}
+  \end{multipleChoice}
+\end{question}
+
+\begin{example}
+  The system of linear equations
+  \begin{align*}
+    x_1 +4x_2  - x_4  + 7x_6 - 9x_7 &= 3\\
+    2x_1 + 8x_2 - x_3 + 3x_4 + 9x_5 - 13x_6 + 7x_7 &= 9\\
+    2x_3 -3x_4 -4x_5 +12x_6 -8x_7 &= 1\\
+    -x_1  - 4x_2 + 2x_3 +4x_4 + 8x_5 - 31x_6 + 37x_7 &= 4
+  \end{align*}
+  has coefficient matrix
+  \[
+    M = \begin{bmatrix}
+      1 & 4 & 0 & -1 & 0 & 7 &  -9 \\
+      2 & 8 &  -1 & 3 & 9 &  -13 & 7\\
+      0 & 0 &  2 & -3 & -4 & 12 &  -8\\
+      -1 &  -4 & 2 & 4 & 8 &  -31 & 37
+    \end{bmatrix}
+  \]
+  To build the row space, we transpose the matrix,
+  \[
+    \transpose{M}=
+    \begin{bmatrix}
+      1 & \answer{2} & 0 & -1\\
+      \answer{4} & 8 & 0 & -4\\
+      0 & -1 & 2 & 2\\
+      -1 & 3 & -3 & 4\\
+      0 & 9 & -4 & 8\\
+      7 & -13 & 12 & -31\\
+      -9 & 7 & -8 & 37
+    \end{bmatrix}
+  \]
+
+  Then the columns of this matrix are used in a span to build the row space,
+  \[
+    \rsp{M}=\csp{\transpose{M}}=
+    \spn{\set{
+        \colvector{1\\4\\0\\-1\\0\\7\\-9},\,
+        \colvector{2\\8\\-1\\3\\9\\-13\\7},\,
+        \colvector{0\\0\\2\\-3\\-4\\12\\-8},\,
+        \colvector{-1\\-4\\2\\4\\8\\-31\\37}
+      }}.
+  \]
+  
+  However, we can use \ref{theorem:BCS} to get a slightly better description.  First, row-reduce $\transpose{M}$,
+  \[
+    \begin{bmatrix}
+      \leading{1} & 0 & 0 & -\frac{31}{7}\\
+      0 & \leading{1} & 0 & \frac{12}{7}\\
+      0 & 0 & \leading{1} & \frac{13}{7}\\
+      0 & 0 & 0 & 0\\
+      0 & 0 & 0 & 0\\
+      0 & 0 & 0 & 0\\
+      0 & 0 & 0 & 0
+    \end{bmatrix}.
+  \]
+
+  Since the pivot columns have indices $D=\set{1,\,2,\,3}$, the column
+  space of $\transpose{M}$ can be spanned by just the first three
+  columns of $\transpose{M}$,
+  \[
+    \rsp{M}=\csp{\transpose{M}}=
+    \spn{\set{
+        \colvector{1\\4\\0\\-1\\0\\7\\-9},\,
+        \colvector{2\\8\\-1\\3\\9\\-13\\7},\,
+        \colvector{0\\0\\2\\-3\\-4\\12\\-8}
+      }}.
+  \]
+\end{example}
+
+The row space would not be too interesting if it was simply the column
+space of the transpose.  However, when we do row operations on a
+matrix we have no effect on the many linear combinations that can be
+formed with the rows of the matrix.  This is stated more carefully in
+the following theorem.
+
+\begin{theorem}[Row-Equivalent Matrices have equal Row Spaces]
+  \label{theorem:REMRS}Suppose $A$ and $B$ are row-equivalent
+  matrices.  Then $\rsp{A}=\rsp{B}$.
+
+  \begin{proof}
+    Two matrices are row-equivalent (\ref{definition:REM}) if one can
+    be obtained from another by a sequence of (possibly many) row
+    operations.  We will prove the theorem for two matrices that
+    differ by a single row operation, and then this result can be
+    applied repeatedly to get the full statement of the theorem.  The
+    row spaces of $A$ and $B$ are spans of the columns of their
+    transposes.  For each row operation we perform on a matrix, we can
+    define an analogous operation on the columns.  Perhaps we should
+    call these \dfn{column operations}.  Instead, we will still call
+    them row operations, but we will apply them to the columns of the
+    transposes.
+
+    Refer to the columns of $\transpose{A}$ and $\transpose{B}$ as
+    $\vect{A}_i$ and $\vect{B}_i$, $1\leq i\leq m$.  The row operation
+    that switches rows will switch columns of the transposed matrices.
+    This will have \wordChoice{\choice[correct]{no}\choice{an}} effect
+    on the possible linear combinations formed by the columns.
+
+    Suppose that $\transpose{B}$ is formed from $\transpose{A}$ by
+    multiplying column $\vect{A}_t$ by $\alpha\neq 0$.  In other
+    words, $\vect{B}_t=\alpha\vect{A}_t$, and $\vect{B}_i=\vect{A}_i$
+    for all $i\neq t$.  We need to establish that two sets are equal,
+    $\csp{\transpose{A}}=\csp{\transpose{B}}$.  We will take a generic
+    element of one and show that it is contained in the other.
+    \begin{align*}
+      \beta_1\vect{B}_1+
+      &
+        \beta_2\vect{B}_2+
+        \beta_3\vect{B}_3+
+        \cdots+
+        \beta_t\vect{B}_t+
+        \cdots+
+        \beta_m\vect{B}_m\\
+      &=
+        \beta_1\vect{A}_1+
+        \beta_2\vect{A}_2+
+        \beta_3\vect{A}_3+
+        \cdots+
+        \beta_t\left(\alpha\vect{A}_t\right)+
+        \cdots+
+        \beta_m\vect{A}_m\\
+      &=
+        \beta_1\vect{A}_1+
+        \beta_2\vect{A}_2+
+        \beta_3\vect{A}_3+
+        \cdots+
+        \left(\alpha\beta_t\right)\vect{A}_t+
+        \cdots+
+        \beta_m\vect{A}_m
+    \end{align*}
+    says that $\csp{\transpose{B}}\subseteq\csp{\transpose{A}}$.  Similarly,
+    \begin{align*}
+      \gamma_1\vect{A}_1+
+      &
+        \gamma_2\vect{A}_2+
+        \gamma_3\vect{A}_3+
+        \cdots+
+        \gamma_t\vect{A}_t+
+        \cdots+
+        \gamma_m\vect{A}_m\\
+      &=
+        \gamma_1\vect{A}_1+
+        \gamma_2\vect{A}_2+
+        \gamma_3\vect{A}_3+
+        \cdots+
+        \left(\frac{\gamma_t}{\alpha}\alpha\right)\vect{A}_t+
+        \cdots+
+        \gamma_m\vect{A}_m\\
+      &=
+        \gamma_1\vect{A}_1+
+        \gamma_2\vect{A}_2+
+        \gamma_3\vect{A}_3+
+        \cdots+
+        \frac{\gamma_t}{\alpha}\left(\alpha\vect{A}_t\right)+
+        \cdots+
+        \gamma_m\vect{A}_m\\
+      &=
+        \gamma_1\vect{B}_1+
+        \gamma_2\vect{B}_2+
+        \gamma_3\vect{B}_3+
+        \cdots+
+        \frac{\gamma_t}{\alpha}\vect{B}_t+
+        \cdots+
+        \gamma_m\vect{B}_m
+    \end{align*}
+    says that $\csp{\transpose{A}}\subseteq\csp{\transpose{B}}$.  So
+    $\rsp{A}=\csp{\transpose{A}}=\csp{\transpose{B}}=\rsp{B}$ when a
+    single row operation of the second type is performed.
+
+    Suppose now that $\transpose{B}$ is formed from $\transpose{A}$ by
+    replacing $\vect{A}_t$ with $\alpha\vect{A}_s+\vect{A}_t$ for some
+    $\alpha\in\complexes$ and $s\neq t$.  In other words,
+    $\vect{B}_t=\alpha\vect{A}_s+\vect{A}_t$, and
+    $\vect{B}_i=\vect{A}_i$ for $i\neq t$.
+    \begin{align*}
+      \beta_1\vect{B}_1+
+      &
+        \beta_2\vect{B}_2+
+        \cdots+
+        \beta_s\vect{B}_s+
+        \cdots+
+        \beta_t\vect{B}_t+
+        \cdots+
+        \beta_m\vect{B}_m\\
+      &=
+        \beta_1\vect{A}_1+
+        \beta_2\vect{A}_2+
+        \cdots+
+        \beta_s\vect{A}_s+
+        \cdots+
+        \beta_t\left(\alpha\vect{A}_s+\vect{A}_t\right)+
+        \cdots+
+        \beta_m\vect{A}_m\\
+      &=
+        \beta_1\vect{A}_1+
+        \beta_2\vect{A}_2+
+        \cdots+
+        \beta_s\vect{A}_s+
+        \cdots+
+        \left(\beta_t\alpha\right)\vect{A}_s+\beta_t\vect{A}_t+
+        \cdots+
+        \beta_m\vect{A}_m\\
+      &=
+        \beta_1\vect{A}_1+
+        \beta_2\vect{A}_2+
+        \cdots+
+        \beta_s\vect{A}_s+\left(\beta_t\alpha\right)\vect{A}_s+
+        \cdots+
+        \beta_t\vect{A}_t+
+        \cdots+
+        \beta_m\vect{A}_m\\
+      &=
+        \beta_1\vect{A}_1+
+        \beta_2\vect{A}_2+
+        \cdots+
+        \left(\beta_s+\beta_t\alpha\right)\vect{A}_s+
+        \cdots+
+        \beta_t\vect{A}_t+
+        \cdots+
+        \beta_m\vect{A}_m
+    \end{align*}
+    says that $\csp{\transpose{B}}\subseteq\csp{\transpose{A}}$.  Similarly,
+    \begin{align*}
+      \gamma_1&\vect{A}_1+
+                \gamma_2\vect{A}_2+
+                \cdots+
+                \gamma_s\vect{A}_s+
+                \cdots+
+                \gamma_t\vect{A}_t+
+                \cdots+
+                \gamma_m\vect{A}_m\\
+              &=
+                \gamma_1\vect{A}_1+
+                \gamma_2\vect{A}_2+
+                \cdots+
+                \gamma_s\vect{A}_s+
+                \cdots+
+                \left(-\alpha\gamma_t\vect{A}_s + \alpha\gamma_t\vect{A}_s\right)+\gamma_t\vect{A}_t+
+                \cdots+
+                \gamma_m\vect{A}_m\\
+              &=
+                \gamma_1\vect{A}_1+
+                \gamma_2\vect{A}_2+
+                \cdots+
+                \left(-\alpha\gamma_t+\gamma_s\right)\vect{A}_s+
+                \cdots+
+                \gamma_t\left(\alpha\vect{A}_s+\vect{A}_t\right)+
+                \cdots+
+                \gamma_m\vect{A}_m\\
+              &=
+                \gamma_1\vect{B}_1+
+                \gamma_2\vect{B}_2+
+                \cdots+
+                \left(-\alpha\gamma_t+\gamma_s\right)\vect{B}_s+
+                \cdots+
+                \gamma_t\vect{B}_t+
+                \cdots+
+                \gamma_m\vect{B}_m
+    \end{align*}
+    says that $\csp{\transpose{A}}\subseteq\csp{\transpose{B}}$.  So
+    $\rsp{A}=\csp{\transpose{A}}=\csp{\transpose{B}}=\rsp{B}$ when a
+    single row operation of the third type is performed.
+
+    So the row space of a matrix is preserved by each row operation,
+    and hence row spaces of row-equivalent matrices are equal.
+\end{proof}
+\end{theorem}
+
+\begin{example}[Row spaces of two row-equivalent matrices]
+  The matrices
+  \begin{align*}
+    A&=\begin{bmatrix}
+      2&-1&3&4\\
+      5&2&-2&3\\
+      1&1&0&6
+    \end{bmatrix}
+  \end{align*}
+  and
+  \begin{align*}
+    B&=\begin{bmatrix}
+      1&1&0&6\\
+      3&0&-2&-9\\
+      2&-1&3&4
+    \end{bmatrix}
+  \end{align*}
+  are row-equivalent by demonstrating a sequence of two row operations
+  that converted $A$ into $B$.  Applying \ref{theorem:REMRS} we can
+  conclude
+  \begin{multipleChoice}
+    \choice[correct]{$\rsp{A} = \rsp{B}$}
+    \choice{$\rsp{A} \neq \rsp{B}$}
+  \end{multipleChoice}
+  
+  \begin{feedback}
+    \begin{align*}
+      \rsp{A} &=
+                \spn{\set{\colvector{2\\-1\\3\\4},\,\colvector{5\\2\\-2\\3},\,\colvector{1\\1\\0\\6}}} \\
+              &=\spn{\set{\colvector{1\\1\\0\\6},\,\colvector{3\\0\\-2\\-9},\,\colvector{2\\-1\\3\\4}}} \\
+              &=\rsp{B}.
+    \end{align*}    
+  \end{feedback}
+
+\end{example}
+
+\ref{theorem:REMRS} is at its best when one of the row-equivalent
+matrices is in reduced row-echelon form.  The vectors that are zero
+rows can be ignored.  The echelon pattern insures that the nonzero
+rows yield vectors that are linearly independent.  Here is the
+theorem.
+
+\begin{theorem}[Basis for the Row Space]
+  \label{theorem:BRS}
+
+  Suppose that $A$ is a matrix and $B$ is a row-equivalent matrix in
+  reduced row-echelon form.  Let $S$ be the set of nonzero columns of
+  $\transpose{B}$.  Then
+  \begin{enumerate}
+  \item $\rsp{A}=\spn{S}$.
+  \item $S$ is a linearly independent set.
+  \end{enumerate}
+
+  \begin{proof}
+    From \ref{theorem:REMRS} we know that $\rsp{A}=\rsp{B}$.  If $B$
+    has any zero rows, these are columns of $\transpose{B}$ that are
+    the zero vector.  We can safely toss out the zero vector in the
+    span construction, since it can be recreated from the nonzero
+    vectors by a linear combination where all the scalars are zero.
+    So $\rsp{A}=\spn{S}$.
+
+    Suppose $B$ has $r$ nonzero rows and let
+    $D=\set{d_1,\,d_2,\,d_3,\,\ldots,\,d_r}$ denote the indices of the
+    pivot columns of $B$.  Denote the $r$ column vectors of
+    $\transpose{B}$, the vectors in $S$, as $\vectorlist{B}{r}$.  To
+    show that $S$ is linearly independent, start with a relation of
+    linear dependence
+    \[
+      \lincombo{\alpha}{B}{r}=\zerovector
+    \]
+
+    Now consider this vector equality in location $d_i$.  Since $B$ is
+    in reduced row-echelon form, the entries of column $d_i$ of $B$
+    are all zero, except for a leading 1 in row $i$.  Thus, in
+    $\transpose{B}$, row $d_i$ is all zeros, excepting a 1 in column
+    $i$.  So, for $1\leq i\leq r$,
+    \begin{align*}
+      0
+      &=\vectorentry{\zerovector}{d_i}&&\ref{definition:ZCV}\\
+      &=\vectorentry{\lincombo{\alpha}{B}{r}}{d_i}
+                                      &&\ref{definition:RLDCV}\\
+      &=
+        \vectorentry{\alpha_1\vect{B}_1}{d_i}+
+        \vectorentry{\alpha_2\vect{B}_2}{d_i}+
+        \vectorentry{\alpha_3\vect{B}_3}{d_i}+
+        \cdots+
+        \vectorentry{\alpha_r\vect{B}_r}{d_i}
+                                      &&\ref{definition:MA}\\
+      &=
+        \alpha_1\vectorentry{\vect{B}_1}{d_i}+
+        \alpha_2\vectorentry{\vect{B}_2}{d_i}+
+        \alpha_3\vectorentry{\vect{B}_3}{d_i}+
+        \cdots+
+        \alpha_r\vectorentry{\vect{B}_r}{d_i}
+                                      &&\ref{definition:MSM}\\
+      &=
+        \alpha_1(0)+
+        \alpha_2(0)+
+        \alpha_3(0)+
+        \cdots+
+        \alpha_i(1)+
+        \cdots+
+        \alpha_r(0)
+                                      &&\ref{definition:RREF}\\
+      &=\alpha_i
+    \end{align*}
+
+    So we conclude that $\alpha_i=0$ for all $1\leq i\leq r$,
+    establishing the linear independence of $S$
+    (\ref{definition:LICV}).
+  \end{proof}
+\end{theorem}
+
+\begin{example}[Improving a span]
+
+  Suppose in the course of analyzing a matrix (its column space, its
+  null space, its ldots ) we encounter the following set of vectors,
+  described by a span
+  \[
+    X=\spn{\set{
+        \colvector{1\\2\\1\\6\\6},\,
+        \colvector{3\\-1\\2\\-1\\6},\,
+        \colvector{1\\-1\\0\\-1\\-2},\,
+        \colvector{-3\\2\\-3\\6\\-10}
+      }}
+  \]
+
+  Let $A$ be the matrix whose rows are the vectors in $X$, so by
+  design $X=\rsp{A}$,
+  \[
+    A=
+    \begin{bmatrix}
+      1 & 2 & 1 & 6 & 6\\
+      3 & -1 & 2 & -1 & 6\\
+      1 & -1 & 0 & -1 & -2\\
+      -3 & 2 & -3 & 6 & -10
+    \end{bmatrix}
+  \]
+
+  Row-reduce $A$ to form a row-equivalent matrix in reduced
+  row-echelon form,
+  \[
+    B=
+    \begin{bmatrix}
+      \leading{1} & 0 & 0 & 2 & -1\\
+      0 & \leading{1} & 0 & 3 & 1\\
+      0 & 0 & \leading{1} & -2 & 5\\
+      0 & 0 & 0 & 0 & 0
+    \end{bmatrix}
+  \]
+  
+  Then \ref{theorem:BRS} says we can grab the nonzero columns of
+  $\transpose{B}$ and write
+  \[
+    X=\rsp{A}=\rsp{B}=
+    \spn{\set{
+        \colvector{1\\0\\0\\2\\-1},\,
+        \colvector{0\\1\\0\\3\\1},\,
+        \colvector{0\\0\\1\\-2\\5}
+      }}
+  \]
+
+  These three vectors provide a much-improved description of $X$.
+  There are fewer vectors, and the pattern of zeros and ones in the
+  first three entries makes it easier to determine membership in $X$.
+\end{example}
+
+Notice that in \ref{example:IAS} all we had to do was row-reduce the
+right matrix and toss out a zero row.  Next to row operations
+themselves, \ref{theorem:BRS} is probably \textbf{the most powerful
+  computational technique at your disposal} as it quickly provides a
+much improved description of a span in the context of computing the
+row space, the column space, \ldots
+
+\ref{theorem:BRS} and the techniques of \ref{example:IAS} will provide
+yet another description of the column space of a matrix.  First we
+state a triviality as a theorem, so we can reference it later.
+
+\begin{theorem}[Column Space, Row Space, Transpose]
+  \label{theorem:CSRST}
+
+  Suppose $A$ is a matrix.  Then $\csp{A}=\rsp{\transpose{A}}$.
+
+  \begin{proof}
+    \begin{align*}
+      \csp{A}
+      &=\csp{\transpose{\left(\transpose{A}\right)}}
+      &&\ref{theorem:TT}\\
+      &=\rsp{\transpose{A}}
+      &&\ref{definition:RSM}
+    \end{align*}
+  \end{proof}
+\end{theorem}
+
+So to find another expression for the column space of a matrix, build
+its transpose, row-reduce it, toss out the zero rows, and convert the
+nonzero rows to column vectors to yield an improved set for the span
+construction.
+
+\begin{example}[Column space from row operations]
+  Consider again the matrix
+  \[
+    M = \begin{bmatrix}
+      1 & 4 & 0 & -1 & 0 & 7 &  -9 \\
+      2 & 8 &  -1 & 3 & 9 &  -13 & 7\\
+      0 & 0 &  2 & -3 & -4 & 12 &  -8\\
+      -1 &  -4 & 2 & 4 & 8 &  -31 & 37
+    \end{bmatrix}
+  \]
+  The transpose is
+  \[
+    \begin{bmatrix}
+      1 & 2 & 0 & -1\\
+      4 & 8 & 0 & -4\\
+      0 & -1 & 2 & 2\\
+      -1 & 3 & -3 & 4\\
+      0 & 9 & -4 & 8\\
+      7 & -13 & 12 & -31\\
+      -9 & 7 & -8 & 37
+    \end{bmatrix}.
+  \]
+
+  Row-reduced this becomes,
+  \[
+    \begin{bmatrix}
+      \leading{1} & 0 & 0 & -\frac{31}{7}\\
+      0 & \leading{1} & 0 & \frac{12}{7}\\
+      0 & 0 & \leading{1} & \frac{13}{7}\\
+      0 & 0 & 0 & 0\\
+      0 & 0 & 0 & 0\\
+      0 & 0 & 0 & 0\\
+      0 & 0 & 0 & 0
+    \end{bmatrix}.
+  \]
+
+  Now, using \ref{theorem:CSRST} and \ref{theorem:BRS}
+  \[
+    \csp{M}=\rsp{\transpose{M}}=
+    \spn{\set{
+        \colvector{1\\0\\0\\-\frac{31}{7}},\,
+        \colvector{0\\1\\0\\\frac{12}{7}},\,
+        \colvector{0\\0\\1\\\frac{13}{7}}
+      }}.
+  \]
+
+  This is a very nice description of the column space.  Fewer vectors
+  than the 7 involved in the definition, and the pattern of the zeros
+  and ones in the first 3 slots can be used to advantage.  For
+  example, if we set
+  \[
+    \vect{b}=\colvector{3\\9\\1\\4}.
+  \]
+  then $\linearsystem{M}{\vect{b}}$ is consistent.  And since
+  $\linearsystem{M}{\vect{b}}$ is consistent, \ref{theorem:CSCS} tells
+  us that $\vect{b}\in\csp{M}$.  But we could see this quickly with
+  the following computation, which really only involves any work in
+  the 4th entry of the vectors as the scalars in the linear
+  combination are \textit{dictated} by the first three entries of
+  $\vect{b}$.
+  \[
+    \vect{b}=\colvector{3\\9\\1\\4}=
+    3\colvector{1\\0\\0\\-\frac{31}{7}}+
+    9\colvector{0\\1\\0\\\frac{12}{7}}+
+    1\colvector{0\\0\\1\\\frac{13}{7}}
+  \]
+
+  Can you now rapidly construct several vectors, $\vect{b}$, so that
+  $\linearsystem{M}{\vect{b}}$ is consistent, and several more so that
+  the system is inconsistent?
+\end{example}
+
+\end{document}

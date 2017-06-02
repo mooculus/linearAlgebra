@@ -1,0 +1,191 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Transposes and Symmetric Matrices}
+
+\begin{document}
+\begin{abstract}
+  Informally, to transpose a matrix is to build a new matrix by swapping its rows and columns.
+\end{abstract}
+\maketitle
+
+
+\begin{definition}[Transpose of a Matrix]
+
+  Given an $m\times n$ matrix $A$, its \dfn{transpose} is the $n\times m$ matrix $\transpose{A}$ given by
+  \[
+    \matrixentry{\transpose{A}}{ij}=\matrixentry{A}{ji},\quad 1\leq i\leq n,\,1\leq j\leq m.
+  \]
+\end{definition}
+
+\begin{example}[Transpose of a $3\times 4$ matrix]
+
+Suppose
+\[
+D=
+\begin{bmatrix}
+3&7&2&-3\\
+-1&4&2&8\\
+0&3&-2&5
+\end{bmatrix}.
+\]
+
+We could formulate the transpose, entry-by-entry, using the
+definition.  But it is easier to just systematically rewrite rows as
+columns (or vice-versa).  The form of the definition given will be
+more useful in proofs.  So we have
+\[
+  \transpose{D}=
+  \begin{bmatrix}
+    \answer{3}&\answer{-1}&0\\
+    \answer{7}&\answer{4}&3\\
+    2&2&-2\\
+    -3&8&5
+  \end{bmatrix}
+\]
+
+\end{example}
+
+It will sometimes happen that a matrix is equal to its transpose.  In
+this case, we will call a matrix \dfn{symmetric}.  These matrices
+occur naturally in certain situations, and also have some nice
+properties, so it is worth stating the definition carefully.
+Informally a matrix is symmetric if we can ``flip'' it about the main
+diagonal (upper-left corner, running down to the lower-right corner)
+and have it look unchanged.
+
+\begin{definition}[Symmetric Matrix]
+The matrix $A$ is \dfn{symmetric} if $A=\transpose{A}$.
+\end{definition}
+
+\begin{example}[A $5\times 5$ matrix]
+
+  The matrix
+  \[
+    E=
+    \begin{bmatrix}
+      2&3&-9&5&7\\
+      3&1&6&-2&-3\\
+      -9&6&0&-1&9\\
+      5&-2&-1&4&-8\\
+      7&-3&9&-8&-3
+    \end{bmatrix}
+  \]
+  is\ldots
+  \begin{multipleChoice}
+    \choice[correct]{symmetric.}
+    \choice{not symmetric.}
+  \end{multipleChoice}
+\end{example}
+
+\begin{example}[Another $5\times 5$ matrix]
+
+  The matrix
+  \[
+    F=
+    \begin{bmatrix}
+      2&4&8&4&6\\
+      3&2&5&1&3\\
+      1&2&0&1&5\\
+      1&2&1&3&3\\
+      6&3&5&3&3
+    \end{bmatrix}
+  \]
+  is\ldots
+  \begin{multipleChoice}
+    \choice{symmetric.}
+    \choice[correct]{not symmetric.}
+  \end{multipleChoice}
+\end{example}
+
+You might have noticed that \ref{definition:SYM} did not specify the
+size of the matrix $A$, as has been our custom.  That is because it
+was not necessary.  An alternative would have been to state the
+definition just for square matrices, but this is the substance of the
+next proof.
+
+\begin{theorem}[Symmetric Matrices are Square]
+  \label{theorem:SMS}
+  Suppose that $A$ is a symmetric matrix.  Then $A$ is square.
+  
+  \begin{proof}
+    We start by specifying $A$'s size, without assuming it is square,
+    since we are trying to \textit{prove} that, so we cannot also
+    assume it.  Suppose $A$ is an $m\times n$ matrix.  Because $A$ is
+    symmetric, we know by \ref{definition:SYM} that $A=\transpose{A}$.
+    So, in particular, \ref{definition:ME} requires that $A$ and
+    $\transpose{A}$ must have the same size.  The size of
+    $\transpose{A}$ is $n\times m$.  Because $A$ has $m$ rows and
+    $\transpose{A}$ has $n$ rows, we conclude that $m=n$, and hence
+    $A$ must be square by \ref{definition:SQM}.
+  \end{proof}
+\end{theorem}
+
+We finish this section with three easy theorems, but they illustrate the interplay of our three new operations, our new notation, and the techniques used to prove matrix equalities.
+
+\begin{theorem}[Transpose and Matrix Addition]
+  \label{theorem:TMA}
+
+  Suppose that $A$ and $B$ are $m\times n$ matrices.  Then  $\transpose{(A+B)}=\transpose{A}+\transpose{B}$.
+
+  \begin{proof}
+    The statement to be proved is an equality of matrices, so we work
+    entry-by-entry and use \ref{definition:ME}.  Think carefully about
+    the objects involved here, and the many uses of the plus sign.
+    Realize too that while $A$ and $B$ are $m\times n$ matrices, the
+    conclusion is a statement about the equality of two $n\times m$
+    matrices.  So we begin with: for $1\leq i\leq n$, $1\leq j\leq m$,
+    \begin{align*}
+      \matrixentry{\transpose{(A+B)}}{ij}
+      &=\matrixentry{A+B}{ji}\\ %&&\ref{definition:TM}\\
+      &=\matrixentry{A}{ji}+\matrixentry{B}{ji}\\ %&&\ref{definition:MA}\\
+      &=\matrixentry{\transpose{A}}{ij}+\matrixentry{\transpose{B}}{ij}\\ %&&\ref{definition:TM}\\
+      &=\matrixentry{\transpose{A}+\transpose{B}}{ij}\\ %&&\ref{definition:MA}
+    \end{align*}
+    
+    Since the matrices $\transpose{(A+B)}$ and
+    $\transpose{A}+\transpose{B}$ agree at each entry,
+    the two matrices are equal.
+\end{proof}
+\end{theorem}
+
+\begin{theorem}[Transpose and Matrix Scalar Multiplication]
+\label{theorem:TMSM}
+
+Suppose that $\alpha\in\complexes$ and $A$ is an $m\times n$ matrix.  Then $\transpose{(\alpha A)}=\alpha\transpose{A}$.
+
+\begin{proof}
+  The statement  to be proved is an equality of matrices, so we work entry-by-entry and use \ref{definition:ME}.  Notice that the desired equality is of $n\times m$ matrices, and think carefully about the objects involved here, plus the many uses of juxtaposition.  For $1\leq i\leq m$, $1\leq j\leq n$,
+  \begin{align*}
+    \matrixentry{\transpose{(\alpha A)}}{ji}&=
+                                              \matrixentry{\alpha A}{ij}\\ %&&\ref{definition:TM}\\
+                                            &=\alpha\matrixentry{A}{ij}\\ %&&\ref{definition:MSM}\\
+                                            &=\alpha\matrixentry{\transpose{A}}{ji}\\ %&&\ref{definition:TM}\\
+                                            &=\matrixentry{\alpha\transpose{A}}{ji}\\ %&&\ref{definition:MSM}
+  \end{align*}
+
+  Since the matrices $\transpose{(\alpha A)}$ and $\alpha\transpose{A}$ agree at each entry, \ref{definition:ME} tells us the two matrices are equal.
+  
+\end{proof}
+\end{theorem}
+
+\begin{theorem}[Transpose of a Transpose]
+  \label{theorem:TT}
+  
+  Suppose that $A$ is an $m\times n$ matrix.  Then $\transpose{\left(\transpose{A}\right)}=A$.
+
+  \begin{proof}
+    We again want to prove an equality of matrices, so we work entry-by-entry and use \ref{definition:ME}.  For $1\leq i\leq m$, $1\leq j\leq n$,
+    \begin{align*}
+      \matrixentry{\transpose{\left(\transpose{A}\right)}}{ij}
+      &=\matrixentry{\transpose{A}}{ji}\\ %&&\ref{definition:TM}\\
+      &=\matrixentry{A}{ij}\\ %&&\ref{definition:TM}
+    \end{align*}
+    
+    Since the matrices $\transpose{\left(\transpose{A}\right)}$ and $A$ agree at each entry, \ref{definition:ME} tells us the two matrices are equal.
+    
+  \end{proof}
+\end{theorem}
+
+\end{document}

@@ -1,0 +1,221 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Rank and Nullity of a Linear Transformation}
+
+\begin{document}
+\begin{abstract}
+  The rank and nullity of a linear transformation are related.
+\end{abstract}
+\maketitle
+
+
+Just as a matrix has a rank and a nullity, so too do linear transformations.  And just like the rank and nullity of a matrix are related (they sum to the number of columns, \ref{theorem:RPNC}) the rank and nullity of a linear transformation are related.  Here are the definitions and theorems.
+
+\begin{definition}[Rank Of a Linear Transformation]
+
+Suppose that $\ltdefn{T}{U}{V}$ is a linear transformation.  Then the \dfn{rank} of $T$, $\rank{T}$, is the dimension of the range of $T$,
+\[
+\rank{T}=\dimension{\rng{T}}
+\]
+
+\end{definition}
+
+\begin{definition}[Nullity Of a Linear Transformation]
+
+Suppose that $\ltdefn{T}{U}{V}$ is a linear transformation.  Then the \dfn{nullity} of $T$, $\nullity{T}$, is the dimension of the kernel of $T$,
+\[
+\nullity{T}=\dimension{\krn{T}}
+\]
+\end{definition}
+
+Here are two quick theorems.
+
+\begin{theorem}[Rank Of a Surjective Linear Transformation]
+\label{theorem:ROSLT}
+
+
+Suppose that $\ltdefn{T}{U}{V}$ is a linear transformation.  Then the rank of $T$ is the dimension of $V$, $\rank{T}=\dimension{V}$, if and only if $T$ is surjective.
+
+
+
+
+
+\begin{proof}
+By \ref{theorem:RSLT}, $T$ is surjective if and only if $\rng{T}=V$.  Applying \ref{definition:ROLT}, $\rng{T}=V$ if and only if $\rank{T}=\dimension{\rng{T}}=\dimension{V}$.
+
+
+
+\end{proof}
+\end{theorem}
+
+\begin{theorem}[Nullity Of an Injective Linear Transformation]
+\label{theorem:NOILT}
+
+
+Suppose that $\ltdefn{T}{U}{V}$ is a linear transformation.  Then the nullity of $T$ is zero, $\nullity{T}=0$, if and only if $T$ is injective.
+
+
+
+
+
+\begin{proof}
+By \ref{theorem:KILT}, $T$ is injective if and only if $\krn{T}=\set{\zerovector}$.  Applying \ref{definition:NOLT}, $\krn{T}=\set{\zerovector}$ if and only if $\nullity{T}=0$.
+
+
+
+\end{proof}
+\end{theorem}
+
+Just as injectivity and surjectivity come together in invertible linear transformations, there is a clear relationship between rank and nullity of a linear transformation.  If one is big, the other is small.
+
+
+
+\begin{theorem}[Rank Plus Nullity is Domain Dimension]
+\label{theorem:RPNDD}
+
+
+Suppose that $\ltdefn{T}{U}{V}$ is a linear transformation.  Then
+\[
+\rank{T}+\nullity{T}=\dimension{U}
+\]
+
+
+
+
+
+
+\begin{proof}
+Let $r=\rank{T}$ and $s=\nullity{T}$.  Suppose that $R=\set{\vectorlist{v}{r}}\subseteq V$ is a basis of the range of $T$, $\rng{T}$, and $S=\set{\vectorlist{u}{s}}\subseteq U$ is a basis of the kernel of $T$, $\krn{T}$.  Note that $R$ and $S$ are possibly empty, which means that some of the sums in this proof are ``empty'' and are equal to the zero vector.
+
+
+
+Because the elements of $R$ are all in the range of $T$, each must have a nonempty pre-image by \ref{theorem:RPI}.  Choose vectors $\vect{w}_i\in U$, $1\leq i\leq r$ such that $\vect{w}_i\in\preimage{T}{\vect{v}_i}$.  So $\lteval{T}{\vect{w}_i}=\vect{v}_i$, $1\leq i\leq r$.  Consider the set
+\[
+B=\set{\vectorlist{u}{s},\,\vectorlist{w}{r}}
+\]
+We claim that $B$ is a basis for $U$.
+
+
+
+To establish linear independence for $B$, begin with a relation of linear dependence on $B$.  So suppose there are scalars $\scalarlist{a}{s}$ and $\scalarlist{b}{r}$
+\[
+\zerovector=\lincombo{a}{u}{s}+\lincombo{b}{w}{r}
+\]
+
+
+
+
+Then
+\begin{align*}
+\zerovector&=\lteval{T}{\zerovector}&&\ref{theorem:LTTZZ}\\
+&=T\left(\lincombo{a}{u}{s}+\right.\\
+&\quad\quad\quad\quad\left.\lincombo{b}{w}{r}\right)&&\ref{definition:LI}\\
+&=a_1\lteval{T}{\vect{u}_1}+a_2\lteval{T}{\vect{u}_2}+a_3\lteval{T}{\vect{u}_3}+\cdots+a_s\lteval{T}{\vect{u}_s}+\\
+&\quad\quad b_1\lteval{T}{\vect{w}_1}+b_2\lteval{T}{\vect{w}_2}+b_3\lteval{T}{\vect{w}_3}+\cdots+b_r\lteval{T}{\vect{w}_r}
+&&\ref{theorem:LTLC}\\
+&=a_1\zerovector+a_2\zerovector+a_3\zerovector+\cdots+a_s\zerovector+\\
+&\quad\quad b_1\lteval{T}{\vect{w}_1}+b_2\lteval{T}{\vect{w}_2}+b_3\lteval{T}{\vect{w}_3}+\cdots+b_r\lteval{T}{\vect{w}_r}
+&&\ref{definition:KLT}\\
+&=\zerovector+\zerovector+\zerovector+\cdots+\zerovector+\\
+&\quad\quad b_1\lteval{T}{\vect{w}_1}+b_2\lteval{T}{\vect{w}_2}+b_3\lteval{T}{\vect{w}_3}+\cdots+b_r\lteval{T}{\vect{w}_r}
+&&\ref{theorem:ZVSM}\\
+&=b_1\lteval{T}{\vect{w}_1}+b_2\lteval{T}{\vect{w}_2}+b_3\lteval{T}{\vect{w}_3}+\cdots+b_r\lteval{T}{\vect{w}_r}&&\ref{property:Z}\\
+&=b_1\vect{v}_1+b_2\vect{v}_2+b_3\vect{v}_3+\cdots+b_r\vect{v}_r&&\ref{definition:PI}
+\end{align*}
+
+
+
+
+This is a relation of linear dependence on $R$ (\ref{definition:RLD}), and since $R$ is a linearly independent set (\ref{definition:LI}), we see that $b_1=b_2=b_3=\ldots=b_r=0$.  Then the original relation of linear dependence on $B$ becomes
+\begin{align*}
+\zerovector&=\lincombo{a}{u}{s}+0\vect{w}_1+0\vect{w}_2+\ldots+0\vect{w}_r\\
+&=\lincombo{a}{u}{s}+\zerovector+\zerovector+\ldots+\zerovector&&\ref{theorem:ZSSM}\\
+&=\lincombo{a}{u}{s}&&\ref{property:Z}
+\end{align*}
+
+
+
+
+But this is again a relation of linear independence (\ref{definition:RLD}), now on the set $S$.  Since $S$ is linearly independent (\ref{definition:LI}), we have $a_1=a_2=a_3=\ldots=a_r=0$.  Since we now know that all the scalars in the relation of linear dependence on $B$ must be zero, we have established the linear independence of $S$ through \ref{definition:LI}.
+
+
+
+To now establish that $B$ spans $U$, choose an arbitrary vector $\vect{u}\in U$.  Then $\lteval{T}{\vect{u}}\in R(T)$, so there are scalars $\scalarlist{c}{r}$ such that
+\[
+\lteval{T}{\vect{u}}=\lincombo{c}{v}{r}
+\]
+
+
+
+
+Use the scalars $\scalarlist{c}{r}$ to define a vector $\vect{y}\in U$,
+\[
+\vect{y}=\lincombo{c}{w}{r}
+\]
+
+
+
+
+Then
+\begin{align*}
+\lteval{T}{\vect{u}-\vect{y}}&=\lteval{T}{\vect{u}}-\lteval{T}{\vect{y}}&&\ref{theorem:LTLC}\\
+&=\lteval{T}{\vect{u}}-\lteval{T}{\lincombo{c}{w}{r}}&&\text{Substitution}\\
+&=\lteval{T}{\vect{u}}-\left(c_1\lteval{T}{\vect{w}_1}+c_2\lteval{T}{\vect{w}_2}+\cdots+c_r\lteval{T}{\vect{w}_r}\right)&&\ref{theorem:LTLC}\\
+&=\lteval{T}{\vect{u}}-\left(\lincombo{c}{v}{r}\right)&&\vect{w}_i\in\preimage{T}{\vect{v}_i}\\
+&=\lteval{T}{\vect{u}}-\lteval{T}{\vect{u}}&&\text{Substitution}\\
+&=\zerovector&&\ref{property:AI}
+\end{align*}
+
+
+
+
+So the vector $\vect{u}-\vect{y}$ is sent to the zero vector by $T$ and hence is an element of the kernel of $T$.  As such it can be written as a linear combination of the basis vectors for $\krn{T}$, the elements of the set $S$.  So there are scalars $\scalarlist{d}{s}$ such that
+\[
+\vect{u}-\vect{y}=\lincombo{d}{u}{s}
+\]
+
+
+
+
+Then
+\begin{align*}
+\vect{u}&=\left(\vect{u}-\vect{y}\right)+\vect{y}\\
+&=\lincombo{d}{u}{s}+\lincombo{c}{w}{r}
+\end{align*}
+
+
+
+
+This says that for any vector, $\vect{u}$, from $U$, there exist scalars ($\scalarlist{d}{s}$, $\scalarlist{c}{r}$) that form $\vect{u}$ as a linear combination of the vectors in the set $B$.  In other words, $B$ spans $U$ (\ref{definition:SS}).
+
+
+
+So $B$ is a basis (\ref{definition:B}) of $U$ with $s+r$ vectors, and thus
+\[
+\dimension{U}=s+r=\nullity{T}+\rank{T}
+\]
+as desired.
+
+
+
+\end{proof}
+\end{theorem}
+
+\ref{theorem:RPNC} said that the rank and nullity of a matrix sum to the number of columns of the matrix.  This result is now an easy consequence of \ref{theorem:RPNDD} when we consider the linear transformation $\ltdefn{T}{\complex{n}}{\complex{m}}$ defined with the $m\times n$ matrix $A$ by $\lteval{T}{\vect{x}}=A\vect{x}$.  The range and kernel of $T$ are identical to the column space and null space of the matrix $A$ (<acroref type="exercise" acro="ILT.T20" />, <acroref type="exercise" acro="SLT.T20" />), so the rank and nullity of the matrix $A$ are identical to the rank and nullity of the linear transformation $T$.  The dimension of the domain of $T$ is the dimension of $\complex{n}$, exactly the number of columns for the matrix $A$.
+
+
+
+This theorem can be especially useful in determining basic properties of linear transformations.  For example, suppose that $\ltdefn{T}{\complex{6}}{\complex{6}}$ is a linear transformation and you are able to quickly establish that the kernel is trivial.  Then $\nullity{T}=0$.  First this means that $T$ is injective by \ref{theorem:NOILT}.  Also, \ref{theorem:RPNDD} becomes
+\[
+6=\dimension{\complex{6}}=\rank{T}+\nullity{T}=\rank{T}+0=\rank{T}
+\]
+So the rank of $T$ is equal to the dimension of the codomain, and by \ref{theorem:ROSLT} we know $T$ is surjective.  Finally, we know $T$ is invertible by \ref{theorem:ILTIS}.  So from the determination that the kernel is trivial, and consideration of various dimensions, the theorems of this section allow us to conclude the existence of an inverse linear transformation for $T$.
+Similarly, \ref{theorem:RPNDD} can be used to provide alternative proofs for \ref{theorem:ILTD}, \ref{theorem:SLTD} and \ref{theorem:IVSED}.  It would be an interesting exercise to construct these proofs.
+
+
+
+It would be instructive to study the archetypes that are linear transformations and see how many of their properties can be deduced just from considering only the dimensions of the domain and codomain.  Then add in just knowledge of either the nullity or rank, and see how much more you can learn about the linear transformation.  The table preceding all of the archetypes (<miscref type="archetype" text="Archetypes" />) could be a good place to start this analysis.
+
+\end{document}

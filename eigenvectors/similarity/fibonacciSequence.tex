@@ -1,0 +1,190 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Fibonacci Sequences}
+
+\begin{document}
+\begin{abstract}
+  We illustrate an application of eigenvalues and diagonalization
+  through the determination of a closed-form expression for an
+  arbitrary term of the Fibonacci sequence.
+\end{abstract}
+\maketitle
+
+\begin{example}[Fibonacci sequence, closed form]
+
+The \dfn{Fibonacci sequence} is a sequence of integers defined recursively by
+\begin{align*}
+a_0&=0
+&
+a_1&=1
+&
+a_{n+1}&=a_n+a_{n-1},\quad n\geq 1
+\end{align*}
+
+\begin{question}
+So the initial portion of the sequence is $0,\,1,\,1,\,2,\,\answer{3},\,5,\,\answer{8},\,13,\,21,\,\ldots$.  
+\end{question}
+
+To begin, verify that for any $n\geq 1$ the recursive statement above establishes the truth of the statement
+\begin{align*}
+\colvector{a_n\\a_{n+1}}
+&=
+\begin{bmatrix}0&1\\1&1\end{bmatrix}
+\colvector{a_{n-1}\\a_n}
+\end{align*}
+
+Let $A$ denote this $2\times 2$ matrix.  Through repeated applications of the statement above we have
+\begin{align*}
+\colvector{a_n\\a_{n+1}}
+&
+=A\colvector{a_{n-1}\\a_n}
+=A^2\colvector{a_{n-2}\\a_{n-1}}
+=A^3\colvector{a_{n-3}\\a_{n-2}}
+=\cdots
+=A^n\colvector{a_{0}\\a_{1}}
+\end{align*}
+
+In preparation for working with this high power of $A$, we will
+diagonalize $A$.
+
+\begin{question}
+The characteristic polynomial of $A$ is
+$\charpoly{A}{x}=\answer{x^2-x-1}$, with roots (the eigenvalues of $A$ by
+\ref{theorem:EMRCP})
+\begin{align*}
+\rho&=\frac{1+\sqrt{\answer{5}}}{2}
+&
+\delta&=\frac{1-\sqrt{\answer{5}}}{2}
+\end{align*}
+
+With two distinct eigenvalues, we conclude $A$ is
+\wordChoice{\choice{not diagonalizable}\choice[correct]{diagonalizable}}.
+\end{question}
+
+It will be easier to compute with these eigenvalues
+once you confirm the following properties (all but the last can be
+derived from the fact that $\rho$ and $\delta$ are roots of the
+characteristic polynomial, in a factored or unfactored form)
+\begin{align*}
+\rho+\delta&=1
+&
+\rho\delta&=-1
+&
+1+\rho&=\rho^2
+&
+1+\delta&=\delta^2
+&
+\rho-\delta&=\sqrt{5}
+\end{align*}
+
+Then eigenvectors of $A$ (for $\rho$ and $\delta$, respectively) are
+\begin{align*}
+&\colvector{1\\\rho}
+&
+&\colvector{1\\\delta}
+\end{align*}
+which can be easily confirmed, as we demonstrate for the eigenvector for $\rho$,
+\begin{align*}
+\begin{bmatrix}0&1\\1&1\end{bmatrix}\colvector{1\\\rho}
+&
+=\colvector{\rho\\1+\rho}
+=\colvector{\rho\\\rho^2}
+=\rho\colvector{1\\\rho}
+\end{align*}
+
+From the proof of \ref{theorem:DC} we know $A$ can be diagonalized by a matrix $S$ with these eigenvectors as columns, giving $D=\inverse{S}AS$.  We list $S$, $\inverse{S}$ and the diagonal matrix $D$,
+\begin{align*}
+S&=\begin{bmatrix}1&1\\\rho&\delta\end{bmatrix}
+&
+\inverse{S}&=\frac{1}{\rho-\delta}\begin{bmatrix}-\delta&1\\\rho&-1\end{bmatrix}
+&
+D&=\begin{bmatrix}\rho&0\\0&\delta\end{bmatrix}
+\end{align*}
+
+OK, we have everything in place now.  The main step in the following
+is to replace $A$ by $SD\inverse{S}$. Here we go,
+\begin{align*}
+\colvector{a_n\\a_{n+1}}
+&=A^n\colvector{a_{0}\\a_{1}}\\
+&=\left(SD\inverse{S}\right)^n\colvector{a_{0}\\a_{1}}\\
+&=SD\inverse{S}SD\inverse{S}SD\inverse{S}\cdots SD\inverse{S}\colvector{a_{0}\\a_{1}}\\
+&=SDDD\cdots D\inverse{S}\colvector{a_{0}\\a_{1}}\\
+&=SD^n\inverse{S}\colvector{a_{0}\\a_{1}}\\
+&=
+\begin{bmatrix}1&1\\\rho&\delta\end{bmatrix}
+\begin{bmatrix}\rho&0\\0&\delta\end{bmatrix}^n
+\frac{1}{\rho-\delta}\begin{bmatrix}-\delta&1\\\rho&-1\end{bmatrix}
+\colvector{a_{0}\\a_{1}}\\
+&=
+\frac{1}{\rho-\delta}
+\begin{bmatrix}1&1\\\rho&\delta\end{bmatrix}
+\begin{bmatrix}\rho^n&0\\0&\delta^n\end{bmatrix}
+\begin{bmatrix}-\delta&1\\\rho&-1\end{bmatrix}
+\colvector{0\\1}\\
+&=
+\frac{1}{\rho-\delta}
+\begin{bmatrix}1&1\\\rho&\delta\end{bmatrix}
+\begin{bmatrix}\rho^n&0\\0&\delta^n\end{bmatrix}
+\colvector{1\\-1}\\
+&=
+\frac{1}{\rho-\delta}
+\begin{bmatrix}1&1\\\rho&\delta\end{bmatrix}
+\colvector{\rho^n\\-\delta^n}\\
+&=
+\frac{1}{\rho-\delta}
+\colvector{\rho^n-\delta^n\\\rho^{n+1}-\delta^{n+1}}
+\end{align*}
+
+Performing the scalar multiplication and equating the first entries of
+the two vectors, we arrive at the closed form expression
+\begin{align*}
+a_n&=\frac{1}{\rho-\delta}\left(\rho^n-\delta^n\right)\\
+&=\frac{1}{\sqrt{5}}
+\left(\left(\frac{1+\sqrt{5}}{2}\right)^n-\left(\frac{1-\sqrt{5}}{2}\right)^n\right)\\
+&=\frac{1}{2^n\sqrt{5}}
+\left(\left(1+\sqrt{5}\right)^n-\left(1-\sqrt{5}\right)^n\right)
+\end{align*}
+
+Notice that it does not matter whether we use the equality of the
+first or second entries of the vectors, we will arrive at the same
+formula, once in terms of $n$ and again in terms of $n+1$.  Also, our
+definition clearly describes a sequence that will only contain
+integers, yet the presence of the irrational number $\sqrt{5}$ might
+make us suspicious.  But no, our expression for $a^n$ will always
+yield an integer!
+
+The Fibonacci sequence, and generalizations of it, have been
+extensively studied (Fibonacci lived in the 12th and 13th centuries).
+There are many ways to derive the closed-form expression we just
+found, and our approach may not be the most efficient route.  But it
+is a nice demonstration of how diagonalization can be used to solve a
+problem outside the field of linear algebra.
+
+\end{example}
+
+We close this section with a comment about an important upcoming
+theorem that we will prove later.  A consequence of \ref{theorem:OD}
+is that every Hermitian matrix (\ref{definition:HM}) is diagonalizable
+(\ref{definition:DZM}), and the similarity transformation that
+accomplishes the diagonalization uses a unitary matrix
+(\ref{definition:UM}).  This means that for every Hermitian matrix of
+size $n$ there is a basis of $\complex{n}$ that is composed entirely
+of eigenvectors for the matrix and also forms an orthonormal set
+(\ref{definition:ONS}).  Notice that for matrices with only real
+entries, we only need the hypothesis that the matrix is symmetric
+(\ref{definition:SYM}) to reach this conclusion.  Can you imagine a
+prettier basis for use with a matrix?  I cannot.
+
+These results in \ref{section:OD} explain much of our recurring
+interest in orthogonality, and make the section a high point in your
+study of linear algebra.  A precise statement of this diagonalization
+result applies to a slightly broader class of matrices, known as
+``normal'' matrices (\ref{definition:NRML}), which are matrices that
+commute with their adjoints.  With this expanded category of matrices,
+the result becomes an equivalence (\ref{technique:E}).  See
+\ref{theorem:OD} and \ref{theorem:OBNM} in \ref{section:OD} for all
+the details.
+
+\end{document}

@@ -1,0 +1,156 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Eigenvalues and Eigenvectors of a Matrix}
+
+\begin{document}
+\begin{abstract}
+  We will define the eigenvalues and eigenvectors of a matrix, and see how to compute them.  
+\end{abstract}
+\maketitle
+
+We start with the principal definition for this chapter.
+
+\begin{definition}[Eigenvalues and Eigenvectors of a Matrix]
+  Suppose that $A$ is a square matrix of size $n$,
+  $\vect{x}\neq\zerovector$ is a vector in $\complex{n}$, and
+  $\lambda$ is a scalar in $\complexes$.  Then we say $\vect{x}$ is an
+  \dfn{eigenvector} of $A$ with \dfn{eigenvalue} $\lambda$ if
+  \[
+    A\vect{x}=\lambda\vect{x}
+  \]
+\end{definition}
+
+Before going any further, perhaps we should convince you that such
+things ever happen at all.  Understand the next example, but do not
+concern yourself with where the pieces come from.  We will have
+methods soon enough to be able to discover these eigenvectors
+ourselves.
+
+\begin{example}[Some eigenvalues and eigenvectors]
+  Consider the matrix
+  \[
+    A=
+    \begin{bmatrix}
+      204 & 98 & -26 & -10\\
+      -280 & -134 & 36 & 14\\
+      716 & 348 & -90 & -36\\
+      -472 & -232 & 60 & 28
+    \end{bmatrix}
+  \]
+  and the vectors
+  \begin{align*}
+\vect{x}=\colvector{1\\-1\\2\\5}&&     % ev=4
+\vect{y}=\colvector{-3\\4\\-10\\4}&&  % ev = 0
+\vect{z}=\colvector{-3\\7\\0\\8}&&     % ev=2
+\vect{w}=\colvector{1\\-1\\4\\0}        % ev=2
+\end{align*}
+
+Then
+\[
+A\vect{x}=
+\begin{bmatrix}
+204 & 98 & -26 & -10\\
+-280 & -134 & 36 & 14\\
+716 & 348 & -90 & -36\\
+-472 & -232 & 60 & 28
+\end{bmatrix}
+\colvector{1\\-1\\2\\5}=
+\colvector{4\\-4\\8\\20}=
+4\colvector{1\\-1\\2\\5}=4\vect{x}
+\]
+so $\vect{x}$ is an eigenvector of $A$ with eigenvalue $\lambda=\answer{4}$.
+
+Also,
+\[
+A\vect{y}=
+\begin{bmatrix}
+204 & 98 & -26 & -10\\
+-280 & -134 & 36 & 14\\
+716 & 348 & -90 & -36\\
+-472 & -232 & 60 & 28
+\end{bmatrix}
+\colvector{-3\\4\\-10\\4}=
+\colvector{0\\0\\0\\0}=
+0\colvector{-3\\4\\-10\\4}=0\vect{y}
+\]
+so $\vect{y}$ is an eigenvector of $A$ with eigenvalue $\lambda=\answer{0}$.
+
+Also,
+\[
+A\vect{z}=
+\begin{bmatrix}
+204 & 98 & -26 & -10\\
+-280 & -134 & 36 & 14\\
+716 & 348 & -90 & -36\\
+-472 & -232 & 60 & 28
+\end{bmatrix}
+\colvector{-3\\7\\0\\8}=
+\colvector{-6\\14\\0\\16}=
+2\colvector{-3\\7\\0\\8}=2\vect{z}
+\]
+so $\vect{z}$ is an eigenvector of $A$ with eigenvalue $\lambda=\answer{2}$.
+
+Also,
+\[
+A\vect{w}=
+\begin{bmatrix}
+204 & 98 & -26 & -10\\
+-280 & -134 & 36 & 14\\
+716 & 348 & -90 & -36\\
+-472 & -232 & 60 & 28
+\end{bmatrix}
+\colvector{1\\-1\\4\\0}=
+\colvector{2\\-2\\8\\0}=
+2\colvector{1\\-1\\4\\0}=2\vect{w}
+\]
+so $\vect{w}$ is an eigenvector of $A$ with eigenvalue $\lambda=2$.
+
+So we have demonstrated four eigenvectors of $A$.  Are there more?
+Yes, any nonzero scalar multiple of an eigenvector is again an
+eigenvector.  In this example, set $\vect{u}=30\vect{x}$.  Then
+\begin{align*}
+  A\vect{u}
+  &=A(30\vect{x})\\
+  &=30A\vect{x}&&\ref{theorem:MMSMM}\\
+  &=30(4\vect{x})&&\ref{definition:EEM}\\
+  &=4(30\vect{x})&&\ref{property:SMAM}\\
+  &=4\vect{u}
+\end{align*}
+so that $\vect{u}$ is also an eigenvector of $A$ for the same eigenvalue, $\lambda=4$.
+
+The vectors $\vect{z}$ and $\vect{w}$ are both eigenvectors of $A$ for
+the same eigenvalue $\lambda=2$, yet this is not as simple as the two
+vectors just being scalar multiples of each other (they are not).
+Look what happens when we add them together, to form
+$\vect{v}=\vect{z}+\vect{w}$, and multiply by $A$,
+\begin{align*}
+  A\vect{v}
+  &=A(\vect{z}+\vect{w})\\
+  &=A\vect{z}+A\vect{w}&&\ref{theorem:MMDAA}\\
+  &=2\vect{z}+2\vect{w}&&\ref{definition:EEM}\\
+  &=2(\vect{z}+\vect{w})&&\ref{property:DVAC}\\
+  &=2\vect{v}
+\end{align*}
+so that $\vect{v}$ is also an eigenvector of $A$ for the eigenvalue
+$\lambda=2$.  So it would appear that the set of eigenvectors that are
+associated with a fixed eigenvalue is closed under the vector space
+operations of $\complex{n}$.  Hmmm.
+
+The vector $\vect{y}$ is an eigenvector of $A$ for the eigenvalue
+$\lambda=0$, so we can use \ref{theorem:ZSSM} to write
+$A\vect{y}=0\vect{y}=\zerovector$.  But this also means that
+$\vect{y}\in\nsp{A}$.  There would appear to be a connection here
+also.
+\end{example}
+
+\ref{example:SEE} hints at a number of intriguing properties, and
+there are many more.  We will explore the general properties of
+eigenvalues and eigenvectors in \ref{section:PEE}, but in this section
+we will concern ourselves with the question of actually computing
+eigenvalues and eigenvectors.  First we need a bit of background
+material on polynomials and matrices.
+
+\end{document}
+

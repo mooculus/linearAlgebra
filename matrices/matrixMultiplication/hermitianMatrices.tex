@@ -1,0 +1,151 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Hermitian Matrices}
+
+\begin{document}
+\begin{abstract}
+  The adjoint of a matrix has a basic property when employed in a matrix-vector product as part of an inner product.
+\end{abstract}
+\maketitle
+
+You could even use the following result as a motivation for the definition of an adjoint.
+
+\begin{theorem}[Adjoint and Inner Product]
+  \label{theorem:AIP}
+
+  Suppose that $A$ is an $m\times n$ matrix and
+  $\vect{x}\in\complex{n}$, $\vect{y}\in\complex{m}$.  Then
+  $\innerproduct{A\vect{x}}{\vect{y}}=\innerproduct{\vect{x}}{\adjoint{A}\vect{y}}$.
+
+  \begin{proof}
+    
+    \begin{align*}
+      \innerproduct{A\vect{x}}{\vect{y}}
+      &=\transpose{\left(\conjugate{A\vect{x}}\right)}\vect{y}
+      &&\ref{theorem:MMIP}\\
+      &=\transpose{\left(\conjugate{A}\,\conjugate{\vect{x}}\right)}\vect{y}
+      &&\ref{theorem:MMCC}\\
+      &=\transpose{\conjugate{\vect{x}}}\transpose{\conjugate{A}}\vect{y}
+      &&\ref{theorem:MMT}\\
+      &=\transpose{\conjugate{\vect{x}}}\left(\adjoint{A}\vect{y}\right)
+      &&\ref{definition:A}\\
+      &=\innerproduct{\vect{x}}{\adjoint{A}\vect{y}}
+      &&\ref{theorem:MMIP}
+    \end{align*}
+  \end{proof}
+\end{theorem}
+
+Sometimes a matrix is equal to its adjoint (\ref{definition:A}), and
+these matrices have interesting properties.  One of the most common
+situations where this occurs is when a matrix has only real number
+entries.  Then we are simply talking about symmetric matrices
+(\ref{definition:SYM}), so you can view this as a generalization of a
+symmetric matrix.
+
+\begin{definition}[Hermitian Matrix]
+  The square matrix $A$ is \dfn{Hermitian} (or \dfn{self-adjoint}) if $A=\adjoint{A}$.
+\end{definition}
+
+Again, the set of real matrices that are Hermitian is exactly the set
+of symmetric matrices.  In \ref{section:PEE} we will uncover some
+amazing properties of Hermitian matrices, so when you get there, run
+back here to remind yourself of this definition.  Further properties
+will also appear in \ref{section:OD}.  Right now we prove a
+fundamental result about Hermitian matrices, matrix vector products
+and inner products.  As a characterization, this could be employed as
+a definition of a Hermitian matrix and some authors take this
+approach.
+
+\begin{theorem}[Hermitian Matrices and Inner Products]
+  \label{theorem:HMIP}
+
+  Suppose that $A$ is a square matrix of size $n$.  Then $A$ is
+  Hermitian if and only if
+  $\innerproduct{A\vect{x}}{\vect{y}}=\innerproduct{\vect{x}}{A\vect{y}}$
+  for all $\vect{x},\,\vect{y}\in\complex{n}$.
+
+\begin{proof}
+  ($\Rightarrow$) This is the ``easy half'' of the proof, and makes
+  the rationale for a definition of Hermitian matrices most obvious.
+  Assume $A$ is Hermitian,
+  \begin{align*}
+    \innerproduct{A\vect{x}}{\vect{y}}
+    &=\innerproduct{\vect{x}}{\adjoint{A}\vect{y}}&&\ref{theorem:AIP}\\
+    &=\innerproduct{\vect{x}}{A\vect{y}}&&\ref{definition:HM}\\
+  \end{align*}
+
+  ($\Leftarrow$) This ``half'' will take a bit more work.  Assume that
+  $\innerproduct{A\vect{x}}{\vect{y}}=\innerproduct{\vect{x}}{A\vect{y}}$
+  for all $\vect{x},\,\vect{y}\in\complex{n}$.  We show that
+  $A=\adjoint{A}$ by establishing that $A\vect{x}=\adjoint{A}\vect{x}$
+  for all $\vect{x}$, so we can then apply \ref{theorem:EMMVP}.  With
+  only this much motivation, consider the inner product for any
+  $\vect{x}\in\complex{n}$.
+  \begin{align*}
+    \innerproduct{A\vect{x}-\adjoint{A}\vect{x}}{A\vect{x}-\adjoint{A}\vect{x}}
+    &=
+      \innerproduct{A\vect{x}-\adjoint{A}\vect{x}}{A\vect{x}}-
+      \innerproduct{A\vect{x}-\adjoint{A}\vect{x}}{\adjoint{A}\vect{x}}
+    &&\ref{theorem:IPVA}\\
+    &=
+      \innerproduct{A\vect{x}-\adjoint{A}\vect{x}}{A\vect{x}}-
+      \innerproduct{A\left(A\vect{x}-\adjoint{A}\vect{x}\right)}{\vect{x}}
+    &&\ref{theorem:AIP}\\
+    &=
+      \innerproduct{A\vect{x}-\adjoint{A}\vect{x}}{A\vect{x}}-
+      \innerproduct{A\vect{x}-\adjoint{A}\vect{x}}{A\vect{x}}
+    &&\text{Hypothesis}\\
+    &
+      =0
+    &&\ref{property:AICN}
+  \end{align*}
+
+  Because this first inner product equals zero, and has the same
+  vector in each argument ($A\vect{x}-\adjoint{A}\vect{x}$),
+  \ref{theorem:PIP} gives the conclusion that
+  $A\vect{x}-\adjoint{A}\vect{x}=\zerovector$.  With
+  $A\vect{x}=\adjoint{A}\vect{x}$ for all $\vect{x}\in\complex{n}$,
+  \ref{theorem:EMMVP} says $A=\adjoint{A}$, which is the defining
+  property of a Hermitian matrix (\ref{definition:HM}).
+\end{proof}
+\end{theorem}
+
+So, informally, Hermitian matrices are those that can be tossed around from one side of an inner product to the other with reckless abandon.  We will see later what this buys us.
+
+\begin{question}
+  Suppose that $A$ is an $n\times n$ matrix.  Is $\adjoint{A}A$ a Hermitian matrix?
+  
+  \begin{multipleChoice}
+    \choice[correct]{Yes}
+    \choice{No}
+  \end{multipleChoice}
+\end{question}
+
+\begin{question}
+  Suppose that $A$ is an $n\times n$ matrix.  Is $A\adjoint{A}$ a Hermitian matrix?
+  
+  \begin{multipleChoice}
+    \choice[correct]{Yes}
+    \choice{No}
+  \end{multipleChoice}
+\end{question}
+
+\begin{question}
+  Suppose that $A$ is an $n\times n$ matrix.
+
+  For all 
+  $\vect{x}\in\complex{n}$, $\vect{y}\in\complex{n}$, the expression
+  \[
+    \innerproduct{A\adjoint{A}\vect{x}}{\vect{y}}
+  \] is equal to
+  \begin{multipleChoice}
+    \choice{$\innerproduct{\vect{x}}{\adjoint{A}A\vect{y}}$.}
+    \choice[correct]{$\innerproduct{\vect{x}}{A\adjoint{A}\vect{y}}$.}
+    \choice{$\innerproduct{\vect{y}}{\adjoint{A}A\vect{x}}$.}
+    \choice{$\innerproduct{\vect{y}}{A\adjoint{A}\vect{x}}$.}
+  \end{multipleChoice}
+\end{question}
+
+\end{document}

@@ -1,0 +1,523 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Succinctly stating the solution set}
+
+\begin{document}
+\begin{abstract}
+  The solution set to a linear system of equations can be expressed succinctly with vectors.
+\end{abstract}
+\maketitle
+
+The statement of this theorem is a bit scary, and the proof is
+scarier.  For now, be sure to convice yourself, by working through the
+examples, that the statement just describes the procedure we presented
+in the previous activity.
+
+\begin{theorem}[Vector Form of Solutions to Linear Systems]
+  \label{theorem:VFSLS}
+  Suppose that $\augmented{A}{\vect{b}}$ is the augmented matrix for a
+  consistent linear system $\linearsystem{A}{\vect{b}}$ of $m$
+  equations in $n$ variables.  Let $B$ be a row-equivalent
+  $m\times (n+1)$ matrix in reduced row-echelon form. Suppose that $B$
+  has $r$ pivot columns, with indices
+  $D=\set{d_1,\,d_2,\,d_3,\,\ldots,\,d_r}$, while the $n-r$ non-pivot
+  columns have indices in
+  $F=\set{f_1,\,f_2,\,f_3,\,\ldots,\,f_{n-r},\,n+1}$.  Define vectors
+  $\vect{c}$, $\vect{u}_j$, $1\leq j\leq n-r$ of size $n$ by
+  \begin{align*}
+    \vectorentry{\vect{c}}{i}&=
+                               \begin{cases}
+                                 0&\text{if $i\in F$}\\
+                                 \matrixentry{B}{k,n+1}&\text{if $i\in D$, $i=d_k$}
+                               \end{cases}\\
+    \vectorentry{\vect{u}_j}{i}&=
+                                 \begin{cases}
+                                   1&\text{if $i\in F$, $i=f_j$}\\
+                                   0&\text{if $i\in F$, $i\neq f_j$}\\
+                                   -\matrixentry{B}{k,f_j}&\text{if $i\in D$, $i=d_k$}
+                                 \end{cases}.
+  \end{align*}
+  
+  Then the set of solutions to the system of equations $\linearsystem{A}{\vect{b}}$ is
+  \[
+    S=\setparts{
+      \vect{c}+\alpha_1\vect{u}_1+\alpha_2\vect{u}_2+\alpha_3\vect{u}_3+\cdots+\alpha_{n-r}\vect{u}_{n-r}
+    }{
+      \alpha_1,\,\alpha_2,\,\alpha_3,\,\ldots,\,\alpha_{n-r}\in\complexes
+    }
+  \]
+  
+  \begin{proof}
+    First, $\linearsystem{A}{\vect{b}}$ is equivalent to the linear
+    system of equations that has the matrix $B$ as its augmented
+    matrix (\ref{theorem:REMES}), so we need only show that $S$ is the
+    solution set for the system with $B$ as its augmented matrix.  The
+    conclusion of this theorem is that the solution set is equal to
+    the set $S$, so we will apply \ref{definition:SE}.
+
+    We begin by showing that every element of $S$ is indeed a solution
+    to the system.  Let
+    $\alpha_1,\,\alpha_2,\,\alpha_3,\,\ldots,\,\alpha_{n-r}$ be one
+    choice of the scalars used to describe elements of $S$.  So an
+    arbitrary element of $S$, which we will consider as a proposed
+    solution is
+    \[
+      \vect{x}=
+      \vect{c}+\alpha_1\vect{u}_1+\alpha_2\vect{u}_2+\alpha_3\vect{u}_3+\cdots+\alpha_{n-r}\vect{u}_{n-r}
+    \]
+    
+    When $r+1\leq\ell\leq m$, row $\ell$ of the matrix $B$ is a zero
+    row, so the equation represented by that row is always true, no
+    matter which solution vector we propose.  So concentrate on rows
+    representing equations $1\leq\ell\leq r$.  We evaluate equation
+    $\ell$ of the system represented by $B$ with the proposed solution
+    vector $\vect{x}$ and refer to the value of the left-hand side of
+    the equation as $\beta_\ell$,
+    \[
+      \beta_\ell=
+      \matrixentry{B}{\ell 1}\vectorentry{\vect{x}}{1}+
+      \matrixentry{B}{\ell 2}\vectorentry{\vect{x}}{2}+
+      \matrixentry{B}{\ell 3}\vectorentry{\vect{x}}{3}+
+      \cdots+
+      \matrixentry{B}{\ell n}\vectorentry{\vect{x}}{n}
+    \]
+    
+    Since $\matrixentry{B}{\ell d_{i}}=0$ for all $1\leq i\leq r$,
+    except that $\matrixentry{B}{\ell d_{\ell}}=1$, we see that
+    $\beta_\ell$ simplifies to
+    \[
+      \beta_\ell=
+      \vectorentry{\vect{x}}{d_{\ell}}+
+      \matrixentry{B}{\ell f_1}\vectorentry{\vect{x}}{f_1}+
+      \matrixentry{B}{\ell f_2}\vectorentry{\vect{x}}{f_2}+
+      \matrixentry{B}{\ell f_3}\vectorentry{\vect{x}}{f_3}+
+      \cdots+
+      \matrixentry{B}{\ell f_{n-r}}\vectorentry{\vect{x}}{f_{n-r}}
+    \]
+
+    Notice that for $1\leq i\leq n-r$
+    \begin{align*}
+      \vectorentry{\vect{x}}{f_i}
+      &=
+        \vectorentry{\vect{c}}{f_i}+
+        \alpha_1\vectorentry{\vect{u}_1}{f_i}+
+        \alpha_2\vectorentry{\vect{u}_2}{f_i}+
+        \cdots+
+        \alpha_i\vectorentry{\vect{u}_i}{f_i}+
+        \cdots+
+        \alpha_{n-r}\vectorentry{\vect{u_{n-r}}}{f_i}\\
+      &=
+        0+
+        \alpha_1(0)+
+        \alpha_2(0)+
+        \cdots+
+        \alpha_i(1)+
+        \cdots+
+        \alpha_{n-r}(0)\\
+      &=
+        \alpha_i
+    \end{align*}
+
+    So $\beta_\ell$ simplifies further, and we expand the first term
+    \begin{align*}
+      \beta_\ell
+      &=
+        \vectorentry{\vect{x}}{d_{\ell}}+
+        \matrixentry{B}{\ell f_1}\alpha_1+
+        \matrixentry{B}{\ell f_2}\alpha_2+
+        \matrixentry{B}{\ell f_3}\alpha_3+
+        \cdots+
+        \matrixentry{B}{\ell f_{n-r}}\alpha_{n-r}\\
+      &=
+        \vectorentry{
+        \vect{c}+
+        \alpha_1\vect{u}_1+
+        \alpha_2\vect{u}_2+
+        \alpha_3\vect{u}_3+
+        \cdots+
+        \alpha_{n-r}\vect{u}_{n-r}
+        }{d_{\ell}}
+        +\\
+      &\quad\quad
+        \matrixentry{B}{\ell f_1}\alpha_1+
+        \matrixentry{B}{\ell f_2}\alpha_2+
+        \matrixentry{B}{\ell f_3}\alpha_3+
+        \cdots+
+        \matrixentry{B}{\ell f_{n-r}}\alpha_{n-r}\\
+      &=
+        \vectorentry{\vect{c}}{d_{\ell}}+
+        \alpha_1\vectorentry{\vect{u}_1}{d_{\ell}}+
+        \alpha_2\vectorentry{\vect{u}_2}{d_{\ell}}+
+        \alpha_3\vectorentry{\vect{u}_3}{d_{\ell}}+
+        \cdots+
+        \alpha_{n-r}\vectorentry{\vect{u_{n-r}}}{d_{\ell}}
+        +\\
+      &\quad\quad
+        \matrixentry{B}{\ell f_1}\alpha_1+
+        \matrixentry{B}{\ell f_2}\alpha_2+
+        \matrixentry{B}{\ell f_3}\alpha_3+
+        \cdots+
+        \matrixentry{B}{\ell f_{n-r}}\alpha_{n-r}\\
+      &=
+        \matrixentry{B}{\ell,{n+1}}+\\
+      &\quad\quad
+        \alpha_1(-\matrixentry{B}{\ell f_1})+
+        \alpha_2(-\matrixentry{B}{\ell f_2})+
+        \alpha_3(-\matrixentry{B}{\ell f_3})+
+        \cdots+
+        \alpha_{n-r}(-\matrixentry{B}{\ell f_{n-r}})
+        +\\
+      &\quad\quad
+        \matrixentry{B}{\ell f_1}\alpha_1+
+        \matrixentry{B}{\ell f_2}\alpha_2+
+        \matrixentry{B}{\ell f_3}\alpha_3+
+        \cdots+
+        \matrixentry{B}{\ell f_{n-r}}\alpha_{n-r}\\
+      &=
+        \matrixentry{B}{\ell,{n+1}}
+    \end{align*}
+
+    So $\beta_\ell$ began as the left-hand side of equation $\ell$ of
+    the system represented by $B$ and we now know it equals
+    $\matrixentry{B}{\ell,{n+1}}$, the constant term for equation
+    $\ell$ of this system.  So the arbitrarily chosen vector from $S$
+    makes every equation of the system true, and therefore is a
+    solution to the system.  So all the elements of $S$ are solutions
+    to the system.
+
+    For the second half of the proof, assume that $\vect{x}$ is a
+    solution vector for the system having $B$ as its augmented matrix.
+    For convenience and clarity, denote the entries of $\vect{x}$ by
+    $x_i$, in other words, $x_i=\vectorentry{\vect{x}}{i}$.  We desire
+    to show that this solution vector is also an element of the set
+    $S$.  Begin with the observation that a solution vector's entries
+    makes equation $\ell$ of the system true for all
+    $1\leq\ell\leq m$,
+    \[
+      \matrixentry{B}{\ell,1}x_1+
+      \matrixentry{B}{\ell,2}x_2+
+      \matrixentry{B}{\ell,3}x_3+
+      \cdots+
+      \matrixentry{B}{\ell,n}x_n=
+      \matrixentry{B}{\ell,n+1}
+    \]
+    
+    When $\ell\leq r$, the pivot columns of $B$ have zero entries in row $\ell$ with the exception of column $d_\ell$, which will contain a $1$.  So for $1\leq\ell\leq r$, equation $\ell$ simplifies to
+    \[
+      1x_{d_\ell}+
+      \matrixentry{B}{\ell,f_1}x_{f_1}+
+      \matrixentry{B}{\ell,f_2}x_{f_2}+
+      \matrixentry{B}{\ell,f_3}x_{f_3}+
+      \cdots+
+      \matrixentry{B}{\ell,f_{n-r}}x_{f_{n-r}}=
+      \matrixentry{B}{\ell,n+1}
+    \]
+    
+    This allows us to write,
+    \begin{align*}
+      \vectorentry{\vect{x}}{d_\ell}
+      &=
+        x_{d_\ell}\\
+      &=
+        \matrixentry{B}{\ell,n+1}
+        -\matrixentry{B}{\ell,f_1}x_{f_1}
+        -\matrixentry{B}{\ell,f_2}x_{f_2}
+        -\matrixentry{B}{\ell,f_3}x_{f_3}
+        -\cdots
+        -\matrixentry{B}{\ell,f_{n-r}}x_{f_{n-r}}\\
+      &=
+        \vectorentry{\vect{c}}{d_\ell}
+        +x_{f_1}\vectorentry{\vect{u}_1}{d_\ell}
+        +x_{f_2}\vectorentry{\vect{u}_2}{d_\ell}
+        +x_{f_3}\vectorentry{\vect{u}_3}{d_\ell}
+        +\cdots
+        +x_{f_{n-r}}\vectorentry{\vect{u}_{n-r}}{d_\ell}\\
+      &=
+        \vectorentry{
+        \vect{c}
+        +x_{f_1}\vect{u}_1
+        +x_{f_2}\vect{u}_2
+        +x_{f_3}\vect{u}_3
+        +\cdots
+        +x_{f_{n-r}}\vect{u}_{n-r}
+        }{d_\ell}
+    \end{align*}
+    
+    This tells us that the entries of the solution vector $\vect{x}$
+    corresponding to dependent variables (indices in $D$), are equal
+    to those of a vector in the set $S$.  We still need to check the
+    other entries of the solution vector $\vect{x}$ corresponding to
+    the free variables (indices in $F$) to see if they are equal to
+    the entries of the same vector in the set $S$.  To this end,
+    suppose $i\in F$ and $i=f_j$.  Then
+    \begin{align*}
+      \vectorentry{\vect{x}}{i}
+      &=x_{i}=x_{f_j}\\
+      &=
+        0+
+        0x_{f_1}+
+        0x_{f_2}+
+        0x_{f_3}+
+        \cdots+
+        0x_{f_{j-1}}+
+        1x_{f_j}+
+        0x_{f_{j+1}}+
+        \cdots+
+        0x_{f_{n-r}}\\
+      &=
+        \vectorentry{\vect{c}}{i}+
+        x_{f_1}\vectorentry{\vect{u}_1}{i}+
+        x_{f_2}\vectorentry{\vect{u}_2}{i}+
+        x_{f_3}\vectorentry{\vect{u}_3}{i}+
+        \cdots+
+        x_{f_j}\vectorentry{\vect{u}_j}{i}+
+        \cdots+
+        x_{f_{n-r}}\vectorentry{\vect{u}_{n-r}}{i}\\
+      &=\vectorentry{
+        \vect{c}
+        +x_{f_1}\vect{u}_1
+        +x_{f_2}\vect{u}_2
+        +\cdots
+        +x_{f_{n-r}}\vect{u}_{n-r}
+        }{i}
+    \end{align*}
+    
+    So entries of $\vect{x}$ and
+    $\vect{c} +x_{f_1}\vect{u}_1 +x_{f_2}\vect{u}_2 +\cdots
+    +x_{f_{n-r}}\vect{u}_{n-r}$ are equal and therefore by
+    \ref{definition:CVE} they are equal vectors.  Since
+    $x_{f_1},\,x_{f_2},\,x_{f_3},\,\ldots,\,x_{f_{n-r}}$ are scalars,
+    this shows us that $\vect{x}$ qualifies for membership in $S$. So
+    the set $S$ contains all of the solutions to the system.
+
+  \end{proof}
+\end{theorem}
+
+Note that both halves of the proof of this theorem indicate that
+$\alpha_i=\vectorentry{\vect{x}}{f_i}$.  In other words, the arbitrary
+scalars, $\alpha_i$, in the description of the set $S$ actually have
+more meaning---they are the values of the free variables
+$\vectorentry{\vect{x}}{f_i}$, $1\leq i\leq n-r$.  So we will often
+exploit this observation in our descriptions of solution sets.
+
+The theorem formalizes what happened in the three steps of the
+preceeding examples.  The theorem will be useful in proving other
+theorems, and it it is useful since it tells us an exact procedure for
+simply describing an infinite solution set.  We could program a
+computer to implement it, once we have the augmented matrix
+row-reduced and have checked that the system is consistent.  By
+Knuth's definition, this completes our conversion of linear equation
+solving from art into science.  Notice that it even applies (but is
+overkill) in the case of a unique solution.  However, as a practical
+matter, I prefer the three-step process when I need to describe an
+infinite solution set.  So let us practice some more, but with a
+bigger example.
+
+\begin{example}[Vector form of solutions]
+  The system
+  \begin{align*}
+    x_1 +4x_2  - x_4  + 7x_6 - 9x_7 &= 3\\
+    2x_1 + 8x_2 - x_3 + 3x_4 + 9x_5 - 13x_6 + 7x_7 &= 9\\
+    2x_3 -3x_4 -4x_5 +12x_6 -8x_7 &= 1\\
+    -x_1  - 4x_2 + 2x_3 +4x_4 + 8x_5 - 31x_6 + 37x_7 &= 4
+  \end{align*}
+  is a linear system of $m=4$ equations in $n=7$ variables.
+  Row-reducing the augmented matrix yields
+  \[\begin{bmatrix}
+      \leading{1} & 4 & 0 & 0 & 2 & 1 & -3 & 4 \\
+      0 & 0 & \leading{1}  &  0 & 1 &  -3 & 5 & 2 \\
+      0 & 0 &  0 & \leading{1} & 2 &  -6 & 6 & 1 \\
+      0 & 0 &  0 & 0 & 0 & 0 & 0 & 0
+    \end{bmatrix}\] and we see $r=\answer{3}$ pivot columns, with
+  indices $D=\{1,\,3,\,\answer{4}\}$.  So the $r=3$ dependent
+  variables are $x_1,\,x_3,\,x_4$.  The non-pivot columns have indices
+  in $F=\{2,\,5,\,6,\,7,\,8\}$, so the $n-r=4$ free variables are
+  $x_2,\,x_5,\,x_6,\,x_7$.
+  
+  \textbf{Step 1.}  Write the vector of variables ($\vect{x}$) as a
+  fixed vector ($\vect{c}$), plus a linear combination of $n-r=4$
+  vectors ($\vect{u}_1,\,\vect{u}_2,\,\vect{u}_3,\,\vect{u}_4$), using
+  the free variables as the scalars.
+  \[
+    \vect{x}=\colvector{x_1\\x_2\\x_3\\x_4\\x_5\\x_6\\x_7}=
+    \colvector{\ \\\ \\\ \\\ \\\ \\\ \\\ }+
+    x_2\colvector{\ \\\ \\\ \\\ \\\ \\\ \\\ }+
+    x_5\colvector{\ \\\ \\\ \\\ \\\ \\\ \\\ }+
+    x_6\colvector{\ \\\ \\\ \\\ \\\ \\\ \\\ }+
+    x_7\colvector{\ \\\ \\\ \\\ \\\ \\\ \\\ }
+  \]
+
+  \textbf{Step 2.}  For each free variable, use 0's and 1's to ensure
+  equality for the corresponding entry of the vectors.  Take note of
+  the pattern of 0's and 1's at this stage, because this is the best
+  look you will have at it.  We will state an important theorem in the
+  next section and the proof will essentially rely on this
+  observation.
+  \[
+    \vect{x}=\colvector{x_1\\x_2\\x_3\\x_4\\x_5\\x_6\\x_7}=
+    \colvector{\ \\0\\\ \\\ \\0\\0\\0}+
+    x_2\colvector{\ \\\answer{1}\\\ \\\ \\0\\0\\0}+
+    x_5\colvector{\ \\0\\\ \\\ \\1\\0\\0}+
+    x_6\colvector{\ \\0\\\ \\\ \\0\\1\\0}+
+    x_7\colvector{\ \\0\\\ \\\ \\0\\0\\1}
+  \]
+
+  \textbf{Step 3.}  For each dependent variable, use the augmented
+  matrix to formulate an equation expressing the dependent variable as
+  a constant plus multiples of the free variables.  Convert this
+  equation into entries of the vectors that ensure equality for each
+  dependent variable, one at a time.
+  \begin{align*}
+    x_1&=4-4x_2-2x_5-1x_6+3x_7\quad\Rightarrow\\
+    \vect{x}&=\colvector{x_1\\x_2\\x_3\\x_4\\x_5\\x_6\\x_7}=
+    \colvector{4\\0\\\ \\\ \\0\\0\\0}+
+    x_2\colvector{-4\\1\\\ \\\ \\0\\0\\0}+
+    x_5\colvector{-2\\0\\\ \\\ \\1\\0\\0}+
+    x_6\colvector{-1\\0\\\ \\\ \\0\\1\\0}+
+    x_7\colvector{3\\0\\\ \\\ \\0\\0\\1}\\[12pt]
+    x_3&=2+0x_2-x_5+3x_6-5x_7\quad\Rightarrow\\
+    \vect{x}&=\colvector{x_1\\x_2\\x_3\\x_4\\x_5\\x_6\\x_7}=
+    \colvector{4\\0\\2\\\ \\0\\0\\0}+
+    x_2\colvector{-4\\1\\0\\\ \\0\\0\\0}+
+    x_5\colvector{-2\\0\\-1\\\ \\1\\0\\0}+
+    x_6\colvector{-1\\0\\3\\\ \\0\\1\\0}+
+    x_7\colvector{3\\0\\-5\\\ \\0\\0\\1}\\[12pt]
+    x_4&=1+0x_2-2x_5+6x_6-6x_7\quad\Rightarrow\\
+    \vect{x}&=\colvector{x_1\\x_2\\x_3\\x_4\\x_5\\x_6\\x_7}=
+    \colvector{4\\0\\2\\1\\0\\0\\0}+
+    x_2\colvector{-4\\1\\0\\0\\0\\0\\0}+
+    x_5\colvector{-2\\0\\-1\\-2\\1\\0\\0}+
+    x_6\colvector{-1\\0\\3\\6\\0\\1\\0}+
+    x_7\colvector{3\\0\\-5\\-6\\0\\0\\1}\\
+  \end{align*}
+  
+  We can now use this final expression to quickly build solutions to
+  the system.  Even better, we have a description of the infinite
+  solution set, based on just 5 vectors, which we combine in linear
+  combinations to produce solutions.
+\end{example}
+
+This technique is so important, that we will do one more example.
+However, an important distinction will be that this system is
+homogeneous.
+
+\begin{example}[Vector form of solutions]
+  Consider the homogeneous system given by the $5\times 5$ coefficient matrix
+  \[
+    L = \begin{bmatrix}
+      -2 & -1 & -2 & -4 & 4 \\
+      -6 & -5 &  -4 &  -4 & 6 \\
+      10 & 7 & 7 &  10 & -13 \\
+      -7 & -5 &  -6 & -9 & 10 \\
+      -4 &  -3 & -4 & -6 & 6 \\
+    \end{bmatrix}
+  \]
+  So we are solving the homogeneous system
+  $\linearsystem{L}{\zerovector}$ having $m=5$ equations in $n=5$
+  variables.  If we built the augmented matrix, we would add a sixth
+  column to $L$ containing all zeros.  As we did row operations, this
+  sixth column would remain all zeros.  So instead we will row-reduce
+  the coefficient matrix, and mentally remember the missing sixth
+  column of zeros.  This row-reduced matrix is
+  \[
+    \begin{bmatrix}
+      \leading{1} & 0 & 0 & 1 & -2 \\
+      0 & \leading{1} & 0 &  -2 & 2 \\
+      0 & 0 & \leading{1} &  2 &  -1 \\
+      0 & 0 & 0 & 0 &  0 \\
+      0 & 0 & 0 & 0 &  0
+    \end{bmatrix}
+  \]
+  and we see $r=\answer{3}$ pivot columns with indices
+  $D=\{1,\,2,\,3\}$.  So the $r$ dependent variables are
+  $x_1,\,x_2,\,x_3$.  The non-pivot columns have indices
+  $F=\{4,\,5\}$, so the $n-r=2$ free variables are $x_4,\,x_5$. Notice
+  that if we had included the all-zero vector of constants to form the
+  augmented matrix for the system, then the index 6 would have
+  appeared in the set $F$, and subsequently would have been ignored
+  when listing the free variables.  So nothing is lost by not creating
+  an augmented matrix (in the case of a homogenous system).  And maybe
+  it is an improvement, since now \textit{every} index in $F$ can be
+  used to reference a variable of the linear system.
+
+  \textbf{Step 1.}  Write the vector of variables ($\vect{x}$) as a
+  fixed vector ($\vect{c}$), plus a linear combination of $n-r=2$
+  vectors ($\vect{u}_1,\,\vect{u}_2$), using the free variables as the
+  scalars.
+  \[
+    \vect{x}=\colvector{x_1\\x_2\\x_3\\x_4\\x_5}=
+    \colvector{\ \\\ \\\ \\\ \\\ }+
+    x_4\colvector{\ \\\ \\\ \\\ \\\ }+
+    x_5\colvector{\ \\\ \\\ \\\ \\\ }
+  \]
+  
+  \textbf{Step 2.}  For each free variable, use 0's and 1's to ensure
+  equality for the corresponding entry of the vectors.  Take note of
+  the pattern of 0's and 1's at this stage, even if it is not as
+  illuminating as in other examples.
+  \[
+    \vect{x}=\colvector{x_1\\x_2\\x_3\\x_4\\x_5}=
+    \colvector{\ \\\ \\\ \\0\\0}+
+    x_4\colvector{\ \\\ \\\ \\1\\0}+
+    x_5\colvector{\ \\\ \\\ \\0\\1}
+  \]
+
+  \textbf{Step 3.}  For each dependent variable, use the augmented
+  matrix to formulate an equation expressing the dependent variable as
+  a constant plus multiples of the free variables.  Do not forget
+  about the ``missing'' sixth column being full of zeros.  Convert
+  this equation into entries of the vectors that ensure equality for
+  each dependent variable, one at a time.
+  \begin{align*}
+    x_1&=0-1x_4+2x_5&&\Rightarrow&&
+                                    \vect{x}=\colvector{x_1\\x_2\\x_3\\x_4\\x_5}=
+    \colvector{0\\\ \\\ \\0\\0}+
+    x_4\colvector{-1\\\ \\\ \\1\\0}+
+    x_5\colvector{2\\\ \\\ \\0\\1}\\
+    x_2&=0+2x_4-2x_5&&\Rightarrow&&
+                                    \vect{x}=\colvector{x_1\\x_2\\x_3\\x_4\\x_5}=
+    \colvector{0\\0\\\ \\0\\0}+
+    x_4\colvector{-1\\2\\\ \\1\\0}+
+    x_5\colvector{2\\-2\\\ \\0\\1}\\
+    x_3&=0-2x_4+1x_5&&\Rightarrow&&
+                                    \vect{x}=\colvector{x_1\\x_2\\x_3\\x_4\\x_5}=
+    \colvector{0\\0\\0\\0\\0}+
+    x_4\colvector{-1\\2\\-2\\1\\0}+
+    x_5\colvector{2\\-2\\1\\0\\1}
+  \end{align*}
+  The vector $\vect{c}$ will always have 0's in the entries
+  corresponding to free variables.  However, since we are solving a
+  homogeneous system, the row-reduced augmented matrix has zeros in
+  column $n+1=6$, and hence \textit{all} the entries of $\vect{c}$ are
+  zero.  So we can write
+  \[
+    \vect{x}=\colvector{x_1\\x_2\\x_3\\x_4\\x_5}=
+    \zerovector+
+    x_4\colvector{-1\\2\\-2\\1\\0}+
+    x_5\colvector{2\\-2\\1\\0\\1}
+    =
+    x_4\colvector{-1\\2\\-2\\1\\0}+
+    x_5\colvector{2\\-2\\1\\0\\1}
+  \]
+  It will always happen that the solutions to a homogeneous system has
+  $\vect{c}=\zerovector$ (even in the case of a unique solution?).  So
+  our expression for the solutions is a bit more pleasing.  In this
+  example it says that the solutions are \textit{all possible} linear
+  combinations of the two vectors
+  $\vect{u}_1=\colvector{-1\\2\\-2\\1\\0}$ and
+  $\vect{u}_2=\colvector{2\\-2\\1\\0\\1}$, with no mention of any
+  fixed vector entering into the linear combination.
+
+  This observation will motivate our next section and the main
+  definition of that section, and after that we will conclude the
+  section by formalizing this situation.
+\end{example}
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

@@ -1,0 +1,155 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Preimages}
+
+\begin{document}
+\begin{abstract}
+An output from the codomain could have many different inputs from the domain which the transformation sends to that output, or there could be no inputs at all which the transformation sends to that output.
+\end{abstract}
+\maketitle
+
+
+The definition of a function requires that for each input in the
+domain there is \textit{exactly} one output in the codomain.  However,
+the correspondence does not have to behave the other way around.  To
+formalize our discussion of this aspect of linear transformations, we
+define the preimage.
+
+\begin{definition}[Preimage]
+
+Suppose that $\ltdefn{T}{U}{V}$ is a linear transformation.  For each $\vect{v}$, define the \dfn{preimage} of $\vect{v}$ to be the subset of $U$ given by
+\[
+\preimage{T}{\vect{v}}=\setparts{\vect{u}\in U}{\lteval{T}{\vect{u}}=\vect{v}}
+\]
+
+\end{definition}
+
+In other words, $\preimage{T}{\vect{v}}$ is the set of all those vectors in the domain $U$ that get ``sent'' to the vector $\vect{v}$.
+
+\begin{example}[Sample preimages]
+Let $T$ be the linear transformation defined by
+\[\ltdefn{T}{\complex{3}}{M_{22}},\quad
+\lteval{T}{\colvector{a\\b\\c}}=
+\begin{bmatrix}
+a-b&2a+2b+c\\
+3a+b+c&-2a-6b-2c
+\end{bmatrix}
+\]
+We could compute a preimage for every element of the codomain
+$M_{22}$.  However, we will compute just two.
+
+Choose
+\[
+\vect{v}=
+\begin{bmatrix}
+2&1\\3&2
+\end{bmatrix}
+\in M_{22}
+\]
+for no particular reason.  What is $\preimage{T}{\vect{v}}$?  Suppose $\vect{u}=\colvector{u_1\\u_2\\u_3}\in\preimage{T}{\vect{v}}$.  The condition that $\lteval{T}{\vect{u}}=\vect{v}$ becomes
+\[
+\begin{bmatrix}
+2&1\\3&2
+\end{bmatrix}
+=\vect{v}
+=\lteval{T}{\vect{u}}
+=\lteval{T}{\colvector{u_1\\u_2\\u_3}}\\
+\]
+which equals 
+\[
+\begin{bmatrix}
+u_1-u_2&2u_1+\answer{2}u_2+u_3\\
+\answer{3}u_1+u_2+u_3&-2u_1-6u_2-2u_3
+\end{bmatrix}
+\]
+
+Using matrix equality (\ref{definition:ME}), we arrive at a system of four equations in the three unknowns $u_1,\,u_2,\,u_3$ with an augmented matrix that we can row-reduce in the hunt for solutions,
+\[
+\begin{bmatrix}
+1 & -1 & 0 & 2\\
+2 & 2 & 1 & 1\\
+3 & 1 & 1 & 3\\
+-2 & -6 & -2 & 2
+\end{bmatrix}
+\rref
+\begin{bmatrix}
+\leading{1} & 0 & \frac{1}{4} &  \frac{5}{4}\\
+0 & \leading{1} & \frac{1}{4} &  -\frac{3}{4}\\
+0 & 0 & 0 &  0\\
+0 & 0 & 0 &  0
+\end{bmatrix}
+\]
+
+We recognize this system as having infinitely many solutions described by the single free variable $u_3$.  Eventually obtaining the vector form of the solutions (\ref{theorem:VFSLS}), we can describe the preimage precisely as,
+\begin{align*}
+\preimage{T}{\vect{v}}&=\setparts{\vect{u}\in\complex{3}}{\lteval{T}{\vect{u}}=\vect{v}}\\
+&=\setparts{\colvector{u_1\\u_2\\u_3}}{u_1=\frac{5}{4}-\frac{1}{4}u_3,\,u_2=-\frac{3}{4}-\frac{1}{4}u_3}\\
+&=\setparts{\colvector{\frac{5}{4}-\frac{1}{4}u_3\\-\frac{3}{4}-\frac{1}{4}u_3\\u_3}}{u_3\in\complexes}\\
+&=\setparts{\colvector{\frac{5}{4}\\-\frac{3}{4}\\0}+u_3\colvector{-\frac{1}{4}\\-\frac{1}{4}\\1}}{u_3\in\complexes}\\
+&=\colvector{\frac{5}{4}\\-\frac{3}{4}\\0}+\spn{\set{\colvector{-\frac{1}{4}\\-\frac{1}{4}\\1}}}
+\end{align*}
+
+This last line is merely a suggestive way of describing the set on the previous line.  You might create three or four vectors in the preimage, and evaluate $T$ with each.  Was the result what you expected?  For a hint of things to come, you might try evaluating $T$ with just the lone vector in the spanning set above.  What was the result?  Now take a look back at \ref{theorem:PSPHS}.  Hmmmm.
+
+OK, let us compute another preimage, but with a different outcome this time.
+Choose
+\[
+\vect{v}=
+\begin{bmatrix}
+1&1\\2&4
+\end{bmatrix}
+\in M_{22}
+\]
+
+
+
+
+What is $\preimage{T}{\vect{v}}$?  Suppose $\vect{u}=\colvector{u_1\\u_2\\u_3}\in\preimage{T}{\vect{v}}$.  That $\lteval{T}{\vect{u}}=\vect{v}$ becomes
+\[
+\begin{bmatrix}
+1&1\\2&4
+\end{bmatrix}
+=\vect{v}
+=\lteval{T}{\vect{u}}
+=\lteval{T}{\colvector{u_1\\u_2\\u_3}}\\
+=\begin{bmatrix}
+u_1-u_2&2u_1+2u_2+u_3\\
+3u_1+u_2+u_3&-2u_1-6u_2-2u_3
+\end{bmatrix}
+\]
+
+Using matrix equality (\ref{definition:ME}), we arrive at a system of four equations in the three unknowns $u_1,\,u_2,\,u_3$ with an augmented matrix that we can row-reduce in the hunt for solutions,
+\[
+\begin{bmatrix}
+1 & -1 & 0 & \answer{1}\\
+2 & 2 & 1 & 1\\
+3 & 1 & 1 & \answer{2}\\
+-2 & -6 & -2 & 4
+\end{bmatrix}
+\rref
+\begin{bmatrix}
+\leading{1} & 0 & \frac{1}{4} &  0\\
+0 & \leading{1} & \frac{1}{4} &  0\\
+0 & 0 & 0 &  \leading{1}\\
+0 & 0 & 0 &  0
+\end{bmatrix}
+\]
+
+By \ref{theorem:RCLS} we recognize this system as \wordChoice{\choice{consistent}\choice[correct]{inconsistent}}.  So no vector $\vect{u}$ is a member of $\preimage{T}{\vect{v}}$ and therefore
+\begin{multipleChoice}
+  \choice[correct]{$\preimage{T}{\vect{v}}=\emptyset$}
+  \choice{$\preimage{T}{\vect{v}}=\complex{3}$}
+\end{multipleChoice}
+
+\end{example}
+
+The preimage is just a set, it is almost never a subspace of $U$ (you might think about just when $\preimage{T}{\vect{v}}$ is a subspace.  We will describe its properties going forward, and it will be central to the main ideas of this chapter.
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

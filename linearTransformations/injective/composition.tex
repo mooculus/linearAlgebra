@@ -1,0 +1,45 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Composition of Injective Linear Transformations}
+
+\begin{document}
+\begin{abstract}
+  The composition of injective linear transformations is again injective.
+\end{abstract}
+\maketitle
+
+We saw how to combine linear transformations to build new linear
+transformations, specifically, how to build the composition of two
+linear transformations (\ref{definition:LTC}).  It will be useful
+later to know that the composition of injective linear transformations
+is again injective, so we prove that here.
+
+
+\begin{theorem}[Composition of Injective Linear Transformations is Injective]
+\label{theorem:CILTI}
+
+
+Suppose that $\ltdefn{T}{U}{V}$ and $\ltdefn{S}{V}{W}$ are injective linear transformations.  Then $\ltdefn{(\compose{S}{T})}{U}{W}$ is \wordChoice{\choice[correct]{an injective}\choice{a surjective}} linear transformation.
+
+
+\begin{proof}
+That the composition is a linear transformation was established in \ref{theorem:CLTLT}, so we need only establish that the composition is injective.  Applying \ref{definition:ILT}, choose $\vect{x}$, $\vect{y}$ from $U$.  Then if $\lteval{\left(\compose{S}{T}\right)}{\vect{x}}=\lteval{\left(\compose{S}{T}\right)}{\vect{y}}$,
+\begin{align*}
+&\Rightarrow&\lteval{S}{\lteval{T}{\vect{x}}}&=\lteval{S}{\lteval{T}{\vect{y}}}
+&&\ref{definition:LTC}\\
+&\Rightarrow&\lteval{T}{\vect{x}}&=\lteval{T}{\vect{y}}
+&&\ref{definition:ILT}\text{ for }S\\
+&\Rightarrow&\vect{x}&=\vect{y}
+&&\ref{definition:ILT}\text{ for }T
+\end{align*}
+
+
+
+
+\end{proof}
+\end{theorem}
+
+
+\end{document}

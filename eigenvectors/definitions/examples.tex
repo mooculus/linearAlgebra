@@ -1,0 +1,528 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Examples of Computing Eigenvalues and Eigenvectors}
+
+\begin{document}
+\begin{abstract}
+  A selection of examples illustrates the range of possibilities for the eigenvalues and eigenvectors of a matrix. 
+\end{abstract}
+\maketitle
+
+These examples can all be done by hand, though the computation of the
+characteristic polynomial would be very time-consuming and
+error-prone.  It can also be difficult to find roots of an arbitrary
+polynomial, though if we were to suggest that most of our eigenvalues
+are going to be integers, then it can be easier to hunt for roots.
+First, we will sneak in a pair of definitions so we can illustrate
+them throughout this sequence of examples.
+
+\begin{definition}[Algebraic Multiplicity of an Eigenvalue]
+  Suppose that $A$ is a square matrix and $\lambda$ is an eigenvalue
+  of $A$.  Then the \dfn{algebraic multiplicity} of $\lambda$,
+  $\algmult{A}{\lambda}$, is the highest power of $(x-\lambda)$ that
+  divides the characteristic polynomial, $\charpoly{A}{x}$.
+\end{definition}
+
+Since an eigenvalue $\lambda$ is a root of the characteristic
+polynomial, there is always a factor of $(x-\lambda)$, and the
+algebraic multiplicity is just the power of this factor in a
+factorization of $\charpoly{A}{x}$.  So in particular,
+$\algmult{A}{\lambda}\geq 1$.  Compare the definition of algebraic
+multiplicity with the next definition.
+
+\begin{definition}[Geometric Multiplicity of an Eigenvalue]
+  Suppose that $A$ is a square matrix and $\lambda$ is an eigenvalue
+  of $A$.  Then the \dfn{geometric multiplicity} of $\lambda$,
+  $\geomult{A}{\lambda}$, is the dimension of the eigenspace
+  $\eigenspace{A}{\lambda}$.
+\end{definition}
+
+Every eigenvalue must have at least one eigenvector, so the associated
+eigenspace cannot be trivial, and so $\geomult{A}{\lambda}\geq 1$.
+
+\begin{example}[Eigenvalue multiplicities, matrix of size 4]
+  Consider the matrix
+  \[
+    B=
+    \begin{bmatrix}
+      -2 & 1 & -2 & -4\\
+      12 & 1 & 4 & 9\\
+      6 & 5 & -2 & -4\\
+      3 & -4 & 5 & 10
+    \end{bmatrix}
+  \]
+  then
+  \[
+    \charpoly{B}{x}=8-20x+18x^2-7x^3+x^4=(x-1)(x-\answer{2})^3
+  \]
+  So the eigenvalues are $\lambda=1,\,2$ with algebraic multiplicities
+  $\algmult{B}{1}=1$ and $\algmult{B}{2}=\answer{3}$.
+
+  Computing eigenvectors,
+  \begin{align*}
+    \lambda&=1&B- 1I_4&=
+                        \begin{bmatrix}
+                          -3 & 1 & -2 & -4\\
+                          12 & 0 & 4 & 9\\
+                          6 & 5 & -3 & -4\\
+                          3 & -4 & 5 & 9
+                        \end{bmatrix}
+                                       \rref
+                                       \begin{bmatrix}
+                                         \leading{1} & 0 & \frac{1}{3} & 0\\
+                                         0 & \leading{1} & -1 & 0\\
+                                         0 & 0 & 0 & \leading{1}\\
+                                         0 & 0 & 0 & 0
+                                       \end{bmatrix}\\
+           &&\eigenspace{B}{1}&=\nsp{B-1I_4}
+                                =\spn{\set{\colvector{-\frac{1}{3}\\1\\1\\0}}}
+    =\spn{\set{\colvector{-1\\3\\3\\0}}}\\
+    \lambda&=2&B-2I_4&=
+                       \begin{bmatrix}
+                         -4 & 1 & -2 & -4\\
+                         12 & -1 & 4 & 9\\
+                         6 & 5 & -4 & -4\\
+                         3 & -4 & 5 & 8
+                       \end{bmatrix}
+                                      \rref
+                                      \begin{bmatrix}
+                                        \leading{1} & 0 & 0 & 1/2\\
+                                        0 & \leading{1} & 0 & -1\\
+                                        0 & 0 & \leading{1} & 1/2\\
+                                        0 & 0 & 0 & 0
+                                      \end{bmatrix}\\
+           &&\eigenspace{B}{2}&=\nsp{B-2I_4}
+                                =\spn{\set{\colvector{-\frac{1}{2}\\1\\-\frac{1}{2}\\1}}}
+    =\spn{\set{\colvector{-1\\2\\-1\\2}}}\\
+  \end{align*}
+  
+  So each eigenspace has dimension 1 and so
+  $\geomult{B}{1}=\answer{1}$ and $\geomult{B}{2}=\answer{1}$.  This
+  example is of interest because of the discrepancy between the two
+  multiplicities for $\lambda=\answer{2}$.  In many of our examples
+  the algebraic and geometric multiplicities will be equal for all of
+  the eigenvalues (as it was for $\lambda=1$ in this example), so keep
+  this example in mind.  We will have some explanations for this
+  phenomenon later.
+\end{example}
+
+\begin{example}[Eigenvalues, symmetric matrix of size 4]
+  Consider the matrix
+  \[
+    C=
+    \begin{bmatrix}
+      1 &  0 &  1 &  1\\
+      0 &  1 &  1 &  1\\
+      1 &  1 &  1 &  0\\
+      1 &  1 &  0 &  1
+    \end{bmatrix}
+  \]
+  then
+  \[
+    \charpoly{C}{x}=-3+4x+2x^2-4x^3+x^4=(x-3)(x-1)^2(x+1)
+  \]
+  So the eigenvalues are $\lambda=3,\,1,\,-1$ with algebraic
+  multiplicities $\algmult{C}{3}=1$, $\algmult{C}{1}=\answer{2}$ and
+  $\algmult{C}{-1}=1$.
+
+  Computing eigenvectors,
+  \begin{align*}
+    \lambda&=3&C- 3I_4&=
+                        \begin{bmatrix}
+                          -2 & 0 & 1 & 1\\
+                          0 & -2 & 1 & 1\\
+                          1 & 1 & -2 & 0\\
+                          1 & 1 & 0 & -2
+                        \end{bmatrix}
+                                      \rref
+                                      \begin{bmatrix}
+                                        \leading{1} & 0 & 0 & -1\\
+                                        0 & \leading{1} & 0 & -1\\
+                                        0 & 0 & \leading{1} & -1\\
+                                        0 & 0 & 0 & 0
+                                      \end{bmatrix}\\
+           &&\eigenspace{C}{3}&=\nsp{C-3I_4}
+                                =\spn{\set{\colvector{1\\1\\1\\1}}}\\
+    \lambda&=1&C-1I_4&=
+                       \begin{bmatrix}
+                         0 & 0 & 1 & 1\\
+                         0 & 0 & 1 & 1\\
+                         1 & 1 & 0 & 0\\
+                         1 & 1 & 0 & 0
+                       \end{bmatrix}
+                                     \rref
+                                     \begin{bmatrix}
+                                       \leading{1} & 1 & 0 & 0\\
+                                       0 & 0 & \leading{1} & 1\\
+                                       0 & 0 & 0 & 0\\
+                                       0 & 0 & 0 & 0
+                                     \end{bmatrix}\\
+           &&\eigenspace{C}{1}&=\nsp{C-1I_4}
+                                =\spn{\set{\colvector{-1\\1\\0\\0},\,\colvector{0\\0\\-1\\1}}}\\
+    \lambda&=-1&C+1I_4&=
+                        \begin{bmatrix}
+                          2 & 0 & 1 & 1\\
+                          0 & 2 & 1 & 1\\
+                          1 & 1 & 2 & 0\\
+                          1 & 1 & 0 & 2
+                        \end{bmatrix}
+                                      \rref
+                                      \begin{bmatrix}
+                                        \leading{1} & 0 & 0 & 1\\
+                                        0 & \leading{1} & 0 & 1\\
+                                        0 & 0 & \leading{1} & -1\\
+                                        0 & 0 & 0 & 0
+                                      \end{bmatrix}\\
+           &&\eigenspace{C}{-1}&=\nsp{C+1I_4}
+                                 =\spn{\set{\colvector{-1\\-1\\1\\1}}}\\
+  \end{align*}
+
+  So the eigenspace dimensions yield geometric multiplicities
+  $\geomult{C}{3}=1$, $\geomult{C}{1}=\answer{2}$ and
+  $\geomult{C}{-1}=1$, the same as for the algebraic multiplicities.
+  This example is of interest because $A$ is a symmetric matrix, and
+  will be the subject of \ref{theorem:HMRE}.
+
+\end{example}
+
+\begin{example}[High multiplicity eigenvalues, matrix of size 5]
+  
+  Consider the matrix
+  \[
+    E=
+    \begin{bmatrix}
+      29 & 14 & 2 & 6 & -9\\
+      -47 & -22 & -1 & -11 & 13\\
+      19 & 10 & 5 & 4 & -8\\
+      -19 & -10 & -3 & -2 & 8\\
+      7 & 4 & 3 & 1 & -3
+    \end{bmatrix}
+  \]
+  then
+  \[
+    \charpoly{E}{x}=-16+16x+8x^2-16x^3+7x^4-x^5=-(x-2)^4(x+1)
+  \]
+  So the eigenvalues are $\lambda=2,\,-1$ with algebraic multiplicities $\algmult{E}{2}=\answer{4}$  and $\algmult{E}{-1}=1$.
+  
+  Computing eigenvectors,
+  \begin{align*}
+    \lambda&=2\\
+    E-2I_5&=
+            \begin{bmatrix}
+              27 & 14 & 2 & 6 & -9\\
+              -47 & -24 & -1 & -11 & 13\\
+              19 & 10 & 3 & 4 & -8\\
+              -19 & -10 & -3 & -4 & 8\\
+              7 & 4 & 3 & 1 & -5
+            \end{bmatrix}
+                              \rref
+                              \begin{bmatrix}
+                                \leading{1} & 0 & 0 & 1 & 0\\
+                                0 & \leading{1} & 0 & -\frac{3}{2} & -\frac{1}{2}\\
+                                0 & 0 & \leading{1} & 0 & -1\\
+                                0 & 0 & 0 & 0 & 0\\
+                                0 & 0 & 0 & 0 & 0
+                              \end{bmatrix}\\
+    \eigenspace{E}{2}&=\nsp{E-2I_5}
+                       =\spn{\set{\colvector{-1\\\frac{3}{2}\\0\\1\\0},\,\colvector{0\\\frac{1}{2}\\1\\0\\1}}}
+    =\spn{\set{\colvector{-2\\3\\0\\2\\0},\,\colvector{0\\1\\2\\0\\2}}}\\
+    \lambda&=-1\\
+    E+1I_5&=
+            \begin{bmatrix}
+              30 & 14 & 2 & 6 & -9\\
+              -47 & -21 & -1 & -11 & 13\\
+              19 & 10 & 6 & 4 & -8\\
+              -19 & -10 & -3 & -1 & 8\\
+              7 & 4 & 3 & 1 & -2
+            \end{bmatrix}
+                              \rref
+                              \begin{bmatrix}
+                                \leading{1} & 0 & 0 & 2 & 0\\
+                                0 & \leading{1} & 0 & -4 & 0\\
+                                0 & 0 & \leading{1} & 1 & 0\\
+                                0 & 0 & 0 & 0 & \leading{1}\\
+                                0 & 0 & 0 & 0 & 0
+                              \end{bmatrix}\\
+    \eigenspace{E}{-1}&=\nsp{E+1I_5}=\spn{\set{\colvector{-2\\4\\-1\\1\\0}}}\\
+  \end{align*}
+  
+  So the eigenspace dimensions yield geometric multiplicities
+  $\geomult{E}{2}=\answer{2}$ and $\geomult{E}{-1}=1$.  This example
+  is of interest because $\lambda=2$ has such a large algebraic
+  multiplicity, which is also not equal to its geometric multiplicity.
+
+\end{example}
+
+\begin{example}[Complex eigenvalues, matrix of size 6]
+
+  Consider the matrix
+  \[
+    F=
+    \begin{bmatrix}
+      -59 & -34 & 41 & 12 & 25 & 30\\
+      1 & 7 & -46 & -36 & -11 & -29\\
+      -233 & -119 & 58 & -35 & 75 & 54\\
+      157 & 81 & -43 & 21 & -51 & -39\\
+      -91 & -48 & 32 & -5 & 32 & 26\\
+      209 & 107 & -55 & 28 & -69 & -50
+    \end{bmatrix}
+  \]
+  then
+  \begin{align*}
+    \charpoly{F}{x}&=-50+55x+13x^2-50x^3+32x^4-9x^5+x^6\\
+                   &=(x-2)(x+1)(x^2-4x+5)^2\\
+                   &=(x-2)(x+1)((x-(2+i))(x-(2-i)))^2\\
+                   &=(x-2)(x+1)(x-(2+i))^2(x-(2-i))^2\\
+  \end{align*}
+  So the eigenvalues are $\lambda=2,\,-1,2+i,\,2-i$ with algebraic
+  multiplicities $\algmult{F}{2}=1$, $\algmult{F}{-1}=1$,
+  $\algmult{F}{2+i}=2$ and $\algmult{F}{2-i}=2$.
+
+  We compute eigenvectors, noting that the last two basis vectors are
+  each a scalar multiple of what \ref{theorem:BNS} will provide,
+  \begin{align*}
+    \lambda&=2\quad\quad F-2I_6=\\
+           &
+             \begin{bmatrix}
+               -61 & -34 & 41 & 12 & 25 & 30\\
+               1 & 5 & -46 & -36 & -11 & -29\\
+               -233 & -119 & 56 & -35 & 75 & 54\\
+               157 & 81 & -43 & 19 & -51 & -39\\
+               -91 & -48 & 32 & -5 & 30 & 26\\
+               209 & 107 & -55 & 28 & -69 & -52
+             \end{bmatrix}
+                                            \rref
+                                            \begin{bmatrix}
+                                              \leading{1} & 0 & 0 & 0 & 0 & \frac{1}{5}\\
+                                              0 & \leading{1} & 0 & 0 & 0 & 0\\
+                                              0 & 0 & \leading{1} & 0 & 0 & \frac{3}{5}\\
+                                              0 & 0 & 0 & \leading{1} & 0 & -\frac{1}{5}\\
+                                              0 & 0 & 0 & 0 & \leading{1} & \frac{4}{5}\\
+                                              0 & 0 & 0 & 0 & 0 & 0
+                                            \end{bmatrix}\\
+           &\eigenspace{F}{2}=\nsp{F-2I_6}
+             =\spn{\set{\colvector{-\frac{1}{5}\\0\\-\frac{3}{5}\\\frac{1}{5}\\-\frac{4}{5}\\1}}}
+    =\spn{\set{\colvector{-1\\0\\-3\\1\\-4\\5}}}\\
+  \end{align*}
+  \begin{align*}
+    \lambda&=-1\quad\quad F+1I_6=\\
+           &
+             \begin{bmatrix}
+               -58 & -34 & 41 & 12 & 25 & 30\\
+               1 & 8 & -46 & -36 & -11 & -29\\
+               -233 & -119 & 59 & -35 & 75 & 54\\
+               157 & 81 & -43 & 22 & -51 & -39\\
+               -91 & -48 & 32 & -5 & 33 & 26\\
+               209 & 107 & -55 & 28 & -69 & -49
+             \end{bmatrix}
+                                            \rref
+                                            \begin{bmatrix}
+                                              \leading{1} & 0 & 0 & 0 & 0 & \frac{1}{2}\\
+                                              0 & \leading{1} & 0 & 0 & 0 & -\frac{3}{2}\\
+                                              0 & 0 & \leading{1} & 0 & 0 & \frac{1}{2}\\
+                                              0 & 0 & 0 & \leading{1} & 0 & 0\\
+                                              0 & 0 & 0 & 0 & \leading{1} & -\frac{1}{2}\\
+                                              0 & 0 & 0 & 0 & 0 & 0
+                                            \end{bmatrix}\\
+           &\eigenspace{F}{-1}=\nsp{F+I_6}
+             =\spn{\set{\colvector{-\frac{1}{2}\\\frac{3}{2}\\-\frac{1}{2}\\0\\\frac{1}{2}\\1}}}
+    =\spn{\set{\colvector{-1\\3\\-1\\0\\1\\2}}}\\
+  \end{align*}
+  \begin{align*}
+    \lambda&=2+i\\
+           &F-(2+i)I_6=
+             \begin{bmatrix}
+               -61-i & -34 & 41 & 12 & 25 & 30\\
+               1 & 5-i & -46 & -36 & -11 & -29\\
+               -233 & -119 & 56-i & -35 & 75 & 54\\
+               157 & 81 & -43 & 19-i & -51 & -39\\
+               -91 & -48 & 32 & -5 & 30-i & 26\\
+               209 & 107 & -55 & 28 & -69 & -52-i
+             \end{bmatrix}\\
+           &
+             \rref
+             \begin{bmatrix}
+               \leading{1} & 0 & 0 & 0 & 0 & \frac{1}{5}(7+ i)\\
+               0 & \leading{1} & 0 & 0 & 0 & \frac{1}{5}(-9-2i)\\
+               0 & 0 & \leading{1} & 0 & 0 & 1\\
+               0 & 0 & 0 & \leading{1} & 0 & -1\\
+               0 & 0 & 0 & 0 & \leading{1} & 1\\
+               0 & 0 & 0 & 0 & 0 & 0
+             \end{bmatrix}\\
+           &\eigenspace{F}{2+i}=\nsp{F-(2+i)I_6}
+             =\spn{\set{\colvector{-7-i\\9+2i\\-5\\5\\-5\\5}}}\\
+  \end{align*}
+  \begin{align*}
+    \lambda&=2-i\\
+           &F-(2-i)I_6=
+             \begin{bmatrix}
+               -61+i & -34 & 41 & 12 & 25 & 30\\
+               1 & 5+i & -46 & -36 & -11 & -29\\
+               -233 & -119 & 56+i & -35 & 75 & 54\\
+               157 & 81 & -43 & 19+i & -51 & -39\\
+               -91 & -48 & 32 & -5 & 30+i & 26\\
+               209 & 107 & -55 & 28 & -69 & -52+i
+             \end{bmatrix}\\
+           &\rref
+             \begin{bmatrix}
+               \leading{1} & 0 & 0 & 0 & 0 & \frac{1}{5}(7-i)\\
+               0 & \leading{1} & 0 & 0 & 0 & \frac{1}{5}(-9+2i)\\
+               0 & 0 & \leading{1} & 0 & 0 & 1\\
+               0 & 0 & 0 & \leading{1} & 0 & -1\\
+               0 & 0 & 0 & 0 & \leading{1} & 1\\
+               0 & 0 & 0 & 0 & 0 & 0
+             \end{bmatrix}\\
+           &\eigenspace{F}{2-i}=\nsp{F-(2-i)I_6}
+             =\spn{\set{\colvector{-7+i\\9-2i\\-5\\5\\-5\\5}}}\\
+  \end{align*}
+  
+  Eigenspace dimensions yield geometric multiplicities of
+  $\geomult{F}{2}=1$, $\geomult{F}{-1}=1$, $\geomult{F}{2+i}=1$ and
+  $\geomult{F}{2-i}=1$.  This example demonstrates some of the
+  possibilities for the appearance of complex eigenvalues, even when
+  all the entries of the matrix are real.  Notice how all the numbers
+  in the analysis of $\lambda=2-i$ are conjugates of the corresponding
+  number in the analysis of $\lambda=2+i$.  This is the content of the
+  upcoming \ref{theorem:ERMCP}.
+\end{example}
+
+\begin{example}[Distinct eigenvalues, matrix of size 5]
+  Consider the matrix
+  \[
+    H=
+    \begin{bmatrix}
+      15 & 18 & -8 & 6 & -5\\
+      5 & 3 & 1 & -1 & -3\\
+      0 & -4 & 5 & -4 & -2\\
+      -43 & -46 & 17 & -14 & 15\\
+      26 & 30 & -12 & 8 & -10
+    \end{bmatrix}
+  \]
+  then
+  \[
+    \charpoly{H}{x}=-6x+x^2+7x^3-x^4-x^5=x(x-2)(x-1)(x+1)(x+3)
+  \]
+  So the eigenvalues are $\lambda=2,\,1,\,0,\,-1,\,-3$ with algebraic
+  multiplicities $\algmult{H}{2}=1$, $\algmult{H}{1}=1$,
+  $\algmult{H}{0}=1$, $\algmult{H}{-1}=1$ and $\algmult{H}{-3}=1$.
+  
+  Computing eigenvectors,
+  \begin{align*}
+    \lambda&=2\\&H-2I_5=
+                  \begin{bmatrix}
+                    13 & 18 & -8 & 6 & -5\\
+                    5 & 1 & 1 & -1 & -3\\
+                    0 & -4 & 3 & -4 & -2\\
+                    -43 & -46 & 17 & -16 & 15\\
+                    26 & 30 & -12 & 8 & -12
+                  \end{bmatrix}
+                                        \rref
+                                        \begin{bmatrix}
+                                          \leading{1} & 0 & 0 & 0 & -1\\
+                                          0 & \leading{1} & 0 & 0 & 1\\
+                                          0 & 0 & \leading{1} & 0 & 2\\
+                                          0 & 0 & 0 & \leading{1} & 1\\
+                                          0 & 0 & 0 & 0 & 0
+                                        \end{bmatrix}\\
+           &\eigenspace{H}{2}=\nsp{H-2I_5}
+             =\spn{\set{\colvector{1\\-1\\-2\\-1\\1}}}
+  \end{align*}
+  \begin{align*}
+    \lambda&=1\\&H-1I_5=
+                  \begin{bmatrix}
+                    14 & 18 & -8 & 6 & -5\\
+                    5 & 2 & 1 & -1 & -3\\
+                    0 & -4 & 4 & -4 & -2\\
+                    -43 & -46 & 17 & -15 & 15\\
+                    26 & 30 & -12 & 8 & -11
+                  \end{bmatrix}
+                                        \rref
+                                        \begin{bmatrix}
+                                          \leading{1} & 0 & 0 & 0 & -\frac{1}{2}\\
+                                          0 & \leading{1} & 0 & 0 & 0\\
+                                          0 & 0 & \leading{1} & 0 & \frac{1}{2}\\
+                                          0 & 0 & 0 & \leading{1} & 1\\
+                                          0 & 0 & 0 & 0 & 0
+                                        \end{bmatrix}\\
+           &\eigenspace{H}{1}=\nsp{H-1I_5}
+             =\spn{\set{\colvector{\frac{1}{2}\\0\\-\frac{1}{2}\\-1\\1}}}
+    =\spn{\set{\colvector{1\\0\\-1\\-2\\2}}}
+  \end{align*}
+  \begin{align*}
+    \lambda&=0\\&H-0I_5=
+                  \begin{bmatrix}
+                    15 & 18 & -8 & 6 & -5\\
+                    5 & 3 & 1 & -1 & -3\\
+                    0 & -4 & 5 & -4 & -2\\
+                    -43 & -46 & 17 & -14 & 15\\
+                    26 & 30 & -12 & 8 & -10
+                  \end{bmatrix}
+                                        \rref
+                                        \begin{bmatrix}
+                                          \leading{1} & 0 & 0 & 0 & 1\\
+                                          0 & \leading{1} & 0 & 0 & -2\\
+                                          0 & 0 & \leading{1} & 0 & -2\\
+                                          0 & 0 & 0 & \leading{1} & 0\\
+                                          0 & 0 & 0 & 0 & 0
+                                        \end{bmatrix}\\
+           &\eigenspace{H}{0}=\nsp{H-0I_5}
+             =\spn{\set{\colvector{-1\\2\\2\\0\\1}}}
+  \end{align*}
+  \begin{align*}
+    \lambda&=-1\\&H+1I_5=
+                   \begin{bmatrix}
+                     16 & 18 & -8 & 6 & -5\\
+                     5 & 4 & 1 & -1 & -3\\
+                     0 & -4 & 6 & -4 & -2\\
+                     -43 & -46 & 17 & -13 & 15\\
+                     26 & 30 & -12 & 8 & -9
+                   \end{bmatrix}
+                                         \rref
+                                         \begin{bmatrix}
+                                           \leading{1} & 0 & 0 & 0 & -1/2\\
+                                           0 & \leading{1} & 0 & 0 & 0\\
+                                           0 & 0 & \leading{1} & 0 & 0\\
+                                           0 & 0 & 0 & \leading{1} & 1/2\\
+                                           0 & 0 & 0 & 0 & 0
+                                         \end{bmatrix}\\
+           &\eigenspace{H}{-1}=\nsp{H+1I_5}
+             =\spn{\set{\colvector{\frac{1}{2}\\0\\0\\-\frac{1}{2}\\1}}}
+    =\spn{\set{\colvector{1\\0\\0\\-1\\2}}}
+  \end{align*}
+  \begin{align*}
+    \lambda&=-3\\&H+3I_5=
+                   \begin{bmatrix}
+                     18 & 18 & -8 & 6 & -5\\
+                     5 & 6 & 1 & -1 & -3\\
+                     0 & -4 & 8 & -4 & -2\\
+                     -43 & -46 & 17 & -11 & 15\\
+                     26 & 30 & -12 & 8 & -7
+                   \end{bmatrix}
+                                         \rref
+                                         \begin{bmatrix}
+                                           \leading{1} & 0 & 0 & 0 & -1\\
+                                           0 & \leading{1} & 0 & 0 & \frac{1}{2}\\
+                                           0 & 0 & \leading{1} & 0 & 1\\
+                                           0 & 0 & 0 & \leading{1} & 2\\
+                                           0 & 0 & 0 & 0 & 0
+                                         \end{bmatrix}\\
+           &\eigenspace{H}{-3}=\nsp{H+3I_5}
+=\spn{\set{\colvector{1\\-\frac{1}{2}\\-1\\-2\\1}}}
+    =\spn{\set{\colvector{-2\\1\\2\\4\\-2}}}
+  \end{align*}
+
+
+  So the eigenspace dimensions yield geometric multiplicities
+  $\geomult{H}{2}=\answer{1}$, $\geomult{H}{1}=\answer{1}$,
+  $\geomult{H}{0}=\answer{1}$, $\geomult{H}{-1}=\answer{1}$ and
+  $\geomult{H}{-3}=\answer{1}$, identical to the algebraic
+  multiplicities.  This example is of interest for two reasons.
+  First, $\lambda=0$ is an eigenvalue, illustrating the upcoming
+  \ref{theorem:SMZE}.  Second, all the eigenvalues are distinct,
+  yielding algebraic and geometric multiplicities of 1 for each
+  eigenvalue, illustrating \ref{theorem:DED}.
+\end{example}
+
+\end{document}

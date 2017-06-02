@@ -1,0 +1,111 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Rank and Nullity of a Nonsingular Matrix}
+
+\begin{document}
+\begin{abstract}
+  The dimensions of the row space, column space, and null space are
+  important quantities associated to a matrix.
+\end{abstract}
+\maketitle
+
+Let us take a look at the rank and nullity of a square matrix.
+
+\begin{example}[Rank and nullity of a square matrix]
+  The matrix
+  \[
+    E=\begin{bmatrix}
+      0 & 4 & -1 & 2 & 2 & 3 & 1\\
+      2 & -2 & 1 & -1 & 0 & -4 & -3\\
+      -2 & -3 & 9 & -3 & 9 & -1 & 9\\
+      -3 & -4 & 9 & 4 & -1 & 6 & -2\\
+      -3 & -4 & 6 & -2 & 5 & 9 & -4\\
+      9 & -3 & 8 & -2 & -4 & 2 & 4\\
+      8 & 2 & 2 & 9 & 3 & 0 & 9
+    \end{bmatrix}
+  \]
+  is row-equivalent to the matrix in reduced row-echelon form,
+  \[
+    \begin{bmatrix}
+      \leading{1} & 0 & 0 & 0 & 0 & 0 & 0\\
+      0 & \leading{1} & 0 & 0 & 0 & 0 & 0\\
+      0 & 0 & \leading{1} & 0 & 0 & 0 & 0\\
+      0 & 0 & 0 & \leading{1} & 0 & 0 & 0\\
+      0 & 0 & 0 & 0 & \leading{1} & 0 & 0\\
+      0 & 0 & 0 & 0 & 0 & \leading{1} & 0\\
+      0 & 0 & 0 & 0 & 0 & 0 & \leading{1}
+    \end{bmatrix}
+  \]
+  
+  With $n=7$ columns and $r=7$ nonzero rows \ref{theorem:CRN} tells us
+  the rank is $\rank{E}=\answer{7}$ and the nullity is $\nullity{E}=\answer{0}$.
+\end{example}
+
+The value of either the nullity or the rank are enough to characterize a nonsingular matrix.
+
+\begin{theorem}[Rank and Nullity of a Nonsingular Matrix]
+  \label{theorem:RNNM}
+  
+  Suppose that $A$ is a square matrix of size $n$.  The following are equivalent.
+  \begin{enumerate}
+  \item A is nonsingular.
+  \item The rank of $A$ is $n$, $\rank{A}=n$.
+  \item The nullity of $A$ is zero, $\nullity{A}=0$.
+  \end{enumerate}
+
+  \begin{proof}
+    (1 $\Rightarrow$ 2) \ref{theorem:CSNM} says that if $A$ is
+    nonsingular then $\csp{A}=\complex{n}$.  If $\csp{A}=\complex{n}$,
+    then the column space has dimension $n$ by \ref{theorem:DCM}, so
+    the rank of $A$ is $n$.
+
+    (2 $\Rightarrow$ 3)  Suppose $\rank{A}=n$.  Then \ref{theorem:RPNC} gives
+    \begin{align*}
+      \nullity{A}&=n-\rank{A}&&\ref{theorem:RPNC}\\
+                 &=n-n&&\text{Hypothesis}\\
+                 &=0
+    \end{align*}
+
+    (3 $\Rightarrow$ 1) Suppose $\nullity{A}=0$, so a basis for the
+    null space of $A$ is 
+    \begin{multipleChoice}
+      \choice{the rows of $A$}
+      \choice{the columns of $A$}
+      \choice[correct]{the empty set.}
+    \end{multipleChoice}
+    
+    \begin{feedback}[correct]
+      Because the basis is $\varnothing$, this implies that
+      $\nsp{A}=\set{\zerovector}$ and \ref{theorem:NMTNS} says $A$ is
+      nonsingular.
+    \end{feedback}
+  \end{proof}
+\end{theorem}
+
+With a new equivalence for a nonsingular matrix, we can update our
+list of equivalences, which now becomes a list requiring double digits
+to number.
+
+\begin{theorem}[Nonsingular Matrix Equivalences, Round 6]
+
+  Suppose that $A$ is a square matrix of size $n$.  The following are equivalent.
+  \begin{enumerate}\item $A$ is nonsingular.
+  \item $A$ row-reduces to the identity matrix.
+  \item The null space of $A$ contains only the zero vector, $\nsp{A}=\set{\zerovector}$.
+  \item The linear system $\linearsystem{A}{\vect{b}}$ has a unique solution for every possible choice of $\vect{b}$.
+  \item The columns of $A$ are a linearly independent set.
+  \item $A$ is invertible.
+  \item The column space of $A$ is $\complex{n}$, $\csp{A}=\complex{n}$.
+  \item The columns of $A$ are a basis for $\complex{n}$.
+  \item The rank of $A$ is $n$, $\rank{A}=n$.
+  \item The nullity of $A$ is zero, $\nullity{A}=0$.
+  \end{enumerate}
+
+  \begin{proof}
+    We can add two of the statements from \ref{theorem:RNNM}.
+  \end{proof}
+\end{theorem}
+
+\end{document}

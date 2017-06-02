@@ -1,0 +1,53 @@
+\documentclass{ximera}
+
+\input{../../../preamble.tex}
+\author{Robert Beezer}
+\license{GFDL}
+
+\begin{document}
+
+\begin{exercise}
+  Suppose that $S=\set{\colvector{2\\-1\\3\\4},\,\colvector{3\\2\\-2\\1}}$.
+
+  Let $W=\spn{S}$ and let $\vect{y}=\colvector{5\\1\\3\\5}$.  Is
+  $\vect{y}\in W$? 
+
+  \begin{multipleChoice}
+    \choice[correct]{No.}
+    \choice{Yes.}
+  \end{multipleChoice}
+
+  \begin{question}
+    Rephrasing the question, we want to know if there are scalars
+    $\alpha_1$ and $\alpha_2$ such that
+    \[
+      \alpha_1\colvector{2\\-1\\3\\4}+\alpha_2\colvector{3\\2\\-2\\1}=\colvector{5\\1\\3\\5}
+    \]
+    Then \ref{theorem:SLSLC} allows us to rephrase the question again as a quest for solutions to the system of four equations in two unknowns with an augmented matrix given by
+    \[
+      \begin{bmatrix}
+        2 & \answer{3} & \answer{5}\\
+        -1 & 2 & 1\\
+        3 & -2 & 3\\
+        4 &  1 & 5
+      \end{bmatrix}
+    \]
+    This matrix row-reduces to
+    \[
+      \begin{bmatrix}
+        \leading{1} & \answer{0} & \answer{0}\\
+        0 & \leading{1} & 0\\
+        0 & 0 & \leading{1}\\
+        0 & 0 & 0
+      \end{bmatrix}
+    \]
+    With a pivot column in the last column of this matrix
+    (\ref{theorem:RCLS}) we can see that the system of equations has
+    no solution, so there are no values for $\alpha_1$ and $\alpha_2$
+    that will allow us to conclude that $\vect{y}$ is in $W$.  So
+    $\vect{y}\not\in W$.
+  \end{question}
+\end{exercise}
+
+\end{document}
+

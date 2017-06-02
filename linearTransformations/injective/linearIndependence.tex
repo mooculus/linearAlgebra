@@ -1,0 +1,116 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Injective Linear Transformations and Linear Independence}
+
+\begin{document}
+\begin{abstract}
+There is a connection between injective linear transformations and linearly independent sets that we will make precise.
+\end{abstract}
+\maketitle
+
+
+Informally, we can get a feel for the connection between injective
+linear transformations and linearly independent sets when we think
+about how each property is defined.  A set of vectors is linearly
+independent if the \textbf{only} relation of linear dependence is the
+trivial one.  A linear transformation is injective if the
+\textbf{only} way two input vectors can produce the same output is in
+the trivial way, when both input vectors are equal.
+
+
+\begin{theorem}[Injective Linear Transformations and Linear Independence]
+\label{theorem:ILTLI}
+
+Suppose that $\ltdefn{T}{U}{V}$ is an injective linear transformation and
+\begin{align*}
+S&=\set{\vectorlist{u}{t}}
+\end{align*}
+is a linearly independent subset of $U$.  Then
+\begin{align*}
+R&=\set{\lteval{T}{\vect{u}_1},\,\lteval{T}{\vect{u}_2},\,\lteval{T}{\vect{u}_3},\,\ldots,\,\lteval{T}{\vect{u}_t}}
+\end{align*}
+is a linearly independent subset of $V$.
+
+\begin{proof}
+Begin with a relation of linear dependence on $R$ (\ref{definition:RLD}, \ref{definition:LI}),
+\begin{align*}
+a_1\lteval{T}{\vect{u}_1}+a_2\lteval{T}{\vect{u}_2}+a_3\lteval{T}{\vect{u}_3}+\ldots+a_t\lteval{T}{\vect{u}_t}&=\zerovector\\
+\lteval{T}{\lincombo{a}{u}{t}}&=\zerovector&&\ref{theorem:LTLC}\\
+\lincombo{a}{u}{t}&\in\krn{T}&&\ref{definition:KLT}\\
+\lincombo{a}{u}{t}&\in\set{\zerovector}&&\ref{theorem:KILT}\\
+\lincombo{a}{u}{t}&=\zerovector&&\ref{definition:SET}\\
+\end{align*}
+
+Since this is a relation of linear dependence on the linearly independent set $S$, we can conclude that
+\begin{align*}
+a_1&=0&a_2&=0&a_3&=0&\ldots&&a_t&=0
+\end{align*}
+and this establishes that $R$ is a linearly independent set.
+
+\end{proof}
+\end{theorem}
+
+\begin{theorem}[Injective Linear Transformations and Bases]
+\label{theorem:ILTB}
+
+Suppose that $\ltdefn{T}{U}{V}$ is a linear transformation and
+\begin{align*}
+B&=\set{\vectorlist{u}{m}}
+\end{align*}
+is a basis of $U$.  Then $T$ is injective if and only if
+\begin{align*}
+C&=\set{\lteval{T}{\vect{u}_1},\,\lteval{T}{\vect{u}_2},\,\lteval{T}{\vect{u}_3},\,\ldots,\,\lteval{T}{\vect{u}_m}}
+\end{align*}
+is a linearly independent subset of $V$.
+
+
+\begin{proof}
+($\Rightarrow$)  Assume $T$ is injective.  Since $B$ is a basis, we know $B$ is linearly independent (\ref{definition:B}).  Then \ref{theorem:ILTLI} says that $C$ is a linearly independent subset of $V$.
+
+
+
+($\Leftarrow$)  Assume that $C$ is linearly independent.  To establish that $T$ is injective, we will show that the kernel of $T$ is trivial (\ref{theorem:KILT}).  Suppose that $\vect{u}\in\krn{T}$.  As an element of $U$, we can write $\vect{u}$ as a linear combination of the basis vectors in $B$ (uniquely).  So there are are scalars, $\scalarlist{a}{m}$, such that
+\[
+\vect{u}=\lincombo{a}{u}{m}
+\]
+
+
+
+
+Then,
+\begin{align*}
+\zerovector
+&=\lteval{T}{\vect{u}}
+&&\ref{definition:KLT}\\
+&=\lteval{T}{\lincombo{a}{u}{m}}
+&&\ref{definition:SSVS}\\
+&=a_1\lteval{T}{\vect{u}_1}+a_2\lteval{T}{\vect{u}_2}+a_3\lteval{T}{\vect{u}_3}+\cdots+a_m\lteval{T}{\vect{u}_m}
+&&\ref{theorem:LTLC}
+\end{align*}
+
+
+
+
+This is a relation of linear dependence (\ref{definition:RLD}) on the linearly independent set $C$, so 
+\begin{multipleChoice}
+\choice{one of the scalars iszero:  $a_i \neq 0$.}
+\choice[correct]{the scalars are all zero:  $a_1=a_2=a_3=\cdots=a_m=0$.}
+\end{multipleChoice}
+
+Then
+\begin{align*}
+\vect{u}&=\lincombo{a}{u}{m}\\
+&=0\vect{u}_1+0\vect{u}_2+0\vect{u}_3+\cdots+0\vect{u}_m&&\ref{theorem:ZSSM}\\
+&=\zerovector+\zerovector+\zerovector+\cdots+\zerovector&&\ref{theorem:ZSSM}\\
+&=\zerovector&&\ref{property:Z}
+\end{align*}
+
+
+Since $\vect{u}$ was chosen as an arbitrary vector from $\krn{T}$, we have $\krn{T}=\set{\zerovector}$ and \ref{theorem:KILT} tells us that $T$ is injective.
+
+\end{proof}
+\end{theorem}
+
+\end{document}

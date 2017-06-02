@@ -1,0 +1,25 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Injective Linear Transformations}
+
+\begin{document}
+\begin{abstract}
+  An ``injective'' function is a function such that that if it yields
+  equal outputs, then we must have achieved those equal outputs by
+  employing equal inputs.
+\end{abstract}
+\maketitle
+
+Some linear transformations possess one, or both, of two key properties, which go by the names injective and surjective.  We will see that they are closely related to ideas like linear independence and spanning, and subspaces like the null space and the column space.  In this activity, we will define an injective linear transformation and analyze the resulting consequences.  The next activity will do the same for the surjective property.  Eventually we will see what happens when we have the two properties simultaneously.
+
+So first, a definition.
+
+\begin{definition}[Injective Linear Transformation]
+Suppose $\ltdefn{T}{U}{V}$ is a linear transformation.  Then $T$ is \dfn{injective} if whenever $\lteval{T}{\vect{x}}=\lteval{T}{\vect{y}}$, then $\vect{x}=\vect{y}$.
+\end{definition}
+
+Given an arbitrary function, it is possible for two different inputs to yield the same output (think about the function $f(x)=x^2$ and the inputs $x=3$ and $x=-3$).  For an injective function, this never happens.  If we have equal outputs ($\lteval{T}{\vect{x}}=\lteval{T}{\vect{y}}$) then we must have achieved those equal outputs by employing equal inputs ($\vect{x}=\vect{y}$).  Some authors prefer the term \dfn{one-to-one} where we use injective, and we will sometimes refer to an injective linear transformation as an \dfn{injection}.
+
+\end{document}

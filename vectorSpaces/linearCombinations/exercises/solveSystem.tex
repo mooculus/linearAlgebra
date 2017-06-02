@@ -1,0 +1,47 @@
+\documentclass{ximera}
+
+\input{../../../preamble.tex}
+\author{Robert Beezer}
+\license{GFDL}
+
+\begin{document}
+
+\begin{exercise}
+  Find the vector form of the solutions to the system of equations:
+  \begin{align*}
+    2x_1-4x_2+3x_3+x_5&=6\\
+    x_1-2x_2-2x_3+14x_4-4x_5&=15\\
+    x_1-2x_2+x_3+2x_4+x_5&=-1\\
+    -2x_1+4x_2-12x_4+x_5&=-7
+  \end{align*}
+
+  \begin{hint}
+    Row-reduce the augmented matrix representing this system, to find
+    \[
+      \begin{bmatrix}
+        \leading{1} & -2 & 0 & 6 & 0 & 1\\
+        0 & 0 & \leading{1} & -4 & 0 & 3\\
+        0 & 0 & 0 & 0 & \leading{1} & -5\\
+        0 & 0 & 0 & 0 & 0 & 0
+      \end{bmatrix}
+    \]
+  \end{hint}
+
+  \begin{hint}
+    The system is consistent (no pivot column in column 6,
+    \ref{theorem:RCLS}). $x_2$ and $x_4$ are the free variables.  Now
+    apply \ref{theorem:VFSLS}.
+  \end{hint}
+
+  \[
+    \colvector{x_1\\x_2\\x_3\\x_4\\x_5}
+    =
+    \colvector{1\\\answer{0}\\\answer{3}\\\answer{0}\\\answer{-5}}+
+    x_2\colvector{2\\1\\0\\0\\0}+
+    x_4\colvector{-6\\0\\4\\1\\0}
+  \]
+
+\end{exercise}
+
+\end{document}
+

@@ -1,0 +1,30 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Surjective Linear Transformations}
+
+\begin{document}
+\begin{abstract}
+  Surjective linear transformations are closely related to spanning sets and ranges.
+\end{abstract}
+\maketitle
+
+
+
+The companion to an injection is a surjection.  Surjective linear transformations are closely related to spanning sets and ranges.  So as you complete this activity, reflect back and note the parallels and the contrasts.  In the next activity on invertible linear transformations, we will combine the two properties.
+
+As usual, we lead with a definition.
+
+\begin{definition}
+[Surjective Linear Transformation]
+Suppose $\ltdefn{T}{U}{V}$ is a linear transformation.  Then $T$ is \dfn{surjective} if for every $\vect{v}\in V$ there exists a $\vect{u}\in U$ so that $\lteval{T}{\vect{u}}=\vect{v}$.
+
+
+
+\end{definition}
+
+Given an arbitrary function, it is possible for there to be an element of the codomain that is not an output of the function (think about the function $y=f(x)=x^2$ and the codomain element $y=-3$).  For a surjective function, this never happens.  If we choose any element of the codomain ($\vect{v}\in V$) then there must be an input from the domain ($\vect{u}\in U$) which will create the output when used to evaluate the linear transformation ($\lteval{T}{\vect{u}}=\vect{v}$).  Some authors prefer the term \dfn{onto} where we use surjective, and we will sometimes refer to a surjective linear transformation as a \dfn{surjection}.
+
+
+\end{document}

@@ -1,0 +1,141 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Matrix Equality, Addition, Scalar Multiplication}
+
+\begin{document}
+\begin{abstract}
+  We begin with a definition of a totally general set of matrices, and see where that takes us.
+\end{abstract}
+\maketitle
+
+\begin{definition}[Vector Space of $m\times n$ Matrices]
+  The vector space $M_{mn}$ is the set of all $m\times n$ matrices with entries from the set of complex numbers.
+\end{definition}
+
+Just as we made, and used, a careful definition of equality for column
+vectors, so too, we have precise definitions for matrices.
+
+\begin{definition}[Matrix Equality]
+  The $m\times n$ matrices $A$ and $B$ are \dfn{equal}, written $A=B$
+  provided $\matrixentry{A}{ij}=\matrixentry{B}{ij}$ for all
+  $1\leq i\leq m$, $1\leq j\leq n$.
+\end{definition}
+
+So equality of matrices translates to the equality of complex numbers,
+on an entry-by-entry basis.  Notice that we now have yet another
+definition that uses the symbol ``='' for shorthand.  Whenever a
+theorem has a conclusion saying two matrices are equal (think about
+your objects), we will consider appealing to this definition as a way
+of formulating the top-level structure of the proof.
+
+We will now define two operations on the set $M_{mn}$.  Again, we will
+overload a symbol (`+') and a convention (juxtaposition for scalar
+multiplication).
+
+\begin{definition}[Matrix Addition]
+  Given the $m\times n$ matrices $A$ and $B$, define the \dfn{sum} of
+  $A$ and $B$ as an $m\times n$ matrix, written $A+B$, according to
+  \begin{align*}
+    \matrixentry{A+B}{ij}&=\matrixentry{A}{ij}+\matrixentry{B}{ij}
+    &&1\leq i\leq m,\,1\leq j\leq n
+  \end{align*}
+\end{definition}
+
+So matrix addition takes two matrices of the same size and combines
+them (in a natural way!) to create a new matrix of the same size.
+Perhaps this is the ``obvious'' thing to do, but it does not relieve
+us from the obligation to state it carefully.
+
+\begin{example}[Addition of two matrices in $M_{23}$]
+  If
+  \begin{align*}
+    A=
+    \begin{bmatrix}
+      2&-3&4\\
+      1&0&-7
+    \end{bmatrix}
+       &&
+          B=
+          \begin{bmatrix}
+            6&2&-4\\
+            3&5&2
+          \end{bmatrix}
+  \end{align*}
+  then
+  \begin{align*}
+    A+B&=\begin{bmatrix}
+      \answer{8}&\answer{-1}&0\\
+      \answer{4}&5&-5
+    \end{bmatrix}
+  \end{align*}
+
+     \begin{hint}
+     This can be computed as
+     \begin{align*}
+       A+B&=
+            \begin{bmatrix}
+              2&-3&4\\
+              1&0&-7
+            \end{bmatrix}
+                   +
+                   \begin{bmatrix}
+                     6&2&-4\\
+                     3&5&2
+                   \end{bmatrix}\\
+          &=
+            \begin{bmatrix}
+              2+6&-3+2&4+(-4)\\
+              1+3&0+5&-7+2
+            \end{bmatrix}
+                       =\begin{bmatrix}
+                         8&-1&0\\
+                         4&5&-5
+                       \end{bmatrix}
+     \end{align*}
+   \end{hint}
+\end{example}
+
+Our second operation takes two objects of different types,
+specifically a number and a matrix, and combines them to create
+another matrix.  As with vectors, in this context we call a number a
+\dfn{scalar} in order to emphasize that it is not a matrix.
+
+\begin{definition}[Matrix Scalar Multiplication]
+Given the $m\times n$ matrix $A$
+and the scalar $\alpha\in\complexes$, the \dfn{scalar multiple} of $A$ is an $m\times n$ matrix, written $\alpha A$ and defined according to
+\begin{align*}
+\matrixentry{\alpha A}{ij}&=\alpha\matrixentry{A}{ij}&&
+\quad 1\leq i\leq m,\,1\leq j\leq n
+\end{align*}
+\end{definition}
+
+Notice again that we have yet another kind of multiplication, and it is again written putting two symbols side-by-side.  Computationally, scalar matrix multiplication is very easy.
+
+\begin{example}[Scalar multiplication in $M_{32}$]
+  If
+  \[
+    A=
+    \begin{bmatrix}
+      2&8\\
+      -3&5\\0&1
+    \end{bmatrix}
+  \]
+  and $\alpha=7$, then
+    \[
+      \alpha A=
+      \begin{bmatrix}\answer{14}&56\\-21&\answer{35}\\0&7\end{bmatrix}
+    \]
+    \begin{hint}
+      This computation could be done via
+      \[
+        \alpha A=
+        7\begin{bmatrix}2&8\\-3&5\\0&1\end{bmatrix}=
+        \begin{bmatrix}7(2)&7(8)\\7(-3)&7(5)\\7(0)&7(1)\end{bmatrix}=
+        \begin{bmatrix}14&56\\-21&35\\0&7\end{bmatrix}
+      \]
+    \end{hint}
+\end{example}
+
+\end{document}

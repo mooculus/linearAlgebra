@@ -1,0 +1,357 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Elementary matrices}
+
+\begin{document}
+\begin{abstract}
+  Before we define the determinant of a matrix, we take a slight
+  detour to introduce elementary matrices.  These will bring us back
+  to the beginning of the course and our old friend, row operations.
+\end{abstract}
+\maketitle
+
+Elementary matrices are very simple, as you might have suspected from
+their name.  Their purpose is to effect row operations
+(\ref{definition:RO}) on a matrix through matrix multiplication
+(\ref{definition:MM}).  Their definitions look much more complicated
+than they really are, so be sure to skip over them on your first
+reading and head right for the explanation that follows and the first
+example.
+
+
+
+\begin{definition}[Elementary Matrices]
+
+\begin{enumerate}\item For $i\neq j$, the matrix $\elemswap{i}{j}$ is the square matrix of size $n$ with
+\[
+\matrixentry{\elemswap{i}{j}}{k\ell}=
+\begin{cases}
+0 & k\neq i, k\neq j, \ell\neq k\\
+1 & k\neq i, k\neq j, \ell=k\\
+0 & k=i, \ell\neq j\\
+1 & k=i, \ell=j\\
+0 & k=j, \ell\neq i\\
+1 & k=j, \ell=i
+\end{cases}
+\]
+\item For $\alpha\neq 0$, $\elemmult{\alpha}{i}$ is the square matrix of size $n$ with
+\[
+\matrixentry{\elemmult{\alpha}{i}}{k\ell}=
+\begin{cases}
+0        & \ell\neq k\\
+1        & k\neq i, \ell=k\\
+\alpha & k=i, \ell=i
+\end{cases}
+\]
+\item For $i\neq j$, $\elemadd{\alpha}{i}{j}$ is the square matrix of size $n$ with
+\[
+\matrixentry{\elemadd{\alpha}{i}{j}}{k\ell}=
+\begin{cases}
+0 & k\neq j, \ell\neq k\\
+1 & k\neq j, \ell=k\\
+0 & k=j, \ell\neq i, \ell\neq j\\
+1 & k=j, \ell=j\\
+\alpha & k=j, \ell=i\\
+\end{cases}
+\]
+\end{enumerate}
+\end{definition}
+
+Again, these matrices are not as complicated as their definitions
+suggest, since they are just small perturbations of the $n\times n$
+identity matrix (\ref{definition:IM}).  $\elemswap{i}{j}$ is the
+identity matrix with rows (or columns) $i$ and $j$ trading places,
+$\elemmult{\alpha}{i}$ is the identity matrix where the diagonal entry
+in row $i$ and column $i$ has been replaced by $\alpha$, and
+$\elemadd{\alpha}{i}{j}$ is the identity matrix where the entry in row
+$j$ and column $i$ has been replaced by $\alpha$. (Yes, those
+subscripts look backwards in the description of
+$\elemadd{\alpha}{i}{j}$).  Notice that our notation makes no
+reference to the size of the elementary matrix, since this will always
+be apparent from the context, or unimportant.
+
+The \textit{raison d'etre} for elementary matrices is to ``do'' row
+operations on matrices with matrix multiplication.  So here is an
+example where we will both see some elementary matrices and see how
+they accomplish row operations when used with matrix multiplication.
+
+\begin{example}[Elementary matrices and row operations]
+
+  We will perform a sequence of row operations (\ref{definition:RO})
+  on the $3\times 4$ matrix $A$, while also multiplying the matrix on
+  the left by the appropriate $3\times 3$ elementary matrix.
+\[
+A=
+\begin{bmatrix}
+2 & 1 & 3 & 1\\
+1 & 3 & 2 & 4\\
+5 & 0 & 3 & 1
+\end{bmatrix}
+\]
+\begin{align*}
+\rowopswap{1}{3}:\ &
+\begin{bmatrix}
+5 & 0 & 3 & 1\\
+1 & 3 & 2 & 4\\
+2 & 1 & 3 & 1
+\end{bmatrix}
+&
+\elemswap{1}{3}:\ &
+\begin{bmatrix}
+0 & 0 & 1\\
+0 & 1 & 0\\
+1 & 0 & 0
+\end{bmatrix}
+\begin{bmatrix}
+2 & 1 & 3 & 1\\
+1 & 3 & 2 & 4\\
+5 & 0 & 3 & 1
+\end{bmatrix}
+=
+\begin{bmatrix}
+5 & 0 & 3 & 1\\
+1 & 3 & 2 & 4\\
+2 & 1 & 3 & 1
+\end{bmatrix}\\
+\rowopmult{2}{2}:\ &
+\begin{bmatrix}
+5 & 0 & 3 & 1\\
+\answer{2} & 6 & 4 & 8\\
+2 & 1 & 3 & 1
+\end{bmatrix}
+&
+\elemmult{2}{2}:\ &
+\begin{bmatrix}
+1 & 0 & 0\\
+0 & 2 & 0\\
+0 & 0 & 1
+\end{bmatrix}
+\begin{bmatrix}
+5 & 0 & 3 & 1\\
+1 & 3 & 2 & 4\\
+2 & 1 & 3 & 1
+\end{bmatrix}
+=
+\begin{bmatrix}
+5 & 0 & 3 & 1\\
+2 & 6 & 4 & 8\\
+2 & 1 & 3 & 1
+\end{bmatrix}\\
+\rowopadd{2}{3}{1}:\ &
+\begin{bmatrix}
+9 & 2 & 9 & 3\\
+2 & 6 & 4 & 8\\
+2 & 1 & 3 & 1
+\end{bmatrix}
+&
+\elemadd{2}{3}{1}:\ &
+\begin{bmatrix}
+1 & 0 & 2\\
+0 & 1 & 0\\
+0 & 0 & 1
+\end{bmatrix}
+\begin{bmatrix}
+5 & 0 & 3 & 1\\
+2 & 6 & 4 & 8\\
+2 & 1 & 3 & 1
+\end{bmatrix}
+=
+\begin{bmatrix}
+\answer{9} & 2 & 9 & 3\\
+2 & 6 & 4 & 8\\
+2 & 1 & 3 & 1
+\end{bmatrix}
+\end{align*}
+
+
+\end{example}
+
+The next three theorems establish that each elementary matrix effects a row operation via matrix multiplication.
+
+
+\begin{theorem}[Elementary Matrices Do Row Operations]
+\label{theorem:EMDRO}
+
+Suppose that $A$ is an $m\times n$ matrix, and $B$ is a matrix of the
+same size that is obtained from $A$ by a single row operation
+(\ref{definition:RO}).  Then there is an elementary matrix of size $m$
+that will convert $A$ to $B$ via matrix multiplication on the left.
+More precisely,
+\begin{enumerate}
+\item If the row operation swaps rows $i$ and $j$, then
+  $B=\elemswap{i}{j}A$.
+\item If the row operation multiplies row $i$ by $\alpha$, then
+  $B=\elemmult{\alpha}{i}A$.
+\item If the row operation multiplies row $i$ by $\alpha$ and adds the
+  result to row $j$, then $B=\elemadd{\alpha}{i}{j}A$.
+\end{enumerate}
+
+\begin{proof}
+  In each of the three conclusions, performing the row operation on
+  $A$ will create the matrix $B$ where only one or two rows will have
+  changed.  So we will establish the equality of the matrix entries
+  row by row, first for the unchanged rows, then for the changed rows,
+  showing in each case that the result of the matrix product is the
+  same as the result of the row operation.  Here we go.
+
+  Row $k$ of the product $\elemswap{i}{j}A$, where $k\neq i$, $k\neq j$, is unchanged from $A$,
+  \begin{align*}
+    \matrixentry{\elemswap{i}{j}A}{k\ell}
+    &=\sum_{p=1}^{n}\matrixentry{\elemswap{i}{j}}{kp}\matrixentry{A}{p\ell}
+    &&\ref{theorem:EMP}\\
+    &=\matrixentry{\elemswap{i}{j}}{kk}\matrixentry{A}{k\ell}+
+      \sum_{\substack{p=1\\p\neq k}}^{n}\matrixentry{\elemswap{i}{j}}{kp}\matrixentry{A}{p\ell}
+    &&\ref{property:CACN}\\
+    &=1\matrixentry{A}{k\ell}+
+      \sum_{\substack{p=1\\p\neq k}}^{n}0\matrixentry{A}{p\ell}
+    &&\ref{definition:ELEM}\\
+    &=\matrixentry{A}{k\ell}
+  \end{align*}
+
+  Row $i$ of the product $\elemswap{i}{j}A$ is row $j$ of $A$,
+  \begin{align*}
+    \matrixentry{\elemswap{i}{j}A}{i\ell}
+    &=\sum_{p=1}^{n}\matrixentry{\elemswap{i}{j}}{ip}\matrixentry{A}{p\ell}
+    &&\ref{theorem:EMP}\\
+    &=\matrixentry{\elemswap{i}{j}}{ij}\matrixentry{A}{j\ell}+
+      \sum_{\substack{p=1\\p\neq j}}^{n}\matrixentry{\elemswap{i}{j}}{ip}\matrixentry{A}{p\ell}
+    &&\ref{property:CACN}\\
+    &=1\matrixentry{A}{j\ell}+
+      \sum_{\substack{p=1\\p\neq j}}^{n}0\matrixentry{A}{p\ell}
+    &&\ref{definition:ELEM}\\
+    &=\matrixentry{A}{j\ell}
+  \end{align*}
+
+  Row $j$ of the product  $\elemswap{i}{j}A$ is row $i$ of $A$,
+  \begin{align*}
+    \matrixentry{\elemswap{i}{j}A}{j\ell}
+    &=\sum_{p=1}^{n}\matrixentry{\elemswap{i}{j}}{jp}\matrixentry{A}{p\ell}
+    &&\ref{theorem:EMP}\\
+    &=\matrixentry{\elemswap{i}{j}}{ji}\matrixentry{A}{i\ell}+
+      \sum_{\substack{p=1\\p\neq i}}^{n}\matrixentry{\elemswap{i}{j}}{jp}\matrixentry{A}{p\ell}
+    &&\ref{property:CACN}\\
+    &=1\matrixentry{A}{i\ell}+\sum_{\substack{p=1\\p\neq i}}^{n}0\matrixentry{A}{p\ell}
+    &&\ref{definition:ELEM}\\
+    &=\matrixentry{A}{i\ell}
+  \end{align*}
+  
+  So the matrix product $\elemswap{i}{j}A$ is the same as the row operation that swaps rows $i$ and $j$.
+
+  Row $k$ of the product $\elemmult{\alpha}{i}A$, where $k\neq i$, is unchanged from $A$,
+  \begin{align*}
+    \matrixentry{\elemmult{\alpha}{i}A}{k\ell}
+    &=\sum_{p=1}^{n}\matrixentry{\elemmult{\alpha}{i}}{kp}\matrixentry{A}{p\ell}
+    &&\ref{theorem:EMP}\\
+    &=\matrixentry{\elemmult{\alpha}{i}}{kk}\matrixentry{A}{k\ell}+
+      \sum_{\substack{p=1\\p\neq k}}^{n}\matrixentry{\elemmult{\alpha}{i}}{kp}\matrixentry{A}{p\ell}
+    &&\ref{property:CACN}\\
+    &=1\matrixentry{A}{k\ell}+\sum_{\substack{p=1\\p\neq k}}^{n}0\matrixentry{A}{p\ell}
+    &&\ref{definition:ELEM}\\
+    &=\matrixentry{A}{k\ell}
+  \end{align*}
+
+  Row $i$ of the product  $\elemmult{\alpha}{i}A$ is $\alpha$ times row $i$ of $A$,
+  \begin{align*}
+    \matrixentry{\elemmult{\alpha}{i}A}{i\ell}
+    &=\sum_{p=1}^{n}\matrixentry{\elemmult{\alpha}{i}}{ip}\matrixentry{A}{p\ell}
+    &&\ref{theorem:EMP}\\
+    &=\matrixentry{\elemmult{\alpha}{i}}{ii}\matrixentry{A}{i\ell}+
+      \sum_{\substack{p=1\\p\neq i}}^{n}\matrixentry{\elemmult{\alpha}{i}}{ip}\matrixentry{A}{p\ell}
+    &&\ref{property:CACN}\\
+    &=\alpha\matrixentry{A}{i\ell}+\sum_{\substack{p=1\\p\neq i}}^{n}0\matrixentry{A}{p\ell}
+    &&\ref{definition:ELEM}\\
+    &=\alpha\matrixentry{A}{i\ell}
+  \end{align*}
+  
+  So the matrix product $\elemmult{\alpha}{i}A$ is the same as the row operation that swaps multiplies row $i$ by $\alpha$.
+
+  Row $k$ of the product $\elemadd{\alpha}{i}{j}A$, where $k\neq j$, is unchanged from $A$,
+  \begin{align*}
+    \matrixentry{\elemadd{\alpha}{i}{j}A}{k\ell}
+    &=\sum_{p=1}^{n}\matrixentry{\elemadd{\alpha}{i}{j}}{kp}\matrixentry{A}{p\ell}
+    &&\ref{theorem:EMP}\\
+    &=\matrixentry{\elemadd{\alpha}{i}{j}}{kk}\matrixentry{A}{k\ell}+
+      \sum_{\substack{p=1\\p\neq k}}^{n}\matrixentry{\elemadd{\alpha}{i}{j}}{kp}\matrixentry{A}{p\ell}
+    &&\ref{property:CACN}\\
+    &=1\matrixentry{A}{k\ell}+\sum_{\substack{p=1\\p\neq k}}^{n}0\matrixentry{A}{p\ell}
+    &&\ref{definition:ELEM}\\
+    &=\matrixentry{A}{k\ell}
+  \end{align*}
+
+  Row $j$ of the product $\elemadd{\alpha}{i}{j}A$, is $\alpha$ times row $i$ of $A$ and then added to row $j$ of $A$,
+  \begin{align*}
+    \matrixentry{\elemadd{\alpha}{i}{j}A}{j\ell}
+    &=\sum_{p=1}^{n}\matrixentry{\elemadd{\alpha}{i}{j}}{jp}\matrixentry{A}{p\ell}
+    &&\ref{theorem:EMP}\\
+    &=\matrixentry{\elemadd{\alpha}{i}{j}}{jj}\matrixentry{A}{j\ell}+\\
+    &\quad\quad\matrixentry{\elemadd{\alpha}{i}{j}}{ji}\matrixentry{A}{i\ell}+
+      \sum_{\substack{p=1\\p\neq j,i}}^{n}\matrixentry{\elemadd{\alpha}{i}{j}}{jp}\matrixentry{A}{p\ell}
+    &&\ref{property:CACN}\\
+    &=1\matrixentry{A}{j\ell}+\alpha\matrixentry{A}{i\ell}+\sum_{\substack{p=1\\p\neq j,i}}^{n}0\matrixentry{A}{p\ell}
+    &&\ref{definition:ELEM}\\
+    &=\matrixentry{A}{j\ell}+\alpha\matrixentry{A}{i\ell}
+  \end{align*}
+
+  So the matrix product $\elemadd{\alpha}{i}{j}A$ is the same as the
+  row operation that multiplies row $i$ by $\alpha$ and adds the
+  result to row $j$.
+\end{proof}
+\end{theorem}
+
+Later in this section we will need two facts about elementary
+matrices.
+
+\begin{theorem}[Elementary Matrices are Nonsingular]
+  \label{theorem:EMN}
+
+  If $E$ is an elementary matrix, then $E$ is nonsingular.
+
+  \begin{proof}
+    We show that we can row-reduce each elementary matrix to the
+    identity matrix.  Given an elementary matrix of the form
+    $\elemswap{i}{j}$, perform the row operation that swaps row $j$
+    with row $\answer{i}$.  Given an elementary matrix of the form
+    $\elemmult{\alpha}{i}$, with $\alpha\neq 0$, perform the row
+    operation that multiplies row $i$ by $1/\alpha$.  Given an
+    elementary matrix of the form $\elemadd{\alpha}{i}{j}$, with
+    $\alpha\neq 0$, perform the row operation that multiplies row $i$
+    by $-\alpha$ and adds it to row $j$.  In each case, the result of
+    the single row operation is the identity matrix.  So each
+    elementary matrix is row-equivalent to the identity matrix, and by
+    \ref{theorem:NMRRI} is nonsingular.
+\end{proof}
+\end{theorem}
+
+Notice that we have now made use of the nonzero restriction on
+$\alpha$ in the definition of $\elemmult{\alpha}{i}$.  One more key
+property of elementary matrices.
+
+\begin{theorem}[Nonsingular Matrices are Products of Elementary Matrices]
+\label{theorem:NMPEM}
+
+Suppose that $A$ is a nonsingular matrix.  Then there exists
+elementary matrices $E_1,\,E_2,\,E_3,\,\dots,\,E_t$ so that
+$A=E_1 E_2 E_3\dots E_t$.
+
+\begin{proof}
+  Since $A$ is nonsingular, it is row-equivalent to the identity
+  matrix by \ref{theorem:NMRRI}, so there is a sequence of $t$ row
+  operations that converts $I$ to $A$.  For each of these row
+  operations, form the associated elementary matrix from
+  \ref{theorem:EMDRO} and denote these matrices by
+  $E_1,\,E_2,\,E_3,\,\dots,\,E_t$.  Applying the first row operation
+  to $I$ yields the matrix $E_1I$.  The second row operation yields
+  $E_2(E_1I)$, and the third row operation creates $E_3E_2E_1I$.  The
+  result of the full sequence of $t$ row operations will yield $A$, so
+  \[
+    A=  E_t\dots E_3E_2E_1I= E_t\dots E_3E_2E_1
+  \]
+
+  Other than the cosmetic matter of re-indexing these elementary
+  matrices in the opposite order, this is the desired result.
+\end{proof}
+\end{theorem}
+
+\end{document}

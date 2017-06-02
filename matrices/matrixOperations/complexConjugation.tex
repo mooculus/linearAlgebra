@@ -1,0 +1,143 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Matrices and Complex Conjugation}
+
+\begin{document}
+\begin{abstract}
+  As with vectors, we can define what it means to take the conjugate of a matrix.
+\end{abstract}
+\maketitle
+
+\begin{definition}[Complex Conjugate of a Matrix]
+Suppose $A$ is an $m\times n$ matrix.  Then the \dfn{conjugate} of $A$, written $\conjugate{A}$ is an $m\times n$ matrix defined by
+\[
+\matrixentry{\conjugate{A}}{ij}=\conjugate{\matrixentry{A}{ij}}
+\]
+\end{definition}
+
+\begin{example}[Complex conjugate of a matrix]
+If
+\[
+A=
+\begin{bmatrix}
+2-i & 3 & 5+4i\\
+-3+6i & 2-3i & 0
+\end{bmatrix}
+\]
+then
+\[
+\conjugate{A}=
+\begin{bmatrix}
+\answer{2+i} & \answer{3} & 5-4i\\
+\answer{-3-6i} & 2+3i & 0
+\end{bmatrix}
+\]
+
+\end{example}
+
+The interplay between the conjugate of a matrix and the two operations
+on matrices is what you might expect.
+
+
+\begin{theorem}[Conjugation Respects Matrix Addition]
+\label{theorem:CRMA}
+
+Suppose that $A$ and $B$ are $m\times n$ matrices.  Then $\conjugate{A+B}=\conjugate{A}+\conjugate{B}$.
+
+\begin{proof}
+  For $1\leq i\leq m$, $1\leq j\leq n$,
+  \begin{align*}
+    \matrixentry{\conjugate{A+B}}{ij}
+    &=\conjugate{\matrixentry{A+B}{ij}}\\ %&&\ref{definition:CCM}\\
+    &=\conjugate{\matrixentry{A}{ij}+\matrixentry{B}{ij}}\\ %&&\ref{definition:MA}\\
+    &=\conjugate{\matrixentry{A}{ij}}+\conjugate{\matrixentry{B}{ij}}\\ %&&\ref{theorem:CCRA}\\
+    &=\matrixentry{\conjugate{A}}{ij}+\matrixentry{\conjugate{B}}{ij}\\ %&&\ref{definition:CCM}\\
+    &=\matrixentry{\conjugate{A}+\conjugate{B}}{ij}\\ %&&\ref{definition:MA}
+  \end{align*}
+  
+  Since the matrices $\conjugate{A+B}$ and
+  $\conjugate{A}+\conjugate{B}$ are equal in each entry,
+  we may conclude
+  $\conjugate{A+B}=\conjugate{A}+\conjugate{B}$.
+
+\end{proof}
+\end{theorem}
+
+\begin{theorem}[Conjugation Respects Matrix Scalar Multiplication]
+\label{theorem:CRMSM}
+
+Suppose that $\alpha\in\complexes$ and $A$ is an $m\times n$ matrix.  Then $\conjugate{\alpha A}=\conjugate{\alpha}\conjugate{A}$.
+
+\begin{proof}
+  For $1\leq i\leq m$, $1\leq j\leq n$,
+  \begin{align*}
+    \matrixentry{\conjugate{\alpha A}}{ij}
+    &=\conjugate{\matrixentry{\alpha A}{ij}}\\ %&&\ref{definition:CCM}\\
+    &=\conjugate{\alpha\matrixentry{A}{ij}}\\ %&&\ref{definition:MSM}\\
+    &=\conjugate{\alpha}\conjugate{\matrixentry{A}{ij}}\\ %&&\ref{theorem:CCRM}\\
+    &=\conjugate{\alpha}\matrixentry{\conjugate{A}}{ij}\\ %&&\ref{definition:CCM}\\
+    &=\matrixentry{\conjugate{\alpha}\conjugate{A}}{ij}\\ %&&\ref{definition:MSM}
+  \end{align*}
+  
+  Since the matrices $\conjugate{\alpha A}$ and
+  $\conjugate{\alpha}\conjugate{A}$ are equal in each entry,
+  then
+  $\conjugate{\alpha A}=\conjugate{\alpha}\conjugate{A}$.
+
+\end{proof}
+\end{theorem}
+
+\begin{theorem}[Conjugate of the Conjugate of a Matrix]
+\label{theorem:CCM}
+
+Suppose that $A$ is an $m\times n$ matrix.  Then $\conjugate{\left(\conjugate{A}\right)}=A$.
+
+\begin{proof}
+  For $1\leq i\leq m$, $1\leq j\leq n$,
+  \begin{align*}
+    \matrixentry{\conjugate{\left(\conjugate{A}\right)}}{ij}
+    &=\conjugate{\matrixentry{\conjugate{A}}{ij}}\\ %&&\ref{definition:CCM}\\
+    &=\conjugate{\conjugate{\matrixentry{A}{ij}}}\\ %&&\ref{definition:CCM}\\
+    &=\matrixentry{A}{ij}\\ %&&\ref{theorem:CCT}%
+  \end{align*}
+  
+  Since the matrices $\conjugate{\left(\conjugate{A}\right)}$ and $A$
+  are equal in each entry, \ref{definition:ME} says that
+  $\conjugate{\left(\conjugate{A}\right)}=A$.
+
+\end{proof}
+\end{theorem}
+
+Finally, we will need the following result about matrix conjugation and transposes later.
+
+\begin{theorem}[Matrix Conjugation and Transposes]
+  \label{theorem:MCT}
+
+  Suppose that $A$ is an $m\times n$ matrix.  Then
+  $\conjugate{\left(\transpose{A}\right)}=\transpose{\left(\conjugate{A}\right)}$.
+
+  \begin{proof}
+    For $1\leq i\leq m$, $1\leq j\leq n$,
+    \begin{align*}
+      \matrixentry{\conjugate{\left(\transpose{A}\right)}}{ji}
+      &=\conjugate{\matrixentry{\transpose{A}}{ji}}
+      \\ %&&\ref{definition:CCM}\\
+      &=\conjugate{\matrixentry{A}{ij}}
+      \\ %&&\ref{definition:TM}\\
+      &=\matrixentry{\conjugate{A}}{ij}
+      \\ %&&\ref{definition:CCM}\\
+      &=\matrixentry{\transpose{\left(\conjugate{A}\right)}}{ji}
+      \\ %&&\ref{definition:TM}\\
+    \end{align*}
+
+    Since the matrices $\conjugate{\left(\transpose{A}\right)}$ and
+    $\transpose{\left(\conjugate{A}\right)}$ are equal in each entry,
+    \ref{definition:ME} says that
+    $\conjugate{\left(\transpose{A}\right)}=\transpose{\left(\conjugate{A}\right)}$.
+
+\end{proof}
+\end{theorem}
+
+\end{document}

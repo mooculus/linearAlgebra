@@ -1,0 +1,110 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Linear Independence and Nonsingular Matrices}
+
+\begin{document}
+\begin{abstract}
+  Consider the concept of linear independence for square matrices.
+\end{abstract}
+\maketitle
+
+We will now specialize to sets of $n$ vectors from $\complex{n}$ or $\real{n}$.
+
+\begin{example}%[Linearly dependent columns]
+  Consider the matrix
+  \[
+    A = \begin{bmatrix}
+      1 & -1 & 2\\
+      2 & 1 & 1\\
+      1 & 1 & 0
+    \end{bmatrix}.
+  \]
+  The square matrix $A$ is
+  \begin{multipleChoice}
+    \choice[correct]{singular}
+    \choice{nonsingular}
+  \end{multipleChoice}
+  and so the columns of this matrix form a
+  \begin{multipleChoice}
+    \choice{linearly independent set}
+    \choice[correct]{linearly dependent set}
+  \end{multipleChoice}
+
+  \begin{feedback}[correct]
+    According to the definition of nonsingular matrices,
+    \ref{definition:NM}, the homogeneous system $\homosystem{A}$ has
+    infinitely many solutions.  So by \ref{theorem:LIVHS}, the columns
+    of $A$ form a linearly dependent set.
+  \end{feedback}
+\end{example}
+
+\begin{example}%[Linearly independent columns in Archetype B]
+  Consider the matrix
+  \[
+    B = \begin{bmatrix}
+      -7&-6&-12\\
+      5&5&7\\
+      1&0&4
+    \end{bmatrix}
+  \]
+  The square matrix $B$ is
+  \begin{multipleChoice}
+    \choice{singular}
+    \choice[correct]{nonsingular}
+  \end{multipleChoice}
+  and so the columns of this matrix form a
+  \begin{multipleChoice}
+    \choice[correct]{linearly independent set}
+    \choice{linearly dependent set}
+  \end{multipleChoice}
+
+  \begin{feedback}[correct]
+    According to the definition of nonsingular matrices,
+    \ref{definition:NM}, the homogeneous system $\homosystem{A}$ has a
+    unique solution.  So by \ref{theorem:LIVHS}, the columns of $B$
+    form a linearly independent set.
+  \end{feedback}
+
+\end{example}
+
+That \ref{archetype:A} and \ref{archetype:B} have opposite properties
+for the columns of their coefficient matrices is no accident.  Here is
+the theorem.
+
+\begin{theorem}[Nonsingular Matrices have Linearly Independent Columns]
+  \label{theorem:NMLIC} Suppose that $A$ is a square matrix.  Then $A$
+  is nonsingular if and only if the columns of $A$ form a linearly
+  independent set.
+
+\begin{proof}
+  This is a proof where we can chain together equivalences, rather
+  than proving the two halves separately.
+
+  By \ref{definition:NM}, the matrix $A$ is nonsingular iff
+  $\homosystem{A}$ has a unique solution.  By \ref{theorem:LIVHS},
+  this happens iff columns of $A$ are linearly independent.
+\end{proof}
+\end{theorem}
+
+Let's summarize what we know about nonsingular matrices.
+
+\begin{theorem}[Nonsingular Matrix Equivalences, Round 2]
+  Suppose that $A$ is a square matrix.  The following are equivalent.
+  \begin{enumerate}
+  \item $A$ is nonsingular.
+  \item $A$ row-reduces to the identity matrix.
+  \item The null space of $A$ contains only the zero vector, $\nsp{A}=\set{\zerovector}$.
+  \item The linear system $\linearsystem{A}{\vect{b}}$ has a unique
+    solution for every possible choice of $\vect{b}$.
+  \item The columns of $A$ form a linearly independent set.
+  \end{enumerate}
+  
+  \begin{proof}
+    \ref{theorem:NMLIC} is yet another equivalence for a nonsingular
+    matrix, so we can add it to our earlier list.
+  \end{proof}
+\end{theorem}
+
+\end{document}

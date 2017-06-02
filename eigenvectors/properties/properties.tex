@@ -1,0 +1,413 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Basic Properties of Eigenvalues}
+
+\begin{document}
+\begin{abstract}
+  Eigenvectors and eigenvalues enjoy many properties.
+\end{abstract}
+\maketitle
+
+This activity will be more about theorems, and the various properties
+eigenvalues and eigenvectors enjoy.  Like a good
+$4\times 100\text{ meter}$ relay, we will lead-off with one of our
+better theorems and we'll save the very best for the anchor leg.
+
+\begin{theorem}[Eigenvectors with Distinct Eigenvalues are Linearly Independent]
+\label{theorem:EDELI}
+
+Suppose that $A$ is an $n\times n$ square matrix and
+$S=\set{\vectorlist{x}{p}}$ is a set of eigenvectors with eigenvalues
+$\scalarlist{\lambda}{p}$ such that $\lambda_i\neq\lambda_j$ whenever
+$i\neq j$.  Then $S$ is a linearly independent set.
+
+\begin{proof}
+  If $p=1$, then the set $S=\set{\vect{x}_1}$ is linearly independent
+  since eigenvectors are nonzero (\ref{definition:EEM}), so assume for
+  the remainder that $p\geq 2$.
+
+  We will prove this result by contradiction (\ref{technique:CD}).
+  Suppose to the contrary that $S$ is a linearly \wordChoice{\choice[correct]{dependent}\choice{independent}} set.
+  Define $S_i=\set{\vectorlist{x}{i}}$ and let $k$ be an integer such
+  that $S_{k-1}=\set{\vectorlist{x}{k-1}}$ is linearly independent and
+  $S_k=\set{\vectorlist{x}{k}}$ is linearly dependent.  We have to ask
+  if there is even such an integer $k$?  First, since eigenvectors are
+  nonzero, the set $\set{\vect{x}_1}$ is linearly independent.  Since
+  we are assuming that $S=S_p$ is linearly dependent, there must be an
+  integer $k$, $2\leq k\leq p$, where the sets $S_i$ transition from
+  linear independence to linear dependence (and stay that way). In
+  other words, $\vect{x}_k$ is the vector with the smallest index that
+  is a linear combination of just vectors with smaller indices.
+
+  Since $\set{\vectorlist{x}{k}}$ is a linearly dependent set there
+  must be scalars, $\scalarlist{a}{k}$, not all zero
+  (\ref{definition:LI}), so that
+  \begin{align*}
+    \zerovector=\lincombo{a}{x}{k}
+  \end{align*}
+
+  Then,
+  \begin{align*}
+    \zerovector
+    &=\left(A-\lambda_kI_n\right)\zerovector
+    &&\ref{theorem:ZVSM}\\
+    &=\left(A-\lambda_kI_n\right)\left(\lincombo{a}{x}{k}\right)
+    &&\ref{definition:RLD}\\
+    &=\left(A-\lambda_kI_n\right)a_1\vect{x}_1+
+      \cdots+
+      \left(A-\lambda_kI_n\right)a_k\vect{x}_k
+    &&\ref{theorem:MMDAA}\\
+    &=a_1\left(A-\lambda_kI_n\right)\vect{x}_1+
+      \cdots+
+      a_k\left(A-\lambda_kI_n\right)\vect{x}_k
+    &&\ref{theorem:MMSMM}\\
+    &=a_1\left(A\vect{x}_1-\lambda_kI_n\vect{x}_1\right)+
+      \cdots+
+      a_k\left(A\vect{x}_k-\lambda_kI_n\vect{x}_k\right)
+    &&\ref{theorem:MMDAA}\\
+    &=a_1\left(A\vect{x}_1-\lambda_k\vect{x}_1\right)+
+      \cdots+
+      a_k\left(A\vect{x}_k-\lambda_k\vect{x}_k\right)
+    &&\ref{theorem:MMIM}\\
+    &=a_1\left(\lambda_1\vect{x}_1-\lambda_k\vect{x}_1\right)+
+      \cdots+
+      a_k\left(\lambda_k\vect{x}_k-\lambda_k\vect{x}_k\right)
+    &&\ref{definition:EEM}\\
+    &=a_1\left(\lambda_1-\lambda_k\right)\vect{x}_1+
+      \cdots+
+      a_k\left(\lambda_k-\lambda_k\right)\vect{x}_k
+    &&\ref{theorem:MMDAA}\\
+    &=a_1\left(\lambda_1-\lambda_k\right)\vect{x}_1+
+      \cdots+
+      a_{k-1}\left(\lambda_{k-1}-\lambda_k\right)\vect{x}_{k-1}+
+      a_k\left(0\right)\vect{x}_k
+    &&\ref{property:AICN}\\
+    &=a_1\left(\lambda_1-\lambda_k\right)\vect{x}_1+
+      \cdots+
+      a_{k-1}\left(\lambda_{k-1}-\lambda_k\right)\vect{x}_{k-1}+
+      \zerovector
+    &&\ref{theorem:ZSSM}\\
+    &=a_1\left(\lambda_1-\lambda_k\right)\vect{x}_1+
+      \cdots+
+      a_{k-1}\left(\lambda_{k-1}-\lambda_k\right)\vect{x}_{k-1}
+    &&\ref{property:Z}
+  \end{align*}
+  This equation is a relation of linear dependence on the linearly
+  independent set $\set{\vectorlist{x}{k-1}}$, so the scalars must all
+  be zero.  That is, $a_i\left(\lambda_i-\lambda_k\right)=0$ for
+  $1\leq i\leq k-1$.  However, we have the hypothesis that the
+  eigenvalues are distinct, so $\lambda_i\neq\lambda_k$ for
+  $1\leq i\leq k-1$.  Thus $a_i=0$ for $1\leq i\leq k-1$.
+
+  This reduces the original relation of linear dependence on
+  $\set{\vectorlist{x}{k}}$ to the simpler equation
+  $a_k\vect{x}_k=\zerovector$.  By \ref{theorem:SMEZV} we conclude
+  that $a_k=0$ or $\vect{x}_k=\zerovector$.  Eigenvectors are never
+  the zero vector (\ref{definition:EEM}), so $a_k=0$.  So all of the
+  scalars $a_i$, $1\leq i\leq k$ are zero, contradicting their
+  introduction as the scalars creating a nontrivial relation of linear
+  dependence on the set $\set{\vectorlist{x}{k}}$.  With a
+  contradiction in hand, we conclude that $S$ must be linearly
+  independent.
+\end{proof}
+\end{theorem}
+
+There is a simple connection between the eigenvalues of a matrix and whether or not the matrix is nonsingular.
+
+\begin{theorem}[Singular Matrices have Zero Eigenvalues]
+\label{theorem:SMZE}
+
+Suppose $A$ is a square matrix.  Then $A$ is singular if and only if
+$\lambda=\answer{0}$ is an eigenvalue of $A$.
+
+\begin{proof}
+  We have the following equivalences:
+  \begin{align*}
+    \text{$A$ is singular}&\iff\text{there exists $\vect{x}\neq\zerovector$, $A\vect{x}=\zerovector$}&&\ref{definition:NM}\\
+                          &\iff\text{there exists $\vect{x}\neq\zerovector$, $A\vect{x}=0\vect{x}$}&&\ref{theorem:ZSSM}\\
+                          &\iff\text{$\lambda=0$ is an eigenvalue of $A$}&&\ref{definition:EEM}
+\end{align*}
+
+\end{proof}
+\end{theorem}
+
+With an equivalence about singular matrices we can update our list of equivalences about nonsingular matrices.
+
+\begin{theorem}[Nonsingular Matrix Equivalences, Round 8]
+Suppose that $A$ is a square matrix of size $n$.  The following are equivalent.
+\begin{enumerate}\item $A$ is nonsingular.
+\item $A$ row-reduces to the identity matrix.
+\item The null space of $A$ contains only the zero vector, $\nsp{A}=\set{\zerovector}$.
+\item The linear system $\linearsystem{A}{\vect{b}}$ has a unique solution for every possible choice of $\vect{b}$.
+\item The columns of $A$ are a linearly independent set.
+\item $A$ is invertible.
+\item The column space of $A$ is $\complex{n}$, $\csp{A}=\complex{n}$.
+\item The columns of $A$ are a basis for $\complex{n}$.
+\item The rank of $A$ is $n$, $\rank{A}=n$.
+\item The nullity of $A$ is zero, $\nullity{A}=0$.
+\item The determinant of $A$ is nonzero, $\detname{A}\neq 0$.
+\item $\lambda=0$ is not an eigenvalue of $A$.
+\end{enumerate}
+
+\begin{proof}
+  The equivalence of the first and last statements is
+  \ref{theorem:SMZE}, reformulated by negating each statement in the
+  equivalence.  So we are able to improve our previous result with
+  this addition.
+\end{proof}
+\end{theorem}
+
+Certain changes to a matrix change its eigenvalues in a predictable way.
+
+\begin{theorem}[Eigenvalues of a Scalar Multiple of a Matrix]
+\label{theorem:ESMM}
+
+Suppose $A$ is a square matrix and $\lambda$ is an eigenvalue of $A$.
+Then $\alpha\lambda$ is an eigenvalue of $\alpha A$.
+
+\begin{proof}
+Let $\vect{x}\neq\zerovector$ be one eigenvector of $A$ for $\lambda$.  Then
+\begin{align*}
+\left(\alpha A\right)\vect{x}&=\alpha\left(A\vect{x}\right)&&\ref{theorem:MMSMM}\\
+&=\alpha\left(\lambda\vect{x}\right)&&\ref{definition:EEM}\\
+&=\left(\alpha\lambda\right)\vect{x}&&\ref{property:SMAC}
+\end{align*}
+
+So $\vect{x}\neq\zerovector$ is an eigenvector of $\alpha A$ for the eigenvalue $\alpha\lambda$.
+
+\end{proof}
+\end{theorem}
+
+Unfortunately, there are not parallel theorems about the sum or product of arbitrary matrices.  But we can prove a similar result for powers of a matrix.
+
+\begin{theorem}[Eigenvalues Of Matrix Powers]
+\label{theorem:EOMP}
+
+Suppose $A$ is a square matrix, $\lambda$ is an eigenvalue of $A$, and $s\geq 0$ is an integer.  Then $\lambda^s$ is an eigenvalue of $A^s$.
+
+\begin{proof}
+Let $\vect{x}\neq\zerovector$ be one eigenvector of $A$ for $\lambda$.  Suppose $A$ has size $n$.  Then we proceed by induction on $s$.  First, for $s=0$,
+\begin{align*}
+A^s\vect{x}&=A^0\vect{x}\\
+&=I_n\vect{x}\\
+&=\vect{x}&&\ref{theorem:MMIM}\\
+&=1\vect{x}&&\ref{property:OC}\\
+&=\lambda^0\vect{x}\\
+&=\lambda^s\vect{x}\\
+\end{align*}
+so $\lambda^s$ is an eigenvalue of $A^s$ in this special case.  If we assume the theorem is true for $s$, then we find
+\begin{align*}
+A^{s+1}\vect{x}&=A^sA\vect{x}\\
+&=A^s\left(\lambda\vect{x}\right)&&\ref{definition:EEM}\\
+&=\lambda\left(A^s\vect{x}\right)&&\ref{theorem:MMSMM}\\
+&=\lambda\left(\lambda^s\vect{x}\right)&&\text{Induction hypothesis}\\
+&=\left(\lambda\lambda^s\right)\vect{x}&&\ref{property:SMAC}\\
+&=\lambda^{s+1}\vect{x}
+\end{align*}
+
+So $\vect{x}\neq\zerovector$ is an eigenvector of $A^{s+1}$ for $\lambda^{s+1}$, and induction tells us the theorem is true for all $s\geq 0$.
+
+\end{proof}
+\end{theorem}
+
+While we cannot prove that the sum of two arbitrary matrices behaves
+in any reasonable way with regard to eigenvalues, we can work with the
+sum of dissimilar powers of the \textit{same} matrix.  We have already
+seen two connections between eigenvalues and polynomials, in the proof
+of \ref{theorem:EMHE} and the characteristic polynomial
+(\ref{definition:CP}).  Our next theorem strengthens this connection.
+
+\begin{theorem}[Eigenvalues of the Polynomial of a Matrix]
+\label{theorem:EPM}
+
+Suppose $A$ is a square matrix and $\lambda$ is an eigenvalue of $A$.
+Let $q(x)$ be a polynomial in the variable $x$.  Then $q(\lambda)$ is
+an eigenvalue of the matrix $q(A)$.
+
+
+
+
+
+\begin{proof}
+Let $\vect{x}\neq\zerovector$ be one eigenvector of $A$ for $\lambda$, and write $q(x)=a_0+a_1x+a_2x^2+\cdots+a_mx^m$.  Then
+\begin{align*}
+q(A)\vect{x}&=\left(a_0A^0+a_1A^1+a_2A^2+\cdots+a_mA^m\right)\vect{x}\\
+&=(a_0A^0)\vect{x}+(a_1A^1)\vect{x}+(a_2A^2)\vect{x}+\cdots+(a_mA^m)\vect{x}&&\ref{theorem:MMDAA}\\
+&=a_0(A^0\vect{x})+a_1(A^1\vect{x})+a_2(A^2\vect{x})+\cdots+a_m(A^m\vect{x})&&\ref{theorem:MMSMM}\\
+&=a_0(\lambda^0\vect{x})+a_1(\lambda^1\vect{x})+a_2(\lambda^2\vect{x})+\cdots+a_m(\lambda^m\vect{x})&&\ref{theorem:EOMP}\\
+&=(a_0\lambda^0)\vect{x}+(a_1\lambda^1)\vect{x}+(a_2\lambda^2)\vect{x}+\cdots+(a_m\lambda^m)\vect{x}&&\ref{property:SMAC}\\
+&=\left(a_0\lambda^0+a_1\lambda^1+a_2\lambda^2+\cdots+a_m\lambda^m\right)\vect{x}&&\ref{property:DSAC}\\
+&=q(\lambda)\vect{x}
+\end{align*}
+
+
+
+
+So $\vect{x}\neq 0$ is an eigenvector of $q(A)$ for the eigenvalue $q(\lambda)$.
+
+
+
+\end{proof}
+\end{theorem}
+
+\begin{example}[Building desired eigenvalues]
+
+The $4\times 4$ symmetric matrix
+\[
+C=
+\begin{bmatrix}
+1 &  0 &  1 &  1\\
+0 &  1 &  1 &  1\\
+1 &  1 &  1 &  0\\
+1 &  1 &  0 &  1
+\end{bmatrix}
+\]
+has three eigenvalues $\lambda=3,\,1,\,-1$.  Suppose we wanted a $4\times 4$ matrix that has the three eigenvalues $\lambda=4,\,0,\,-2$.  We can employ \ref{theorem:EPM} by finding a polynomial that converts $3$ to $4$, $1$ to $0$, and $-1$ to $-2$.  Such a polynomial is called an \dfn{interpolating polynomial}, and in this example we can use
+\[
+r(x)=\frac{1}{4}x^2+x-\frac{5}{4}
+\]
+We will not discuss how to concoct this polynomial, but a text on
+numerical analysis should provide the details.  For now, simply verify
+that $r(3)=\answer{4}$, $r(1)=\answer{0}$ and $r(-1)=-2$.
+
+Now compute
+\begin{align*}
+r(C)&=\frac{1}{4}C^2+C-\frac{5}{4}I_4\\
+&=
+\frac{1}{4}
+\begin{bmatrix}
+3 &  2 &  2 &  2\\
+2 &  3 &  2 &  2\\
+2 &  2 &  3 &  2\\
+2 &  2 &  2 &  3
+\end{bmatrix}
++
+\begin{bmatrix}
+1 &  0 &  1 &  1\\
+0 &  1 &  1 &  1\\
+1 &  1 &  1 &  0\\
+1 &  1 &  0 &  1
+\end{bmatrix}
+-\frac{5}{4}
+\begin{bmatrix}
+1 &  0 &  0 &  0\\
+0 &  1 &  0 &  0\\
+0 &  0 &  1 &  0\\
+0 &  0 &  0 &  1
+\end{bmatrix}
+=
+\frac{1}{2}
+\begin{bmatrix}
+1 &  1 &  3 &  3\\
+1 &  1 &  3 &  3\\
+3 &  3 &  1 &  1\\
+3 &  3 &  1 &  1
+\end{bmatrix}
+\end{align*}
+
+
+\ref{theorem:EPM} tells us that if $r(x)$ transforms the eigenvalues in the desired manner, then $r(C)$ will have the desired eigenvalues.  You can check this by computing the eigenvalues of $r(C)$ directly.  Furthermore, notice that the multiplicities are the same, and the eigenspaces of $C$ and $r(C)$ are identical.
+
+\end{example}
+
+Inverses and transposes also behave predictably with regard to their eigenvalues.
+
+
+
+\begin{theorem}[Eigenvalues of the Inverse of a Matrix]
+\label{theorem:EIM}
+
+Suppose $A$ is a square nonsingular matrix and $\lambda$ is an
+eigenvalue of $A$.  Then $\lambda^{-1}$ is an eigenvalue of the matrix
+$\inverse{A}$.
+
+
+\begin{proof}
+Notice that since $A$ is assumed nonsingular, $\inverse{A}$ exists by \ref{theorem:NI}, but more importantly, $\lambda^{-1}=1/\lambda$  does not involve division by zero since \ref{theorem:SMZE} prohibits this possibility.
+
+Let $\vect{x}\neq\zerovector$ be one eigenvector of $A$ for $\lambda$. Suppose $A$ has size $n$.  Then
+\begin{align*}
+\inverse{A}\vect{x}&=\inverse{A}(1\vect{x})&&\ref{property:OC}\\
+&=\inverse{A}(\frac{1}{\lambda}\lambda\vect{x})&&\ref{property:MICN}\\
+&=\frac{1}{\lambda}\inverse{A}(\lambda\vect{x})&&\ref{theorem:MMSMM}\\
+&=\frac{1}{\lambda}\inverse{A}(A\vect{x})&&\ref{definition:EEM}\\
+&=\frac{1}{\lambda}(\inverse{A}A)\vect{x}&&\ref{theorem:MMA}\\
+&=\frac{1}{\lambda}I_n\vect{x}&&\ref{definition:MI}\\
+&=\frac{1}{\lambda}\vect{x}&&\ref{theorem:MMIM}
+\end{align*}
+
+So $\vect{x}\neq\zerovector$ is an eigenvector of $\inverse{A}$ for the eigenvalue $\frac{1}{\lambda}$.
+
+\end{proof}
+\end{theorem}
+
+The proofs of the theorems above have a similar style to them.  They all begin by grabbing an eigenvalue-eigenvector pair and adjusting it in some way to reach the desired conclusion.  You should add this to your toolkit as a general approach to proving theorems about eigenvalues.
+
+
+
+So far we have been able to reserve the characteristic polynomial for strictly computational purposes.  However, sometimes a theorem about eigenvalues can be proved easily by employing the characteristic polynomial (rather than using an eigenvalue-eigenvector pair).  The next theorem is an example of this.
+
+
+
+
+\begin{theorem}[Eigenvalues of the Transpose of a Matrix]
+\label{theorem:ETM}
+
+
+Suppose $A$ is a square matrix and $\lambda$ is an eigenvalue of $A$.  Then $\lambda$ is an eigenvalue of the matrix $\transpose{A}$.
+
+
+\begin{proof}
+Suppose $A$ has size $n$.  Then
+\begin{align*}
+\charpoly{A}{x}
+&=\detname{A-xI_n}&&\ref{definition:CP}\\
+&=\detname{\transpose{\left(A-xI_n\right)}}&&\ref{theorem:DT}\\
+&=\detname{\transpose{A}-\transpose{\left(xI_n\right)}}&&\ref{theorem:TMA}\\
+&=\detname{\transpose{A}-x\transpose{I_n}}&&\ref{theorem:TMSM}\\
+&=\detname{\transpose{A}-xI_n}&&\ref{definition:IM}\\
+&=\charpoly{\transpose{A}}{x}&&\ref{definition:CP}\\
+\end{align*}
+
+
+So $A$ and $\transpose{A}$ have 
+\begin{multipleChoice}
+\choice[correct]{the same characteristic polynomial,}
+\choice{different characteristic polynomials,}
+\end{multipleChoice}
+and by \ref{theorem:EMRCP}, their eigenvalues are identical and have
+equal algebraic multiplicities.  Notice that what we have proved here
+is a bit stronger than the stated conclusion in the theorem.
+
+\end{proof}
+\end{theorem}
+
+If a matrix has only real entries, then the computation of the characteristic polynomial (\ref{definition:CP}) will result in a polynomial with coefficients that are real numbers.  Complex numbers could result as roots of this polynomial, but they are roots of quadratic factors with real coefficients, and as such, come in conjugate pairs.  The next theorem proves this, and a bit more, without mentioning the characteristic polynomial.
+
+
+
+\begin{theorem}[Eigenvalues of Real Matrices come in Conjugate Pairs]
+\label{theorem:ERMCP}
+
+Suppose $A$ is a square matrix with real entries and $\vect{x}$ is an eigenvector of $A$ for the eigenvalue $\lambda$.  Then $\conjugate{\vect{x}}$ is an eigenvector of $A$ for the eigenvalue $\conjugate{\lambda}$.
+
+
+\begin{proof}
+
+\begin{align*}
+A\conjugate{\vect{x}}&=\conjugate{A}\conjugate{\vect{x}}&&\text{$A$ has real entries}\\
+&=\conjugate{A\vect{x}}&&\ref{theorem:MMCC}\\
+&=\conjugate{\lambda\vect{x}}&&\ref{definition:EEM}\\
+&=\conjugate{\lambda}\conjugate{\vect{x}}&&\ref{theorem:CRSM}
+\end{align*}
+
+So $\conjugate{\vect{x}}$ is an eigenvector of $A$ for the eigenvalue $\conjugate{\lambda}$.
+
+\end{proof}
+\end{theorem}
+
+This result can be a time-saver for computing eigenvalues and eigenvectors of real matrices with complex eigenvalues, since the conjugate eigenvalue and eigenspace can be inferred from the theorem rather than computed.
+
+\end{document}

@@ -1,0 +1,61 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Vector Spaces}
+
+\begin{document}
+\begin{abstract}
+  An example of a vector space is the result of collecting together
+  all possible vectors of a fixed size.
+\end{abstract}
+\maketitle
+
+Begin by recalling our definition of a column vector as an ordered
+list of complex numbers, written vertically.  The collection of all
+possible vectors of a fixed size is a commonly used set, so we start
+with its definition.
+
+\begin{definition}[Vector Space of Column Vectors]
+  The vector space $\complex{m}$ is the set of all column vectors of
+  size $m$ with entries from the set of complex numbers, $\complexes$.
+
+  When a set similar to this is defined using only column vectors
+  where all the entries are from the real numbers, it is written as
+  ${\mathbb R}^m$ and is known as \dfn{Euclidean $m$-space}.
+\end{definition}
+
+\begin{warning}
+  Often people conflate the notion of vector with that of a point.  To
+  relate these ideas, we can construct an arrow from the origin to the
+  point which is consistent with the notion that a vector has
+  direction and magnitude.
+\end{warning}
+
+\begin{question}
+  The term \dfn{vector} is used in a variety of different ways.  We
+  have defined it as an ordered list written vertically.  A vector
+  could simply be
+  \begin{multipleChoice}
+    \choice[correct]{an ordered list of numbers}
+    \choice{a set of numbers}
+  \end{multipleChoice}
+
+  \begin{feedback}[correct]
+    A vector could be written as
+    $\left\langle 2,\,3,\,-1,\,6\right\rangle$.  Or it could be
+    interpreted as a point in $m$ dimensions, such as
+    $\left(3,\,4,\,-2\right)$ representing a point in three dimensions
+    relative to $x$, $y$ and $z$ axes.
+
+    All of these ideas---points, vectors with direction and magnitude,
+    ordered lists numbers of numbers---can be shown to be related and
+    equivalent, so keep that in mind as you connect the ideas of this
+    course with ideas from other disciplines.
+
+    For now, we will stick with the idea that a vector is just a list
+    of numbers, in some particular order.
+  \end{feedback}
+\end{question}
+
+\end{document}

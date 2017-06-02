@@ -1,0 +1,285 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{New Linear Transformations From Old}
+
+\begin{document}
+\begin{abstract}
+We can combine linear transformations in natural ways to create new linear transformations.  
+\end{abstract}
+\maketitle
+
+We will define combinations of old linear transformations to build new
+ones, and then prove that the results really are still linear
+transformations.  First, let's consider the sum of two linear transformations.
+
+\begin{definition}[Linear Transformation Addition]
+
+  Suppose that $\ltdefn{T}{U}{V}$ and $\ltdefn{S}{U}{V}$ are two
+  linear transformations with the same domain and codomain.  Then
+  their \dfn{sum} is the function $\ltdefn{T+S}{U}{V}$ whose outputs
+  are defined by
+  \[
+    \lteval{(T+S)}{\vect{u}}=\lteval{T}{\vect{u}}+\lteval{S}{\vect{u}}
+  \]
+
+\end{definition}
+
+Notice that the first plus sign in the definition is the operation
+being defined, while the second one is the vector addition in $V$.
+(Vector addition in $U$ will appear just now in the proof that $T+S$
+is a linear transformation.)  \ref{definition:LTA} only provides a
+function.  It would be nice to know that when the constituents ($T$,
+$S$) are linear transformations, then so too is $T+S$.
+
+\begin{theorem}[Sum of Linear Transformations is a Linear Transformation]
+\label{theorem:SLTLT}
+
+Suppose that $\ltdefn{T}{U}{V}$ and $\ltdefn{S}{U}{V}$ are two linear
+transformations with the same domain and codomain.  Then
+$\ltdefn{T+S}{U}{V}$ is a linear transformation.
+
+
+\begin{proof}
+We simply check the defining properties of a linear transformation (\ref{definition:LT}).  This is a good place to consistently ask yourself which objects are being combined with which operations.
+\begin{align*}
+\lteval{(T+S)}{\vect{x}+\vect{y}}&=
+\lteval{T}{\vect{x}+\vect{y}}+\lteval{S}{\vect{x}+\vect{y}}&&\ref{definition:LTA}\\
+&=\lteval{T}{\vect{x}}+\lteval{T}{\vect{y}}+\lteval{S}{\vect{x}}+\lteval{S}{\vect{y}}&&\ref{definition:LT}\\
+&=\lteval{T}{\vect{x}}+\lteval{S}{\vect{x}}+\lteval{T}{\vect{y}}+\lteval{S}{\vect{y}}&&\ref{property:C}\text{ in }V\\
+&=\lteval{(T+S)}{\vect{x}}+\lteval{(T+S)}{\vect{y}}&&\ref{definition:LTA}\\
+\end{align*}
+and
+\begin{align*}
+\lteval{(T+S)}{\alpha\vect{x}}&=
+\lteval{T}{\alpha\vect{x}}+\lteval{S}{\alpha\vect{x}}&&\ref{definition:LTA}\\
+&=\alpha\lteval{T}{\vect{x}}+\alpha\lteval{S}{\vect{x}}&&\ref{definition:LT}\\
+&=\alpha\left(\lteval{T}{\vect{x}}+\lteval{S}{\vect{x}}\right)&&\ref{property:DVA}\text{ in }V\\
+&=\alpha\lteval{(T+S)}{\vect{x}}&&\ref{definition:LTA}\\
+\end{align*}
+
+
+
+
+\end{proof}
+\end{theorem}
+
+\begin{example}[Sum of two linear transformations]
+
+Suppose that $\ltdefn{T}{\complex{2}}{\complex{3}}$ and $\ltdefn{S}{\complex{2}}{\complex{3}}$ are defined by
+\begin{align*}
+\lteval{T}{\colvector{x_1\\x_2}}=\colvector{x_1+2x_2\\3x_1-4x_2\\5x_1+2x_2}
+&&
+\lteval{S}{\colvector{x_1\\x_2}}=\colvector{4x_1-x_2\\x_1+3x_2\\-7x_1+5x_2}
+\end{align*}
+
+Then by \ref{definition:LTA}, we have
+\begin{align*}
+\lteval{(T+S)}{\colvector{x_1\\x_2}}&=\lteval{T}{\colvector{x_1\\x_2}}+\lteval{S}{\colvector{x_1\\x_2}}\\
+&=\colvector{x_1+2x_2\\3x_1-4x_2\\5x_1+2x_2}+\colvector{4x_1-x_2\\x_1+3x_2\\-7x_1+5x_2}
+=\colvector{5x_1+x_2\\4x_1-x_2\\-2x_1+\answer{7}x_2}
+\end{align*}
+and by \ref{theorem:SLTLT} we know $T+S$ is also a linear transformation 
+\begin{multipleChoice}
+  \choice{from $\complex{3}$ to $\complex{3}$.}
+  \choice{from $\complex{3}$ to $\complex{2}$.}
+  \choice[correct]{from $\complex{2}$ to $\complex{3}$.}
+  \choice{from $\complex{2}$ to $\complex{2}$.}
+\end{multipleChoice}
+\end{example}
+
+\begin{definition}
+[Linear Transformation Scalar Multiplication]
+Suppose that $\ltdefn{T}{U}{V}$ is a linear transformation and $\alpha\in\complexes$.  Then the \dfn{scalar multiple} is the function $\ltdefn{\alpha T}{U}{V}$ whose outputs are defined by
+\[
+\lteval{(\alpha T)}{\vect{u}}=\alpha\lteval{T}{\vect{u}}
+\]
+
+\end{definition}
+
+Given that $T$ is a linear transformation, it would be nice to know that $\alpha T$ is also a linear transformation.
+
+
+\begin{theorem}[Multiple of a Linear Transformation is a Linear Transformation]
+\label{theorem:MLTLT}
+
+Suppose that $\ltdefn{T}{U}{V}$ is a linear transformation and $\alpha\in\complexes$.  Then $\ltdefn{(\alpha T)}{U}{V}$ is a linear transformation.
+
+
+\begin{proof}
+We simply check the defining properties of a linear transformation (\ref{definition:LT}).  This is another good place to consistently ask yourself which objects are being combined with which operations.
+\begin{align*}
+\lteval{(\alpha T)}{\vect{x}+\vect{y}}&=
+\alpha\left(\lteval{T}{\vect{x}+\vect{y}}\right)&&\ref{definition:LTSM}\\
+&=\alpha\left(\lteval{T}{\vect{x}}+\lteval{T}{\vect{y}}\right)&&\ref{definition:LT}\\
+&=\alpha\lteval{T}{\vect{x}}+\alpha\lteval{T}{\vect{y}}&&\ref{property:DVA}\text{ in }V\\
+&=\lteval{(\alpha T)}{\vect{x}}+\lteval{(\alpha T)}{\vect{y}}&&\ref{definition:LTSM}\\
+\end{align*}
+and
+\begin{align*}
+\lteval{(\alpha T)}{\beta\vect{x}}&=
+\alpha\lteval{T}{\beta\vect{x}}&&\ref{definition:LTSM}\\
+&=\alpha\left(\beta\lteval{T}{\vect{x}}\right)&&\ref{definition:LT}\\
+&=\left(\alpha\beta\right)\lteval{T}{\vect{x}}&&\ref{property:SMA}\text{ in }V\\
+&=\left(\beta\alpha\right)\lteval{T}{\vect{x}}&&\text{Commutativity in $\complex{}$}\\
+&=\beta\left(\alpha\lteval{T}{\vect{x}}\right)&&\ref{property:SMA}\text{ in }V\\
+&=\beta\left(\lteval{(\alpha T)}{\vect{x}}\right)&&\ref{definition:LTSM}\\
+\end{align*}
+
+
+
+
+\end{proof}
+\end{theorem}
+
+\begin{example}
+[Scalar multiple of a linear transformation]
+
+Suppose that $\ltdefn{T}{\complex{4}}{\complex{3}}$ is defined by
+\[
+\lteval{T}{\colvector{x_1\\x_2\\x_3\\x_4}}=
+\colvector{x_1+2x_2-x_3+2x_4\\x_1+5x_2-3x_3+x_4\\-2x_1+3x_2-4x_3+2x_4}
+\]
+
+
+
+
+For the sake of an example, choose $\alpha=2$, so by \ref{definition:LTSM}, we have
+\begin{align*}
+\lteval{\alpha T}{\colvector{x_1\\x_2\\x_3\\x_4}}
+&=2\lteval{T}{\colvector{x_1\\x_2\\x_3\\x_4}}
+ =2\colvector{x_1+2x_2-x_3+2x_4\\x_1+5x_2-3x_3+x_4\\-2x_1+3x_2-4x_3+2x_4}\\
+&=\colvector{2x_1+4x_2-2x_3+4x_4\\2x_1+10x_2-6x_3+2x_4\\-4x_1+6x_2-8x_3+4x_4}
+\end{align*}
+and by \ref{theorem:MLTLT} we know $2T$ is also a linear transformation from $\complex{4}$ to $\complex{3}$.
+
+
+
+\end{example}
+
+Now, let us imagine we have two vector spaces, $U$ and $V$, and we collect every possible linear transformation from $U$ to $V$ into one big set, and call it $\vslt{U}{V}$.  \ref{definition:LTA} and \ref{definition:LTSM} tell us how we can ``add'' and ``scalar multiply'' two elements of $\vslt{U}{V}$.  \ref{theorem:SLTLT} and \ref{theorem:MLTLT} tell us that if we do these operations, then the resulting functions are linear transformations that are also in $\vslt{U}{V}$.   Hmmmm, sounds like a vector space to me!  A set of objects, an addition and a scalar multiplication.  Why not?
+
+
+
+\begin{theorem}
+\label{theorem:VSLT}
+[Vector Space of Linear Transformations]
+
+<indexlocation index="linear transformation!vector space of" />
+Suppose that $U$ and $V$ are vector spaces.  Then the set of all linear transformations from $U$ to $V$, $\vslt{U}{V}$, is a vector space when the operations are those given in \ref{definition:LTA} and \ref{definition:LTSM}.
+
+
+
+
+
+\begin{proof}
+\ref{theorem:SLTLT} and \ref{theorem:MLTLT} provide two of the ten properties in \ref{definition:VS}.  However, we still need to verify the remaining eight properties.  By and large, the proofs are straightforward and rely on concocting the obvious object, or by reducing the question to the same vector space property in the vector space $V$.
+
+
+
+The zero vector is of some interest, though. What linear transformation would we add to any other linear transformation, so as to keep the second one unchanged?  The answer is $\ltdefn{Z}{U}{V}$ defined by $\lteval{Z}{\vect{u}}=\zerovector_V$ for every $\vect{u}\in U$.  Notice how we do not need to know any of the specifics about $U$ and $V$ to make this definition of $Z$.
+
+
+
+\end{proof}
+\end{theorem}
+
+\begin{definition}[Linear Transformation Composition]
+Suppose that $\ltdefn{T}{U}{V}$ and $\ltdefn{S}{V}{W}$ are linear transformations.  Then the \dfn{composition} of $S$ and $T$ is the function $\ltdefn{(\compose{S}{T})}{U}{W}$ whose outputs are defined by
+\[
+\lteval{(\compose{S}{T})}{\vect{u}}=\lteval{S}{\lteval{T}{\vect{u}}}
+\]
+
+\end{definition}
+
+Given that $T$ and $S$ are linear transformations, it would be nice to know that $\compose{S}{T}$ is also a linear transformation.
+
+\begin{theorem}
+\label{theorem:CLTLT}
+[Composition of Linear Transformations is a Linear Transformation]
+
+Suppose that $\ltdefn{T}{U}{V}$ and $\ltdefn{S}{V}{W}$ are linear transformations.  Then $\ltdefn{(\compose{S}{T})}{U}{W}$ is a linear transformation.
+
+
+\begin{proof}
+We simply check the defining properties of a linear transformation (\ref{definition:LT}).
+\begin{align*}
+\lteval{(\compose{S}{T})}{\vect{x}+\vect{y}}
+&=\lteval{S}{\lteval{T}{\vect{x}+\vect{y}}}&&\ref{definition:LTC}\\
+&=\lteval{S}{\lteval{T}{\vect{x}}+\lteval{T}{\vect{y}}}&&\ref{definition:LT}\text{ for }T\\
+&=\lteval{S}{\lteval{T}{\vect{x}}}+\lteval{S}{\lteval{T}{\vect{y}}}&&\ref{definition:LT}\text{ for }S\\
+&=\lteval{(\compose{S}{T})}{\vect{x}}+\lteval{(\compose{S}{T})}{\vect{y}}&&\ref{definition:LTC}
+\end{align*}
+and
+\begin{align*}
+\lteval{(\compose{S}{T})}{\alpha\vect{x}}
+&=\lteval{S}{\lteval{T}{\alpha\vect{x}}}&&\ref{definition:LTC}\\
+&=\lteval{S}{\alpha\lteval{T}{\vect{x}}}&&\ref{definition:LT}\text{ for }T\\
+&=\alpha\lteval{S}{\lteval{T}{\vect{x}}}&&\ref{definition:LT}\text{ for }S\\
+&=\alpha\lteval{(\compose{S}{T})}{\vect{x}}&&\ref{definition:LTC}
+\end{align*}
+
+
+
+
+\end{proof}
+\end{theorem}
+
+\begin{example}[Composition of two linear transformations]
+
+Suppose that $\ltdefn{T}{\complex{2}}{\complex{4}}$ and $\ltdefn{S}{\complex{4}}{\complex{3}}$ are defined by
+\begin{align*}
+\lteval{T}{\colvector{x_1\\x_2}}=\colvector{x_1+2x_2\\3x_1-4x_2\\5x_1+2x_2\\6x_1-3x_2}
+&&
+\lteval{S}{\colvector{x_1\\x_2\\x_3\\x_4}}=
+\colvector{2x_1-x_2+x_3-x_4\\5x_1-3x_2+8x_3-2x_4\\-4x_1+3x_2-4x_3+5x_4}
+\end{align*}
+
+
+
+Then by \ref{definition:LTC}
+\begin{align*}
+\lteval{(\compose{S}{T})}{\colvector{x_1\\x_2}}&=
+\lteval{S}{\lteval{T}{\colvector{x_1\\x_2}}}
+=\lteval{S}{\colvector{x_1+2x_2\\3x_1-4x_2\\5x_1+2x_2\\6x_1-3x_2}}\\
+&=\colvector{
+2(x_1+2x_2)-(3x_1-4x_2)+(5x_1+2x_2)-(6x_1-3x_2)\\
+5(x_1+2x_2)-3(3x_1-4x_2)+8(5x_1+2x_2)-2(6x_1-3x_2)\\
+-4(x_1+2x_2)+3(3x_1-4x_2)-4(5x_1+2x_2)+5(6x_1-3x_2)
+}\\
+&=\colvector{
+-2x_1+13x_2\\
+24x_1+44x_2\\
+\answer{15}x_1-43x_2
+}
+\end{align*}
+and by \ref{theorem:CLTLT} $\compose{S}{T}$ is a linear transformation
+\begin{multipleChoice}
+  \choice{from $\complex{3}$ to $\complex{3}$.}
+  \choice{from $\complex{3}$ to $\complex{2}$.}
+  \choice[correct]{from $\complex{2}$ to $\complex{3}$.}
+  \choice{from $\complex{2}$ to $\complex{2}$.}
+\end{multipleChoice}
+
+\end{example}
+
+Here is an interesting exercise that will presage an important result later.
+In \ref{example:STLT} compute (via \ref{theorem:MLTCV}) the matrix of  $T$, $S$ and $T+S$.  Do you see a relationship between these three matrices?
+
+
+
+In \ref{example:SMLT} compute (via \ref{theorem:MLTCV}) the matrix of  $T$ and  $2T$.  Do you see a relationship between these two matrices?
+
+
+
+Here is the tough one.  In \ref{example:CTLT} compute (via \ref{theorem:MLTCV}) the matrix of  $T$, $S$ and $\compose{S}{T}$.  Do you see a relationship between these three matrices???
+
+
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

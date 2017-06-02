@@ -1,0 +1,167 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Definition of a vector space}
+
+\begin{document}
+\begin{abstract}
+The formal definition of a vector space leads to an extra increment of abstraction.
+\end{abstract}
+\maketitle
+
+Here is one of the two most important definitions in the entire course.
+
+\begin{definition}[Vector Space]
+  \label{definition:VS}
+  Suppose that $V$ is a set upon which we have defined two operations:
+  (1) \dfn{vector addition}, which combines two elements of $V$ and is
+  denoted by ``+'', and (2) \dfn{scalar multiplication}, which
+  combines a complex number with an element of $V$ and is denoted by
+  juxtaposition.  Then $V$, along with the two operations, is a
+  \dfn{vector space} over $\complexes$ if the following ten properties
+  hold.
+
+%<propertylist>
+%<property acro="AC" index="additive closure!vectors">
+\begin{description}
+\item[Additive Closure]
+If $\vect{u},\,\vect{v}\in V$, then $\vect{u}+\vect{v}\in V$.
+%<property acro="SC" index="scalar closure!vectors">
+\item[Scalar Closure]
+If $\alpha\in\complexes$ and $\vect{u}\in V$, then $\alpha\vect{u}\in V$.
+%<property acro="C" index="commutativity!vectors">
+\item[Commutativity]
+If $\vect{u},\,\vect{v}\in V$, then $\vect{u}+\vect{v}=\vect{v}+\vect{u}$.
+%<property acro="AA" index="additive associativity!vectors">
+\item[Additive Associativity]
+If $\vect{u},\,\vect{v},\,\vect{w}\in V$, then $\vect{u}+\left(\vect{v}+\vect{w}\right)=\left(\vect{u}+\vect{v}\right)+\vect{w}$.
+%<property acro="Z" index="zero vector!vectors">
+\item[Zero Vector]
+There is a vector, $\zerovector$, called the \dfn{zero vector}, such that  $\vect{u}+\zerovector=\vect{u}$  for all $\vect{u}\in V$.
+%<property acro="AI" index="additive inverses!vectors">
+\item[Additive Inverses]
+If $\vect{u}\in V$, then there exists a vector $\vect{-u}\in V$ so that $\vect{u}+ (\vect{-u})=\zerovector$.
+%<property acro="SMA" index="scalar multiplication associativity!vectors">
+\item[Scalar Multiplication Associativity]
+If $\alpha,\,\beta\in\complexes$ and $\vect{u}\in V$, then $\alpha(\beta\vect{u})=(\alpha\beta)\vect{u}$.
+%<property acro="DVA" index="distributivity, vector addition!vectors">
+\item[Distributivity across Vector Addition]
+If $\alpha\in\complexes$ and $\vect{u},\,\vect{v}\in V$, then $\alpha(\vect{u}+\vect{v})=\alpha\vect{u}+\alpha\vect{v}$.
+%<property acro="DSA" index="distributivity, scalar addition!vectors">
+\item[Distributivity across Scalar Addition]
+If $\alpha,\,\beta\in\complexes$ and $\vect{u}\in V$, then
+$(\alpha+\beta)\vect{u}=\alpha\vect{u}+\beta\vect{u}$.
+%<property acro="O" index="one!vectors">
+\item[One]
+If $\vect{u}\in V$, then $1\vect{u}=\vect{u}$.
+\end{description}
+
+The objects in $V$ are called \dfn{vectors}, no matter what else they might really be, simply by virtue of being elements of a vector space.
+
+\end{definition}
+
+Now, there are several important observations to make.  Many of these
+will be easier to understand on a second or third reading, and
+especially after carefully studying the examples in future activities.
+
+An \dfn{axiom} is often a ``self-evident'' truth.  Something so
+fundamental that we all agree it is true and accept it without proof.
+Typically, it would be the logical underpinning that we would begin to
+build theorems upon.  Some might refer to the ten properties of
+\ref{definition:VS} as axioms, implying that a vector space is a very
+natural object and the ten properties are the essence of a vector
+space.  We will instead emphasize that we will begin with a definition
+of a vector space.  After studying the remainder of this chapter, you
+might return here and remind yourself how all our forthcoming theorems
+and definitions rest on this foundation.
+
+As we will see shortly, the objects in $V$ can be \textit{anything},
+even though we will call them vectors.  We have been working with
+vectors frequently, but we should stress here that these have so far
+just been \textit{column} vectors---scalars arranged in a columnar
+list of fixed length.  In a similar vein, you have used the symbol
+``+'' for many years to represent the addition of numbers (scalars).
+We have extended its use to the addition of column vectors and to the
+addition of matrices, and now we are going to recycle it even further
+and let it denote vector addition in \textit{any} possible vector
+space.  So when describing a new vector space, we will have to
+\textit{define} exactly what ``+'' is.  Similar comments apply to
+scalar multiplication.  Conversely, we can \textit{define} our
+operations any way we like, so long as the ten properties are
+fulfilled (see \ref{example:CVS}).
+
+In \ref{definition:VS}, the scalars do not have to be complex numbers.
+They can come from what are called in more advanced mathematics,
+``fields''.  Examples of fields are the set of complex numbers, the
+set of real numbers, the set of rational numbers, and even the finite
+set of ``binary numbers'', $\set{0,\,1}$.  There are many, many
+others.  In this case we would call $V$ a \dfn{vector space} over (the
+field) $F$.
+
+A vector space is composed of three objects, a set and two operations.
+Some would explicitly state in the definition that $V$ must be a
+nonempty set, but we can infer this from \ref{property:Z}, since the
+set cannot be empty and contain a vector that behaves as the zero
+vector.  Also, we usually use the same symbol for both the set and the
+vector space itself.  Do not let this convenience fool you into
+thinking the operations are secondary!
+
+This discussion has either convinced you that we are really embarking
+on a new level of abstraction, or it has seemed cryptic, mysterious or
+nonsensical.  You might want to return to this section in a few days
+and give it another read then.  In any case, let us look at some
+concrete examples now.
+
+\begin{exercise}
+%<exercise type="M" number="11" rough="Vector space or not?">
+%<problem contributor="chrisblack">
+  Let $V$ be the set $\real{2}$ with the usual vector addition, but
+  with scalar multiplication defined by
+  \[
+    \alpha \colvector{x\\y} = \colvector{\alpha y \\ \alpha x}
+  \]
+  Then $V$, with these operations\ldots
+  \begin{multipleChoice}
+    \choice[correct]{is not a vector space}
+    \choice{is a vector space}
+  \end{multipleChoice}
+
+  \begin{feedback}[correct]
+    The set $\real{2}$ with the proposed operations is not a vector
+    space since \ref{property:O} is not valid.  A counterexample is
+    $1\colvector{3\\2 } = \colvector{2\\3}\ne\colvector{3\\2 }$, so in
+    general, $1\vect{u}\ne\vect{u}$.
+  \end{feedback}
+\end{exercise}
+
+\subsection{Recycling definitions}
+
+When we say that $V$ is a vector space, we then know we have a set of
+objects (the ``vectors''), but we also know we have been provided with
+two operations (``vector addition'' and ``scalar multiplication'') and
+these operations behave with these objects according to the ten
+properties of \ref{definition:VS}.  One combines two vectors and
+produces a vector, the other takes a scalar and a vector, producing a
+vector as the result.  So if
+$\vect{u}_1,\,\vect{u}_2,\,\vect{u}_3\in V$ then an expression like
+\[
+  5\vect{u}_1+7\vect{u}_2-13\vect{u}_3
+\]
+would be unambiguous in \textit{any} of the vector spaces we have
+discussed in this section.  And the resulting object would be another
+vector in the vector space.  If you were tempted to call the above
+expression a linear combination, you would be right.  Four of the
+definitions that were central to our discussions in \ref{chapter:V}
+were stated in the context of vectors being \textit{column vectors},
+but were purposely kept broad enough that they could be applied in the
+context of any vector space.  They only rely on the presence of
+scalars, vectors, vector addition and scalar multiplication to make
+sense.  We will restate them shortly, unchanged, except that their
+titles and acronyms no longer refer to column vectors, and the
+hypothesis of being in a vector space has been added.  Take the time
+now to look forward and review each one, and begin to form some
+connections to what we have done earlier and what we will be doing in
+subsequent activities.
+
+\end{document}

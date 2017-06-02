@@ -1,0 +1,221 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Spanning Sets}
+
+\begin{document}
+\begin{abstract}
+  Given a vector space, a ``spanning set'' is a set the span of which is the vector space.
+\end{abstract}
+\maketitle
+
+In a vector space $V$, suppose we are given a set of vectors
+$S\subseteq V$.  Then we can immediately construct a subspace,
+$\spn{S}$, using \ref{definition:SS} and then be assured by
+\ref{theorem:SSS} that the construction does provide a subspace.  We
+now turn the situation upside-down.  Suppose we are first given a
+subspace $W\subseteq V$.  Can we find a set $S$ so that $\spn{S}=W$?
+Typically $W$ is infinite and we are searching for a finite set of
+vectors $S$ that we can combine in linear combinations and ``build''
+all of $W$.
+
+I like to think of $S$ as the raw materials that are sufficient for
+the construction of $W$.  If you have nails, lumber, wire, copper
+pipe, drywall, plywood, carpet, shingles, paint (and a few other
+things), then you can combine them in many different ways to create a
+house (or infinitely many different houses for that matter).  A
+fast-food restaurant may have beef, chicken, beans, cheese, tortillas,
+taco shells and hot sauce and from this small list of ingredients
+build a wide variety of items for sale.  Or maybe a better analogy
+comes from Ben Cordes---the additive primary colors (red, green and
+blue) can be combined to create many different colors by varying the
+intensity of each.  The intensity is like a scalar multiple, and the
+combination of the three intensities is like vector addition.  The
+three individual colors, red, green and blue, are the elements of the
+spanning set.
+
+Because we will use terms like ``spanned by'' and ``spanning set,''
+there is the potential for confusion with ``the span.''  Come back and
+reread the first paragraph of this subsection whenever you are
+uncertain about the difference.  Here is the working definition.
+
+\begin{definition}[Spanning Set of a Vector Space]
+  Suppose $V$ is a vector space.  A subset $S$ of $V$ is a
+  \dfn{spanning set} of $V$ if $\spn{S}=V$.  In this case, we also
+  frequently say $S$ \dfn{spans} $V$.
+\end{definition}
+
+The definition of a spanning set requires that two sets (subspaces
+actually) be equal.  If $S$ is a subset of $V$, then
+$\spn{S}\subseteq V$, always.  Thus it is usually only necessary to
+prove that $V\subseteq\spn{S}$.
+
+\begin{example}[Spanning set in $P_4$]
+  We showed that
+  \[
+    W=\setparts{p(x)}{p\in P_4,\ p(2)=0}
+  \]
+  is a subspace of $P_4$, the vector space of polynomials with degree
+  at most $4$ (\ref{example:VSP}).  In this example, we will show that
+  the set
+  \[
+    S=\set{x-2,\,x^2-4x+4,\,x^3-6x^2+12x-8,\,x^4-8x^3+24x^2-32x+16}
+  \]
+  is a spanning set for $W$.  To do this, we require that 
+  \begin{multipleChoice}
+    \choice{$W=S$.}
+    \choice[correct]{$W=\spn{S}$.}
+  \end{multipleChoice}
+  This is an equality of sets.  We can check that every polynomial in
+  $S$ has $x=2$ as a root and therefore $S\subseteq W$.  Since $W$ is
+  closed under addition and scalar multiplication,
+  $\spn{S}\subseteq W$ also.
+
+  So it remains to show that $W\subseteq \spn{S}$
+  (\ref{definition:SE}).  To do this, begin by choosing an arbitrary
+  polynomial in $W$, say $r(x)=ax^4+bx^3+cx^2+dx+e\in W$.  This
+  polynomial is not as arbitrary as it would appear, since we also
+  know it must have $x=2$ as a root.  This translates to
+  \[
+    0=a(2)^4+b(2)^3+c(2)^2+d(2)+e=16a+8b+4c+2d+e
+  \]
+  as a condition on $r$.
+
+  We wish to show that $r$ is a polynomial in $\spn{S}$, that is, we
+  want to show that $r$ can be written as a linear combination of the
+  vectors (polynomials) in $S$.  So let us try.
+  \begin{align*}
+    r(x)&=ax^4+bx^3+cx^2+dx+e\\
+        &=\alpha_1\left(x-2\right)+\alpha_2\left(x^2-4x+4\right)+\alpha_3\left(x^3-6x^2+12x-8\right)\\
+        &\quad +\alpha_4\left(x^4-8x^3+24x^2-32x+16\right)\\
+        &=\alpha_4x^4+
+          \left(\alpha_3-8\alpha_4\right)x^3+
+          \left(\alpha_2-6\alpha_3+24\alpha_4\right)x^2\\
+        &\quad +
+          \left(\alpha_1-4\alpha_2+12\alpha_3-32\alpha_4\right)x+
+          \left(-2\alpha_1+4\alpha_2-8\alpha_3+16\alpha_4\right)
+  \end{align*}
+
+  Equating coefficients (vector equality in $P_4$) gives the system of
+  five equations in four variables,
+  \begin{align*}
+    \alpha_4&=a\\
+    \alpha_3-8\alpha_4&=b\\
+    \alpha_2-6\alpha_3+24\alpha_4&=c\\
+    \alpha_1-4\alpha_2+12\alpha_3-32\alpha_4&=d\\
+    -2\alpha_1+4\alpha_2-8\alpha_3+16\alpha_4&=e\\
+  \end{align*}
+
+  Any solution to this system of equations will provide the linear
+  combination we need to determine if $r\in\spn{S}$, but we need to be
+  convinced there is a solution for any values of $a,\,b,\,c,\,d,\,e$
+  that qualify $r$ to be a member of $W$.  So the question is: is this
+  system of equations consistent?  We will form the augmented matrix,
+  and row-reduce. (We probably need to do this by hand, since the
+  matrix is symbolic---reversing the order of the first four rows is
+  the best way to start).  We obtain a matrix in reduced row-echelon
+  form
+  \begin{align*}
+    &\begin{bmatrix}
+      \leading{1}&0&0&0&32a+12b+4c+d\\
+      0&\leading{1}&0&0&24a+6b+c\\
+      0&0&\leading{1}&0&8a+b\\
+      0&0&0&\leading{1}&a\\
+      0&0&0&0&16a+8b+4c+2d+e
+    \end{bmatrix}\\
+    =&
+       \begin{bmatrix}
+         \leading{1}&0&0&0&32a+12b+4c+d\\
+         0&\leading{1}&0&0&24a+6b+c\\
+         0&0&\leading{1}&0&8a+b\\
+         0&0&0&\leading{1}&a\\
+         0&0&0&0&0
+       \end{bmatrix}
+  \end{align*}
+
+  For your results to match our first matrix, you may find it
+  necessary to multiply the final row of your row-reduced matrix by
+  the appropriate scalar, and/or add multiples of this row to some of
+  the other rows.  To obtain the second version of the matrix, the
+  last entry of the last column has been simplified to zero according
+  to the one condition we were able to impose on an arbitrary
+  polynomial from $W$.  Since the last column is not a pivot column,
+  \ref{theorem:RCLS} tells us this system is consistent.  Therefore,
+  \textit{any} polynomial from $W$ can be written as a linear
+  combination of the polynomials in $S$, so
+  $W\subseteq\spn{S}$. Therefore, $W=\spn{S}$ and $S$ is a spanning
+  set for $W$ by \ref{definition:SSVS}.
+
+  Notice that an alternative to row-reducing the augmented matrix by
+  hand would be to appeal to \ref{theorem:FS} by expressing the column
+  space of the coefficient matrix as a null space, and then verifying
+  that the condition on $r$ guarantees that $r$ is in the column
+  space, thus implying that the system is always consistent.  Give it
+  a try, we will wait.  This has been a complicated example, but worth
+  studying carefully.
+\end{example}
+
+Given a subspace and a set of vectors, it can take some work to
+determine that the set actually is a spanning set.  An even harder
+problem is to be confronted with a subspace and required to construct
+a spanning set with no guidance.  We will now work an example of this
+flavor, but some of the steps will be unmotivated.  Fortunately, we
+will have some better tools for this type of problem later on.
+
+\begin{example}[Spanning set in $M_{22}$]
+  In the space of all $2\times 2$ matrices, $M_{22}$ consider the subspace
+  \[
+    Z=\setparts{\begin{bmatrix}a&b\\c&d\end{bmatrix}}{a+3b-c-5d=0,\ -2a-6b+3c+14d=0}
+  \]
+  and find a spanning set for $Z$.
+
+  We need to construct a limited number of matrices in $Z$ so that
+  every matrix in $Z$ can be expressed as a linear combination of this
+  limited number of matrices.  Suppose that
+  $B=\begin{bmatrix}a&b\\c&d\end{bmatrix}$ is a matrix in $Z$.  Then
+  we can form a column vector with the entries of $B$ and write
+  \[
+    \colvector{a\\b\\c\\d}\in
+    \nsp{\begin{bmatrix}1 & 3 & -1 & -5\\-2 & -6 & 3 & 14\end{bmatrix}}
+  \]
+
+  Row-reducing this matrix and applying \ref{theorem:REMES} we obtain
+  the equivalent statement,
+  \[
+    \colvector{a\\b\\c\\d}\in
+    \nsp{\begin{bmatrix}\leading{1} & 3 & 0 & -1\\0 & 0 & \leading{1} & 4\end{bmatrix}}
+  \]
+
+  We can then express the subspace $Z$ in the following equal forms,
+  \begin{align*}
+    Z&=\setparts{\begin{bmatrix}a&b\\c&d\end{bmatrix}}{a+3b-c-5d=0,\ -2a-6b+3c+14d=0}\\
+     &=\setparts{\begin{bmatrix}a&b\\c&d\end{bmatrix}}{a+3b-d=0,\ c+4d=0}\\
+     &=\setparts{\begin{bmatrix}a&b\\c&d\end{bmatrix}}{a=-3b+d,\ c=-4d}\\
+     &=\setparts{\begin{bmatrix}-3b+d&b\\-4d&d\end{bmatrix}}{b,\,d\in\complexes}\\
+     &=\setparts{
+       \begin{bmatrix}-3b&b\\0&0\end{bmatrix}+
+                                \begin{bmatrix}d&0\\-4d&d\end{bmatrix}
+                                                         }{b,\,d\in\complexes}\\
+     &=\setparts{
+       b\begin{bmatrix}-3&1\\0&0\end{bmatrix}+
+                                d\begin{bmatrix}1&0\\-4&1\end{bmatrix}
+                                                         }{b,\,d\in\complexes}\\
+     &=\spn{\set{
+       \begin{bmatrix}-3&1\\0&0\end{bmatrix},\,
+                               \begin{bmatrix}1&0\\-4&1\end{bmatrix}
+                                                       }}
+  \end{align*}
+
+  So the set
+  \[
+    Q=\set{
+      \begin{bmatrix}-3&1\\0&0\end{bmatrix},\,
+      \begin{bmatrix}1&0\\-4&1\end{bmatrix}
+    }
+  \]
+  spans $Z$ by \ref{definition:SSVS}.
+\end{example}
+
+
+\end{document}

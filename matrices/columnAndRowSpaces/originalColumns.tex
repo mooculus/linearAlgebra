@@ -1,0 +1,187 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Column Space Spanned by Original Columns}
+
+\begin{document}
+\begin{abstract}
+  We have a foolproof, automated procedure for determining membership
+  in the column space of a matrix.  While this works just fine a
+  vector at a time, we would like to have a more useful description of
+  the column space.
+\end{abstract}
+\maketitle
+
+The next example will preview the first of two fundamental results
+about the column space of a matrix.
+
+\begin{example}[Column space, two ways]
+
+  Consider the $5\times 7$ matrix $A$,
+  \[
+    \begin{bmatrix}
+      2 & 4 & 1 & -1 & 1 & 4 & 4 \\
+      1 & 2 & 1 & 0 & 2 & 4 & 7 \\
+      0 & 0 & 1 & 4 & 1 & 8 & 7 \\
+      1 & 2 & -1 & 2 & 1 & 9 & 6 \\
+      -2 & -4 & 1 & 3 & -1 & -2 & -2
+    \end{bmatrix}
+  \]
+  
+  According to the definition, the column space of $A$ is
+  \[
+    \csp{A}=
+    \spn{\set{
+        \colvector{ 2 \\ 1 \\ 0 \\ 1 \\ -2 },\,
+        \colvector{ 4 \\ 2 \\ 0 \\ 2 \\ -4 },\,
+        \colvector{ 1 \\ 1 \\ 1 \\ -1 \\ 1 },\,
+        \colvector{ -1 \\ 0 \\ 4 \\ 2 \\ 3 },\,
+        \colvector{ 1 \\ 2 \\ 1 \\ 1 \\ -1 },\,
+        \colvector{ 4 \\ 4 \\ 8 \\ 9 \\ -2 },\,
+        \colvector{ 4 \\ 7 \\ 7 \\ 6 \\ -2 }
+      }}
+  \]
+
+  While this is a concise description of an infinite set, we might be
+  able to describe the span with fewer than seven vectors.  This is
+  the substance of \ref{theorem:BS}.  So we take these seven vectors
+  and make them the columns of a matrix, which is simply the original
+  matrix $A$ again.  Now we row-reduce,
+  \[
+    \begin{bmatrix}
+      2 & 4 & 1 & -1 & 1 & 4 & 4 \\
+      1 & 2 & 1 & 0 & 2 & 4 & 7 \\
+      0 & 0 & 1 & 4 & 1 & 8 & 7 \\
+      1 & 2 & -1 & 2 & 1 & 9 & 6 \\
+      -2 & -4 & 1 & 3 & -1 & -2 & -2
+    \end{bmatrix}
+    \rref
+    \begin{bmatrix}
+      \leading{1} & 2 & 0 & 0 & 0 & 3 & 1 \\
+      0 & 0 & \leading{1} & 0 & 0 & -1 & 0 \\
+      0 & 0 & 0 & \leading{1} & 0 & 2 & 1 \\
+      0 & 0 & 0 & 0 & \leading{1} & 1 & 3 \\
+      0 & 0 & 0 & 0 & 0 & 0 & 0
+    \end{bmatrix}
+  \]
+  
+  The pivot columns are $D=\set{1,\,3,\,4,\,\answer{5}}$, so we can create the set
+  \[
+    T=\set{
+      \colvector{ 2 \\ 1 \\ 0 \\ 1 \\ -2 },\,
+      \colvector{ 1 \\ 1 \\ 1 \\ -1 \\ 1 },\,
+      \colvector{ -1 \\ 0 \\ 4 \\ 2 \\ 3 },\,
+      \colvector{ 1 \\ 2 \\ 1 \\ 1 \\ -1 }
+    }
+  \]
+  and know that $\csp{A}=\spn{T}$ and $T$ is a linearly
+  \wordChoice{\choice{dependent}\choice[correct]{independent}} set of
+  columns from the set of columns of $A$.
+\end{example}
+  
+We will now formalize the previous example, which will make it
+trivial to determine a linearly independent set of vectors that will
+span the column space of a matrix, and is constituted of just
+columns of $A$.
+
+\begin{theorem}[Basis of the Column Space]
+  \label{theorem:BCS}
+  Suppose that $A$ is an $m\times n$ matrix with columns
+  $\vectorlist{A}{n}$, and $B$ is a row-equivalent matrix in reduced
+  row-echelon form with $r$ pivot columns.  Let
+  $D=\{d_1,\,d_2,\,d_3,\,\ldots,\,d_r\}$ be the set of indices for the
+  pivot columns of $B$ Let
+  $T=\set{\vect{A}_{d_1},\,\vect{A}_{d_2},\,\vect{A}_{d_3},\,\ldots,\,\vect{A}_{d_r}}$.
+  Then
+  \begin{enumerate}
+  \item $T$ is a linearly independent set.
+  \item $\csp{A}=\spn{T}$.
+  \end{enumerate}
+
+
+  \begin{proof}
+    \ref{definition:CSM} describes the column space as the span of the
+    set of columns of $A$.  \ref{theorem:BS} tells us that we can
+    reduce the set of vectors used in a span.  If we apply
+    \ref{theorem:BS} to $\csp{A}$, we would collect the columns of $A$
+    into a matrix (which would just be $A$ again) and bring the matrix
+    to reduced row-echelon form, which is the matrix $B$ in the
+    statement of the theorem.  In this case, the conclusions of
+    \ref{theorem:BS} applied to $A$, $B$ and $\csp{A}$ are exactly the
+    conclusions we desire.
+\end{proof}
+\end{theorem}
+
+This is a nice result since it gives us a handful of vectors that
+describe the entire column space (through the span), and we believe
+this set is as small as possible because we cannot create any more
+relations of linear dependence to trim it down further.  Furthermore,
+we defined the column space (\ref{definition:CSM}) as all linear
+combinations of the columns of the matrix, and the elements of the set
+$T$ are still columns of the matrix (we will not be so lucky in the
+next two constructions of the column space).
+
+Procedurally this theorem is extremely easy to apply.  Row-reduce the
+original matrix, identify $r$ pivot columns the reduced matrix, and
+grab the columns of the original matrix with the same indices as the
+pivot columns.  But it is still important to study the proof of
+\ref{theorem:BS} and its motivation in \ref{example:COV} which lie at
+the root of this theorem.  We will trot through an example all the
+same.
+
+\begin{example}[Column space, original columns]
+
+  Let us determine a compact expression for the entire column space of
+  the coefficient matrix of the system of equations
+  \begin{align*}
+    2x_1  + x_2 + 7x_3 - 7x_4 &= 8, \\
+    -3x_1 + 4x_2 -5x_3 - 6x_4 &=  -12, \\
+    x_1 +x_2 + 4x_3 - 5x_4 &=  4.
+  \end{align*}
+  Notice that in \ref{example:CSMCS} we were only determining if
+  individual vectors were in the column space or not, now we are
+  describing the entire column space.
+
+  To start with the application of \ref{theorem:BCS}, call the
+  coefficient matrix $A$ and row-reduce it to reduced row-echelon form
+  $B$,
+  \begin{align*}
+    A&=\begin{bmatrix}
+      2 & 1 & 7 & -7\\
+      -3 & 4 &  -5 & -6\\
+      1 & 1 & 4 &  -5
+    \end{bmatrix} \\
+    B&= \begin{bmatrix}
+      \leading{1} & 0 & 3 & -2 & 4 \\
+      0 & \leading{1} & 1 &  -3 & 0\\
+      0 & 0 & 0 &  0 & 0
+    \end{bmatrix}
+  \end{align*}
+
+  Since columns 1 and 2 are pivot columns, $D=\{1,\,2\}$.  To
+  construct a set that spans $\csp{A}$, just grab the columns of $A$
+  with indices in $D$, so
+  \[
+    \csp{A}=\spn{\set{\colvector{2\\-3\\\answer{1}},\,\colvector{1\\4\\1}}}.
+  \]
+  That's it.
+
+  In \ref{example:CSMCS} we determined that the vector
+  \[
+    \vect{c}=\colvector{2\\3\\2}
+  \]
+  \textit{was not} in the column space of $A$.  Try to write
+  $\vect{c}$ as a linear combination of the first two columns of $A$.
+  What happens?
+
+  Also in \ref{example:CSMCS} we determined that the vector
+  \[
+    \vect{b}=\colvector{8\\-12\\4}
+  \]
+  \textit{was} in the column space of $A$.  Try to write $\vect{b}$ as
+  a linear combination of the first two columns of $A$.  What happens?
+  Did you find a unique solution to this question?  Hmmmm.
+\end{example}
+
+\end{document}

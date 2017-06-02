@@ -1,0 +1,82 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Bases and Nonsingular Matrices}
+
+\begin{document}
+\begin{abstract}
+  The columns of a nonsingular matrix form a basis.
+\end{abstract}
+\maketitle
+
+A quick source of diverse bases for $\real{m}$ is the set of columns of a nonsingular matrix.
+
+\begin{theorem}[Columns of Nonsingular Matrix are a Basis]
+  \label{theorem:CNMB}
+
+  Suppose that $A$ is a square matrix of size $m$.  Then the columns
+  of $A$ are a basis of $\real{m}$ if and only if $A$ is nonsingular.
+  
+  \begin{proof}
+    ($\Rightarrow$) Suppose that the columns of $A$ are a basis for
+    $\real{m}$.  Then \ref{definition:B} says the set of columns is
+    linearly independent.  \ref{theorem:NMLIC} then says that $A$ is
+    \wordChoice{\choice[correct]{nonsingular}\choice{singular}}.
+    
+    ($\Leftarrow$) Suppose that $A$ is nonsingular.  Then by
+    \ref{theorem:NMLIC} this set of columns is linearly
+    \wordChoice{\choice[correct]{independent}\choice{dependent}}.
+    \ref{theorem:CSNM} says that for a nonsingular matrix,
+    $\csp{A}=\real{m}$.  This is equivalent to saying that the columns
+    of $A$ are a spanning set for the vector space $\real{m}$.  As a
+    linearly independent spanning set, the columns of $A$ qualify as a
+    basis for $\real{m}$ (\ref{definition:B}).
+  \end{proof}
+\end{theorem}
+
+\begin{example}[Columns as Basis]
+  Consider the $5\times 5$ matrix
+  \[
+    K=\begin{bmatrix}
+      10 & 18 & 24 & 24 & -12 \\
+      12 & -2 &  -6 & 0 & -18 \\
+      -30 &  -21 & -23 &  -30 & 39 \\
+      27 & 30 &  36 & 37 &  -30 \\
+      18 & 24 & 30 &  30 & -20
+    \end{bmatrix}
+  \]
+  which is row-equivalent to the $5\times 5$ identity matrix $I_5$.
+  So by \ref{theorem:NMRRI}, $K$ is nonsingular.  Then
+  \ref{theorem:CNMB} says the set
+  \[
+    \set{\colvector{10\\12\\-30\\27\\18},\,\colvector{18\\-2\\-21\\30\\24},\,\colvector{24\\-6\\-23\\36\\30},\,\colvector{24\\0\\-30\\37\\30},\,\colvector{-12\\-18\\39\\-30\\-20}}
+  \]
+  is a (novel) basis of $\real{5}$.
+\end{example}
+
+Perhaps we should view the fact that the standard unit vectors are a
+basis (\ref{theorem:SUVB}) as just a simple corollary of
+\ref{theorem:CNMB}?  (See \ref{technique:LC}.)
+
+With a new equivalence for a nonsingular matrix, we can update our list of equivalences.
+
+\begin{theorem}[Nonsingular Matrix Equivalences, Round 5]
+
+  Suppose that $A$ is a square matrix of size $n$.  The following are equivalent.
+  \begin{enumerate}\item $A$ is nonsingular.
+  \item $A$ row-reduces to the identity matrix.
+  \item The null space of $A$ contains only the zero vector, $\nsp{A}=\set{\zerovector}$.
+  \item The linear system $\linearsystem{A}{\vect{b}}$ has a unique solution for every possible choice of $\vect{b}$.
+  \item The columns of $A$ are a linearly independent set.
+  \item $A$ is invertible.
+  \item The column space of $A$ is $\real{n}$, $\csp{A}=\real{n}$.
+  \item The columns of $A$ are a basis for $\real{n}$.
+  \end{enumerate}
+
+  \begin{proof}
+    With a new equivalence for a nonsingular matrix in \ref{theorem:CNMB} we can expand our previous theorem.
+  \end{proof}
+\end{theorem}
+
+\end{document}

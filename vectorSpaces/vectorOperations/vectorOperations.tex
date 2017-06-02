@@ -1,0 +1,108 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Vector Operations}
+
+\begin{document}
+\begin{abstract}
+  We define two operations involving vectors, and collect some basic
+  properties of these operations.
+\end{abstract}
+\maketitle
+
+We will now define two operations on the set $\complex{m}$.  By this
+we mean well-defined procedures that somehow convert vectors into
+other vectors.  Here are two of the most basic definitions of the
+entire course.
+
+\begin{definition}[Column Vector Addition]
+  Suppose that $\vect{u},\,\vect{v}\in\complex{m}$. The \dfn{sum} of
+  $\vect{u}$ and $\vect{v}$ is the vector $\vect{u}+\vect{v}$ defined
+  by
+  \begin{align*}
+    \vectorentry{\vect{u}+\vect{v}}{i}
+    &=\vectorentry{\vect{u}}{i}+\vectorentry{\vect{v}}{i}
+    &&1\leq i\leq m
+  \end{align*}
+\end{definition}
+
+So vector addition takes two vectors of the same size and combines
+them to create a new vector of the same size.
+
+Notice that this definition is required, even if we agree that this is
+the obvious, right, natural or correct way to do it.  Notice too that
+the symbol $+$ is being recycled.  We all know how to add
+\textit{numbers}, but now we have the same symbol extended to
+double-duty and we use it to indicate how to add two new objects,
+\textit{vectors.}  And this definition of our new meaning is built on
+our previous meaning of addition via the expressions $u_i+v_i$.
+
+\begin{example}[Addition of two vectors in $\complex{4}$]
+  If
+  \begin{align*}
+    \vect{u}=\colvector{2\\-3\\4\\2}&&\vect{v}=\colvector{-1\\5\\2\\-7}
+  \end{align*}
+  then
+  \[\vect{u}+\vect{v}=
+    \colvector{\answer{2}\\-3\\4\\2}+\colvector{-1\\5\\2\\-7}=
+    \colvector{2+(-1)\\-3+5\\4+2\\2+(-7)}=
+    \colvector{\answer{1}\\\answer{2}\\6\\-5}\]
+\end{example}
+
+Our second operation takes two objects of different types,
+specifically a number and a vector, and combines them to create
+another vector.  In this context we call a number a \dfn{scalar} in
+order to emphasize that it is not a vector.
+
+\begin{definition}[Column Vector Scalar Multiplication]
+  Suppose $\vect{u}\in\complex{m}$ and $\alpha\in\complexes$, then the
+  \dfn{scalar multiple} of $\vect{u}$ by $\alpha$ is the vector
+  $\alpha\vect{u}$ defined by
+  \begin{align*}
+    \vectorentry{\alpha\vect{u}}{i}
+    &=\alpha\vectorentry{\vect{u}}{i}
+    &&1\leq i\leq m
+  \end{align*}
+\end{definition}
+
+Notice that we are doing a kind of multiplication here, but we are
+\textit{defining} a new type, perhaps in what appears to be a natural
+way.  We use juxtaposition to denote this operation rather than using
+a symbol like we did with vector addition.  So this can be another
+source of confusion.  When two symbols are next to each other, are we
+doing regular old multiplication or are we doing scalar vector
+multiplication, the operation we just defined?  Think about your
+objects---if the first object is a scalar, and the second is a vector,
+then it \textit{must} be that we are doing our new operation, and the
+\textit{result} of this operation will be another vector.
+
+\begin{warning}
+  Notice how consistency in notation can be an aid here.  If we write
+  scalars as lower case Greek letters from the start of the alphabet
+  (such as $\alpha$, $\beta$, \ldots ) and write vectors in Latin
+  letters from the end of the alphabet ($\vect{u}$, $\vect{v}$, \ldots
+  ), then we have some hints about what type of objects we are working
+  with.  This can be a blessing \textit{and} a curse, since when we go
+  read another book about linear algebra, or read an application in
+  another discipline (physics, economics, ldots ) the types of
+  notation employed may be very different and hence unfamiliar.
+\end{warning}
+
+Computationally, vector scalar multiplication is easy.
+
+\begin{example}[Scalar multiplication in $\complex{5}$]
+  If
+  \[
+    \vect{u}=\colvector{3\\1\\-2\\4\\-1}
+  \]
+  and $\alpha=6$, then
+  \[
+    \alpha\vect{u}=
+    6\colvector{3\\1\\\answer{-2}\\4\\-1}=
+%    \colvector{6(3)\\6(1)\\6(-2)\\6(4)\\6(-1)}=
+    \colvector{18\\6\\\answer{-12}\\24\\-6}.
+  \]
+\end{example}
+
+\end{document}

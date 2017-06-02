@@ -1,0 +1,107 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Left Null Space}
+
+\begin{document}
+\begin{abstract}
+  We now define how to multiply two matrices together.  
+\end{abstract}
+\maketitle
+
+There are four natural subsets associated with a matrix.  We have met
+three already: the null space, the column space and the row space.  In
+this section we will introduce a fourth, the left null space. 
+
+% The objective of this section is to describe one procedure that will
+% allow us to find linearly independent sets that span each of these
+% four sets of column vectors.  Along the way, we will make a
+% connection with the inverse of a matrix, so \ref{theorem:FS} will
+% tie together most all of this chapter (and the entire course so
+% far).
+
+\begin{definition}
+[Left Null Space]
+Suppose $A$ is an $m\times n$ matrix.  Then the \dfn{left null space} is defined as 
+\[
+\lns{A}=\nsp{\transpose{A}}\subseteq\complex{m}.
+\]
+\end{definition}
+
+The left null space will not feature prominently in the sequel, but we
+can explain its name and connect it to row operations.  Suppose
+$\vect{y}\in\lns{A}$.  Then by \ref{definition:LNS},
+$\transpose{A}\vect{y}=\zerovector$.  We can then write
+\begin{align*}
+\transpose{\zerovector}
+&=\transpose{\left(\transpose{A}\vect{y}\right)}
+\\ %&&\ref{definition:LNS}\\
+&=\transpose{\vect{y}}\transpose{\left(\transpose{A}\right)}
+\\ %&&\ref{theorem:MMT}\\
+&=\transpose{\vect{y}}A
+% &&\ref{theorem:TT}
+\end{align*}
+
+The product $\transpose{\vect{y}}A$ can be viewed as the components of
+$\vect{y}$ acting as the scalars in a linear combination of the
+\textit{rows} of $A$.  And the result is a ``row vector'',
+$\transpose{\zerovector}$ that is totally zeros.  When we apply a
+sequence of row operations to a matrix, each row of the resulting
+matrix is some linear combination of the rows.  These observations
+tell us that the vectors in the left null space are scalars that
+record a sequence of row operations that result in a row of zeros in
+the row-reduced version of the matrix.
+
+% We will see this idea more explicitly in the course of proving
+% \ref{theorem:FS}.
+
+\begin{example}[Left null space]
+
+We will find the left null space of
+\[
+A=
+\begin{bmatrix}
+ 1 & -3 & 1 \\
+ -2 & 1 & 1 \\
+ 1 & 5 & 1 \\
+ 9 & -4 & 0
+\end{bmatrix}
+\]
+
+We transpose $A$ and row-reduce,
+\[
+\transpose{A}=
+\begin{bmatrix}
+ 1 & \answer{-2} & 1 & 9 \\
+ \answer{-3} & 1 & 5 & -4 \\
+ 1 & 1 & 1 & 0
+\end{bmatrix}
+\rref
+\begin{bmatrix}
+ \leading{1} & 0 & 0 & 2 \\
+ 0 & \leading{1} & 0 & -3 \\
+ 0 & 0 & \leading{1} & 1
+\end{bmatrix}
+\]
+
+Applying \ref{definition:LNS} and \ref{theorem:BNS} we have
+\[
+\lns{A}=\nsp{\transpose{A}}=
+\spn{\set{
+\colvector{\answer{-2}\\\answer{3}\\\answer{-1}\\1}
+}}
+\]
+
+If you row-reduce $A$ you will discover one zero row in the reduced
+row-echelon form.  This zero row is created by a sequence of row
+operations, which in total amounts to a linear combination, with
+scalars $a_1=-2$, $a_2=3$, $a_3=-1$ and $a_4=1$, on the rows of $A$
+and which results in the zero vector (check this!).  So the components
+of the vector describing the left null space of $A$ provide a relation
+of linear dependence on the rows of $A$.
+
+\end{example}
+
+\end{document}
+

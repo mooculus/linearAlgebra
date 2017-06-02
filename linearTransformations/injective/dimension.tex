@@ -1,0 +1,51 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Injective Linear Transformations and Dimension}
+
+\begin{document}
+\begin{abstract}
+  Injective linear transformations cannot reduce dimension.
+\end{abstract}
+\maketitle
+
+
+\begin{theorem}[Injective Linear Transformations and Dimension]
+\label{theorem:ILTD}
+
+Suppose that $\ltdefn{T}{U}{V}$ is an injective linear transformation.  Then $\dimension{U}\leq\dimension{V}$.
+
+\begin{proof}
+Suppose to the contrary that $m=\dimension{U}>\dimension{V}=t$.  Let $B$ be  a basis of $U$, which will then contain $m$ vectors.  Apply $T$ to each element of $B$ to form a set $C$ that is a subset of $V$.  By \ref{theorem:ILTB}, $C$ is linearly independent and therefore must contain $m$ distinct vectors.  So we have found a set of $m$ linearly independent vectors in $V$, a vector space of dimension $t$, with $m>t$.  However, this contradicts \ref{theorem:G}, so our assumption is false and $\dimension{U}\leq\dimension{V}$.
+
+\end{proof}
+\end{theorem}
+
+\begin{example}
+
+Consider the linear transformation 
+\[\ltdefn{T}{M_{23}}{\complex{4}},\quad
+\lteval{T}{\begin{bmatrix}a&b&c\\d&e&f\end{bmatrix}}=
+\colvector{a+2b+12c-3d+e+6f\\2a-b-c+d-11f\\a+b+7c+2d+e-3f\\a+2b+12c+5e-5f}
+\]
+
+
+Since $\dimension{M_{23}}=6>4=\dimension{\complex{4}}$, 
+\begin{multipleChoice}
+\choice{$T$ must be injective}
+\choice[correct]{$T$ cannot be injective}
+\end{multipleChoice}
+\begin{feedback}[correct]
+Exactly!  If it were, then $T$ would violate \ref{theorem:ILTD}.
+\end{feedback}
+
+\end{example}
+
+Notice that the previous example made no use of the actual formula defining the function.  Merely a comparison of the dimensions of the domain and codomain are enough to conclude that the linear transformation is not injective.  \ref{archetype:M} and \ref{archetype:N} are two more examples of linear transformations that have ``big'' domains and ``small'' codomains, resulting in ``collisions'' of outputs and thus are non-injective linear transformations.
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

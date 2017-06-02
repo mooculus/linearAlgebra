@@ -1,0 +1,137 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Vector Representation}
+
+\begin{document}
+\begin{abstract}
+  A given vector can be represented as a linear combination of the
+  vectors from a linearly independent spanning set.
+\end{abstract}
+\maketitle
+
+We will take up the matter of representations fully, where
+\ref{theorem:VRRB} will be critical for \ref{definition:VR}.  We will
+now motivate and prove a critical theorem that tells us how to
+``represent'' a vector.  This theorem could wait, but working with it
+now will provide some extra insight into the nature of linearly
+independent spanning sets.  First an example, then the theorem.
+
+\begin{example}[A vector representation]
+  Consider the set
+  \[
+    S=\set{\colvector{-7\\5\\1},\,\colvector{-6\\5\\0},\,\colvector{-12\\7\\4}}
+  \]
+  from the vector space $\real{3}$.  Let $A$ be the matrix whose
+  columns are the set $S$, and verify that $A$ is nonsingular.  By
+  \ref{theorem:NMLIC} the elements of $S$ form a linearly independent
+  set.  Suppose that $\vect{b}\in\real{3}$.  Then
+  $\linearsystem{A}{\vect{b}}$ has a (unique) solution
+  (\ref{theorem:NMUS}) and hence is consistent.  By
+  \ref{theorem:SLSLC}, 
+  \begin{multipleChoice}
+    \choice[correct]{$\vect{b}\in\spn{S}$.}
+    \choice{$\vect{b}\not\in\spn{S}$.}
+  \end{multipleChoice}
+  Since $\vect{b}$ is arbitrary, this is enough to show that
+  $\spn{S}=\real{3}$, and therefore $S$ is a spanning set for
+  $\real{3}$ (\ref{definition:SSVS}).
+
+  Now examine the situation for a particular choice of $\vect{b}$, say
+  $\vect{b}=\colvector{-33\\24\\5}$.  Because $S$ is a spanning set
+  for $\real{3}$, we know we can write $\vect{b}$ as a linear
+  combination of the vectors in $S$,
+  \[
+    \colvector{-33\\24\\5}=
+    (-3)\colvector{-7\\5\\1}+(5)\colvector{-6\\5\\0}+(2)\colvector{-12\\7\\4}.
+  \]
+
+  The nonsingularity of the matrix $A$ tells that the scalars in this
+  linear combination are unique.  More precisely, it is the linear
+  independence of $S$ that provides the uniqueness.  We will refer to
+  the scalars $a_1=-3$, $a_2=5$, $a_3=2$ as a ``representation of
+  $\vect{b}$ relative to $S$.''  In other words, once we settle on $S$
+  as a linearly independent set that spans $\real{3}$, the vector
+  $\vect{b}$ is recoverable just by knowing the scalars $a_1=-3$,
+  $a_2=5$, $a_3=2$ (use these scalars in a linear combination of the
+  vectors in $S$).
+\end{example}
+
+That example is all an illustration of the following important
+theorem, which we prove in the setting of a general vector space.
+
+\begin{theorem}[Vector Representation Relative to a Basis]
+  \label{theorem:VRRB}
+
+  Suppose that $V$ is a vector space and $B=\set{\vectorlist{v}{m}}$
+  is a linearly independent set that spans $V$.  Let $\vect{w}$ be any
+  vector in $V$.  Then there exist \textit{unique} scalars
+  $a_1,\,a_2,\,a_3,\,\ldots,\,a_m$ such that
+  \[
+    \vect{w}=\lincombo{a}{v}{m}.
+  \]
+
+  \begin{proof}
+    That $\vect{w}$ can be written as a linear combination of the
+    vectors in $B$ follows from the spanning property of the set
+    (\ref{definition:SSVS}).  This is good, but not the meat of this
+    theorem.  We now know that for any choice of the vector $\vect{w}$
+    there exist \textit{some} scalars that will create $\vect{w}$ as a
+    linear combination of the basis vectors.  The real question is: Is
+    there \textit{more} than one way to write $\vect{w}$ as a linear
+    combination of $\{\vectorlist{v}{m}\}$?  Are the scalars
+    $a_1,\,a_2,\,a_3,\,\ldots,\,a_m$ unique?
+
+    Assume there are two different linear combinations of
+    $\{\vectorlist{v}{m}\}$ that equal the vector $\vect{w}$.  In
+    other words there exist scalars $a_1,\,a_2,\,a_3,\,\ldots,\,a_m$
+    and $b_1,\,b_2,\,b_3,\,\ldots,\,b_m$ so that
+    \begin{align*}
+      \vect{w}&=\lincombo{a}{v}{m}\\
+      \vect{w}&=\lincombo{b}{v}{m}.
+    \end{align*}
+
+    Then notice that
+    \begin{align*}
+      \zerovector
+      &=\vect{w}+(\vect{-w})&&\ref{property:AI}\\
+      &=\vect{w}+(-1)\vect{w}&&\ref{theorem:AISM}\\
+      &=(\lincombo{a}{v}{m})+\\
+      &\quad\quad(-1)(\lincombo{b}{v}{m})\\
+      &=(\lincombo{a}{v}{m})+\\
+      &\quad\quad (-b_1\vect{v}_1-b_2\vect{v}_2-b_3\vect{v}_3-\ldots-b_m\vect{v}_m)&&\ref{property:DVA}\\
+      &=(a_1-b_1)\vect{v_1}+(a_2-b_2)\vect{v_2}+(a_3-b_3)\vect{v_3}+\\
+      &\quad\quad\cdots+(a_m-b_m)\vect{v_m}&&\ref{property:C}, \ref{property:DSA}
+    \end{align*}
+
+    But this is a relation of linear dependence on a linearly
+    independent set of vectors (\ref{definition:RLD})! Now we are
+    using the other assumption about $B$, that $\{\vectorlist{v}{m}\}$
+    is a linearly independent set.  So by \ref{definition:LI} it
+    \textit{must} happen that the scalars are all zero.  That is,
+    \begin{align*}
+      (a_1-b_1)&=0&(a_2-b_2)&=0&(a_3-b_3)&=0&\ldots&&(a_m-b_m)&=0\\
+      a_1&=b_1&a_2&=b_2&a_3&=b_3&\ldots&&a_m&=b_m.
+    \end{align*}
+
+    And so we find that the scalars are unique.
+  \end{proof}
+\end{theorem}
+
+The converse of \ref{theorem:VRRB} is true as well, but is not
+important enough to rise beyond an exercise.
+
+This is a very typical use of the hypothesis that a set is linearly
+independent---obtain a relation of linear dependence and then conclude
+that the scalars \textit{must} all be zero.  The result of this
+theorem tells us that we can write any vector in a vector space as a
+linear combination of the vectors in a linearly independent spanning
+set, but only just.  There is only enough raw material in the spanning
+set to write each vector one way as a linear combination.  So in this
+sense, we could call a linearly independent spanning set a ``minimal
+spanning set.''  These sets are so important that we will give them a
+simpler name (``basis'') and explore their properties further in the
+next section.
+
+\end{document}

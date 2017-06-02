@@ -1,0 +1,218 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Spanning Sets and Surjective Linear Transformations}
+
+\begin{document}
+\begin{abstract}
+  Just as injective linear transformations are allied with linear independence, surjective linear transformations are allied with spanning sets.
+\end{abstract}
+\maketitle
+
+
+\begin{theorem}[Spanning Set for Image of a Linear Transformation]
+\label{theorem:SSRLT}
+
+Suppose that $\ltdefn{T}{U}{V}$ is a linear transformation and
+\begin{align*}
+S&=\set{\vectorlist{u}{t}}
+\end{align*}
+spans $U$.  Then
+\begin{align*}
+R&=\set{\lteval{T}{\vect{u}_1},\,\lteval{T}{\vect{u}_2},\,\lteval{T}{\vect{u}_3},\,\ldots,\,\lteval{T}{\vect{u}_t}}
+\end{align*}
+spans $\rng{T}$.
+
+\begin{proof}
+We need to establish that $\rng{T}=\spn{R}$, a set equality.  First we establish that $\rng{T}\subseteq\spn{R}$.  To this end, choose $\vect{v}\in\rng{T}$.  Then there exists a vector $\vect{u}\in U$, such that $\lteval{T}{\vect{u}}=\vect{v}$ (\ref{definition:RLT}).  Because $S$ spans $U$ there are scalars, $\scalarlist{a}{t}$, such that
+\[
+\vect{u}=\lincombo{a}{u}{t}
+\]
+
+
+
+
+Then
+\begin{align*}
+\vect{v}
+&=\lteval{T}{\vect{u}}&&\ref{definition:RLT}\\
+&=\lteval{T}{\lincombo{a}{u}{t}}&&\ref{definition:SSVS}\\
+&=a_1\lteval{T}{\vect{u}_1}+a_2\lteval{T}{\vect{u}_2}+a_3\lteval{T}{\vect{u}_3}+\ldots+a_t\lteval{T}{\vect{u}_t}&&\ref{theorem:LTLC}\\
+\end{align*}
+which establishes that $\vect{v}\in\spn{R}$ (\ref{definition:SS}).  So $\rng{T}\subseteq\spn{R}$.
+
+
+
+To establish the opposite inclusion, choose an element of the span of $R$, say $\vect{v}\in\spn{R}$.  Then there are scalars $\scalarlist{b}{t}$ so that
+\begin{align*}
+\vect{v}
+&=b_1\lteval{T}{\vect{u}_1}+b_2\lteval{T}{\vect{u}_2}+b_3\lteval{T}{\vect{u}_3}+\cdots+b_t\lteval{T}{\vect{u}_t}
+&&\ref{definition:SS}\\
+&=\lteval{T}{\lincombo{b}{\vect{u}}{t}}&&\ref{theorem:LTLC}
+\end{align*}
+
+
+
+
+This demonstrates that $\vect{v}$ is an output of the linear transformation $T$, so $\vect{v}\in\rng{T}$.  Therefore $\spn{R}\subseteq\rng{T}$, so we have the set equality $\rng{T}=\spn{R}$ (\ref{definition:SE}).  In other words, $R$ spans $\rng{T}$ (\ref{definition:SSVS}).
+
+
+
+\end{proof}
+\end{theorem}
+
+\ref{theorem:SSRLT} provides an easy way to begin the construction of a basis for the image of a linear transformation, since the construction of a spanning set requires simply evaluating the linear transformation on a spanning set of the domain.  In practice the best choice for a spanning set of the domain would be as small as possible, in other words, a basis.  The resulting spanning set for the codomain may not be linearly independent, so to find a basis for the image might require tossing out redundant vectors from the spanning set.  Here is an example.
+
+
+
+\begin{example}
+[A basis for the image of a linear transformation]
+
+Define the linear transformation $\ltdefn{T}{M_{22}}{P_2}$ by
+\[
+\lteval{T}{ \begin{bmatrix} a&b\\c&d \end{bmatrix}}
+=\left(a+2b+8c+d\right)+\left(-3a+2b+5d\right)x+\left(a+b+5c\right)x^2
+\]
+
+
+
+
+A convenient spanning set for $M_{22}$ is the basis
+\[
+S=\set{
+\begin{bmatrix} 1 & 0 \\ 0 & 0 \end{bmatrix},\,
+\begin{bmatrix} 0 & 1 \\ 0 & 0 \end{bmatrix},\,
+\begin{bmatrix} 0 & 0 \\ 1 & 0 \end{bmatrix},\,
+\begin{bmatrix} 0 & 0 \\ 0 & 1 \end{bmatrix}
+}
+\]
+
+
+
+
+So by \ref{theorem:SSRLT}, a spanning set for $\rng{T}$ is
+\begin{align*}
+R
+&=\set{
+\lteval{T}{\begin{bmatrix} 1 & 0 \\ 0 & 0 \end{bmatrix}},\,
+\lteval{T}{\begin{bmatrix} 0 & 1 \\ 0 & 0 \end{bmatrix}},\,
+\lteval{T}{\begin{bmatrix} 0 & 0 \\ 1 & 0 \end{bmatrix}},\,
+\lteval{T}{\begin{bmatrix} 0 & 0 \\ 0 & 1 \end{bmatrix}}
+}\\
+&=\set{1-3x+x^2,\,2+2x+x^2,\,8+5x^2,\,1+5x}
+\end{align*}
+
+Then
+\begin{multipleChoice}
+\choice[correct]{The set $R$ is not linearly independent.}
+\choice{The set $R$ is linearly independent.}
+\end{multipleChoice}
+
+\begin{feedback}[correct]
+So if we desire a basis for $\rng{T}$, we need to eliminate some redundant vectors.  Two particular relations of linear dependence on $R$ are
+\begin{align*}
+(-2)(1-3x+x^2)+(-3)(2+2x+x^2)+(8+5x^2)&=0+0x+0x^2=\zerovector\\
+(1-3x+x^2)+(-1)(2+2x+x^2)+(1+5x)&=0+0x+0x^2=\zerovector
+\end{align*}
+
+These, individually, allow us to remove $8+5x^2$ and $1+5x$ from $R$ without destroying the property that $R$ spans $\rng{T}$.  The two remaining vectors are linearly independent (check this!), so we can write
+\[
+\rng{T}=\spn{\set{1-3x+x^2,\,2+2x+x^2}}
+\]
+and see that $\dimension{\rng{T}}=2$.
+\end{feedback}
+
+\end{example}
+
+Elements of the image are precisely those elements of the codomain with nonempty preimages.
+
+\begin{theorem}[Image and Pre-Image]
+\label{theorem:RPI}
+
+
+Suppose that $\ltdefn{T}{U}{V}$ is a linear transformation.  Then
+\[
+\vect{v}\in\rng{T}\text{ if and only if }\preimage{T}{\vect{v}}\neq\emptyset
+\]
+
+
+
+
+
+\begin{proof}
+($\Rightarrow$)  If $\vect{v}\in\rng{T}$, then there is a vector $\vect{u}\in U$ such that $\lteval{T}{\vect{u}}=\vect{v}$.  This qualifies $\vect{u}$ for membership in $\preimage{T}{\vect{v}}$, and thus the preimage of $\vect{v}$ is not empty.
+
+
+
+($\Leftarrow$)  Suppose the preimage of $\vect{v}$ is not empty, so we can choose a vector $\vect{u}\in U$ such that $\lteval{T}{\vect{u}}=\vect{v}$.  Then $\vect{v}\in\rng{T}$.
+
+
+\end{proof}
+\end{theorem}
+
+Now would be a good time to return to \ref{diagram:KPI} which depicted the pre-images of a non-surjective linear transformation.  The vectors $\vect{x},\,\vect{y}\in V$ were elements of the codomain whose pre-images were empty, as we expect for a non-surjective linear transformation from the characterization in \ref{theorem:RPI}.
+
+
+
+\begin{theorem}[Surjective Linear Transformations and Bases]
+\label{theorem:SLTB}
+
+
+Suppose that $\ltdefn{T}{U}{V}$ is a linear transformation and
+\begin{align*}
+B&=\set{\vectorlist{u}{m}}
+\end{align*}
+is a basis of $U$.  Then $T$ is surjective if and only if
+\begin{align*}
+C&=\set{\lteval{T}{\vect{u}_1},\,\lteval{T}{\vect{u}_2},\,\lteval{T}{\vect{u}_3},\,\ldots,\,\lteval{T}{\vect{u}_m}}
+\end{align*}
+is a spanning set for $V$.
+
+
+
+
+\begin{proof}
+($\Rightarrow$)  Assume $T$ is surjective.  Since $B$ is a basis, we know $B$ is a spanning set of $U$ (\ref{definition:B}).  Then \ref{theorem:SSRLT} says that $C$ spans $\rng{T}$.  But the hypothesis that $T$ is surjective means $V=\rng{T}$ (\ref{theorem:RSLT}), so $C$ spans $V$.
+
+
+
+($\Leftarrow$)  Assume that $C$ spans $V$.  To establish that $T$ is surjective, we will show that every element of $V$ is an output of $T$ for some input (\ref{definition:SLT}).  Suppose that $\vect{v}\in V$.  As an element of $V$, we can write $\vect{v}$ as a linear combination of the spanning set $C$.  So there are scalars, $\scalarlist{b}{m}$, such that
+\[
+\vect{v}=b_1\lteval{T}{\vect{u}_1}+b_2\lteval{T}{\vect{u}_2}+b_3\lteval{T}{\vect{u}_3}+\cdots+b_m\lteval{T}{\vect{u}_m}
+\]
+
+
+
+
+Now define the vector $\vect{u}\in U$ by
+\[
+\vect{u}=\lincombo{b}{u}{m}
+\]
+
+
+
+
+Then
+\begin{align*}
+\lteval{T}{\vect{u}}&=\lteval{T}{\lincombo{b}{u}{m}}\\
+&=b_1\lteval{T}{\vect{u}_1}+b_2\lteval{T}{\vect{u}_2}+b_3\lteval{T}{\vect{u}_3}+\cdots+b_m\lteval{T}{\vect{u}_m}&&\ref{theorem:LTLC}\\
+&=\vect{v}
+\end{align*}
+
+
+
+
+So, given any choice of a vector $\vect{v}\in V$, we can design an input $\vect{u}\in U$ to produce $\vect{v}$ as an output of $T$.  Thus, by \ref{definition:SLT}, $T$ is surjective.
+
+
+
+\end{proof}
+\end{theorem}
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

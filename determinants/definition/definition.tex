@@ -1,0 +1,172 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Definition of the Determinant}
+
+\begin{document}
+\begin{abstract}
+  Our definition of the determinant function is recursive, that is,
+  the determinant of a large matrix is defined in terms of the
+  determinant of smaller matrices.
+\end{abstract}
+\maketitle
+
+\begin{definition}[SubMatrix]
+  Suppose that $A$ is an $m\times n$ matrix.  Then the \dfn{submatrix}
+  $\submatrix{A}{i}{j}$ is the $(m-1)\times (n-1)$ matrix obtained
+  from $A$ by removing row $i$ and column $j$.
+\end{definition}
+
+\begin{example}[Some submatrices]
+  For the matrix
+  \[
+    A=
+    \begin{bmatrix}
+      1 & -2 & 3 & 9\\
+      4 & -2 & 0 & 1\\
+      3 & 5 & 2 & 1
+    \end{bmatrix}
+  \]
+  we have the submatrices
+  \[
+    \submatrix{A}{\answer{2}}{\answer{3}}
+    =
+    \begin{bmatrix}
+      1 & -2 & 9\\
+      3 & 5 & 1
+    \end{bmatrix}
+  \]
+  and
+  \[
+    \submatrix{A}{\answer{3}}{\answer{1}}
+    =
+    \begin{bmatrix}
+      -2 & 3 & 9\\
+      -2 & 0 & 1
+    \end{bmatrix}.
+  \]
+\end{example}
+
+\begin{definition}[Determinant of a Matrix]
+  Suppose $A$ is a square matrix.  Then its \dfn{determinant},
+  $\detname{A}=\detbars{A}$, is an element of $\complexes$ defined
+  recursively by:
+\begin{enumerate}
+\item If $A$ is a $1\times 1$ matrix, then $\detname{A}=\matrixentry{A}{11}$.
+\item If $A$ is a matrix of size $n$ with $n\geq 2$, then
+  \begin{align*}
+    \detname{A}&=
+                 \matrixentry{A}{11}\detname{\submatrix{A}{1}{1}}
+                 -\matrixentry{A}{12}\detname{\submatrix{A}{1}{2}}
+                 +\matrixentry{A}{13}\detname{\submatrix{A}{1}{3}}-\\
+               &\quad \matrixentry{A}{14}\detname{\submatrix{A}{1}{4}}
+                 +\cdots
+                 +(-1)^{n+1}\matrixentry{A}{1n}\detname{\submatrix{A}{1}{n}}
+  \end{align*}
+\end{enumerate}
+\end{definition}
+
+So to compute the determinant of a $5\times 5$ matrix we must build 5
+submatrices, each of size $4$.  To compute the determinants of each
+the $4\times 4$ matrices we need to create 4 submatrices each, these
+now of size $3$ and so on.  To compute the determinant of a
+$10\times 10$ matrix would require computing the determinant of
+$10!=10\times 9\times 8\times 7\times 6\times 5\times 4\times 3\times
+2=3,628,800$ $1\times 1$ matrices.  Fortunately there are better ways.
+However this does suggest an excellent computer programming exercise
+to write a recursive procedure to compute a determinant.
+
+Let us compute the determinant of a reasonably sized matrix by hand.
+
+\begin{example}[Determinant of a $3\times 3$ matrix]
+  Suppose that we have the $3\times 3$ matrix
+  \[
+    A=
+    \begin{bmatrix}
+      3 & 2 & -1\\
+      4 & 1 & 6\\
+      -3 & -1 & 2
+    \end{bmatrix}
+  \]
+
+  Then
+  \begin{align*}
+    \detname{A}=\detbars{A}
+    &=\begin{vmatrix}
+      3 & 2 & -1\\
+      4 & 1 & 6\\
+      -3 & -1 & 2
+    \end{vmatrix}\\
+    &=
+      3
+      \begin{vmatrix}
+        1 & 6\\
+        -1 & 2
+      \end{vmatrix}
+             -2
+             \begin{vmatrix}
+               4 & 6\\
+               -3 & 2
+             \end{vmatrix}
+                    +(-1)
+                    \begin{vmatrix}
+                      4 & 1\\
+                      -3 & -1
+                    \end{vmatrix}\\
+    &=
+      3\left(
+      1\begin{vmatrix}
+        2\\
+      \end{vmatrix}
+    -6\begin{vmatrix}
+      -1
+    \end{vmatrix}\right)
+    -2\left(
+    4\begin{vmatrix}
+      2
+    \end{vmatrix}
+    -6\begin{vmatrix}
+      -3
+    \end{vmatrix}\right)
+    -\left(
+    4\begin{vmatrix}
+      -1
+    \end{vmatrix}
+    -1\begin{vmatrix}
+      -3
+    \end{vmatrix}\right)\\
+    &=
+      3\left(1(2)-6(-1)\right)
+      -2\left(4(2)-6(-3)\right)
+      -\left(4(-1)-1(-3)\right)\\
+    &=24-52+1\\
+    &=-27
+  \end{align*}
+\end{example}
+
+In practice it is a bit silly to decompose a $2\times 2$ matrix down
+into a couple of $1\times 1$ matrices and then compute the exceedingly
+easy determinant of these puny matrices.  So here is a theorem that
+most people who use linear algebra often employ unconsciously.
+
+\begin{theorem}[Determinant of Matrices of Size Two]
+\label{theorem:DMST}
+
+Suppose that $A=\begin{bmatrix}a&b\\c&d\end{bmatrix}$.  Then
+$\detname{A}=ad-bc$.
+
+\begin{proof}
+  Applying \ref{definition:DM},
+  \[
+    \begin{vmatrix}
+      a&b\\c&d
+    \end{vmatrix}=
+    \answer{a}\begin{vmatrix}d\end{vmatrix}-b\begin{vmatrix}c\end{vmatrix}=ad-bc
+  \]
+\end{proof}
+\end{theorem}
+
+Do you recall seeing the expression $ad-bc$ before?  (Hint: \ref{theorem:TTMI}.)
+
+\end{document}

@@ -1,0 +1,111 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Complex Numbers}
+
+\begin{document}
+\begin{abstract}
+  Because we have chosen to use complex numbers as our set of scalars,
+  this section is more complex than it would be for the real
+  numbers.
+\end{abstract}
+\maketitle
+
+If you have not already, now would be a good time to review some of
+the basic properties of arithmetic with complex numbers.  With that
+done, we can extend the basics of complex number arithmetic to our
+study of vectors in $\complex{m}$.
+
+We know how the addition and multiplication of complex numbers is
+employed in defining the operations for vectors in $\complex{m}$..  We
+can also extend the idea of the conjugate to vectors.
+
+\begin{definition}[Complex Conjugate of a Column Vector]
+  Suppose that $\vect{u}$ is a vector from $\complex{m}$.  Then the
+  conjugate of the vector, $\conjugate{\vect{u}}$, is defined by
+  \begin{align*}
+    \vectorentry{\conjugate{\vect{u}}}{i}
+    &=\conjugate{\vectorentry{\vect{u}}{i}}
+    &&\text{$1\leq i\leq m$}
+  \end{align*}
+\end{definition}
+
+\begin{example}
+  Suppose $\vect{x} = \begin{bmatrix} 2 + 3i \\ 4 - 2i \end{bmatrix}$.
+
+  Then
+  \[
+    \conjugate{\vect{x}} = \begin{bmatrix} \answer{2 - 3i} \\ \answer{4 + 2i} \end{bmatrix}.
+  \]
+\end{example}
+
+With this definition we can show that the conjugate of a column vector behaves as we would expect with regard to vector addition and scalar multiplication.
+
+\begin{theorem}[Conjugation Respects Vector Addition]
+  \label{theorem:CRVA}
+  
+  Suppose $\vect{x}$ and $\vect{y}$ are two vectors from $\complex{m}$.  Then
+  \[
+    \conjugate{\vect{x}+\vect{y}}=\conjugate{\vect{x}}+\conjugate{\vect{y}}
+  \]
+  
+  \begin{proof}
+    For each $1\leq i\leq m$,
+    \begin{align*}
+      \vectorentry{\conjugate{\vect{x}+\vect{y}}}{i}
+      &=\conjugate{\vectorentry{\vect{x}+\vect{y}}{i}}\\ %\ref{definition:CCCV}\\
+      &=\conjugate{\vectorentry{\vect{x}}{i}+\vectorentry{\vect{y}}{i}}\\ %\ref{definition:CVA}\\
+      &=\conjugate{\vectorentry{\vect{x}}{i}}+\conjugate{\vectorentry{\vect{y}}{i}}\\ %\ref{theorem:CCRA}\\
+      &=\vectorentry{\conjugate{\vect{x}}}{i}+\vectorentry{\conjugate{\vect{y}}}{i}\\ %\ref{definition:CCCV}\\
+      &=\vectorentry{\conjugate{\vect{x}}+\conjugate{\vect{y}}}{i}\\ %\ref{definition:CVA}
+    \end{align*}
+    
+    
+    Then by \ref{definition:CVE} we have $\conjugate{\vect{x}+\vect{y}}=\conjugate{\vect{x}}+\conjugate{\vect{y}}$.
+    
+  \end{proof}
+\end{theorem}
+
+\begin{theorem}[Conjugation Respects Vector Scalar Multiplication]
+  \label{theorem:CRSM}
+  
+  Suppose $\vect{x}$ is a vector from $\complex{m}$, and $\alpha\in\complexes$ is a scalar.  Then
+  \[
+    \conjugate{\alpha\vect{x}}=\conjugate{\alpha}\,\conjugate{\vect{x}}
+  \]
+  
+  \begin{proof}
+    For $1\leq i\leq m$,
+    \begin{align*}
+      \vectorentry{\conjugate{\alpha\vect{x}}}{i}
+      &=\conjugate{\vectorentry{\alpha\vect{x}}{i}}\\ %\ref{definition:CCCV}\\
+      &=\conjugate{\alpha\vectorentry{\vect{x}}{i}}\\ %\ref{definition:CVSM}\\
+      &=\conjugate{\alpha}\,\conjugate{\vectorentry{\vect{x}}{i}}\\ %\ref{theorem:CCRM}\\
+      &=\conjugate{\alpha}\,\vectorentry{\conjugate{\vect{x}}}{i}\\ %\ref{definition:CCCV}\\
+      &=\vectorentry{\conjugate{\alpha}\,\conjugate{\vect{x}}}{i}\\ %\ref{definition:CVSM}\\
+    \end{align*}
+
+    Then by \ref{definition:CVE} we have $\conjugate{\alpha\vect{x}}=\conjugate{\alpha}\,\conjugate{\vect{x}}$.
+\end{proof}
+\end{theorem}
+
+These two theorems together tell us how we can ``push'' complex conjugation through linear combinations.
+
+\begin{example}
+  Suppose $\vect{x}$ and $\vect{y}$ are two vectors in $\complex{m}$.
+  
+  Set $\vect{z} = \alpha \vect{x} + \beta \vect{y}$.
+
+  Then $\conjugate{\vect{z}}$ is
+  \begin{multipleChoice}
+    \choice{$\alpha \conjugate{\vect{x}} + \beta \conjugate{\vect{y}}$}
+    \choice{$\conjugate{\alpha}\, \vect{x} + \conjugate{\beta}\, \vect{y}$}
+    \choice[correct]{$\conjugate{\alpha}\, \conjugate{\vect{x}} + \conjugate{\beta}\, \conjugate{\vect{y}}$}
+    \choice{$\conjugate{\alpha}\, \conjugate{\vect{x}} - \conjugate{\beta}\, \conjugate{\vect{y}}$}
+  \end{multipleChoice}
+\end{example}
+
+
+\end{document}
+

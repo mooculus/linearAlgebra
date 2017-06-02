@@ -1,0 +1,55 @@
+\documentclass{ximera}
+
+\input{../../../preamble.tex}
+\author{Robert Beezer}
+\license{GFDL}
+
+\begin{document}
+
+\begin{exercise}
+  Suppose $R=\set{\colvector{2\\-1\\3\\4\\0},\,\colvector{1\\1\\2\\2\\-1},\,\colvector{3\\-1\\0\\3\\-2}}$.  Is $\vect{y}=\colvector{1\\-1\\-8\\-4\\-3}$ in $\spn{R}$?
+
+  \begin{multipleChoice}
+    \choice{No.}
+    \choice[correct]{Yes.}
+  \end{multipleChoice}
+
+  \begin{question}
+    Form a linear combination, with unknown scalars, of $R$ that equals $\vect{y}$,
+    \[
+      a_1\colvector{2\\-1\\3\\4\\0}+
+      a_2\colvector{1\\1\\2\\2\\-1}+
+      a_3\colvector{3\\-1\\0\\3\\-2}
+      =
+      \colvector{1\\-1\\-8\\-4\\-3}
+    \]
+    We want to know if there are values for the scalars that make the vector equation true since that is the definition of membership in $\spn{R}$.  By \ref{theorem:SLSLC} any such values will also be solutions to the linear system represented by the augmented matrix,
+    \[
+      \begin{bmatrix}
+        2 & 1 & 3 & 1\\
+        -1 & 1 & -1 & -1\\
+        3 & 2 & 0 & -8\\
+        4 & 2 & 3 & -4\\
+        0 & -1 & -2 & -3
+      \end{bmatrix}
+    \]
+    Row-reducing the matrix yields,
+    \[
+      \begin{bmatrix}
+        \leading{1} & 0 & 0 & \answer{-2}\\
+        0 & \leading{1} & 0 & \answer{-1}\\
+        0 & 0 & \leading{1} & \answer{2}\\
+        0 & 0 & 0 & 0\\
+        0 & 0 & 0 & 0
+      \end{bmatrix}
+    \]
+    From this we see that the system of equations is consistent
+    (\ref{theorem:RCLS}), and has \wordChoice{\choice[correct]{a
+        unique solution}\choice{infinitely many solutions}} which
+    provides a linear combination of the vectors in $R$ that equals
+    $\vect{y}$.  So $\vect{y}\in R$.
+  \end{question}
+\end{exercise}
+
+\end{document}
+

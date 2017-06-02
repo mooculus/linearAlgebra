@@ -1,0 +1,121 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Properties of Similar Matrices}
+
+\begin{document}
+\begin{abstract}
+  Similar matrices share many properties and it is these theorems that
+  justify the choice of the word ``similar.''
+\end{abstract}
+\maketitle
+
+We will show that similarity is an \dfn{equivalence relation}.
+Equivalence relations are important in the study of various algebras
+and can always be regarded as a kind of weak version of equality.
+Sort of alike, but not quite equal.  The notion of two matrices being
+row-equivalent is an example of an equivalence relation we have been
+working with since the beginning of the course.  Row-equivalent
+matrices are not equal, but they are a lot alike.  For example,
+row-equivalent matrices have the same rank.  Formally, an equivalence
+relation requires three conditions hold: reflexive, symmetric and
+transitive.  We will illustrate these as we prove that similarity is
+an equivalence relation.
+
+\begin{theorem}[Similarity is an Equivalence Relation]
+\label{theorem:SER}
+
+Suppose $A$, $B$ and $C$ are square matrices of size $n$.  Then
+\begin{enumerate}\item $A$ is similar to $A$.  (Reflexive)
+\item If $A$ is similar to $B$, then $B$ is similar to $A$.  (Symmetric)
+\item If $A$ is similar to $B$ and $B$ is similar to $C$, then $A$ is similar to $C$.  (Transitive)
+\end{enumerate}
+
+\begin{proof}
+To see that $A$ is similar to $A$, we need only demonstrate a nonsingular matrix that effects a similarity transformation of $A$ to $A$.  $I_n$ is 
+\wordChoice{\choice[correct]{nonsingular}\choice{singular}} (since it row-reduces to the identity matrix, \ref{theorem:NMRRI}), and
+\[
+\similar{A}{I_n}=I_nAI_n=A
+\]
+
+If we assume that $A$ is similar to $B$, then we know there is a nonsingular matrix $S$ so that $A=\similar{B}{S}$ by \ref{definition:SIM}.  By \ref{theorem:MIMI}, $\inverse{S}$ is invertible, and by \ref{theorem:NI} is therefore nonsingular.  So
+\begin{align*}
+\similar{A}{(\inverse{S})}&=SA\inverse{S}&&\ref{theorem:MIMI}\\
+&=S\similar{B}{S}\inverse{S}&&\ref{definition:SIM}\\
+&=\left(S\inverse{S}\right)B\left(S\inverse{S}\right)&&\ref{theorem:MMA}\\
+&=I_nBI_n&&\ref{definition:MI}\\
+&=B&&\ref{theorem:MMIM}
+\end{align*}
+and we see that $B$ is \wordChoice{\choice{not similar}\choice[correct]{similar}} to $A$.
+
+Assume that $A$ is similar to $B$, and $B$ is similar to $C$.  This gives us the existence of two nonsingular matrices, $S$ and $R$, such that $A=\similar{B}{S}$ and $B=\similar{C}{R}$, by \ref{definition:SIM}.  (Notice how we have to assume $S\neq R$, as will usually be the case.)  Since $S$ and $R$ are invertible, so too $RS$ is invertible by \ref{theorem:SS} and then nonsingular by \ref{theorem:NI}.  Now
+\begin{align*}
+\similar{C}{(RS)}&=\similar{\similar{C}{R}}{S}&&\ref{theorem:SS}\\
+&=\similar{\left(\similar{C}{R}\right)}{S}&&\ref{theorem:MMA}\\
+&=\similar{B}{S}&&\ref{definition:SIM}\\
+&=A
+\end{align*}
+so $A$ is similar to $C$ via the nonsingular matrix $RS$.
+\end{proof}
+\end{theorem}
+
+Here is another theorem that tells us exactly what sorts of properties similar matrices share.
+
+\begin{theorem}[Similar Matrices have Equal Eigenvalues]
+\label{theorem:SMEE}
+
+Suppose $A$ and $B$ are similar matrices.  Then the characteristic polynomials of $A$ and $B$ are equal, that is, $\charpoly{A}{x}=\charpoly{B}{x}$.
+
+\begin{proof}
+  Let $n$ denote the size of $A$ and $B$.  Since $A$ and $B$ are
+  similar, there exists a nonsingular matrix $S$, such that
+  $A=\similar{B}{S}$ (\ref{definition:SIM}).  Then
+  \begin{align*}
+    \charpoly{A}{x}&=\detname{A-xI_n}&&\ref{definition:CP}\\
+                   &=\detname{\similar{B}{S}-xI_n}&&\ref{definition:SIM}\\
+                   &=\detname{\similar{B}{S}-x\similar{I_n}{S}}&&\ref{theorem:MMIM}\\
+                   &=\detname{\similar{B}{S}-\inverse{S}xI_nS}&&\ref{theorem:MMSMM}\\
+                   &=\detname{\similar{\left(B-xI_n\right)}{S}}&&\ref{theorem:MMDAA}\\
+                   &=\detname{\inverse{S}}\detname{B-xI_n}\detname{S}&&\ref{theorem:DRMM}\\
+                   &=\detname{\inverse{S}}\detname{S}\detname{B-xI_n}&&\ref{property:CMCN}\\
+                   &=\detname{\inverse{S}S}\detname{B-xI_n}&&\ref{theorem:DRMM}\\
+                   &=\detname{I_n}\detname{B-xI_n}&&\ref{definition:MI}\\
+                   &=1\detname{B-xI_n}&&\ref{definition:DM}\\
+                   &=\charpoly{B}{x}&&\ref{definition:CP}
+  \end{align*}
+\end{proof}
+\end{theorem}
+
+So similar matrices not only have the same \textit{set} of
+eigenvalues, the algebraic multiplicities of these eigenvalues will
+also be the same.  However, be careful with this theorem.  It is
+tempting to think the converse is true, and argue that if two matrices
+have the same eigenvalues, then they are similar.  Not so, as the
+following example illustrates.
+
+\begin{example}[Equal eigenvalues, not similar]
+
+Define
+\begin{align*}
+A&=\begin{bmatrix}1&1\\0&1\end{bmatrix}
+&
+B&=\begin{bmatrix}1&0\\0&1\end{bmatrix}
+\end{align*}
+and check that
+\[
+\charpoly{A}{x}=\charpoly{B}{x}=\answer{1-2x+x^2}
+\]
+and so $A$ and $B$ have equal characteristic polynomials.  If the
+converse of \ref{theorem:SMEE} were true, then $A$ and $B$ would be
+similar.  Suppose this is the case. More precisely, suppose there is a
+nonsingular matrix $S$ so that $A=\similar{B}{S}$. Then
+\[
+A=\similar{B}{S}=\similar{I_2}{S}=\inverse{S}S=I_2
+\]
+Clearly $A\neq I_2$ and this contradiction tells us that the converse
+of \ref{theorem:SMEE} is false.
+
+\end{example}
+
+\end{document}

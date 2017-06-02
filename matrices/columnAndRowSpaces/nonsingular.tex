@@ -1,0 +1,160 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Column Space of a Nonsingular Matrix}
+
+\begin{document}
+\begin{abstract}
+  Specializing to square matrices, the column space of a nonsingular
+  matrix differs greatly from the column space of a singular matrix.
+\end{abstract}
+\maketitle
+
+\begin{example}
+  Consider the linear system
+  \begin{align*}
+    x_1 -x_2 +2x_3 & =1\\
+    2x_1+ x_2 + x_3 & =8\\
+    x_1 + x_2 & =5
+  \end{align*}
+
+  The coefficient matrix is
+  \begin{align*}
+    A &= \begin{bmatrix}
+      1 & -1 & 2\\
+      2 & 1 & 1\\
+      1 & 1 & 0
+    \end{bmatrix}
+  \end{align*}
+  which row-reduces to
+  \begin{align*}
+    B&=\begin{bmatrix}
+      \leading{1} & 0 & 1 & 3\\
+      0 & \leading{1} & -1 & 2\\
+      0 & 0 & 0 & 0
+    \end{bmatrix}
+  \end{align*}
+
+  Columns $1$ and $\answer{2}$ are pivot columns, so by
+  \ref{theorem:BCS} we can write
+  \[
+    \csp{A}=\spn{\set{\vect{A}_1,\,\vect{A}_2}}=\spn{\set{\colvector{1\\2\\1},\,\colvector{-1\\1\\1}}}.
+  \]
+
+  We want to show in this example that
+  \begin{multipleChoice}
+    \choice[correct]{$\csp{A}\neq\complex{3}$.}
+    \choice{$\csp{A} = \complex{3}$.}
+  \end{multipleChoice}
+
+  So take, for example, the vector $\vect{b}=\colvector{1\\3\\2}$.
+  Then there is \wordChoice{\choice[correct]{no}\choice{one}} solution
+  to the system $\linearsystem{A}{\vect{b}}$, or equivalently, it is
+  not possible to write $\vect{b}$ as a linear combination of
+  $\vect{A}_1$ and $\vect{A}_2$.  Try one of these two computations
+  yourself.  (Or try both!).  Since $\vect{b}\not\in\csp{A}$, the
+  column space of $A$ cannot be all of $\complex{3}$.  So by varying
+  the vector of constants, it is possible to create inconsistent
+  systems of equations with this coefficient matrix (the vector
+  $\vect{b}$ being one such example).
+
+  In \ref{example:MWIAA} we wished to show that the coefficient matrix
+  from \ref{archetype:A} was not invertible as a first example of a
+  matrix without an inverse.  Our device there was to find an
+  inconsistent linear system with $A$ as the coefficient matrix.  The
+  vector of constants in that example was $\vect{b}$, deliberately
+  chosen outside the column space of $A$.
+\end{example}
+
+\begin{example}
+  Consider another linear system, namely
+  \begin{align*}
+    -7x_1 -6 x_2 - 12x_3 &=-33\\
+    5x_1  + 5x_2 + 7x_3 &=24\\
+    x_1 +4x_3 &=5
+  \end{align*}
+  The coefficient matrix in this case is
+  \begin{align*}
+    B&= \begin{bmatrix}
+      -7&-6&-12\\
+      5&5&7\\
+      1&0&4
+    \end{bmatrix}
+  \end{align*}
+  and $B$ is nonsingular.  By \ref{theorem:NMUS}, the linear system
+  $\linearsystem{B}{\vect{b}}$ has a (unique) solution for every
+  choice of $\vect{b}$.  \ref{theorem:CSCS} then says that
+  $\vect{b}\in\csp{B}$ for all $\vect{b}\in\complex{3}$.  Stated
+  differently, there is no way to build an inconsistent system with
+  the coefficient matrix $B$, but then we knew that already from
+  \ref{theorem:NMUS}.
+\end{example}
+
+These examples together motivate the following equivalence, which says
+that nonsingular matrices have column spaces that are as big as
+possible.
+
+\begin{theorem}[Column Space of a Nonsingular Matrix]
+  \label{theorem:CSNM}
+
+  Suppose $A$ is a square matrix of size $n$.  Then $A$ is nonsingular
+  if and only if $\csp{A}=\complex{n}$.
+
+  \begin{proof} 
+    Thanks go to \texttt{travisosborne} for this proof.
+
+    ($\Rightarrow$) Suppose $A$ is nonsingular.  We wish to establish
+    the set equality $\csp{A}=\complex{n}$.  By \ref{definition:CSM},
+    $\csp{A}\subseteq\complex{n}$.  To show that
+    $\complex{n}\subseteq\csp{A}$ choose $\vect{b}\in\complex{n}$.  By
+    \ref{theorem:NMUS}, we know the linear system
+    $\linearsystem{A}{\vect{b}}$ has a (unique) solution and therefore
+    is consistent.  \ref{theorem:CSCS} then says that
+    $\vect{b}\in\csp{A}$.  So by \ref{definition:SE},
+    $\csp{A}=\complex{n}$.
+
+    ($\Leftarrow$) If $\vect{e}_i$ is column $i$ of the $n\times n$
+    identity matrix (\ref{definition:SUV}) and by hypothesis
+    $\csp{A}=\complex{n}$, then $\vect{e}_i\in\csp{A}$ for
+    $1\leq i\leq n$.  By \ref{theorem:CSCS}, the system
+    $\linearsystem{A}{\vect{e}_i}$ is consistent for $1\leq i\leq n$.
+    Let $\vect{b}_i$ denote any one particular solution to
+    $\linearsystem{A}{\vect{e}_i}$, $1\leq i\leq n$.
+
+    Define the $n\times n$ matrix $B=\matrixcolumns{b}{n}$.  Then
+    \begin{align*}
+      AB
+      &=A\matrixcolumns{b}{n}\\
+      &=[A\vect{b}_1|A\vect{b}_2|A\vect{b}_3|\ldots|A\vect{b}_n]&&\ref{definition:MM}\\
+      &=\matrixcolumns{e}{n}\\
+      &=I_n&&\ref{definition:SUV}\\
+    \end{align*}
+
+    So the matrix $B$ is a ``right-inverse'' for $A$.  By
+    \ref{theorem:NMRRI}, $I_n$ is a nonsingular matrix, so by
+    \ref{theorem:NPNT} both $A$ and $B$ are nonsingular.  Thus, in
+    particular, $A$ is nonsingular.
+  \end{proof}
+\end{theorem}
+
+With this equivalence for nonsingular matrices we can update our list.
+
+\begin{theorem}[Nonsingular Matrix Equivalences, Round 4]
+
+  Suppose that $A$ is a square matrix of size $n$.  The following are equivalent.
+  \begin{enumerate}\item $A$ is nonsingular.
+  \item $A$ row-reduces to the identity matrix.
+  \item The null space of $A$ contains only the zero vector, $\nsp{A}=\set{\zerovector}$.
+  \item The linear system $\linearsystem{A}{\vect{b}}$ has a unique solution for every possible choice of $\vect{b}$.
+  \item The columns of $A$ are a linearly independent set.
+  \item $A$ is invertible.
+  \item The column space of $A$ is $\complex{n}$, $\csp{A}=\complex{n}$.
+  \end{enumerate}
+
+  \begin{proof}
+    Since \ref{theorem:CSNM} is an equivalence, we can add it to the list.
+  \end{proof}
+\end{theorem}
+
+\end{document}

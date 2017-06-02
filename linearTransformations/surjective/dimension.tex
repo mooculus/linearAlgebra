@@ -1,0 +1,52 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Surjective Linear Transformations and Dimension}
+
+\begin{document}
+\begin{abstract}
+  Surjective functions cannot increase dimension.
+\end{abstract}
+\maketitle
+
+\begin{theorem}[Surjective Linear Transformations and Dimension]
+\label{theorem:SLTD}
+
+Suppose that $\ltdefn{T}{U}{V}$ is a surjective linear transformation.  Then $\dimension{U}\geq\dimension{V}$.
+
+
+\begin{proof}
+Suppose to the contrary that
+$m=\dimension{U}<\dimension{V}=t$.
+Let $B$ be  a basis of $U$, which will then contain $m$ vectors.  Apply $T$ to each element of $B$ to form a set $C$ that is a subset of $V$.  By \ref{theorem:SLTB}, $C$ is a spanning set of $V$ with $m$ or fewer vectors.  So we have a set of $m$ or fewer vectors that span $V$, a vector space of dimension $t$, with
+$m<t$.
+However, this contradicts \ref{theorem:G}, so our assumption is false and $\dimension{U}\geq\dimension{V}$.
+
+
+
+\end{proof}
+\end{theorem}
+
+\begin{example}
+
+Consider the linear transformation 
+\[\ltdefn{T}{P_4}{P_5},\quad
+\lteval{T}{p(x)}=(x-2)p(x)
+\]
+
+Since
+$\dimension{P_4}=5<6=\dimension{P_5}$, we may conclude
+\begin{multipleChoice}
+\choice[correct]{$T$ cannot be surjective}
+\choice{$T$ must be surjective}
+\end{multipleChoice}
+\begin{feedback}[correct]
+Exactly!  If it were, then it would violate \ref{theorem:SLTD}.
+\end{feedback}
+
+\end{example}
+
+Notice that the previous example made no use of the actual formula defining the function.  Merely a comparison of the dimensions of the domain and codomain are enough to conclude that the linear transformation is not surjective.  There are examples of linear transformations that have ``small'' domains and ``big'' codomains, resulting in an inability to create all possible outputs and thus they are non-surjective linear transformations.
+
+\end{document}

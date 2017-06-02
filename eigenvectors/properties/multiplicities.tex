@@ -1,0 +1,242 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Multiplicities of Eigenvalues}
+
+\begin{document}
+\begin{abstract}
+  Our understanding of the roots of a polynomial informs our
+  understanding of the algebraic multiplicity of eigenvalues.
+\end{abstract}
+\maketitle
+
+A polynomial of degree $n$ will have exactly $n$ roots.  From this fact about polynomial equations we can say more about the algebraic multiplicities of eigenvalues.
+
+\begin{theorem}[Degree of the Characteristic Polynomial]
+\label{theorem:DCP}
+
+Suppose that $A$ is a square matrix of size $n$.  Then the
+characteristic polynomial of $A$, $\charpoly{A}{x}$, has degree $n$.
+
+\begin{proof}
+  We will prove a more general result by induction Then the theorem
+  will be true as a special case.  We will carefully state this result
+  as a proposition indexed by $m$, $m\geq 1$.
+
+  $P(m)$: Suppose that $A$ is an $m\times m$ matrix whose entries are
+  complex numbers or linear polynomials in the variable $x$ of the
+  form $c-x$, where $c$ is a complex number.  Suppose further that
+  there are exactly $k$ entries that contain $x$ and that no row or
+  column contains more than one such entry.  Then, when $k=m$,
+  $\detname{A}$ is a polynomial in $x$ of degree $m$, with leading
+  coefficient $\pm 1$, and when $k<m$, $\detname{A}$ is a polynomial
+  in $x$ of degree $k$ or less.
+
+  Base Case: Suppose $A$ is a $1\times 1$ matrix.  Then its
+  determinant is equal to the lone entry (\ref{definition:DM}).  When
+  $k=m=1$, the entry is of the form $c-x$, a polynomial in $x$ of
+  degree $m=1$ with leading coefficient $-1$.  When $k<m$, then $k=0$
+  and the entry is simply a complex number, a polynomial of degree
+  $0\leq k$.  So $P(1)$ is true.
+
+  Induction Step: Assume $P(m)$ is true, and that $A$ is an
+  $(m+1)\times(m+1)$ matrix with $k$ entries of the form $c-x$.  There
+  are two cases to consider.
+
+  Suppose $k=m+1$.  Then every row and every column will contain an
+  entry of the form $c-x$.  Suppose that for the first row, this entry
+  is in column $t$.  Compute the determinant of $A$ by an expansion
+  about this first row (\ref{definition:DM}).  The term associated
+  with entry $t$ of this row will be of the form
+  \[
+    (c-x)(-1)^{1+t}\detname{\submatrix{A}{1}{t}}
+  \]
+  The submatrix $\submatrix{A}{1}{t}$ is an $m\times m$ matrix with
+  $k=m$ terms of the form $c-x$, no more than one per row or column.
+  By the induction hypothesis, $\detname{\submatrix{A}{1}{t}}$ will be
+  a polynomial in $x$ of degree $m$ with coefficient $\pm 1$.  So this
+  entire term is then a polynomial of degree $m+1$ with leading
+  coefficient $\pm 1$.
+
+  The remaining terms (which constitute the sum that is the
+  determinant of $A$) are products of complex numbers from the first
+  row with cofactors built from submatrices that lack the first row of
+  $A$ and lack some column of $A$, other than column $t$.  As such,
+  these submatrices are $m\times m$ matrices with $k=m-1<m$ entries of
+  the form $c-x$, no more than one per row or column.  Applying the
+  induction hypothesis, we see that these terms are polynomials in $x$
+  of degree $m-1$ or less.  Adding the single term from the entry in
+  column $t$ with all these others, we see that $\detname{A}$ is a
+  polynomial in $x$ of degree $m+1$ and leading coefficient $\pm 1$.
+
+
+  The second case occurs when $k<m+1$.  Now there is a row of $A$ that
+  does not contain an entry of the form $c-x$.  We consider the
+  determinant of $A$ by expanding about this row (\ref{theorem:DER}),
+  whose entries are all complex numbers.  The cofactors employed are
+  built from submatrices that are $m\times m$ matrices with either $k$
+  or $k-1$ entries of the form $c-x$, no more than one per row or
+  column.  In either case, $k\leq m$, and we can apply the induction
+  hypothesis to see that the determinants computed for the cofactors
+  are all polynomials of degree $k$ or less.  Summing these
+  contributions to the determinant of $A$ yields a polynomial in $x$
+  of degree $k$ or less, as desired.
+
+  The characteristic polynomial of an $n\times n$ matrix is the
+  determinant of a matrix having exactly $n$ entries of the form
+  $c-x$, no more than one per row or column.  As such we can apply
+  $P(n)$ to see that the characteristic polynomial has degree $n$.
+\end{proof}
+\end{theorem}
+
+\begin{theorem}[Number of Eigenvalues of a Matrix]
+\label{theorem:NEM}
+
+Suppose that $\scalarlist{\lambda}{k}$ are the distinct eigenvalues of
+a square matrix $A$ of size $n$.  Then
+\[
+  \sum_{i=1}^{k}\algmult{A}{\lambda_i}=\answer{n}.
+\]
+
+\begin{proof}
+  By the definition of the algebraic multiplicity (\ref{definition:AME}), we can factor the characteristic polynomial as
+\[
+  \charpoly{A}{x}=c(x-\lambda_1)^{\algmult{A}{\lambda_1}}(x-\lambda_2)^{\algmult{A}{\lambda_2}}(x-\lambda_3)^{\algmult{A}{\lambda_3}}\cdots(x-\lambda_k)^{\algmult{A}{\lambda_k}}
+\]
+where $c$ is a nonzero constant.  (We could prove that $c=(-1)^{n}$,
+but we do not need that specificity right now.  The left-hand side is
+a polynomial of degree $n$ by \ref{theorem:DCP} and the right-hand
+side is a polynomial of degree $\sum_{i=1}^{k}\algmult{A}{\lambda_i}$.
+So the equality of the polynomials' degrees gives the equality
+$\sum_{i=1}^{k}\algmult{A}{\lambda_i}=n$.
+\end{proof}
+\end{theorem}
+
+\begin{theorem}[Multiplicities of an Eigenvalue]
+\label{theorem:ME}
+
+Suppose that $A$ is a square matrix of size $n$ and $\lambda$ is an eigenvalue.  Then
+\[
+1\leq\geomult{A}{\lambda}\leq\algmult{A}{\lambda}\leq \answer{n}
+\]
+
+\begin{proof}
+Since $\lambda$ is an eigenvalue of $A$, there is an eigenvector of $A$ for $\lambda$, $\vect{x}$.  Then $\vect{x}\in\eigenspace{A}{\lambda}$, so $\geomult{A}{\lambda}\geq 1$, since we can extend $\set{\vect{x}}$ into a basis of $\eigenspace{A}{\lambda}$ (\ref{theorem:ELIS}).
+
+To show $\geomult{A}{\lambda}\leq\algmult{A}{\lambda}$ is the most involved portion of this proof.  To this end, let $g=\geomult{A}{\lambda}$ and let $\vectorlist{x}{g}$ be a basis for the eigenspace of $\lambda$, $\eigenspace{A}{\lambda}$.  Construct another $n-g$ vectors, $\vectorlist{y}{n-g}$, so that
+\[
+\set{\vectorlist{x}{g},\,\vectorlist{y}{n-g}}
+\]
+is a basis of $\complex{n}$.  This can be done by repeated applications of \ref{theorem:ELIS}.
+
+
+
+Finally, define a matrix $S$ by
+\[
+S=[\vect{x}_1|\vect{x}_2|\vect{x}_3|\ldots|\vect{x}_g|\vect{y}_1|\vect{y}_2|\vect{y}_3|\ldots|\vect{y}_{n-g}]
+=[\vect{x}_1|\vect{x}_2|\vect{x}_3|\ldots|\vect{x}_g|R]
+\]
+where $R$ is an $n\times(n-g)$ matrix whose columns are $\vectorlist{y}{n-g}$.  The columns of $S$ are linearly independent by design, so $S$ is nonsingular (\ref{theorem:NMLIC}) and therefore invertible (\ref{theorem:NI}).
+
+
+
+Then,
+\begin{align*}
+\matrixcolumns{e}{n}&=I_n\\
+&=\inverse{S}S\\
+&=\inverse{S}[\vect{x}_1|\vect{x}_2|\vect{x}_3|\ldots|\vect{x}_g|R]\\
+&=[\inverse{S}\vect{x}_1|\inverse{S}\vect{x}_2|\inverse{S}\vect{x}_3|\ldots|\inverse{S}\vect{x}_g|\inverse{S}R]
+\end{align*}
+
+
+
+
+So
+\[
+\inverse{S}\vect{x}_i=\vect{e}_i\quad 1\leq i\leq g\tag{$*$}
+\]
+
+
+
+
+Preparations in place, we compute the characteristic polynomial of $A$,
+\begin{align*}
+\charpoly{A}{x}&=\detname{A-xI_n}&&\ref{definition:CP}\\
+&=1\detname{A-xI_n}&&\ref{property:OCN}\\
+&=\detname{I_n}\detname{A-xI_n}&&\ref{definition:DM}\\
+&=\detname{\inverse{S}S}\detname{A-xI_n}&&\ref{definition:MI}\\
+&=\detname{\inverse{S}}\detname{S}\detname{A-xI_n}&&\ref{theorem:DRMM}\\
+&=\detname{\inverse{S}}\detname{A-xI_n}\detname{S}&&\ref{property:CMCN}\\
+&=\detname{\inverse{S}\left(A-xI_n\right)S}&&\ref{theorem:DRMM}\\
+&=\detname{\inverse{S}AS-\inverse{S}xI_nS}&&\ref{theorem:MMDAA}\\
+&=\detname{\inverse{S}AS-x\inverse{S}I_nS}&&\ref{theorem:MMSMM}\\
+&=\detname{\inverse{S}AS-x\inverse{S}S}&&\ref{theorem:MMIM}\\
+&=\detname{\inverse{S}AS-xI_n}&&\ref{definition:MI}\\
+&=\charpoly{\inverse{S}AS}{x}&&\ref{definition:CP}
+\end{align*}
+
+
+
+
+What can we learn then about the matrix $\inverse{S}AS$?
+\begin{align*}
+\inverse{S}AS&=\inverse{S}A[\vect{x}_1|\vect{x}_2|\vect{x}_3|\ldots|\vect{x}_g|R]\\
+&=\inverse{S}[A\vect{x}_1|A\vect{x}_2|A\vect{x}_3|\ldots|A\vect{x}_g|AR]&&\ref{definition:MM}\\
+&=\inverse{S}[\lambda\vect{x}_1|\lambda\vect{x}_2|\lambda\vect{x}_3|\ldots|\lambda\vect{x}_g|AR]&&\ref{definition:EEM}\\
+&=[\inverse{S}\lambda\vect{x}_1|\inverse{S}\lambda\vect{x}_2|\inverse{S}\lambda\vect{x}_3|\ldots|\inverse{S}\lambda\vect{x}_g|\inverse{S}AR]&&\ref{definition:MM}\\
+&=[\lambda\inverse{S}\vect{x}_1|\lambda\inverse{S}\vect{x}_2|\lambda\inverse{S}\vect{x}_3|\ldots|\lambda\inverse{S}\vect{x}_g|\inverse{S}AR]&&\ref{theorem:MMSMM}\\
+&=[\lambda\vect{e}_1|\lambda\vect{e}_2|\lambda\vect{e}_3|\ldots|\lambda\vect{e}_g|\inverse{S}AR]&&\text{$\inverse{S}S=I_n$, (($*$) above)}
+\end{align*}
+
+
+
+
+Now imagine computing the characteristic polynomial of $A$ by computing the characteristic polynomial of $\inverse{S}AS$ using the form just obtained.  The first $g$ columns of $\inverse{S}AS$ are all zero, save for a $\lambda$ on the diagonal.  So if we compute the determinant by expanding about the first column, successively, we will get successive factors of $(\lambda-x)$.  More precisely, let $T$ be the square matrix of size $n-g$ that is formed from the last $n-g$ rows and last $n-g$ columns of $\inverse{S}AR$.  Then
+\[
+\charpoly{A}{x}=\charpoly{\inverse{S}AS}{x}=(\lambda-x)^g\charpoly{T}{x}.
+\]
+
+
+
+
+This says that $(x-\lambda)$ is a factor of the characteristic polynomial <em>at least</em> $g$ times, so the algebraic multiplicity of $\lambda$ as an eigenvalue of $A$ is greater than or equal to $g$ (\ref{definition:AME}).  In other words,
+\[
+\geomult{A}{\lambda}=g\leq\algmult{A}{\lambda}
+\]
+as desired.
+
+
+
+\ref{theorem:NEM} says that the sum of the algebraic multiplicities for \textit{all} the eigenvalues of $A$ is equal to $n$.  Since the algebraic multiplicity is a positive quantity, no single algebraic multiplicity can exceed $n$ without the sum of all of the algebraic multiplicities doing the same.
+
+
+
+\end{proof}
+\end{theorem}
+
+\begin{theorem}[Maximum Number of Eigenvalues of a Matrix]
+\label{theorem:MNEM}
+
+Suppose that $A$ is a square matrix of size $n$.  Then $A$ cannot have more than $\answer{n}$ distinct eigenvalues.
+
+\begin{proof}
+Suppose that $A$ has $k$ distinct eigenvalues, $\scalarlist{\lambda}{k}$.  Then
+\begin{align*}
+k&=\sum_{i=1}^{k}1\\
+&\leq\sum_{i=1}^{k}\algmult{A}{\lambda_i}&&\ref{theorem:ME}\\
+&=n&&\ref{theorem:NEM}
+\end{align*}
+
+
+
+
+\end{proof}
+\end{theorem}
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

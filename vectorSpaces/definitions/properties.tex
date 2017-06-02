@@ -1,0 +1,254 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Vector Space Properties}
+
+\begin{document}
+\begin{abstract}
+  We prove some general properties of vector spaces.  Some of these results will again seem obvious, but it is important to understand why it is necessary to state and prove them.
+\end{abstract}
+\maketitle
+
+As we prove general properties, a typical hypothesis will be ``Let $V$
+be a vector space.''  From this we may assume the ten properties of
+\ref{definition:VS}, \textit{and nothing more}.  It is like starting
+over, as we learn about what can happen in this new algebra we are
+learning.  But the power of this careful approach is that we can apply
+these theorems to any vector space we encounter---those in the
+previous examples, or new ones we have not yet contemplated.  Or
+perhaps new ones that nobody has ever contemplated.  We will
+illustrate some of these results with examples from the crazy vector
+space (\ref{example:CVS}), but mostly we are stating theorems and
+doing proofs.  These proofs do not get too involved, but are not
+trivial either, so these are good theorems to try proving yourself
+before you study the proof given here.
+
+First we show that there is just one zero vector.  Notice that the
+properties only require there to be <em>at least</em> one, and say
+nothing about there possibly being more.  That is because we can use
+the ten properties of a vector space (\ref{definition:VS}) to learn
+that there can \textit{never} be more than one.  To require that this
+extra condition be stated as an eleventh property would make the
+definition of a vector space more complicated than it needs to be.
+
+\begin{theorem}[Zero Vector is Unique]
+  \label{theorem:ZVU}
+  
+  Suppose that $V$ is a vector space.  The zero vector, $\zerovector$,
+  is unique.
+  
+  \begin{proof}
+    To prove uniqueness, a standard technique is to suppose the
+    existence of two objects.  So let $\zerovector_1$ and
+    $\zerovector_2$ be two zero vectors in $V$.  Then
+    \begin{align*}
+      \zerovector_1
+      &=\zerovector_1+\zerovector_2
+      &&\ref{property:Z}\text{ for }\zerovector_2\\
+      &=\zerovector_2+\zerovector_1
+      &&\ref{property:C}\\
+      &=\zerovector_2
+      &&\ref{property:Z}\text{ for }\zerovector_1
+    \end{align*}
+    
+    This proves the uniqueness since the two zero vectors are really the same.
+  \end{proof}
+\end{theorem}
+
+\begin{theorem}[Additive Inverses are Unique]
+  \label{theorem:AIU}
+  
+  Suppose that $V$ is a vector space.   For each $\vect{u}\in V$, the additive inverse, $\vect{-u}$, is unique.
+  
+  \begin{proof}
+    To prove uniqueness, a standard technique is to suppose the existence of two objects (\ref{technique:U}).  So let $\vect{-u}_1$ and $\vect{-u}_2$ be two additive inverses for $\vect{u}$.  Then
+    \begin{align*}
+      \vect{-u}_1&=\vect{-u}_1+\zerovector&&\ref{property:Z}\\
+                 &=\vect{-u}_1+(\vect{u}+\vect{-u}_2)&&\ref{property:AI}\\
+                 &=(\vect{-u}_1+\vect{u})+\vect{-u}_2&&\ref{property:AA}\\
+                 &=\zerovector+\vect{-u}_2&&\ref{property:AI}\\
+                 &=\vect{-u}_2&&\ref{property:Z}
+    \end{align*}
+    
+    So the two additive inverses are really the same.
+    
+  \end{proof}
+\end{theorem}
+
+As obvious as the next three theorems appear, nowhere have we
+guaranteed that the zero scalar, scalar multiplication and the zero
+vector all interact this way.  Until we have proved it, anyway.
+
+\begin{theorem}[Zero Scalar in Scalar Multiplication]
+  \label{theorem:ZSSM}
+
+  Suppose that $V$ is a vector space and $\vect{u}\in V$.  Then $0\vect{u}=\zerovector$.
+
+  \begin{proof}
+    Notice that $0$ is a scalar, $\vect{u}$ is a vector, so \ref{property:SC} says $0\vect{u}$ is again a vector.  As such, $0\vect{u}$ has an additive inverse, $-(0\vect{u})$ by \ref{property:AI}.
+    \begin{align*}
+      0\vect{u}
+      &=\zerovector+0\vect{u}&&\ref{property:Z}\\
+      &=\left(-(0\vect{u}) + 0\vect{u}\right)+0\vect{u}&&\ref{property:AI}\\
+      &=-(0\vect{u}) + \left(0\vect{u}+0\vect{u}\right)&&\ref{property:AA}\\
+      &=-(0\vect{u}) + (0+0)\vect{u}&&\ref{property:DSA}\\
+      &=-(0\vect{u}) + 0\vect{u}&&\ref{property:ZCN}\\
+      &=\zerovector&&\ref{property:AI}
+    \end{align*}
+
+  \end{proof}
+\end{theorem}
+
+Here is another theorem that \textit{looks} like it should be obvious, but is still in need of a proof.
+
+\begin{theorem}
+  \label{theorem:ZVSM}
+  [Zero Vector in Scalar Multiplication]
+  
+  Suppose that $V$ is a vector space and $\alpha\in\complexes$.   Then $\alpha\zerovector=\zerovector$.
+
+  \begin{proof}
+    Notice that $\alpha$ is a scalar, $\zerovector$ is a vector, so \ref{property:SC} means $\alpha\zerovector$ is again a vector.  As such, $\alpha\zerovector$ has an additive inverse, $-(\alpha\zerovector)$ by \ref{property:AI}.
+    \begin{align*}
+      \alpha\zerovector
+      &=\zerovector+\alpha\zerovector&&\ref{property:Z}\\
+      &=\left(-(\alpha\zerovector)+\alpha\zerovector\right)+\alpha\zerovector&&\ref{property:AI}\\
+      &=-(\alpha\zerovector)+\left(\alpha\zerovector+\alpha\zerovector\right)&&\ref{property:AA}\\
+      &=-(\alpha\zerovector)+\alpha\left(\zerovector+\zerovector\right)&&\ref{property:DVA}\\
+      &=-(\alpha\zerovector)+\alpha\zerovector&&\ref{property:Z}\\
+      &=\zerovector&&\ref{property:AI}
+    \end{align*}
+  \end{proof}
+\end{theorem}
+
+Here is another one that sure looks obvious.  But understand that we
+have chosen to use certain notation because it makes the theorem's
+conclusion look so nice.  The theorem is not true because the notation
+looks so good; it still needs a proof.  If we had really wanted to
+make this point, we might have used notation like $\vect{u}^\sharp$
+for the additive inverse of $\vect{u}$.  Then we would have written
+the defining property, \ref{property:AI}, as
+$\vect{u}+\vect{u}^\sharp=\zerovector$.  This theorem would become
+$\vect{u}^\sharp=(-1)\vect{u}$.  Not really quite as pretty, is it?
+
+\begin{theorem}[Additive Inverses from Scalar Multiplication]
+  \label{theorem:AISM}
+
+  Suppose that $V$ is a vector space and $\vect{u}\in V$.  Then $\vect{-u}=(-1)\vect{u}$.
+
+  \begin{proof}
+    \begin{align*}
+      \vect{-u}
+      &=\vect{-u}+\zerovector&&\ref{property:Z}\\
+      &=\vect{-u}+0\vect{u}&&\ref{theorem:ZSSM}\\
+      &=\vect{-u}+\left(1+(-1)\right)\vect{u}&&\ref{property:AICN}\\
+&=\vect{-u}+\left(1\vect{u}+(-1)\vect{u}\right)&&\ref{property:DSA}\\
+      &=\vect{-u}+\left(\vect{u}+(-1)\vect{u}\right)&&\ref{property:O}\\
+      &=\left(\vect{-u}+\vect{u}\right)+(-1)\vect{u}&&\ref{property:AA}\\
+      &=\zerovector+(-1)\vect{u}&&\ref{property:AI}\\
+      &=(-1)\vect{u}&&\ref{property:Z}
+    \end{align*}
+  \end{proof}
+\end{theorem}
+
+Because of this theorem, we can now write linear combinations like
+$6\vect{u}_1+(-4)\vect{u}_2$ as $6\vect{u}_1-4\vect{u}_2$, even though
+we have not formally defined an operation called \dfn{vector
+  subtraction}.
+
+Our next theorem is a bit different from several of the others in the
+list.  Rather than making a declaration (``the zero vector is
+unique'') it is an implication (``\ldots, then\ldots'') and so can be
+used in proofs to convert a vector equality into two possibilities,
+one a scalar equality and the other a vector equality.  It should
+remind you of the situation for complex numbers.  If
+$\alpha,\,\beta\in\complexes$ and $\alpha\beta=0$, then $\alpha=0$ or
+$\beta=0$.  This critical property is the driving force behind using a
+factorization to solve a polynomial equation.
+
+\begin{theorem}[Scalar Multiplication Equals the Zero Vector]
+  \label{theorem:SMEZV}
+
+  Suppose that $V$ is a vector space and $\alpha\in\complexes$.  If
+  $\alpha\vect{u}=\zerovector$, then either $\alpha=0$ or
+  $\vect{u}=\zerovector$.
+
+  \begin{proof}
+    We prove this theorem by breaking up the analysis into two cases.  The first seems too trivial, and it is, but the logic of the argument is still legitimate.
+
+    \textbf{Case 1.}  Suppose $\alpha=0$.  In this case our conclusion
+    is true (the first part of the either/or is true) and we are done.
+    That was easy.
+    
+    \textbf{Case 2.}  Suppose $\alpha\neq 0$.
+    \begin{align*}
+      \vect{u}
+      &=1\vect{u}
+      &&\ref{property:O}\\
+      &=\left(\frac{1}{\alpha}\alpha\right)\vect{u}
+      &&\alpha\neq 0, \ref{property:MICN}\\
+      &=\frac{1}{\alpha}\left(\alpha\vect{u}\right)
+      &&\ref{property:SMA}\\
+      &=\frac{1}{\alpha}\left(\zerovector\right)
+      &&\text{Hypothesis}\\
+      &=\zerovector&&\ref{theorem:ZVSM}
+    \end{align*}
+
+    So in this case, the conclusion is true (the second part of the either/or is true) and we are done since the conclusion was true in each of the two cases.
+  \end{proof}
+\end{theorem}
+
+\begin{exercise}
+  Suppose that $V$ is a vector space, and $\vect{u},\,\vect{v},\,\vect{w}\in V$.
+
+  If $\vect{w}+\vect{u}=\vect{w}+\vect{v}$, then it is necessarily the case that
+  \begin{multipleChoice}
+    \choice[correct]{$\vect{u}=\vect{v}$}
+    \choice{$\vect{w}=\zerovector$}
+  \end{multipleChoice}
+  
+  \begin{feedback}[correct]
+    We can prove the statement ``if
+    $\vect{w}+\vect{u}=\vect{w}+\vect{v}$ then $\vect{u}=\vect{v}$''
+    with an argument such as this:
+    \begin{align*}
+      \vect{u}
+      &=\zerovector+\vect{u}&&\ref{property:Z}\\
+      &=\left(\vect{-w}+\vect{w}\right)+\vect{u}&&\ref{property:AI}\\
+      &=\vect{-w}+\left(\vect{w}+\vect{u}\right)&&\ref{property:AA}\\
+      &=\vect{-w}+\left(\vect{w}+\vect{v}\right)&&\text{Hypothesis}\\
+      &=\left(\vect{-w}+\vect{w}\right)+\vect{v}&&\ref{property:AA}\\
+      &=\zerovector+\vect{v}&&\ref{property:AI}\\
+      &=\vect{v}&&\ref{property:Z}
+    \end{align*}
+  \end{feedback}
+\end{exercise}
+
+\begin{example}[Properties for the Crazy Vector Space]
+  Several of the above theorems have interesting demonstrations when
+  applied to the crazy vector space, $C$ (\ref{example:CVS}).  We are
+  not proving anything new here, or learning anything we did not know
+  already about $C$.  It is just plain fun to see how these general
+  theorems apply in a specific instance.  For most of our examples,
+  the applications are obvious or trivial, but not with $C$.
+
+  Suppose $\vect{u}\in C$.  Then, as given by \ref{theorem:ZSSM},
+  \[
+    0\vect{u}=0(x_1,\,x_2)=(0x_1+0-1,\,0x_2+0-1)=(-1,-1)=\zerovector
+  \]
+  And as given by \ref{theorem:ZVSM},
+  \begin{align*}
+    \alpha\zerovector
+    &=\alpha(-1,\,-1)=(\alpha(-1)+\alpha-1,\,\alpha(-1)+\alpha-1)\\
+    &=(-\alpha+\alpha-1,\,-\alpha+\alpha-1)=(-1,\,-1)=\zerovector
+  \end{align*}
+  Finally, as given by \ref{theorem:AISM},
+  \begin{align*}
+    (-1)\vect{u}
+    &=(-1)(x_1,\,x_2)=((-1)x_1+(-1)-1,\,(-1)x_2+(-1)-1)\\
+    &=(-x_1-2,\,-x_2-2)=-\vect{u}
+  \end{align*}
+\end{example}
+
+\end{document}

@@ -1,0 +1,216 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Determinants, Nonsingular Matrices, Matrix Multiplication}
+
+\begin{document}
+\begin{abstract}
+  A square matrix is singular exactly when its determinant vanishes.
+\end{abstract}
+\maketitle
+
+If you asked someone with substantial experience working with matrices
+about the value of the determinant, they'd be likely to quote the
+following theorem as the first thing to come to mind.
+
+\begin{theorem}[Singular Matrices have Zero Determinants]
+  \label{theorem:SMZD}
+
+  Let $A$ be a square matrix.  Then $A$ is singular if and only if $\detname{A}=0$.
+
+  \begin{proof}
+    Rather than jumping into the two halves of the equivalence, we
+    first establish a few items.  Let $B$ be the unique square matrix
+    that is row-equivalent to $A$ and in reduced row-echelon form
+    (\ref{theorem:REMEF}, \ref{theorem:RREFU}).  For each of the row
+    operations that converts $B$ into $A$, there is an elementary
+    matrix $E_i$ which effects the row operation by matrix
+    multiplication (\ref{theorem:EMDRO}).  Repeated applications of
+    \ref{theorem:EMDRO} allow us to write
+    \[
+      A=E_sE_{s-1}\dots E_2E_1B
+    \]
+
+    Then
+    \begin{align*}
+      \detname{A}
+      &=
+        \detname{E_sE_{s-1}\dots E_2E_1B}\\
+      &=\detname{E_s}\detname{E_{s-1}}\dots\detname{E_2}\detname{E_1}\detname{B}
+      &&\ref{theorem:DEMMM}
+    \end{align*}
+
+    From \ref{theorem:DEM} we can infer that the determinant of an
+    elementary matrix is never zero (note the ban on $\alpha=0$ for
+    $\elemmult{\alpha}{i}$ in \ref{definition:ELEM}).  So the product
+    on the right is composed of nonzero scalars, with the possible
+    exception of $\detname{B}$.  More precisely, we can argue that
+    $\detname{A}=0$ if and only if $\detname{B}=0$.  With this
+    established, we can take up the two halves of the equivalence.
+
+    ($\Rightarrow$) If $A$ is singular, then by \ref{theorem:NMRRI},
+    $B$ cannot be the identity matrix.  Because (1) the number of
+    pivot columns is equal to the number of nonzero rows, (2) not
+    every column is a pivot column, and (3) $B$ is square, we see that
+    $B$ must have a zero row.  By \ref{theorem:DZRC} the determinant
+    of $B$ is zero, and by the above, we conclude that the determinant
+    of $A$ is zero.
+
+    ($\Leftarrow$) We will prove the contrapositive
+    (\ref{technique:CP}).  So assume $A$ is nonsingular, then by
+    \ref{theorem:NMRRI}, $B$ is the identity matrix and
+    \ref{theorem:DIM} tells us that $\detname{B}=1\neq 0$.  With the
+    argument above, we conclude that the determinant of $A$ is nonzero
+    as well.
+  \end{proof}
+\end{theorem}
+
+For the case of $2\times 2$ matrices you might compare the application
+of \ref{theorem:SMZD} with the combination of the results stated in
+\ref{theorem:DMST} and \ref{theorem:TTMI}.
+
+%BADBAD
+\begin{example}[Zero and nonzero determinant]
+  The matrix
+  \[
+    A = \begin{bmatrix}
+      1 & -1 & 2\\
+      2 & 1 & 1\\
+      1 & 1 & 0
+    \end{bmatrix}
+  \]
+  has $\detname{A} = \answer{0}$ and consequently the matrix $A$ is
+  \begin{multipleChoice}
+    \choice[correct]{singular.}
+    \choice{nonsingular.}
+  \end{multipleChoice}
+\end{example}
+
+\begin{example}
+  The matrix
+  \[
+    B = \begin{bmatrix}
+      -7&-6&-12\\
+      5&5&7\\
+      1&0&4
+    \end{bmatrix}
+  \]
+  has $\detname{B} = \answer{-2} \neq 0$ and consequently the matrix $B$ is
+  \begin{multipleChoice}
+    \choice{singular.}
+    \choice[correct]{nonsingular.}
+  \end{multipleChoice}
+\end{example}
+
+\begin{question}
+  In \ref{section:MINM} we said ``singular matrices are a distinct
+  minority.''  If you built a random matrix and took its determinant,
+  how likely would it be that you got zero?
+
+  \begin{multipleChoice}
+    \choice[correct]{Not very likely.}
+    \choice{Extremely likely.}
+  \end{multipleChoice}
+\end{question}
+
+Since \ref{theorem:SMZD} is an equivalence (\ref{technique:E}) we can
+expand on our growing list of equivalences about nonsingular matrices.
+The addition of the condition $\detname{A}\neq 0$ is one of the best
+motivations for learning about determinants.
+
+\begin{theorem}[Nonsingular Matrix Equivalences, Round 7]
+
+Suppose that $A$ is a square matrix of size $n$.  The following are equivalent.
+\begin{enumerate}
+\item $A$ is nonsingular.
+\item $A$ row-reduces to the identity matrix.
+\item The null space of $A$ contains only the zero vector, $\nsp{A}=\set{\zerovector}$.
+\item The linear system $\linearsystem{A}{\vect{b}}$ has a unique solution for every possible choice of $\vect{b}$.
+\item The columns of $A$ are a linearly independent set.
+\item $A$ is invertible.
+\item The column space of $A$ is $\complex{n}$, $\csp{A}=\complex{n}$.
+\item The columns of $A$ are a basis for $\complex{n}$.
+\item The rank of $A$ is $n$, $\rank{A}=n$.
+\item The nullity of $A$ is zero, $\nullity{A}=0$.
+\item The determinant of $A$ is nonzero, $\detname{A}\neq 0$.
+\end{enumerate}
+
+\begin{proof}
+  \ref{theorem:SMZD} says $A$ is singular if and only if
+  $\detname{A}=0$.  If we negate each of these statements, we arrive
+  at two contrapositives that we can combine as the equivalence, $A$
+  is nonsingular if and only if $\detname{A}\neq 0$.  This allows us
+  to add a new statement to the previous list.
+\end{proof}
+\end{theorem}
+
+Computationally, row-reducing a matrix is the most efficient way to
+determine if a matrix is nonsingular, though the effect of using
+division in a computer can lead to round-off errors that confuse small
+quantities with critical zero quantities.  Conceptually, the
+determinant may seem the most efficient way to determine if a matrix
+is nonsingular.  The definition of a determinant uses just addition,
+subtraction and multiplication, so division is never a problem.  And
+the final test is easy: is the determinant zero or not?  However, the
+number of operations involved in computing a determinant by the
+definition very quickly becomes so excessive as to be impractical.
+
+Now for the \textit{coup de grace.}  We will generalize
+\ref{theorem:DEMMM} to the case of \textit{any} two square matrices.
+You may recall thinking that matrix multiplication was defined in a
+needlessly complicated manner.  For sure, the definition of a
+determinant seems even stranger.  (Though \ref{theorem:SMZD} might be
+forcing you to reconsider.)  Read the statement of the next theorem
+and contemplate how nicely matrix multiplication and determinants play
+with each other.
+
+\begin{theorem}[Determinant Respects Matrix Multiplication]
+\label{theorem:DRMM}
+
+Suppose that $A$ and $B$ are square matrices of the same size.  Then
+$\detname{AB}=\detname{A}\detname{B}$.
+
+\begin{proof}
+  This proof is constructed in two cases.  First, suppose that $A$ is
+  singular.  Then $\detname{A}=0$ by \ref{theorem:SMZD}.  By the
+  contrapositive of \ref{theorem:NPNT}, $AB$ is singular as well.  So
+  by a second application of \ref{theorem:SMZD}, $\detname{AB}=0$.
+  Putting it all together
+  \begin{align*}
+    \detname{AB}=0=0\,\detname{B}=\detname{A}\detname{B}
+  \end{align*}
+  as desired.
+
+  For the second case, suppose that $A$ is nonsingular.  By
+  \ref{theorem:NMPEM} there are elementary matrices
+  $E_{1},\,E_{2},\,E_{3},\,\dots,\,E_{s}$ such that
+  $A=E_1E_2E_3\dots E_s$.  Then
+  \begin{align*}
+    \detname{AB}
+    &=
+      \detname{E_1E_2E_3\dots E_{s}B}\\
+    &=
+      \detname{E_1}\detname{E_2}\detname{E_3}\dots\detname{E_s}\detname{B}
+    &&\ref{theorem:DEMMM}\\
+    &=
+      \detname{E_1E_2E_3\dots E_s}\detname{B}
+    &&\ref{theorem:DEMMM}\\
+    &=
+      \detname{A}\detname{B}
+  \end{align*}
+\end{proof}
+\end{theorem}
+
+\begin{question}
+  It is amazing that matrix multiplication and the determinant
+  interact this way.  Is it also be true that
+  $\detname{A+B}=\detname{A}+\detname{B}$?
+  
+  \begin{multipleChoice}
+    \choice{Yes,}
+    \choice[correct]{No.}
+  \end{multipleChoice}
+\end{question}
+
+\end{document}

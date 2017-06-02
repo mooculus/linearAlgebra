@@ -1,0 +1,593 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Diagonalization}
+
+\begin{document}
+\begin{abstract}
+  The eigenvalues of a diagonal matrix are the entries on the diagonal
+  of the diagonal matrix, and it can be a much simpler matter to
+  compute high powers of a diagonal matrix.
+\end{abstract}
+\maketitle
+
+Good things happen when a matrix is similar to a diagonal matrix.
+Here are the relevant definitions, then our main theorem for this
+section.
+
+\begin{definition}[Diagonal Matrix]
+  Suppose that $A$ is a square matrix.  Then $A$ is a \dfn{diagonal
+    matrix} if $\matrixentry{A}{ij}=0$ whenever $i\neq j$.
+\end{definition}
+
+\begin{definition}[Diagonalizable Matrix]
+  Suppose $A$ is a square matrix.  Then $A$ is \dfn{diagonalizable} if
+  $A$ is similar to a diagonal matrix.
+\end{definition}
+
+\begin{example}[Diagonalization of a three-by-three matrix]
+Consider the $3\times 3$ coefficient matrix
+\[
+B=\begin{bmatrix}
+-7&-6&-12\\
+ 5&5&7\\
+ 1&0&4
+\end{bmatrix}
+\]
+is similar to a diagonal matrix, as can be seen by the following computation with the nonsingular matrix $S$,
+\begin{align*}
+\similar{B}{S}&=
+\inverse{\begin{bmatrix}-5&-3&-2\\3&2&1\\1&1&1\end{bmatrix}}\begin{bmatrix}
+-7&-6&-12\\
+ 5&5&7\\
+ 1&0&4
+\end{bmatrix}\begin{bmatrix}-5&-3&-2\\3&2&1\\1&1&1\end{bmatrix}\\
+&=\begin{bmatrix}-1&-1&-1\\2&3&1\\-1&-2&1\end{bmatrix}\begin{bmatrix}
+-7&-6&-12\\
+ 5&5&7\\
+ 1&0&4
+\end{bmatrix}\begin{bmatrix}-5&-3&-2\\3&2&1\\1&1&1\end{bmatrix}\\
+&=
+\begin{bmatrix}-1&0&0\\0&1&0\\0&0&2\end{bmatrix}
+\end{align*}
+
+\end{example}
+
+In general, how would we find the magic matrix $S$ that can be used in a similarity transformation to produce a diagonal matrix?  Before you read the statement of the next theorem, you might study the eigenvalues and eigenvectors of the matrix $B$ above.
+
+\begin{theorem}[Diagonalization Characterization]
+\label{theorem:DC}
+
+Suppose $A$ is a square matrix of size $n$.  Then $A$ is
+diagonalizable if and only if there exists a linearly independent set
+$S$ that contains $n$ eigenvectors of $A$.
+
+\begin{proof}
+($\Leftarrow$)  Let $S=\set{\vectorlist{x}{n}}$ be a linearly independent set of eigenvectors of $A$ for the eigenvalues $\scalarlist{\lambda}{n}$.  Recall \ref{definition:SUV} and define
+\begin{align*}
+R&=\matrixcolumns{x}{n}\\
+D&=
+\begin{bmatrix}
+\lambda_1 & 0 & 0 &\cdots & 0\\
+ 0 &\lambda_2 & 0 &\cdots & 0\\
+ 0 & 0 &\lambda_3 &\cdots & 0\\
+ \vdots & \vdots & \vdots & & \vdots\\
+ 0 & 0 & 0 &\cdots & \lambda_n
+\end{bmatrix}
+=[\lambda_1\vect{e}_1|\lambda_2\vect{e}_2|\lambda_3\vect{e}_3|\ldots|\lambda_n\vect{e}_n]
+\end{align*}
+
+The columns of $R$ are the vectors of the linearly independent set $S$ and so by \ref{theorem:NMLIC} the matrix $R$ is nonsingular.  By \ref{theorem:NI} we know $\inverse{R}$ exists.
+\begin{align*}
+\inverse{R}AR&=
+\inverse{R}A\matrixcolumns{x}{n}\\
+&=\inverse{R}[A\vect{x}_1|A\vect{x}_2|A\vect{x}_3|\ldots|A\vect{x}_n]
+&&\ref{definition:MM}\\
+&=\inverse{R}[\lambda_1\vect{x}_1|\lambda_2\vect{x}_2|\lambda_3\vect{x}_3|\ldots|\lambda_n\vect{x}_n]
+&&\ref{definition:EEM}\\
+&=\inverse{R}[\lambda_1R\vect{e}_1|\lambda_2R\vect{e}_2|\lambda_3R\vect{e}_3|\ldots|\lambda_nR\vect{e}_n]
+&&\ref{definition:MVP}\\
+&=\inverse{R}[R(\lambda_1\vect{e}_1)|R(\lambda_2\vect{e}_2)|R(\lambda_3\vect{e}_3)|\ldots|R(\lambda_n\vect{e}_n)]
+&&\ref{theorem:MMSMM}\\
+&=\inverse{R}R[\lambda_1\vect{e}_1|\lambda_2\vect{e}_2|\lambda_3\vect{e}_3|\ldots|\lambda_n\vect{e}_n]
+&&\ref{definition:MM}\\
+&=I_nD
+&&\ref{definition:MI}\\
+&=D
+&&\ref{theorem:MMIM}
+\end{align*}
+
+This says that $A$ is similar to the diagonal matrix $D$ via the nonsingular matrix $R$.  Thus $A$ is diagonalizable (\ref{definition:DZM}).
+
+($\Rightarrow$)  Suppose that $A$ is diagonalizable, so there is a nonsingular matrix of size $n$
+\begin{align*}
+T&=\matrixcolumns{y}{n}
+\end{align*}
+and a diagonal matrix (recall \ref{definition:SUV})
+\begin{align*}
+E&=\begin{bmatrix}
+d_1 & 0 & 0 &\cdots & 0\\
+0 &d_2 & 0 &\cdots & 0\\
+0 & 0 &d_3 &\cdots & 0\\
+\vdots & \vdots & \vdots & & \vdots\\
+0 & 0 & 0 &\cdots & d_n
+\end{bmatrix}
+=[d_1\vect{e}_1|d_2\vect{e}_2|d_3\vect{e}_3|\ldots|d_n\vect{e}_n]&&\text{}
+\end{align*}
+such that $\inverse{T}AT=E$.
+
+Then consider,
+\begin{align*}
+[A\vect{y}_1|A\vect{y}_2|A\vect{y}_3&|\ldots|A\vect{y}_n]\\
+&=A\matrixcolumns{y}{n}
+&&\ref{definition:MM}\\
+&=AT\\
+&=I_nAT
+&&\ref{theorem:MMIM}\\
+&=T\inverse{T}AT
+&&\ref{definition:MI}\\
+&=TE\\
+&=T[d_1\vect{e}_1|d_2\vect{e}_2|d_3\vect{e}_3|\ldots|d_n\vect{e}_n]\\
+&=[T(d_1\vect{e}_1)|T(d_2\vect{e}_2)|T(d_3\vect{e}_3)|\ldots|T(d_n\vect{e}_n)]
+&&\ref{definition:MM}\\
+&=[d_1T\vect{e}_1|d_2T\vect{e}_2|d_3T\vect{e}_3|\ldots|d_nT\vect{e}_n]
+&&\ref{definition:MM}\\
+&=[d_1\vect{y}_1|d_2\vect{y}_2|d_3\vect{y}_3|\ldots|d_n\vect{y}_n]
+&&\ref{definition:MVP}
+\end{align*}
+
+This equality of matrices (\ref{definition:ME}) allows us to conclude
+that the individual columns are equal vectors (\ref{definition:CVE}).
+That is, $A\vect{y}_i=d_i\vect{y}_i$ for $1\leq i\leq n$.  In other
+words, $\vect{y}_i$ is an eigenvector of $A$ for the eigenvalue $d_i$,
+$1\leq i\leq n$.  (Why does $\vect{y}_i\neq\zerovector$?).  Because
+$T$ is nonsingular, the set containing $T$'s columns,
+$S=\set{\vectorlist{y}{n}}$, is a linearly independent set
+(\ref{theorem:NMLIC}).  So the set $S$ has all the required
+properties.
+
+\end{proof}
+\end{theorem}
+
+Notice that the proof of \ref{theorem:DC} is constructive.  To
+diagonalize a matrix, we need only locate $n$ linearly independent
+eigenvectors.  Then we can construct a nonsingular matrix using the
+eigenvectors as columns ($R$) so that $\inverse{R}AR$ is a diagonal
+matrix ($D$).  The entries on the diagonal of $D$ will be the
+eigenvalues of the eigenvectors used to create $R$, \textit{in the
+  same order} as the eigenvectors appear in $R$.  We illustrate this
+by \dfn{diagonalizing} some matrices.
+
+\begin{example}[Diagonalizing a matrix using the theorem]
+
+Consider the matrix
+\[
+F=
+\begin{bmatrix}
+-13 & -8 & -4\\
+12 & 7 & 4\\
+24 & 16 & 7
+\end{bmatrix}.
+\]
+The eigenvalues and eigenspaces of $F$ are
+\begin{align*}
+\eigensystem{F}{3}{\colvector{-\frac{1}{2}\\\frac{1}{2}\\1}}\\
+\eigensystem{F}{-1}{\colvector{-\frac{2}{3}\\1\\0},\,\colvector{-\frac{1}{3}\\0\\1}}
+\end{align*}
+
+Define the matrix $S$ to be the $3\times 3$ matrix whose columns are
+the three basis vectors in the eigenspaces for $F$,
+\[
+S=
+\begin{bmatrix}
+-\frac{1}{2} & -\frac{2}{3} & -\frac{1}{3}\\
+\frac{1}{2} & 1 & 0\\
+1 & 0 & 1
+\end{bmatrix}
+\]
+
+Check that $S$ is nonsingular (row-reduces to the identity matrix,
+\ref{theorem:NMRRI} or has a nonzero determinant, \ref{theorem:SMZD}).
+Then the three columns of $S$ are a linearly independent set
+(\ref{theorem:NMLIC}).  By \ref{theorem:DC} we now know that $F$ is
+diagonalizable.  Furthermore, the construction in the proof of
+\ref{theorem:DC} tells us that if we apply the matrix $S$ to $F$ in a
+similarity transformation, the result will be a diagonal matrix with
+the eigenvalues of $F$ on the diagonal.  The eigenvalues appear on the
+diagonal of the matrix in the same order as the eigenvectors appear in
+$S$.  So,
+\begin{align*}
+\similar{F}{S}&=
+\inverse{
+\begin{bmatrix}
+-\frac{1}{2} & -\frac{2}{3} & -\frac{1}{3}\\
+\frac{1}{2} & 1 & 0\\
+1 & 0 & 1
+\end{bmatrix}
+}
+\begin{bmatrix}
+-13 & -8 & -4\\
+12 & 7 & 4\\
+24 & 16 & 7
+\end{bmatrix}
+\begin{bmatrix}
+-\frac{1}{2} & -\frac{2}{3} & -\frac{1}{3}\\
+\frac{1}{2} & 1 & 0\\
+1 & 0 & 1
+\end{bmatrix}\\
+&=
+\begin{bmatrix}
+6 & 4 & 2\\
+-3 & -1 & -1\\
+-6 & -4 & -1
+\end{bmatrix}
+\begin{bmatrix}
+-13 & -8 & -4\\
+12 & 7 & 4\\
+24 & 16 & 7
+\end{bmatrix}
+\begin{bmatrix}
+-\frac{1}{2} & -\frac{2}{3} & -\frac{1}{3}\\
+\frac{1}{2} & 1 & 0\\
+1 & 0 & 1
+\end{bmatrix}\\
+&=
+\begin{bmatrix}
+3 & 0 & 0\\
+0 & -1 & 0\\
+0 & 0 & -1
+\end{bmatrix}
+\end{align*}
+
+Note that the above computations can be viewed two ways.  The proof of
+\ref{theorem:DC} tells us that the four matrices ($F$, $S$,
+$\inverse{F}$ and the diagonal matrix) \textit{will} interact the way
+we have written the equation.  Or as an example, we can actually
+\textit{perform} the computations to verify what the theorem predicts.
+\end{example}
+
+The dimension of an eigenspace can be no larger than the algebraic
+multiplicity of the eigenvalue by \ref{theorem:ME}.  When every
+eigenvalue's eigenspace is this large, then we can diagonalize the
+matrix, and only then.  In each case we've seen so far, you can verify
+that the geometric and algebraic multiplicities are equal for every
+eigenvalue.  This is the substance of the next theorem.
+
+\begin{theorem}[Diagonalizable Matrices have Full Eigenspaces]
+\label{theorem:DMFE}
+
+Suppose $A$ is a square matrix.  Then $A$ is diagonalizable if and only if $\geomult{A}{\lambda}=\algmult{A}{\lambda}$ for every eigenvalue $\lambda$ of $A$.
+
+\begin{proof}
+Suppose $A$ has size $n$ and $k$ distinct eigenvalues, $\scalarlist{\lambda}{k}$.  Let $S_i=\set{\vect{x}_{i1},\,\vect{x}_{i2},\,\vect{x}_{i3},\,\ldots,\,\vect{x}_{i\geomult{A}{\lambda_i}}}$,  denote a basis for the eigenspace of $\lambda_i$, $\eigenspace{A}{\lambda_i}$,  for $1\leq i\leq k$.  Then
+\[
+S=S_1\cup S_2\cup S_3\cup\cdots\cup S_k
+\]
+is a set of eigenvectors for $A$.  A vector cannot be an eigenvector for two different eigenvalues (see <acroref type="exercise" acro="EE.T20" />) so $S_i\cap S_j=\emptyset$ whenever $i\neq j$.  In other words, $S$ is a disjoint union of $S_i$, $1\leq i\leq k$.
+
+($\Leftarrow$)  The size of $S$ is
+\begin{align*}
+\card{S}
+&=\sum_{i=1}^k\geomult{A}{\lambda_i}&&\text{$S$ disjoint union of $S_i$}\\
+&=\sum_{i=1}^k\algmult{A}{\lambda_i}&&\text{Hypothesis}\\
+&=n&&\ref{theorem:NEM}
+\end{align*}
+
+
+
+
+We next show that $S$ is a linearly independent set.  So we will begin with a relation of linear dependence on $S$, using doubly-subscripted scalars and eigenvectors,
+\begin{align*}
+\zerovector=
+&\left(a_{11}\vect{x}_{11}+a_{12}\vect{x}_{12}+\cdots+a_{1\geomult{A}{\lambda_1}}\vect{x}_{1\geomult{A}{\lambda_1}}\right)+\\
+&\left(a_{21}\vect{x}_{21}+a_{22}\vect{x}_{22}+\cdots+a_{2\geomult{A}{\lambda_2}}\vect{x}_{2\geomult{A}{\lambda_2}}\right)+\\
+&\left(a_{31}\vect{x}_{31}+a_{32}\vect{x}_{32}+\cdots+a_{3\geomult{A}{\lambda_3}}\vect{x}_{3\geomult{A}{\lambda_3}}\right)+\\
+&\quad\quad\vdots\\
+&\left(a_{k1}\vect{x}_{k1}+a_{k2}\vect{x}_{k2}+\cdots+a_{k\geomult{A}{\lambda_k}}\vect{x}_{k\geomult{A}{\lambda_k}}\right)
+\end{align*}
+
+
+
+
+Define the vectors $\vect{y}_i$, $1\leq i\leq k$ by
+\begin{align*}
+\vect{y}_1&=\left(a_{11}\vect{x}_{11}+a_{12}\vect{x}_{12}+a_{13}\vect{x}_{13}+\cdots+a_{\geomult{A}{1\lambda_1}}\vect{x}_{1\geomult{A}{\lambda_1}}\right)\\
+\vect{y}_2&=\left(a_{21}\vect{x}_{21}+a_{22}\vect{x}_{22}+a_{23}\vect{x}_{23}+\cdots+a_{\geomult{A}{2\lambda_2}}\vect{x}_{2\geomult{A}{\lambda_2}}\right)\\
+\vect{y}_3&=\left(a_{31}\vect{x}_{31}+a_{32}\vect{x}_{32}+a_{33}\vect{x}_{33}+\cdots+a_{\geomult{A}{3\lambda_3}}\vect{x}_{3\geomult{A}{\lambda_3}}\right)\\
+&\quad\quad\vdots\\
+\vect{y}_k&=\left(a_{k1}\vect{x}_{k1}+a_{k2}\vect{x}_{k2}+a_{k3}\vect{x}_{k3}+\cdots+a_{\geomult{A}{k\lambda_k}}\vect{x}_{k\geomult{A}{\lambda_k}}\right)
+\end{align*}
+
+
+
+
+Then the relation of linear dependence becomes
+\begin{align*}
+\zerovector&=\vect{y}_1+\vect{y}_2+\vect{y}_3+\cdots+\vect{y}_k
+\end{align*}
+
+
+
+
+Since the eigenspace $\eigenspace{A}{\lambda_i}$ is closed under vector addition and scalar multiplication, $\vect{y}_i\in\eigenspace{A}{\lambda_i}$, $1\leq i\leq k$.  Thus, for each $i$, the vector $\vect{y}_i$ is an eigenvector of $A$ for $\lambda_i$, or is the zero vector.  Recall that sets of eigenvectors whose eigenvalues are distinct form a linearly independent set by \ref{theorem:EDELI}.  Should any (or some) $\vect{y}_i$ be nonzero, the previous equation would provide a nontrivial relation of linear dependence on a set of eigenvectors with distinct eigenvalues, contradicting \ref{theorem:EDELI}.  Thus $\vect{y}_i=\zerovector$, $1\leq i\leq k$.
+
+
+
+Each of the $k$ equations, $\vect{y}_i=\zerovector$, is a relation of linear dependence on the corresponding set $S_i$, a set of basis vectors for the eigenspace $\eigenspace{A}{\lambda_i}$, which is therefore linearly independent.  From these relations of linear dependence on linearly independent sets we conclude that the scalars are all zero, more precisely, $a_{ij}=0$, $1\leq j\leq\geomult{A}{\lambda_i}$ for $1\leq i\leq k$.  This establishes that our original relation of linear dependence on $S$ has only the trivial relation of linear dependence, and hence $S$ is a linearly independent set.
+
+
+
+We have determined that $S$ is a set of $n$ linearly independent eigenvectors for $A$, and so by \ref{theorem:DC} is diagonalizable.
+
+
+
+($\Rightarrow$)  Now we assume that $A$ is diagonalizable.  Aiming for a contradiction (\ref{technique:CD}), suppose that there is at least one eigenvalue, say $\lambda_t$, such that $\geomult{A}{\lambda_t}\neq\algmult{A}{\lambda_t}$.  By \ref{theorem:ME} we must have
+$\geomult{A}{\lambda_t}<\algmult{A}{\lambda_t}$,
+and $\geomult{A}{\lambda_i}\leq\algmult{A}{\lambda_i}$ for $1\leq i\leq k$, $i\neq t$.
+
+
+
+Since $A$ is diagonalizable, \ref{theorem:DC} guarantees a set of $n$ linearly independent vectors, all of which are eigenvectors of $A$.  Let $n_i$ denote the number of eigenvectors in $S$ that are eigenvectors for $\lambda_i$, and recall that a vector cannot be an eigenvector for two different eigenvalues (<acroref type="exercise" acro="EE.T20" />).  $S$ is a linearly independent set, so the subset $S_i$ containing the $n_i$ eigenvectors for $\lambda_i$ must also be linearly independent.  Because the eigenspace $\eigenspace{A}{\lambda_i}$ has dimension $\geomult{A}{\lambda_i}$ and $S_i$ is a linearly independent subset in $\eigenspace{A}{\lambda_i}$, \ref{theorem:G} tells us that $n_i\leq\geomult{A}{\lambda_i}$, for $1\leq i\leq k$.
+
+
+
+Putting all these facts together gives,
+\begin{align*}
+n
+&=n_1+n_2+n_3+\cdots+n_t+\cdots+n_k
+&&\ref{definition:SU}\\
+&\leq\geomult{A}{\lambda_1}+\geomult{A}{\lambda_2}+\geomult{A}{\lambda_3}+\cdots+\geomult{A}{\lambda_t}+\cdots+\geomult{A}{\lambda_k}
+&&\ref{theorem:G}\\
+&<\algmult{A}{\lambda_1}+\algmult{A}{\lambda_2}+\algmult{A}{\lambda_3}+\cdots+\algmult{A}{\lambda_t}+\cdots+\algmult{A}{\lambda_k}&&\ref{theorem:ME}\\
+&=n
+&&\ref{theorem:NEM}
+\end{align*}
+
+
+
+
+This is a contradiction
+(we cannot have $n<n$!)
+and so our assumption that some eigenspace had less than full dimension was false.
+
+
+
+\end{proof}
+\end{theorem}
+
+While we have provided many examples of matrices that are
+diagonalizable, there are many matrices that are not diagonalizable.
+Here is one now.
+
+\begin{example}[A non-diagonalizable matrix of size 4]
+
+The matrix
+\[
+B=
+\begin{bmatrix}
+-2 & 1 & -2 & -4\\
+12 & 1 & 4 & 9\\
+6 & 5 & -2 & -4\\
+3 & -4 & 5 & 10
+\end{bmatrix}
+\]
+has characteristic polynomial
+\[
+\charpoly{B}{x}=(x-1)(x-2)^3
+\]
+and an eigenspace for $\lambda=2$ of
+\[
+\eigenspace{B}{2}=\spn{\set{\colvector{-\frac{1}{2}\\1\\-\frac{1}{2}\\1}}}\\
+\]
+
+So the geometric multiplicity of $\lambda=2$ is $\geomult{B}{2}=1$,
+while the algebraic multiplicity is $\algmult{B}{2}=3$.  By
+\ref{theorem:DMFE}, the matrix $B$ is not diagonalizable.
+
+\end{example}
+
+
+\begin{theorem}[Distinct Eigenvalues implies Diagonalizable]
+\label{theorem:DED}
+
+Suppose $A$ is a square matrix of size $n$ with $n$ distinct eigenvalues.  Then $A$ is diagonalizable.
+
+\begin{proof}
+Let $\scalarlist{\lambda}{n}$ denote the $n$ distinct eigenvalues of $A$.
+Then by \ref{theorem:NEM} we have $n=\sum_{i=1}^n\algmult{A}{\lambda_i}$, which implies that $\algmult{A}{\lambda_i}=1$, $1\leq i\leq n$.  From \ref{theorem:ME} it follows that $\geomult{A}{\lambda_i}=1$, $1\leq i\leq n$.  So $\geomult{A}{\lambda_i}=\algmult{A}{\lambda_i}$, $1\leq i\leq n$ and \ref{theorem:DMFE} says $A$ is diagonalizable.
+
+\end{proof}
+\end{theorem}
+
+\begin{example}[Distinct eigenvalues, hence diagonalizable]
+
+The matrix
+\[
+H=
+\begin{bmatrix}
+15 & 18 & -8 & 6 & -5\\
+5 & 3 & 1 & -1 & -3\\
+0 & -4 & 5 & -4 & -2\\
+-43 & -46 & 17 & -14 & 15\\
+26 & 30 & -12 & 8 & -10
+\end{bmatrix}
+\]
+has characteristic polynomial
+\[
+\charpoly{H}{x}=x(x-2)(x-1)(x+1)(x+3)
+\]
+and so is a $5\times 5$ matrix with exactly
+\begin{multipleChoice}
+  \choice{3 eigenvalues.}
+  \choice{4 eigenvalues.}
+  \choice[correct]{5 eigenvalues.}
+\end{multipleChoice}
+
+By \ref{theorem:DED} we know $H$ \wordChoice{\choice[correct]{must be}\choice{cannot be}} diagonalizable.
+
+But just for practice, we exhibit a diagonalization.  The matrix $S$
+contains eigenvectors of $H$ as columns, one from each eigenspace,
+guaranteeing linear independent columns and thus the nonsingularity of
+$S$.  Notice that we have chosen eigenvectors that have integer
+entries.  The diagonal matrix has the eigenvalues of $H$ in the same
+order that their respective eigenvectors appear as the columns of $S$.
+With these matrices, verify computationally that $\similar{H}{S}=D$.
+\begin{align*}
+S&=
+\begin{bmatrix}
+2 & 1 & -1 & 1 & 1\\
+-1 & 0 & 2 & 0 & -1\\
+-2 & 0 & 2 & -1 & -2\\
+-4 & -1 & 0 & -2 & -1\\
+2 & 2 & 1 & 2 & 1
+\end{bmatrix}
+&D&=
+\begin{bmatrix}
+-3 & 0 & 0 & 0 & 0\\
+0 & -1 & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & 0\\
+0 & 0 & 0 & 1 & 0\\
+0 & 0 & 0 & 0 & 2
+\end{bmatrix}
+\end{align*}
+Note that there 
+\begin{multipleChoice}
+\choice[correct]{are many different ways}
+\choice{is exactly one way}
+\end{multipleChoice}
+to diagonalize $H$.  We could replace eigenvectors by nonzero scalar
+multiples, or we could rearrange the order of the eigenvectors as the
+columns of $S$ (which would subsequently reorder the eigenvalues along
+the diagonal of $D$).
+\end{example}
+
+\section{Powers}
+
+Powers of a diagonal matrix are easy to compute, and when a matrix is diagonalizable, it is almost as easy.  We could state a theorem here perhaps, but we will settle instead for an example that makes the point just as well.
+
+\begin{example}[High power of a diagonalizable matrix]
+
+Suppose that
+\[
+A=\begin{bmatrix}
+ 19 & 0 & 6 & 13 \\
+ -33 & -1 & -9 & -21 \\
+ 21 & -4 & 12 & 21 \\
+ -36 & 2 & -14 & -28
+\end{bmatrix}
+\]
+and we wish to compute $A^{20}$.  Normally this would require 19 matrix multiplications, but since $A$ is diagonalizable, we can simplify the computations substantially.
+
+First, we diagonalize $A$.  With
+\[
+S=\begin{bmatrix}
+ 1 & -1 & 2 & -1 \\
+ -2 & 3 & -3 & 3 \\
+ 1 & 1 & 3 & 3 \\
+ -2 & 1 & -4 & 0
+\end{bmatrix}
+\]
+we find
+\begin{align*}
+D&=\similar{A}{S}\\
+&=
+\begin{bmatrix}
+ -6 & 1 & -3 & -6 \\
+ 0 & 2 & -2 & -3 \\
+ 3 & 0 & 1 & 2 \\
+ -1 & -1 & 1 & 1
+\end{bmatrix}
+\begin{bmatrix}
+ 19 & 0 & 6 & 13 \\
+ -33 & -1 & -9 & -21 \\
+ 21 & -4 & 12 & 21 \\
+ -36 & 2 & -14 & -28
+\end{bmatrix}
+\begin{bmatrix}
+ 1 & -1 & 2 & -1 \\
+ -2 & 3 & -3 & 3 \\
+ 1 & 1 & 3 & 3 \\
+ -2 & 1 & -4 & 0
+\end{bmatrix}\\
+&=
+\begin{bmatrix}
+ -1 & 0 & 0 & 0 \\
+ 0 & 0 & 0 & 0 \\
+ 0 & 0 & 2 & 0 \\
+ 0 & 0 & 0 & 1
+\end{bmatrix}
+\end{align*}
+
+
+Now we find an alternate expression for $A^{20}$,
+\begin{align*}
+A^{20}
+&=AAA\ldots A\\
+&=I_nAI_nAI_nAI_n\ldots I_nAI_n\\
+&=\left(S\inverse{S}\right)A\left(S\inverse{S}\right)A\left(S\inverse{S}\right)A\left(S\inverse{S}\right)\ldots
+\left(S\inverse{S}\right)A\left(S\inverse{S}\right)\\
+&=S\left(\inverse{S}AS\right)\left(\inverse{S}AS\right)\left(\inverse{S}AS\right)\ldots \left(\inverse{S}AS\right)\inverse{S}\\
+&=SDDD\ldots D\inverse{S}\\
+&=SD^{20}\inverse{S}
+\end{align*}
+and since $D$ is a diagonal matrix, powers are much easier to compute,
+\begin{align*}
+&=
+S
+\begin{bmatrix}
+ -1 & 0 & 0 & 0 \\
+ 0 & 0 & 0 & 0 \\
+ 0 & 0 & 2 & 0 \\
+ 0 & 0 & 0 & 1
+\end{bmatrix}^{20}
+\inverse{S}\\
+&=
+S
+\begin{bmatrix}
+ \answer{1} & 0 & 0 & 0 \\
+ 0 & \answer{0} & 0 & 0 \\
+ 0 & 0 & (2)^{20} & 0 \\
+ 0 & 0 & 0 & \answer{1}
+\end{bmatrix}
+\inverse{S}\\
+&=
+\begin{bmatrix}
+ 1 & -1 & 2 & -1 \\
+ -2 & 3 & -3 & 3 \\
+ 1 & 1 & 3 & 3 \\
+ -2 & 1 & -4 & 0
+\end{bmatrix}
+\begin{bmatrix}
+ 1 & 0 & 0 & 0 \\
+ 0 & 0 & 0 & 0 \\
+ 0 & 0 & 1048576 & 0 \\
+ 0 & 0 & 0 & 1
+\end{bmatrix}
+\begin{bmatrix}
+ -6 & 1 & -3 & -6 \\
+ 0 & 2 & -2 & -3 \\
+ 3 & 0 & 1 & 2 \\
+ -1 & -1 & 1 & 1
+\end{bmatrix}\\
+&=
+\begin{bmatrix}
+ 6291451 & 2 & 2097148 & 4194297 \\
+ -9437175 & -5 & -3145719 & -6291441 \\
+ 9437175 & -2 & 3145728 &  6291453 \\
+ -12582900 & -2 & -4194298 & -8388596
+\end{bmatrix}
+\end{align*}
+
+Notice how we effectively replaced the twentieth power of $A$ by the twentieth power of $D$, and how a high power of a diagonal matrix is just a collection of powers of scalars on the diagonal.  The price we pay for this simplification is the need to diagonalize the matrix (by computing eigenvalues and eigenvectors) and finding the inverse of the matrix of eigenvectors.  And we still need to do two matrix products.  But the higher the power, the greater the savings.
+
+
+
+\end{example}
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

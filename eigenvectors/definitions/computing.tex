@@ -1,0 +1,295 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Computing Eigenvalues and Eigenvectors}
+
+\begin{document}
+\begin{abstract}
+  The determinant, and specifically \ref{theorem:SMZD}, provides our
+  main tool for computing eigenvalues.
+\end{abstract}
+\maketitle
+
+Here is an informal sequence of equivalences that is the key to determining the eigenvalues and eigenvectors of a matrix,
+\[
+  A\vect{x}=\lambda\vect{x}\iff
+  A\vect{x}-\lambda I_n\vect{x}=\zerovector\iff
+  \left(A-\lambda I_n\right)\vect{x}=\zerovector
+\]
+
+So, for an eigenvalue $\lambda$ and associated eigenvector
+$\vect{x}\neq\zerovector$, the vector $\vect{x}$ will be a nonzero
+element of the null space of $A-\lambda I_n$, while the matrix
+$A-\lambda I_n$ will be singular and therefore have zero determinant.
+These ideas are made precise in \ref{theorem:EMRCP} and
+\ref{theorem:EMNS}, but for now this brief discussion should suffice
+as motivation for the following definition and example.
+
+\begin{definition}[Characteristic Polynomial]
+
+  Suppose that $A$ is a square matrix of size $n$.  Then the
+  \dfn{characteristic polynomial} of $A$ is the polynomial
+  $\charpoly{A}{x}$ defined by
+  \[
+    \charpoly{A}{x}=\detname{A-xI_n}
+  \]
+
+\end{definition}
+
+\begin{example}[Characteristic polynomial of a matrix, size 3]
+  Consider
+  \[
+    F=
+    \begin{bmatrix}
+      -13 & -8 & -4\\
+      12 & 7 & 4\\
+      24 & 16 & 7
+    \end{bmatrix}
+  \]
+
+  Then
+  \begin{align*}
+    \charpoly{F}{x}&=\detname{F-xI_3}\\
+                   &=
+                     \begin{vmatrix}
+                       \answer{-13-x} & -8 & -4\\
+                       12 & 7-x & 4\\
+                       24 & 16 & 7-x
+                     \end{vmatrix}&&\ref{definition:CP}\\
+                   &=
+                     (-13-x)
+                     \begin{vmatrix}
+                       7-x & 4\\
+                       16 & 7-x
+                     \end{vmatrix}
+                            +(-8)(-1)
+                            \begin{vmatrix}
+                              12  & 4\\
+                              24  & 7-x
+                            \end{vmatrix}&&\ref{definition:DM}\\
+                   &\quad\quad
+                     +(-4)
+                     \begin{vmatrix}
+                       12 & 7-x\\
+                       24 & 16
+                     \end{vmatrix}\\
+                   &=(-13-x)((7-x)(7-x)-4(16))&&\ref{theorem:DMST}\\
+                   &\quad\quad +(-8)(-1)(12(7-x)-4(24))\\
+                   &\quad\quad +(-4)(12(16)-(7-x)(24))\\
+                   &=3+5x+x^2-x^3\\
+                   &=-(x-3)(x+1)^2
+  \end{align*}
+\end{example}
+
+The characteristic polynomial is our main computational tool for
+finding eigenvalues, and will sometimes be used to aid us in
+determining the properties of eigenvalues.
+
+\begin{theorem}[Eigenvalues of a Matrix are Roots of Characteristic Polynomials]
+\label{theorem:EMRCP}
+
+Suppose $A$ is a square matrix.
+Then $\lambda$ is an eigenvalue of $A$ if and only if $\charpoly{A}{\lambda}=0$.
+
+\begin{proof}
+Suppose $A$ has size $n$.
+\begin{align*}
+&\text{$\lambda$ is an eigenvalue of $A$}\\
+&\iff\text{ there exists $\vect{x}\neq\zerovector$ so that $A\vect{x}=\lambda\vect{x}$}
+&&\ref{definition:EEM}\\
+&\iff \text{ there exists $\vect{x}\neq\zerovector$ so that $A\vect{x}-\lambda\vect{x}=\zerovector$}
+&&\ref{property:AIC}\\
+&\iff \text{ there exists $\vect{x}\neq\zerovector$ so that $A\vect{x}-\lambda I_n\vect{x}=\zerovector$}
+&&\ref{theorem:MMIM}\\
+&\iff\text{ there exists $\vect{x}\neq\zerovector$ so that $(A-\lambda I_n)\vect{x}=\zerovector$}
+&&\ref{theorem:MMDAA}\\
+&\iff A-\lambda I_n\text{ is singular}
+&&\ref{definition:NM}\\
+&\iff\detname{A-\lambda I_n}=0
+&&\ref{theorem:SMZD}\\
+&\iff\charpoly{A}{\lambda}=0
+&&\ref{definition:CP}
+\end{align*}
+
+\end{proof}
+\end{theorem}
+
+\begin{example}[Eigenvalues of a matrix, size 3]
+  We found the characteristic polynomial of
+  \[
+    F=
+    \begin{bmatrix}
+      -13 & -8 & -4\\
+      12 & 7 & 4\\
+      24 & 16 & 7
+    \end{bmatrix}
+  \]
+  to be $\charpoly{F}{x}=-(x-3)(x+1)^2$.  Factored, we can find all of
+  its roots easily, they are $x=\answer{3}$ and $x=-1$.  By
+  \ref{theorem:EMRCP}, $\lambda=\answer{3}$ and $\lambda=-1$ are both
+  eigenvalues of $F$, and these are the only eigenvalues of $F$.  We
+  have found them all.
+\end{example}
+
+Let us now turn our attention to the computation of eigenvectors.
+
+\begin{definition}[Eigenspace of a Matrix]
+  Suppose that $A$ is a square matrix and $\lambda$ is an eigenvalue
+  of $A$.  Then the \dfn{eigenspace} of $A$ for $\lambda$,
+  $\eigenspace{A}{\lambda}$, is the set of all the eigenvectors of $A$
+  for $\lambda$, together with the inclusion of the zero vector.
+\end{definition}
+
+A previous example\ref{example:SEE} hinted that the set of
+eigenvectors for a single eigenvalue might have some closure
+properties, and with the addition of the one eigenvector that is never
+an eigenvector, $\zerovector$, we indeed get a whole subspace.
+
+\begin{theorem}[Eigenspace for a Matrix is a Subspace]
+\label{theorem:EMS}
+
+Suppose $A$ is a square matrix of size $n$ and $\lambda$ is an
+eigenvalue of $A$.  Then the eigenspace $\eigenspace{A}{\lambda}$ is a
+subspace of the vector space $\complex{n}$.
+
+\begin{proof}
+  We will check the three conditions of \ref{theorem:TSS}.  First, \ref{definition:EM} explicitly includes the zero vector in $\eigenspace{A}{\lambda}$, so the set is nonempty.
+  
+  Suppose that $\vect{x},\,\vect{y}\in\eigenspace{A}{\lambda}$, that
+  is, $\vect{x}$ and $\vect{y}$ are two eigenvectors of $A$ for
+  $\lambda$.  Then
+  \begin{align*}
+    A\left(\vect{x}+\vect{y}\right)&=A\vect{x}+A\vect{y}&&\ref{theorem:MMDAA}\\
+                                   &=\lambda\vect{x}+\lambda\vect{y}&&\ref{definition:EEM}\\
+                                   &=\lambda\left(\vect{x}+\vect{y}\right)&&\ref{property:DVAC}
+  \end{align*}
+
+  So either $\vect{x}+\vect{y}=\zerovector$, or $\vect{x}+\vect{y}$ is
+  an eigenvector of $A$ for $\lambda$ (\ref{definition:EEM}). So, in
+  either event, $\vect{x}+\vect{y}\in\eigenspace{A}{\lambda}$, and we
+  have additive closure.
+
+  Suppose that $\alpha\in\complexes$, and that
+  $\vect{x}\in\eigenspace{A}{\lambda}$, that is, $\vect{x}$ is an
+  eigenvector of $A$ for $\lambda$.  Then
+  \begin{align*}
+    A\left(\alpha\vect{x}\right)&=\alpha\left(A\vect{x}\right)&&\ref{theorem:MMSMM}\\
+                                &=\alpha\lambda\vect{x}&&\ref{definition:EEM}\\
+                                &=\lambda\left(\alpha\vect{x}\right)&&\ref{property:SMAC}
+  \end{align*}
+
+  So either $\alpha\vect{x}=\zerovector$, or $\alpha\vect{x}$ is an
+  eigenvector of $A$ for $\lambda$ (\ref{definition:EEM}).  So, in
+  either event, $\alpha\vect{x}\in\eigenspace{A}{\lambda}$, and we
+  have scalar closure.
+
+  With the three conditions of \ref{theorem:TSS} met, we know
+  $\eigenspace{A}{\lambda}$ is a subspace.
+\end{proof}
+\end{theorem}
+
+The theorem \ref{theorem:EMS} tells us that an eigenspace is a
+subspace (and hence a vector space in its own right).  Our next
+theorem tells us how to quickly construct this subspace.
+
+\begin{theorem}[Eigenspace of a Matrix is a Null Space]
+  \label{theorem:EMNS}
+
+  Suppose $A$ is a square matrix of size $n$ and $\lambda$ is an
+  eigenvalue of $A$.  Then
+  \[
+    \eigenspace{A}{\lambda}=\nsp{A-\lambda I_n}
+  \]
+
+  \begin{proof}
+    The conclusion of this theorem is an equality of sets, so normally
+    we would follow the advice of \ref{definition:SE}.  However, in
+    this case we can construct a sequence of equivalences which will
+    together provide the two subset inclusions we need.  First, notice
+    that $\zerovector\in\eigenspace{A}{\lambda}$ by
+    \ref{definition:EM} and $\zerovector\in\nsp{A-\lambda I_n}$ by
+    \ref{theorem:HSC}.  Now consider any nonzero vector
+    $\vect{x}\in\complex{n}$,
+    \begin{align*}
+      \vect{x}\in\eigenspace{A}{\lambda}&\iff A\vect{x}=\lambda\vect{x}&&\ref{definition:EM}\\
+                                        &\iff A\vect{x}-\lambda\vect{x}=\zerovector&&\ref{property:AIC}\\
+                                        &\iff A\vect{x}-\lambda I_n\vect{x}=\zerovector&&\ref{theorem:MMIM}\\
+                                        &\iff\left(A-\lambda I_n\right)\vect{x}=\zerovector&&\ref{theorem:MMDAA}\\
+                                        &\iff\vect{x}\in\nsp{A-\lambda I_n}&&\ref{definition:NSM}
+    \end{align*}
+
+  \end{proof}
+\end{theorem}
+
+You might notice the close parallels (and differences) between the
+proofs of \ref{theorem:EMRCP} and \ref{theorem:EMNS}.  Since
+\ref{theorem:EMNS} describes the set of all the eigenvectors of $A$ as
+a null space we can use techniques such as \ref{theorem:BNS} to
+provide concise descriptions of eigenspaces.  \ref{theorem:EMNS} also
+provides a trivial proof for \ref{theorem:EMS}.
+
+\begin{example}[Eigenspaces of a matrix, size 3]
+  The characteristic polynomial of the $3\times 3$ matrix
+  \[
+    F=
+    \begin{bmatrix}
+      -13 & -8 & -4\\
+      12 & 7 & 4\\
+      24 & 16 & 7
+    \end{bmatrix}
+  \]
+  has roots $3$ and $-1$, so the eigenvalues of $F$ are $3$ and $-1$.
+
+  We will now take each eigenvalue in turn and compute its eigenspace.
+  To do this, we row-reduce the matrix $F-\lambda I_3$ in order to
+  determine solutions to the homogeneous system
+  $\homosystem{F-\lambda I_3}$ and then express the eigenspace as the
+  null space of $F-\lambda I_3$ (\ref{theorem:EMNS}).
+  \ref{theorem:BNS} then tells us how to write the null space as the
+  span of a basis.
+  \begin{align*}
+    \lambda&=3&F-3I_3&=
+                       \begin{bmatrix}
+                         -16 & -8 & -4\\
+                         12 & 4 & 4\\
+                         24 & 16 & 4
+                       \end{bmatrix}
+                                   \rref
+                                   \begin{bmatrix}
+                                     \leading{1} & 0 & \frac{1}{2}\\
+                                     0 & \leading{1} & -\frac{1}{2}\\
+                                     0 & 0 & 0
+                                   \end{bmatrix}\\
+           &&\eigenspace{F}{3}&=\nsp{F-3I_3}
+                                =\spn{\set{\colvector{-\frac{1}{2}\\\frac{1}{2}\\1}}}
+    =\spn{\set{\colvector{-1\\1\\2}}}\\
+    \lambda&=-1&F+1I_3&=
+                        \begin{bmatrix}
+                          -12 & -8 & -4\\
+                          12 & 8 & 4\\
+                          24 & 16 & 8
+                        \end{bmatrix}
+                                    \rref
+                                    \begin{bmatrix}
+                                      \leading{1} & \frac{2}{3} & \frac{1}{3}\\
+                                      0 & 0 & 0\\
+                                      0 & 0 & 0
+                                    \end{bmatrix}\\
+           &&\eigenspace{F}{-1}&=\nsp{F+1I_3}
+                                 =\spn{\set{\colvector{-\frac{2}{3}\\1\\0},\,\colvector{-\frac{1}{3}\\0\\1}}}
+    =\spn{\set{\colvector{-2\\3\\0},\,\colvector{-1\\0\\3}}}
+  \end{align*}
+  
+  Eigenspaces in hand, we can easily compute eigenvectors by forming
+  nontrivial linear combinations of the basis vectors describing each
+  eigenspace.  In particular, notice that we can ``pretty up'' our
+  basis vectors by using scalar multiples to clear out fractions.
+
+\end{example}
+
+\end{document}
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

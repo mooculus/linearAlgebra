@@ -1,0 +1,255 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Particular Solutions, Homogeneous Solutions}
+
+\begin{document}
+\begin{abstract}
+  To find all of the solutions to a linear system of equations, it is
+  sufficient to find just one solution, and then find all of the
+  solutions to the corresponding homogeneous system.
+\end{abstract}
+\maketitle
+
+The next theorem tells us that in order to find all of the solutions
+to a linear system of equations, it is sufficient to find just one
+solution, and then find all of the solutions to the corresponding
+homogeneous system.  This explains part of our interest in the null
+space, the set of all solutions to a homogeneous system.
+
+\begin{theorem}[Particular Solution Plus Homogeneous Solutions]
+  \label{theorem:PSPHS}
+  Suppose that $\vect{w}$ is one solution to the linear system of
+  equations $\linearsystem{A}{\vect{b}}$.  Then $\vect{y}$ is a
+  solution to $\linearsystem{A}{\vect{b}}$ if and only if
+  $\vect{y}=\vect{w}+\vect{z}$ for some vector $\vect{z}\in\nsp{A}$.
+
+  \begin{proof}
+    Let $\vectorlist{A}{n}$ be the columns of the coefficient matrix $A$.
+
+    ($\Leftarrow$) Suppose $\vect{y}=\vect{w}+\vect{z}$ and
+    $\vect{z}\in\nsp{A}$. Then
+    \begin{align*}
+      \vect{b}
+      &=
+        \vectorentry{\vect{w}}{1}\vect{A}_1+
+        \vectorentry{\vect{w}}{2}\vect{A}_2+
+        \vectorentry{\vect{w}}{3}\vect{A}_3+
+        \cdots+
+        \vectorentry{\vect{w}}{n}\vect{A}_n
+      &&\ref{theorem:SLSLC}\\
+      &=
+        \vectorentry{\vect{w}}{1}\vect{A}_1+
+        \vectorentry{\vect{w}}{2}\vect{A}_2+
+        \vectorentry{\vect{w}}{3}\vect{A}_3+
+        \cdots+
+        \vectorentry{\vect{w}}{n}\vect{A}_n
+        +\zerovector
+      &&\ref{property:ZC}\\
+      &=
+        \vectorentry{\vect{w}}{1}\vect{A}_1+
+        \vectorentry{\vect{w}}{2}\vect{A}_2+
+        \vectorentry{\vect{w}}{3}\vect{A}_3+
+        \cdots+
+        \vectorentry{\vect{w}}{n}\vect{A}_n
+      &&\ref{theorem:SLSLC}\\
+      &\quad\quad
+        +
+        \vectorentry{\vect{z}}{1}\vect{A}_1+
+        \vectorentry{\vect{z}}{2}\vect{A}_2+
+        \vectorentry{\vect{z}}{3}\vect{A}_3+
+        \cdots+
+        \vectorentry{\vect{z}}{n}\vect{A}_n\\
+      &=
+        \left(\vectorentry{\vect{w}}{1}+\vectorentry{\vect{z}}{1}\right)\vect{A}_1+
+        \left(\vectorentry{\vect{w}}{2}+\vectorentry{\vect{z}}{2}\right)\vect{A}_2
+      &&\ref{theorem:VSPCV}\\
+      &\quad\quad
+        \left(\vectorentry{\vect{w}}{3}+\vectorentry{\vect{z}}{3}\right)\vect{A}_3+
+        \cdots+
+        \left(\vectorentry{\vect{w}}{n}+\vectorentry{\vect{z}}{n}\right)\vect{A}_n\\
+      &=
+        \vectorentry{\vect{w}+\vect{z}}{1}\vect{A}_1+
+        \vectorentry{\vect{w}+\vect{z}}{2}\vect{A}_2+
+        \cdots+
+        \vectorentry{\vect{w}+\vect{z}}{n}\vect{A}_n
+      &&\ref{definition:CVA}\\
+      &=
+        \vectorentry{\vect{y}}{1}\vect{A}_1+
+        \vectorentry{\vect{y}}{2}\vect{A}_2+
+        \vectorentry{\vect{y}}{3}\vect{A}_3+
+        \cdots+
+        \vectorentry{\vect{y}}{n}\vect{A}_n
+      &&\text{Definition of $\vect{y}$}
+    \end{align*}
+    Applying \ref{theorem:SLSLC} we see that the vector $\vect{y}$ is
+    a solution to $\linearsystem{\answer{A}}{\vect{b}}$.
+
+    ($\Rightarrow$) Suppose $\vect{y}$ is a solution to
+    $\linearsystem{A}{\vect{b}}$.  Then
+    \begin{align*}
+      \zerovector
+      &=
+        \vect{b}-\vect{b}&&\text{}\\
+      &=
+        \vectorentry{\vect{y}}{1}\vect{A}_1+
+        \vectorentry{\vect{y}}{2}\vect{A}_2+
+        \vectorentry{\vect{y}}{3}\vect{A}_3+
+        \cdots+
+        \vectorentry{\vect{y}}{n}\vect{A}_n
+                         &&\ref{theorem:SLSLC}\\
+      &\quad\quad
+        -
+        \left(
+        \vectorentry{\vect{w}}{1}\vect{A}_1+
+        \vectorentry{\vect{w}}{2}\vect{A}_2+
+        \vectorentry{\vect{w}}{3}\vect{A}_3+
+        \cdots+
+        \vectorentry{\vect{w}}{n}\vect{A}_n
+        \right)\\
+      &=
+        \left(\vectorentry{\vect{y}}{1}-\vectorentry{\vect{w}}{1}\right)\vect{A}_1+
+        \left(\vectorentry{\vect{y}}{2}-\vectorentry{\vect{w}}{2}\right)\vect{A}_2
+                         &&\ref{theorem:VSPCV}\\
+      &\quad\quad
+        +
+        \left(\vectorentry{\vect{y}}{3}-\vectorentry{\vect{w}}{3}\right)\vect{A}_3+
+        \cdots+
+        \left(\vectorentry{\vect{y}}{n}-\vectorentry{\vect{w}}{n}\right)\vect{A}_n\\
+      &=
+        \vectorentry{\vect{y}-\vect{w}}{1}\vect{A}_1+
+        \vectorentry{\vect{y}-\vect{w}}{2}\vect{A}_2
+                         &&\ref{definition:CVA}\\
+      &\quad\quad
+        +\vectorentry{\vect{y}-\vect{w}}{3}\vect{A}_3+
+        \cdots+
+        \vectorentry{\vect{y}-\vect{w}}{n}\vect{A}_n
+    \end{align*}
+    By \ref{theorem:SLSLC} we see that the vector $\vect{y}-\vect{w}$
+    is a solution to the homogeneous system $\homosystem{A}$ and by
+    \ref{definition:NSM}, $\vect{y}-\vect{w}\in\nsp{A}$.  In other
+    words, $\vect{y}-\vect{w}=\vect{z}$ for some vector
+    $\vect{z}\in\nsp{A}$.  Rewritten, this is
+    %$\vect{y}=\vect{w}+\vect{z}$
+    $\vect{y}=\answer{w+z}$, as desired.
+  \end{proof}
+\end{theorem}
+
+Nonsingular coefficient matrices lead to unique solutions for every
+choice of the vector of constants.  What does this say about singular
+matrices?  A singular matrix $A$ has a nontrivial null space
+(\ref{theorem:NMTNS}).  For a given vector of constants, $\vect{b}$,
+the system $\linearsystem{A}{\vect{b}}$ could be inconsistent, meaning
+there are no solutions.  But if there is at least one solution
+($\vect{w}$), then \ref{theorem:PSPHS} tells us there will be
+infinitely many solutions because of the role of the infinite null
+space for a singular matrix.  So a system of equations with a singular
+coefficient matrix \textit{never} has a unique solution.  With a
+singular coefficient matrix, either there are no solutions, or
+infinitely many solutions, depending on the choice of the vector of
+constants ($\vect{b}$).
+
+\begin{example}[Particular solutions, homogeneous solutions]
+  The system
+  \begin{align*}
+    2x_1  + x_2 + 7x_3 - 7x_4 &= 8 \\
+    -3x_1 + 4x_2 -5x_3 - 6x_4 &=  -12 \\
+    x_1 +x_2 + 4x_3 - 5x_4 &=  4
+  \end{align*}
+  is a consistent system of equations with a nontrivial null space.
+  Let $A$ denote the coefficient matrix of this system.  The write-up
+  for this system begins with three solutions,
+  \begin{align*}
+    \vect{y}_1=\colvector{0\\1\\2\\1}&&
+    \vect{y}_2=\colvector{4\\0\\0\\0}&&
+    \vect{y}_3=\colvector{7\\8\\1\\3}
+  \end{align*}
+
+  We will choose to have $\vect{y}_1$ play the role of $\vect{w}$ in
+  the statement of \ref{theorem:PSPHS}, any one of the three vectors
+  listed here (or others) could have been chosen.  To illustrate the
+  theorem, we should be able to write each of these three solutions as
+  the vector $\vect{w}$ plus a solution to the corresponding
+  homogeneous system of equations.  Since $\zerovector$ is always a
+  solution to a homogeneous system we can easily write
+  \[
+    \vect{y}_1=\vect{w}=\vect{w}+\zerovector.
+  \]
+
+  The vectors $\vect{y}_2$ and $\vect{y}_3$ will require a bit more
+  effort.  Solutions to the homogeneous system $\homosystem{A}$ are
+  exactly the elements of the null space of the coefficient matrix,
+  which by an application of \ref{theorem:VFSLS} is
+  \[
+    \nsp{A}=\setparts{
+      x_3\colvector{-3\\-1\\1\\0}+x_4\colvector{2\\3\\0\\1}
+    }{
+      x_3,\,x_4\in\complexes
+    }
+  \]
+  Then
+  \[
+    \vect{y}_2=\colvector{4\\0\\0\\0}
+    =\colvector{0\\1\\2\\1}+\colvector{4\\-1\\-2\\-1}
+    =\colvector{0\\1\\2\\1}+\left((-2)\colvector{-3\\-1\\1\\0}+(-1)\colvector{2\\3\\0\\1}\right)
+    =\vect{w}+\vect{z}_2
+  \]
+  where
+  \[
+    \vect{z}_2
+    =\colvector{4\\-1\\-2\\-1}
+    =(-2)\colvector{-3\\-1\\1\\0}+(-1)\colvector{2\\3\\0\\1}
+  \]
+  is obviously a solution of the homogeneous system since it is
+  written as a linear combination of the vectors describing the null
+  space of the coefficient matrix (or as a check, you could just
+  evaluate the equations in the homogeneous system with $\vect{z}_2$).
+
+  Again
+  \[
+    \vect{y}_3=\colvector{7\\8\\1\\3}
+    =\colvector{0\\1\\2\\1}+\colvector{7\\7\\-1\\2}
+    =\colvector{0\\1\\2\\1}+\left((-1)\colvector{-3\\-1\\1\\0}+2\colvector{2\\3\\0\\1}\right)
+    =\vect{w}+\vect{z}_3
+  \]
+  where
+  \[
+    \vect{z}_3=\colvector{7\\7\\-1\\2}=
+    (-1)\colvector{-3\\-1\\1\\0}+2\colvector{2\\3\\0\\1}
+  \]
+  is obviously a solution of the homogeneous system since it is
+  written as a linear combination of the vectors describing the null
+  space of the coefficient matrix (or as a check, you could just
+  evaluate the equations in the homogeneous system with $\vect{z}_2$).
+
+  Here is another view of this theorem, in the context of this
+  example.  Grab two new solutions of the original system of
+  equations, say
+  \begin{align*}
+    \vect{y}_4=\colvector{11\\0\\-3\\-1}&&
+    \vect{y}_5=\colvector{-4\\2\\4\\2}
+  \end{align*}
+  and form their difference,
+  \[
+    \vect{u}=\colvector{11\\0\\-3\\-1}-\colvector{-4\\2\\4\\2}=\colvector{15\\-2\\-7\\-3}.
+  \]
+  Is $\vect{u}$ a solution to the homogeneous system?
+  \begin{multipleChoice}
+    \choice{No.}
+    \choice[correct]{Yes.}
+  \end{multipleChoice}
+
+  \begin{feedback}[correct]
+    It is no accident that $\vect{u}$ is a solution to the homogeneous
+    system (check this!).  In other words, the difference between any
+    two solutions to a linear system of equations is an element of the
+    null space of the coefficient matrix.  This is an equivalent way
+    to state \ref{theorem:PSPHS}.
+  \end{feedback}
+\end{example}
+
+The ideas of this subsection will appear again when we discuss
+preimages of linear transformations..
+
+\end{document}

@@ -1,0 +1,166 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Dimension of Vector Spaces}
+
+\begin{document}
+\begin{abstract}
+  We collect the dimension of some common, and not so common, vector spaces.
+\end{abstract}
+\maketitle
+
+\begin{theorem}[Dimension of $\complex{m}$]
+  \label{theorem:DCM}
+
+  The dimension of $\complex{m}$ (\ref{example:VSCV}) is $m$.
+
+  \begin{proof}
+    \ref{theorem:SUVB} provides a basis with $m$ vectors.
+  \end{proof}
+\end{theorem}
+
+\begin{theorem}[Dimension of $P_n$]
+  \label{theorem:DP}
+
+  The dimension of $P_{n}$  (\ref{example:VSP}) is $\answer{n+1}$.
+
+  \begin{feedback}[correct]
+    \begin{proof}
+      \ref{example:BP} provides \textit{two} bases with $n+1$ vectors.  Take your pick.
+    \end{proof}
+  \end{feedback}
+\end{theorem}
+
+\begin{theorem}[Dimension of $M_{mn}$]
+  \label{theorem:DM}
+
+  The dimension of $M_{mn}$  (\ref{example:VSM}) is $mn$.
+  
+  \begin{proof}
+    \ref{example:BM} provides a basis with $mn$ vectors.
+  \end{proof}
+\end{theorem}
+
+\begin{example}[Dimension of a subspace of $M_{22}$]
+  It should now be plausible that
+  \[
+    Z=\setparts{\begin{bmatrix}a&b\\c&d\end{bmatrix}}{2a+b+3c+4d=0,\,-a+3b-5c-2d=0}
+  \]
+  is a subspace of the vector space $M_{22}$ (\ref{example:VSM}).  
+
+  To find the dimension of $Z$ we must first find a basis, though any old basis will do.
+
+  First concentrate on the conditions relating $a,\,b,\,c$ and $d$.  They form a homogeneous system of two equations in four variables with coefficient matrix
+  \[
+    \begin{bmatrix}
+      2 & 1 & 3 & 4\\
+      -1 & 3 & -5 & -2
+    \end{bmatrix}
+  \]
+
+  We can row-reduce this matrix to obtain
+  \[
+    \begin{bmatrix}
+      \leading{1} & 0 & 2 & 2\\
+      0 & \leading{1} & -1 & 0
+    \end{bmatrix}
+  \]
+  
+  Rewrite the two equations represented by each row of this matrix, expressing the dependent variables ($a$ and $b$) in terms of the free variables ($c$ and $d$), and we obtain,
+  \begin{align*}
+    a&=-2c-2d\\
+    b&=c
+  \end{align*}
+
+  We can now write a typical entry of $Z$ strictly in terms of $c$ and $d$, and we can decompose the result,
+  \[
+    \begin{bmatrix}a&b\\c&d\end{bmatrix}=
+    \begin{bmatrix}-2c-2d&c\\c&d\end{bmatrix}=
+    \begin{bmatrix}-2c&c\\c&0\end{bmatrix}+
+    \begin{bmatrix}-2d&0\\0&d\end{bmatrix}=
+    c\begin{bmatrix}-2&1\\1&0\end{bmatrix}+
+    d\begin{bmatrix}-2&0\\0&1\end{bmatrix}
+  \]
+
+  This equation says that an arbitrary matrix in $Z$ can be written as a linear combination of the two vectors in
+  \[
+    S=\set{\begin{bmatrix}-2&1\\1&0\end{bmatrix},\,\begin{bmatrix}-2&0\\0&1\end{bmatrix}}
+  \]
+  so we know that
+  \[
+    Z=\spn{S}=
+    \spn{\set{
+        \begin{bmatrix}-2&1\\1&0\end{bmatrix},\,
+        \begin{bmatrix}-2&0\\0&1\end{bmatrix}
+      }}
+  \]
+
+  Are these two matrices (vectors) also linearly independent?  Begin with a relation of linear dependence on $S$,
+  \begin{align*}
+    a_1\begin{bmatrix}-2&1\\1&0\end{bmatrix}+
+                               a_2\begin{bmatrix}-2&0\\0&1\end{bmatrix}&=\zeromatrix\\
+    \begin{bmatrix}-2a_1-2a_2&a_1\\a_1&a_2\end{bmatrix}&=
+                                                         \begin{bmatrix}0&0\\0&0\end{bmatrix}
+  \end{align*}
+  
+  From the equality of the two entries in the last row, we conclude
+  that $a_1=0$, $a_2=0$.  Thus the only possible relation of linear
+  dependence is the trivial one, and therefore $S$ is linearly
+  independent (\ref{definition:LI}).  So $S$ is a basis for $Z$
+  (\ref{definition:B}).  Finally, we can conclude that
+  $\dimension{Z}=2$ (\ref{definition:D}) since $S$ has two elements.
+\end{example}
+
+\begin{example}[Dimension of a subspace of $P_4$]
+  We showed that
+  \[
+    S=\set{x-2,\,x^2-4x+4,\,x^3-6x^2+12x-8,\,x^4-8x^3+24x^2-32x+16}
+  \]
+  is a basis for $W=\setparts{p(x)}{p\in P_4,\ p(2)=0}$.  Thus, the
+  dimension of $W$ is four, $\dimension{W}=4$.
+
+  Note that $\dimension{P_4}=5$ by \ref{theorem:DP}, so $W$ is a
+  subspace of dimension 4 within the vector space $P_4$ of dimension
+  5, illustrating the upcoming \ref{theorem:PSSD}.
+\end{example}
+
+\begin{example}[Dimension of the crazy vector space]
+  In \ref{example:BC} we determined that the set
+  $R=\set{(1,\,0),\,(6,\,3)}$ from the crazy vector space, $C$
+  (\ref{example:CVS}), is a basis for $C$.  By \ref{definition:D} we
+  see that $C$ has dimension 2, $\dimension{C}=2$.
+\end{example}
+
+It is possible for a vector space to have no finite bases, in which
+case we say it has infinite dimension.  Many of the best examples of
+this are vector spaces of functions, which lead to constructions like
+Hilbert spaces.  We will focus exclusively on finite-dimensional
+vector spaces.  OK, one infinite-dimensional example, and
+\textit{then} we will focus exclusively on finite-dimensional vector
+spaces.
+
+\begin{example}[Vector space of polynomials with unbounded degree]
+  Define the set $P$ by
+  \[
+    P=\setparts{p}{p(x)\text{ is a polynomial in }x}
+  \]
+
+  Our operations will be the same as those defined for $P_n$
+  (\ref{example:VSP}).
+
+  With no restrictions on the possible degrees of our polynomials, any
+  finite set that is a candidate for spanning $P$ will come up short.
+  We will give a proof by contradiction (\ref{technique:CD}).  To this
+  end, suppose that the dimension of $P$ is finite, say
+  $\dimension{P}=n$.
+
+  The set $T=\set{1,\,x,\,x^2,\,\ldots,\,x^n}$ is a linearly
+  independent set (check this!) containing $n+1$ polynomials from $P$.
+  However, a basis of $P$ will be a spanning set of $P$ containing $n$
+  vectors.  This situation is a contradiction of \ref{theorem:SSLD},
+  so our assumption that $P$ has finite dimension is false.  Thus, we
+  say $\dimension{P}=\infty$.
+\end{example}
+
+\end{document}

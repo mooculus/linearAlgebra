@@ -1,0 +1,316 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Orthonormal Bases and Coordinates}
+
+\begin{document}
+\begin{abstract}
+  When an orthogonal set also spans a subspace, then the set is a
+  basis for that subspace.
+\end{abstract}
+\maketitle
+
+We learned about orthogonal sets of vectors in $\real{m}$ back in
+\ref{section:O}, and we also learned that orthogonal sets are
+automatically linearly independent (\ref{theorem:OSLI}).  When an
+orthogonal set also spans a subspace of $\real{m}$, then the set is a
+basis.  And when the set is orthonormal, then the set is an incredibly
+nice basis.  We will back up this claim with a theorem, but first
+consider how you might manufacture such a set.
+
+Suppose that $W$ is a subspace of $\real{m}$ with basis $B$.  Then $B$
+spans $W$ and is a linearly independent set of nonzero vectors.  We
+can apply the Gram-Schmidt Procedure (\ref{theorem:GSP}) and obtain a
+linearly independent set $T$ such that $\spn{T}=\spn{B}=W$ and $T$ is
+orthogonal.  In other words, $T$ is a basis for $W$, and is an
+orthogonal set.  By scaling each vector of $T$ to norm 1, we can
+convert $T$ into an orthonormal set, without destroying the properties
+that make it a basis of $W$.  In short, we can convert any basis into
+an orthonormal basis.  \ref{example:GSTV}, followed by
+\ref{example:ONTV}, illustrates this process.
+
+\begin{question}
+  Suppose that $Q$ is a unitary matrix of size $n$.
+
+  \begin{multipleChoice}
+    \choice{Then the matrix $Q$ is singular.}
+    \choice[correct]{Then the $n$ columns of $Q$ form an orthonormal set.}
+  \end{multipleChoice}
+
+  \begin{feedback}[correct]
+    Unitary matrices (\ref{definition:UM}) are another good source of
+    orthonormal bases (and vice versa).  Then the $n$ columns of $Q$
+    form an orthonormal set (\ref{theorem:CUMOS}) that is therefore
+    linearly independent (\ref{theorem:OSLI}).  Since $Q$ is
+    invertible (\ref{theorem:UMI}), we know $Q$ is nonsingular
+    (\ref{theorem:NI}), and then the columns of $Q$ span $\complex{n}$
+    (\ref{theorem:CSNM}).  So the columns of a unitary matrix of size
+    $n$ are an orthonormal basis for $\complex{n}$.
+  \end{feedback}
+\end{question}
+
+Why all the fuss about orthonormal bases?  \ref{theorem:VRRB} told us
+that any vector in a vector space could be written, uniquely, as a
+linear combination of basis vectors.  For an orthonormal basis,
+finding the scalars for this linear combination is extremely easy, and
+this is the content of the next theorem.  Furthermore, with vectors
+written this way (as linear combinations of the elements of an
+orthonormal set) certain computations and analysis become much easier.
+Here is the promised theorem.
+
+\begin{theorem}[Coordinates and Orthonormal Bases]
+  \label{theorem:COB}
+  Suppose that $B=\set{\vectorlist{v}{p}}$ is an orthonormal basis of
+  the subspace $W$ of $\complex{m}$.  For any $\vect{w}\in W$,
+  \[
+    \vect{w}=
+    \innerproduct{\vect{v}_1}{\vect{w}}\vect{v}_1+
+    \innerproduct{\vect{v}_2}{\vect{w}}\vect{v}_2+
+    \innerproduct{\vect{v}_3}{\vect{w}}\vect{v}_3+
+    \cdots+
+    \innerproduct{\vect{v}_p}{\vect{w}}\vect{v}_p
+  \]
+
+  \begin{proof}
+    Because $B$ is a basis of $W$, \ref{theorem:VRRB} tells us that we
+    can write $\vect{w}$ uniquely as a linear combination of the
+    vectors in $B$.  So it is not this aspect of the conclusion that
+    makes this theorem interesting.  What is interesting is that the
+    particular scalars are so easy to compute.  No need to solve big
+    systems of equations---just do an inner product of $\vect{w}$ with
+    $\vect{v}_i$ to arrive at the coefficient of $\vect{v}_i$ in the
+    linear combination.
+
+    So begin the proof by writing $\vect{w}$ as a linear combination
+    of the vectors in $B$, using unknown scalars,
+    \[
+      \vect{w}=\lincombo{a}{v}{p}
+    \]
+    and compute,
+    \begin{align*}
+      \innerproduct{\vect{v}_i}{\vect{w}}
+      &=\innerproduct{\vect{v}_i}{\sum_{k=1}^{p}a_k\vect{v}_k}
+      &&\ref{theorem:VRRB}\\
+      &=\sum_{k=1}^{p}\innerproduct{\vect{v}_i}{a_k\vect{v}_k}
+      &&\ref{theorem:IPVA}\\
+      &=\sum_{k=1}^{p}a_k\innerproduct{\vect{v}_i}{\vect{v}_k}
+      &&\ref{theorem:IPSM}\\
+      &=a_i\innerproduct{\vect{v}_i}{\vect{v}_i}+
+        \sum_{\substack{k=1\\k\neq i}}^{p}a_k\innerproduct{\vect{v}_i}{\vect{v}_k}
+      &&\ref{property:C}\\
+      &=a_i(1)+\sum_{\substack{k=1\\k\neq i}}^{p}a_k(0)
+      &&\ref{definition:ONS}\\
+      &=a_i
+    \end{align*}
+    
+    So the (unique) scalars for the linear combination are indeed the
+    inner products advertised in the conclusion of the theorem's
+    statement.
+  \end{proof}
+\end{theorem}
+
+\begin{example}[Coordinatization relative to an orthonormal basis, $\complex{4}$]
+  The set
+  \[
+    \set{\vect{x}_1,\,\vect{x}_2,\,\vect{x}_3,\,\vect{x}_4}=
+    \set{
+      \colvector{1+i\\1\\1-i\\i},\,
+      \colvector{1+5i\\6+5i\\-7-i\\1-6i},\,
+      \colvector{-7+34i\\-8-23i\\-10+22i\\30+13i},\,
+      \colvector{-2-4i\\6+i\\4+3i\\6-i}
+    }
+  \]
+  was proposed, and partially verified, as an orthogonal set in
+  \ref{example:AOS}.  Let us scale each vector to norm 1, so as to
+  form an orthonormal set in $\complex{4}$.  Then by
+  \ref{theorem:OSLI} the set will be linearly independent, and the set
+  will be a basis for $\complex{4}$.  So, once scaled to norm 1, the
+  adjusted set will be an orthonormal basis of $\complex{4}$.  The
+  norms are,
+  \begin{align*}
+    \norm{\vect{x}_1}=\sqrt{\answer{6}}
+    &&
+       \norm{\vect{x}_2}=\sqrt{174}
+    &&
+       \norm{\vect{x}_3}=\sqrt{3451}
+    &&
+       \norm{\vect{x}_4}=\sqrt{119}
+  \end{align*}
+
+  \begin{feedback}[correct]
+    Therefore an orthonormal basis is
+    \begin{align*}
+      B&=
+         \set{\vect{v}_1,\,\vect{v}_2,\,\vect{v}_3,\,\vect{v}_4}\\
+       &=\set{
+         \frac{1}{\sqrt{6}}\colvector{1+i\\1\\1-i\\i},\,
+      \frac{1}{\sqrt{174}}\colvector{1+5i\\6+5i\\-7-i\\1-6i},\,
+      \frac{1}{\sqrt{3451}}\colvector{-7+34i\\-8-23i\\-10+22i\\30+13i},\,
+      \frac{1}{\sqrt{119}}\colvector{-2-4i\\6+i\\4+3i\\6-i}
+      }
+    \end{align*}
+
+    Now, to illustrate \ref{theorem:COB}, choose any vector from $\complex{4}$, say $\vect{w}=\colvector{2\\-3\\1\\4}$, and compute
+    \begin{align*}
+      \innerproduct{\vect{v}_1}{\vect{w}}&=\frac{-5i}{\sqrt{6}}&
+                                                                 \innerproduct{\vect{v}_2}{\vect{w}}&=\frac{-19+30i}{\sqrt{174}}\\
+      \innerproduct{\vect{v}_3}{\vect{w}}&=\frac{120-211i}{\sqrt{3451}}&
+                                                                         \innerproduct{\vect{v}_4}{\vect{w}}&=\frac{6+12i}{\sqrt{119}}
+    \end{align*}
+    
+    Then \ref{theorem:COB} guarantees that
+    \begin{align*}
+      \colvector{2\\-3\\1\\4}&=
+                               \frac{-5i}{\sqrt{6}}\left(\frac{1}{\sqrt{6}}\colvector{1+i\\1\\1-i\\i}\right)+
+      \frac{-19+30i}{\sqrt{174}}\left(\frac{1}{\sqrt{174}}\colvector{1+5i\\6+5i\\-7-i\\1-6i}\right)\\
+                             &\quad\quad+
+                               \frac{120-211i}{\sqrt{3451}}\left(\frac{1}{\sqrt{3451}}\colvector{-7+34i\\-8-23i\\-10+22i\\30+13i}\right)+
+      \frac{6+12i}{\sqrt{119}}\left(\frac{1}{\sqrt{119}}\colvector{-2-4i\\6+i\\4+3i\\6-i}\right)
+    \end{align*}
+    as you might want to check (if you have unlimited patience).
+  \end{feedback}
+\end{example}
+
+A slightly less intimidating example follows, in three dimensions and
+with just real numbers.
+
+\begin{example}[Coordinatization relative to an orthonormal basis, $\real{3}$]
+  The set
+  \[
+    \set{\vect{x}_1,\,\vect{x}_2,\,\vect{x}_3}
+    =\set{
+      \colvector{1\\2\\1},\,
+      \colvector{-1\\0\\1},\,
+      \colvector{2\\1\\1}
+    }
+  \]
+  is a linearly independent set, which the Gram-Schmidt Process
+  (\ref{theorem:GSP}) converts to an orthogonal set, and which can
+  then be converted to the orthonormal set,
+  \[
+    B=
+    \set{\vect{v}_1,\,\vect{v}_2,\,\vect{v}_3}
+    =\set{
+      \frac{1}{\sqrt{6}}\colvector{1\\2\\1},\,
+      \frac{1}{\sqrt{2}}\colvector{-1\\0\\1},\,
+      \frac{1}{\sqrt{3}}\colvector{1\\-1\\1}
+    }
+  \]
+  which is therefore an orthonormal basis of $\real{3}$.  With three
+  vectors in $\real{3}$, all with real number entries, the inner
+  product (\ref{definition:IP}) reduces to the usual ``dot product''
+  (or scalar product) and the orthogonal pairs of vectors can be
+  interpreted as perpendicular pairs of directions.  So the vectors in
+  $B$ serve as replacements for our usual 3-D axes, or the usual 3-D
+  unit vectors $\vec{i},\vec{j}$ and $\vec{k}$.  We would like to
+  decompose arbitrary vectors into ``components'' in the directions of
+  each of these basis vectors.  It is \ref{theorem:COB} that tells us
+  how to do this.
+
+  Suppose that we choose $\vect{w}=\colvector{2\\-1\\5}$.  Compute
+  \begin{align*}
+    \innerproduct{\vect{v}_1}{\vect{w}}=\frac{5}{\sqrt{6}}&&
+                                                             \innerproduct{\vect{v}_2}{\vect{w}}=\frac{3}{\sqrt{2}}&&
+                                                                                                                      \innerproduct{\vect{v}_3}{\vect{w}}=\frac{8}{\sqrt{3}}
+  \end{align*}
+  then \ref{theorem:COB} guarantees that
+  \[
+    \colvector{2\\-1\\5}=
+    \frac{\answer{5}}{\sqrt{6}}\left(\frac{1}{\sqrt{6}}\colvector{1\\2\\1}\right)+
+    \frac{3}{\sqrt{2}}\left(\frac{1}{\sqrt{2}}\colvector{-1\\0\\1}\right)+
+    \frac{8}{\sqrt{3}}\left(\frac{1}{\sqrt{3}}\colvector{1\\-1\\1}\right)
+  \]
+  which you should be able to check easily, even if you do not have much patience.
+\end{example}
+
+Not only do the columns of a unitary matrix form an orthonormal basis,
+but there is a deeper connection between orthonormal bases and unitary
+matrices.  Informally, the next theorem says that if we transform each
+vector of an orthonormal basis by multiplying it by a unitary matrix,
+then the resulting set will be another orthonormal basis.  And more
+remarkably, any matrix with this property must be unitary!  As an
+equivalence, we could take this as our defining property of a unitary
+matrix, though it might not have the same utility as
+\ref{definition:UM}.
+
+\begin{theorem}[Unitary Matrices Convert Orthonormal Bases]
+  \label{theorem:UMCOB}
+
+  Let $A$ be an $n\times n$ matrix and $B=\set{\vectorlist{x}{n}}$ be an orthonormal basis of $\complex{n}$.  Define
+  \begin{align*}
+    C&=\set{A\vect{x}_1,\,A\vect{x}_2,\,A\vect{x}_3,\,\dots,\,A\vect{x}_n}
+  \end{align*}
+
+  Then $A$ is a unitary matrix if and only if $C$ is an orthonormal basis of $\complex{n}$.
+
+  \begin{proof}
+    ($\Rightarrow$)
+    Assume $A$ is a unitary matrix and establish several facts about $C$.  First we check that $C$ is an orthonormal set (\ref{definition:ONS}).  By \ref{theorem:UMPIP}, for $i\neq j$,
+    \begin{align*}
+      \innerproduct{A\vect{x}_i}{A\vect{x}_j}&
+                                               =\innerproduct{\vect{x}_i}{\vect{x}_j}=0
+    \end{align*}
+    
+    Similarly, \ref{theorem:UMPIP} also gives, for $1\leq i\leq n$,
+    \begin{align*}
+      \norm{A\vect{x}_i}=\norm{\vect{x}_i}=1
+    \end{align*}
+
+    As $C$ is an orthogonal set (\ref{definition:OSV}),
+    \ref{theorem:OSLI} yields the linear independence of $C$.  Having
+    established that the column vectors on $C$ form a linearly
+    independent set, a matrix whose columns are the vectors of $C$ is
+    nonsingular (\ref{theorem:NMLIC}), and hence these vectors form a
+    basis of $\complex{n}$ by \ref{theorem:CNMB}.
+
+    ($\Leftarrow$)
+    Now assume that $C$ is an orthonormal set.  Let $\vect{y}$ be an arbitrary vector from $\complex{n}$.  Since $B$ spans $\complex{n}$, there are scalars, $\scalarlist{a}{n}$, such that
+    \begin{align*}
+      \vect{y}&=a_1\vect{x}_1+a_2\vect{x}_2+a_3\vect{x}_3+\cdots+a_n\vect{x}_n
+    \end{align*}
+
+    Now
+    \begin{align*}
+      \adjoint{A}A\vect{y}
+      &=\sum_{i=1}^{n}\innerproduct{\vect{x}_i}{\adjoint{A}A\vect{y}}\vect{x}_i
+      &&\ref{theorem:COB}\\
+      &=\sum_{i=1}^{n}\innerproduct{\vect{x}_i}{\adjoint{A}A\sum_{j=1}^{n}a_j\vect{x}_j}\vect{x}_i
+      &&\ref{definition:SSVS}\\
+      &=\sum_{i=1}^{n}\innerproduct{\vect{x}_i}{\sum_{j=1}^{n}\adjoint{A}Aa_j\vect{x}_j}\vect{x}_i
+      &&\ref{theorem:MMDAA}\\
+      &=\sum_{i=1}^{n}\innerproduct{\vect{x}_i}{\sum_{j=1}^{n}a_j\adjoint{A}A\vect{x}_j}\vect{x}_i
+      &&\ref{theorem:MMSMM}\\
+      &=\sum_{i=1}^{n}\sum_{j=1}^{n}\innerproduct{\vect{x}_i}{a_j\adjoint{A}A\vect{x}_j}\vect{x}_i
+      &&\ref{theorem:IPVA}\\
+      &=\sum_{i=1}^{n}\sum_{j=1}^{n}a_j\innerproduct{\vect{x}_i}{\adjoint{A}A\vect{x}_j}\vect{x}_i
+      &&\ref{theorem:IPSM}\\
+      &=\sum_{i=1}^{n}\sum_{j=1}^{n}a_j\innerproduct{A\vect{x}_i}{A\vect{x}_j}\vect{x}_i
+      &&\ref{theorem:AIP}\\
+      &=
+        \sum_{i=1}^{n}\sum_{\substack{j=1\\j\neq i}}^{n}a_j\innerproduct{A\vect{x}_i}{A\vect{x}_j}\vect{x}_i
+      +
+      \sum_{\ell=1}^{n}a_\ell\innerproduct{A\vect{x}_\ell}{A\vect{x}_\ell}\vect{x}_\ell
+      &&\ref{property:C}\\
+      &=
+        \sum_{i=1}^{n}\sum_{\substack{j=1\\j\neq i}}^{n}a_j(0)\vect{x}_i
+      +
+      \sum_{\ell=1}^{n}a_\ell(1)\vect{x}_\ell
+      &&\ref{definition:ONS}\\
+      &=
+        \sum_{i=1}^{n}\sum_{\substack{j=1\\j\neq i}}^{n}\zerovector
+      +
+      \sum_{\ell=1}^{n}a_\ell\vect{x}_\ell
+      &&\ref{theorem:ZSSM}\\
+      &=\sum_{\ell=1}^{n}a_\ell\vect{x}_\ell
+      &&\ref{property:Z}\\
+      &=\vect{y}\\
+      &=I_n\vect{y}
+      &&\ref{theorem:MMIM}
+    \end{align*}
+    
+    Since the choice of $\vect{y}$ was arbitrary, \ref{theorem:EMMVP} tells us that $\adjoint{A}A=I_n$, so $A$ is unitary (\ref{definition:UM}).
+  \end{proof}
+\end{theorem}
+
+\end{document}

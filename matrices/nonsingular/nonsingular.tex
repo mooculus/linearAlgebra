@@ -1,0 +1,250 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Nonsingular Matrices are Invertible}
+
+\begin{document}
+\begin{abstract}
+  Although we have defined them differently, a matrix being
+  nonsingular and a matrix being invertible amount to the same thing.
+\end{abstract}
+\maketitle
+
+If a square matrix $A$ is nonsingular, then there is a matrix $B$ so
+that $AB=I_n$.  In other words, $B$ is halfway to being an inverse of
+$A$.  We will see in this section that $B$ automatically fulfills the
+second condition ($BA=I_n$).  We have seen examples in which the
+coefficient matrix had no inverse; not coincidentally, in those cases
+the coefficient matrix was singular.  We will make all these
+connections precise now.  Not many examples or definitions in this
+section, just theorems.
+
+We need a couple of technical results for starters.  Some books would
+call these minor, but essential, results ``lemmas.''  We'll just call
+them theorems.
+
+The first of these technical results is interesting in that the
+hypothesis says something about a product of two square matrices and
+the conclusion then says the same thing about each individual matrix
+in the product.  This result has an analogy in the algebra of complex
+numbers: suppose $\alpha,\,\beta\in\complexes$, then
+$\alpha\beta\neq 0$ if and only if $\alpha\neq 0$ and $\beta\neq 0$.
+We can view this result as suggesting that the term ``nonsingular''
+for matrices is like the term ``nonzero'' for scalars.  Consider too
+that we know singular matrices, as coefficient matrices for systems of
+equations, will sometimes lead to systems with no solutions, or
+systems with infinitely many solutions.  What do linear equations with
+zero look like?  Consider $0x=5$, which has no solution, and $0x=0$,
+which has infinitely many solutions.  In the algebra of scalars, zero
+is exceptional (meaning different, not better), and in the algebra of
+matrices, singular matrices are also the exception.  While there is
+only one zero scalar, and there are infinitely many singular matrices,
+we will see that singular matrices are a distinct minority.
+
+\begin{theorem}[Nonsingular Product has Nonsingular Terms]
+  \label{theorem:NPNT}
+  
+  Suppose that $A$ and $B$ are square matrices of size $n$.  The
+  product $AB$ is nonsingular if and only if $A$ and $B$ are both
+  nonsingular.
+
+  \begin{proof}
+    ($\Rightarrow$) For this portion of the proof we will form the
+    logically-equivalent contrapositive and prove that statement using
+    two cases.  ``$AB$ is nonsingular implies $A$ and $B$ are both
+    nonsingular'' becomes ``$A$ \wordChoice{\choice[correct]{or}\choice{and}} $B$ is singular implies $AB$ is
+    \wordChoice{\choice[correct]{singular}\choice{nonsingular}}.''
+
+    \textbf{Case 1.}  Suppose $B$ is singular.  Then there is a
+    nonzero vector $\vect{z}$ that is a solution to $\homosystem{B}$.
+    So
+    \begin{align*}
+      (AB)\vect{z}
+      &=A(B\vect{z})&&\ref{theorem:MMA}\\
+      &=A\zerovector&&\ref{theorem:SLEMM}\\
+      &=\zerovector&&\ref{theorem:MMZM}\\
+    \end{align*}
+
+    With \ref{theorem:SLEMM} we can translate this vector equality to
+    the statement that $\vect{z}$ is a nonzero solution to
+    $\homosystem{AB}$.  Thus $AB$ is singular (\ref{definition:NM}),
+    as desired.
+
+    \textbf{Case 2.}  Suppose $A$ is singular, and $B$ is not
+    singular.  In other words, with Case 1 complete, we can be more
+    precise about this remaining case and assume that $B$ is
+    nonsingular.  Because $A$ is singular, there is a nonzero vector
+    $\vect{y}$ that is a solution to $\homosystem{A}$.  Now consider
+    the linear system $\linearsystem{B}{\vect{y}}$.  Since $B$ is
+    nonsingular, the system has a unique solution
+    (\ref{theorem:NMUS}), which we will denote as $\vect{w}$.  We
+    first claim $\vect{w}$ is not the zero vector either.  Assuming
+    the opposite, suppose that $\vect{w}=\zerovector$
+    (\ref{technique:CD}).  Then
+    \begin{align*}
+      \vect{y}
+      &=B\vect{w}&&\ref{theorem:SLEMM}\\
+      &=B\zerovector&&\text{Hypothesis}\\
+      &=\zerovector&&\ref{theorem:MMZM}
+    \end{align*}
+    contrary to $\vect{y}$ being nonzero.  So $\vect{w}\neq\zerovector$.  The pieces are in place, so here we go,
+    \begin{align*}
+      (AB)\vect{w}
+      &=A(B\vect{w})&&\ref{theorem:MMA}\\
+      &=A\vect{y}&&\ref{theorem:SLEMM}\\
+      &=\zerovector&&\ref{theorem:SLEMM}\\
+    \end{align*}
+
+    With \ref{theorem:SLEMM} we can translate this vector equality to
+    the statement that $\vect{w}$ is a nonzero solution to
+    $\homosystem{AB}$.  Thus $AB$ is singular (\ref{definition:NM}),
+    as desired.  And this conclusion holds for both cases.
+
+    ($\Leftarrow$) Now assume that both $A$ and $B$ are nonsingular.
+    Suppose that $\vect{x}\in\complex{n}$ is a solution to
+    $\homosystem{AB}$.  Then
+    \begin{align*}
+      \zerovector
+      &=\left(AB\right)\vect{x}&&\ref{theorem:SLEMM}\\
+      &=A\left(B\vect{x}\right)&&\ref{theorem:MMA}
+    \end{align*}
+
+    By \ref{theorem:SLEMM}, $B\vect{x}$ is a solution to
+    $\homosystem{A}$, and by the definition of a nonsingular matrix
+    (\ref{definition:NM}), we conclude that $B\vect{x}=\zerovector$.
+    Now, by an entirely similar argument, the nonsingularity of $B$
+    forces us to conclude that $\vect{x}=\zerovector$.  So the only
+    solution to $\homosystem{AB}$ is the zero vector and we conclude
+    that $AB$ is nonsingular by \ref{definition:NM}.
+  \end{proof}
+\end{theorem}
+
+This is a powerful result in the ``forward'' direction, because it
+allows us to begin with a hypothesis that something complicated (the
+matrix product $AB$) has the property of being nonsingular, and we can
+then conclude that the simpler constituents ($A$ and $B$ individually)
+then also have the property of being nonsingular.  If we had thought
+that the matrix product was an artificial construction, results like
+this would make us begin to think twice.
+
+The contrapositive of this entire result is equally interesting.  It
+says that $A$ or $B$ (or both) is a singular matrix if and only if the
+product $AB$ is singular.
+
+\begin{theorem}[One-Sided Inverse is Sufficient]
+  \label{theorem:OSIS}
+
+  Suppose $A$ and $B$ are  square matrices of size $n$ such that $AB=I_n$.  Then $BA=I_n$.
+
+  \begin{proof}
+    The matrix $I_n$ is nonsingular (since it row-reduces easily to
+    $I_n$, \ref{theorem:NMRRI}).  So $A$ and $B$ are nonsingular by
+    \ref{theorem:NPNT}, so in particular $B$ is nonsingular.  We can
+    therefore apply \ref{theorem:CINM} to assert the existence of a
+    matrix $C$ so that $BC=I_n$.  This application of
+    \ref{theorem:CINM} could be a bit confusing, mostly because of the
+    names of the matrices involved.  $B$ is nonsingular, so there must
+    be a ``right-inverse'' for $B$, and we are calling it $C$.
+
+    Now
+    \begin{align*}
+      BA
+      &=(BA)I_n&&\ref{theorem:MMIM}\\
+      &=(BA)(BC)&&\ref{theorem:CINM}\\
+      &=B(AB)C&&\ref{theorem:MMA}\\
+      &=BI_nC&&\text{Hypothesis}\\
+      &=BC&&\ref{theorem:MMIM}\\
+      &=I_n&&\ref{theorem:CINM}
+    \end{align*}
+    which is the desired conclusion.
+  \end{proof}
+\end{theorem}
+
+So \ref{theorem:OSIS} tells us that if $A$ is nonsingular, then the
+matrix $B$ guaranteed by \ref{theorem:CINM} will be both a
+``right-inverse'' and a ``left-inverse'' for $A$, so $A$ is invertible
+and $\inverse{A}=B$.
+
+So if you have a nonsingular matrix, $A$, you can use the procedure
+described in \ref{theorem:CINM} to find an inverse for $A$.  If $A$ is
+singular, then the procedure in \ref{theorem:CINM} will fail as the
+first $n$ columns of $M$ will not row-reduce to the identity matrix.
+However, we can say a bit more.  When $A$ is singular, then $A$ does
+not have an inverse (which is very different from saying that the
+procedure in \ref{theorem:CINM} fails to find an inverse).  This may
+feel like we are splitting hairs, but it is important that we do not
+make unfounded assumptions.  These observations motivate the next
+theorem.
+
+\begin{theorem}[Nonsingularity is Invertibility]
+  \label{theorem:NI}
+
+  Suppose that $A$ is a square matrix.  Then $A$ is nonsingular if and only if $A$ is invertible.
+  
+  \begin{proof}
+    ($\Leftarrow$) Since $A$ is invertible, we can write
+    $I_n=A\inverse{A}$ (\ref{definition:MI}).  Notice that $I_n$ is
+    nonsingular (\ref{theorem:NMRRI}) so \ref{theorem:NPNT} implies
+    that $A$ (and $\inverse{A}$) is nonsingular.
+
+    ($\Rightarrow$) Suppose now that $A$ is nonsingular.  By
+    \ref{theorem:CINM} we find $B$ so that $AB=I_n$.  Then
+    \ref{theorem:OSIS} tells us that $BA=I_n$.  So $B$ is $A$'s
+    inverse, and by construction, $A$ is invertible.
+
+  \end{proof}
+\end{theorem}
+
+So for a square matrix, the properties of having an inverse and of
+having a trivial null space are one and the same.  Cannot have one
+without the other.
+
+\begin{theorem}[Nonsingular Matrix Equivalences, Round 3]
+  Suppose that $A$ is a square matrix of size $n$.  The following are equivalent.
+  \begin{enumerate}\item $A$ is nonsingular.
+  \item $A$ row-reduces to the identity matrix.
+  \item The null space of $A$ contains only the zero vector, $\nsp{A}=\set{\zerovector}$.
+  \item The linear system $\linearsystem{A}{\vect{b}}$ has a unique solution for every possible choice of $\vect{b}$.
+  \item The columns of $A$ are a linearly independent set.
+  \item $A$ is invertible.
+  \end{enumerate}
+  
+  \begin{proof}
+    We can update our list of equivalences for nonsingular matrices
+    with the equivalent condition from \ref{theorem:NI}.
+  \end{proof}
+\end{theorem}
+
+In the case that $A$ is a nonsingular coefficient matrix of a system
+of equations, the inverse allows us to very quickly compute the unique
+solution, for any vector of constants.
+
+\begin{theorem}[Solution with Nonsingular Coefficient Matrix]
+  \label{theorem:SNCM}
+
+  Suppose that $A$ is nonsingular.  Then the unique solution to
+  $\linearsystem{A}{\vect{b}}$ is $\inverse{A}\vect{b}$.
+
+  \begin{proof}
+    By \ref{theorem:NMUS} we know already that
+    $\linearsystem{A}{\vect{b}}$ has \wordChoice{\choice{infinitely
+        many solutions}\choice[correct]{a unique solution}} for every
+  choice of $\vect{b}$.  We need to show that the expression stated is
+  indeed a solution (\textit{the} solution).  That is easy, just
+  ``plug it in'' to the vector equation representation of the system
+  (\ref{theorem:SLEMM}),
+    \begin{align*}
+      A\left(\inverse{A}\vect{b}\right)
+      &=\left(A\inverse{A}\right)\vect{b}&&\ref{theorem:MMA}\\
+      &=I_n\vect{b}&&\ref{definition:MI}\\
+      &=\vect{b}&&\ref{theorem:MMIM}
+    \end{align*}
+
+    Since $A\vect{x}=\vect{b}$ is true when we substitute
+    $\inverse{A}\vect{b}$ for $\vect{x}$, $\inverse{A}\vect{b}$ is a
+    (the!) solution to $\linearsystem{A}{\vect{b}}$.
+  \end{proof}
+\end{theorem}
+
+\end{document}

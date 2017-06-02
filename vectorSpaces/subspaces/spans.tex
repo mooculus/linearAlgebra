@@ -1,0 +1,529 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Span of a set}
+
+\begin{document}
+\begin{abstract}
+  We have already considered the span of a set of column vectors, but
+  now we consider the span of a set of vectors in an abstract vector
+  space.
+\end{abstract}
+\maketitle
+
+The definition of the span depended only on being able to formulate
+linear combinations.  In any of our more general vector spaces we
+always have a definition of vector addition and of scalar
+multiplication.  So we can build linear combinations and manufacture
+spans.  This subsection contains two definitions that are just mild
+variants of definitions we have seen earlier for column vectors.
+
+\begin{definition}[Linear Combination]
+  Suppose that $V$ is a vector space.
+  Given $n$ vectors $\vectorlist{u}{n}$ and $n$ scalars $\alpha_1,\,\alpha_2,\,\alpha_3,\,\ldots,\,\alpha_n$, their \dfn{linear combination} is the vector
+  \[
+    \lincombo{\alpha}{u}{n}.
+  \]
+\end{definition}
+
+\begin{example}[A linear combination of matrices]
+  In the vector space $M_{23}$ of $2\times 3$ matrices, we have the vectors
+  \begin{align*}
+    \vect{x}&=
+              \begin{bmatrix}
+                1&3&-2\\
+                2&0&7
+              \end{bmatrix}
+                   &
+                     \vect{y}&=
+                               \begin{bmatrix}
+                                 3&-1&2\\
+                                 5&5&1
+                               \end{bmatrix}
+                   &
+                     \vect{z}&=
+                               \begin{bmatrix}
+                                 4&2&-4\\
+                                 1&1&1
+                               \end{bmatrix}
+  \end{align*}
+  and we can form linear combinations such as
+  \begin{align*}
+    2\vect{x}+4\vect{y}+(-1)\vect{z}&=
+                                      2
+                                      \begin{bmatrix}
+                                        1&3&-2\\
+                                        2&0&7
+                                      \end{bmatrix}
+                                             +4
+                                             \begin{bmatrix}
+                                               3&-1&2\\
+                                               5&5&1
+                                             \end{bmatrix}
+                                                    +(-1)
+                                                    \begin{bmatrix}
+                                                      4&2&-4\\
+                                                      1&1&1
+                                                    \end{bmatrix}\\
+                                    &=
+                                      \begin{bmatrix}
+                                        2&6&-4\\
+                                        4&0&14
+                                      \end{bmatrix}
+                                             +
+                                             \begin{bmatrix}
+                                               12&-4&8\\
+                                               20&20&4
+                                             \end{bmatrix}
+                                                      +
+                                                      \begin{bmatrix}
+                                                        -4&-2&4\\
+                                                        -1&-1&-1
+                                                      \end{bmatrix}\\
+                                    &=
+                                      \begin{bmatrix}
+                                        10&0&8\\
+                                        23&19&17
+                                      \end{bmatrix}
+  \end{align*}
+  or,
+  \begin{align*}
+    4\vect{x}-2\vect{y}+3\vect{z}&=
+                                   4
+                                   \begin{bmatrix}
+                                     1&3&-2\\
+                                     2&0&7
+                                   \end{bmatrix}
+                                          -2
+                                          \begin{bmatrix}
+                                            3&-1&2\\
+                                            5&5&1
+                                          \end{bmatrix}
+                                                 +3
+                                                 \begin{bmatrix}
+                                                   4&2&-4\\
+                                                   1&1&1
+                                                 \end{bmatrix}\\
+                                 &=
+                                   \begin{bmatrix}
+                                     4&12&-8\\
+                                     8&0&28
+                                   \end{bmatrix}
+                                          +
+                                          \begin{bmatrix}
+                                            -6&2&-4\\
+                                            -10&-10&-2
+                                          \end{bmatrix}
+                                                     +
+                                                     \begin{bmatrix}
+                                                       12&6&-12\\
+                                                       3&3&3
+                                                     \end{bmatrix}\\
+                                 &=
+                                   \begin{bmatrix}
+                                     10&20&-24\\
+                                     1&-7&29
+                                   \end{bmatrix}
+  \end{align*}
+\end{example}
+
+When we realize that we can form linear combinations in any vector
+space, then it is natural to revisit our definition of the span of a
+set, since it is the set of \textit{all} possible linear combinations
+of a set of vectors.
+
+\begin{definition}[Span of a Set]
+  Suppose that $V$ is a vector space.
+  Given a set of vectors $S=\{\vectorlist{u}{t}\}$, their \dfn{span}, $\spn{S}$, is the set of all possible linear combinations of $\vectorlist{u}{t}$.  Symbolically,
+  \begin{align*}
+    \spn{S}&=\setparts{\lincombo{\alpha}{u}{t}}{\alpha_i\in\complexes,\,1\leq i\leq t}\\
+           &=\setparts{\sum_{i=1}^{t}\alpha_i\vect{u}_i}{\alpha_i\in\complexes,\,1\leq i\leq t}
+  \end{align*}
+\end{definition}
+
+\begin{theorem}[Span of a Set is a Subspace]
+  \label{theorem:SSS}
+
+  Suppose $V$ is a vector space.  Given a set of vectors $S=\{\vectorlist{u}{t}\}\subseteq V$, their span, $\spn{S}$, is a subspace.
+
+  \begin{proof}
+    By \ref{definition:SS}, the span contains linear combinations of
+    vectors from the vector space $V$, so by repeated use of the
+    closure properties, \ref{property:AC} and \ref{property:SC},
+    $\spn{S}$ can be seen to be a subset of $V$.
+
+    We will then verify the three conditions of \ref{theorem:TSS}.
+    First,
+    \begin{align*}
+      \zerovector
+      &=\zerovector+\zerovector+\zerovector+\ldots+\zerovector&&\ref{property:Z}\\
+      &=0\vect{u}_1+0\vect{u}_2+0\vect{u}_3+\cdots+0\vect{u}_t&&\ref{theorem:ZSSM}
+    \end{align*}
+    
+    So we have written $\zerovector$ as a linear combination of the
+    vectors in $S$ and by \ref{definition:SS}$, \zerovector\in\spn{S}$
+    and therefore $\spn{S}\neq\emptyset$.
+
+    Second, suppose $\vect{x}\in\spn{S}$ and $\vect{y}\in\spn{S}$.
+    Can we conclude that $\vect{x}+\vect{y}\in\spn{S}$?  What do we
+    know about $\vect{x}$ and $\vect{y}$ by virtue of their membership
+    in $\spn{S}$?  There must be scalars from $\complexes$,
+    $\alpha_1,\,\alpha_2,\,\alpha_3,\,\ldots,\,\alpha_t$ and
+    $\beta_1,\,\beta_2,\,\beta_3,\,\ldots,\,\beta_t$ so that
+    \begin{align*}
+      \vect{x}&=\lincombo{\alpha}{u}{t}\\
+      \vect{y}&=\lincombo{\beta}{u}{t}
+    \end{align*}
+    Then
+    \begin{align*}
+      \vect{x}+\vect{y}&=\lincombo{\alpha}{u}{t}\\
+                       &\quad\quad+\lincombo{\beta}{u}{t}\\
+                       &=\alpha_1\vect{u}_1+\beta_1\vect{u}_1+\alpha_2\vect{u}_2+\beta_2\vect{u}_2\\
+                       &\quad\quad+\alpha_3\vect{u}_3+\beta_3\vect{u}_3+\cdots+\alpha_t\vect{u}_t+\beta_t\vect{u}_t&&\ref{property:AA}, \ref{property:C}\\
+                       &=(\alpha_1+\beta_1)\vect{u}_1+(\alpha_2+\beta_2)\vect{u}_2\\
+                       &\quad\quad+(\alpha_3+\beta_3)\vect{u}_3+\cdots+(\alpha_t+\beta_t)\vect{u}_t&&\ref{property:DSA}
+    \end{align*}
+    Since each $\alpha_i+\beta_i$ is again a scalar from $\complexes$
+    we have expressed the vector sum $\vect{x}+\vect{y}$ as a linear
+    combination of the vectors from $S$, and therefore by
+    \ref{definition:SS} we can say that $\vect{x}+\vect{y}\in\spn{S}$.
+
+    Third, suppose $\alpha\in\complexes$ and $\vect{x}\in\spn{S}$.
+    Can we conclude that $\alpha\vect{x}\in\spn{S}$?  What do we know
+    about $\vect{x}$ by virtue of its membership in $\spn{S}$?  There
+    must be scalars from $\complexes$,
+    $\alpha_1,\,\alpha_2,\,\alpha_3,\,\ldots,\,\alpha_t$ so that
+    \begin{align*}
+      \vect{x}&=\lincombo{\alpha}{u}{t}\\
+    \end{align*}
+    Then
+    \begin{align*}
+      \alpha\vect{x}&=\alpha\left(\lincombo{\alpha}{u}{t}\right)\\
+                    &=\alpha(\alpha_1\vect{u}_1)+\alpha(\alpha_2\vect{u}_2)+\alpha(\alpha_3\vect{u}_3)+\cdots+\alpha(\alpha_t\vect{u}_t)&&\ref{property:DVA}\\
+                    &=(\alpha\alpha_1)\vect{u}_1+(\alpha\alpha_2)\vect{u}_2+(\alpha\alpha_3)\vect{u}_3+\cdots+(\alpha\alpha_t)\vect{u}_t&&\ref{property:SMA}\\
+    \end{align*}
+    Since each $\alpha\alpha_i$ is again a scalar from $\complexes$ we
+    have expressed the scalar multiple $\alpha\vect{x}$ as a linear
+    combination of the vectors from $S$, and therefore by
+    \ref{definition:SS} we can say that $\alpha\vect{x}\in\spn{S}$.
+
+    With the three conditions of \ref{theorem:TSS} met, we can say
+    that $\spn{S}$ is a subspace (and so is also a vector space,
+    \ref{definition:VS}).
+  \end{proof}
+\end{theorem}
+
+\begin{example}[Span of a set of polynomials]
+
+  We proved that
+  \[
+    W=\setparts{p(x)}{p\in P_4,\ p(2)=0}
+  \]
+  is a subspace of $P_4$, the vector space of polynomials of degree at
+  most 4.  Since $W$ is a vector space itself, let us construct a span
+  within $W$.  First let
+  \[
+    S=\set{x^4-4x^3+5x^2-x-2,\,2x^4-3x^3-6x^2+6x+4}
+  \]
+  and verify that $S$ is a subset of $W$ by checking that each of
+  these two polynomials has $x=2$ as a root.  Now, if we define
+  $U=\spn{S}$, then \ref{theorem:SSS} tells us that $U$ is a subspace
+  of $W$.  So quite quickly we have built a chain of subspaces, $U$
+  inside $W$, and $W$ inside $P_4$.
+
+  Rather than dwell on how quickly we can build subspaces, let us try
+  to gain a better understanding of just how the span construction
+  creates subspaces, in the context of this example.  We can quickly
+  build representative elements of $U$,
+  \[
+    3(x^4-4x^3+5x^2-x-2)+5(2x^4-3x^3-6x^2+6x+4)=13x^4-27x^3-15x^2+27x+14
+  \]
+  and
+  \[
+    (-2)(x^4-4x^3+5x^2-x-2)+8(2x^4-3x^3-6x^2+6x+4)=14x^4-16x^3-58x^2+50x+36
+  \]
+  and each of these polynomials must be in $W$ since it is closed
+  under addition and scalar multiplication.  But you might check for
+  yourself that both of these polynomials have $x=2$ as a root.
+
+  I can tell you that $\vect{y}=3x^4-7x^3-x^2+7x-2$ is not in $U$, but
+  would you believe me?  A first check shows that $\vect{y}$ does have
+  $x=2$ as a root, but that only shows that $\vect{y}\in W$.  What
+  does $\vect{y}$ have to do to gain membership in $U=\spn{S}$?  It
+  must be a linear combination of the vectors in $S$,
+  $x^4-4x^3+5x^2-x-2$ and $2x^4-3x^3-6x^2+6x+4$.  So let us suppose
+  that $\vect{y}$ is such a linear combination,
+  \begin{align*}
+    \vect{y}
+    &=3x^4-7x^3-x^2+7x-2\\
+    &=\alpha_1(x^4-4x^3+5x^2-x-2)+\alpha_2(2x^4-3x^3-6x^2+6x+4)\\
+    &=
+      (\alpha_1+2\alpha_2)x^4+
+      (-4\alpha_1-3\alpha_2)x^3+
+      (5\alpha_1-6\alpha_2)x^2\\
+    &\quad\quad+
+      (-\alpha_1+6\alpha_2)x+
+      (-2\alpha_1+4\alpha_2)
+  \end{align*}
+  
+  Notice that operations above are done in accordance with the
+  definition of the vector space of polynomials (\ref{example:VSP}).
+  Now, if we equate coefficients, which is the definition of equality
+  for polynomials, then we obtain the system of five linear equations
+  in two variables
+  \begin{align*}
+    \alpha_1+2\alpha_2&=3\\
+    -4\alpha_1-3\alpha_2&=-7\\
+    5\alpha_1-6\alpha_2&=-1\\
+    -\alpha_1+6\alpha_2&=7\\
+    -2\alpha_1+4\alpha_2&=-2
+  \end{align*}
+  
+  Build an augmented matrix from the system and row-reduce,
+  \[
+    \begin{bmatrix}
+      1 & 2 & 3\\
+      -4 & -3 & -7\\
+      5 & -6 & -1\\
+      -1 & 6 & 7\\
+      -2 & 4 & -2
+    \end{bmatrix}
+    \rref
+    \begin{bmatrix}
+      \leading{1} & 0 & 0\\
+      0 & \leading{1} & 0\\
+      0 & 0 & \leading{1}\\
+      0 & 0 & 0\\
+      0 & 0 & 0
+    \end{bmatrix}
+  \]
+
+  Since the final column of the row-reduced augmented matrix is a
+  pivot column, \ref{theorem:RCLS} tells us the system of equations is
+  inconsistent.  Therefore, there are no scalars, $\alpha_1$ and
+  $\alpha_2$, to establish $\vect{y}$ as a linear combination of the
+  elements in $U$.  So $\vect{y}\not\in U$.
+\end{example}
+
+Let us again examine membership in a span.
+
+\begin{example}[A subspace of $M_{32}$]
+  The set of all $3\times 2$ matrices forms a vector space when we use
+  the operations of matrix addition (\ref{definition:MA}) and scalar
+  matrix multiplication (\ref{definition:MSM}), as was shown in
+  \ref{example:VSM}.  Consider the subset
+  \[
+    S=\set{
+      \begin{bmatrix}
+        3 & 1 \\ 4 & 2 \\ 5 & -5
+      \end{bmatrix},\,
+      \begin{bmatrix}
+        1 & 1 \\ 2 &-1 \\ 14 & -1
+      \end{bmatrix},\,
+      \begin{bmatrix}
+        3 & -1 \\ -1&2 \\ -19 & -11
+      \end{bmatrix},\,
+      \begin{bmatrix}
+        4 & 2 \\ 1 & -2 \\ 14 & -2
+      \end{bmatrix},\,
+      \begin{bmatrix}
+        3 & 1 \\ -4 & 0 \\ -17 & 7
+      \end{bmatrix}
+    }
+  \]
+  and define a new subset of vectors $W$ in $M_{32}$ using the span
+  (\ref{definition:SS}), $W=\spn{S}$.  So by \ref{theorem:SSS} we know
+  that $W$ is a subspace of $M_{32}$.  While $W$ is an infinite set,
+  and this is a precise description, it would still be worthwhile to
+  investigate whether or not $W$ contains certain elements.
+
+  First, is
+  \[
+    \vect{y}=\begin{bmatrix}
+      9 & 3 \\ 7 & 3 \\ 10 & -11
+    \end{bmatrix}
+  \]
+  in $W$?  To answer this, we want to determine if $\vect{y}$ can be
+  written as a linear combination of the five matrices in $S$.  Can we
+  find scalars, $\alpha_1,\,\alpha_2,\,\alpha_3,\,\alpha_4,\,\alpha_5$
+  so that
+  \begin{align*}
+    &\begin{bmatrix}
+      9 & 3 \\ 7&3 \\ 10 & -11
+    \end{bmatrix}\\
+    &=
+      \alpha_1
+      \begin{bmatrix}
+        3 & 1 \\ 4 & 2 \\ 5 & -5
+      \end{bmatrix}
+                              +\alpha_2
+                              \begin{bmatrix}
+                                1 & 1 \\ 2 & -1 \\ 14 & -1
+                              \end{bmatrix}
+                                                        +\alpha_3
+                                                        \begin{bmatrix}
+                                                          3 & -1 \\ -1 & 2 \\ -19 & -11
+                                                        \end{bmatrix}
+                                                                                    +\alpha_4
+                                                                                    \begin{bmatrix}
+                                                                                      4 & 2 \\ 1 & -2 \\ 14 & -2
+                                                                                    \end{bmatrix}
+                                                                                                              +\alpha_5
+                                                                                                              \begin{bmatrix}
+                                                                                                                3 & 1 \\ -4 & 0 \\ -17 & 7
+                                                                                                              \end{bmatrix}\\
+    &=
+      \begin{bmatrix}
+        3\alpha_1 +\alpha_2 +3\alpha_3 +4\alpha_4 +3\alpha_5 &
+        \alpha_1 +\alpha_2 -\alpha_3 +2\alpha_4 +\alpha_5\\
+        4\alpha_1 +2\alpha_2 -\alpha_3 +\alpha_4 -4\alpha_5&
+        2\alpha_1 -\alpha_2 +2\alpha_3 -2\alpha_4 \\
+        5\alpha_1 +14\alpha_2 -19\alpha_3 +14\alpha_4 -17\alpha_5&
+        -5\alpha_1 -\alpha_2 -11\alpha_3 -2\alpha_4 +7\alpha_5
+      \end{bmatrix}
+  \end{align*}
+
+  Using our definition of matrix equality (\ref{definition:ME}) we can
+  translate this statement into six equations in the five unknowns,
+  \begin{align*}
+    3\alpha_1 +\alpha_2 +3\alpha_3 +4\alpha_4 +3\alpha_5& =9\\
+    \alpha_1 +\alpha_2 -\alpha_3 +2\alpha_4 +\alpha_5& =3\\
+    4\alpha_1 +2\alpha_2 -\alpha_3 +\alpha_4 -4\alpha_5& =7\\
+    2\alpha_1 -\alpha_2 +2\alpha_3 -2\alpha_4 & =3\\
+    5\alpha_1 +14\alpha_2 -19\alpha_3 +14\alpha_4 -17\alpha_5& =10\\
+    -5\alpha_1 -\alpha_2 -11\alpha_3 -2\alpha_4 +7\alpha_5&=-11
+  \end{align*}
+
+  This is a linear system of equations, which we can represent with an
+  augmented matrix and row-reduce in search of solutions.  The matrix
+  that is row-equivalent to the augmented matrix is
+  \[
+    \begin{bmatrix}
+      \leading{1} & 0 & 0 & 0 & \frac{5}{8} & 2\\
+      0 & \leading{1} & 0 & 0 & \frac{-19}{4} & -1\\
+      0 & 0 & \leading{1} & 0 & \frac{-7}{8} & 0\\
+      0 & 0 & 0 & \leading{1} & \frac{17}{8} & 1\\
+      0 & 0 & 0 & 0 & 0 & 0\\
+      0 & 0 & 0 & 0 & 0 & 0
+    \end{bmatrix}
+  \]
+
+  So we recognize that the system is consistent since the final column
+  is not a pivot column (\ref{theorem:RCLS}), and compute $n-r=5-4=1$
+  free variables (\ref{theorem:FVCS}).  While there are infinitely
+  many solutions, we are only in pursuit of a single solution, so let
+  us choose the free variable $\alpha_5=0$ for simplicity's sake.
+  Then we easily see that $\alpha_1=2$, $\alpha_2=-1$, $\alpha_3=0$,
+  $\alpha_4=1$.  So the scalars $\alpha_1=2$, $\alpha_2=-1$,
+  $\alpha_3=0$, $\alpha_4=1$, $\alpha_5=0$ will provide a linear
+  combination of the elements of $S$ that equals $\vect{y}$, as we can
+  verify by checking,
+  \begin{align*}
+    \begin{bmatrix}
+      9 & 3 \\ 7 & 3 \\ 10 & -11
+    \end{bmatrix}
+                             =
+                             2
+                             \begin{bmatrix}
+                               3 & 1 \\ 4 & 2 \\ 5 & -5
+                             \end{bmatrix}
+                                                     +(-1)
+                                                     \begin{bmatrix}
+                                                       1 & 1 \\ 2 & -1 \\ 14 & -1
+                                                     \end{bmatrix}
+                                                                               +(1)
+                                                                               \begin{bmatrix}
+                                                                                 4 & 2 \\ 1 & -2 \\ 14 & -2
+                                                                               \end{bmatrix}
+  \end{align*}
+  So with one particular linear combination in hand, we are convinced
+  that $\vect{y}$ deserves to be a member of $W=\spn{S}$.
+
+  Second, is
+  \[
+    \vect{x}=\begin{bmatrix}
+      2 & 1 \\ 3 & 1 \\ 4 & -2
+    \end{bmatrix}
+  \]
+  in $W$?  To answer this, we want to determine if $\vect{x}$ can be
+  written as a linear combination of the five matrices in $S$.  Can we
+  find scalars, $\alpha_1,\,\alpha_2,\,\alpha_3,\,\alpha_4,\,\alpha_5$
+  so that
+  \begin{align*}
+    &\begin{bmatrix}
+      2 & 1 \\ 3 & 1 \\ 4 & -2
+    \end{bmatrix}\\
+    &=
+      \alpha_1
+      \begin{bmatrix}
+        3 & 1 \\ 4 & 2 \\ 5 & -5
+      \end{bmatrix}
+                              +\alpha_2
+                              \begin{bmatrix}
+                                1 & 1 \\ 2 & -1 \\ 14 & -1
+                              \end{bmatrix}
+                                                        +\alpha_3
+                                                        \begin{bmatrix}
+                                                          3 & -1 \\ -1 & 2 \\ -19 & -11
+                                                        \end{bmatrix}
+                                                                                    +\alpha_4
+                                                                                    \begin{bmatrix}
+                                                                                      4 & 2 \\ 1 & -2 \\ 14 & -2
+                                                                                    \end{bmatrix}
+                                                                                                              +\alpha_5
+                                                                                                              \begin{bmatrix}
+                                                                                                                3 & 1 \\ -4 & 0 \\ -17 & 7
+                                                                                                              \end{bmatrix}\\
+    &=
+      \begin{bmatrix}
+        3\alpha_1 +\alpha_2 +3\alpha_3 +4\alpha_4 +3\alpha_5 &
+        \alpha_1 +\alpha_2 -\alpha_3 +2\alpha_4 +\alpha_5\\
+        4\alpha_1 +2\alpha_2 -\alpha_3 +\alpha_4 -4\alpha_5&
+        2\alpha_1 -\alpha_2 +2\alpha_3 -2\alpha_4 \\
+        5\alpha_1 +14\alpha_2 -19\alpha_3 +14\alpha_4 -17\alpha_5&
+        -5\alpha_1 -\alpha_2 -11\alpha_3 -2\alpha_4 +7\alpha_5
+      \end{bmatrix}
+  \end{align*}
+  Using our definition of matrix equality (\ref{definition:ME}) we can translate this statement into six equations in the five unknowns,
+  \begin{align*}
+    3\alpha_1 +\alpha_2 +3\alpha_3 +4\alpha_4 +3\alpha_5& =2\\
+    \alpha_1 +\alpha_2 -\alpha_3 +2\alpha_4 +\alpha_5& =1\\
+    4\alpha_1 +2\alpha_2 -\alpha_3 +\alpha_4 -4\alpha_5& =3\\
+    2\alpha_1 -\alpha_2 +2\alpha_3 -2\alpha_4 & =1\\
+    5\alpha_1 +14\alpha_2 -19\alpha_3 +14\alpha_4 -17\alpha_5& =4\\
+    -5\alpha_1 -\alpha_2 -11\alpha_3 -2\alpha_4 +7\alpha_5&=-2
+  \end{align*}
+  This is a linear system of equations, which we can represent with an
+  augmented matrix and row-reduce in search of solutions.  The matrix
+  that is row-equivalent to the augmented matrix is
+  \[
+    \begin{bmatrix}
+      \leading{1} & 0 & 0 & 0 & \frac{5}{8} & 0\\
+      0 & \leading{1} & 0 & 0 & -\frac{38}{8} & 0\\
+      0 & 0 & \leading{1} & 0 & -\frac{7}{8} & 0\\
+      0 & 0 & 0 & \leading{1} & -\frac{17}{8} & 0\\
+      0 & 0 & 0 & 0 & 0 & \leading{1}\\
+      0 & 0 & 0 & 0 & 0 & 0\
+    \end{bmatrix}
+  \]
+  Therefore
+  \begin{multipleChoice}
+    \choice[correct]{$\vect{x}\not\in W$.}
+    \choice{$\vect{x}\in W$.}
+  \end{multipleChoice}
+  
+  \begin{feedback}[correct]
+    Since the last column is a pivot column, \ref{theorem:RCLS} tells
+    us that the system is inconsistent.  Therefore, there are no
+    values for the scalars that will place $\vect{x}$ in $W$, and so
+    we conclude that $\vect{x}\not\in W$.
+  \end{feedback}
+\end{example}
+
+Notice how \ref{example:SSP} and contained questions about membership
+in a span, but these questions quickly became questions about
+solutions to a system of linear equations.  This will be a common
+theme going forward.
+
+\end{document}

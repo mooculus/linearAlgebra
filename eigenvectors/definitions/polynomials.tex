@@ -1,0 +1,110 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Polynomials and Matrices}
+
+\begin{document}
+\begin{abstract}
+  We can ``plug in'' a matrix to a polynomial.
+\end{abstract}
+\maketitle
+
+
+A polynomial is a combination of powers, multiplication by scalar
+coefficients, and addition (with subtraction just being the inverse of
+addition).  We never have occasion to divide when computing the value
+of a polynomial.  So it is with matrices.  We can add and subtract
+matrices, we can multiply matrices by scalars, and we can form powers
+of square matrices by repeated applications of matrix multiplication.
+We do not normally divide matrices (though sometimes we can multiply
+by an inverse).  If a matrix is square, all the operations
+constituting a polynomial will preserve the size of the matrix.  So it
+is natural to consider evaluating a polynomial with a matrix,
+effectively replacing the variable of the polynomial by a matrix.  We
+will demonstrate with an example.
+
+\begin{example}[Polynomial of a matrix]
+
+Let $p(x)=14+19x-3x^2-7x^3+x^4$ and
+\[
+D=\begin{bmatrix}-1 & 3 & 2\\1 & 0 & -2\\-3 & 1 & 1\end{bmatrix}.
+\]
+We will compute $p(D)$.
+
+First, compute the necessary powers of $D$.  Notice that $D^0$ is defined to be the multiplicative identity, $I_3$, as will be the case in general.
+\begin{align*}
+D^0&=I_3=\begin{bmatrix}\answer{1} & 0 & 0\\0 & 1 & 0\\0 & 0 & 1\end{bmatrix}\\
+D^1&=D=\begin{bmatrix}-1 & 3 & 2\\1 & 0 & -2\\-3 & 1 & 1\end{bmatrix}\\
+D^2&=DD^1=
+\begin{bmatrix}-1 & 3 & 2\\1 & 0 & -2\\-3 & 1 & 1\end{bmatrix}
+\begin{bmatrix}-1 & 3 & 2\\1 & 0 & -2\\-3 & 1 & 1\end{bmatrix}
+=
+\begin{bmatrix}-2 & -1 & -6\\5 & 1 & 0\\1 & -8 & -7\end{bmatrix}\\
+D^3&=DD^2=
+\begin{bmatrix}-1 & 3 & 2\\1 & 0 & -2\\-3 & 1 & 1\end{bmatrix}
+\begin{bmatrix}-2 & -1 & -6\\5 & 1 & 0\\1 & -8 & -7\end{bmatrix}
+=
+\begin{bmatrix}19 & -12 & -8\\-4 & 15 & 8\\12 & -4 & 11\end{bmatrix}\\
+D^4&=DD^3=
+\begin{bmatrix}-1 & 3 & 2\\1 & 0 & -2\\-3 & 1 & 1\end{bmatrix}
+\begin{bmatrix}19 & -12 & -8\\-4 & 15 & 8\\12 & -4 & 11\end{bmatrix}
+=
+\begin{bmatrix}-7 & 49 & 54\\-5 & -4 & -30\\-49 & 47 & 43\end{bmatrix}\\
+\end{align*}
+
+Then
+\begin{align*}
+p(D)&=14+19D-3D^2-7D^3+D^4\\
+&=
+  14\begin{bmatrix}1 & 0 & 0\\0 & 1 & 0\\0 & 0 & 1\end{bmatrix}
++19\begin{bmatrix}-1 & 3 & 2\\1 & 0 & -2\\-3 & 1 & 1\end{bmatrix}
+   -3\begin{bmatrix}-2 & -1 & -6\\5 & 1 & 0\\1 & -8 & -7\end{bmatrix}\\
+&\quad\quad
+   -7\begin{bmatrix}19 & -12 & -8\\-4 & 15 & 8\\12 & -4 & 11\end{bmatrix}
+    +\begin{bmatrix}-7 & 49 & 54\\-5 & -4 & -30\\-49 & 47 & 43\end{bmatrix}\\
+&=
+\begin{bmatrix}
+-139 & 193 & 166\\
+27 & -98 & -124\\
+-193 & 118 & 20
+\end{bmatrix}
+\end{align*}
+
+Notice that $p(x)$ factors as
+\[
+p(x)=14+19x-3x^2-7x^3+x^4=(x-2)(x-7)(x+1)^2
+\]
+
+Because $D$ commutes with itself ($DD=DD$), we can use distributivity of matrix multiplication across matrix addition (\ref{theorem:MMDAA}) without being careful with any of the matrix products, and just as easily evaluate $p(D)$ using the factored form of $p(x)$,
+\begin{align*}
+p(D)&=14+19D-3D^2-7D^3+D^4=(D-2I_3)(D-\answer{7}I_3)(D+I_3)^2\\
+&=
+\begin{bmatrix}
+-3 & 3 & 2\\ 1 & -2 & -2\\ -3 & 1 & -1
+\end{bmatrix}\,
+\begin{bmatrix}
+-8 & 3 & 2\\ 1 & -7 & -2\\ -3 & 1 & -6
+\end{bmatrix}\,
+\begin{bmatrix}
+0 & 3 & 2\\ 1 & 1 & -2\\ -3 & 1 & 2
+\end{bmatrix}^2\\
+&=
+\begin{bmatrix}
+-139 & 193 & 166\\
+27 & -98 & -124\\
+-193 & 118 & 20
+\end{bmatrix}
+\end{align*}
+
+
+This example is not meant to be too profound.  It \textit{is} meant to show you that it is natural to evaluate a polynomial with a matrix, and that the factored form of the polynomial is as good as (or maybe better than) the expanded form.  And do not forget that constant terms in polynomials are really multiples of the identity matrix when we are evaluating the polynomial with a matrix.
+
+\end{example}
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

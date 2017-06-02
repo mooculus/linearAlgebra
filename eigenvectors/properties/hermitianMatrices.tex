@@ -1,0 +1,98 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Eigenvalues of Hermitian Matrices}
+
+\begin{document}
+\begin{abstract}
+  Hermitian matrices have real eigenvalues and orthogonal eigenvectors,
+\end{abstract}
+\maketitle
+
+Recall that a matrix is Hermitian (or self-adjoint) if $A=\adjoint{A}$ (\ref{definition:HM}).  In the case where $A$ is a matrix whose entries are all real numbers, being Hermitian is identical to being symmetric (\ref{definition:SYM}).  Keep this in mind as you read the next two theorems.  Their hypotheses could be changed to ``suppose $A$ is a real symmetric matrix.''
+
+\begin{theorem}[Hermitian Matrices have Real Eigenvalues]
+\label{theorem:HMRE}
+
+Suppose that $A$ is a Hermitian matrix and $\lambda$ is an eigenvalue of $A$.  Then $\lambda\in{\mathbb R}$.
+
+\begin{proof}
+Let $\vect{x}\neq\zerovector$ be one eigenvector of $A$ for the eigenvalue $\lambda$.   Then by \ref{theorem:PIP} we know $\innerproduct{\vect{x}}{\vect{x}}\neq 0$.  So
+\begin{align*}
+\lambda
+&=\frac{1}{\innerproduct{\vect{x}}{\vect{x}}}\lambda\innerproduct{\vect{x}}{\vect{x}}
+&&\ref{property:MICN}\\
+&=\frac{1}{\innerproduct{\vect{x}}{\vect{x}}}\innerproduct{\vect{x}}{\lambda\vect{x}}
+&&\ref{theorem:IPSM}\\
+&=\frac{1}{\innerproduct{\vect{x}}{\vect{x}}}\innerproduct{\vect{x}}{A\vect{x}}
+&&\ref{definition:EEM}\\
+&=\frac{1}{\innerproduct{\vect{x}}{\vect{x}}}\innerproduct{A\vect{x}}{\vect{x}}
+&&\ref{theorem:HMIP}\\
+&=\frac{1}{\innerproduct{\vect{x}}{\vect{x}}}\innerproduct{\lambda\vect{x}}{\vect{x}}
+&&\ref{definition:EEM}\\
+&=\frac{1}{\innerproduct{\vect{x}}{\vect{x}}}\conjugate{\lambda}\innerproduct{\vect{x}}{\vect{x}}
+&&\ref{theorem:IPSM}\\
+&=\conjugate{\lambda}
+&&\ref{property:MICN}
+\end{align*}
+
+
+If a complex number is equal to its conjugate, then it has a complex
+part equal to zero, and therefore is a real number.
+
+\end{proof}
+\end{theorem}
+
+Notice the appealing symmetry to the justifications given for the
+steps of this proof.  In the center is the ability to pitch a
+Hermitian matrix from one side of the inner product to the other.
+
+In many physical problems, a matrix of interest will be real and
+symmetric, or Hermitian.  Then if the eigenvalues are to represent
+physical quantities of interest, \ref{theorem:HMRE} guarantees that
+these values will be real.
+
+The eigenvectors of a Hermitian matrix also enjoy a pleasing property
+that we will exploit later.
+
+\begin{theorem}
+\label{theorem:HMOE}
+[Hermitian Matrices have Orthogonal Eigenvectors]
+
+Suppose that $A$ is a Hermitian matrix and $\vect{x}$ and $\vect{y}$ are two eigenvectors of $A$ for different eigenvalues.  Then $\vect{x}$ and $\vect{y}$ are orthogonal vectors.
+
+\begin{proof}
+Let $\vect{x}$ be an eigenvector of $A$ for $\lambda$ and let $\vect{y}$ be an eigenvector of $A$ for a different eigenvalue $\rho$.   So we have $\lambda-\rho\neq 0$.  Then
+\begin{align*}
+\innerproduct{\vect{x}}{\vect{y}}
+&=\frac{1}{\lambda-\rho}\left(\lambda-\rho\right)\innerproduct{\vect{x}}{\vect{y}}
+&&\ref{property:MICN}\\
+&=\frac{1}{\lambda-\rho}
+\left(\lambda\innerproduct{\vect{x}}{\vect{y}}-\rho\innerproduct{\vect{x}}{\vect{y}}\right)
+&&\ref{property:DCN}\\
+&=\frac{1}{\lambda-\rho}
+\left(\innerproduct{\conjugate{\lambda}\vect{x}}{\vect{y}}-\innerproduct{\vect{x}}{\rho\vect{y}}\right)
+&&\ref{theorem:IPSM}\\
+&=\frac{1}{\lambda-\rho}
+\left(\innerproduct{\lambda\vect{x}}{\vect{y}}-\innerproduct{\vect{x}}{\rho\vect{y}}\right)
+&&\ref{theorem:HMRE}\\
+&=\frac{1}{\lambda-\rho}
+\left(\innerproduct{A\vect{x}}{\vect{y}}-\innerproduct{\vect{x}}{A\vect{y}}\right)
+&&\ref{definition:EEM}\\
+&=\frac{1}{\lambda-\rho}
+\left(\innerproduct{A\vect{x}}{\vect{y}}-\innerproduct{A\vect{x}}{\vect{y}}\right)
+&&\ref{theorem:HMIP}\\
+&=\frac{1}{\lambda-\rho}\left(0\right)
+&&\ref{property:AICN}\\
+&=\answer{0}.
+\end{align*}
+
+This equality says that $\vect{x}$ and $\vect{y}$ are orthogonal vectors (\ref{definition:OV}).
+
+\end{proof}
+\end{theorem}
+
+Notice again how the key step in this proof is the fundamental property of a Hermitian matrix (\ref{theorem:HMIP}) --- the ability to swap $A$ across the two arguments of the inner product.  We will build on these results and continue to see some more interesting properties in \ref{section:OD}.
+
+\end{document}

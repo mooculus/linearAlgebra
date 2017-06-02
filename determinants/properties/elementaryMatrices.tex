@@ -1,0 +1,129 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Determinants, Row Operations, Elementary Matrices}
+
+\begin{document}
+\begin{abstract}
+  As a final preparation for our two most important theorems about
+  determinants, we prove a handful of facts about the interplay of row
+  operations and matrix multiplication with elementary matrices with
+  regard to the determinant.
+\end{abstract}
+\maketitle
+
+First, a simple, but crucial, fact about the identity matrix.
+
+\begin{theorem}[Determinant of the Identity Matrix]
+  \label{theorem:DIM} 
+
+  For every $n\geq 1$, $\detname{I_n}=1$.
+
+  \begin{proof}
+    It may be overkill, but this is a good situation to run through a
+    proof by induction on $n$.  Is the result true when $n=1$? Yes,
+    \begin{align*}
+      \detname{I_1}
+      &=\matrixentry{I_1}{11}&&\ref{definition:DM}\\
+      &=1&&\ref{definition:IM}\\
+    \end{align*}
+    
+    Now assume the theorem is true for the identity matrix of size
+    $n-1$ and investigate the determinant of the identity matrix of
+    size $n$ with expansion about row 1,
+    \begin{align*}
+      \detname{I_n}
+      &=
+        \sum_{j=1}^{n}(-1)^{1+j}\matrixentry{I_n}{1j}\detname{\submatrix{I_n}{1}{j}}
+      &&\ref{definition:DM}\\
+      &=
+        (-1)^{1+1}\matrixentry{I_n}{11}\detname{\submatrix{I_n}{1}{1}}\\
+      &\quad\quad+
+        \sum_{j=2}^{n}(-1)^{1+j}\matrixentry{I_n}{1j}\detname{\submatrix{I_n}{1}{j}}\\
+      &=
+        1\detname{I_{n-1}}+
+        \sum_{j=2}^{n}(-1)^{1+j}\,0\,\detname{\submatrix{I_n}{1}{j}}
+      &&\ref{definition:IM}\\
+      &=
+        1(1)+\sum_{j=2}^{n}\,0=1
+      &&\text{Induction Hypothesis}\\
+    \end{align*}
+  \end{proof}
+\end{theorem}
+
+\begin{theorem}[Determinants of Elementary Matrices]
+  \label{theorem:DEM}
+  For the three possible versions of an elementary matrix (\ref{definition:ELEM}) we have the determinants,
+  \begin{enumerate}
+  \item $\detname{\elemswap{i}{j}}=-1$
+  \item $\detname{\elemmult{\alpha}{i}}=\alpha$
+  \item $\detname{\elemadd{\alpha}{i}{j}}=1$
+  \end{enumerate}
+
+  \begin{proof}
+    Swapping rows $i$ and $j$ of the identity matrix will create $\elemswap{i}{j}$  (\ref{definition:ELEM}), so
+    \begin{align*}
+      \detname{\elemswap{i}{j}}
+      &=-\detname{I_n}&&\ref{theorem:DRCS}\\
+      &=-1&&\ref{theorem:DIM}\\
+    \end{align*}
+
+    Multiplying row $i$ of the identity matrix by $\alpha$ will create $\elemmult{\alpha}{i}$ (\ref{definition:ELEM}), so
+    \begin{align*}
+      \detname{\elemmult{\alpha}{i}}
+      &=\alpha\detname{I_n}&&\ref{theorem:DRCM}\\
+      &=\alpha(1)=\alpha&&\ref{theorem:DIM}\\
+    \end{align*}
+
+    Multiplying row $i$ of the identity matrix by $\alpha$ and adding to row $j$ will create $\elemadd{\alpha}{i}{j}$ (\ref{definition:ELEM}), so
+    \begin{align*}
+      \detname{\elemadd{\alpha}{i}{j}}
+      &=\detname{I_n}&&\ref{theorem:DRCMA}\\
+      &=1&&\ref{theorem:DIM}\\
+    \end{align*}
+    
+  \end{proof}
+\end{theorem}
+
+\begin{theorem}[Determinants, Elementary Matrices, Matrix Multiplication]
+  \label{theorem:DEMMM}
+  Suppose that $A$ is a square matrix of size $n$ and $E$ is any elementary matrix of size $n$.  Then
+  \[
+    \detname{EA}=\detname{E}\detname{A}
+  \]
+
+  \begin{proof}
+    The proof procedes in three parts, one for each type of elementary matrix, with each part very similar to the other two.
+
+    First, let $B$ be the matrix obtained from $A$ by swapping rows $i$ and $\answer{j}$,
+    \begin{align*}
+      \detname{\elemswap{i}{j}A}
+      &=\detname{B}&&\ref{theorem:EMDRO}\\
+      &=\answer{-1}\cdot\detname{A}&&\ref{theorem:DRCS}\\
+      &=\detname{\elemswap{i}{j}}\detname{A}&&\ref{theorem:DEM}
+    \end{align*}
+
+    Second, let $B$ be the matrix obtained from $A$ by multiplying row $\answer{i}$ by $\alpha$,
+    \begin{align*}
+      \detname{\elemmult{\alpha}{i}A}
+      &=\detname{B}&&\ref{theorem:EMDRO}\\
+      &=\alpha\detname{A}&&\ref{theorem:DRCM}\\
+      &=\detname{\elemmult{\alpha}{i}}\detname{A}&&\ref{theorem:DEM}
+    \end{align*}
+
+    Third, let $B$ be the matrix obtained from $A$ by multiplying row $i$ by $\alpha$ and adding to row $j$,
+    \begin{align*}
+      \detname{\elemadd{\alpha}{i}{j}A}
+      &=\detname{B}&&\ref{theorem:EMDRO}\\
+      &=\detname{A}&&\ref{theorem:DRCMA}\\
+      &=\detname{\elemadd{\alpha}{i}{j}}\detname{A}&&\ref{theorem:DEM}
+    \end{align*}
+
+    Since the desired result holds for each variety of elementary matrix individually, we are done.
+  \end{proof}
+\end{theorem}
+
+\end{document}
+
+

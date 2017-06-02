@@ -1,0 +1,98 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Systems of Linear Equations and Linear Transformations}
+
+\begin{document}
+\begin{abstract}
+  We consider examples of injective functions, and examples that are not injective.
+\end{abstract}
+\maketitle
+
+Now is just the right time to have a discussion about the connections between the central topic of linear algebra, linear transformations, and our motivating topic from \ref{chapter:SLE}, systems of linear equations.  We will discuss several theorems we have seen already, but we will also make some forward-looking statements that will be justified in \ref{chapter:R}.
+
+\ref{archetype:D} and \ref{archetype:E} are ideal
+
+Consider the system of linear equations
+\begin{align*}
+2x_1  + x_2 + 7x_3 - 7x_4 &= 8 \\
+-3x_1 + 4x_2 -5x_3 - 6x_4 &=  -12 \\
+x_1 +x_2 + 4x_3 - 5x_4 &=  4
+\end{align*}
+and the system of linear equations
+\begin{align*}
+2x_1  + x_2 + 7x_3 - 7x_4 &= 2 \\
+-3x_1 + 4x_2 -5x_3 - 6x_4 &=  3 \\
+x_1 +x_2 + 4x_3 - 5x_4 &=  2
+\end{align*}
+Both have the same coefficient matrix,
+\[
+\begin{bmatrix}
+2 & 1 & 7 & -7 \\
+-3 & 4 &  -5 & -6 \\
+1 & 1 & 4 &  -5
+\end{bmatrix}
+\]
+
+To apply the \textit{theory} of linear transformations to these two archetypes, employ the matrix-vector product (\ref{definition:MVP}) and define the linear transformation,
+\[
+\ltdefn{T}{\complex{4}}{\complex{3}},\quad \lteval{T}{\vect{x}}=D\vect{x}
+=x_1\colvector{2\\-3\\1}+
+x_2\colvector{1\\4\\1}+
+x_3\colvector{7\\-5\\4}+
+x_4\colvector{-7\\-6\\-5}
+\]
+
+
+
+\ref{theorem:MBLT} tells us that $T$ is indeed a linear transformation.  \ref{archetype:D} asks for solutions to $\linearsystem{D}{\vect{b}}$, where $\vect{b}=\colvector{8\\-12\\-4}$.  In the language of linear transformations this is equivalent to asking for $\preimage{T}{\vect{b}}$.  In the language of vectors and matrices it asks for a linear combination of the four columns of $D$ that will equal $\vect{b}$.   One solution listed is $\vect{w}=\colvector{7\\8\\1\\3}$.  With a nonempty preimage, \ref{theorem:KPI} tells us that the complete solution set of the linear system is the preimage of $\vect{b}$,
+\[
+\vect{w}+\krn{T}=\setparts{\vect{w}+\vect{z}}{\vect{z}\in\krn{T}}
+\]
+
+
+
+
+The kernel of the linear transformation $T$ is exactly the null space of the matrix $D$, so this approach to the solution set should be reminiscent of \ref{theorem:PSPHS}.  The kernel of the linear transformation is the preimage of the zero vector, exactly equal to the solution set of the homogeneous system $\homosystem{D}$.  Since $D$ has a null space of dimension two, every preimage (and in particular the preimage of $\vect{b}$) is as ``big'' as a subspace of dimension two (but is not a subspace).
+
+
+
+\ref{archetype:E} is identical to \ref{archetype:D} but with a different vector of constants, $\vect{d}=\colvector{2\\3\\2}$.  We can use the same linear transformation $T$ to discuss this system of equations since the coefficient matrix is identical.  Now the set of solutions to $\linearsystem{D}{\vect{d}}$  is the pre-image of $\vect{d}$, $\preimage{T}{\vect{d}}$.  However, the vector $\vect{d}$ is not in the range of the linear transformation (nor is it in the column space of the matrix, since these two sets are equal.  So the empty pre-image is equivalent to the inconsistency of the linear system.
+
+
+
+These two archetypes each have three equations in four variables, so either the resulting linear systems are inconsistent, or they are consistent and application of \ref{theorem:CMVEI} tells us that the system has infinitely many solutions.  Considering these same parameters for the linear transformation, the dimension of the domain, $\complex{4}$, is four, while the codomain, $\complex{3}$, has dimension three.  Then
+\begin{align*}
+\nullity{T}&=\dimension{\complex{4}}-\rank{T}&&\ref{theorem:RPNDD}\\
+&=4-\dimension{\rng{T}}&&\ref{definition:ROLT}\\
+&\geq 4-3&&\text{$\rng{T}$ subspace of $\complex{3}$}\\
+&=1
+\end{align*}
+
+
+
+
+So the kernel of $T$ is nontrivial simply by considering the dimensions of the domain (number of variables) and the codomain (number of equations).  Pre-images of elements of the codomain that are not in the range of $T$ are empty (inconsistent systems).  For elements of the codomain that are in the range of $T$ (consistent systems), \ref{theorem:KPI} tells us that the pre-images are built from the kernel, and with a nontrivial kernel, these pre-images are infinite (infinitely many solutions).
+
+
+
+When do systems of equations have unique solutions?  Consider the system of linear equations $\linearsystem{C}{\vect{f}}$ and the linear transformation $\lteval{S}{\vect{x}}=C\vect{x}$.  If $S$ has a trivial kernel, then pre-images will either be empty or be finite sets with single elements.  Correspondingly, the coefficient matrix $C$ will have a trivial null space and solution sets will either be empty (inconsistent) or contain a single solution (unique solution).  Should the matrix be square and have a trivial null space then we recognize the matrix as being nonsingular.  A square matrix means that the corresponding linear transformation, $T$, has equal-sized domain and codomain.  With a nullity of zero, $T$ is injective, and also \ref{theorem:RPNDD} tells us that rank of $T$ is equal to the dimension of the domain, which in turn is equal to the dimension of the codomain.  In other words, $T$ is surjective.  Injective and surjective, and \ref{theorem:ILTIS} tells us that $T$ is invertible.  Just as we can use the inverse of the coefficient matrix to find the unique solution of any linear system with a nonsingular coefficient matrix (\ref{theorem:SNCM}), we can use the inverse of the linear transformation to construct the unique element of any pre-image (proof of \ref{theorem:ILTIS}).
+
+
+
+The executive summary of this discussion is that to every coefficient matrix of a system of linear equations we can associate a natural linear transformation.  Solution sets for systems with this coefficient matrix are preimages of elements of the codomain of the linear transformation.  For every theorem about systems of linear equations there is an analogue about linear transformations.  The theory of linear transformations provides all the tools to recreate the theory of solutions to linear systems of equations.
+
+
+
+We will continue this adventure in a future course.
+
+
+
+\end{document}
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

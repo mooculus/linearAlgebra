@@ -1,0 +1,110 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Adjoint of a Matrix}
+
+\begin{document}
+\begin{abstract}
+  The combination of transposing and conjugating a matrix is an especially important operation.
+\end{abstract}
+\maketitle
+
+\begin{definition}[Adjoint]
+If $A$ is a matrix, then its \dfn{adjoint} is
+$\adjoint{A}=\transpose{\left(\conjugate{A}\right)}$.
+\end{definition}
+
+You will see the adjoint written elsewhere variously as $A^H$,
+$A^\ast$ or $A^\dagger$.
+
+\begin{question}
+  Does it matter if we conjugate and then transposed, or transposed
+  and then conjugated?
+
+  \begin{multipleChoice}
+    \choice[correct]{No}
+    \choice{Yes}
+  \end{multipleChoice}
+
+  \begin{feedback}[correct]
+    By \ref{theorem:MCT}, it does not really matter if we conjugate
+    and then transpose, or transpose and then conjugate.
+  \end{feedback}
+
+\end{question}
+
+\begin{theorem}[Adjoint and Matrix Addition]
+\label{theorem:AMA}
+
+Suppose $A$ and $B$ are matrices of the same size.  Then $\adjoint{\left(A+B\right)}=\adjoint{A}+\adjoint{B}$.
+
+\begin{proof}
+
+  \begin{align*}
+    \adjoint{\left(A+B\right)}
+    &=\transpose{\left(\conjugate{A+B}\right)}
+    &&\ref{definition:A}\\
+    &=\transpose{\left(\conjugate{A}+\conjugate{B}\right)}
+    &&\ref{theorem:CRMA}\\
+    &=\transpose{\left(\conjugate{A}\right)}+\transpose{\left(\conjugate{B}\right)}
+    &&\ref{theorem:TMA}\\
+    &=\adjoint{A}+\adjoint{B}
+    &&\ref{definition:A}
+  \end{align*}
+\end{proof}
+\end{theorem}
+
+\begin{theorem}[Adjoint and Matrix Scalar Multiplication]
+\label{theorem:AMSM}
+
+Suppose $\alpha\in\complexes$ is a scalar and $A$ is a matrix.  Then $\adjoint{\left(\alpha A\right)}=\conjugate{\alpha}\adjoint{A}$.
+
+\begin{proof}
+
+  \begin{align*}
+    \adjoint{\left(\alpha A\right)}
+    &=\transpose{\left(\conjugate{\alpha A}\right)}
+    &&\ref{definition:A}\\
+    &=\transpose{\left(\conjugate{\alpha}\conjugate{A}\right)}
+    &&\ref{theorem:CRMSM}\\
+    &=\conjugate{\alpha}\transpose{\left(\conjugate{A}\right)}
+    &&\ref{theorem:TMSM}\\
+    &=\conjugate{\alpha}\adjoint{A}
+    &&\ref{definition:A}
+\end{align*}
+
+\end{proof}
+\end{theorem}
+
+\begin{theorem}[Adjoint of an Adjoint]
+\label{theorem:AA}
+
+Suppose that $A$ is a matrix.  Then $\adjoint{\left(\adjoint{A}\right)}=A$.
+
+\begin{proof}
+  
+  \begin{align*}
+    \adjoint{\left(\adjoint{A}\right)}
+    &=\transpose{\left(\conjugate{\left(\adjoint{A}\right)}\right)}
+    &&\ref{definition:A}\\
+    &=\conjugate{\left(\transpose{\left(\adjoint{A}\right)}\right)}
+    &&\ref{theorem:MCT}\\
+    &=\conjugate{\left(\transpose{\left(\transpose{\left(\conjugate{A}\right)}\right)}\right)}
+    &&\ref{definition:A}\\
+    &=\conjugate{\left(\conjugate{A}\right)}
+    &&\ref{theorem:TT}\\
+    &=A
+    &&\ref{theorem:CCM}
+  \end{align*}
+\end{proof}
+\end{theorem}
+
+Take note of how the theorems in this section, while simple, build on
+earlier theorems and definitions and never descend to the level of
+entry-by-entry proofs based on \ref{definition:ME}.  In other words,
+the equal signs that appear in the previous proofs are equalities of
+matrices, not scalars (which is the opposite of a proof like that of
+\ref{theorem:TMA}).
+
+\end{document}

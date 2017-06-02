@@ -1,0 +1,140 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Vector Space Properties}
+
+\begin{document}
+\begin{abstract}
+  There are key properties satisfied by vector addition and scalar multiplication.
+\end{abstract}
+\maketitle
+
+With definitions of vector addition and scalar multiplication we can
+state, and prove, several properties of each operation, and some
+properties that involve their interplay.  We collect ten of them here.
+
+\begin{theorem}[Vector Space Properties of Column Vectors]\label{theorem:VSPCV}
+  Suppose that $\complex{m}$ is the set of column vectors of size $m$
+  with addition and scalar multiplication as defined before.  Then
+  \begin{description}
+  \item[Additive Closure, Column Vectors]
+    If $\vect{u},\,\vect{v}\in\complex{m}$, then $\vect{u}+\vect{v}\in\complex{m}$.
+  \item[Scalar Closure, Column Vectors]
+    If $\alpha\in\complexes$ and $\vect{u}\in\complex{m}$, then $\alpha\vect{u}\in\complex{m}$.
+  \item[Commutativity, Column Vectors]
+    If $\vect{u},\,\vect{v}\in\complex{m}$, then $\vect{u}+\vect{v}=\vect{v}+\vect{u}$.
+  \item[Additive Associativity, Column Vectors]
+    If $\vect{u},\,\vect{v},\,\vect{w}\in\complex{m}$, then $\vect{u}+\left(\vect{v}+\vect{w}\right)=\left(\vect{u}+\vect{v}\right)+\vect{w}$.
+  \item[Zero Vector, Column Vectors]
+    There is a vector, $\zerovector$, called the \dfn{zero vector}, such that  $\vect{u}+\zerovector=\vect{u}$  for all $\vect{u}\in\complex{m}$.
+  \item[Additive Inverses, Column Vectors]
+    If  $\vect{u}\in\complex{m}$, then there exists a vector $\vect{-u}\in\complex{m}$ so that $\vect{u}+ (\vect{-u})=\zerovector$.
+  \item[Scalar Multiplication Associativity, Column Vectors]
+    If $\alpha,\,\beta\in\complexes$ and $\vect{u}\in\complex{m}$, then $\alpha(\beta\vect{u})=(\alpha\beta)\vect{u}$.
+  \item[Distributivity across Vector Addition, Column Vectors]
+    If $\alpha\in\complexes$ and $\vect{u},\,\vect{v}\in\complex{m}$, then $\alpha(\vect{u}+\vect{v})=\alpha\vect{u}+\alpha\vect{v}$.
+  \item[Distributivity across Scalar Addition, Column Vectors]
+    If $\alpha,\,\beta\in\complexes$ and $\vect{u}\in\complex{m}$, then
+    $(\alpha+\beta)\vect{u}=\alpha\vect{u}+\beta\vect{u}$.
+  \item[One, Column Vectors]
+    If $\vect{u}\in\complex{m}$, then $1\vect{u}=\vect{u}$.
+  \end{description}
+
+\begin{proof}
+  While some of these properties seem very obvious, they all require
+  proof.  However, the proofs are not very interesting, and border on
+  tedious. We will prove one version of distributivity very carefully,
+  and you can test your proof-building skills on some of the others.
+  We need to establish an equality, so we will do so by beginning with
+  one side of the equality, apply various definitions and theorems
+  (listed to the right of each step) to massage the expression from
+  the left into the expression on the right.  Here we go with a proof
+  of one of these properties.
+
+  For $1\leq i\leq m$,
+  \begin{align*}
+    \vectorentry{(\alpha+\beta)\vect{u}}{i}
+    &=(\alpha+\beta)\vectorentry{\vect{u}}{i} \\
+%    &&\ref{definition:CVSM}\\
+    &=\alpha\vectorentry{\vect{u}}{i}+\beta\vectorentry{\vect{u}}{i} \\
+%    &&\ref{property:DCN}\\
+    &=\vectorentry{\alpha\vect{u}}{i}+\vectorentry{\beta\vect{u}}{i} \\
+%    &&\ref{definition:CVSM}\\
+    &=\vectorentry{\alpha\vect{u}+\beta\vect{u}}{i}
+%    &&\ref{definition:CVA}\\
+  \end{align*}
+
+  Since the individual components of the vectors
+  $(\alpha+\beta)\vect{u}$ and $\alpha\vect{u}+\beta\vect{u}$ are
+  equal for \textit{all} $i$, $1\leq i\leq m$, we conclude the vectors
+  are equal.
+\end{proof}
+\end{theorem}
+
+Many of the conclusions of our theorems can be characterized as
+``identities,'' especially when we are establishing basic properties
+of operations such as those in this section.  Most of the properties
+listed above are examples.
+
+Be careful with the notion of the vector $\vect{-u}$.  This is a
+vector that we add to $\vect{u}$ so that the result is the particular
+vector $\zerovector$.  This is basically a property of vector
+addition.  It happens that we can compute $\vect{-u}$ using the
+\textit{other} operation, scalar multiplication.  We can prove this
+directly by writing that
+\[
+  \vectorentry{\vect{-u}}{i}
+  =-\vectorentry{\vect{u}}{i}
+  =(\answer{-1})\vectorentry{\vect{u}}{i}
+  =\vectorentry{(-1)\vect{u}}{i}
+\]
+We will see later how to derive this property as a
+\textit{consequence} of several of the ten properties listed above.
+
+\begin{question}
+  Similarly, we will often write something you would immediately
+  recognize as ``vector subtraction.''  This could be placed on a firm
+  theoretical foundation, by defining ``$\vect{u}-\vect{v}$'' by
+  \begin{align*}
+    \vectorentry{\vect{u}-\vect{v}}{i}=\vectorentry{\vect{u}}{i}-\vectorentry{\vect{v}}{i}&&1\leq
+    i\leq m
+  \end{align*}
+
+  Is vector subtraction commutative?
+  \begin{multipleChoice}
+    \choice[correct]{No.}
+    \choice{Yes.}
+  \end{multipleChoice}
+
+  Is vector subtraction associative?
+  \begin{multipleChoice}
+    \choice[correct]{No.}
+    \choice{Yes.}
+  \end{multipleChoice}
+
+\end{question}
+
+\begin{question}
+  For all $\vect{a}, \vect{b}, \vect{c} \in \complex{5}$, which two
+  expressions below are equal?
+  \begin{selectAll}
+    \choice[correct]{$\left(\vect{a} + \vect{b} \right) + \vect{c}$}
+    \choice{$\vect{a} - \left( \vect{b} - \vect{c} \right)$}
+    \choice{$\left(\vect{a} - \vect{b} \right) - \vect{c}$}
+    \choice[correct]{$\vect{a} + \left( \vect{b} + \vect{c} \right)$}
+  \end{selectAll}
+  
+  \begin{feedback}
+    Associativity implies that we do not have to be careful about how
+    we ``parenthesize'' the addition of vectors.  In other words,
+    there is nothing to be gained by writing
+    $\left(\vect{u}+\vect{v}\right)+\left(\vect{w}+\left(\vect{x}+\vect{y}\right)\right)$
+    rather than $\vect{u}+\vect{v}+\vect{w}+\vect{x}+\vect{y}$, since
+    we get the same result no matter which order we choose to perform
+    the four additions.  So we will not be careful about using
+    parentheses this way.
+\end{feedback}
+\end{question}
+
+\end{document}

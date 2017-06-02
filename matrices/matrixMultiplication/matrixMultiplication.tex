@@ -1,0 +1,141 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Matrix Multiplication}
+
+\begin{document}
+\begin{abstract}
+  We now define how to multiply two matrices together.  
+\end{abstract}
+\maketitle
+
+Stop for a minute and think about how you might define the product of
+two matrices.
+
+Many books would present this definition much earlier in the course.
+However, we have taken great care to delay it as long as possible and
+to present as many ideas as practical based mostly on the notion of
+linear combinations.  Towards the conclusion of the course, or when
+you perhaps take a second course in linear algebra, you may be in a
+position to appreciate the reasons for this.  For now, understand that
+matrix multiplication is a central definition and perhaps you will
+appreciate its importance more by having saved it for later.
+
+\begin{definition}[Matrix Multiplication]
+  Suppose $A$ is an $m\times n$ matrix and $\vectorlist{B}{p}$ are the
+  columns of an $n\times p$ matrix $B$.  Then the \dfn{matrix product}
+  of $A$ with $B$ is the $m\times p$ matrix where column $i$ is the
+  matrix-vector product $A\vect{B}_i$.  Symbolically,
+  \[
+    AB=A\matrixcolumns{B}{p}=\left[A\vect{B}_1|A\vect{B}_2|A\vect{B}_3|\ldots|A\vect{B}_p\right].
+  \]
+\end{definition}
+
+\begin{example}[Product of two matrices]
+Set
+\begin{align*}
+A=
+\begin{bmatrix}
+1 & 2 & -1 & 4 & 6\\
+0 & -4 & 1 & 2 & 3\\
+-5 & 1 & 2 & -3 & 4
+\end{bmatrix}
+&&
+B=
+\begin{bmatrix}
+1 & 6 & 2 & 1\\
+-1 & 4 & 3 & 2\\
+1 & 1 & 2 & 3\\
+6 & 4 & -1 & 2\\
+1 & -2 & 3 & 0
+\end{bmatrix} &
+\end{align*}
+
+Then
+\[
+AB=\begin{bmatrix}
+\answer{28} & 17 & 20 & 10\\
+\answer{20} & -13 & -3 & -1\\
+\answer{-18} & -44 & 12 & -3
+\end{bmatrix}.
+\]
+
+\begin{hint}
+  \[
+    AB=\left[
+      A\colvector{1\\-1\\1\\6\\1}
+      \left\lvert A\colvector{6\\4\\1\\4\\-2}\right.
+      \left\lvert A\colvector{2\\3\\2\\-1\\3}\right.
+      \left\lvert A\colvector{1\\2\\3\\2\\0}\right.
+    \right]
+    =
+    \begin{bmatrix}
+      28 & 17 & 20 & 10\\
+      20 & -13 & -3 & -1\\
+      -18 & -44 & 12 & -3
+    \end{bmatrix}.
+  \]
+\end{hint}
+
+\end{example}
+
+Is this the definition of matrix multiplication you expected?  Perhaps
+our previous operations for matrices caused you to think that we might
+multiply two matrices of the \textit{same} size,
+\textit{entry-by-entry}?  Notice that our current definition uses
+matrices of different sizes (though the number of columns in the first
+must equal the number of rows in the second), and the result is of a
+third size.  Notice too in the previous example that we cannot even
+consider the product $BA$, since the sizes of the two matrices in this
+order are not right.
+
+\begin{example}%[Matrix multiplication is not commutative]
+
+  Set
+  \begin{align*}
+    A=
+    \begin{bmatrix}
+      1 & 3\\
+      -1 & 2
+    \end{bmatrix}
+         &&
+            B=
+            \begin{bmatrix}
+              4&0\\
+              5&1
+            \end{bmatrix}.
+  \end{align*}
+  
+  Then we have two square, $2\times 2$ matrices, so \ref{definition:MM} allows us to multiply them in either order.  We find
+  \[
+    AB=
+    \begin{bmatrix}
+      \answer{19} & 3\\
+      6 & 2
+    \end{bmatrix}
+  \]
+  and
+  \[
+    BA=
+    \begin{bmatrix}
+      \answer{4} & 12\\
+      4 & 17
+    \end{bmatrix}.
+  \]
+  and therefore $AB\neq BA$.  Not even close.  It should not be hard
+  for you to construct other pairs of matrices that do not commute
+  (try a couple of $3\times 3$'s).
+
+  Can you find a pair of non-identical matrices that \textit{do}
+  commute?
+
+\end{example}
+
+And it gets weirder than $AB \neq BA$.  Many of your old ideas about
+``multiplication'' will not apply to matrix multiplication, but some
+still will.  So make no assumptions, and do not do anything until you
+have a theorem that says you can.  Even if the sizes are right, matrix
+multiplication is not commutative---order matters.
+
+\end{document}

@@ -1,0 +1,354 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Computing Determinants}
+
+\begin{document}
+\begin{abstract}
+  There are a variety of ways to compute the determinant.  We will
+  establish first that we can choose to mimic our definition of the
+  determinant, but by using matrix entries and submatrices based on a
+  row other than the first one.
+\end{abstract}
+\maketitle
+
+\begin{theorem}[Determinant Expansion about Rows]
+\label{theorem:DER}
+
+Suppose that $A$ is a square matrix of size $n$.  Then for $1\leq i\leq n$
+\begin{align*}
+  \detname{A}&=
+               (-1)^{i+1}\matrixentry{A}{i1}\detname{\submatrix{A}{i}{1}}+
+               (-1)^{i+2}\matrixentry{A}{i2}\detname{\submatrix{A}{i}{2}}\\
+             &\quad+(-1)^{i+3}\matrixentry{A}{i3}\detname{\submatrix{A}{i}{3}}+
+               \cdots+
+               (-1)^{i+n}\matrixentry{A}{in}\detname{\submatrix{A}{i}{n}}
+\end{align*}
+which is known as \dfn{expansion} about row $i$.
+
+\begin{proof}
+  First, the statement of the theorem coincides with
+  \ref{definition:DM} when $i=1$, so throughout, we need only consider
+  $i>1$.
+
+  Given the recursive definition of the determinant, it should be no
+  surprise that we will use induction for this proof
+  (\ref{technique:I}).  When $n=1$, there is nothing to prove since
+  there is but one row.  When $n=2$, we just examine expansion about
+  the second row,
+  \begin{align*}
+(-1)^{2+1}\matrixentry{A}{21}&\detname{\submatrix{A}{2}{1}}+
+                               (-1)^{2+2}\matrixentry{A}{22}\detname{\submatrix{A}{2}{2}}\\
+                             &=-\matrixentry{A}{21}\matrixentry{A}{12}+\matrixentry{A}{22}\matrixentry{A}{11}
+                             &&\ref{definition:DM}\\
+&=\matrixentry{A}{11}\matrixentry{A}{22}-\matrixentry{A}{12}\matrixentry{A}{21}\\
+                             &=
+                               \detname{A}&&\ref{theorem:DMST}\\
+  \end{align*}
+  
+  So the theorem is true for matrices of size $n=1$ and $n=2$.  Now
+  assume the result is true for all matrices of size $n-1$ as we
+  derive an expression for expansion about row $i$ for a matrix of
+  size $n$.  We will abuse our notation for a submatrix slightly, so
+  $\submatrix{A}{i_1,i_2}{j_1,j_2}$ will denote the matrix formed by
+  removing rows $i_1$ and $i_2$, along with removing columns $j_1$ and
+  $j_2$.  Also, as we take a determinant of a submatrix, we will need
+  to ``jump up'' the index of summation partway through as we ``skip
+  over'' a missing column.  To do this smoothly we will set
+  \[
+    \epsilon_{\ell j}=
+    \begin{cases}
+      0 & \ell<j\\
+      1 & \ell>j
+    \end{cases}
+  \]
+
+  Now,
+  \begin{align*}
+    &\detname{A}\\
+&\quad=
+  \sum_{j=1}^{n}(-1)^{1+j}\matrixentry{A}{1j}\detname{\submatrix{A}{1}{j}}
+&&\ref{definition:DM}\\
+    &\quad=
+      \sum_{j=1}^{n}(-1)^{1+j}\matrixentry{A}{1j}
+      \sum_{\substack{1\leq\ell\leq n\\\ell\neq j}}
+    (-1)^{i-1+\ell-\epsilon_{\ell j}}\matrixentry{A}{i\ell}\detname{\submatrix{A}{1,i}{j,\ell}}
+    &&\text{Induction}\\
+    &\quad=
+      \sum_{j=1}^{n}\sum_{\substack{1\leq\ell\leq n\\\ell\neq j}}
+    (-1)^{j+i+\ell-\epsilon_{\ell j}}
+\matrixentry{A}{1j}\matrixentry{A}{i\ell}\detname{\submatrix{A}{1,i}{j,\ell}}
+    &&\ref{property:DCN}\\
+    &\quad=
+      \sum_{\ell=1}^{n}\sum_{\substack{1\leq j\leq n\\j\neq\ell}}
+    (-1)^{j+i+\ell-\epsilon_{\ell j}}
+    \matrixentry{A}{1j}\matrixentry{A}{i\ell}\detname{\submatrix{A}{1,i}{j,\ell}}
+&&\ref{property:CACN}\\
+    &\quad=
+      \sum_{\ell=1}^{n}(-1)^{i+\ell}\matrixentry{A}{i\ell}
+      \sum_{\substack{1\leq j\leq n\\j\neq\ell}}
+    (-1)^{j-\epsilon_{\ell j}}
+    \matrixentry{A}{1j}\detname{\submatrix{A}{1,i}{j,\ell}}
+    &&\ref{property:DCN}\\
+    &\quad=
+      \sum_{\ell=1}^{n}(-1)^{i+\ell}\matrixentry{A}{i\ell}
+      \sum_{\substack{1\leq j\leq n\\j\neq\ell}}
+    (-1)^{\epsilon_{\ell j}+j}
+    \matrixentry{A}{1j}\detname{\submatrix{A}{i,1}{\ell,j}}
+    &&\text{$2\epsilon_{\ell j}$ is even}\\
+    &\quad=
+      \sum_{\ell=1}^{n}(-1)^{i+\ell}\matrixentry{A}{i\ell}\detname{\submatrix{A}{i}{\ell}}
+&&\ref{definition:DM}
+  \end{align*}
+
+\end{proof}
+\end{theorem}
+
+We can also obtain a formula that computes a determinant by expansion
+about a column, but this will be simpler if we first prove a result
+about the interplay of determinants and transposes.  Notice how the
+following proof makes use of the ability to compute a determinant by
+expanding about \textit{any} row.
+
+\begin{theorem}[Determinant of the Transpose]
+  \label{theorem:DT}
+  Suppose that $A$ is a square matrix.  Then $\detname{\transpose{A}}=\detname{A}$.
+
+  \begin{proof}
+    With our definition of the determinant (\ref{definition:DM}) and
+    theorems like \ref{theorem:DER}, using induction
+    (\ref{technique:I}) is a natural approach to proving properties of
+    determinants.  And so it is here.  Let $n$ be the size of the
+    matrix $A$, and we will use induction on $n$.
+
+    For $n=1$, the transpose of a matrix is identical to the original
+    matrix, so vacuously, the determinants are equal.
+
+    Now assume the result is true for matrices of size $n-1$.  Then,
+    \begin{align*}
+      \detname{\transpose{A}}
+      &=\frac{1}{n}\sum_{i=1}^{n}\detname{\transpose{A}}\\
+      &=
+        \frac{1}{n}\sum_{i=1}^{n}\sum_{j=1}^{n}(-1)^{i+j}
+        \matrixentry{\transpose{A}}{ij}\detname{\submatrix{\transpose{A}}{i}{j}}
+      &&\ref{theorem:DER}\\
+      &=
+        \frac{1}{n}\sum_{i=1}^{n}\sum_{j=1}^{n}(-1)^{i+j}
+        \matrixentry{A}{ji}\detname{\submatrix{\transpose{A}}{i}{j}}
+      &&\ref{definition:TM}\\
+      &=
+        \frac{1}{n}\sum_{i=1}^{n}\sum_{j=1}^{n}(-1)^{i+j}
+        \matrixentry{A}{ji}\detname{\transpose{\left(\submatrix{A}{j}{i}\right)}}
+      &&\ref{definition:TM}\\
+      &=
+        \frac{1}{n}\sum_{i=1}^{n}\sum_{j=1}^{n}(-1)^{i+j}
+        \matrixentry{A}{ji}\detname{\submatrix{A}{j}{i}}
+      &&\text{Induction Hypothesis}\\
+      &=
+        \frac{1}{n}\sum_{j=1}^{n}\sum_{i=1}^{n}(-1)^{j+i}
+        \matrixentry{A}{ji}\detname{\submatrix{A}{j}{i}}
+      &&\ref{property:CACN}\\
+      &=
+        \frac{1}{n}\sum_{j=1}^{n}\detname{A}
+      &&\ref{theorem:DER}\\
+      &=\detname{A}
+    \end{align*}
+  \end{proof}
+\end{theorem}
+
+Now we can easily get the result that a determinant can be computed by
+expansion about any column as well.
+
+\begin{theorem}[Determinant Expansion about Columns]
+  \label{theorem:DEC}
+  Suppose that $A$ is a square matrix of size $n$.  Then for
+  $1\leq j\leq n$
+  \begin{align*}
+  \detname{A}&=
+               (-1)^{1+j}\matrixentry{A}{1j}\detname{\submatrix{A}{1}{j}}+
+               (-1)^{2+j}\matrixentry{A}{2j}\detname{\submatrix{A}{2}{j}}\\
+             &\quad+(-1)^{3+j}\matrixentry{A}{3j}\detname{\submatrix{A}{3}{j}}+
+               \cdots+
+               (-1)^{n+j}\matrixentry{A}{nj}\detname{\submatrix{A}{n}{j}}
+  \end{align*}
+  which is known as \dfn{expansion} about column $j$.
+
+  \begin{proof}
+
+    \begin{align*}
+      \detname{A}
+      &=
+        \detname{\transpose{A}}&&\ref{theorem:DT}\\
+      &=
+        \sum_{i=1}^{n}(-1)^{j+i}\matrixentry{\transpose{A}}{ji}\detname{\submatrix{\transpose{A}}{j}{i}}
+                               &&\ref{theorem:DER}\\
+      &=
+        \sum_{i=1}^{n}(-1)^{j+i}\matrixentry{\transpose{A}}{ji}\detname{\transpose{\left(\submatrix{A}{i}{j}\right)}}
+                               &&\ref{definition:TM}\\
+      &=
+        \sum_{i=1}^{n}(-1)^{j+i}\matrixentry{\transpose{A}}{ji}\detname{\submatrix{A}{i}{j}}
+                               &&\ref{theorem:DT}\\
+      &=
+        \sum_{i=1}^{n}(-1)^{i+j}\matrixentry{A}{ij}\detname{\submatrix{A}{i}{j}}
+                               &&\ref{definition:TM}
+    \end{align*}
+  \end{proof}
+\end{theorem}
+
+That the determinant of an $n\times n$ matrix can be computed in $2n$
+different (albeit similar) ways is nothing short of remarkable.  For
+the doubters among us, we will do an example, computing a $4\times 4$
+matrix in two different ways.
+
+\begin{example}[Two computations, same determinant]
+  Let
+  \[
+    A=
+    \begin{bmatrix}
+      -2 & 3 & 0 & 1\\
+      9 & -2 & 0 & 1\\
+      1 & 3 & -2 & -1\\
+      4 & 1 & 2 & 6
+    \end{bmatrix}
+  \]
+
+  Then expanding about the fourth row (\ref{theorem:DER} with $i=4$)
+  yields,
+  \begin{align*}
+    \detbars{A}
+    &=
+      (4)(-1)^{4+1}
+      \begin{vmatrix}
+        \answer{3} & 0 & 1\\
+        \answer{-2} & 0 & 1\\
+        \answer{3} & -2 & -1
+      \end{vmatrix}
+                 +(1)(-1)^{4+2}
+                 \begin{vmatrix}
+                   -2 &  0 & 1\\
+                   9 &  0 & 1\\
+                   1 &  -2 & -1
+                 \end{vmatrix}\\
+    &\quad\quad+(2)(-1)^{4+3}
+      \begin{vmatrix}
+        -2 & 3 &  1\\
+        9 & -2 &  1\\
+        1 & 3  & -1
+      \end{vmatrix}
+                 +(6)(-1)^{4+4}
+                 \begin{vmatrix}
+                   -2 & 3 & 0 \\
+                   9 & -2 & 0 \\
+                   1 & 3 & -2
+                 \end{vmatrix}\\
+    &=
+      (-4)(10)+(1)(-22)+(-2)(61)+6(46)=92
+  \end{align*}
+
+  Expanding about column 3 (\ref{theorem:DEC} with $j=3$) gives
+  \begin{align*}
+    \detbars{A}
+    &=
+      (0)(-1)^{1+3}
+      \begin{vmatrix}
+        9 & -2 & 1\\
+        1 & 3 & -1\\
+        4 & 1 & 6
+      \end{vmatrix}
+                +
+                (0)(-1)^{2+3}
+                \begin{vmatrix}
+                  -2 & 3 & 1\\
+                  1 & 3 & -1\\
+                  4 & 1 & 6
+                \end{vmatrix}
+                          +\\
+    &\quad\quad(-2)(-1)^{3+3}
+      \begin{vmatrix}
+        -2 & 3 & 1\\
+        9 & -2 & 1\\
+        4 & 1 & 6
+      \end{vmatrix}
+                +
+                (2)(-1)^{4+3}
+                \begin{vmatrix}
+                  -2 & 3 & 1\\
+                  9 & -2 & 1\\
+                  1 & 3 & -1
+                \end{vmatrix}\\
+    &=0+0+(-2)(-107)+(-2)(61)=\answer{92}
+  \end{align*}
+
+  Notice how much easier the second computation was.  By choosing to
+  expand about the third column, we have two entries that are zero, so
+  two $3\times 3$ determinants need not be computed at all!
+\end{example}
+
+When a matrix has all zeros above (or below) the diagonal, exploiting
+the zeros by expanding about the proper row or column makes computing
+a determinant insanely easy.
+
+\begin{example}[Determinant of an upper triangular matrix]
+  Suppose that
+  \[
+    T=
+    \begin{bmatrix}
+      2 & 3 & -1 & 3 & 3\\
+      0 & -1 & 5 & 2 & -1\\
+      0 & 0 & 3 & 9 & 2\\
+      0 & 0 & 0 & -1 & 3\\
+      0 & 0 & 0 & 0 & 5
+    \end{bmatrix}
+  \]
+
+  We will compute the determinant of this $5\times 5$ matrix by
+  consistently expanding about the first column for each submatrix
+  that arises and does not have a zero entry multiplying it.
+  \begin{align*}
+    \detname{T}&=
+                 \begin{vmatrix}
+                   2 & 3 & -1 & 3 & 3\\
+                   0 & -1 & 5 & 2 & -1\\
+                   0 & 0 & 3 & 9 & 2\\
+                   0 & 0 & 0 & -1 & 3\\
+                   0 & 0 & 0 & 0 & 5
+                 \end{vmatrix}\\
+               &=2(-1)^{1+1}
+                 \begin{vmatrix}
+                   -1 & 5 & 2 & -1\\
+                   0 & 3 & 9 & 2\\
+                   0 & 0 & -1 & 3\\
+                   0 & 0 & 0 & 5
+                 \end{vmatrix}\\
+               &=2(-1)(-1)^{1+1}
+                 \begin{vmatrix}
+                   3 & 9 & 2\\
+                   0 & -1 & 3\\
+                   0 & 0 & 5
+                 \end{vmatrix}\\
+               &=2(-1)(3)(-1)^{1+1}
+                 \begin{vmatrix}
+                   -1 & 3\\
+                   0 & 5
+                 \end{vmatrix}\\
+               &=2(-1)(3)(-1)(-1)^{1+1}
+                 \begin{vmatrix}
+                   5
+                 \end{vmatrix}\\
+               &=2(-1)(3)(-1)(5)=30
+  \end{align*}
+\end{example}
+
+When you consult other texts in your study of determinants, you may
+run into the terms ``minor'' and ``cofactor,'' especially in a
+discussion centered on expansion about rows and columns.  We have
+chosen not to make these definitions formally since we have been able
+to get along without them.  However, informally, a \dfn{minor} is a
+determinant of a submatrix, specifically
+$\detname{\submatrix{A}{i}{j}}$ and is usually referenced as the minor
+of $\matrixentry{A}{ij}$.  A \dfn{cofactor} is a signed minor,
+specifically the cofactor of $\matrixentry{A}{ij}$ is
+$(-1)^{i+j}\detname{\submatrix{A}{i}{j}}$.
+
+\end{document}

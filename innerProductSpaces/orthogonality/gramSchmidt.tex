@@ -1,0 +1,292 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Gram-Schmidt}
+
+\begin{document}
+\begin{abstract}
+  A linearly independent set of vectors can be transformed into an
+  orthogonal set of vectors while preserving the span.
+\end{abstract}
+\maketitle
+
+The Gram-Schmidt Procedure is really a theorem.  It says that if we
+begin with a linearly independent set of $p$ vectors, $S$, then we can
+do a number of calculations with these vectors and produce an
+orthogonal set of $p$ vectors, $T$, so that $\spn{S}=\spn{T}$.  Given
+the large number of computations involved, it is indeed a procedure to
+do all the necessary computations, and it is best employed on a
+computer.  However, it also has value in proofs where we may on
+occasion wish to replace a linearly independent set by an orthogonal
+set.
+
+This is our first occasion to use the technique of ``mathematical
+induction'' for a proof, a technique we will see again several times.
+
+\begin{theorem}[Gram-Schmidt Procedure]
+  \label{theorem:GSP}
+
+  Suppose that $S=\set{\vectorlist{v}{p}}$ is a linearly independent set of vectors in $\complex{m}$.  Define the vectors $\vect{u}_i$, $1\leq i\leq p$ by
+  \[
+    \vect{u}_i=\vect{v}_i
+    -\frac{\innerproduct{\vect{u}_1}{\vect{v}_i}}{\innerproduct{\vect{u}_1}{\vect{u}_1}}\vect{u}_1
+    -\frac{\innerproduct{\vect{u}_2}{\vect{v}_i}}{\innerproduct{\vect{u}_2}{\vect{u}_2}}\vect{u}_2
+    -\frac{\innerproduct{\vect{u}_3}{\vect{v}_i}}{\innerproduct{\vect{u}_3}{\vect{u}_3}}\vect{u}_3
+    -\cdots
+    -\frac{\innerproduct{\vect{u}_{i-1}}{\vect{v}_i}}{\innerproduct{\vect{u}_{i-1}}{\vect{u}_{i-1}}}\vect{u}_{i-1}
+  \]
+  
+  
+  Let $T=\set{\vectorlist{u}{p}}$.  Then $T$ is an orthogonal set of nonzero vectors, and $\spn{T}=\spn{S}$.
+  
+  \begin{proof}
+    We will prove the result by using induction on $p$.
+    
+    To begin, we prove that $T$ has the desired properties when
+    $p=\answer{1}$.  In this case $\vect{u}_1=\vect{v}_1$ and
+    $T=\set{\vect{u}_1}=\set{\vect{v}_1}=S$.  Because $S$ and $T$ are
+    equal, $\spn{S}=\spn{T}$.  Equally trivial, $T$ is an orthogonal
+    set.  If $\vect{u}_1=\zerovector$, then $S$ would be a linearly
+    dependent set, a contradiction.
+
+    Suppose that the theorem is true for any set of $p-1$ linearly
+    independent vectors.  Let $S=\set{\vectorlist{v}{p}}$ be a
+    linearly independent set of $p$ vectors.  Then
+    $S^\prime=\set{\vectorlist{v}{p-1}}$ is also linearly independent.
+    So we can apply the theorem to $S^\prime$ and construct the
+    vectors $T^\prime=\set{\vectorlist{u}{p-1}}$.  $T^\prime$ is
+    therefore an orthogonal set of nonzero vectors and
+    $\spn{S^\prime}=\spn{T^\prime}$.  Define
+    \[
+      \vect{u}_p=\vect{v}_p
+      -\frac{\innerproduct{\vect{u}_1}{\vect{v}_p}}{\innerproduct{\vect{u}_1}{\vect{u}_1}}\vect{u}_1
+      -\frac{\innerproduct{\vect{u}_2}{\vect{v}_p}}{\innerproduct{\vect{u}_2}{\vect{u}_2}}\vect{u}_2
+      -\frac{\innerproduct{\vect{u}_3}{\vect{v}_p}}{\innerproduct{\vect{u}_3}{\vect{u}_3}}\vect{u}_3
+      -\cdots
+      -\frac{\innerproduct{\vect{u}_{p-1}}{\vect{v}_p}}{\innerproduct{\vect{u}_{p-1}}{\vect{u}_{p-1}}}\vect{u}_{p-1}
+    \]
+    and let $T=T^\prime\cup\set{\vect{u}_p}$.  We need to now show
+    that $T$ has several properties by building on what we know about
+    $T^\prime$.  But first notice that the above equation has no
+    problems with the denominators
+    ($\innerproduct{\vect{u}_i}{\vect{u}_i}$) being zero, since the
+    $\vect{u}_i$ are from $T^\prime$, which is composed of nonzero
+    vectors.
+
+    We show that $\spn{T}=\spn{S}$, by first establishing that
+    $\spn{T}\subseteq\spn{S}$.  Suppose $\vect{x}\in\spn{T}$, so
+    \[
+      \vect{x}=\lincombo{a}{u}{p}
+    \]
+    The term $a_p\vect{u}_p$ is a linear combination of vectors from
+    $T^\prime$ and the vector $\vect{v}_p$, while the remaining terms
+    are a linear combination of vectors from $T^\prime$.  Since
+    $\spn{T^\prime}=\spn{S^\prime}$, any term that is a multiple of a
+    vector from $T^\prime$ can be rewritten as a linear combination of
+    vectors from $S^\prime$.  The remaining term $a_p\vect{v}_p$ is a
+    multiple of a vector in $S$.  So we see that $\vect{x}$ can be
+    rewritten as a linear combination of vectors from $S$, i.e.,
+    $\vect{x}\in\spn{S}$.
+
+    To show that $\spn{S}\subseteq\spn{T}$, begin with
+    $\vect{y}\in\spn{S}$, so
+    \[
+      \vect{y}=\lincombo{a}{v}{p}
+    \]
+
+    Rearrange our defining equation for $\vect{u}_p$ by solving for
+    $\vect{v}_p$.  Then the term $a_p\vect{v}_p$ is a multiple of a
+    linear combination of elements of $T$.  The remaining terms are a
+    linear combination of $\vectorlist{v}{p-1}$, hence an element of
+    $\spn{S^\prime}=\spn{T^\prime}$.  Thus these remaining terms can
+    be written as a linear combination of the vectors in $T^\prime$.
+    So $\vect{y}$ is a linear combination of vectors from $T$, i.e.,
+    $\vect{y}\in\spn{T}$.
+
+
+    The elements of $T^\prime$ are nonzero, but what about
+    $\vect{u}_p$?  Suppose to the contrary that
+    $\vect{u}_p=\zerovector$,
+    \begin{align*}
+      \zerovector&=\vect{u}_p=\vect{v}_p
+                   -\frac{\innerproduct{\vect{u}_1}{\vect{v}_p}}{\innerproduct{\vect{u}_1}{\vect{u}_1}}\vect{u}_1
+                   -\frac{\innerproduct{\vect{u}_2}{\vect{v}_p}}{\innerproduct{\vect{u}_2}{\vect{u}_2}}\vect{u}_2
+                   -\frac{\innerproduct{\vect{u}_3}{\vect{v}_p}}{\innerproduct{\vect{u}_3}{\vect{u}_3}}\vect{u}_3
+                   -\cdots
+                   -\frac{\innerproduct{\vect{u}_{p-1}}{\vect{v}_p}}{\innerproduct{\vect{u}_{p-1}}{\vect{u}_{p-1}}}\vect{u}_{p-1}\\
+                 &\vect{v}_p=
+                   \frac{\innerproduct{\vect{u}_1}{\vect{v}_p}}{\innerproduct{\vect{u}_1}{\vect{u}_1}}\vect{u}_1
+                   +\frac{\innerproduct{\vect{u}_2}{\vect{v}_p}}{\innerproduct{\vect{u}_2}{\vect{u}_2}}\vect{u}_2
+                   +\frac{\innerproduct{\vect{u}_3}{\vect{v}_p}}{\innerproduct{\vect{u}_3}{\vect{u}_3}}\vect{u}_3
+                   +\cdots
+                   +\frac{\innerproduct{\vect{u}_{p-1}}{\vect{v}_p}}{\innerproduct{\vect{u}_{p-1}}{\vect{u}_{p-1}}}\vect{u}_{p-1}
+    \end{align*}
+
+    Since $\spn{S^\prime}=\spn{T^\prime}$ we can write the vectors
+    $\vectorlist{u}{p-1}$ on the right side of this equation in terms
+    of the vectors $\vectorlist{v}{p-1}$ and we then have the vector
+    $\vect{v}_p$ expressed as a linear combination of the other $p-1$
+    vectors in $S$, implying that $S$ is a linearly dependent set
+    (\ref{theorem:DLDS}), contrary to our lone hypothesis about $S$.
+
+    Finally, it is a simple matter to establish that $T$ is an
+    orthogonal set, though it will not appear so simple looking.
+    Think about your objects as you work through the following---what
+    is a vector and what is a scalar.  Since $T^\prime$ is an
+    orthogonal set by induction, most pairs of elements in $T$ are
+    already known to be orthogonal.  We just need to test ``new''
+    inner products, between $\vect{u}_p$ and $\vect{u}_i$, for
+    $1\leq i\leq p-1$.  Here we go, using summation notation,
+    \begin{align*}
+      \innerproduct{\vect{u}_i}{\vect{u}_p}&=
+                                             \innerproduct{\vect{u}_i}{
+                                             \vect{v}_p-\sum_{k=1}^{p-1}\frac{\innerproduct{\vect{u}_k}{\vect{v}_p}}{\innerproduct{\vect{u}_k}{\vect{u}_k}}\vect{u}_k
+                                             }
+      \\
+                                           &=
+                                             \innerproduct{\vect{u}_i}{\vect{v}_p}
+                                             -
+                                             \innerproduct{\vect{u}_i}{
+                                             \sum_{k=1}^{p-1}\frac{\innerproduct{\vect{u}_k}{\vect{v}_p}}{\innerproduct{\vect{u}_k}{\vect{u}_k}}\vect{u}_k
+                                             }
+      \\ %&&\ref{theorem:IPVA}\\
+                                           &=
+                                             \innerproduct{\vect{u}_i}{\vect{v}_p}
+                                             -
+                                             \sum_{k=1}^{p-1}\innerproduct{\vect{u}_i}{
+                                             \frac{\innerproduct{\vect{u}_k}{\vect{v}_p}}{\innerproduct{\vect{u}_k}{\vect{u}_k}}\vect{u}_k
+                                             }
+      \\ %&&\ref{theorem:IPVA}\\
+                                           &=
+                                             \innerproduct{\vect{u}_i}{\vect{v}_p}
+                                             -
+                                             \sum_{k=1}^{p-1}\frac{\innerproduct{\vect{u}_k}{\vect{v}_p}}{\innerproduct{\vect{u}_k}{\vect{u}_k}}\innerproduct{\vect{u}_i}{\vect{u}_k}
+      \\ %&&\ref{theorem:IPSM}\\
+                                           &=
+                                             \innerproduct{\vect{u}_i}{\vect{v}_p}
+                                             -
+                                             \frac{\innerproduct{\vect{u}_i}{\vect{v}_p}}{\innerproduct{\vect{u}_i}{\vect{u}_i}}\innerproduct{\vect{u}_i}{\vect{u}_i}
+                                             -
+                                             \sum_{k\neq i}\frac{\innerproduct{\vect{u}_k}{\vect{v}_p}}{\innerproduct{\vect{u}_k}{\vect{u}_k}}(0)
+\\ %&&\text{Induction Hypothesis}\\
+                                           &=
+                                             \innerproduct{\vect{u}_i}{\vect{v}_p}
+                                             -
+                                             \innerproduct{\vect{u}_i}{\vect{v}_p}
+                                             -
+                                             \sum_{k\neq i}0\\
+                                           &=0
+    \end{align*}
+    
+  \end{proof}
+\end{theorem}
+
+\begin{example}[Gram-Schmidt of three vectors]
+
+  We will illustrate the Gram-Schmidt process with three vectors.  Begin with the linearly independent set
+  \[
+    S=\set{\vect{v}_1,\,\vect{v}_2,\,\vect{v}_3}=\set{
+      \colvector{1\\1+i\\1},\,
+      \colvector{-i\\1\\1+i},\,
+      \colvector{0\\i\\i}
+    }
+  \]
+  
+  Then
+  \begin{align*}
+    \vect{u}_1&=\vect{v_1}=\colvector{1\\1+i\\1}\\
+    \vect{u}_2&=\vect{v}_2
+                -\frac{\innerproduct{\vect{u}_1}{\vect{v}_2}}{\innerproduct{\vect{u}_1}{\vect{u}_1}}\vect{u}_1
+                =\frac{1}{4}\colvector{-2-3i\\1-i\\2+5i}\\
+    \vect{u}_3&=\vect{v}_3
+                -\frac{\innerproduct{\vect{u}_1}{\vect{v}_3}}{\innerproduct{\vect{u}_1}{\vect{u}_1}}\vect{u}_1
+                -\frac{\innerproduct{\vect{u}_2}{\vect{v}_3}}{\innerproduct{\vect{u}_2}{\vect{u}_2}}\vect{u}_2
+                =\frac{1}{11}\colvector{-3-i\\1+3i\\-1-i}
+  \end{align*}
+  and
+  \[
+    T=\set{\vect{u}_1,\,\vect{u}_2,\,\vect{u}_3}
+    =\set{
+      \colvector{1\\1+i\\1},\,
+      \frac{1}{4}\colvector{-2-3i\\1-i\\2+5i},\,
+      \frac{1}{11}\colvector{-3-i\\1+3i\\-1-i}
+    }
+  \]
+  is an orthogonal set (which you can check) of nonzero vectors and
+  $\spn{T}=\spn{S}$ (all by \ref{theorem:GSP}).  Of course, as a
+  by-product of orthogonality, the set $T$ is also linearly
+  independent (\ref{theorem:OSLI}).
+
+\end{example}
+
+One final definition related to orthogonal vectors.
+
+\begin{definition}[OrthoNormal Set]
+
+  Suppose $S=\set{\vectorlist{u}{n}}$ is an orthogonal set of vectors
+  such that $\norm{\vect{u}_i}=1$ for all $1\leq i\leq n$.  Then $S$
+  is an \dfn{orthonormal} set of vectors.
+
+\end{definition}
+
+Once you have an orthogonal set, it is easy to convert it to an
+orthonormal set---multiply each vector by the reciprocal of its norm,
+and the resulting vector will have norm 1.  This scaling of each
+vector will not affect the orthogonality properties (apply
+\ref{theorem:IPSM}).
+
+\begin{example}[Orthonormal set, three vectors]
+
+The set
+\[
+T=\set{\vect{u}_1,\,\vect{u}_2,\,\vect{u}_3}
+=\set{
+\colvector{1\\1+i\\1},\,
+\frac{1}{4}\colvector{-2-3i\\1-i\\2+5i},\,
+\frac{1}{11}\colvector{-3-i\\1+3i\\-1-i}
+}
+\]
+from \ref{example:GSTV} is an orthogonal set.
+
+We compute the norm of each vector,
+\begin{align*}
+\norm{\vect{u}_1}=\answer{2}&&
+\norm{\vect{u}_2}=\frac{1}{2}\sqrt{11}&&
+\norm{\vect{u}_3}=\frac{\sqrt{2}}{\sqrt{11}}
+\end{align*}
+
+
+
+
+Converting each vector to a norm of 1, yields an orthonormal set,
+\begin{align*}
+\vect{w}_1&=\frac{1}{\answer{2}}\colvector{1\\1+i\\1}\\
+\vect{w}_2&=\frac{1}{\frac{1}{2}\sqrt{11}}\frac{1}{4}\colvector{-2-3i\\1-i\\2+5i}=\frac{1}{2\sqrt{11}}\colvector{-2-3i\\1-i\\2+5i}\\
+\vect{w}_3&=\frac{1}{\frac{\sqrt{2}}{\sqrt{11}}}\frac{1}{11}\colvector{-3-i\\1+3i\\-1-i}=\frac{1}{\sqrt{22}}\colvector{-3-i\\1+3i\\-1-i}
+\end{align*}
+
+\end{example}
+
+\begin{example}[Orthonormal set, four vectors]
+  
+  As an exercise convert the linearly independent set
+  \[
+    S=\set{
+      \colvector{1+i\\1\\1-i\\i},\,
+      \colvector{i\\1+i\\-1\\-i},\,
+      \colvector{i\\-i\\ -1+i\\1},\,
+      \colvector{-1-i\\i\\1\\-1}
+    }
+  \]
+  to an orthogonal set via the Gram-Schmidt Process (\ref{theorem:GSP}) and then scale the vectors to norm 1 to create an orthonormal set.  You should get the same set you would if you scaled the orthogonal set of \ref{example:AOS} to become an orthonormal set.
+
+\end{example}
+
+We will see orthonormal sets again because they are intimately related
+to unitary matrices (\ref{definition:UM}) through \ref{theorem:CUMOS}.
+Some of the utility of orthonormal sets is captured by
+\ref{theorem:COB}.  Orthonormal sets appear once again in
+\ref{section:OD} where they are key in orthonormal diagonalization.
+
+\end{document}

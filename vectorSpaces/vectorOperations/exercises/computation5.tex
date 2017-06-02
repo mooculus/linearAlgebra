@@ -1,0 +1,59 @@
+\documentclass{ximera}
+
+\input{../../../preamble.tex}
+\author{Chris Black}
+\license{GFDL}
+
+\begin{document}
+
+\begin{exercise}
+  Find $\alpha$ and $\beta$ that solve the vector equation.
+  \[
+    \alpha\colvector{2\\1}+
+    \beta\colvector{1\\3
+    }=
+    \colvector{5\\0}
+  \]
+
+  \begin{hint}
+    Performing the indicated operations, we obtain the vector equations
+    \begin{align*}
+      \colvector{5\\0}
+   &= \alpha\colvector{2\\1} + \beta\colvector{1\\3}
+      = \colvector{2\alpha + \beta \\ \alpha + 3\beta}
+    \end{align*}
+  \end{hint}
+
+  \begin{hint}
+    Since the entries of the vectors must be equal, we obtain the system of equations
+    \begin{align*}
+      2\alpha + \beta &= 5\\
+      \alpha + 3\beta &= 0.
+    \end{align*}
+  \end{hint}
+    
+  \begin{hint}
+    We can solve by row-reducing the augmented matrix of the system,
+    \begin{align*}
+      \begin{bmatrix}
+        2 & 1 & 5\\
+        1 & 3 & 0
+      \end{bmatrix}
+          &\rref
+            \begin{bmatrix}
+              \leading{1} & 0 & 3\\
+              0 & \leading{1} & -1
+            \end{bmatrix}
+    \end{align*}
+  \end{hint}
+  
+  \begin{hint}
+    Thus, the only solution is $\alpha = 3$, $\beta = -1$.
+  \end{hint}
+
+  Then $\alpha = \answer{3}$ and $\beta = \answer{-1}$.
+
+\end{exercise}
+
+\end{document}
+

@@ -1,0 +1,122 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Solutions and Inverses}
+
+\begin{document}
+\begin{abstract}
+  The inverse of a square matrix, and solutions to linear systems with square coefficient matrices, are intimately connected.
+\end{abstract}
+\maketitle
+
+\begin{example}[Solving a system via the inverse of a matrix]
+  \ref{archetype:B} 
+
+  Consider the system of $m=3$ linear equations in $n=3$ variables:
+  \begin{align*}
+    -7x_1 -6 x_2 - 12x_3 &=-33\\
+    5x_1  + 5x_2 + 7x_3 &=24\\
+    x_1 +4x_3 &=5
+  \end{align*}
+  
+  By \ref{theorem:SLEMM} we can represent this system of equations as
+  \[
+    A\vect{x}=\vect{b}
+  \]
+  where
+  \begin{align*}
+    A=\begin{bmatrix}
+      -7&-6&-12\\
+      5&5&7\\
+      1&0&4
+    \end{bmatrix}
+       &&\vect{x}=\colvector{x_1\\x_2\\x_3}&&\vect{b}=\colvector{-33\\24\\5}
+  \end{align*}
+  
+  Now, entirely unmotivated, we define the $3\times 3$ matrix $B$,
+  \[
+    B=\begin{bmatrix}
+      -10 & -12 & -9\\
+      \frac{13}{2} & 8 & \frac{11}{2}\\
+      \frac{5}{2} & 3 & \frac{5}{2}
+    \end{bmatrix}
+  \]
+  and note the remarkable fact that
+  \begin{align*}
+    BA &=\begin{bmatrix}
+      -10 & -12 & -9\\
+      \frac{13}{2} & 8 & \frac{11}{2}\\
+      \frac{5}{2} & 3 & \frac{5}{2}
+    \end{bmatrix}\begin{bmatrix}
+      -7&-6&-12\\
+      5&5&7\\
+      1&0&4
+    \end{bmatrix} \\
+       &=
+         \begin{bmatrix}
+           \answer{1} & 0 & 0\\
+           \answer{0} & 1 & 0\\
+           \answer{0} & 0 & 1
+         \end{bmatrix}.
+  \end{align*}
+  
+  Now apply this computation to the problem of solving the system of equations,
+  \begin{align*}
+    \vect{x}
+    &=I_3\vect{x} \\ 
+    &=(BA)\vect{x} \\
+    &=B(A\vect{x}) \\
+    &=B\vect{b}
+  \end{align*}
+  
+  So we have
+  \[
+    \vect{x}=B\vect{b}=
+    \begin{bmatrix}
+      -10 & -12 & -9\\
+      \frac{13}{2} & 8 & \frac{11}{2}\\
+      \frac{5}{2} & 3 & \frac{5}{2}
+    \end{bmatrix} \colvector{-33\\24\\5} =
+    \colvector{-3\\5\\2}
+  \]
+  
+  So with the help and assistance of $B$ we have been able to determine
+  a solution to the system represented by $A\vect{x}=\vect{b}$ through
+  judicious use of matrix multiplication.  Since the coefficient matrix
+  in this example is nonsingular, there would be a unique solution, no
+  matter what the choice of $\vect{b}$.  The derivation above amplifies
+  this result, since we were \textit{forced} to conclude that
+  $\vect{x}=B\vect{b}$ and the solution could not be anything else.  You
+  should notice that this argument would hold for any particular choice
+  of $\vect{b}$.
+\end{example}
+
+The matrix $B$ of the previous example is called the \textbf{inverse}
+of $A$.  When $A$ and $B$ are combined via matrix multiplication, the
+result is the identity matrix, which can be inserted ``in front'' of
+$\vect{x}$ as the first step in finding the solution.  This is
+entirely analogous to how we might solve a single linear equation like
+$3x=12$.
+\[
+x=1x=\left(\frac{1}{3}\left(3\right)\right)x=\frac{1}{3}\left(3x\right)=\frac{1}{3}\left(12\right)=4
+\]
+
+Here we have obtained a solution by employing the ``multiplicative
+inverse'' of $3$, $3^{-1}=\frac{1}{3}$.  This works fine for any
+scalar multiple of $x$, except for zero, since zero does not have a
+multiplicative inverse.  Consider separately the two linear equations,
+\[
+  0x=12
+  \quad
+  0x=0
+\]
+
+The first has no solutions, while the second has infinitely many
+solutions.  For matrices, it is all just a little more complicated.
+Some matrices have inverses, some do not.  And when a matrix does have
+an inverse, just how would we compute it?  In other words, just where
+did that matrix $B$ in the last example come from?  Are there other
+matrices that might have worked just as well?
+
+\end{document}

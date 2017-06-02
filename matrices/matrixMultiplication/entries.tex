@@ -1,0 +1,154 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Matrix Multiplication, Entry-by-Entry}
+
+\begin{document}
+\begin{abstract}
+  While certain ``natural'' properties of multiplication do not hold, many more do.
+\end{abstract}
+\maketitle
+
+We need a theorem that provides an alternate means of multiplying two
+matrices.  In many texts, this would be given as the
+\textit{definition} of matrix multiplication.  We prefer to turn it
+around and have the following formula as a consequence of our
+definition.  It will prove useful for proofs of matrix equality, where
+we need to examine products of matrices, entry-by-entry.
+
+\begin{theorem}[Entries of Matrix Products]
+  \label{theorem:EMP}
+  Suppose $A$ is an $m\times n$ matrix and $B$ is an $n\times p$ matrix.
+  Then for $1\leq i\leq m$, $1\leq j\leq p$, the individual entries of
+  $AB$ are given by
+  \begin{align*}
+    \matrixentry{AB}{ij}
+    &=
+      \matrixentry{A}{i1}\matrixentry{B}{1j}+
+      \matrixentry{A}{i2}\matrixentry{B}{2j}+
+      \matrixentry{A}{i3}\matrixentry{B}{3j}+
+      \cdots+
+      \matrixentry{A}{in}\matrixentry{B}{nj}\\
+    &=
+      \sum_{k=1}^{n}\matrixentry{A}{ik}\matrixentry{B}{kj}
+  \end{align*}
+  
+  \begin{proof}
+    Let the vectors $\vectorlist{A}{n}$ denote the columns of $A$ and let the vectors $\vectorlist{B}{p}$ denote the columns of $B$.  Then for $1\leq i\leq m$, $1\leq j\leq p$,
+    \begin{align*}
+      \matrixentry{AB}{ij}
+      &=\vectorentry{A\vect{B}_j}{i}&&\ref{definition:MM}\\
+      &=\vectorentry{
+        \vectorentry{\vect{B}_j}{1}\vect{A}_1+
+        \vectorentry{\vect{B}_j}{2}\vect{A}_2+
+        \cdots+
+        \vectorentry{\vect{B}_j}{n}\vect{A}_n
+        }{i}&&\ref{definition:MVP}\\
+      &=
+        \vectorentry{\vectorentry{\vect{B}_j}{1}\vect{A}_1}{i}+
+        \vectorentry{\vectorentry{\vect{B}_j}{2}\vect{A}_2}{i}+
+        \cdots+
+        \vectorentry{\vectorentry{\vect{B}_j}{n}\vect{A}_n}{i}
+                                    &&\ref{definition:CVA}\\
+      &=
+        \vectorentry{\vect{B}_j}{1}\vectorentry{\vect{A}_1}{i}+
+        \vectorentry{\vect{B}_j}{2}\vectorentry{\vect{A}_2}{i}+
+        \cdots+
+        \vectorentry{\vect{B}_j}{n}\vectorentry{\vect{A}_n}{i}
+                                    &&\ref{definition:CVSM}\\
+      &=
+        \matrixentry{B}{1j}\matrixentry{A}{i1}+
+        \matrixentry{B}{2j}\matrixentry{A}{i2}+
+        \cdots+
+        \matrixentry{B}{nj}\matrixentry{A}{in}
+                                    &&\ref{definition:M}\\
+      &=
+        \matrixentry{A}{i1}\matrixentry{B}{1j}+
+        \matrixentry{A}{i2}\matrixentry{B}{2j}+
+        \cdots+
+        \matrixentry{A}{in}\matrixentry{B}{nj}
+                                    &&\ref{property:CMCN}\\
+      &=\sum_{k=1}^{n}\matrixentry{A}{ik}\matrixentry{B}{kj}
+    \end{align*}
+  \end{proof}
+\end{theorem}
+
+\begin{example}[Product of two matrices, entry-by-entry]
+  
+  Consider again the two matrices from \ref{example:PTM}
+  \begin{align*}
+    A=
+    \begin{bmatrix}
+      1 & 2 & -1 & 4 & 6\\
+      0 & -4 & 1 & 2 & 3\\
+      -5 & 1 & 2 & -3 & 4
+    \end{bmatrix}
+        &&
+           B=
+           \begin{bmatrix}
+             1 & 6 & 2 & 1\\
+             -1 & 4 & 3 & 2\\
+             1 & 1 & 2 & 3\\
+             6 & 4 & -1 & 2\\
+             1 & -2 & 3 & 0
+           \end{bmatrix} &
+  \end{align*}
+  
+  Then suppose we just wanted the entry of $AB$ in the second row, third column:
+  \begin{align*}
+    \matrixentry{AB}{23} = \answer{-3}
+  \end{align*}
+  \begin{hint}
+    \begin{align*}
+      \matrixentry{AB}{23} =&
+                              \matrixentry{A}{21}\matrixentry{B}{13}+
+                              \matrixentry{A}{22}\matrixentry{B}{23}+
+                              \matrixentry{A}{23}\matrixentry{B}{33}+
+                              \matrixentry{A}{24}\matrixentry{B}{43}+
+                              \matrixentry{A}{25}\matrixentry{B}{53}\\
+      =&(0)(2)+(-4)(3)+(1)(2)+(2)(-1)+(3)(3)=-3
+    \end{align*}
+  \end{hint}
+  
+  Notice how there are 5 terms in the sum, since 5 is the common
+  dimension of the two matrices (column count for $A$, row count for
+  $B$).  In the conclusion of \ref{theorem:EMP}, it would be the index
+  $k$ that would run from 1 to 5 in this computation.  Here is a bit
+  more practice.
+
+  The entry of third row, first column:
+  \[
+    \matrixentry{AB}{31} = \answer{-18}
+  \]
+  
+  \begin{hint}
+    \begin{align*}
+      \matrixentry{AB}{31} = 
+      =&
+         \matrixentry{A}{31}\matrixentry{B}{11}+
+         \matrixentry{A}{32}\matrixentry{B}{21}+
+         \matrixentry{A}{33}\matrixentry{B}{31}+
+         \matrixentry{A}{34}\matrixentry{B}{41}+
+         \matrixentry{A}{35}\matrixentry{B}{51}\\
+      =&(-5)(1)+(1)(-1)+(2)(1)+(-3)(6)+(4)(1)=-18
+    \end{align*}
+  \end{hint}
+
+  To get some more practice on your own, complete the computation of
+  the other 10 entries of this product.  Construct some other pairs of
+  matrices (of compatible sizes) and compute their product two ways.
+  First use \ref{definition:MM}.  Since linear combinations are
+  straightforward for you now, this should be easy to do and to do
+  correctly.  Then do it again, using \ref{theorem:EMP}.  Since this
+  process may take some practice, use your first computation to check
+  your work.
+\end{example}
+
+\ref{theorem:EMP} is the way many people compute matrix products by
+hand.  It will also be very useful for the theorems we are going to
+prove shortly.  However, the definition (\ref{definition:MM}) is
+frequently the most useful for its connections with deeper ideas like
+the null space and the upcoming column space.
+
+\end{document}

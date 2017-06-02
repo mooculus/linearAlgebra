@@ -1,0 +1,234 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Null Spaces, Spans, Linear Independence}
+
+\begin{document}
+\begin{abstract}
+  Linearly dependent sets carry redundant vectors with them when used
+  in building a set as a span, so when describing a null space as a
+  span of vectors, it would be best if those vectors were linearly
+  independent.
+\end{abstract}
+\maketitle
+
+Earlier, we proved \ref{theorem:SSNS} which provided $n-r$ vectors
+that could be used with the span construction to build the entire null
+space of a matrix.
+
+Linearly dependent sets carry redundant vectors with them when used in
+building a set as a span.  Our aim now is to show that the vectors
+provided by \ref{theorem:SSNS} form a linearly independent set, so in
+one sense they are as efficient as possible a way to describe the null
+space.
+
+Notice that the vectors $\vect{z}_j$, $1\leq j\leq n-r$ first appear
+in the vector form of solutions to arbitrary linear systems
+(\ref{theorem:VFSLS}).  The exact same vectors appear again in the
+span construction in the conclusion of \ref{theorem:SSNS}.  Since this
+second theorem specializes to homogeneous systems the only real
+difference is that the vector $\vect{c}$ in \ref{theorem:VFSLS} is the
+zero vector for a homogeneous system.  Finally, \ref{theorem:BNS} will
+now show that these same vectors are a linearly independent set.  We
+will set the stage for the proof of this theorem with a moderately
+large example.  Study the example carefully, as it will make it easier
+to understand the proof.
+
+\begin{example}%[Linear independence of null space basis]
+  Suppose that we are interested in the null space of a $3\times 7$
+  matrix, $A$, which row-reduces to
+  \[
+    B=
+    \begin{bmatrix}
+      \leading{1} & 0 & -2 & 4 & 0 & 3 & 9\\
+      0 & \leading{1} & 5 & 6 & 0 & 7 & 1\\
+      0 & 0 & 0 & 0 & \leading{1} & 8 & -5
+    \end{bmatrix}
+  \]
+
+  The set $F=\set{3,\,4,\,6,\,7}$ is the set of indices for our four
+  free variables that would be used in a description of the solution
+  set for the homogeneous system $\homosystem{A}$.  Applying
+  \ref{theorem:SSNS} we can begin to construct a set of four vectors
+  whose span is the null space of $A$, a set of vectors we will
+  reference as $T$.
+  \[
+    \nsp{A}=\spn{T}=\spn{\set{\vect{z}_1,\,\vect{z}_2,\,\vect{z}_3,\,\vect{z}_4}}=\spn{\set{
+        \colvector{ \\ \\1\\0\\ \\0\\0},\,
+        \colvector{ \\ \\0\\1\\ \\0\\0},\,
+        \colvector{ \\ \\0\\0\\ \\1\\0},\,
+        \colvector{ \\ \\0\\0\\ \\0\\1}
+      }}
+  \]
+  So far, we have constructed as much of these individual vectors as
+  we can, based just on the knowledge of the contents of the set $F$.
+  This has allowed us to determine the entries in slots 3, 4, 6 and 7,
+  while we have left slots 1, 2 and 5 blank.  Without doing any more,
+  let us ask if $T$ is linearly independent?
+
+  Begin with a relation of linear dependence on $T$, and see what we
+  can learn about the scalars,
+  \begin{align*}
+    \zerovector&=\alpha_1\vect{z}_1+\alpha_2\vect{z}_2+\alpha_3\vect{z}_3+\alpha_4\vect{z}_4\\
+    \colvector{0\\0\\0\\0\\0\\0\\0}
+               &=
+                 \alpha_1\colvector{ \\ \\1\\0\\ \\0\\0}+
+                 \alpha_2\colvector{ \\ \\0\\1\\ \\0\\0}+
+                 \alpha_3\colvector{ \\ \\0\\0\\ \\1\\0}+
+                 \alpha_4\colvector{ \\ \\0\\0\\ \\0\\1}\\
+               &=
+                 \colvector{ \\ \\\alpha_1\\0\\ \\0\\0}+
+                 \colvector{ \\ \\0\\\alpha_2\\ \\0\\0}+
+                 \colvector{ \\ \\0\\0\\ \\\alpha_3\\0}+
+                 \colvector{ \\ \\0\\0\\ \\0\\\alpha_4}
+                =
+                 \colvector{ \\ \\\alpha_1\\\alpha_2\\ \\\alpha_3\\\alpha_4}
+  \end{align*}
+  Applying \ref{definition:CVE} to the two ends of this chain of
+  equalities, we see that $\alpha_1=\alpha_2=\alpha_3=\alpha_4=0$.  
+  Therefore, the only relation of linear dependence on the set $T$ is
+  \begin{multipleChoice}
+    \choice[correct]{the trivial one}
+    \choice{a nontrivial one}
+  \end{multipleChoice}
+
+  \begin{feedback}[correct]
+    Exactly!  Therefore the set $T$ is linearly independent.
+    The important feature of this example is how the ``pattern of zeros
+    and ones'' in the four vectors led to the conclusion of linear
+    independence.
+  \end{feedback}
+\end{example}
+
+The proof of \ref{theorem:BNS} relies on the ``pattern of zeros and
+ones'' that arise in the vectors $\vect{z}_i$, $1\leq i\leq n-r$ in
+the entries that arise with the locations of the non-pivot columns.
+Play along with the above example as you study the proof.  This proof
+is also a good first example of how to prove a conclusion that states
+a set is linearly independent.
+
+\begin{theorem}[Basis for Null Spaces]
+  \label{theorem:BNS}
+
+  Suppose that $A$ is an $m\times n$ matrix, and $B$ is a
+  row-equivalent matrix in reduced row-echelon form with $r$ pivot
+  columns.  Let $D=\{d_1,\,d_2,\,d_3,\,\ldots,\,d_r\}$ and
+  $F=\{f_1,\,f_2,\,f_3,\,\ldots,\,f_{n-r}\}$ be the sets of column
+  indices where $B$ does and does not (respectively) have pivot
+  columns.  Construct the $n-r$ vectors $\vect{z}_j$,
+  $1\leq j\leq n-r$ of size $n$ as
+  \[
+    \vectorentry{\vect{z}_j}{i}=
+    \begin{cases}
+      1&\text{if $i\in F$, $i=f_j$}\\
+      0&\text{if $i\in F$, $i\neq f_j$}\\
+      -\matrixentry{B}{k,f_j}&\text{if $i\in D$, $i=d_k$}
+    \end{cases}
+  \]
+
+  Define the set $S=\set{\vectorlist{z}{n-r}}$.Then
+  \begin{enumerate}
+  \item $\nsp{A}=\spn{S}$.
+  \item $S$ is a linearly independent set.
+  \end{enumerate}
+
+\begin{proof}
+  Notice first that the vectors $\vect{z}_j$, $1\leq j\leq n-r$ are
+  exactly the same as the $n-r$ vectors defined in \ref{theorem:SSNS}.
+  Also, the hypotheses of \ref{theorem:SSNS} are the same as the
+  hypotheses of the theorem we are currently proving.  So it is then
+  simply the conclusion of \ref{theorem:SSNS} that tells us that
+  $\nsp{A}=\spn{S}$.  That was the easy half, but the second part is
+  not much harder.  What is new here is the claim that $S$ is a
+  linearly
+  \wordChoice{\choice{dependent}\choice[correct]{independent}} set.
+
+  To prove the linear independence of a set, we need to start with a
+  relation of linear dependence and somehow conclude that the scalars
+  involved \wordChoice{\choice[correct]{must all be zero}\choice{must
+      all be nonzero}}, i.e., that the relation of linear dependence
+  only happens in the trivial fashion.  So to establish the linear
+  \wordChoice{\choice{dependence}\choice[correct]{independence}} of
+  $S$, we start with
+  \[
+    \lincombo{\alpha}{z}{n-r}=\zerovector.
+  \]
+
+  For each $j$, $1\leq j\leq n-r$, consider the equality of the
+  individual entries of the vectors on both sides of this equality in
+  position $f_j$,
+  \begin{align*}
+    0
+    &=\vectorentry{\zerovector}{f_j}\\
+    &=\vectorentry{\lincombo{\alpha}{z}{n-r}}{f_j} \\ %&&\ref{definition:CVE}\\
+    &=
+      \vectorentry{\alpha_1\vect{z}_1}{f_j}+
+      \vectorentry{\alpha_2\vect{z}_2}{f_j}+
+      \vectorentry{\alpha_3\vect{z}_3}{f_j}+
+      \cdots+
+      \vectorentry{\alpha_{n-r}\vect{z}_{n-r}}{f_j} \\ %&&\ref{definition:CVA}\\
+    &=
+      \alpha_1\vectorentry{\vect{z}_1}{f_j}+
+      \alpha_2\vectorentry{\vect{z}_2}{f_j}+
+      \alpha_3\vectorentry{\vect{z}_3}{f_j}+
+      \cdots+\\
+    &\quad\quad
+      \alpha_{j-1}\vectorentry{\vect{z}_{j-1}}{f_j}+
+      \alpha_{j}\vectorentry{\vect{z}_j}{f_j}+
+      \alpha_{j+1}\vectorentry{\vect{z}_{j+1}}{f_j}+
+      \cdots+\\
+    &\quad\quad
+      \alpha_{n-r}\vectorentry{\vect{z}_{n-r}}{f_j} \\ %&&\ref{definition:CVSM}\\
+    &=\alpha_1(0)+
+      \alpha_2(0)+
+      \alpha_3(0)+
+      \cdots+\\
+    &\quad\quad
+      \alpha_{j-1}(0)+
+      \alpha_{j}(1)+
+      \alpha_{j+1}(0)+
+      \cdots+\alpha_{n-r}(0) \\ %&&\text{Definition of $\vect{z}_j$}\\
+    &=\alpha_{j}
+  \end{align*}
+  So for all $j$, $1\leq j\leq n-r$, we have $\alpha_j=\answer{0}$,
+  which is the conclusion that tells us that the \textit{only}
+  relation of linear dependence on $S=\set{\vectorlist{z}{n-r}}$ is
+  the trivial one.  Hence the set is linearly independent, as desired.
+\end{proof}
+\end{theorem}
+
+\begin{example}%[Null space spanned by linearly independent set,  Archetype L]
+  The matrix
+  \[
+    L = \begin{bmatrix}
+      -2 & -1 & -2 & -4 & 4 \\
+      -6 & -5 &  -4 &  -4 & 6 \\
+      10 & 7 & 7 &  10 & -13 \\
+      -7 & -5 &  -6 & -9 & 10 \\
+      -4 &  -3 & -4 & -6 & 6 \\
+    \end{bmatrix}
+  \]
+  row reduces to
+  \[
+    \begin{bmatrix}
+      \leading{1} & 0 & 0 & 1 & -2 \\
+      0 & \leading{1} & 0 &  -2 & 2 \\
+      0 & 0 & \leading{1} &  2 &  -1 \\
+      0 & 0 & 0 & 0 &  0 \\
+      0 & 0 & 0 & 0 &  0
+    \end{bmatrix}
+  \]
+  and the null space can be written as
+  \[
+    \nsp{L} = \spn{\set{\colvector{-1\\2\\-2\\1\\\answer{0}},\,\colvector{2\\-2\\1\\0\\\answer{1}}}}
+  \]
+  Solving the homogeneous system $\homosystem{L}$ resulted in
+  recognizing $x_4$ and $x_5$ as the free variables.  So look in
+  entries 4 and 5 of the two vectors above and notice the pattern of
+  zeros and ones that provides the linear independence of the set.
+\end{example}
+
+\end{document}
+
+

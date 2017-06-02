@@ -1,0 +1,313 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Testing subspaces}
+
+\begin{document}
+\begin{abstract}
+  To check that a subset is a subspace, six of the properties were
+  easy to prove, and we can lean on some of the properties of the
+  larger vector space to make the other four easier.
+\end{abstract}
+\maketitle
+
+Here is a theorem that will make it easier to test if a subset is a vector space.  It's a shortcut if there ever was one!
+
+\begin{theorem}[Testing Subsets for Subspaces]
+  \label{theorem:TSS}
+
+  Suppose that $V$ is a vector space and $W$ is a subset of $V$,
+  $W\subseteq V$.  Endow $W$ with the same operations as $V$.  Then $W$
+  is a subspace if and only if three conditions are met
+  \begin{enumerate}
+  \item $W$ is nonempty, $W\neq\emptyset$.
+  \item If $\vect{x}\in W$ and $\vect{y}\in W$, then $\vect{x}+\vect{y}\in W$.
+  \item If $\alpha\in\complexes$ and $\vect{x}\in W$, then $\alpha\vect{x}\in W$.
+  \end{enumerate}
+  
+  \begin{proof}
+    ($\Rightarrow$) We have the hypothesis that $W$ is a subspace, so
+    by \ref{property:Z} we know that $W$ contains a zero vector.  This
+    is enough to show that $W\neq\emptyset$.  Also, since $W$ is a
+    vector space it satisfies the additive and scalar multiplication
+    closure properties (\ref{property:AC}, \ref{property:SC}), and so
+    exactly meets the second and third conditions.  If that was easy,
+    the other direction might require a bit more work.
+
+    ($\Leftarrow$) We have three properties for our hypothesis, and
+    from this we should conclude that $W$ has the ten defining
+    properties of a vector space.  The second and third conditions of
+    our hypothesis are exactly \ref{property:AC} and
+    \ref{property:SC}.  Our hypothesis that $V$ is a vector space
+    implies that \ref{property:C}, \ref{property:AA},
+    \ref{property:SMA}, \ref{property:DVA}, \ref{property:DSA} and
+    \ref{property:O} all hold.  They continue to be true for vectors
+    from $W$ since passing to a subset, and keeping the operation the
+    same, leaves their statements unchanged.  Eight down, two to go.
+
+    Suppose $\vect{x}\in W$.  Then by the third part of our hypothesis
+    (scalar closure), we know that $(-1)\vect{x}\in W$.  By
+    \ref{theorem:AISM} $(-1)\vect{x}=\vect{-x}$, so together these
+    statements show us that $\vect{-x}\in W$.  $\vect{-x}$ is the
+    additive inverse of $\vect{x}$ in $V$, but will continue in this
+    role when viewed as an element of the subset $W$.  So every
+    element of $W$ has an additive inverse that is an element of $W$
+    and \ref{property:AI} is completed.  Just one property left.
+
+    While we have implicitly discussed the zero vector in the previous
+    paragraph, we need to be certain that the zero vector (of $V$)
+    really lives in $W$.  Since $W$ is nonempty, we can choose some
+    vector $\vect{z}\in W$.  Then by the argument in the previous
+    paragraph, we know $\vect{-z}\in W$.  Now by \ref{property:AI} for
+    $V$ and then by the second part of our hypothesis (additive
+    closure) we see that
+    \[
+      \zerovector=\vect{z}+(\vect{-z})\in W
+    \]
+
+    So $W$ contains the zero vector from $V$.  Since this vector
+    performs the required duties of a zero vector in $V$, it will
+    continue in that role as an element of $W$. This gives us,
+    \ref{property:Z}, the final property of the ten required.
+    %(<contributorname code="sarahfellez" /> contributed to this    proof.)
+
+\end{proof}
+\end{theorem}
+
+So just three conditions, plus being a subset of a known vector space,
+gets us all ten properties.  Fabulous!  This theorem can be
+paraphrased by saying that a subspace is ``a nonempty subset (of a
+vector space) that is closed under vector addition and scalar
+multiplication.''
+
+You might want to go back and rework previous examples in light of
+this result, perhaps seeing where we can now economize or where the
+work done in the example mirrored the proof and where it did not.  We
+will press on and apply this theorem in a slightly more abstract
+setting.
+
+\begin{example}[A subspace of $P_4$]
+
+  $P_4$ is the vector space of polynomials with degree at most $4$ (\ref{example:VSP}).  Define a subset $W$ as
+  \[
+    W=\setparts{p(x)}{p\in P_4,\ p(2)=0}
+  \]
+  so $W$ is the collection of those polynomials (with degree 4 or
+  less) whose graphs cross the $x$-axis at $x=2$.  Whenever we
+  encounter a new set it is a good idea to gain a better understanding
+  of the set by finding a few elements in the set, and a few outside
+  it.  For example $x^2-x-2\in W$, while $x^4+x^3-7\not\in W$.
+
+  Is $W$ nonempty?  
+  \begin{multipleChoice}
+    \choice[correct]{Yes}
+    \choice{No}
+  \end{multipleChoice}
+
+  \begin{feedback}[correct]
+    Indeed $x-2\in W$, so $W \neq \varnothing$.
+  \end{feedback}
+
+  Additive closure?  Suppose $p\in W$ and $q\in W$.  Is $p+q\in W$?
+  $p$ and $q$ are not totally arbitrary, we know that $p(2)=0$ and
+  $q(2)=0$.  Then we can check $p+q$ for membership in $W$,
+  \begin{align*}
+    (p+q)(2)&=p(2)+q(2)&&\text{Addition in }P_4\\
+            &=0+0&&p\in W,\,q\in W\\
+            &=0
+  \end{align*}
+  so we see that $p+q$ qualifies for membership in $W$.
+  
+  Scalar multiplication closure?  Suppose that $\alpha\in\complexes$ and $p\in W$.  Then we know that $p(2)=0$.  Testing $\alpha p$ for membership,
+  \begin{align*}
+    (\alpha p)(2)&=\alpha p(2)&&\text{Scalar multiplication in }P_4\\
+                 &=\alpha 0&&p\in W\\
+                 &=0
+  \end{align*}
+  so $\alpha p\in W$.
+  
+  We have shown that $W$ meets the three conditions of
+  \ref{theorem:TSS} and so qualifies as a subspace of $P_4$.  Notice
+  that by \ref{definition:S} we now know that $W$ is also a vector
+  space.  So all the properties of a vector space
+  (\ref{definition:VS}) and the theorems of \ref{section:VS} apply in
+  full.
+
+\end{example}
+
+Much of the power of \ref{theorem:TSS} is that we can easily establish
+new vector spaces if we can locate them as subsets of other vector
+spaces, such as the vector spaces presented previously.
+
+It can be as instructive to consider some subsets that are
+\textit{not} subspaces.  Since \ref{theorem:TSS} is an equivalence
+(see \ref{technique:E}) we can be assured that a subset is not a
+subspace if it violates one of the three conditions, and in any
+example of interest this will not be the ``nonempty'' condition.
+However, since a subspace has to be a vector space in its own right,
+we can also search for a violation of any one of the ten defining
+properties in \ref{definition:VS} or any inherent property of a vector
+space.  Notice also that a violation need only be for a specific
+vector or pair of vectors.
+
+\begin{example}[A non-subspace in $\complex{2}$, zero vector]
+
+  Consider the subset $W$ below as a candidate for being a subspace of $\complex{2}$
+  \[
+    W=\setparts{\colvector{x_1\\x_2}}{3x_1-5x_2=12}
+  \]
+
+  The zero vector of $\complex{2}$, $\zerovector=\colvector{0\\0}$
+  will need to be the zero vector in $W$ also.  However,
+  $\zerovector\not\in W$ since $3(0)-5(0)=0\neq 12$.  So $W$ has no
+  zero vector and fails \ref{property:Z} of \ref{definition:VS}.  This
+  subspace also fails to be closed under addition and scalar
+  multiplication.  Can you find examples of this?
+\end{example}
+
+\begin{example}[A non-subspace in $\complex{2}$, additive closure]
+  
+  Consider the subset $X$ below as a candidate for being a subspace of $\complex{2}$
+  \[
+    X=\setparts{\colvector{x_1\\x_2}}{x_1x_2=0}
+  \]
+
+  You can check that $\zerovector\in X$, so the approach of the last
+  example will not get us anywhere.  However, notice that
+  $\vect{x}=\colvector{1\\0}\in X$ and
+  $\vect{y}=\colvector{0\\1}\in X$.  Yet
+  \[
+    \vect{x}+\vect{y}=\colvector{1\\0}+\colvector{0\\1}=\colvector{1\\1}\not\in X
+  \]
+
+  So $X$ fails the additive closure requirement of either
+  \ref{property:AC} or \ref{theorem:TSS}, and is therefore not a
+  subspace.
+\end{example}
+
+\begin{example}[A non-subspace in $\complex{2}$, scalar multiplication closure]
+
+  Consider the subset $Y$ below as a candidate for being a subspace of $\complex{2}$
+  \[
+    Y=\setparts{\colvector{x_1\\x_2}}{x_1\in{\mathbb Z},\,x_2\in{\mathbb Z}}
+  \]
+  The set ${\mathbb Z}$ is the set of integers, so we are only
+  allowing ``whole numbers'' as the constituents of our vectors.  Now,
+  $\zerovector\in Y$, and additive closure also holds (can you prove
+  these claims?).  So we will have to try something different.  Note
+  that $\alpha = \frac{1}{2}\in\complexes$ and
+  $\colvector{2\\3}\in Y$, but
+  \[
+    \alpha\vect{x}=\frac{1}{2}\colvector{2\\3}=\colvector{1\\\frac{3}{2}}\not\in Y
+  \]
+  So $Y$ fails the scalar multiplication closure requirement of either
+  \ref{property:SC} or \ref{theorem:TSS}, and is therefore not a
+  subspace.
+\end{example}
+
+There are two examples of subspaces that are trivial.  Suppose that
+$V$ is any vector space.  Then $V$ is a subset of itself and is a
+vector space.  By \ref{definition:S}, $V$ qualifies as a subspace of
+itself.  The set containing just the zero vector $Z=\set{\zerovector}$
+is also a subspace as can be seen by applying \ref{theorem:TSS} or by
+simple modifications of the techniques hinted at in \ref{example:VSS}.
+Since these subspaces are so obvious (and therefore not too
+interesting) we will refer to them as being trivial.
+
+\begin{definition}[Trivial Subspaces]
+  Given the vector space $V$, the subspaces $V$ and
+  $\set{\zerovector}$ are each called a \dfn{trivial subspace}.
+\end{definition}
+
+We can also use \ref{theorem:TSS} to prove more general statements
+about subspaces, as illustrated in the next theorem.
+
+\begin{theorem}[Null Space of a Matrix is a Subspace]
+  \label{theorem:NSMS}
+
+  Suppose that $A$ is an $m\times n$ matrix.  Then the null space of
+  $A$, $\nsp{A}$, is a subspace of $\complex{n}$.
+  
+  \begin{proof}
+    We will examine the three requirements of \ref{theorem:TSS}.
+    Recall that \ref{definition:NSM} can be formulated as
+    $\nsp{A}=\setparts{\vect{x}\in\complex{n}}{A\vect{x}=\zerovector}$.
+
+    First, $\zerovector\in\nsp{A}$, which can be inferred as a
+    consequence of \ref{theorem:HSC}.  Therefore
+    \begin{multipleChoice}
+      \choice{$\nsp{A}=\emptyset$.}
+      \choice[correct]{$\nsp{A}\neq\emptyset$.}
+    \end{multipleChoice}
+
+    Second, check additive closure by supposing that
+    $\vect{x}\in\nsp{A}$ and $\vect{y}\in\nsp{A}$.  So we know a
+    little something about $\vect{x}$ and $\vect{y}$:
+    $A\vect{x}=\zerovector$ and $A\vect{y}=\zerovector$, and that is
+    all we know.  Question: Is $\vect{x}+\vect{y}\in\nsp{A}$?  Let us
+    check.
+    \begin{align*}
+      A(\vect{x}+\vect{y})&=A\vect{x}+A\vect{y}&&\ref{theorem:MMDAA}\\
+                          &=\zerovector+\zerovector&&\vect{x}\in\nsp{A},\ \vect{y}\in\nsp{A}\\
+                          &=\zerovector&&\ref{theorem:VSPCV}
+    \end{align*}
+    So, yes, $\vect{x}+\vect{y}$ qualifies for membership in $\nsp{A}$.
+
+    Third, check scalar multiplication closure by supposing that
+    $\alpha\in\complexes$ and $\vect{x}\in\nsp{A}$.  So we know a
+    little something about $\vect{x}$, namely $A\vect{x}=\zerovector$,
+    and that is all we know.  Question: Is $\alpha\vect{x}\in\nsp{A}$?
+    Let us check.
+    \begin{align*}
+      A(\alpha\vect{x})&=\alpha(A\vect{x})&&\ref{theorem:MMSMM}\\
+                       &=\alpha\zerovector&&\vect{x}\in\nsp{A}\\
+                       &=\zerovector&&\ref{theorem:ZVSM}
+    \end{align*}
+    And therefore
+    \begin{multipleChoice}
+      \choice[correct]{$\alpha\vect{x}$ qualifies for membership in $\nsp{A}$.}
+      \choice{$\alpha\vect{x} \not\in \nsp{A}$.}
+    \end{multipleChoice}
+
+    Having met the three conditions in \ref{theorem:TSS} we can now
+    say that the null space of a matrix is a subspace (and hence a
+    vector space in its own right!).
+  \end{proof}
+\end{theorem}
+
+Here is an example where we can exercise \ref{theorem:NSMS}.
+
+\begin{example}[Recasting a subspace as a null space]
+
+  Consider the subset of $\complex{5}$ defined as
+  \[
+    W =\setparts{\colvector{x_1\\x_2\\x_3\\x_4\\x_5}}{
+      \begin{array}{l}
+        3x_1+x_2-5x_3+7x_4+x_5=0,\\
+        4x_1+6x_2+3x_3-6x_4-5x_5=0,\\
+        -2x_1+4x_2+7x_4+x_5=0
+      \end{array}
+    }
+  \]
+
+  It is possible to show that $W$ is a subspace of $\complex{5}$ by
+  checking the three conditions of \ref{theorem:TSS} directly, but it
+  will get tedious rather quickly.  Instead, give $W$ a fresh look and
+  notice that it is a set of solutions to a homogeneous system of
+  equations.  Define the matrix
+  \[
+    A=\begin{bmatrix}
+      3&1&-5&7&1\\
+      4&6&3&-6&-5\\
+      -2&4&0&7&1
+    \end{bmatrix}
+  \]
+  and then recognize that $W=\nsp{A}$.  By \ref{theorem:NSMS} we can
+  immediately see that $W$ is a subspace.  Boom!
+
+\end{example}
+
+
+
+\end{document}

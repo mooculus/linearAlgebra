@@ -1,0 +1,46 @@
+\documentclass{ximera}
+
+\input{../../../preamble.tex}
+\author{Robert Beezer}
+\license{GFDL}
+
+\begin{document}
+
+\begin{exercise}
+  Is the set 
+  \[
+    \set{\colvector{-1\\2\\4\\2},\,\colvector{3\\3\\-1\\3},\,\colvector{7\\3\\-6\\4}}
+  \]
+  linearly independent?
+
+  \begin{hint}
+    We can answer this question by putting theses vectors into a matrix as columns and row-reducing.
+  \end{hint}
+  
+  \begin{hint}
+    Doing this we obtain,
+    \[
+      \begin{bmatrix}
+        \leading{1} & 0 & 0\\
+        0 & \leading{1} & 0\\
+        0 & 0 & \leading{1}\\
+        0 & 0 & 0
+      \end{bmatrix}
+    \]
+  \end{hint}
+  
+  \begin{hint}
+    With $n=3$ (3 vectors, 3 columns) and $r=3$ (3 pivot columns) we
+    have $n=r$ and the theorem says the vectors are linearly
+    independent.
+  \end{hint}
+    
+  \begin{multipleChoice}
+    \choice{No.}
+    \choice[correct]{Yes.}
+  \end{multipleChoice}
+
+\end{exercise}
+
+\end{document}
+

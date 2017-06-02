@@ -1,0 +1,266 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Existence of Eigenvalues and Eigenvectors}
+
+\begin{document}
+\begin{abstract}
+  Before we embark on computing eigenvalues and eigenvectors, we will prove that every matrix has at least one eigenvalue (and an eigenvector to go with it).
+\end{abstract}
+\maketitle
+
+Every matrix has at least one eigenvalue.  In \ref{theorem:MNEM}, we
+will determine the maximum number of eigenvalues a matrix may have.
+
+\begin{theorem}[Every Matrix Has an Eigenvalue]
+\label{theorem:EMHE}
+
+Suppose $A$ is a square matrix.  Then $A$ has at least one eigenvalue.
+
+
+\begin{proof}
+Suppose that $A$ has size $n$, and choose $\vect{x}$ as \textit{any} nonzero vector from $\complex{n}$.  (Notice how much latitude we have in our choice of $\vect{x}$.  Only the zero vector is off-limits.)  Consider the set
+\[
+S=\set{\vect{x},\,A\vect{x},\,A^2\vect{x},\,A^3\vect{x},\,\ldots,\,A^n\vect{x}}
+\]
+
+
+
+
+This is a set of $n+1$ vectors from $\complex{n}$, so by \ref{theorem:MVSLD}, $S$ is linearly dependent.  Let $a_0,\,a_1,\,a_2,\,\ldots,\,a_n$ be a collection of $n+1$ scalars from $\complexes$, not all zero, that provide a relation of linear dependence on $S$.  In other words,
+\[
+a_0\vect{x}+a_1A\vect{x}+a_2A^2\vect{x}+a_3A^3\vect{x}+\cdots+a_nA^n\vect{x}=\zerovector
+\]
+
+
+
+
+Some of the $a_i$ are nonzero.  Suppose that just $a_0\neq 0$, and $a_1=a_2=a_3=\cdots=a_n=0$.  Then $a_0\vect{x}=\zerovector$ and by \ref{theorem:SMEZV}, either $a_0=0$ or $\vect{x}=\zerovector$, which are both contradictions.  So $a_i\neq 0$ for some $i\geq 1$.  Let $m$ be the largest integer such that $a_m\neq 0$.  From this discussion we know that $m\geq 1$.  We can also assume that $a_m=1$, for if not, replace each $a_i$ by $a_i/a_m$ to obtain scalars that serve equally well in providing a relation of linear dependence on $S$.
+
+
+
+Define the polynomial
+\[
+p(x)=a_0+a_1x+a_2x^2+a_3x^3+\cdots+a_mx^m
+\]
+
+
+
+
+Because we have consistently used $\complexes$ as our set of scalars (rather than ${\mathbb R}$), we know that we can factor $p(x)$ into linear factors of the form $(x-b_i)$, where $b_i\in\complexes$.  So there are scalars, $\scalarlist{b}{m}$, from $\complexes$ so that,
+\[
+p(x)=(x-b_m)(x-b_{m-1})\cdots(x-b_3)(x-b_2)(x-b_1)
+\]
+
+
+
+
+Put it all together and
+\begin{align*}
+\zerovector&=a_0\vect{x}+a_1A\vect{x}+a_2A^2\vect{x}+\cdots+a_nA^n\vect{x}\\
+&=a_0\vect{x}+a_1A\vect{x}+a_2A^2\vect{x}+\cdots+a_mA^m\vect{x}&&\text{$a_i=0$ for $i>m$}\\
+&=\left(a_0I_n+a_1A+a_2A^2+\cdots+a_mA^m\right)\vect{x}&&\ref{theorem:MMDAA}\\
+&=p(A)\vect{x}&&\text{Definition of $p(x)$}\\
+&=(A-b_mI_n)(A-b_{m-1}I_n)\cdots(A-b_2I_n)(A-b_1I_n)\vect{x}
+\end{align*}
+
+
+
+
+Let $k$ be the smallest integer such that
+\[
+(A-b_kI_n)(A-b_{k-1}I_n)\cdots(A-b_2I_n)(A-b_1I_n)\vect{x}=\zerovector.
+\]
+
+
+
+
+From the preceding equation, we know that $k\leq m$.  Define the vector $\vect{z}$ by
+\[
+\vect{z}=(A-b_{k-1}I_n)\cdots(A-b_2I_n)(A-b_1I_n)\vect{x}
+\]
+
+
+
+
+Notice that by the definition of $k$, the vector $\vect{z}$ must be nonzero.  In the case where $k=1$, we understand that $\vect{z}$ is defined by $\vect{z}=\vect{x}$, and $\vect{z}$ is still nonzero.  Now
+\[
+(A-b_kI_n)\vect{z}=(A-b_kI_n)(A-b_{k-1}I_n)\cdots(A-b_3I_n)(A-b_2I_n)(A-b_1I_n)\vect{x}=\zerovector
+\]
+which allows us to write
+\begin{align*}
+A\vect{z}
+&=(A+\zeromatrix)\vect{z}&&\ref{property:ZM}\\
+&=(A-b_kI_n+b_kI_n)\vect{z}&&\ref{property:AIM}\\
+&=(A-b_kI_n)\vect{z}+b_kI_n\vect{z}&&\ref{theorem:MMDAA}\\
+&=\zerovector+b_kI_n\vect{z}&&\text{Defining property of $\vect{z}$}\\
+&=b_kI_n\vect{z}&&\ref{property:ZM}\\
+&=b_k\vect{z}&&\ref{theorem:MMIM}
+\end{align*}
+
+
+
+
+Since $\vect{z}\neq\zerovector$, this equation says that $\vect{z}$ is an eigenvector of $A$ for the eigenvalue $\lambda=b_k$ (\ref{definition:EEM}), so we have shown that any square matrix $A$ does have at least one eigenvalue.
+
+
+
+\end{proof}
+\end{theorem}
+
+The proof of \ref{theorem:EMHE} is constructive (it contains an unambiguous procedure that leads to an eigenvalue), but it is not meant to be practical.  We will illustrate the theorem with an example, the purpose being to provide a companion for studying the proof and not to suggest this is the best procedure for computing an eigenvalue.
+
+
+
+\begin{example}[Computing an eigenvalue the hard way]
+
+  This example illustrates the proof of \ref{theorem:EMHE}, and so
+  will employ the same notation as the proof --- look there for full
+  explanations.  It is \textit{not} meant to be an example of a
+  reasonable computational approach to finding eigenvalues and
+  eigenvectors.  OK, warnings in place, here we go.
+
+Consider the matrix
+\begin{align*}
+A&=\begin{bmatrix}
+-7 & -1 & 11 & 0 & -4\\
+4 & 1 & 0 & 2 & 0\\
+-10 & -1 & 14 & 0 & -4\\
+8 & 2 & -15 & -1 & 5\\
+-10 & -1 & 16 & 0 & -6
+\end{bmatrix}
+\end{align*}
+and choose the vector $\vect{x}$,
+\begin{align*}
+\vect{x}&=\colvector{3\\0\\3\\-5\\4}
+\end{align*}
+
+It is important to notice that the choice of $\vect{x}$ could be
+\textit{anything}, so long as it is \textit{not} the zero vector.  We
+have not chosen $\vect{x}$ totally at random, but so as to make our
+illustration of the theorem as general as possible.  You could
+replicate this example with your own choice and the computations are
+guaranteed to be reasonable, provided you have a computational tool
+that will factor a fifth degree polynomial for you.
+
+The set
+\begin{align*}
+S&=\set{\vect{x},\,A\vect{x},\,A^2\vect{x},\,A^3\vect{x},\,A^4\vect{x},\,A^5\vect{x}}\\
+&=
+\set{
+\colvector{3\\0\\3\\-5\\4},\,
+\colvector{-4\\2\\-4\\4\\-6},\,
+\colvector{6\\-6\\6\\-2\\10},\,
+\colvector{-10\\14\\-10\\-2\\-18},\,
+\colvector{18\\-30\\18\\10\\34},\,
+\colvector{-34\\62\\-34\\-26\\-66}
+}
+\end{align*}
+is guaranteed to be linearly dependent, as it has six vectors from $\complex{5}$ (\ref{theorem:MVSLD}).
+
+We will search for a nontrivial relation of linear dependence by
+solving a homogeneous system of equations whose coefficient matrix has
+the vectors of $S$ as columns through row operations,
+\[
+\begin{bmatrix}
+3 & -4 & 6 & -10 & 18 & -34\\
+0 & 2 & -6 & 14 & -30 & 62\\
+3 & -4 & 6 & -10 & 18 & -34\\
+-5 & 4 & -2 & -2 & 10 & -26\\
+4 & -6 & 10 & -18 & 34 & -66
+\end{bmatrix}
+\rref
+\begin{bmatrix}
+\leading{1} & 0 & -2 & 6 & -14 & 30\\
+0 & \leading{1} & -3 & 7 & -15 & 31\\
+0 & 0 & 0 & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & 0 & 0
+\end{bmatrix}
+\]
+
+There are four free variables for describing solutions to this
+homogeneous system, so we have our pick of solutions.  The most
+expedient choice would be to set $x_3=1$ and $x_4=x_5=x_6=0$.
+However, we will again opt to maximize the generality of our
+illustration of \ref{theorem:EMHE} and choose $x_3=-8$, $x_4=-3$,
+$x_5=1$ and $x_6=0$.  This leads to a solution with $x_1=16$ and
+$x_2=12$.
+
+This relation of linear dependence then says that
+\begin{align*}
+\zerovector&=16\vect{x}+12A\vect{x}-8A^2\vect{x}-3A^3\vect{x}+A^4\vect{x}+0A^5\vect{x}\\
+\zerovector&=\left(16+12A-8A^2-3A^3+A^4\right)\vect{x}
+\end{align*}
+
+So we define $p(x)=16+12x-8x^2-3x^3+x^4$, and as advertised in the
+proof of \ref{theorem:EMHE}, we have a polynomial of degree $m=4>1$
+such that $p(A)\vect{x}=\zerovector$.  Now we need to factor $p(x)$
+over $\complexes$.  If you made your own choice of $\vect{x}$ at the
+start, this is where you might have a fifth degree polynomial, and
+where you might need to use a computational tool to find roots and
+factors.  We have
+\[
+p(x)=16+12x-8x^2-3x^3+x^4=(x-4)(x+2)(x-2)(x+1)
+\]
+
+So we know that
+\[
+\zerovector=p(A)\vect{x}=(A-4I_5)(A+\answer{2}I_5)(A-2I_5)(A+1I_5)\vect{x}
+\]
+
+We apply one factor at a time, until we get the zero vector, so as to determine the value of $k$ described in the proof of \ref{theorem:EMHE},
+\begin{align*}
+(A+1I_5)\vect{x}&=
+\begin{bmatrix}
+-6 & -1 & 11 & 0 & -4\\
+4 & 2 & 0 & 2 & 0\\
+-10 & -1 & 15 & 0 & -4\\
+8 & 2 & -15 & 0 & 5\\
+-10 & -1 & 16 & 0 & -5
+\end{bmatrix}
+\colvector{3\\0\\3\\-5\\4}
+=
+\colvector{-1\\2\\-1\\-1\\-2}\\
+(A-2I_5)(A+1I_5)\vect{x}&=
+\begin{bmatrix}
+-9 & -1 & 11 & 0 & -4\\
+4 & -1 & 0 & 2 & 0\\
+-10 & -1 & 12 & 0 & -4\\
+8 & 2 & -15 & -3 & 5\\
+-10 & -1 & 16 & 0 & -8
+\end{bmatrix}
+\colvector{-1\\2\\-1\\-1\\-2}
+=
+\colvector{4\\-8\\4\\4\\8}\\
+(A+2I_5)(A-2I_5)(A+1I_5)\vect{x}&=
+\begin{bmatrix}
+-5 & -1 & 11 & 0 & -4\\
+4 & 3 & 0 & 2 & 0\\
+-10 & -1 & 16 & 0 & -4\\
+8 & 2 & -15 & 1 & 5\\
+-10 & -1 & 16 & 0 & -4
+\end{bmatrix}
+\colvector{4\\-8\\4\\4\\8}
+=
+\colvector{0\\0\\0\\0\\0}\\
+\end{align*}
+
+So $k=3$ and
+\[
+\vect{z}=(A-2I_5)(A+1I_5)\vect{x}=\colvector{4\\-8\\4\\4\\8}
+\]
+is an eigenvector of $A$ for the eigenvalue $\lambda=-2$, as you can
+check by doing the computation $A\vect{z}$.  If you work through this
+example with your own choice of the vector $\vect{x}$ (strongly
+recommended) then the eigenvalue you will find may be different, but
+will be in the set $\set{3,\,0,\,1,\,-1,\,-2}$.
+\end{example}
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
