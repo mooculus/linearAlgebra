@@ -1,0 +1,598 @@
+\documentclass{ximera}
+
+\input{../../preamble.tex}
+
+\title{Casting out vectors}
+
+\begin{document}
+\begin{abstract}
+  With a nontrivial relation of linear dependence in hand, we are able
+  to ``toss out'' one of these vectors and span the same set with
+  fewer vectors.
+\end{abstract}
+\maketitle
+
+We consider the span of a handful of vectors.  With a nontrivial
+relation of linear dependence in hand, we are able to ``toss out'' one
+of these vectors and span the same set with fewer vectors!  We do have
+to take some care as to just which vector we toss out.  In the next
+example, we will be more methodical about just how we choose to
+eliminate vectors from a linearly dependent set while preserving a
+span.
+
+\begin{example}[Casting out vectors]
+  We begin with a set $S$ containing seven vectors from $\complex{4}$,
+  \[
+    S=\set{
+      \colvector{1\\2\\0\\-1},\,
+      \colvector{4\\8\\0\\-4},\,
+      \colvector{0\\-1\\2\\2},\,
+      \colvector{-1\\3\\-3\\4},\,
+      \colvector{0\\9\\-4\\8},\,
+      \colvector{7\\-13\\12\\-31},\,
+      \colvector{-9\\7\\-8\\37}
+    }
+  \]
+  and define $W=\spn{S}$.
+  
+  The set $S$ is obviously linearly dependent by \ref{theorem:MVSLD},
+  since we have $n=7$ vectors from $\complex{4}$.  So we can slim down
+  $S$ some, and still create $W$ as the span of a smaller set of
+  vectors.
+
+  As a device for identifying relations of linear dependence among the
+  vectors of $S$, we place the seven column vectors of $S$ into a
+  matrix as columns,
+  \[
+    A=\matrixcolumns{A}{7}=
+    \begin{bmatrix}
+      1 & 4 & 0 & -1 & 0 & 7 &  -9 \\
+      2 & 8 &  -1 & 3 & 9 &  -13 & 7\\
+      0 & 0 &  2 & -3 & -4 & 12 &  -8\\
+      -1 &  -4 & 2 & 4 & 8 &  -31 & 37
+    \end{bmatrix}
+  \]
+  By \ref{theorem:SLSLC} a nontrivial solution to $\homosystem{A}$
+  will give us a nontrivial relation of linear dependence
+  (\ref{definition:RLDCV}) on the \wordChoice{\choice[correct]{columns}\choice{rows}} of $A$ (which are the
+  elements of the set $S$).  The row-reduced form for $A$ is the
+  matrix
+  \[
+    B=\begin{bmatrix}
+      \leading{1} & 4 & 0 & 0 & 2 & 1 & -3\\
+      0 & 0 & \leading{1} &  0 & 1 &  -3 & 5\\
+      0 & 0 &  0 & \leading{1} & 2 &  -6 & 6\\
+      0 & 0 &  0 & 0 & 0 & 0 & 0
+    \end{bmatrix}
+  \]
+  so we can easily create solutions to the homogeneous system
+  $\homosystem{A}$ using the free variables $x_2,\,x_5,\,x_6,\,x_7$.
+  Any such solution will provide a relation of linear dependence on
+  the \wordChoice{\choice[correct]{columns}\choice{rows}} of $B$.
+  These solutions will allow us to solve for one column vector as a
+  linear combination of some others, in the spirit of
+  \ref{theorem:DLDS}, and remove that vector from the set.  We will
+  set about forming these linear combinations methodically.
+
+  Set the free variable $x_2=1$, and set the other free variables to
+  zero.  Then a solution to $\linearsystem{A}{\zerovector}$ is
+  \[
+    \vect{x}=\colvector{-4\\1\\0\\0\\0\\0\\0}
+  \]
+  which can be used to create the linear combination
+  \[
+    (-4)\vect{A}_1+
+    \answer{1}\vect{A}_2+
+    0\vect{A}_3+
+    0\vect{A}_4+
+    0\vect{A}_5+
+    0\vect{A}_6+
+    0\vect{A}_7
+    =\zerovector
+  \]
+  This can then be arranged and solved for $\vect{A}_2$, resulting in
+  $\vect{A}_2$ expressed as a linear combination of
+  $\set{\vect{A}_1,\,\vect{A}_3,\,\vect{A}_4}$,
+  \[
+    \vect{A}_2=
+    \answer{4}\vect{A}_1+
+    0\vect{A}_3+
+    0\vect{A}_4
+  \]
+  This means that $\vect{A}_2$ is surplus, and we can create $W$ just
+  as well with a smaller set with this vector removed,
+  \[
+    W=\spn{\set{\vect{A}_1,\,\vect{A}_3,\,\vect{A}_4,\,\vect{A}_5,\,\vect{A}_6,\,\vect{A}_7}}
+  \]
+
+  Technically, this set equality for $W$ requires a proof, but we will
+  bypass this requirement here, and in the next few paragraphs.
+
+  Now, set the free variable $x_5=1$, and set the other free variables
+  to zero.  Then a solution to $\linearsystem{B}{\zerovector}$ is
+  \[
+    \vect{x}=\colvector{-2\\0\\-1\\-2\\1\\0\\0}
+  \]
+  which can be used to create the linear combination
+  \[
+    (-2)\vect{A}_1+
+    0\vect{A}_2+
+    (-1)\vect{A}_3+
+    (-2)\vect{A}_4+
+    1\vect{A}_5+
+    0\vect{A}_6+
+    0\vect{A}_7
+    =\zerovector
+  \]
+
+  This can then be arranged and solved for $\vect{A}_5$, resulting in
+  $\vect{A}_5$ expressed as a linear combination of
+  $\set{\vect{A}_1,\,\vect{A}_3,\,\vect{A}_4}$,
+  \[
+    \vect{A}_5=
+    2\vect{A}_1+
+    \answer{1}\vect{A}_3+
+    2\vect{A}_4
+  \]
+
+  This means that $\vect{A}_5$ is surplus, and we can create $W$ just
+  as well with a smaller set with this vector removed,
+  \[
+    W=\spn{\left\{\vect{A}_1,\,\vect{A}_3,\,\vect{A}_4,\,\vect{A}_6,\,\vect{A}_7\right\}}
+  \]
+
+  Do it again, set the free variable $x_6=1$, and set the other free
+  variables to zero.  Then a solution to
+  $\linearsystem{B}{\zerovector}$ is
+  \[
+    \vect{x}=\colvector{-1\\0\\3\\6\\0\\1\\0}
+  \]
+  which can be used to create the linear combination
+  \[
+    (-1)\vect{A}_1+
+    0\vect{A}_2+
+    3\vect{A}_3+
+    6\vect{A}_4+
+    0\vect{A}_5+
+    1\vect{A}_6+
+    0\vect{A}_7
+    =\zerovector.
+  \]
+
+  This can then be arranged and solved for $\vect{A}_6$, resulting in
+  $\vect{A}_6$ expressed as a linear combination of
+  $\set{\vect{A}_1,\,\vect{A}_3,\,\vect{A}_4}$,
+  \[
+    \vect{A}_6=
+    1\vect{A}_1+
+    (-3)\vect{A}_3+
+    (-6)\vect{A}_4
+  \]
+  This means that $\vect{A}_6$ is surplus, and we can create $W$ just
+  as well with a smaller set with this vector removed,
+  \[
+    W=\spn{\set{\vect{A}_1,\,\vect{A}_3,\,\vect{A}_4,\,\vect{A}_7}}
+  \]
+
+  Set the free variable $x_7=1$, and set the other free variables to
+  zero.  Then a solution to $\linearsystem{B}{\zerovector}$ is
+  \[
+    \vect{x}=\colvector{3\\0\\-5\\-6\\0\\0\\1}
+  \]
+  which can be used to create the linear combination
+  \[
+    3\vect{A}_1+
+    0\vect{A}_2+
+    (-5)\vect{A}_3+
+    (-6)\vect{A}_4+
+    0\vect{A}_5+
+    0\vect{A}_6+
+    1\vect{A}_7
+    =\zerovector
+  \]
+
+  This can then be arranged and solved for $\vect{A}_7$, resulting in
+  $\vect{A}_7$ expressed as a linear combination of
+  $\set{\vect{A}_1,\,\vect{A}_3,\,\vect{A}_4}$,
+  \[
+    \vect{A}_7=
+    (-3)\vect{A}_1+
+    5\vect{A}_3+
+    6\vect{A}_4
+  \]
+
+  This means that $\vect{A}_7$ is surplus, and we can create $W$ just
+  as well with a smaller set with this vector removed,
+  \[
+    W=\spn{\set{\vect{A}_1,\,\vect{A}_3,\,\vect{A}_4}}
+  \]
+
+  \begin{question}
+    Can we do this again?
+    
+    \begin{multipleChoice}
+      \choice{Yes.}
+      \choice[correct]{No.}
+    \end{multipleChoice}
+
+    \begin{feedback}[correct]
+      You might have thought we could keep this up, but we have run out
+      of free variables!  And not coincidentally, the set
+      $\set{\vect{A}_1,\,\vect{A}_3,\,\vect{A}_4}$ is linearly
+      independent (check this!).  It should be clear how each free
+      variable was used to eliminate the a column from the set used to
+      span the column space, as this will be the essence of the proof of
+      the next theorem.
+    \end{feedback}
+  \end{question}
+\end{example}
+
+That example deserves your careful attention, since this important
+example motivates the following very fundamental theorem.
+
+\begin{theorem}[Basis of a Span]
+  \label{theorem:BS}Suppose that $S=\set{\vectorlist{v}{n}}$ is a set
+  of column vectors.  Define $W=\spn{S}$ and let $A$ be the matrix
+  whose columns are the vectors from $S$.  Let $B$ be the reduced
+  row-echelon form of $A$, with $D=\set{\scalarlist{d}{r}}$ the set of
+  indices for the pivot columns of $B$.  Then
+  \begin{enumerate}
+  \item $T=\set{\vect{v}_{d_1},\,\vect{v}_{d_2},\,\vect{v}_{d_3},\,\ldots\,\vect{v}_{d_r}}$ is a linearly independent set.
+  \item $W=\spn{T}$.
+  \end{enumerate}
+
+  \begin{proof}
+    To prove that $T$ is linearly independent, begin with a relation of linear dependence on $T$,
+    \[
+      \zerovector=
+      \alpha_1\vect{v}_{d_1}+\alpha_2\vect{v}_{d_2}+\alpha_3\vect{v}_{d_3}+\ldots+\alpha_r\vect{v}_{d_r}
+    \]
+    and we will try to conclude that the only possibility for the scalars $\alpha_i$ is that they are all zero.
+    Denote the non-pivot columns of $B$ by $F=\set{\scalarlist{f}{n-r}}$.  Then we can preserve the equality by adding a big fat zero to the linear combination,
+    \[
+      \zerovector=
+      \alpha_1\vect{v}_{d_1}+\alpha_2\vect{v}_{d_2}+\alpha_3\vect{v}_{d_3}+\ldots+\alpha_r\vect{v}_{d_r}+
+      0\vect{v}_{f_1}+0\vect{v}_{f_2}+0\vect{v}_{f_3}+\ldots+0\vect{v}_{f_{n-r}}
+    \]
+    
+    By \ref{theorem:SLSLC}, the scalars in this linear combination
+    (suitably reordered) are a solution to the homogeneous system
+    $\homosystem{A}$.  But notice that this is the solution obtained
+    by setting each free variable to zero.  If we consider the
+    description of a solution vector in the conclusion of
+    \ref{theorem:VFSLS}, in the case of a homogeneous system, then we
+    see that if all the free variables are set to zero the resulting
+    solution vector is trivial (all zeros).  So it must be that
+    $\alpha_i=0$, $1\leq i\leq r$.  This implies by
+    \ref{definition:LICV} that $T$ is a linearly independent set.
+
+    The second conclusion of this theorem is an equality of sets
+    (\ref{definition:SE}).  Since $T$ is a subset of $S$, any linear
+    combination of elements of the set $T$ can also be viewed as a
+    linear combination of elements of the set $S$.  So
+    $\spn{T}\subseteq\spn{S}=W$.  It remains to prove that
+    $W=\spn{S}\subseteq\spn{T}$.
+
+    For each $k$, $1\leq k\leq n-r$, form a solution $\vect{x}$ to
+    $\homosystem{A}$ by setting the free variables as follows:
+    \begin{align*}
+      x_{f_1}&=0
+      &
+        x_{f_2}&=0
+      &
+        x_{f_3}&=0
+      &
+        \ldots&
+      &
+        x_{f_k}&=1
+      &
+        \ldots&
+      &
+        x_{f_{n-r}}&=0
+    \end{align*}
+    
+    By \ref{theorem:VFSLS}, the remainder of this solution vector is given by,
+    \begin{align*}
+      x_{d_1}&=-\matrixentry{B}{1,f_k}
+      &
+        x_{d_2}&=-\matrixentry{B}{2,f_k}
+      &
+        x_{d_3}&=-\matrixentry{B}{3,f_k}
+      &
+        \dots&
+      &
+        x_{d_r}&=-\matrixentry{B}{r,f_k}
+    \end{align*}
+    
+    From this solution, we obtain a relation of linear dependence on
+    the columns of $A$,
+    \[
+      -\matrixentry{B}{1,f_k}\vect{v}_{d_1}
+      -\matrixentry{B}{2,f_k}\vect{v}_{d_2}
+      -\matrixentry{B}{3,f_k}\vect{v}_{d_3}
+      -\ldots
+      -\matrixentry{B}{r,f_k}\vect{v}_{d_r}
+      +1\vect{v}_{f_k}
+      =\zerovector
+    \]
+    which can be arranged as the equality
+    \[
+      \vect{v}_{f_k}=
+      \matrixentry{B}{1,f_k}\vect{v}_{d_1}+
+      \matrixentry{B}{2,f_k}\vect{v}_{d_2}+
+      \matrixentry{B}{3,f_k}\vect{v}_{d_3}+
+      \ldots+
+      \matrixentry{B}{r,f_k}\vect{v}_{d_r}
+    \]
+    
+    Now, suppose we take an arbitrary element, $\vect{w}$, of
+    $W=\spn{S}$ and write it as a linear combination of the elements
+    of $S$, but with the terms organized according to the indices in
+    $D$ and $F$,
+    \begin{align*}
+      \vect{w}&=
+                \alpha_1\vect{v}_{d_1}+
+                \alpha_2\vect{v}_{d_2}+
+                \ldots+
+                \alpha_r\vect{v}_{d_r}+
+                \beta_1\vect{v}_{f_1}+
+                \beta_2\vect{v}_{f_2}+
+                \ldots+
+                \beta_{n-r}\vect{v}_{f_{n-r}}
+    \end{align*}
+    
+    From the above, we can replace each $\vect{v}_{f_j}$ by a linear
+    combination of the $\vect{v}_{d_i}$,
+    \begin{align*}
+      \vect{w}&=
+                \alpha_1\vect{v}_{d_1}+
+                \alpha_2\vect{v}_{d_2}+
+                \ldots+
+                \alpha_r\vect{v}_{d_r}+\\
+              &\beta_1\left(
+                \matrixentry{B}{1,f_1}\vect{v}_{d_1}+
+                \matrixentry{B}{2,f_1}\vect{v}_{d_2}+
+                \matrixentry{B}{3,f_1}\vect{v}_{d_3}+
+                \ldots+
+                \matrixentry{B}{r,f_1}\vect{v}_{d_r}
+                \right)+\\
+              &\beta_2\left(
+                \matrixentry{B}{1,f_2}\vect{v}_{d_1}+
+                \matrixentry{B}{2,f_2}\vect{v}_{d_2}+
+                \matrixentry{B}{3,f_2}\vect{v}_{d_3}+
+                \ldots+
+                \matrixentry{B}{r,f_2}\vect{v}_{d_r}
+                \right)+\\
+              &\quad\quad\vdots\\
+              &\beta_{n-r}\left(
+                \matrixentry{B}{1,f_{n-r}}\vect{v}_{d_1}+
+                \matrixentry{B}{2,f_{n-r}}\vect{v}_{d_2}+
+                \matrixentry{B}{3,f_{n-r}}\vect{v}_{d_3}+
+                \ldots+
+                \matrixentry{B}{r,f_{n-r}}\vect{v}_{d_r}
+                \right)
+    \end{align*}
+    With repeated applications of several of the properties of \ref{theorem:VSPCV} we can rearrange this expression as,
+    \begin{align*}
+      =&\ \left(
+         \alpha_1+
+         \beta_1\matrixentry{B}{1,f_1}+
+         \beta_2\matrixentry{B}{1,f_2}+
+         \beta_3\matrixentry{B}{1,f_3}+
+         \ldots+
+         \beta_{n-r}\matrixentry{B}{1,f_{n-r}}
+         \right)\vect{v}_{d_1}+\\
+       &\left(\alpha_2+
+         \beta_1\matrixentry{B}{2,f_1}+
+         \beta_2\matrixentry{B}{2,f_2}+
+         \beta_3\matrixentry{B}{2,f_3}+
+         \ldots+
+         \beta_{n-r}\matrixentry{B}{2,f_{n-r}}
+         \right)\vect{v}_{d_2}+\\
+       &\quad\quad\vdots\\
+       &\left(\alpha_r+
+         \beta_1\matrixentry{B}{r,f_1}+
+         \beta_2\matrixentry{B}{r,f_2}+
+         \beta_3\matrixentry{B}{r,f_3}+
+         \ldots+\beta_{n-r}\matrixentry{B}{r,f_{n-r}}
+         \right)\vect{v}_{d_r}
+    \end{align*}
+    This mess expresses the vector $\vect{w}$ as a linear combination of the vectors in
+    \[
+      T=\set{\vect{v}_{d_1},\,\vect{v}_{d_2},\,\vect{v}_{d_3},\,\ldots\,\vect{v}_{d_r}}
+    \]
+    thus saying that $\vect{w}\in\spn{T}$.  Therefore, $W=\spn{S}\subseteq\spn{T}$.
+  \end{proof}
+\end{theorem}
+
+In \ref{example:COV}, we tossed-out vectors one at a time.  But in
+each instance, we rewrote the offending vector as a linear combination
+of those vectors with the column indices of the pivot columns of the
+reduced row-echelon form of the matrix of columns.  In the proof of
+\ref{theorem:BS}, we accomplish this reduction in one big step.  In
+\ref{example:COV} we arrived at a linearly independent set at exactly
+the same moment that we ran out of free variables to exploit.  This
+was not a coincidence, it is the substance of our conclusion of linear
+independence in \ref{theorem:BS}.
+
+Here is a straightforward application of \ref{theorem:BS}.
+
+\begin{example}[Reducing a span in $\real{4}$]
+  Begin with a set of five vectors from $\real{4}$,
+  \[
+    S=\set{
+      \colvector{ 1 \\ 1 \\ 2 \\ 1},\,
+      \colvector{ 2 \\ 2 \\ 4 \\ 2},\,
+      \colvector{ 2 \\ 0 \\ -1 \\ 1},\,
+      \colvector{ 7 \\ 1 \\ -1 \\ 4},\,
+      \colvector{ 0 \\ 2 \\ 5 \\ 1}
+    }
+  \]
+  and let $W=\spn{S}$.  To arrive at a (smaller) linearly independent
+  set, follow the procedure described in \ref{theorem:BS}.  Place the
+  vectors from $S$ into a matrix as columns, and row-reduce,
+  \[
+    \begin{bmatrix}
+      1 & 2 & 2 & 7 & 0 \\
+      1 & 2 & 0 & 1 & 2 \\
+      2 & 4 & -1 & -1 & 5 \\
+      1 & 2 & 1 & 4 & 1
+    \end{bmatrix}
+    \rref
+    \begin{bmatrix}
+      \leading{1} & 2 & 0 & 1 & 2 \\
+      0 & 0 & \leading{1} & 3 & -1 \\
+      0 & 0 & 0 & 0 & 0 \\
+      0 & 0 & 0 & 0 & 0
+    \end{bmatrix}
+  \]
+
+  Columns 1 and 3 are the pivot columns ($D=\set{1,\,3}$) so the set
+  \[
+    T=\set{
+      \colvector{ 1 \\ 1 \\ 2 \\ 1},\,
+      \colvector{ 2 \\ 0 \\ -1 \\ 1}
+    }
+  \]
+  is linearly independent and $\spn{T}=\spn{S}=W$.  Boom!
+  
+  Since the reduced row-echelon form of a matrix is unique
+  (\ref{theorem:RREFU}), the procedure of \ref{theorem:BS} leads us to
+  a unique set $T$.  However, there is a wide variety of possibilities
+  for sets $T$ that are linearly independent and which can be employed
+  in a span to create $W$.  Without proof, we list two other
+  possibilities:
+  \begin{align*}
+    T^{\prime}&=\set{
+                \colvector{ 2 \\ 2 \\ 4 \\ 2},\,
+    \colvector{ 2 \\ 0 \\ -1 \\ 1}
+    }\\
+    T^{*}&=\set{
+           \colvector{3 \\ 1 \\ 1 \\ 2},\,
+    \colvector{-1 \\ 1 \\ 3 \\ 0}
+    }
+  \end{align*}
+
+  Can you prove that $T^{\prime}$ and $T^{*}$ are linearly independent
+  sets and $W=\spn{S}=\spn{T^{\prime}}=\spn{T^{*}}$?
+\end{example}
+
+
+\begin{example}[Reworking elements of a span]
+  Begin with a set of five vectors from $\real{4}$,
+  \[
+    R=\set{
+      \colvector{ 2 \\ 1 \\ 3 \\ 2 },\,
+      \colvector{ -1 \\ 1 \\ 0 \\ 1 },\,
+      \colvector{ -8 \\ -1 \\ -9 \\ -4 },\,
+      \colvector{ 3 \\ 1 \\ -1 \\ -2 },\,
+      \colvector{ -10 \\ -1 \\ -1 \\ 4}
+    }
+  \]
+  
+  It is easy to create elements of $X=\spn{R}$.  We will create one at random,
+  \[
+    \vect{y}=
+    6\colvector{ 2 \\ 1 \\ 3 \\ 2 }+
+    (-7)\colvector{ -1 \\ 1 \\ 0 \\ 1 }+
+    1\colvector{ -8 \\ -1 \\ -9 \\ -4 }+
+    6\colvector{ 3 \\ 1 \\ -1 \\ -2 }+
+    2\colvector{ -10 \\ -1 \\ -1 \\ 4}
+    =
+    \colvector{9\\2\\1\\-3}
+  \]
+  
+  We know we can replace $R$ by a smaller set (since it is obviously
+  linearly dependent by \ref{theorem:MVSLD}) that will create the same
+  span.  Here goes,
+  \[
+    \begin{bmatrix}
+      2 & -1 & -8 & 3 & -10 \\
+      1 & 1 & -1 & 1 & -1 \\
+      3 & 0 & -9 & -1 & -1 \\
+      2 & 1 & -4 & -2 & 4
+    \end{bmatrix}
+    \rref
+    \begin{bmatrix}
+      \leading{1} & 0 & -3 & 0 & -1 \\
+      0 & \leading{1} & 2 & 0 & 2 \\
+      0 & 0 & 0 & \leading{1} & -2 \\
+      0 & 0 & 0 & 0 & 0
+    \end{bmatrix}
+  \]
+  
+  So, if we collect the first, second and fourth vectors from $R$,
+  \[
+    P=\set{
+      \colvector{ 2 \\ 1 \\ 3 \\ 2 },\,
+      \colvector{ -1 \\ 1 \\ 0 \\ 1 },\,
+      \colvector{ \answer{3} \\ 1 \\ -1 \\ -2 }
+    }
+  \]
+  then $P$ is linearly independent and $\spn{P}=\spn{R}=X$ by
+  \ref{theorem:BS}.  Since we built $\vect{y}$ as an element of
+  $\spn{R}$ it must also be an element of $\spn{P}$.  
+
+  \begin{question}
+    Can we write
+    $\vect{y}$ as a linear combination of just the three vectors in $P$?
+    
+    \begin{multipleChoice}
+      \choice[correct]{Yes.}
+      \choice{No.}
+    \end{multipleChoice}
+
+    \begin{feedback}[correct]
+      Let us compute an explicit linear combination just for fun.  By
+      \ref{theorem:SLSLC} we can get such a linear combination by
+      solving a system of equations with the column vectors of $R$ as
+      the columns of a coefficient matrix, and $\vect{y}$ as the
+      vector of constants.
+
+      Employing an augmented matrix to solve this system,
+      \[
+        \begin{bmatrix}
+          2 & -1 & 3 & 9 \\
+          1 & 1 & 1 & 2 \\
+          3 & 0 & -1 & 1 \\
+          2 & 1 & -2 & -3
+        \end{bmatrix}
+        \rref
+        \begin{bmatrix}
+          \leading{1} & 0  & 0 & 1 \\
+          0 & \leading{1} & 0 & -1 \\
+          0 & 0 & \leading{1} & 2 \\
+          0 & 0 & 0 & 0
+        \end{bmatrix}
+      \]
+      
+      So we see, as expected, that
+      \[
+        1\colvector{ 2 \\ 1 \\ 3 \\ 2 }+
+        (-1)\colvector{ -1 \\ 1 \\ 0 \\ 1 }+
+        2\colvector{ 3 \\ 1 \\ -1 \\ -2 }
+        =\colvector{9 \\ 2 \\ 1 \\ -3}
+        =\vect{y}
+      \]
+      
+      A key feature of this example is that the linear combination that
+      expresses $\vect{y}$ as a linear combination of the vectors in $P$
+      is unique.  This is a consequence of the linear independence of $P$.
+      The linearly independent set $P$ is smaller than $R$, but still just
+      (barely) big enough to create elements of the set $X=\spn{R}$.
+      There are many, many ways to write $\vect{y}$ as a linear
+      combination of the five vectors in $R$ (the appropriate system of
+      equations to verify this claim yields two free variables in the
+      description of the solution set), yet there is precisely one way to
+      write $\vect{y}$ as a linear combination of the three vectors in
+      $P$.
+    \end{feedback}
+  \end{question}
+\end{example}
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
