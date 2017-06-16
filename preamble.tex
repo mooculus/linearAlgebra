@@ -252,12 +252,12 @@
 %  Vector entries, entry i of vector v
 %  (vector-expession still needs \vect, etc.)
 %  Usage:  \vectorentry{vector-expression}{single-subscript}
-\newcommand{\vectorentry}[2]{#1_{#2}}
+\newcommand{\vectorentry}[2]{\left\lbrack#1\right\rbrack_{#2}}
 %
 %  Matrix entries, entry i,j of matrix A
 %  Usage:  \matrixentry{matrix-expression}{paired-subscripts}
 %
-\newcommand{\matrixentry}[2]{#1\left(#2\right)}
+\newcommand{\matrixentry}[2]{\left\lbrack#1\right\rbrack_{#2}}
 %
 %  A generic linear combination
 %  Usage:  \lincombo{scalar letter}{vector letter}{terminal subscript}
