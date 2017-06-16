@@ -2,6 +2,7 @@
 \#*\#
 .\#*
 *.aux
+*.ids
 *.pdf
 *.log
 *.out
