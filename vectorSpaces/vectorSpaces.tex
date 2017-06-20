@@ -275,6 +275,37 @@ Span(S) := \underset{T\text{ finite}}{\underset{T\subseteq S}{\bigcup}} Span(T)
 \begin{exercise} Show that for any (non-empty) set of vectors $S\subset V$, $Span(S)$ is a subset of $V$ (in other words, it is closed under the addition and scalar multiplication operations coming from $V$). Your argument should work for general sets $S$ without any assumptions on cardinality.
 \end{exercise}
 
+In fact, something stronger is true.
+
+\begin{theorem} If $S$ is a non-empty subset of vectors in a vector space $V$, then $Span(S)$ is a subspace of $V$.
+\end{theorem}
+
+\begin{proof} Assume first that $S$ is finite; then $S = \{ {\bf v}_1,\dots,{\bf v}_n\}$ for some collection of vectors $\{{\bf v}\}_i\in V$, $n\ge 1$. To show that $Span(S)$ is a subspace, it suffices to show three things: i) it contains the zero vector, ii) it is closed under vector addition, and iii) it is closed under scalar multiplication.
+\begin{itemize}
+\item ${\bf z} = 0{\bf v}_1$, so ${\bf z}\in Span(S)$. In other words, the zero vector can be written as a linear ``combination" of a single vector in $S$ (a linear combination of one vector amounts to a scalar multiple of that vector).
+\item {\bf\underbar{C1}} Suppose ${\bf v}, {\bf w}\in Span(S)$. Then there must exist scalars $\alpha_i, \beta_j\in \mathbb R$ such that
+\[
+{\bf v} = \alpha_1{\bf v}_1 +\dots \alpha_n{\bf v}_n,\qquad {\bf w} = \beta_1{\bf w}_1+\dots \beta_n{\bf w}_n
+\]
+then
+\[
+{\bf v} + {\bf w} = (\alpha_1 + \beta_1){\bf v}_1 + (\alpha_2 + \beta_2){\bf v}_2 +\dots + (\alpha_n+\beta_n){\bf v_n}\in Span(S)
+\]
+implying $Span(S)$ is closed under vector addition.
+\item {\bf\underbar{C2}} For ${\bf v}$ as above and $\alpha\in\mathbb R$,
+\[
+\alpha{\bf v} = \alpha(\alpha_1{\bf v}_1 + \dots + \alpha_n{\bf v}_n) = (\alpha\alpha_1){\bf v}_1 + \dots (\alpha\alpha_n){\bf v}_n\in Span(S)
+\]
+Hence $Span(S)$ is closed under scalar multiplication.
+\end{itemize}
+
+Suppose now that $S$ is an infinite set. The first property is verified the same way, by choosing any vector ${\bf v}_1\in S$ and taking the scalar product with $0$. For the second property, for any ${\bf v},{\bf w}\in Span(S)$, there must be some finite set $T\subset S$ satisfying the property that ${\bf v}, {\bf w}\in Span(T)$. But then by the above argument we have that ${\bf v}+ {\bf w}\in Span(T)\subset Span(S)$, verifying the closure axiom (C1). Finally, for the same $\bf v$ and finite set $T\subset S$ with ${\bf v}\in Span(T)$, and scalar $\alpha\in\mathbb R$, the above argument shows that $\alpha{\bf v}\in Span(T)\subset Span(S)$, verifying the second closure axiom (C2). So the necessary properties have been verified, and we may conclude that $Span(S)$ is a subspace for any non-empty subset $S\subset V$, as claimed.
+
+\end{proof}
+
+
+
+
 \begin{lemma} Every vector space $V$ has a spanning set.
 \end{lemma}
 
@@ -369,7 +400,7 @@ A set of vectors $S = \{{\bf v}_1,\dots, {\bf v}_n\}\subset V$ is a {\it basis} 
 \begin{description}
 \item[B1] $S = \{{\bf v}_1,\dots, {\bf v}_n\}\subset V$ is a basis for $V$ iff it is a minimal spanning set for $V$.
 \item[B2] Every non-zero vector space $V$ admits a basis.
-\item[B3] If $S = \{{\bf v}_1,\dots, {\bf v}_n\}$ and $T = \{{\bf w}_1,\dots, {\bf w}_m\}$ are two bases for $V$, then $m=n$.
+\item[B3] (finite case) If $S = \{{\bf v}_1,\dots, {\bf v}_n\}$ and $T = \{{\bf w}_1,\dots, {\bf w}_m\}$ are two bases for $V$, then $m=n$.
 \end{description}
 \vskip.2in
 
@@ -387,7 +418,16 @@ In the other direction, suppose it is a minimal spanning set. If it were not lin
 \underbar{Method 2} Let $T_l = \{S\subset V\ |\ S\ \text{is linearly independent}\}$, and partially order $T_l$ by $S\le S'$ iff $S\subset S'$. Again, every chain has an upper bound $S=V$ (which again will not be in $T_l$). Choose a totally ordered subset of $T_l$ and let $S_l$ be a maximal element, implying it is a maximal linearly independent subset of $V$, hence a basis.
 \vskip.2in
 
-The third property will require a bit more work; its proof will be deferred until later.
+The third property will require a bit more work; its proof will be deferred until later. It is stated above in the case that both $S$ and $T$ have a finite set of vectors, but it is true more generally. For an arbitrary set $S$, let $\# S$ denote the {\it number of elements of} $S$ (this number, which can be infinite, is referred to as the {\it cardinality} of $S$). In full generality, property {\bf B3} states
+\vskip.1in
+
+{\bf B3} (general case) If $V$ is a non-zero vector space, and $S,T$ are two bases for $V$, then $\#S = \# T$.
+\vskip.2in
+
+\begin{definition} If $V$ is a non-zero vector space, the \underbar{dimension} of $V$ is the number of vectors in a basis for $V$: $Dim(V) := \# S$ where $S$ is a basis for $V$ (If $V = \{{\bf 0}\}$ we set $Dim(V) := 0$).
+\end{definition}
+
+Property B3 indicates that the dimension of a (non-zero) vector space $V$ doesn't depend on the choice of basis for $V$; it only depends on $V$. The dimension of a vector space is the single most important numerical invariant one can attach to that space.
 \vskip.3in
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -399,7 +439,7 @@ Re(a+bi) = a,\qquad Im(a+bi) = b
 For $z = a + bi$, we recall its {\it conjugate} is defined to be $\ov{z} := a - bi$. The real numbers embed naturally in $\mathbb C$ as those whose {\it imaginary} component is zero: $\mathbb R\ni a\mapsto a + 0i\in\mathbb C$. Alternatively $\mathbb R$ identifies with those $z\in\mathbb C$ satisfying $z = \ov{z}$.
 \vskip.2in
 
-A {\it vector space over $\mathbb C$} satisfies exactly the same axioms as a vector space over $\mathbb R$, the one difference being that scalars are allowed to be compBeyond that, all of the constructions and definitions over $\mathbb R$ given above extend without change to working over $\mathbb C$.. In analogy to $\mathbb R^n$ we have $\mathbb C^n$, which can be viewed as the complex vector space generated by the same standard basis vectors we had for $\mathbb R^n$; vectors in $\mathbb C^n$ are naturally represented by $n\times 1$ column vectors with entries in $\mathbb C$:
+A {\it vector space over $\mathbb C$} satisfies exactly the same axioms as a vector space over $\mathbb R$, the one difference being that scalars are allowed to be complex. Beyond that, all of the constructions and definitions over $\mathbb R$ given above extend without change to working over $\mathbb C$. In analogy to $\mathbb R^n$ we have $\mathbb C^n$, which can be viewed as the complex vector space generated by the same standard basis vectors we had for $\mathbb R^n$; vectors in $\mathbb C^n$ are naturally represented by $n\times 1$ column vectors with entries in $\mathbb C$:
 \[
 \mathbb C^n := \{[z_1\ z_2\ \dots z_n]^T\ |\ z_i\in\mathbb C\}
 \]
