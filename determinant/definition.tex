@@ -1,0 +1,52 @@
+\documentclass{ximera}
+\input{../preamble.tex}
+\title{Combinatorial definition}
+\author{Crichton Ogle}
+
+\begin{document}
+\begin{abstract}
+  There is also a combinatorial approach to the computation of the determinant.
+\end{abstract}
+\maketitle
+
+et $S_n = \{1,2,\dots,n\}$ be the set consisting of the intergers between $1$ and $n$ inclusive. We denote by $\Sigma_n$ the set of maps $\sigma:S_n\xrightarrow{\cong} S_n$ of $S_n$ to itself which are {\it isomorphisms}, meaning that they are 1-1 and onto. An element $\sigma\in\Sigma_n$ should be thought of as a {\it reordering} of the elements of $S_n$, with $\Sigma_n$ consisting of all such reorderings. Elements of $\Sigma_n$ can be {\it multiplied} (with multiplication given by composition), and with respect to that multiplication every element $\sigma\in\Sigma_n$ has an inverse $\sigma^{-1}\in\Sigma_n$ satisfying $\sigma \sigma^{-1} = Id$. A set satisfying these properties is called a {\it group}, and $\Sigma_n$ is typically referred to as {\it the permutation group on n letters}.
+\vskip.2in
+Among the elements of $\Sigma_n$ are permutations of a particularly simple type, called {\it transpositions}. The permutation which switches two numbers $i$ and $j$, while leaving all others fixed, will be labeled $\tau_{ij}$ (note: $\tau_{ij}$ is often written as $(i,j)$, however this can be confused with the coordinate notation for points in $\mathbb R^2$, hence our choice not to use it).
+\vskip.2in
+It is not hard to see that any permutation $\sigma\in\Sigma_n$ can be written as a product of transpositions:
+\[
+\sigma = \tau_{i_1,j_1}\tau_{i_2,j_2}\dots\tau_{i_m,j_m}
+\]
+The way of doing so is far from unique, but it turns out that - given $\sigma$ - the {\it number} of transpositions used rewriting $\sigma$ in this fashion is {\it always even or always odd}. This allows for the definition of the {\it sign} of a permutation:
+
+\begin{definition} For $\sigma\in\Sigma_n$, the sign of $\sigma$, denoted by $sgn(\sigma)$ is given by
+\[
+sgn(\sigma) := (-1)^m\quad\text{if } \sigma = \tau_{i_1,j_1}\tau_{i_2,j_2}\dots\tau_{i_m,j_m}
+\]
+where the product on the right is a product of transpositions.
+\end{definition}
+
+With this concept established, the determinant may alternatively be defined as
+
+\begin{definition} For an $n\times n$ matrix $A$, 
+\[
+Det(A) = \sum_{\sigma\in\Sigma_n}sgn(\sigma) A(1,\sigma(1))A(2,\sigma(2))\dots A(n,\sigma(n))
+\]
+\end{definition}
+
+\end{document}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Properties of the determinant} The determinant satisfies a number of useful properties, among them
+
+\begin{itemize}
+\item For any two square matrices $A,B$ of the same dimensions, $Det(A*B) = Det(A)Det(B)$.
+\item $A$ is singular iff $Det(A) = 0$.
+\item If $A$ is triangular (either upper or lower), then $Det(A) = A(1,1)A(2,2)\dots A(n,n) =$ the product of the diagonal entries.
+\item $Det(A) = Det(A^T)$.
+\end{itemize}
+\vskip.3in
+
+\end{document}

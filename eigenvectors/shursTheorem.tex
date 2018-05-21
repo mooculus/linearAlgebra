@@ -1,0 +1,94 @@
+\documentclass{ximera}
+\input{../preamble.tex}
+\title{Shur's Theorem}
+\author{Crichton Ogle}
+
+\begin{document}
+\begin{abstract}
+  There are advantages to working with complex numbers.
+\end{abstract}
+\maketitle
+
+Recall that a complex matrix $U$ is unitary if $U^* = U$. 
+
+\begin{theorem} Let $A$ be a complex $n\times n$ matrix. Then there is a unitary matrix $U$ and upper triangular matrix $T$ such that
+\[
+U^**A*U = T
+\]
+\end{theorem}
+
+\begin{proof} By the Fundamental Theorem of Algebra $p_A(t)$ factors completely over $\mathbb C$ into linear terms. In particular, $A$ must have at least one eigenvalue.  Let $\lambda_1$ be an eigenvalue of $A$, and ${\bf v}_1$ a corresponding eigenvector with norm 1. Let $W_1 = Span\{{\bf v}_1\}^\perp$ be the orthogonal complement of the span of ${\bf v}_1$. Write $L_1:\mathbb C^n\to\mathbb C^n$ for the linear transformation ${\bf v}\mapsto A*{\bf v}$. Now consider the linear transformation
+\[
+L_2:W_1\inj\mathbb C^n\xrightarrow{L_1}\mathbb C^n\surj \mathbb C^n/Span\{{\bf v}_1\}\cong W_1
+\]
+By induction on dimension, we can assume the subspace $W_1\subset\mathbb C^n$ admits a complex orthonormal basis $\{{\bf v}_2,\dots, {\bf v}_n\}$ such that $L_2({\bf v}_i)\subset Span\{{\bf v}_2,\dots,{\bf v}_i\}, 2\le i\le n$. In other words, for each $2\le i\le n$ we have
+\[
+L_2({\bf v}_i) = \sum_{j=2}^i\alpha_{i,j}{\bf v}_j
+\]
+This means that the composition $L_2':W_1\inj\mathbb C^n\xrightarrow{L_1}\mathbb C^n$ on the vectors $\{{\bf v}_2,\dots, {\bf v}_n\}$ is given by
+\[
+L_1({\bf v}_i) = L_2'({\bf v}_i) = \sum_{j=1}^i\alpha_{i,j}{\bf v}_j
+\]
+for some choice of complex scalars $\alpha_{1,j}$. Setting $\alpha_{1,1} = \lambda_1$, we see that
+\[
+A*{\bf v}_i = \sum_{j=1}^i\alpha_{i,j}{\bf v}_j,\qquad 1\le i\le n
+\]
+Let $U = [{\bf v}_1\ {\bf v}_2\dots {\bf v}_n]$ be the concatenation of the vectors ${\bf v}_i, 1\le i\le n$ and $T$ the upper triangular matrix with $T(i,j) = \alpha_{i,j}, 1\le i\le j\le n$. Then $U$ is unitary, and last equation can then be written in matrix form as
+\[
+A*U = U*T
+\]
+Multiplying both sides on the left by $U^* = U^{-1}$ gives the desired equation
+\[
+U^**A*U = T
+\]
+\end{proof}
+
+The main corrolary to Shur's theorem is 
+
+\begin{corollary} If $A$ is an $n\times n$ Hermitian matrix, then $A$ is diagonalizable (i.e., $\mathbb C^n$ has a basis consisting of eigenvectors of $A$). Moreover, all of the eigenvalues of $A$ are real.
+\end{corollary}
+
+\begin{proof} By Shur's Theorem, there exists a unitary $U$ and upper triangular $T$ with $U^**A*U = T$. But $A$ is Hermitian, so $A = A^*$. Then
+\begin{align*}
+T^* &= \left(U^**A*U\right)^*\\
+        &= U^**A^**U\\
+        &= U^**A*U = T
+\end{align*}
+But as $T$ is upper triangular, the identity $T = T^*$ implies not only that $T$ is diagonal, but that the diagonal elements remain invariant under complex conjugation; i.e., are real numbers. Thus Shur's equation may be rewritten in this case as $U^**A*U = D$ where $D$ is a real diagonal matrix, or alternatively,
+\[
+A*U = U*D
+\]
+But this last equation implies $A*U(i,:) = \lambda_i U(i,:), 1\le i\le n$, where $\lambda_i = D(i,i)$. As the columns of $U$ are orthonormal, they form a basis for $\mathbb C^n$, implying the result.
+\end{proof}
+
+As a special case, when $A$ is a real $n\times n$ matrix, then it is Hermitian iff it is symmetric. Thus, viewing it as a complex matrix with purely real entries, we have
+
+\begin{corollary} If $A$ is an $n\times n$ real symmetric matrix, then it is diagonalizable and all of its eigenvalues are real.
+\end{corollary}
+
+We are now in a position to return to the question of how to decide when a sesquilinear conjugate-symmetric (complex) pairing - which in the real case reduces to a symmetric bilinear pairing - actually represents an inner product; in other words, is positive definite.
+
+\begin{theorem} Let $<_-,_->:\mathbb C^n\times\mathbb C^n\to \mathbb C, ({\bf v}, {\bf w})\mapsto <{\bf v}, {\bf w}>$ be a sesquilinear conjugate-symmetric pairing on $\mathbb C^n$, represented (with respect to the standard basis) by the Hermitian matrix $A$. Then $<_-,_->$ is positive-definite iff all of the eigenvalues of $A$ are positive (equivalently, iff $A$ is similar to a diagonal matrix $D$ with positive diagonal entries).
+\end{theorem}
+
+\begin{proof} Let $\{{\bf v}_1, {\bf v}_2, \dots, {\bf v}_n\}$ be an orthonormal basis for $\mathbb C^n$ consisting of eigenvectors of $A$, with $A*{\bf v}_i = \lambda_i{\bf v}_i, \lambda_i\in\mathbb R$ (this basis exists by the corollary above). If ${\bf v} = \sum\alpha_i{\bf v}_i$, then 
+\[
+<{\bf v}, {\bf v}> = {\bf v}^**A*{\bf v} = \sum_i|\alpha_i|^2\lambda_i
+\]
+It is easily seen that this sum satisfies condition (HIP3) iff $\lambda_i > 0\,\,\forall 1\le i\le n$.
+\end{proof}
+\vskip.2in
+
+A slightly more general class of Hermitian matrices are those that are {\it non-negative definite}, meaning that their eigenvalues are all non-negative. Now suppose $A$ is an arbitrary $n\times n$ complex matrix, and $B = A^**A$. Then clearly $B^* = (A^**A)^* = A^**A = B$ implying $B$ is Hermitian.
+
+\begin{lemma} For any $n\times n$ matrix $A$, the matrix $B = A^**A$ is non-negative definite. Moreover, $B$ is positive definite iff $A$ is non-singular.
+\end{lemma}
+
+\begin{proof} Since $\mathbb C^n$ admits an orthonormal basis consisting of eigenvectors of $B$, it suffices to show that the eigenvalues of $B$ are non-negative. Let $\bf v$ be an eigenvector of $B$ with eigenvalue $\lambda$. Then
+\[
+\lambda\|{\bf v}\|^2 = \lambda({\bf v}^**{\bf v}) = {\bf v}^**B*{\bf v} = {\bf v}^**(A^**A)*{\bf v} = (A*{\bf v})^**(A*{\bf v}) = \|A*{\bf v}\|^2\ge 0
+\]
+As $\|{\bf v}\|^2 > 0$ this implies $\lambda\ge 0$. Also, as we have already seen, $B$ is non-singular iff $0$ is not an eigenvalue of $B$. But $Det(B) = |Det(A)|^2$. Hence $B$ is non-singular iff $A$ is.
+\end{proof}
+
+\end{document}

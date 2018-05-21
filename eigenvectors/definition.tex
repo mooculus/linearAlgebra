@@ -1,0 +1,54 @@
+\documentclass{ximera}
+\input{../preamble.tex}
+\title{Definition}
+\author{Crichton Ogle}
+
+\begin{document}
+\begin{abstract}
+  A nonzero vector which is scaled by a linear transformation is an eigenvector for that transformation.
+\end{abstract}
+\maketitle
+
+If $A$ is an $m\times n$ matrix, $\bf v$ an $n\times 1$ non-zero vector, we say that $\bf v$ is {\it an eigenvector of A with eigenvalue $\lambda$} if one has the identity
+\[
+A*{\bf v} = \lambda{\bf v}
+\]
+In other words, if multiplying $\bf v$ on the left by the matrix $A$ has the same effect as multiplying it by the scalar $\lambda$. We note first that, in order for this to be at all  possible, $A*{\bf v}$ must also be an $n\times 1$ vector; in other words, $A$ must be a {\it square} matrix.
+\vskip.2in
+
+Given a square matrix, then, the {\it eigenvalue problem} is to find a complete description of the eigenvalues and associated eigenvectors for that matrix. Our goal in this section is to determine a systematic way of doing this.
+\vskip.2in
+
+Before proceeding with examples, we note that
+
+\begin{proposition} If $\bf v$ is an eigenvalue of a matrix $A$, the eigenvector associated with it is unique.
+\end{proposition}
+
+\begin{proof} Suppose $\lambda_1{\bf v} = A*{\bf v} = \lambda_2{\bf v}$. Then $\lambda_1{\bf v} - \lambda_2{\bf v} = (\lambda_1 - \lambda_2){\bf v} = {\bf 0}$. But since ${\bf v}\ne {\bf 0}$, the only way this could happen is if the coefficient $(\lambda_1 - \lambda_2)$ is equal to zero, or equivalently, if $\lambda_1 = \lambda_2$.
+\end{proof}
+\vskip.2in
+
+\begin{example} Let $A = I^{n\times n}$ be the $n\times n$ identity matrix. Then for any ${\bf v}\in\mathbb R^n$, one has $A*{\bf v} = I*{\bf v} = {\bf v} = 1{\bf v}$. So in this case, we see that {\it every non-zero vector in $\mathbb R^n$ is an eigenvector of $A$ with corresponding eigenvalue $1$}.
+\end{example}
+
+[Additional examples to be included here]
+\vskip.2in
+
+In order to understand more clearly what it is we are looking for, we consider a reformulation of the defining equation above. First, we note that the scalar product $\lambda{\bf v}$ can be rewritten as a matrix product
+\[
+\lambda{\bf v} = (\lambda I)*{\bf v}
+\]
+From this we have the following equivalent statements:
+\[
+A*{\bf v} = \lambda{\bf v}\quad\Leftrightarrow\quad A*{\bf v} = (\lambda I)*{\bf v}\quad\Leftrightarrow\quad (A - \lambda I)*{\bf v} = {\bf 0}\quad\Leftrightarrow\quad {\bf v}\in N(A - \lambda I)
+\]
+
+Thus
+
+\begin{observation}\label{obs:eigen} A non-zero vector $\bf v$ is an eigenvector of $A$ with eigenvalue $\lambda$ if and only if it lies in the nullspace of the matrix $A-\lambda I$. In particular, in order for such an vector to exist, the matrix $A-\lambda I$ must be singular.
+\end{observation}
+\vskip.2in
+
+This suggests that in order to solve the eigenvalue problem, we should first determine the values $\lambda$ for which $A - \lambda I$ is singular; then, for each such $\lambda$, determine a basis for the nullspace of $A - \lambda I$. In other words, {\it eigenvalues first, then eigenvectors}. And to do this we will need an effective tool for determining when a square matrix is singular---which brings us to the determinant.
+
+\end{document}

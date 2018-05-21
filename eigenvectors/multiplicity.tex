@@ -1,0 +1,54 @@
+\documentclass{ximera}
+\input{../preamble.tex}
+\title{Geometric versus algebraic multiplicity}
+\author{Crichton Ogle}
+
+\begin{document}
+\begin{abstract}
+  There are advantages to working with complex numbers.
+\end{abstract}
+\maketitle
+
+The identity matrix $\begin{bmatrix} 1 & 0\\0 & 1\end{bmatrix}$ is obviously diagonalizable (it is diagonal to start with), and $\mathbb R^2$ has a basis consisting of eigenvectors of $I$, namely the standard basis $\{{\bf e}_1, {\bf e}_2\}$. On the other hand, we have seen that $\begin{bmatrix} 1 & 1\\0 & 1\end{bmatrix}$ is not, even though it has the same characteristic polynomial as $I$. This example tells us, among other things, that the characteristic polynomial alone does not determine whether or not a given matrix is diagonalizable. As it turns out, this problem can be studied one eigenvalue at a time.
+\vskip.2in
+
+Let $A$ be an arbitrary $n\times n$ matrix, and $\lambda$ an eigenvalue of $A$. The {\it geometric multiplicity} of $\lambda$ is defined as
+\[
+m_g(\lambda) := Dim(E_{\lambda}(A))
+\]
+while its {\it algebraic multiplicity} is the mutiplicity of $\lambda$ viewed as a root of $p_A(t)$ (as defined in the previous section).
+
+\begin{theorem}\label{thm:geoalg} For all square matrices $A$ and eigenvalues $\lambda$, $m_g(\lambda)\le m_a(\lambda)$. Moreover, this holds over both $\mathbb R$ and $\mathbb C$ (in other words, both for real matrices with real eigenvalues, or more generally complex matrices with complex eigenvalues)
+\end{theorem}
+
+The proof of this result will be deferred until later. For now we record an important consequence. Let $\lambda_1,\dots,\lambda_k$ denote the (distinct) eigenvalues of the $n\times n$ matrix $A$. Then (working over $\mathbb C$ if needed) we can write the characteristic polynomial of $A$ as
+\[
+p_A(t) = (-1)^n(t-\lambda_1)^{m_1}(t-\lambda_2)^{m_2}\dots (t-\lambda_k)^{m_k}
+\]
+where $m_i = m_a(\lambda_i$ is the algebraic multiplicity of $\lambda_i$. From this factorization, we see that the sum of the algebraic multiplicities must equal the degree of $p_A(t)$, which equals $n$:
+\[
+\sum_{i=1}^k m_a(\lambda_i) = \sum_{i=1}^k m_i = n
+\]
+By the above theorem we have
+
+\begin{theorem} Over $\mathbb C$ the matrix $A$ is diagonalizable iff for each eigenvalue $\lambda$ one has $m_g(\lambda) = m_a(\lambda)$. If $A$ is a real matrix and $p_A(t)$ factors over $\mathbb R$ into a product of linear terms, then the same holds over $\mathbb R$. 
+\end{theorem}
+
+\begin{proof}We start with the complex case, as working over $\mathbb C$ guaranteees complete factorization of $p_A(t)$. By Theorem \ref{thm:geoalg}, $\sum_i m_g(\lambda_i)\le \sum_i m_a(\lambda_i) = n$; moreover, since $0\le m_g(\lambda_i)\le m_a(\lambda_i)$ for each $i$, we have that $\sum_i m_g(\lambda_i) = n$ iff $m_g(\lambda_i) = m_a(\lambda_i)$ for each $i$. But $\sum_i m_g(\lambda_i) = Dim(E(A)$ (over $\mathbb C$), and $A$ is diagonalizable iff $Dim(E(A)) = n$. This proves the result over $\mathbb C$.
+\vskip.2in
+
+If $A$ is a real matrix and the factorization of $p_A(t)$ over $\mathbb C$ yields only real eigenvectors, then $p_A(t)$ factors completely into linear terms over $\mathbb R$, and the above argument can be repeated in this case to arrive at the same conclusion over $\mathbb R$.
+\end{proof}
+
+An $n\times n$ matrix $A$ is called {\it defective} if the sum of the geometric multiplicities over $\mathbb C$ is strictly less than $n$. Our last theorem shows that this happens iff there is some eigenvalue $\lambda$ of $A$ for which $m_g(\lambda) < m_a(\lambda)$.
+The {\it deficiency} of a particular eigenvalue is then represented by the difference $m_a(\lambda) - m_g(\lambda)$. This can be arbitrarily large, as the next exercise illustrates.
+
+\begin{exercise} Let $T_n$ be the $n\times n$ matrix with $T(i,j) = \begin{cases} 1\quad\text{if } i\le j\\ 0\quad\text{otherwise}\end{cases}$. Show that the eigenvalue $\lambda = 1$ has algebraic multiplicity $n$, but geometric multiplicity $1$.
+\end{exercise}
+
+On the other hand, for almost all matrices (from a statistical point of view), factorization of $p_A(t)$ into linear terms leads to $n$ distinct eigenvalues, which therefore must each have multiplicity equal to 1. Since the geometric multiplicity of a given eigenvalue must be {\it at least} 1 (as the corresponding eigenspace must be non-zero), we see that {\it any eigenvalue with algebraic multiplicity 1 cannot be deficient}. Hence $\sum_i m_g(\lambda_i) = n$ in this case, hence
+
+\begin{corollary} Any $n\times n$ matrix with $n$ distinct eigenvalues is diagonalizable over $\mathbb C$. If the matrix and its eigenvalues are all real, the same statement is true over $\mathbb R$.
+\end{corollary}
+
+\end{document}

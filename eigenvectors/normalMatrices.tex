@@ -1,0 +1,39 @@
+\documentclass{ximera}
+\input{../preamble.tex}
+\title{Normal matrices}
+\author{Crichton Ogle}
+
+\begin{document}
+\begin{abstract}
+  There are advantages to working with complex numbers.
+\end{abstract}
+\maketitle
+
+The identity $U^**A*U = T$ can be expressed as saying that $A$ is {\it unitarily similar} to the triangular matrix $T$ (in other words, the similarity matrix is not just invertible, but unitary). It is reasonable to ask whether of not a complex matrix $A$ is unitarily similar to a diagonal matrix, or alternatively, whether or not $\mathbb C^n$ admits an orthonormal basis consisting of eigenvectors of $A$.
+\vskip.2in
+
+\begin{definition} $A$ is {\it normal} if $A^**A = A*A^*$.
+\end{definition}
+
+\begin{lemma} $A$ is normal iff $A$ is unitarily diagonalizable.
+\end{lemma}
+
+\begin{proof} Shur's identity can be rewritten as $A = U*T*U^*$ ($U$ unitary and $T$ triangular). Then $A$ normal implies
+\[
+(U*T*U^*)*(U*T*U^*)^* = (U*T*U^*)^**(U*T*U^*)
+\]
+Recalling that $(C*D)^* = D^**C^*$, and that unitary means $U^**U = I$, the above identity simplifies to
+\[
+U*T*T^**U^* = U*T^**T*U^*\quad\Leftarrow\quad T*T^* = T^**T
+\]
+One can check that this last condition implies $T$ must be a diagonal matrix (in other words, the only triangular matrix which is also normal is a diagonal one. Note, though, that $T$ need not have real entries).
+\vskip.2in
+
+Conversely, if $T$ is diagonal, then $T$ is normal (as we just noted), and $A$ is unitarily similar to a normal matrix, which implies it too is normal.
+\end{proof}
+\vskip.5in
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}

@@ -1,0 +1,41 @@
+\documentclass{ximera}
+\input{../preamble.tex}
+\title{Cofactor expansion}
+\author{Crichton Ogle}
+
+\begin{document}
+\begin{abstract}
+  One method for computing the determinant is called cofactor expansion.
+\end{abstract}
+\maketitle
+
+If $A$ is an $n\times n$ matrix, with $n > 1$, we define the $(i,j)^{th}$ minor of $A$ to be $M_{ij}(A)$ to be the $(n-1)\times(n-1)$ matrix derived from $A$ by deleting the $i^{th}$ row and $j^{th}$ column. For example,
+\vskip.2in
+
+% BADBAD: [include example here]
+
+ In this framework one proceeds with an {\it inductive} or {\it recursive} definition. In such a definition, we give an explicit formula in the case $n=1$, and that prior to defining the determinant for $n\times n$ matirices, that the determinant {\it has already been given for $(n-1)\times(n-1)$ matrices}. For indices $1\le i,j\le n$, define the $(i,j)^{th}$ cofactor of $A$ to be
+\[
+A_{ij} = (-1)^{i+j}Det(M_{ij}(A))
+\]
+Then
+
+\begin{definition} Id $A = [a]$ is a $1\times 1$ matrix, then $Det(A) = a$. For $n > 1$, $Det(A) = \sum_{j=1}^n A(1,j)A_{1j}$
+\end{definition}
+
+This is sometimes also referred to as {\it cofactor expansion along the first row}.
+\vskip.2in
+\begin{example} Suppose A = $\begin{bmatrix} 2 & 3\\1 & -4\end{bmatrix}$. Then $M_{11}(A) = [-4], M_{12}(A) = [1]$, so $A_{11} = (-1)^{1+1}(-4) = -4$ and $A_{12} = (-1)^{1+2}(1) = -1$. Then $Det(A) = A(1,1)A_{11} + A(1,2)A_{12} = (2)(-4) + (3)(-1) = -11$.
+\end{example}
+\vskip.2in
+
+More generally, 
+
+\begin{example} Suppose $A = \begin{bmatrix} a_{11} & a_{12}\\a_{21} & a_{22}\end{bmatrix}$. Then $M_{11}(A) = [a_{22}], M_{12}(A) = [a_{21}]$, so $A_{11} = (-1)^{1+1}(a_{22}) = a_{22}$ and $A_{12} = (-1)^{1+2}(a_{21}) = a_{21}$. Then 
+\[
+Det(A) = A(1,1)A_{11} + A(1,2)A_{12} = a_{11}a_{22} - a_{12}a_{21}
+\]
+\end{example}
+\vskip.2in
+
+\end{document}

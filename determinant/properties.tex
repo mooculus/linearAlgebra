@@ -1,0 +1,21 @@
+\documentclass{ximera}
+\input{../preamble.tex}
+\title{Properties of the determinant}
+\author{Crichton Ogle}
+
+\begin{document}
+\begin{abstract}
+  The determinant is connected to many of the key ideas in linear algebra.
+\end{abstract}
+\maketitle
+
+The determinant satisfies a number of useful properties, among them
+\begin{itemize}
+\item For any two square matrices $A,B$ of the same dimensions, $Det(A*B) = Det(A)Det(B)$.
+\item $A$ is singular iff $Det(A) = 0$.
+\item If $A$ is triangular (either upper or lower), then $Det(A) = A(1,1)A(2,2)\dots A(n,n) =$ the product of the diagonal entries.
+\item $Det(A) = Det(A^T)$.
+\end{itemize}
+\vskip.3in
+
+\end{document}

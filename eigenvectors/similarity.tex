@@ -1,0 +1,93 @@
+\documentclass{ximera}
+\input{../preamble.tex}
+\title{Similarity and diagonalization}
+\author{Crichton Ogle}
+
+\begin{document}
+\begin{abstract}
+  Similarity represents an important equivalence relation on the vector space of square matrices of a given dimension.
+\end{abstract}
+\maketitle
+
+Two square matrices $A$ and $B$ are said to be {\it similar} if there exists an invertible matrix $S$ such that
+\[
+B = S*A*S^{-1}
+\]
+The matrix $S$ appearing in this equation is referred to as a {\it similarity matrix}. Similarity represents an important {\it equivalence relation} on the vector space of square matrices of a given dimension. A number of important aspects of a square matrix remain unchanged under this relation.
+
+\begin{lemma} If $A$ and $B$ are similar, then $p_A(t) = p_B(t)$. In particular, $Det(A) = Det(B)$.
+\end{lemma}
+
+\begin{proof} Choose $S$ such that $B = S*A*S^{-1}$. Then the equality of the characteristic polynomials follows from the sequence of equalities
+\[
+\begin{split}
+p_B(t) = Det(B - tI) &= Det(S*A*S^{-1} - tI)\\
+&= Det(S*A*S^{-1} - S*(tI)*S^{-1})\\
+&= Det(S*(A - tI)*S^{-1})\\
+&= Det(S)*Det(A - tI)*Det(S^{-1})\\
+&= Det(S)*Det(S)^{-1}*Det(A - tI) = Det(A - tI) = p_A(t)
+\end{split}
+\]
+\end{proof}
+
+Thus similar matrices have the same eigenvalues, occuring with the same multiplicity. Moreover, their eigenvectors are related.
+
+\begin{exercise} If $B = S*A*S^{-1}$, and ${\bf v}$ is an eigenvector of $A$ with eigenvalue $\lambda$, show that $S*{\bf v}$ is an eigenvalue of $B$ with eigenvalue $\lambda$. More generally, slow that if $L_S:\mathbb R^n\to \mathbb R^n$ is the linear transformation $L_S({\bf w}) = S*{\bf w}$, show that $L_S$ induces an isomorphism on eigenspaces $L_S:E_{\lambda}(A)\xrightarrow{\cong} E_{\lambda}(B)$ for all eigenvalues $\lambda$.
+\end{exercise}
+
+In the previous section we considered the question: when does $\mathbb R^n$ decompose as a direct sum of eigenspaces of a matrix $A$? To answer this, we consider first the case when $A = D$ a diagonal matrix with $D(i,i) = \lambda_i, 1\le i\le n$. For such a matrix, each standard basis vector ${\bf e}_i$ is an eigenvector, as $D*{\bf e}_i = \lambda_i{\bf e}_i$ for each $1\le i\le n$. So for such a matrix one has an evident direct sum decomposition
+\[
+\mathbb R^n = \bigoplus_{\lambda} E_{\lambda}(A),\quad E_{\lambda}(A) = Span\{{\bf e}_i\ |\ \lambda_i = \lambda\}
+\]
+\vskip.2in
+
+We say that $A$ is {\it diagonalizable} if $A$ is similar to a diagonal matrix.
+
+\begin{theorem} Given $A$, the following statements are equivalent:
+\begin{enumerate}
+\item $\mathbb R^n$ has a basis consisting of eigenvectors of $A$.
+\item $\mathbb R^n$ can be written as a direct sum of eigenspaces of $A$.
+\item $A$ is diagonalizable.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof} Statements (1) and (2) are clearly equivalent. It will suffice then to show that statement (2) is equivalent to statement (3). Suppose first that $A$ is diagonalizable, in other words that there is a matrix $S$ such that $A = S*D*S^{-1}$. Multiplying both sides of this equation on the right by $S$ yields
+\[
+A*S = S*D
+\]
+The $i^{th}$ column of $A*S$ is $A*(S(:,i))$, while the $i^{th}$ column of $S*D$ is $\lambda_i S(:,i)$ where $\lambda_i = D(i,i)$ represents the $i^{th}$ diagonal element of $D$. In othe words, we have an equality
+\[
+A*S(:,i) = \lambda_i S(:,i),\quad 1\le i\le n
+\]
+implying the columns of $S$ are eigenvectors of $A$. The $n\times n$ matrix $S$ is invertible, so must have rank $n$. This means the  set of column vectors $\{S(:,1), S(:,2),\dots, S(:,n)\}$ are linearly independent, and therefore form a basis for $\mathbb R^n$.
+\vskip.2in
+
+On the other hand, if $\{{\bf v}_1,\dots, {\bf v}_n\}$ is a basis of $\mathbb R^n$ with $A*{\bf v}_i = \lambda_i {\bf v}_i, 1\le i\le n$, then concatenating the vectors in the basis forms a matrix 
+\[
+S := [{\bf v}_1\ {\bf v}_2\ \dots {\bf v}_n]
+\]
+whose $i^{th}$ column is the $i^{th}$ eigenvector ${\bf v}_i$. If we now define $D$ to be the diagonal matrix with $D(i,i) = \lambda_i$, then (as above) one has
+\[
+A*S = S*D
+\]
+By construction the set of columns of $S$ are linearly independent, and so $S$ is invertible. So we may multiply both sides of this last equation on the right by $S^{-1}$, yielding
+\[
+A = S*D*S^{-1}
+\]
+implying that $A$ is diagonalizable. This completes the proof.
+\end{proof}
+
+Many matrices are diagonalizable, but there are also many that are not. The following exercise illustrates a class of matrices that won't be.
+
+\begin{exercise} Show that $A = \begin{bmatrix} 1 & 1\\0 & 1\end{bmatrix}$ is not diagonalizable, by i) finding the single eigenvalue $\lambda_1$ for the matrix, and then ii) showing $E_{\lambda_1}(A)$ has dimension 1 (and this cannot be all of $\mathbb R^2$).
+\end{exercise}
+
+Of course, this discussion so far has been concerned with the case of real matrices and real eigenvalues. Some matrices have no eigenvalues over the real numbers. To illustrate
+
+\begin{example} Let $A = \begin{bmatrix} 0 & 1\\-1 & 0\end{bmatrix}$. Then charactericstic polynomial of $A$ is $p_A(t) = t^2 + 1$, which is an irreducible quadratic polynomial with no real roots. Thus $A$ has no eigenvectors in $\mathbb R^2$.
+\end{example}
+
+What should be done with such matrices? The answer is that even if one is primarily concerned with real matrices and working over the real numbers, there are cases where one needs to enlarge the set of scalars to $\mathbb C$. This is one of those cases.
+\vskip.3in
+
+\end{document}

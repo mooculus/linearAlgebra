@@ -1,0 +1,78 @@
+\documentclass{ximera}
+\input{../preamble.tex}
+\title{Direct sum decomposition}
+\author{Crichton Ogle}
+
+\begin{document}
+\begin{abstract}
+  Establish algebraic criteria for determining exactly when a real number can occur as an eigenvalue of $A$.
+\end{abstract}
+\maketitle
+
+A vector space $V$ can be written as a {\it direct sum} of two subspaces $W_1, W_2$ if
+\begin{itemize}
+\item Every ${\bf v}\in V$ can be written as ${\bf v} = {\bf w}_1 + {\bf w}_2$ for ${\bf w}_i\in W_i$;
+\item $W_1\cap W_2 = \{{\bf 0}\}$.
+\end{itemize}
+
+Another way of expressing this is to say that every vector in $V$ can be written {\it uniquely} as a sum of i) a vector in $W_1$ and ii) a vector in $W_2$. If $V$ is a direct sum of $W_1$ and $W_2$, we write $V = W_1\oplus W_2$. 
+\vskip.2in
+
+
+A similar description applies more generally to an $m$-fold direct sum: $V$ is a direct sum of subspaces $W_i$, $1\le i\le m$ if
+\begin{itemize}
+\item Every ${\bf v}\in V$ can be written as ${\bf v} = \sum_{i=1}^m{\bf w}_i$ for ${\bf w}_i\in W_i$;
+\item $W_1\cap (W_2\oplus W_3\oplus\dots \oplus W_n) = \{{\bf 0}\}$.
+\end{itemize}
+
+If such is the case, we write either $V = \bigoplus_{i=1}^m W_i$, or $V = W_1\oplus W_2\oplus\dots \oplus W_m$. 
+
+\begin{exercise} Show that if $\{{\bf u}_1,\dots, {\bf u}_m\}$ is a linearly independent set of vectors in $W_1$, $\{{\bf v}_1,\dots, {\bf v}_n\}$ a linearly independent set of vectors in $W_2$, and $W_i\subset V$ with $W_1\cap W_2 = \{{\bf 0}\}$, then $\{{\bf u}_1,\dots, {\bf u}_m,{\bf v}_1,\dots, {\bf v}_n\}$ is linearly independent.
+\end{exercise}
+\vskip.2in
+
+\begin{exercise} Suppose $W$ is a subspace of $R^n$ (equipped with its standard inner product). Show that $\mathbb R^n = W\oplus W^{\perp}$
+\end{exercise}
+
+Direct sum decomposition applies just as well to subspaces of $\mathbb R^n$. Define $E(A)\subset\mathbb R^n$ to be the supspace of $\mathbb R^n$ spanned by the eigenvectors of $A$ (this may or may not be all of $\mathbb R^n$). As we have seen, the number of distinct possible eigenvalues of $A$ is at most $n$ when $A$ is an $n\times n$ matrix. In particular, it is finite.
+
+\begin{theorem} Given a real $n\times n$ matrix $A$, let $\lambda_1,\dots,\lambda_m$ be the distinct real eigenvalues of $A$. Then 
+\[
+E(A) = E_{\lambda_1}(A)\oplus E_{\lambda_2}(A)\oplus\dots\oplus E_{\lambda_m}(A)
+\]
+\end{theorem}
+
+\begin{proof} For $m=1$ the statement is trivially true. So suppose that $m=2$, and ${\bf v}\in E_{\lambda_1}(A)\cap E_{\lambda_2}(A)$ with $\lambda_1\ne \lambda_2$. Then
+\[
+A*{\bf v} = \lambda_1{\bf v} = \lambda_2{\bf v}
+\]
+implying $(\lambda_1 - \lambda_2){\bf v} = {\bf 0}$. As $\lambda_1 - \lambda_2\ne 0$, this implies ${\bf v} = {\bf 0}$.
+\vskip.2in
+
+Inductively we can assume that the span of the union of the eigenspaces $\{E_{\lambda_i}(A)\}_{i=2}^m$ is the direct sum of these subspaces.  We wish to show that $E_{\lambda_1}(A)\cap (E_{\lambda_2}(A)\oplus\dots\oplus E_{\lambda_m}(A)) = {\bf 0}$. So let ${\bf v}_1\in E_{\lambda_1}(A)\cap (E_{\lambda_2}(A)\oplus\dots\oplus E_{\lambda_m}(A))$. Then 
+\[
+{\bf v}_1 = {\bf v}_2 + {\bf v}_3 +\dots + {\bf v}_m
+\]
+where $A*{\bf v}_i = \lambda_i{\bf v}_i, 1\le i\le m$. Multiplying the above equality on the left by $A$ gives
+\[
+\lambda_1({\bf v}_2 + {\bf v}_3 +\dots + {\bf v}_m) = \lambda_1{\bf v}_1 = A*{\bf v}_1 = A*({\bf v}_2 + {\bf v}_3 +\dots + {\bf v}_m) = \lambda_2{\bf v}_2 + \lambda_3{\bf v}_3 +\dots + \lambda_m{\bf v}_m
+\]
+Subtracting gives
+\[
+(\lambda_1 - \lambda_2){\bf v}_2 + (\lambda_1 - \lambda_3){\bf v}_3 +\dots + (\lambda_1 - \lambda_m){\bf v}_m = {\bf 0}
+\]
+As the eigenvalues are distinct, the coefficient $(\lambda_1 - \lambda_i)$ is non-zero for each $2\le i\le m$. Then
+\[
+{\bf v}_i = \left(\frac{-1}{(\lambda_1 - \lambda_i)}\right)\Big((\lambda_1 - \lambda_2){\bf v}_2  (\lambda_1 - \lambda_3){\bf v}_3 \dots + (\lambda_1 - \lambda_{i-1}){\bf v}_{i-1} + (\lambda_1 -\lambda_{i+1}){\bf v}_{i+1}\dots +(\lambda_1 - \lambda_m){\bf v}_m\Big)
+\]
+Induction allows us to assume
+\[
+E_{\lambda_i}(A)\cap\left(E_{\lambda_2}(A)\oplus E_{\lambda_3}(A)\oplus\dots\oplus E_{\lambda_{i-1}}(A)\oplus E_{\lambda_{i+1}}(A)\oplus\dots\oplus E_{\lambda_m}(A)\right) = {\bf 0}
+\]
+which together with the last equation implies ${\bf v}_i = {\bf 0}$ for all $2\le i\le m$. As ${\bf v}_1 = \sum_{i=2}^m {\bf v}_i$ we conclude finally that ${\bf v}_1 = {\bf 0}$. Since ${\bf v}_1$ was taken to be an arbitrary element of $E_{\lambda_1}(A)\cap (E_{\lambda_2}(A)\oplus\dots\oplus E_{\lambda_m}(A))$ this shows the intersection must be zero, completing the proof.
+\end{proof}
+
+In the case $E(A) = \mathbb R^n$, this yields a direct sum decomposition of $\mathbb R^n$ into eigenspaces of $A$, which is a very useful thing to know (in the cases it occurs). We investigate this question next.
+\vskip.3in
+
+\end{document}
