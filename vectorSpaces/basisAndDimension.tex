@@ -1,0 +1,57 @@
+\documentclass{ximera}
+\input{../preamble.tex}
+\title{Bases and dimension}
+\author{Crichton Ogle}
+
+\begin{document}
+\begin{abstract}
+  A basis is a collection of vectors which consists of enough vectors
+  to span the space, but few enough vectors that they remain linearly
+  independent.
+\end{abstract}
+\maketitle
+
+A set of vectors $S = \{{\bf v}_1,\dots, {\bf v}_n\}\subset V$ is a
+{\it basis} for $V$ if
+\begin{itemize}
+\item it spans $V$ and
+\item it is linearly independent.
+\end{itemize}
+
+\vskip.2in
+
+{\bf\underbar{Fundamental Properties}}
+
+\begin{description}
+\item[B1] $S = \{{\bf v}_1,\dots, {\bf v}_n\}\subset V$ is a basis for $V$ iff it is a minimal spanning set for $V$.
+\item[B2] Every non-zero vector space $V$ admits a basis.
+\item[B3] (finite case) If $S = \{{\bf v}_1,\dots, {\bf v}_n\}$ and $T = \{{\bf w}_1,\dots, {\bf w}_m\}$ are two bases for $V$, then $m=n$.
+\end{description}
+\vskip.2in
+
+{\bf\underbar{Proof of B1}}\, Suppose $S$ is a basis for $V$. Then it certainly spans $V$. If it were not a minimal spanning set, it would mean there is a vector ${\bf v}_0\in S$ which is in the span of $S\backslash\{{\bf v}_0\}$, which in turn would mean that ${\bf v}_0$ could be written as a linear combination of vectors in $S\backslash\{{\bf v}_0\}$. Thus the original set $S$ would not be vectorwise independent, which by the above exercise is a contradiction. Hence it must be minimal.
+\vskip.1in
+In the other direction, suppose it is a minimal spanning set. If it were not linearly independent, then by the same exercise it would not be vectorwise independent, so there would exist some vector ${\bf v}_1\in S$ which could be written as a linear combination of the other vectors in $S$. Then $Span(S) = Span(S\backslash\{{\bf v}_1\}$, contradicting the fact that $S$ is minimal. Hence $S$ not only spans but must also be linearly independent.\hfill$\square$
+\vskip.2in
+
+{\bf\underbar{Proof of B2}}\, Given the first property, there are two different ways one can go about constructing a basis. We present both. Note: they do require familiarity with the operations of union and intersection for sets.
+\vskip.05in
+
+\underbar{Method 1} Let $T_s = \{S\subset V\ |\ V = Span(S)\}$. We can partially order $T_s$ by defining $S\le S'$ if $S'\subset S$. Every chain is clearly bounded above as a set by $\empty$ (even though the bound is not an element of $T_s$). Choose a totally ordered subset of $T_s$; by Zorn's Lemma it contains a maximal element $S_m\in T_s$. Maximality with respect to this total ordering means $S_m$ is a minimal spanning set, hence a basis by {\bf B1}.
+\vskip.05in
+
+\underbar{Method 2} Let $T_l = \{S\subset V\ |\ S\ \text{is linearly independent}\}$, and partially order $T_l$ by $S\le S'$ iff $S\subset S'$. Again, every chain has an upper bound $S=V$ (which again will not be in $T_l$). Choose a totally ordered subset of $T_l$ and let $S_l$ be a maximal element, implying it is a maximal linearly independent subset of $V$, hence a basis.
+\vskip.2in
+
+The third property will require a bit more work; its proof will be deferred until later. It is stated above in the case that both $S$ and $T$ have a finite set of vectors, but it is true more generally. For an arbitrary set $S$, let $\# S$ denote the {\it number of elements of} $S$ (this number, which can be infinite, is referred to as the {\it cardinality} of $S$). In full generality, property {\bf B3} states
+\vskip.1in
+
+{\bf B3} (general case) If $V$ is a non-zero vector space, and $S,T$ are two bases for $V$, then $\#S = \# T$.
+\vskip.2in
+
+\begin{definition} If $V$ is a non-zero vector space, the \underbar{dimension} of $V$ is the number of vectors in a basis for $V$: $Dim(V) := \# S$ where $S$ is a basis for $V$ (If $V = \{{\bf 0}\}$ we set $Dim(V) := 0$).
+\end{definition}
+
+Property B3 indicates that the dimension of a (non-zero) vector space $V$ doesn't depend on the choice of basis for $V$; it only depends on $V$. The dimension of a vector space is the single most important numerical invariant one can attach to that space.
+
+\end{document}

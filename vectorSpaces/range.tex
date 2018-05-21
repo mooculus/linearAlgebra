@@ -1,0 +1,40 @@
+\documentclass{ximera}
+\input{../preamble.tex}
+\title{Range}
+\author{Crichton Ogle}
+
+\begin{document}
+\begin{abstract}
+  Another subspace associated to a matrix is its range.
+\end{abstract}
+\maketitle
+
+Let $A$ be as above. Then the {\it codomain} or {\it range} of $A$ (viewed as a linear transformation, defined below) is
+\[
+Range(A) := \{{\bf b}\in\mathbb R^m\ |\ A*{\bf x} = {\bf b}\ \text{ is consistent}\}\subseteq \mathbb R^m
+\]
+
+In analogy to the nullspace, we have
+
+\begin{lemma} For any real $m\times n$ matrix $A$, $Range(A)$ is a subspace of $\mathbb R^m$.
+\end{lemma}
+
+\begin{proof} Again, we first note that ${\bf 0}\in Range(A)$, as $A*{\bf 0} = {\bf 0}$. As for the closure axioms,
+\vskip.1in
+
+{\bf\underbar{C1}} Suppose ${\bf v}, {\bf w}\in Range(A)$. Choose ${\bf x},{\bf y}\in\mathbb R^n$ satsifying $A*{\bf x} = {\bf v}, A*{\bf y} = {\bf w}$. Then
+\[
+A*({\bf x} + {\bf y}) = A*{\bf x} + A*{\bf y} = {\bf v} + {\bf w}
+\]
+implying $Range(A)$ is closed under addition.
+\vskip.1in
+
+{\bf\underbar{C2}} Suppose $\alpha\in\mathbb R$ and $A*{\bf x} = {\bf v}\in Range(A)$. Then
+\[
+A*(\alpha{\bf x}) = \alpha(A*{\bf x}) = \alpha{\bf v} 
+\]
+implying $N(A)$ is closed under scalar multiplication.
+\end{proof}
+
+\end{document}
+

@@ -1,0 +1,57 @@
+\documentclass{ximera}
+\input{../preamble.tex}
+\title{Linear combinations and linear independence}
+\author{Crichton Ogle}
+
+\begin{document}
+\begin{abstract}
+  A linear combination is a sum of scalar multiples of vectors.
+\end{abstract}
+\maketitle
+
+The operation of forming linear combinations of vectors is at the heart of Linear Algebra; it is, arguably, the central construct of the entire subject. And yet, it is relatively straightforward to describe.
+\vskip.2in
+
+\begin{definition} Let $(V,+,\cdot)$ be a vector space, and ${\bf v}_1,\dots, {\bf v}_n\in V$ a collection of $n$ vectors in $V$. Then a {\it linear combination} of ${\bf v}_1,\dots,{\bf v}_n$ is a sum of scalar multiples of these vectors; in other words, a sum of the form
+\begin{equation}
+\alpha_1{\bf v}_1 + \alpha_2{\bf v}_2 +\dots + \alpha_n{\bf v}_n
+\end{equation}
+for some choice of scalars $\alpha_1,\alpha_2,\dots,\alpha_n$. A vector ${\bf v}$ is a linear combination of ${\bf v}_1,\dots,{\bf v}_n$ if it can be written in this form. 
+\end{definition}
+
+\begin{example} Suppose ${\bf v}_1 = [1\ 0\ 0]^T, {\bf v}_2 = [0\ 1\ 0]^T\in\mathbb R^3$ (we have written these column vectors as transposed row vectors). Then ${\bf v} = [2\ 5\ 0]^T = 2{\bf v}_1 + 5{\bf v}_2$, so ${\bf v}$ is a linear combination of ${\bf v}_1,{\bf v}_2$. On the other hand, ${\bf w} = [0\ 0\ 1]^T$ is {\it not} a linear combination of ${\bf v}_1,{\bf v}_2$, since the $(3,1)$-entry of ${\bf w}$ is non-zero, while any linear combination of ${\bf v}_1,{\bf v}_2$ would have a $(3,1)$-entry equal to $0$, regardless of the choice of scalars for coefficients.
+\end{example}
+
+In general, given vectors ${\bf v}_1,{\bf v}_2,\dots,{\bf v}_n$, it can be quite difficult to determine simply by inspection whether or not some other vector ${\bf v}$ is or is not a linear combination of the given collection. One of our goals, discussed in detail below, will be to establish some systematic way of answering this question.
+
+\begin{definition} A collection of vectors ${\bf v}_1,\dots,{\bf v}_n$ is {\it linearly independent} if
+\begin{equation}
+\alpha_1{\bf v}_1 + \alpha_2{\bf v}_2 +\dots + \alpha_n{\bf v}_n = {\bf z}\qquad \boldsymbol{\Longleftrightarrow}\qquad \alpha_1 = \alpha_2 = \dots = \alpha_n = 0
+\end{equation}
+In other words, the only linear combination of the vectors that produces the zero vector is the {\it trivial} combination, where each coefficient $\alpha_i = 0$.
+\end{definition}
+
+Call $\{{\bf v}_1,\dots,{\bf v}_n\}$ {\it vectorwise independent} if no vector in the set can be written as a linear combination of the remaining vectors in the set. The following lemma records the equivalence of these two concepts.
+
+
+\begin{lemma} A collection of vectors $\{{\bf v}_1,\dots,{\bf v}_n\}$ is linearly independent iff it is vectorwise independent.
+\end{lemma}
+
+\begin{proof} Suppose $\alpha_1{\bf v}_1 + \alpha_2{\bf v}_2 +\dots + \alpha_n{\bf v}_n = {\bf z}$ is a linear combination of $\{{\bf v}_1,\dots,{\bf v}_n\}$ equalling the zero vector. If $\alpha_i\ne 0$ for some $1\le i\le n$, then this linear relation may be rewritten as
+\[
+{\bf v}_i = \frac{-\alpha_1}{\alpha_i}{\bf v}_1 + \frac{-\alpha_2}{\alpha_i}{\bf v}_2 +\dots + \frac{-\alpha_{i-1}}{\alpha_i}{\bf v}_{i-1} + \frac{-\alpha_{i+1}}{\alpha_i}{\bf v}_{i+1}+\dots + \frac{-\alpha_n}{\alpha_i}{\bf v}_n 
+\]
+from which we see that linear dependence implies the set is not vectorwise independent, or (via the contrapositive), (vectorwise independence)$\Rightarrow$(linear independence). On the other hand, suppose the vectors are vectorwise dependent. Thus there must exist an index $i$ and scalars $\beta_j, j\ne i$ such that
+\[
+{\bf v}_i = \beta_1{\bf v}_1 + \beta_2{\bf v}_2 +\dots + \beta_{i-1}{\bf v}_{i-1} + \beta_{i+1}{\bf v}_{i+1}+\dots + \beta_n{\bf v}_n 
+\]
+or, equivalently
+\[
+{\bf z} = \beta_1{\bf v}_1 + \beta_2{\bf v}_2 +\dots + \beta_{i-1}{\bf v}_{i-1} - {\bf v}_i + \beta_{i+1}{\bf v}_{i+1}+\dots + \beta_n{\bf v}_n 
+\]
+from which we see that (vectorwise dependence)$\Rightarrow$(linear dependence) or, again by contraposition, (linear independence)$\Rightarrow$(vectorwise independence).
+\end{proof}
+\vskip.3in
+
+\end{document}
+

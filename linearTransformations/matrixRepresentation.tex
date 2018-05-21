@@ -1,0 +1,57 @@
+\documentclass{ximera}
+\input{../preamble.tex}
+\title{Matrix representations of transformations}
+\author{Crichton Ogle}
+
+\begin{document}
+\begin{abstract}
+  A linear transformation can be represented by a matrix.
+\end{abstract}
+\maketitle
+
+Suppose $V = \mathbb R^n, W = \mathbb R^m$, and $L_A:V\to W$ is given by 
+\[
+L_A({\bf v}) = A*{\bf v}
+\]
+for some $m\times n$ real matrix $A$. Then it follows immediately from the properties of matrix algebra that $L_A$ is a linear transformation. Conversely, suppose the linear transformation $L$ is given. If we define a matrix by
+\[
+A_L = [L({\bf e}_1)\ L({\bf e}_2)\ \dots L({\bf e}_n)]
+\]
+that is, the $m\times n$ matrix with $A(:,i) = L({\bf e}_i),\, 1\le i\le n$. Then by construction
+\[
+A_L*({\bf e}_i) = A(:,i) = L({\bf e}_i),\, 1\le i\le n
+\]
+so that ${\bf v}\mapsto L({\bf v})$ and ${\bf v}\mapsto A_L*{\bf v}$ are two linear transformations which agree on a basis for $\mathbb R^n$, which by the previous corollary implies
+\[
+L({\bf v}) = A_L*({\bf v})\qquad \forall{\bf v}\in \mathbb R^n
+\]
+Because of this, the matrix $A_L$ is referred to as a {\it matrix representation} of $L$. Note that this representation is with respecto to the standard basis for $\mathbb R^n$ and $\mathbb R^m$.
+\vskip.2in
+
+We see now that the same type of representation applies for arbitrary vector spaces {\it once a basis has been fixed for both the domain and target}. Thus, given
+\begin{itemize}
+\item A vector space $V$ with basis $S = \{{\bf v}_1,\dots,{\bf v}_n\}$,
+\item a vector space $W$ with basis $T = \{{\bf w}_1,\dots,{\bf w}_m\}$, and
+\item a linear transformation $L:V\to W$
+\end{itemize} 
+we could ask if there is a similar reprensentation of $L$ in terms of a matrix (which depends on these two choices of bases). The answer is given by
+
+\begin{theorem}\label{thm:matrep} For any ${\bf v}\in V$
+\[
+{}_TL({\bf v}) = {}_TL_S*{}_S{\bf v}
+\]
+where ${}_SL_T$ is the $m\times n$ matrix defined  by
+\[
+{}_TL_S = [{}_TL({\bf v}_1)\ {}_TL({\bf v}_2)\ \dots\ {}_TL({\bf v}_n)]
+\]
+\end{theorem}
+
+\begin{proof} Again by the above corollary it suffices to verify the equality for basis vectors. But ${}_S{\bf v}_i$ is the $n\times 1$ coordinate vector identical to the basis vector ${\bf e}_i$ for $\mathbb R^n$. From this we get
+\[
+{}_TL({\bf v}_i) = {}_TL_S(:,i) = {}_TL_S*{}_S{\bf v}_i,\qquad 1\le i\le n
+\]
+completing the proof.
+\end{proof}
+\vskip.3in
+
+\end{document}

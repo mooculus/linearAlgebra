@@ -1,0 +1,81 @@
+\documentclass{ximera}
+\input{../preamble.tex}
+\title{Spanning sets}
+\author{Crichton Ogle}
+
+\begin{document}
+\begin{abstract}
+  A collection of vectors spans a set if every vector in the set can
+  be expressed as a linear combination of the vectors in the
+  collection.
+\end{abstract}
+\maketitle
+
+If $S = \{{\bf v}_1,\dots, {\bf v}_n\}\subset V$ is a (finite) collection of vectors in a vector space $V$, then the {\it span} of $S$ is the set of all linear combinations of the vectors in $S$. That is
+\[
+Span(S) := \{\alpha_1{\bf v}_1 + \alpha_2{\bf v}_2 +\dots +\alpha_n{\bf v}_n\ |\ \alpha_i\in\mathbb R\}
+\] 
+
+\begin{remark} If $S = \{{\bf v}_i\ |\ i\in\mathbb N\}$ is a countably infinite set of vectors, then the (linear, algebraic) span of the vectors is defined to be
+\[
+Span\{{\bf v}_i\ |\ i\in\mathbb N\} := \left\{\sum_i\alpha_i{\bf v}_i\ |\ \text{all but finitely many of the }\alpha_i\text{ are zero}\right\}
+\]
+the definition can be extended to arbitrarily large sets of vectors using a slightly different method of extension. Thus, if $S\subseteq V$ is an arbitrary set of vectors in $V$, then
+\[
+Span(S) := \underset{T\text{ finite}}{\underset{T\subseteq S}{\bigcup}} Span(T)
+\]
+\end{remark}
+
+\begin{definition} If $V$ is a vector space, and $S$ a set of vectors in $V$, then we say that $S$ is a {\it spanning set} for $V$ if $V = Span(S)$.
+\end{definition}
+
+\begin{exercise} Show that for any (non-empty) set of vectors $S\subset V$, $Span(S)$ is a subset of $V$ (in other words, it is closed under the addition and scalar multiplication operations coming from $V$). Your argument should work for general sets $S$ without any assumptions on cardinality.
+\end{exercise}
+
+In fact, something stronger is true.
+
+\begin{theorem} If $S$ is a non-empty subset of vectors in a vector space $V$, then $Span(S)$ is a subspace of $V$.
+\end{theorem}
+
+\begin{proof} Assume first that $S$ is finite; then $S = \{ {\bf v}_1,\dots,{\bf v}_n\}$ for some collection of vectors $\{{\bf v}\}_i\in V$, $n\ge 1$. To show that $Span(S)$ is a subspace, it suffices to show three things: i) it contains the zero vector, ii) it is closed under vector addition, and iii) it is closed under scalar multiplication.
+\begin{itemize}
+\item ${\bf z} = 0{\bf v}_1$, so ${\bf z}\in Span(S)$. In other words, the zero vector can be written as a linear ``combination" of a single vector in $S$ (a linear combination of one vector amounts to a scalar multiple of that vector).
+\item {\bf\underbar{C1}} Suppose ${\bf v}, {\bf w}\in Span(S)$. Then there must exist scalars $\alpha_i, \beta_j\in \mathbb R$ such that
+\[
+{\bf v} = \alpha_1{\bf v}_1 +\dots \alpha_n{\bf v}_n,\qquad {\bf w} = \beta_1{\bf w}_1+\dots \beta_n{\bf w}_n
+\]
+then
+\[
+{\bf v} + {\bf w} = (\alpha_1 + \beta_1){\bf v}_1 + (\alpha_2 + \beta_2){\bf v}_2 +\dots + (\alpha_n+\beta_n){\bf v_n}\in Span(S)
+\]
+implying $Span(S)$ is closed under vector addition.
+\item {\bf\underbar{C2}} For ${\bf v}$ as above and $\alpha\in\mathbb R$,
+\[
+\alpha{\bf v} = \alpha(\alpha_1{\bf v}_1 + \dots + \alpha_n{\bf v}_n) = (\alpha\alpha_1){\bf v}_1 + \dots (\alpha\alpha_n){\bf v}_n\in Span(S)
+\]
+Hence $Span(S)$ is closed under scalar multiplication.
+\end{itemize}
+
+Suppose now that $S$ is an infinite set. The first property is verified the same way, by choosing any vector ${\bf v}_1\in S$ and taking the scalar product with $0$. For the second property, for any ${\bf v},{\bf w}\in Span(S)$, there must be some finite set $T\subset S$ satisfying the property that ${\bf v}, {\bf w}\in Span(T)$. But then by the above argument we have that ${\bf v}+ {\bf w}\in Span(T)\subset Span(S)$, verifying the closure axiom (C1). Finally, for the same $\bf v$ and finite set $T\subset S$ with ${\bf v}\in Span(T)$, and scalar $\alpha\in\mathbb R$, the above argument shows that $\alpha{\bf v}\in Span(T)\subset Span(S)$, verifying the second closure axiom (C2). So the necessary properties have been verified, and we may conclude that $Span(S)$ is a subspace for any non-empty subset $S\subset V$, as claimed.
+
+\end{proof}
+
+
+
+
+\begin{lemma} Every vector space $V$ has a spanning set.
+\end{lemma}
+
+\begin{proof} Because we allow spanning sets to be arbitrarily large, we can take $S = V$ and observe that $V = Span(V)$ for trivial reasons.
+\end{proof}
+
+This lemma suggests that spanning sets are not only not unique, they can have vastly different sizes. For example, $\mathbb R^2$ is spanned by $\{{\bf e}_1, {\bf e}_2\}$. It is also spanned by the set $\mathbb R^2$ itself, which is much larger. It is natural to ask how small a spanning set can be. This leads to
+
+\begin{definition} $S$ is a {\it minimal spanning set} for $V$ if
+\begin{itemize} 
+\item $V = Span(S)$, and
+\item For any proper subset $T\subsetneq S$, $Span(T)\subsetneq V$.
+\end{itemize}
+\end{definition}
+
+\end{document}

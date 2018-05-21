@@ -1,0 +1,39 @@
+\documentclass{ximera}
+\input{../preamble.tex}
+\title{Nullspaces}
+\author{Crichton Ogle}
+
+\begin{document}
+\begin{abstract}
+  Minimal spanning sets play a very important role in the study of
+  vector spaces, and are discussed in greater detail below.
+\end{abstract}
+\maketitle
+
+If $A$ is an $m\times n$ matrix with entries in $\mathbb R$, the {\it nullspace of A} is the set
+\[
+N(A) := \{{\bf x}\in\mathbb R^n\ |\ A*{\bf x} = {\bf 0}\}\subset \mathbb R^n
+\]
+In other words, $N(A)$ is the set of all solutions to the homogeneous matrix equation $A*{\bf x} = {\bf 0}$.
+
+\begin{lemma} For any $m\times n$ matrix $A$ with entries in $\mathbb R$, $N(A)$ is a subspace of $\mathbb R^n$.
+\end{lemma}
+
+\begin{proof} Note that ${\bf 0}\in N(A)$. So we need to show that $N(A)$ satisfies the two closure axioms.
+\vskip.1in
+
+{\bf\underbar{C1}} Suppose ${\bf v}, {\bf w}\in N(A)$. Then
+\[
+A*({\bf v} + {\bf w}) = A*{\bf v} + A*{\bf w} = {\bf 0} + {\bf 0} = {\bf 0}
+\]
+Hence $N(A)$ is closed under addition.
+\vskip.1in
+
+{\bf\underbar{C2}} Suppose $\alpha\in\mathbb R$ and ${\bf v}\in N(A)$. Then
+\[
+A*(\alpha{\bf v}) = \alpha(A*{\bf v}) = \alpha{\bf 0} = {\bf 0} 
+\]
+Hence $N(A)$ is closed under scalar multiplication. This completes the proof.
+\end{proof}
+
+\end{document}

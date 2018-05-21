@@ -1,0 +1,138 @@
+\documentclass{ximera}
+\input{../preamble.tex}
+\title{Definition of a vector space}
+\author{Crichton Ogle}
+
+\begin{document}
+\begin{abstract}
+  A vector space is a set equipped with two operations, vector
+  addition and scalar multiplication, satisfying certain properties.
+\end{abstract}
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{definition} A {\it vector space} is a set $V$ equipped with two operations - vector addition \lq\lq$+$\rq\rq\ and scalar multiplication \lq\lq$\cdot$\rq\rq - which satisfy the closure axioms for $V$:
+\begin{description}
+\item[C1] (Closure under vector addition) Given ${\bf v}, {\bf w}\in V$, ${\bf v} + {\bf w}\in V$.
+\item[C2] (Closure under scalar multiplication) Given ${\bf v}\in V$ and a scalar $\alpha$, $\alpha{\bf v}\in V$.
+\end{description}
+together with the eight {\it vector space axioms} [A1] - [A8].
+\end{definition}
+
+In this way, a vector space should properly be represented as a triple $(V,+,\cdot)$, to emphasize the fact that the algebraic structure depends not just on the underlying set of vectors, but on the choice of operations representing addition and scalar multiplication.
+\vskip.2in
+
+\begin{example} Let $V = \mathbb R^{m\times n}$, the space of $m\times n$ matrices, with addition given by matrix addition and scalar multiplication as defined for matrices. Then $(\mathbb R^{m\times n},+,\cdot)$ is a vector space. Again, as with $\mathbb R^n$, the closure axioms are seen to be satisfied as a direct consequence of the definitions, while the other properties follow from Theorem \ref{thm:matalg} together with direct construction of the $m\times n$ \lq\lq zero vector\rq\rq\ $0^{m\times n}$, as well as additive inverses as indicated in [A4].
+\end{example}
+
+Before proceeding to other examples, we need to discuss an important point regarding how theorems about vector spaces are typically proven. In any system of mathematics, one operates with a certain set of assumptions, called {\it axioms}, together with various results previously proven (possibly in other areas of mathematics) and which one is allowed to assume true without further verification.
+\vskip.2in
+
+In the case of {\it vector spaces over $\mathbb R$} (i.e. where the scalars are real numbers), the standing assumption is that the above list of ten properties hold for the real numbers. The fastidious reader will note that this was already assumed in the proof of Theorem \ref{thm:matalg}; in fact the proof of that theorem would have been impossible without such an assumption. To illustrate how this foundational assumption applies in a different context, we consider the space
+\[
+F[a,b] = \ \text{the space of real-valued functions on the closed interval }[a,b]
+\]
+Recall that i) a function is completely determined by the values it takes on the elements of its domain, and therefore ii) two functions $f, g$ are {\it equal} iff they have the same domain and $f(x) = g(x)$ for all elements $x$ in their common domain. So in order to show two functions $f$ and $g$ on the closed interval $[a,b]$ are equal, it suffices to verify that $f(c) = g(c)$ for all $a\le c\le b$.
+\vskip.2in
+
+Next recall that the sum of two functions is given by
+\[
+(f+g)(x) := f(x) + g(x)
+\]
+while the scalar multiple $\alpha f$ of the function $f$ is given by
+\[
+(\alpha f)(x) := \alpha(f(x))
+\]
+
+\begin{theorem} Equipped with addition and scalar multiplication as just defined, $(F[a,b],+,\cdot)$ is a vector space.
+\end{theorem}
+
+
+\begin{proof} One begins by verifying the two closure axioms. If $f,g\in F[a,b]$, they are real-valued functions with common domain $[a,b]$; hence their sum is defined by the above equation, and has the same domain, making $f+g$ a function in $F[a,b]$. Similarly, if $f\in F[a,b]$ and $\alpha\in\mathbb R$, then multiplying $f$ by $\alpha$ leaves the domain unchanged, so $\alpha f\in F[a,b]$.
+\vskip.2in
+The eight vector space axioms [A1] - [A8] are of two types. The third and fourth are {\it existential} - they assert the existence of the zero element and additive inverses, respectively. To verify these, one simply has to produce the candidate satisfying the requisite properties. The remaining six are {\it universal}. They involve statements which hold for all collections of vectors for which the given equality makes sense. We will verify each of the eight axioms in detail. This example, then, can be used as a template for how to proceed in other cases with verification that a proposed candidate vector space is in fact one. 
+\vskip.2in
+
+[A1]: For all $f,g\in F[a,b]$ and $x\in [a,b]$,
+\begin{align*}
+(f+g)(x) &= f(x) + g(x)\quad\text{by definition of addition for functions}\\
+             &= g(x) + f(x)\quad\text{by commutativity of addition for real numbers}\\
+             &=(g+f)(x)\quad\text{by definition of addition for real numbers}
+\end{align*}
+\vskip.2in
+
+[A2]: For all $f,g,h\in F[a,b]$ and $x\in [a,b]$,
+\begin{align*}
+((f+g)+h)(x) &= (f+g)(x) + h(x)\quad\text{by definition of addition for functions}\\
+                     &= (f(x) + g(x)) + h(x)\quad\text{by definition of addition for functions}\\
+                     &=f(x) + (g(x)) + h(x))\quad\text{by associativity of addition for real numbers}\\
+                     &=f(x) + (g+h)(x)\quad\text{by definition of addition for functions}\\
+                     &= (f+(g+h))(x)\quad\text{by definition of addition for functions}
+\end{align*}
+\vskip.2in
+
+[A3]: Define $z\in F[a,b]$ by $z(x) = 0, a\le x\le b$. Then for all $f\in F[a,b]$ and $x\in [a,b]$, 
+\begin{align*}
+(z+f)(x) &= z(x) + f(x)\quad\text{by definition of addition for functions}\\
+             &= 0 + f(x)\quad\text{by definition of $z$}\\
+             &= f(x)\quad\text{by the defining property of $0\in\mathbb R$}\\
+             &= f(x) + 0\quad\text{by the defining property of $0\in\mathbb R$}\\
+             &= f(x) + z(x)\quad\text{by definition of $z$}\\
+             &= (f + z)(x)\quad\text{by definition of addition for functions}
+\end{align*}
+\vskip.2in
+
+[A4]: For each $f\in F[a,b]$, define $(-f)(x) := -(f(x))$ (note the different placement of parentheses on the two sides of the equation). Then for all $f\in F[a,b]$ and $x\in [a,b]$, 
+\begin{align*}
+(f + (-f))(x) &= f(x) + (-f)(x)\quad\text{by definition of addition for functions}\\
+             &= f(x) + (-f(x))\quad\text{by definition of $(-f)$}\\
+             &= 0\quad\text{by the property of additive inverses in $\mathbb R$}\\
+             &= z(x)\quad\text{by the definition of $z\in F[a,b]$}\\
+             &= 0\quad\text{by the definition of $z\in F[a,b]$}\\
+             &= -f(x) + f(x)\quad\text{by the property of additive inverses in $\mathbb R$}\\
+             &= ((-f) + f)(x)\quad\text{by definition of addition for functions}
+\end{align*}
+\vskip.2in
+
+[A5]: For all $f,g\in F[a,b]$ and $\alpha, x\in [a,b]$,
+\begin{align*}
+(\alpha (f+g))(x) &= \alpha((f+g)(x))\quad\text{by definition of scalar multiplication for functions}\\
+             &= \alpha(f(x) + g(x))\quad\text{by definition of addition for functions}\\
+             &= \alpha f(x) + \alpha g(x)\quad\text{by distributivity of multiplication over addition in $\mathbb R$}\\
+             &= (\alpha f)(x) + (\alpha g)(x)\quad\text{by definition of scalar multiplication for functions}\\
+             &= ((\alpha f) + (\alpha g))(x)\quad\text{by definition of addition for functions}
+\end{align*}
+\vskip.2in
+
+[A6]: For all $f\in F[a,b]$ and $\alpha,\beta, x\in [a,b]$,
+\begin{align*}
+((\alpha +\beta)f)(x) &= (\alpha +\beta)f(x)\quad\text{by definition of scalar multiplication for functions}\\
+             &= \alpha f(x) + \beta f(x)\quad\text{by distributivity of multiplication over addition in $\mathbb R$}\\
+             &= (\alpha f)(x) + (\beta f)(x)\quad\text{by definition of scalar multiplication for functions}\\
+             &= ((\alpha f) + (\beta f))(x)\quad\text{by definition of addition for functions}
+\end{align*}
+\vskip.2in
+
+[A7]: For all $f\in F[a,b]$ and $\alpha,\beta, x\in [a,b]$,
+\begin{align*}
+((\alpha \beta)f)(x) &= (\alpha \beta)f(x)\quad\text{by definition of scalar multiplication for functions}\\
+             &= \alpha(\beta f(x))\quad\text{by associativity of multiplication in $\mathbb R$}\\
+             &= \alpha ((\beta f)(x))\quad\text{by definition of scalar multiplication for functions}\\
+             &= (\alpha(\beta f))(x)\quad\text{by definition of scalar multiplication for functions}
+\end{align*}
+\vskip.2in
+
+[A8]: For all $f\in F[a,b]$ and $x\in [a,b]$,
+\begin{align*}
+(1\cdot f)(x) &= 1\cdot f(x)\quad\text{by definition of scalar multiplication for functions}\\
+                     &= f(x)\quad\text{by the multiplicative property of $1\in\mathbb R$}
+\end{align*}
+\end{proof}
+\vskip.2in
+
+\begin{exercise} Show that $(\mathbb R^{m\times n}, +,\cdot)$ is a vector space, where \lq\lq +\rq\rq\ denotes matrix addition, and \lq\lq$\cdot$\rq\rq\ denotes scalar multiplication for matrices (hint: use the results of Theorem \ref{thm:matalg}).
+\end{exercise}
+\vskip.3in
+
+\end{document}

@@ -1,0 +1,39 @@
+\documentclass{ximera}
+\input{../preamble.tex}
+\title{Definition}
+\author{Crichton Ogle}
+
+\begin{document}
+\begin{abstract}
+  A linear transformation is a function between vector spaces preserving the structure of the vector spaces.
+\end{abstract}
+\maketitle
+
+Suppose $V$ and $W$ are vector spaces (of arbitrary dimension). A {\it function} $f:V\to W$ is (as we recall) a rule which associates to each ${\bf v}\in V$ a unique vector $f({\bf v})\in W$. We will call such a function a {\it linear transformation} if it commutes with the linear sturucture in the domain and range:
+
+\begin{eqnarray*}
+f({\bf v} + {\bf w}) = f({\bf v}) + f({\bf w})\qquad\forall {\bf v,w}\in V\\
+f(\alpha{\bf v}) = \alpha f({\bf v})\qquad\qquad\forall \alpha\in\mathbb R, {\bf v}\in V
+\end{eqnarray*}
+
+In other words, $f$ takes sums to sums and scalar products to scalar products. These two properties can be combined into one, using linear combinations. Precisely, $f$ is a linear transformation if
+
+\begin{equation}
+f(\alpha{\bf v} + \beta{\bf w}) = \alpha f({\bf v}) + \beta f({\bf w})\qquad\forall \alpha,\beta\in\mathbb R, {\bf v}, {\bf w}\in V
+\end{equation}
+
+\begin{exercise} Show that $f$ is a linear transformation iff
+\[
+f(\alpha_1{\bf v}_1 +\dots \alpha_n{\bf v}_n) = \alpha_1 f({\bf v}_1) +\dots \alpha_n f({\bf v}_n)\qquad\forall \alpha_i\in\mathbb R, {\bf v}_i\in V
+\]
+\end{exercise}
+
+As a consequence of this exercise, we have
+
+\begin{corollary} If $f: V\to W$ is a linear transformation, then it is uniquely determined by its values on a basis for $V$. Conversely, if $S := \{{\bf v}_1,\dots {\bf v}_n\}$ is a basis for $V$ and $g:S\to W$ is a function from the set $S$ to $W$, then $g$ extends uniquely to a linear transformation $f:V\to W$ with $f({\bf v}_i) = g({\bf v}_i), 1\le i\le n$. Thus, if $f_1, f_2:V\to W$ are two linear transformations which agree on a basis for $V$, then $f_1 = f_2$.
+\end{corollary}
+
+We will often denote a linear transformation between two vector spaces by the letter $L$, when wanting to emphasize its linear nature.
+\vskip.3in
+
+\end{document}

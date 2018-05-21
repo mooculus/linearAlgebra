@@ -1,0 +1,35 @@
+\documentclass{ximera}
+\input{../preamble.tex}
+\title{Vector spaces of linear transformations}
+\author{Crichton Ogle}
+
+\begin{document}
+\begin{abstract}
+  The collection of all linear transformations between given vector
+  spaces itself forms a vector space.
+\end{abstract}
+\maketitle
+
+Suppose $f$ and $g$ are linear transformations from $V$ to $W$.  Then the function
+\[
+  f + g : V \to W
+\]
+defined by the rule which sends $v \in V$ to $f(v) + g(v)$ is also a
+linear transformation.
+
+Similarly, if $f : V \to W$ is linear and $\alpha$ is a scalar, then
+the function
+\[
+  \lambda f : V \to W
+\]
+defined by the rule $(\lambda f)(v) = \lambda f(v)$ is also a linear
+transformation.
+
+\begin{theorem} Suppose $V$ and $W$ are vector spaces.  The collection
+  of linear transformations from $V$ to $W$ forms a vector space under
+  the above operations.
+\end{theorem}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
