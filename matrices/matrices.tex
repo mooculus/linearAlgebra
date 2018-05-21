@@ -1,0 +1,18 @@
+\documentclass{ximera}
+\input{../preamble.tex}
+\title{Matrices}
+\author{Crichton Ogle}
+
+\begin{document}
+\begin{abstract}
+  A matrix is a rectangular array whose entries are of the same type.
+\end{abstract}
+\maketitle
+
+We begin by recalling some notation and terminology regarding matrices. A {\it matrix} will mean a rectangular array whose entries are of the same type. Thus, we could have an array of real numbers, complex numbers, functions, or even matrices. An {\it $m\times n$ matrix} will refer to one which has $m$ rows and $n$ columns, and the {\it collection of all $m\times n$ matrices of real numbers} will be denoted by $\mathbb R^{m\times n}$. We adopt the convention, used by MATLAB, in which the $(i,j)^{th}\ entry$ of the matrix $A$ (that in row $i$ and column $j$) is denoted by $A(i,j)$. Also, following MATLAB notation, we will write the $i^{th}$ row as $A(i,:)$, and the $j^{th}$ column as $A(:,j)$. Before getting to the operations themselves, we first record
+
+\begin{definition} Two matrices $A$ and $B$ are {\it equal} if $A(i,j) = B(i,j)$ for all $i,j$.
+\end{definition}
+Note that this equality forces $A$ and $B$ to have the same dimensions, because if they had different dimensions, there would have to be a choice of indices $(i,j)$ for which one side of the equation exists, but the other does not. Thus, equality can be reformulated as saying: $A$ and $B$ have the same dimensions, and the same entry in each place.
+
+\end{document}
