@@ -1,0 +1,42 @@
+\documentclass{ximera}
+\input{../preamble.tex}
+\title{Orthogonal vectors and subspaces in $\mathbb R^n$}
+\author{Crichton Ogle}
+
+\begin{document}
+\begin{abstract}
+\end{abstract}
+\maketitle
+
+The concept of orthogonality is dependent on the choice of inner product. So assume first that we are working with the standard dot product in $\mathbb R^n$. We say two vectors $\bf v$, $\bf w$ are {\it orthogonal} if they are non-zero and ${\bf v}\cdot{\bf w} = 0$; we indicate this by writing ${\bf v}\perp {\bf w}$. Orthogonality with respect to this standard inner product corresponds to our usual notion of {\it perpendicular} (as we shall see below). More generally, a collection of non-zero vectors $\{{\bf v}_i\}$ is said to be orthogonal if they are pairwise orthogonal; in other words, ${\bf v}_i\cdot{\bf v}_j = 0$ for all $i\ne j$.
+\vskip.2in
+
+The notion of orthogonality extends to subspaces. Thus if $V,W\subset\mathbb R^n$ are two non-zero subspaces, we say $V$ and $W$ are {\it orthogonal} ($V\perp W$) if ${\bf v}\cdot{\bf w} = 0\,\,\forall{\bf v}\in V, {\bf w}\in W$. As with a collection of vectors, a collection of subspaces $\{V_i\}$ is orthogonal iff it is pairwise orthogonal: $V_i\perp V_j\,\,\forall i\ne j$.
+\vskip.2in
+
+\begin{example} Let $V = Span\{[2\,\, 3]^T\}, W = Span\{[ 3\,\, (-2)]^T\}\subset \mathbb R^2$. Then it is easy to check that $V$ and $W$ are orthogonal (geometrically, they are represented by two lines in $\mathbb R^2$ passing through the origin and forming a $90^\circ$ angle between them).
+\end{example}
+\vskip.2in
+
+If $W\subset\mathbb R^n$ is a subspace, its {\it orthogonal complement} is given by $W^\perp := \{{\bf v}\in\mathbb R^n\ |\ {\bf v}\cdot{\bf w} = 0\,\forall {\bf w}\in W\}$. $W^\perp$ is the largest subspace of $\mathbb R^n$ for which every non-zero vector in the subspace is orthogonal to every non-zero vector in $W$.
+\vskip.2in
+
+\begin{exercise} Show that for any subspace $W$, $W = \left(W^\perp\right)^\perp$.
+\end{exercise}
+\vskip.2in
+Orthogonality is connected to the property of linear independence.
+
+\begin{lemma} If $\{{\bf v}_1,\dots,{\bf v}_m\}$ is an orthogonal set of vectors in $\mathbb R^n$, then it is linearly independent.
+\end{lemma}
+
+\begin{proof} Suppose there exist scalars $\alpha_i$ with $\alpha_1{\bf v}_1 +\dots \alpha_m{\bf v}_m = {\bf 0}$. Then for each $i$ one has
+\[
+{\bf 0} = {\bf v}_i\cdot{\bf 0} = {\bf v}_i\cdot (\alpha_1{\bf v}_1 +\dots \alpha_m{\bf v}_m) = \alpha_i({\bf v}_i\cdot{\bf v}_i)
+\]
+which implies $\alpha_i=0$ as ${\bf v}_i\cdot{\bf v}_i = \|{\bf v}_i\|^2 > 0$.
+\end{proof}
+\vskip.2in
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}

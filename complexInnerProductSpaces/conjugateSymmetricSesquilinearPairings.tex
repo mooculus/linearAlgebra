@@ -1,0 +1,51 @@
+\documentclass{ximera}
+\input{../preamble.tex}
+\title{Conjugate-symmetric sesquilinear pairings on $\mathbb C^n$, and their representation}
+\author{Crichton Ogle}
+
+\begin{document}
+\begin{abstract}
+\end{abstract}
+\maketitle
+
+The complex scalar product defined in the previous section is a specific example of a {\it sesquilinear, conjugate-symmetric pairing}. We consider these properties in sequence.
+\vskip.2in
+
+A {\it sesquilinear pairing} on $\mathbb C^n$ is a map $P:\mathbb C^n\times\mathbb C^n\to \mathbb C$ which satisfies property (HIP2), namely it is linear in the first variable and conjugate linear in the second\footnote{this is the standard convention in mathematical literature. Many physics texts, however, reverse this, making the first variable conjugate linear instead.}. A {\it conjugate-symmetric sesquilinear pairing} is a sesquilinear pairing that also satisfies (HIP1). These pairings admit a matrix representation as in the real case discussed above. Again, we assume we are looking at coordinate vectors with respect to the standard basis for $\mathbb C^n$.
+\vskip.2in
+
+Before stating the result, we need to record
+
+\begin{definition} For a complex matrix $A$, the {\it conjugate-transpose of $A$} is $A^* = \ov{A}^T$; $A^*(i,j) = \ov{A(j,i)}$. An $n\times n$ complex matrix is {\it Hermitian} if $A^* = A$.
+\end{definition}
+
+\begin{theorem}\label{thm:matrepcomp} For any sesquilinear pairing $P$ on $\mathbb C^n$, there is a unique $n\times n$ matrix $A_P$ such that
+\[
+P({\bf v},{\bf w}) = \ov{\bf w}^T*A_P*{\bf v} = {\bf w}^**A_P*{\bf v}
+\]
+Moreover, if $P$ is conjugate-symmetric then $A_P$ is Hermitian. Conversely, any $n\times n$ matrix $A$, determines a unique sesquilinear pairing $P_A$ on $\mathbb R^n$ by
+\[
+P_A({\bf v}, {\bf w}) = \ov{\bf w}^T*A*{\bf v} = {\bf w}^**A_P*{\bf v}
+\]
+which is conjugate-symmetric precisely when $A$ is Hermitian.
+\end{theorem}
+
+\begin{proof} The proof is essentially the same as in the real case, with some minor modifications. $P$ is uniquely characterized by its values on ordered pairs of basis vectors; moreover two bilinear pairings $P, P'$ are equal precisely if $P({\bf e}_i,{\bf e}_j) = P'({\bf e}_i,{\bf e}_j)$ for all pairs $1\le i,j\le n$ . So define $A_P$ be the $n\times n$ matrix with $(i,j)^{th}$ entry given by
+\[
+A_P(j,i) := P({\bf e}_i,{\bf e}_j),\quad 1\le i,j\le n
+\]
+By construction, the pairing $({\bf v},{\bf w})\mapsto \ov{\bf w}^T*A_P*{\bf v}$ is sesquilinear, and agrees with $P$ on ordered pairs of basis vectors. Thus the two agree everywhere. This establishes a 1-1 correspondence (sesquilinear pairings on $\mathbb C^n$) $\Leftrightarrow$ ($n\times n$ complex matrices). By construction, the matrix $A_P$ will be conjugate-symmetric  iff $P^T = \ov{P}$, or equivalently if $P$ is Hermitian. Thus this correspondence restricts to a 1-1 correspondence (conjugate-symmetric sesquilinear pairings on $\mathbb C^n$) $\Leftrightarrow$ ($n\times n$ Hermitian matrices).
+\end{proof}
+
+\begin{definition} A {\it Hermitian inner product} on $\mathbb C^n$ is a conjugate-symmetric sesquilinear pairing $P$ that is also positive definite:
+\[
+P({\bf v}, {\bf v})\ge 0;\quad P({\bf v}, {\bf v}) = 0\,\text{ iff } {\bf v} = {\bf 0}
+\]
+\end{definition}
+
+In other words, it also satisfies property (HIP3). As in the real case, proper understanding of this last property will require a discussion of eigenspaces and diagonalizability for symmetric - and more generally Hermitian - matrices.
+\vskip.3in
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}

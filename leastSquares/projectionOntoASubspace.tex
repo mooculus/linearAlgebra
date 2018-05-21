@@ -1,0 +1,27 @@
+\documentclass{ximera}
+\input{../preamble.tex}
+\title{Projection onto a subspace}
+\author{Crichton Ogle}
+
+\begin{document}
+\begin{abstract}
+\end{abstract}
+\maketitle
+
+The corollary stated at the end of the previous section indicates an alternative, and more computationally efficient method of computing the projection of a vector onto a subspace $W$ of $\mathbb R^n$. Previously we had to first establish an orthogonal basis for $W$. But given any basis $\{{\bf v}_1,\dots,{\bf v}_m\}$ for $W$, we can avoid first orthogonalizing the basis by
+
+\begin{itemize}
+\item Concatenating the basis vectors to form the matrix $A$ with $A(:,i) = {\bf v}_i,1\le i\le m$,
+\item then for any vector ${\bf v}\in\mathbb R^n$, computing the projection of $\bf v$ onto $W = C(A)$ as
+\[
+pr_W({\bf v}) = A*(A^T*A)^{-1}*A^T*{\bf v}
+\]
+\end{itemize}
+
+\begin{exercise} If $A$ has maximal rank, verify that $B = A*(A^T*A)^{-1}*A^T$ satisfies the identity $B*B = B$ (a matrix satisfying such an identity is called a {\it projection matrix}, since the linear transformation it defines on $\mathbb R^n$ corresponds exactly to projection onto its range $C(B)$).
+\end{exercise}
+\vskip.2in
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}

@@ -1,0 +1,91 @@
+\documentclass{ximera}
+\input{../preamble.tex}
+\title{The dot product in $\mathbb R^n$}
+\author{Crichton Ogle}
+
+\begin{document}
+\begin{abstract}
+\end{abstract}
+\maketitle
+
+onsider $\mathbb R^n$ equipped with its standard basis (so that vectors in $\mathbb R^n$ are canonically identified with their $n\times 1$ coordinate representations). Then given ${\bf v} = [v_1\ v_2\ \dots\ v_n], {\bf w} = [w_1\ w_2\ \dots\ w_n]^T\in\mathbb R^n$, their {\it dot product} (also referred to as {\it scalar product}) is given by
+\[
+{\bf v}\cdot{\bf w} := {\bf v}^T*{\bf w} = \sum_{i=1}^n v_iw_i
+\]
+
+This operation on pairs of vectors satisfies three basic properties
+
+\begin{description}
+\item[(IP1)] It is symmetric:
+\[
+{\bf v}\cdot {\bf w} = {\bf w}\cdot {\bf v}
+\]
+\item[(IP2)] It is bilinear:
+\begin{gather*}
+(\alpha_1{\bf v}_1 + \alpha_2{\bf v}_2)\cdot {\bf w} = \alpha_1{\bf v}_1\cdot{\bf w} + \alpha_2{\bf v}_2\cdot{\bf w}\\
+{\bf v}\cdot (\beta_1{\bf w}_1 + \beta_2{\bf w}_2) = \beta_1{\bf v}\cdot{\bf w}_1 + \beta_2{\bf v}\cdot{\bf w}_2
+\end{gather*}
+\item[(IP3)] It is positive non-degenerate:
+\[
+{\bf v}\cdot {\bf v}\ge 0;\quad {\bf v}\cdot {\bf v} = 0\,\text{ iff } {\bf v} = {\bf 0}
+\]
+\end{description}
+\vskip.2in
+
+Note that the standard {\it Euclidean norm} of $\bf v$  (also referred to as the $\ell^2$-norm) is closely related to the dot product; precisely
+\begin{equation}
+\|{\bf v}\| = \|{\bf v}\|_2 = \sqrt{v_1^2 + v_2^2 +\dots v_n^2} = ({\bf v}\cdot {\bf v})^{\frac12}
+\end{equation}
+
+Its essential features are
+
+\begin{enumerate}
+\item[(N1)] It is positive definite:
+\[
+\|{\bf v}\|\ge 0;\quad \|{\bf v}\| = 0 \text{ iff } {\bf v} = 0
+\]
+\item[(N2)] It satisfies the triangle inequality (for norms):
+\[
+\|{\bf v} + {\bf w}\|\le \|{\bf v}\| + \|{\bf w}\|
+\]
+\end{enumerate}
+\vskip.2in
+
+This is the norm used in $\mathbb R^n$ to define the standard Euclidean {\it metric}, which is the conventional way to measure the distance between two vectors:
+\begin{equation}
+d({\bf v},{\bf w}) := \|{\bf v} - {\bf w}\|_2
+\end{equation}
+
+Again, this distance function - or metric - satisfies three basic properties, which are direct consequences of the ones above.
+
+\begin{enumerate}
+\item[(M1)] It is symmetric:
+\[
+d({\bf v},{\bf w}) = d({\bf w},{\bf v})
+\]
+\item[(M2)] It is positive non-degenerate:
+\[
+d({\bf v},{\bf w})\ge 0\,\,\forall {\bf v}, {\bf w}\in\mathbb R^n;\text{ moreover } d({\bf v},{\bf w}) = 0\,\text{ iff } {\bf v} = {\bf w}
+\]
+\item[(M3]) It satisfies the triangle inequality (for metrics):
+\[
+d({\bf u},{\bf w})\le d({\bf u},{\bf v}) + d({\bf v},{\bf w})\quad\forall {\bf u}, {\bf v}, {\bf w}\in\mathbb R^n
+\]
+\end{enumerate}
+\vskip.2in
+
+So the i) dot product, ii) Euclidean norm, and iii) Euclidean distance are all closely related. In fact, any one of them determines the other two. Obviously, the dot product determines the norm, and the norm determines the distance. But also one has
+
+\begin{itemize}
+\item the equality
+\[
+{\bf v}\cdot {\bf w} = \frac12(\|{\bf v} + {\bf w}\|^2 - \|{\bf v}\|^2 - \|{\bf w}\|^2)
+\]
+so that one can also recover the dot product from the norm;
+\item $\|{\bf v}\| = d({\bf v}, {\bf 0})$, so $d(_-,_-)$ and $\|_-\|$ determine each other.
+\end{itemize}
+\vskip.3in
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}

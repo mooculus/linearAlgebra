@@ -1,0 +1,71 @@
+\documentclass{ximera}
+\input{../preamble.tex}
+\title{Gram-Schmidt orthogonalization}
+\author{Crichton Ogle}
+
+\begin{document}
+\begin{abstract}
+\end{abstract}
+\maketitle
+
+We know that every non-zero vector space admits a basis. It is natural then to ask: {\it does every non-zero inner product space admit an orthogonal basis}? The answer is: yes, it does. In fact, given a basis for an inner product space, there is a systematic way to convert it into an orthogonal basis. And this method simultaneously provides a method for projecting a vector onto a subspace. Again, we discuss the procedure first for $\mathbb R^n$ equipped with its standard scalar product, then show how this naturally extends to more general inner product spaces.
+\vskip.2in
+
+
+Let $\{{\bf v}_1,{\bf v}_2,\dots,{\bf v}_n\}$ be a basis for $\mathbb R^n$. We will give an inductive procedure for constructing an orthogonal basis for $\mathbb R^n$ from this original set.
+\vskip.2in
+
+First, some notation. Let $W_i := Span\{{\bf v}_1,\dots,{\bf v}_i\}$ be the span of the first $i$ vectors in the set. Since any subset of linearly independent vectors is linearly independent, we see that $Dim(W_i) = i, 1\le i\le n$, with $W_n = \mathbb R^n$.
+\vskip.2in
+
+Now $\{{\bf v}_1\}$ is an orthogonal basis for $W_1$, since it has only one element. We set ${\bf u}_1 = {\bf v}_1$, and consider the vector ${\bf v}_2$. This need not be orthogonal to ${\bf v}_1$, but it cannot be simply a scalar multiple of ${\bf v}_1$ either, since that would imply that the set $\{{\bf v}_1, {\bf v}_2\}$ was linearly dependent, contradicting what we know.
+\vskip.2in
+
+So we define
+\[
+{\bf u}_2 := {\bf v}_2 - pr_{W_1}({\bf v}_2)
+\]
+
+As we have just observed, ${\bf u}_2\ne {\bf 0}$.
+
+\begin{exercise} Compute the dot product ${\bf u}_1\cdot{\bf u}_2$, and confirm it is zero. Also, verify that $Span(\{{\bf u}_1,{\bf u}_2\}) = Span(\{{\bf v}_1,{\bf v}_2\})$. Conclude that $\{{\bf u}_1,{\bf u}_2\}$ is an orthonormal basis for $W_2$.
+\end{exercise}
+\vskip.2in
+
+We now suppose that we have constructed an orthogonal basis $\{{\bf u}_1,\dots,{\bf u}_m\}$ for $W_m$. We need to show how to this can be extended to $W_{m+1}$ if $m<n$. First, for ${\bf v}\in\mathbb R^n$, we define the projection of ${\bf v}$ onto $W_m$ to be
+\[
+pr_{W_m}({\bf v}) := \sum_{i=1}^m \left(\frac{{\bf u}_i\cdot {\bf v}}{{\bf u}_i\cdot{\bf u}_i}\right){\bf u}_i\in W_m
+\]
+
+Again, if ${\bf v}\notin W_m$, then ${\bf v}\ne pr_{W_m}({\bf v})$ and so their difference will not be zero. As abov, we then set
+\[
+{\bf u}_{m+1} = {\bf v}_{m+1} - pr_{W_m}({\bf v}_{m+1})
+\]
+The same arguments used in the previous exercise show
+
+\begin{proposition} If $m < n$, then $\{{\bf u}_1,\dots,{\bf u}_m,{\bf u}_{m+1}\}$ is an orthogonal basis for $W_{m+1}$.
+\end{proposition}
+
+Continuing in this fashion, we eventually reach the case $m=n$ at which point the algorithm is complete. Note that this procedure depends not only on the basis but also on the {\it order} in which we list the basis elements - changing the order will (most of the time) result in a different orthogonal basis for $\mathbb R^n$. Note also that this procedure works just as well if we start with a subspace of $\mathbb R^n$, together with a basis for that subspace. Summarizing
+
+\begin{theorem} For any subspace $W$ of $\mathbb R^n$ and basis $S = \{{\bf v}_1,\dots,{\bf v}_m\}$ for that subspace, the Gram-Schmidt algorithm produces an orthogonal basis $\{{\bf u}_1,\dots,{\bf u}_m\}$ for $W$, which depends only on the ordering of the initial basis elements in $S$. Given this orthogonal basis for $W$ and an arbitrary vector ${\bf v}\in\mathbb R^n$, the projection of $\bf v$ onto $W$, or the $W$-component of $\bf v$ is given by
+\[
+pr_W({\bf v}) := \sum_{i=1}^m \left(\frac{{\bf u}_i\cdot {\bf v}}{{\bf u}_i\cdot{\bf u}_i}\right){\bf u}_i
+\]
+\end{theorem}
+
+The reason for calling this projection the $W$-component of $\bf v$ is more or less clear, since the equation
+\[
+{\bf v} = pr_W({\bf v}) + ({\bf v} - pr_W({\bf v}))
+\]
+decomposes $\bf v$ as a sum of i) its component in $W$, and ii) its component in $W^\perp$. As we have seen above, $\mathbb R^n = W\oplus W^\perp$, so this sum decomposition of $\bf v$ is {\it unique}. In other words,
+
+\begin{corollary} For any non-zero subspace $W\subset\mathbb R^n$, $pr_W({\bf v})$ is the unique vector in $W$ for which the difference ${\bf v} - pr_W({\bf v})$ lies in $W^\perp$.
+\end{corollary}
+
+As we are about to see,  this is equivalent to saying that it is the vector in $W$ {\it closest} to $\bf v$, where distance is in terms of the standard Euclidean distance for $\mathbb R^n$ based on the scalar product.
+\vskip.3in
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}

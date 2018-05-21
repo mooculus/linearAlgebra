@@ -1,0 +1,35 @@
+\documentclass{ximera}
+\input{../preamble.tex}
+\title{Least-squares approximations}
+\author{Crichton Ogle}
+
+\begin{document}
+\begin{abstract}
+\end{abstract}
+\maketitle
+
+The setup is as before: we are given a subspace $W\subset\mathbb R^n$ and a vector ${\bf v}\in\mathbb R^n$. The questions are then:
+\begin{itemize}
+\item[(LS1)] Is there a vector ${\bf w}_{\bf v}\in W$ satisfying the property that $\|{\bf w}_{\bf v} - {\bf v}\|\le \|{\bf w} - {\bf v}\|$ for all ${\bf w}\in W$?
+\item[(LS2)] If such a vector exists, is it unique?
+\end{itemize}
+
+As one might imagine from the previous section, the answer is ``yes". More precisely, the vector in $W$ we are looking for is exactly the projection of $\bf v$ onto $W$:
+
+\begin{proposition} ${\bf w}_{\bf v} = pr_W({\bf v})$.
+\end{proposition}
+
+\begin{proof} Write ${\bf v} - pr_W({\bf v})$ as ${\bf w}_m$. Let ${\bf w}\in W$ be an arbitrary vector, and let ${\bf w}_p := pr_W({\bf v}) - {\bf w}$. Then ${\bf w}_m\cdot{\bf w}_p = 0$, so one has
+\[
+\|{\bf v} - {\bf w}\|^2 = \|{\bf w}_m + {\bf w}_p\|^2 = ({\bf w}_m + {\bf w}_p)\cdot ({\bf w}_m + {\bf w}_p) = {\bf w}_m\cdot{\bf w}_m + {\bf w}_p\cdot{\bf w}_p = \|{\bf w}_m\|^2 + \|{\bf w}_p\|^2\ge \|{\bf w}_m\|^2
+\]
+This shows that the projection satisfies (LS1). However we have already shown that the projection of $\bf v$ onto $W$ is unique, so (LS2) follows as well.
+\end{proof}
+\vskip.2in
+
+The vector ${\bf v}_m = pr_W({\bf v})$ is referred to as {\it the least-squares approximation of ${\bf v}$ by a vector in $W$}, because $pr_W({\bf v})$ satisfies the property that $\|{\bf v}-pr_W({\bf v})\|^2$, which is computed as a sum of squares of differences in coordinates,  is minimized. This turns out to have an important application to finding the best approximation to a system of equations in the event no actual solution exists. We discuss this next.
+\vskip.3in
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}

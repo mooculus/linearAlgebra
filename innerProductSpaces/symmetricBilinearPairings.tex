@@ -1,0 +1,45 @@
+\documentclass{ximera}
+\input{../preamble.tex}
+\title{Symmetric bilinear pairings on $\mathbb R^n$}
+\author{Crichton Ogle}
+
+\begin{document}
+\begin{abstract}
+\end{abstract}
+\maketitle
+
+The dot product defined in the previous section is a specific example of a {\it bilinear, symmetric pairing}. We consider these properties in sequence.
+\vskip.2in
+
+A {\it bilinear pairing} on $\mathbb R^n$ is a map $P:\mathbb R^n\times\mathbb R^n\to \mathbb R$ which simply satisfies property (IP2). A {\it symmetric bilinear pairing} is a bilinear pairing that also satisfies (IP1). These pairings admit a straightforward matrix representation, not unlike the matrix representation of linear transformations discussed previously. Again, we assume we are looking at coordinate vectors with respect to the standard basis for $\mathbb R^n$.
+
+\begin{theorem}\label{thm:matrep} For any bilinear pairing $P$ on $\mathbb R^n$, there is a unique $n\times n$ matrix $A_P$ such that
+\[
+P({\bf v},{\bf w}) = {\bf v}^T*A_P*{\bf w}
+\]
+Moreover, if $P$ is symmetric then so is $A_P$. Conversely, any $n\times n$ matrix $A$, determines a unique bilinear pairing $P_A$ on $\mathbb R^n$ by
+\[
+P_A({\bf v}, {\bf w}) = {\bf v}^T*A*{\bf w}
+\]
+which is symmetric precisely when $A$ is.
+\end{theorem}
+
+\begin{proof} Because it is bilinear, $P$ is uniquely characterized by its values on ordered pairs of basis vectors; moreover two bilinear pairings $P, P'$ are equal precisely if $P({\bf e}_i,{\bf e}_j) = P'({\bf e}_i,{\bf e}_j)$ for all pairs $1\le i,j\le n$ . So define $A_P$ be the $n\times n$ matrix with $(i,j)^{th}$ entry given by
+\[
+A_P(i,j) := P({\bf e}_i,{\bf e}_j),\quad 1\le i,j\le n
+\]
+By construction, the pairing $({\bf v},{\bf w})\mapsto {\bf v}^T*A_P*{\bf w}$ is bilinear, and agrees with $P$ on ordered pairs of basis vectors. Thus the two agree everywhere. This establishes a 1-1 correspondence (bilinear pairings on $\mathbb R^n$) $\Leftrightarrow$ ($n\times n$ matrices). Again, by construction, the matrix $A_P$ will be symmetric  iff $P$ is. Thus this correspondence restricts to a 1-1 correspondence (symmetric bilinear pairings on $\mathbb R^n$) $\Leftrightarrow$ ($n\times n$ symmetric matrices).
+\end{proof}
+
+\begin{definition} An {\it inner product} on $\mathbb R^n$ is a symmetric bilinear pairing $P$ that is also positive definite:
+\[
+P({\bf v}, {\bf v})\ge 0;\quad P({\bf v}, {\bf v}) = 0\,\text{ iff } {\bf v} = {\bf 0}
+\]
+\end{definition}
+
+In other words, it also satisfies property (IP3). However, unlike properties (IP1) and (IP2), (IP3) is harder to translate into properties of the representing matrix. In fact, this last property will only come into focus after we have covered eigenspaces and diagonalizability for symmetric matrices, which is done below.
+\vskip.3in
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}

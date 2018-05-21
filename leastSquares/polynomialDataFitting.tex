@@ -1,0 +1,123 @@
+\documentclass{ximera}
+\input{../preamble.tex}
+\title{Polynomial data fitting}
+\author{Crichton Ogle}
+
+\begin{document}
+\begin{abstract}
+\end{abstract}
+\maketitle
+
+We suppose given $n$ points $\{(x_1,y_1), (x_2,y_2),\dots,(x_n,y_n)\}$ in the plane $\mathbb R^2$, with distinct $x$-coordinates (in practice, such sets of points can arise as data based on the measurement of some quantity - recorded as the $y$-coordinate - as a function of some parameter recorded as the $x$-coordinate). Then we would like to find the equation of the line that {\it best fits} these points (by exactly what measurement the line represents a best possible fit is explained below). if we write the equation of the line as $y = l(x) = c_0 + c_1x$ for indeterminants $c_0, c_1$, then what we are looking for is a {\it least-squares solution} to the $n\times 2$ system of equations
+\begin{align*}
+c_0 + c_1 x_1 &= y_1\\
+c_0 + c_1 x_2 &= y_2\\
+&\vdots\\
+c_0 + c_1 x_n &= y_n
+\end{align*}
+
+Note that, in this system, the $x_i$ and $y_j$ are constants, and we are trying to solve for $c_0$ and $c_1$. For $n\le 2$ there will be a solution, but in the overdetermined case there almost always fails to be one. Hence the need to work in the least-squares setting.
+\vskip.2in
+
+\begin{example} We wish to find the least-squares fit by a linear equation to the set of points $(2,3), (4,6), (7,10), (9,14)$. This problem can be represented by the matrix equation
+\[
+A1*{\bf c} = {\bf y}
+\]
+Where $A1 = \begin{bmatrix} 1 & 2\\1 & 4\\1 & 7\\1 & 9\end{bmatrix}$, ${\bf c} = \begin{bmatrix}c_0\\c_1\end{bmatrix}$, and ${\bf y} = \begin{bmatrix} 3\\6\\10\\14\end{bmatrix}$. We note that this matrix is full rank. Therefore least-squares solution is unique and given by
+\[
+{\bf c} = (A1^T*A1)^{-1}*A1^T*{\bf y} = \begin{bmatrix}-.18966\\ 1.53448\end{bmatrix}
+\]
+Thus the desired equation is given by
+\[
+l(x) = -.18966 + 1.53448 x
+\]
+We can also measure the degree to which this comes close to being an actual solution (which would only exist if the points were colinear). Given $\bf c$, the vector
+\[
+{\bf y}_1 := A1*{\bf c} = \begin{bmatrix} 2.8793\\ 5.9483\\ 10.5517\\ 13.6207\end{bmatrix}
+\]
+is (by the above) the least-squares approximation to $\bf y$ by a vector in the column space of $A1$ (accurate to 4 decimal places). The accuracy can then be estimated by the distance of this approximation to the original vector $\bf y$:
+\[
+e_1 := \|{\bf y} - {\bf y}_1\| = 0.68229
+\]
+\end{example}
+
+The last computation in this example indicates what is being minimized when one fits data points in this way.
+
+\begin{remark} Using least-squares linear approximation techniques to find the best linear fit to a set of $n$ data points $\{(x_1,y_1), (x_2,y_2),\dots,(x_n,y_n)\}$ results in the equation of a line $l(x) = c_0 + c_1(x)$ which minimizes the sum of the squares of the {\it vertical} distances from the given points to the line:
+\[
+\sum_{i=1}^n (y_i - l(x_i))^2
+\]
+Note that, unless the line is horizontal, the vertical distance will be slightly larger than the {\it actual} distance, which is measured in the direction orthogonal to the line, and minimizing the sum of squares of those distances would correspond geometrically to what one might normally think of as constituting a least-squares fit. However, the computation needed to find the best fit with respect to this sum is quite a bit more involved,. This linear algebraic approach provides a simple and efficient method for finding a good approximation by a line which will be exact whenever the points are colinear.
+\end{remark}
+
+The setup above provides a method for finding not just linear approximations, but higher order ones as well. The linear algebra is essentially the same. To illustrate,
+
+\begin{example} Suppose instead we were asked to find the least-squares fit by a {\it quadratic} equation to the same set set of points $(2,3), (4,6), (7,10), (9,14)$. As before, this problem can be represented by the matrix equation
+\[
+A2*{\bf c} = {\bf y}
+\]
+Where $A2 = \begin{bmatrix} 1 & 2 & 4\\1 & 4 & 16\\1 & 7 & 49\\1 & 9 & 81\end{bmatrix}$, ${\bf c} = \begin{bmatrix}c_0\\c_1\\c_2\end{bmatrix}$, and ${\bf y} = \begin{bmatrix} 3\\6\\10\\14\end{bmatrix}$. We note that the matrix $A_2$ is again full rank (it has rank 3). Therefore least-squares solution is unique and given by
+\[
+{\bf c} = (A2^T*A2)^{-1}*A2^T*{\bf y} = \begin{bmatrix} 0.960345\\ 0.984483\\0.050000\end{bmatrix}
+\]
+Thus the desired equation is given by
+\[
+q(x) = 0.960345 + 0.984483 x + 0.050000 x^2
+\]
+Measuring the degree to which this comes close to being an actual solution (which would only exist if the points all lay on the same quadratic graph), we compute
+\[
+{\bf y}_2 := A2*{\bf c} = \begin{bmatrix} 3.1293\\ 5.6983\\ 10.3017\\ 13.8707\end{bmatrix}
+\]
+is (by the above) the least-squares approximation to $\bf y$ by a vector in the column space of $A2$ (accurate to 4 decimal places). The accuracy can then be estimated by the distance of this approximation to the original vector $\bf y$:
+\[
+e_2 := \|{\bf y} - {\bf y}_2\| = 0.46424
+\]
+As with the linear fit, the quantity being minimized is the sum of squares of vertical distances of the original points to the graph of this quadratic function. Notice the modest improvement; from $0.68229$ to $0.46424$. Because the column space of $A2$ contains the columns space of $A1$, the least-squares approximation ${\bf y}_2$ has to be at least as good as the linear one ${\bf y}_1$, and almost always will be closer to the original vector $\bf y$.
+\end{example}
+
+We will illustrate our final point by looking at what happens if we go one degree higher.
+
+\begin{example} We will find the least-squares fit by a {\it cubic} equation to the same set set of points $(2,3), (4,6), (7,10), (9,14)$. As before, this problem can be represented by the matrix equation
+\[
+A3*{\bf c} = {\bf y}
+\]
+Where $A3 = \begin{bmatrix} 1 & 2 & 4\\1 & 4 & 16\\1 & 7 & 49\\1 & 9 & 81\\8 & 64 & 343 & 729\end{bmatrix}$, ${\bf c} = \begin{bmatrix}c_0\\c_1\\c_2\\c_3\end{bmatrix}$, and ${\bf y} = \begin{bmatrix} 3\\6\\10\\14\end{bmatrix}$. The matrix $A_3$ is still full rank (it has rank 34). Therefore least-squares solution is unique and given by
+\[
+{\bf c} = (A3^T*A3)^{-1}*A3^T*{\bf y} = \begin{bmatrix} -1.6\\ 2.890476\\-0.342857\\0.023810\end{bmatrix}
+\]
+Thus the desired equation is given by
+\[
+f(x) = -1.6 + 2.890476 x + -0.342857 x^2 + 0.023810 x^3
+\]
+However, now when we compute the least-squares approximation we get
+\[
+{\bf y}_3 := A3*{\bf c} = \begin{bmatrix} 3\\ 6\\ 10\\ 14\end{bmatrix}
+\]
+which is not just an approximation but rather the vector $\bf y$ on the nose; $e_3 = 0$.. In other words, given these four points, {\it there is a unique cubic equation which fits the points exactly}. Inspecting the computation more carefully, we see why: the matrix $A3$ is both full rank and {\it square}. In other words, non-singular. In this case the system of equations is no longer over determined but rather balanced. And with a non-singular coefficient matrix, we get a unique solution. Symbolically, this can be seen by noting that the non-singularity of $A3$ results in a simplified expression for $\bf c$, confirming it is indeed an exact solution:
+\[
+{\bf c} = (A3^T*A3)^{-1}*A3^T*{\bf y} = A3^{-1}*(A3^T)^{-1}*A3^T*{\bf y} = A3^{-1}*y
+\]
+\end{example}
+
+This set of examples, in which we compute successively higher order approximations to a set of $n$ data points until we finally arrive at an exact fit, is part of a more general phenomenon, which we record without proof by the following theorem.
+
+\begin{theorem} Given $n$ points in $\mathbb R^2$ with distinct $x$-coordinates $\{(x_1,y_1), (x_2,y_2),\dots,(x_n,y_n)\}$, the least-squares fit by a polynomial of degree $k$ is computed by finding the least-squares solution to the matrix equation
+\[
+A_k*{\bf c} = {\bf y}
+\]
+where ${\bf y} = [y_1\ y_2\ \dots y_n]$ and  $A_k$ is the $n\times (k+1)$ matrix with $A_k(i,j) = x_i^{j-1}$. The matrix $A_k$ will have full column rank for all $k\le (n-1)$, and so the least-squares solution $\bf c$ is unique and given by
+\[
+[c_0\ c_1\ \dots c_k]^T = {\bf c} = (A_k^T*A_k)^{-1}*A_k^T*{\bf y}
+\]
+with degree $k$ polynomial least-squares fit given by
+\[
+p_k(x) = \sum_{i=0}^k c_i x^i
+\]
+Because $A_{n-1}$  is non-singular, there will be a polynomial of degree at most $(n-1)$ which fits the points exactly. Moreover, the polynomial of degree at most $(n-1)$ which accomplishes this will be unique.
+\end{theorem}
+\vskip.3in
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\end{document}

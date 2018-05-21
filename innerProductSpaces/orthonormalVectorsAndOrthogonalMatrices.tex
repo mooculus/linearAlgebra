@@ -1,0 +1,42 @@
+\documentclass{ximera}
+\input{../preamble.tex}
+\title{Orthonormal vectors and orthogonal matrices}
+\author{Crichton Ogle}
+
+\begin{document}
+\begin{abstract}
+\end{abstract}
+\maketitle
+
+An orthogonal set of vectors $\{{\bf u}_1, {\bf u}_2,\dots,{\bf u}_n\}$ is said to be {\it orthonormal} if $\|{\bf u}_i\| = 1, 1\le i\le n$. Clearly, given an orthogonal set of vectors $\{{\bf v}_1, {\bf v}_2,\dots,{\bf v}_n\}$, one can orthonormalize it by setting ${\bf u}_i = {\bf v}_i/\|{\bf v}_i\|$ for each $i$. Orthonormal bases in $\mathbb R^n$ ``look" like the standard basis, up to rotation of some type.
+\vskip.2in
+
+We call an $n\times n$ matrix $A$ {\it orthogonal} if the columns of $A$ form an orthonormal set of vectors\footnote{One might expect such a matrix to be called orthonormal.}.
+
+\begin{exercise} Show that an $n\times n$ matrix $A$ is orthogonal iff $A^T*A = I$.
+\end{exercise}
+
+\begin{lemma} An $n\times n$ matrix $A$ is orthogonal iff
+\[
+{\bf v}\cdot{\bf w} = (A*{\bf v})\cdot (A*{\bf w})
+\]
+for all ${\bf v}, {\bf w}\in\mathbb R^n$.
+\end{lemma}
+
+\begin{proof} By Theorem \ref{thm:matrep}, we see that two matrices $A,B$ satsify the property
+\[
+{\bf v}^T*A^T*A*{\bf w} = (A*{\bf v})\cdot (A*{\bf w}) = (B*{\bf v})\cdot (B*{\bf w}) = {\bf v}^T*B^T*B*{\bf w}\qquad\forall {\bf v}, {\bf w}\in\mathbb R^n
+\]
+iff $A^T*A=B^T*B$. The hypothesis of the lemma can be restated as
+\[
+(A*{\bf v})\cdot (A*{\bf w}) = (I*{\bf v})\cdot (I*{\bf w})\qquad\forall {\bf v}, {\bf w}\in\mathbb R^n
+\]
+implying $A^T*A=I^T*I = I$, which by the previous exercise is equivalent to $A$ being orthogonal.
+\end{proof}
+
+The notion of orthogonality for matrices is a special example of a linear transformation preserving a given inner product, which we will discuss in more detail below.
+\vskip.3in
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}

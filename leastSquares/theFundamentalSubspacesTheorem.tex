@@ -1,0 +1,89 @@
+\documentclass{ximera}
+\input{../preamble.tex}
+\title{Least-squares solutions and the Fundamental Subspaces theorem}
+\author{Crichton Ogle}
+
+\begin{document}
+\begin{abstract}
+\end{abstract}
+\maketitle
+
+Suppose we are given a matrix equation $A*{\bf x} = {\bf b}$ with $\bf x$ a vector variable taking values in $\mathbb R^n$, and $\bf b$ a fixed vector in $\mathbb R^m$ (implying that $A$ is an $m\times n$ matrix). The consistency theorem for systems of equations tells us that the equation is consistent precisely when $\bf b$ is in the span of the columns of $A$, or alternatively, when ${\bf b}\in C(A)$. But what if it is not? In other words, the system is inconsistent? Up until now we have simply left it at that; inconsistency was the end of the story.
+\vskip.2in
+
+But it is not. Because whether or not the original system is consistent, one can always find a solution to the related equation
+\begin{equation}\label{eqn:lss}
+A*{\bf x} = pr_{C(A)}({\bf b})
+\end{equation}
+because the projection $pr_{C(A)}({\bf b})$ of $\bf b$ onto the column space of $A$ will always be in the column space of $A$ regardless of whether or not the original vector $\bf b$ is.
+\vskip.2in
+
+The question then becomes: given that we know (\ref{eqn:lss}) has at least one solution, how do we go about finding it (or them)? The starting point for answering that question is the following theorem, often referred to as the Fundamental Subspaces theorem (originally proven by Gauss)
+
+\begin{theorem}\label{thm:fst} For any $m\times n$ matrix $A$, there are equalities
+\begin{itemize}
+\itemsep.01in
+\item $C(A)^\perp = N(A^T)$
+\item $C(A) = N(A^T)^\perp$
+\item $C(A^T)^\perp = N(A)$
+\item $C(A^T) = N(A)^\perp$
+\end{itemize}
+\end{theorem}
+
+
+\begin{proof} Because the theorem is stated for all matrices, and because $(W^\perp)^\perp = W$ for any subspace $W$, the second, third and fourth statements are consequences of the first, and is suffices to verify that case. To see this, we recall that $C(A)$ is the subspace of $\mathbb R^m$ spanned by the columns of $A$; then ${\bf v}\in C(A)^\perp$ iff $A(:,i)\cdot {\bf v} = 0$ for all $1\le i\le n$ iff $A^T(i,:)*{\bf v} = A(:,i)^T*{\bf v} = 0$ for all $1\le i\le n$ iff ${\bf v}\in N(A^T)$.
+\end{proof}
+\vskip.2in
+
+Write ${\bf b}'$ for $pr_{C(A)}({\bf b})$. Then
+\begin{itemize}
+\itemsep.005in
+\item[] $A*{\bf x} = {\bf b}'$
+\item[$\Leftrightarrow$] $A*{\bf x} -{\bf b}\in C(A)^\perp$ (as ${\bf b}'$ is the unique vector in $C(A)$ with ${\bf b}' - {\bf b}\in C(A)^\perp$)
+\item[$\Leftrightarrow$] $A*{\bf x} -{\bf b}\in N(A^T)$ (by Theorem \ref{thm:fst})
+\item[$\Leftrightarrow$] $ A^T*A*{\bf x} - A^T*{\bf b} = A^T*(A*{\bf x} -{\bf b}) = {\bf 0}$
+\item[$\Leftrightarrow$] $A^T*A*{\bf x} = A^T*{\bf b}$
+\end{itemize}
+\vskip.2in
+
+This last equation $A^T*A*{\bf x} = A^T*{\bf b}$ has the same set of solutions as the equation that started the sequence, namely $A*{\bf x} = {\bf b}'$, and is therefore {\it always consistent}. It is derived from our original equation $A*{\bf x} = {\bf b}$ by simply multiplying both sides on the left by $A^T$, and is often referred to as the {\it associated normal equation} of the original matrix equation from which it was derived.
+\vskip.2in
+
+This yields a straightforward procedure for finding the {\it least-squares solution} to our original equation $A*{\bf x} = {\bf b}$; i.e., a solution to the associated normal equation $A^T*A*{\bf x} = A^T*{\bf b}$, which by the above is equivalent to a solution to the related equation $A*{\bf x} = pr_{C(A)}({\bf b})$. Note that the original equation is consistent precisely when ${\bf b}\in C(A)$, or equivalently when ${\bf b} = pr_{C(A)}({\bf b})$; in other words, when the {\it least-squares solution is an exact solution}. The advantages to seeking a least-squares solution are i) it always exists (regardless of whether or not the original equation is consistent), and ii) it yields an actual solution whenever an actual solutions exist. Because this procedure finds the least-squares solution {\it first}, it can be also applied to finding the least-squares approximation to $\bf b$ as $pr_{C(A)}({\bf b}) = A*{\bf x}$, where $\bf x$ is a least-squares solution to the original equation.
+\vskip.2in
+
+The steps are:
+\begin{itemize}
+\item[(Step 1)] Form the associated normal equation $A^T*A*{\bf x} = A^T*{\bf b}$;
+\item[(Step 2)] find the solution(s) to the normal equation by computing $rref([A^T*A\ |\ A^T*{\bf b}])$. These will be the least-squares solution(s) to the original equation;
+\item[(Step 3)] for any least-squares solution ${\bf x}$ from Step 2, compute $A*{\bf x}$. This will yield the least-squares approximation $pr_{C(A)}({\bf b})$ to $\bf b$ by a vector in the column space of $A$.
+\end{itemize}
+\vskip.2in
+
+Again, there will only be {\it one} least-squares approximation to $\bf b$ by a vector in $C(A)$, because we have already seen such a vector is unique. However, the set of least-squares solutions to the original equation may not be unique. Thus another consequence of this theory is
+
+\begin{corollary} The value of $A*{\bf x}$ remains constant as $\bf x$ ranges over the set of least-squares solutions to the matrix equation $A*{\bf x} = {\bf b}$.
+\end{corollary}
+
+A final question then remains; when will there be a {\it unique} least-squares solution? We say that the matrix $A$ has {\it full column rank} (or just {\it full rank} when there is no confusion) if the columns of $A$ are linearly independent; namely that $rank(A) = n$. If $A$ is $m\times n$, this imposes the constraint that $m\ge n$ (otherwise the rank would have to be less than $n$ the number of columns). A useful fact about the ranks of matrices (which we do not prove here) is
+
+\begin{lemma} For any matrix $A$, $rank(A) = rank(A^T*A)$. In particular, $A$ has full column rank iff $A^T*A$ is non-singular.
+\end{lemma}
+
+As the normal equation is always consistent, we see
+
+\begin{corollary} $A^T*A*{\bf x} = A^T*{\bf b}$ will have a unique solution precisely when $N(A^T*A) = \{{\bf 0}\}$, which happens iff $A^T*A$ is non-singular. In this case, the unique least-squares solution is given by
+\[
+{\bf x} = (A^T*A)^{-1}*A^T*{\bf b}
+\]
+and the least-squares approximation to $\bf b$ by a vector in the column space of $A$ is
+\[
+pr_{C(A)}({\bf b}) = A*{\bf x} = A*(A^T*A)^{-1}*A^T*{\bf b}
+\]
+\end{corollary}
+\vskip.3in
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}

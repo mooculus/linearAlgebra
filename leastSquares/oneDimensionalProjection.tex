@@ -1,0 +1,31 @@
+\documentclass{ximera}
+\input{../preamble.tex}
+\title{Projection onto 1-dimensional subspaces}
+\author{Crichton Ogle}
+
+\begin{document}
+\begin{abstract}
+\end{abstract}
+\maketitle
+
+Suppose $W = Span\{{\bf v}\}$ is a 1-dimensional subspace of $\mathbb R^n$ (so that ${\bf v}\ne {\bf 0}$). Then given ${\bf w}\in\mathbb R^n$, we define the {\it projection of $\bf w$ onto $W$} to be
+\[
+pr_W({\bf w}) := \left(\frac{{\bf v}\cdot {\bf w}}{{\bf v}\cdot{\bf v}}\right) {\bf v}
+\]
+Note that this quantity makes sense, as ${\bf v}\ne {\bf 0}$ implies ${\bf v}\cdot{\bf v} > 0$.
+
+\begin{proposition} The vector $pr_W({\bf w})$ depends only on the vector $\bf w$ and the subspace $W$. In other words, it does not depend on the choice of basis for $W$.
+\end{proposition}
+
+\begin{proof} Any other basis vector for $W$ can be written as $\alpha{\bf v}$ for some $\alpha\ne 0$. Then
+\[
+\left(\frac{\alpha{\bf v}\cdot {\bf w}}{\alpha{\bf v}\cdot\alpha{\bf v}}\right) {\alpha\bf v} = \left(\frac{\alpha^2}{\alpha^2}\right)\left(\frac{{\bf v}\cdot {\bf w}}{{\bf v}\cdot{\bf v}}\right) {\bf v} = \left(\frac{{\bf v}\cdot {\bf w}}{{\bf v}\cdot{\bf v}}\right) {\bf v}
+\]
+\end{proof}
+
+The vector $pr_W({\bf w})$ represents {\it the $W$-component of ${\bf w}$} (in texts, this projection is also referred to as the {\it component of $\bf w$ in the direction of $\bf v$}. We prefer the subspace interpretation, as it makes clear the independence on the choice of basis element).
+\vskip.2in
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}

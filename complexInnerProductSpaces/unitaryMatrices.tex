@@ -1,0 +1,33 @@
+\documentclass{ximera}
+\input{../preamble.tex}
+\title{Unitary matrices}
+\author{Crichton Ogle}
+
+\begin{document}
+\begin{abstract}
+\end{abstract}
+\maketitle
+
+A set of $n$ vectors in $\mathbb C^n$ is {\it orthogonal} if it is so with respect to the standard complex scalar product, and {\it orthonormal} if in addition each vector has norm 1. Similarly, one has the complex analogue of a matrix being orthogonal.
+
+\begin{definition} An $n\times n$ complex matrix $U$ is {\it unitary} if $U^**U = I$, or equivalently if $U^{-1} = U^*$.
+\end{definition}
+
+Just as orthogonal matrices are exactly those that preserve the dot product, we have
+
+\begin{lemma} A complex $n\times n$ matrix is unitary iff
+\[
+{\bf w}^**{\bf v} = {\bf v}\cdot {\bf w} = (U*{\bf v})\cdot (U*{\bf w})\qquad\forall {\bf v},{\bf w}\in\mathbb C^n
+\]
+\end{lemma}
+
+\begin{proof} Essentially the same as in the real case; by Theorem \ref{thm:matrepcomp} of the previous section we see that the hypothesis on $U$ implies $U^**U = I^**I = I$.
+\end{proof}
+
+Unitary matrices are special examples of linear transformations which preserve Hermitian inner products. More on this below.
+\vskip.5in
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}
