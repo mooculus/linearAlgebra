@@ -39,19 +39,19 @@ The operations for matrix algebra satisfy similar properties to those for additi
 \begin{theorem}\label{thm:matalg} Let $A,B,C$ denote matrices, and $\alpha,\beta$ scalars.
 
 \begin{enumerate}
-\item $A+B = B+A$ (commutativity of addition);
-\item $A+(B+C) = (A+B)+C$ (associativity of addition);
+\item\label{thm:matalg:commutativity} $A+B = B+A$ (commutativity of addition);
+\item\label{thm:matalg:assoc-addition} $A+(B+C) = (A+B)+C$ (associativity of addition);
 \item $\alpha(A+B) = \alpha A + \alpha B$ (scalar multiplication distributes over matrix addition);
 \item $A*(B+C) = A*B + A*C$ (matrix multiplication left-distributes over matrix addition);
 \item $(A+B)*C = A*C + B*C$ (matrix multiplication right-distributes over matrix addition);
-\item $(\alpha\beta)A = \alpha(\beta A)$ (associativity of scalar multiplication);
-\item $A*(B*C) = (A*B)*C$ (associativity of matrix multiplication).
+\item\label{thm:matalg:assoc-scalar-multiplication} $(\alpha\beta)A = \alpha(\beta A)$ (associativity of scalar multiplication);
+\item\label{thm:matalg:associativity} $A*(B*C) = (A*B)*C$ (associativity of matrix multiplication).
 \end{enumerate}
 \end{theorem}
 
 This theorem is proven by showing that, in each case, the matrix on the left has the same $(i,j)^{th}$ entry as the one on the right. However, as with any proof, one needs to be clear from the beginning exactly what one is allowed to {\it assume} as being true. In this case, we have i) the definition of what it means for two matrices to be equal, ii) the explicit definition of each operation, and iii) the corresponding properties for addition and multiplication for real numbers (which will be taken as axioms for this proof). To see how this works, let's verify the first equality. 
 
-\begin{proof} (of 3.2.1)
+\begin{proof}[Proof of \ref{thm:matalg:commutativity}]
 \begin{align*}
 (A+B)(i,j) &= A(i,j) + B(i,j)\qquad{\rm by\ the\ definition\ of\ matrix\ addition}\\
                 &= B(i,j) + A(i,j)\qquad{\rm by\ commutativity\ of\ addition\ for\ real\ numbers}\\
@@ -61,7 +61,7 @@ This theorem is proven by showing that, in each case, the matrix on the left has
 
 Notice that the proof consists of a sequence of equalities, beginning with the left-hand side of the equation we wish to verify, and ending with the right-hand side of that equation. Moreover, each equality in the sequence is justified by either a definition, or an axiom. Not all of the equalities are that easy; some may require more steps. To illustrate a more involved proof, we will verify property 7 (probably the most difficult to prove of the properties listed).
 
-\begin{proof} (of 3.2.7) In this proof, $i,j,k,l$ will be used as indices (the reason for using four different indices will become apparent).
+\begin{proof}[Proof of \ref{thm:matalg:associativity}] In this proof, $i,j,k,l$ will be used as indices (the reason for using four different indices will become apparent).
 \begin{alignat*}{3}
 (A*(B*C))(i,l)  =& \sum_j A(i,j)(B*C)(j,l)&&\qquad{\rm by\ the\ definition\ of\ matrix\ multiplication}&\\
                 =& \sum_j A(i,j)\left(\sum_k B(j,k)C(k,l)\right)&&\qquad{\rm by\ the\ definition\ of\ matrix\ multiplication}&\\
@@ -75,7 +75,7 @@ Notice that the proof consists of a sequence of equalities, beginning with the l
 \end{proof}
 \vskip.2in
 
-\begin{exercise} Using the above two proofs as models, prove properties (3.2.2) - (3.2.6).
+\begin{exercise} Using the above two proofs as models, prove properties \ref{thm:matalg:assoc-addition}--\ref{thm:matalg:assoc-scalar-multiplication}.
 \end{exercise}
 
 Before moving on to considering equations, we introduce a few more matrix operations.
