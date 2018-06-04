@@ -1,0 +1,42 @@
+\documentclass{ximera}
+
+\title{Solving $3 \times 3$ systems of linear equations}
+\author{Jim Fowler}
+
+\begin{document}
+
+\begin{sagesilent}
+def random_augmented_matrix(equation_count, variable_count):
+    V = VectorSpace(QQ,variable_count)
+    solution = [ZZ.random_element(-4,5) for _ in range(0,variable_count)]
+
+    result = matrix(QQ,[[0]])
+
+    while result.rank() != equation_count:
+        rows = []
+        for _ in range(0,equation_count):
+            coefficients = [ZZ.random_element(-4,5) for _ in range(0,variable_count)]        
+            rows.append( coefficients + [V(coefficients).inner_product( V(solution) )] )
+        result = MatrixSpace(QQ,equation_count,variable_count + 1)(rows)
+
+    result.subdivide( [], [variable_count] )
+    return result
+
+m = random_augmented_matrix(3,3)
+x = var('x')
+y = var('y')
+z = var('z')
+ax, ay, az = m[0:3,0:3].solve_right( m[0:3,3] )
+\end{sagesilent}
+
+\begin{problem}
+  Consider the system of linear equations:
+  \begin{align*}
+    \sage{m[0,0] * x + m[0,1] * y + m[0,2] * z} &= \sage{m[0,3]}, \\
+    \sage{m[1,0] * x + m[1,1] * y + m[1,2] * z} &= \sage{m[1,3]}, \\
+    \sage{m[2,0] * x + m[2,1] * y + m[2,2] * z} &= \sage{m[2,3]}.
+  \end{align*}
+  Then $x = \answer{\sage{ax}}$ and $y = \answer{\sage{ay}}$ and $z = \answer{\sage{az}}$.
+\end{problem}
+
+\end{document}

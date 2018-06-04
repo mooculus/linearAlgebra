@@ -1,0 +1,45 @@
+\documentclass{ximera}
+
+\title{Row reduction practice}
+\author{Jim Fowler}
+
+\begin{document}
+
+\begin{sagesilent}
+def random_augmented_matrix(equation_count, variable_count):
+    V = VectorSpace(QQ,variable_count)
+    solution = [ZZ.random_element(-4,5) for _ in range(0,variable_count)]
+
+    result = matrix(QQ,[[0]])
+
+    while result.rank() != equation_count:
+        rows = []
+        for _ in range(0,equation_count):
+            coefficients = [ZZ.random_element(-4,5) for _ in range(0,variable_count)]        
+            rows.append( coefficients + [V(coefficients).inner_product( V(solution) )] )
+        result = MatrixSpace(QQ,equation_count,variable_count + 1)(rows)
+
+    result.subdivide( [], [variable_count] )
+    return result
+
+m = random_augmented_matrix(4,4)
+ax, ay, az, aw = m[0:4,0:4].solve_right( m[0:4,4] )
+\end{sagesilent}
+
+\begin{problem}
+  Consider the matrix
+  \[
+    M = \sage{m}.
+  \]
+  Then the reduced row echelon form of $M$ is
+  \[
+    \begin{bmatrix}
+      \answer{1} & \answer{0} & \answer{0} & 0 & \answer{\sage{ax}} \\
+      \answer{0} & \answer{1} & \answer{0} & 0 & \answer{\sage{ay}} \\
+      \answer{0} & \answer{0} & \answer{1} & 0 & \answer{\sage{az}} \\
+      \answer{0} & \answer{0} & \answer{0} & 1 & \answer{\sage{aw}}
+    \end{bmatrix}.
+  \]
+\end{problem}
+
+\end{document}
