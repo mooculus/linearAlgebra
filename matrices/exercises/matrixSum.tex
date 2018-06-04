@@ -1,0 +1,44 @@
+\documentclass{ximera}
+
+\title{Finding the sum of two matrices}
+\author{Jim Fowler}
+
+\begin{document}
+
+\begin{javascript}
+  var a11 = Math.round(Math.random()*4)-2;
+  var a12 = Math.round(Math.random()*4)-2;
+  var a21 = Math.round(Math.random()*4)-2;
+  var a22 = Math.round(Math.random()*4)-2;
+
+  var b11 = Math.round(Math.random()*4)-2;
+  var b12 = Math.round(Math.random()*4)-2;
+  var b21 = Math.round(Math.random()*4)-2;
+  var b22 = Math.round(Math.random()*4)-2;
+
+  var c11 = a11+b11;
+  var c12 = a12+b12;
+  var c21 = a21+b21;
+  var c22 = a22+b22;
+\end{javascript}
+
+\begin{problem}
+  Compute:
+  \[
+    \begin{bmatrix}
+      \js{a11} & \js{a12} \\
+      \js{a21} & \js{a22}
+    \end{bmatrix}
+    +
+    \begin{bmatrix}
+      \js{b11} & \js{b12} \\
+      \js{b21} & \js{b22}
+    \end{bmatrix} =
+    \begin{bmatrix}
+      \answer{\js{c11}} & \answer{\js{c12}} \\
+      \answer{\js{c21}} & \answer{\js{c22}}
+    \end{bmatrix}.    
+  \]
+\end{problem}
+
+\end{document}

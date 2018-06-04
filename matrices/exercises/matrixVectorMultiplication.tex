@@ -1,0 +1,49 @@
+\documentclass{ximera}
+
+\title{Multiply matrices and vectors}
+\author{Jim Fowler}
+
+\begin{document}
+
+\begin{javascript}
+  var a11 = Math.round(Math.random()*4)-2;
+  var a12 = Math.round(Math.random()*4)-2;
+  var a13 = Math.round(Math.random()*4)-2;
+  var a21 = Math.round(Math.random()*4)-2;
+  var a22 = Math.round(Math.random()*4)-2;
+  var a23 = Math.round(Math.random()*4)-2;
+  var a31 = Math.round(Math.random()*4)-2;
+  var a32 = Math.round(Math.random()*4)-2;
+  var a33 = Math.round(Math.random()*4)-2;
+
+  var v1 = Math.round(Math.random()*4)-2;
+  var v2 = Math.round(Math.random()*4)-2;
+  var v3 = Math.round(Math.random()*4)-2;
+
+  var w1 = a11*v1 + a12*v2 + a13*v3;
+  var w2 = a21*v1 + a22*v2 + a23*v3;
+  var w3 = a31*v1 + a32*v2 + a33*v3;
+\end{javascript}
+
+\begin{problem}
+  Compute:
+  \[
+    A = \begin{bmatrix}
+      \js{a11} & \js{a12} & \js{a13} \\
+      \js{a21} & \js{a22} & \js{a23} \\
+      \js{a31} & \js{a32} & \js{a33} \\      
+    \end{bmatrix}
+    \begin{bmatrix}
+      \js{v1} \\
+      \js{v2} \\
+      \js{v3} \\      
+    \end{bmatrix} =
+    \begin{bmatrix}
+      \answer{\js{w1}} \\
+      \answer{\js{w2}} \\
+      \answer{\js{w3}} \\      
+    \end{bmatrix}.    
+  \]
+\end{problem}
+
+\end{document}
