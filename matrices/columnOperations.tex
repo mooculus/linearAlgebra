@@ -46,9 +46,47 @@ P_{ij}^{-1} = P_{ij},&\qquad P_{ij}^T = P_{ij}\\
 D_i(r)^{-1} = D_i(r^{-1}),&\qquad D_i(r)^T = D_i(r)\\
 E_{ij}(a)^{-1} = E_{ij}(-a),&\qquad E_{ij}(a)^T = E_{ji}(a)
 \end{align}
+\vskip.4in
 
-This is useful in problems where one wants to express the inverse of a
-matrix explicitly as a product of elementary matrices.
+Elementary matrices are useful in problems where one wants to express the inverse of a matrix explicitly as a product of elementary matrices. We have already seen that a square matrix $A$ is invertible iff is is row equivalent to the identity matrix. By keeping track of the row operations used and then realizing them in terms of left multiplication by elementary matrices, we can write down a product of matrices ending in $A$ that equals $I$. The product of elementary matrices appearing to the left of $A$ must then be equal to $A^{-1}$. With such an expression for $A^{-1}$ we can also represent $A$ itself as a product of elementray matrices.
+\vskip.2in
+
+\begin{example} Suppose $A = \begin{bmatrix} 2 & 3\\3 & 5\end{bmatrix}$. The following (non-unique) sequence of row operations reduces $A$ to $I$:
+\[\begin{split}
+\begin{bmatrix} 2 & 3\\3 & 5\end{bmatrix}
+\xrightarrow{R_2 := R_2 + (-1)*R_1}
+\begin{bmatrix} 2 & 3\\1 & 2\end{bmatrix}
+\xrightarrow{R_1 := R_1 + (-2)*R_2}
+\begin{bmatrix} 0 & -1\\1 & 2
+\end{bmatrix}\\
+\xrightarrow{R_2 := R_2 + 2*R_1}
+\begin{bmatrix} 0 & -1\\1 & 0
+\end{bmatrix}
+\xrightarrow{R_1\leftrightarrow R_2}\begin{bmatrix} 1 & 0\\0 & -1
+\end{bmatrix}\xrightarrow{(-1)*R_2}\begin{bmatrix} 1 & 0\\0 & 1\end{bmatrix}
+\end{split}
+\]
+Remembering that elementary matrices realize row operations via left-multiplication, transforming the above sequence into a product yields the equation
+\[
+D_2(-1)*P_{12}*E_{21}(2)*E_{12}(-2)*E_{21}(-1)*A = I
+\]
+Setting $B = D_2(-1)*P_{12}*E_{21}(2)*E_{12}(-2)*E_{21}(-1)$, we see that $B*A = I$. But we have already seen that this implies $B = A^{-1}$, the unique inverse of $A$.
+\vskip.2in
+
+Now if we want to also represent $A$ as a product of elementary matrices, we could do so by the sequence of equalities
+\begin{align*}
+A &= \big(A^{-1}\big)^{-1}\\
+  &= \big(D_2(-1)*P_{12}*E_{21}(2)*E_{12}(-2)*E_{21}(-1)\big)^{-1}\\
+  &= E_{21}(-1)^{-1}*E_{12}(-2)^{-1}*E_{21}(2)^{-1}*P_{12}^{-1}*D_2(-1)^{-1}\\
+  &= E_{21}(1)*E_{12}(2)*E_{21}(-2)*P_{12}*D_2(-1)
+\end{align*}
+\end{example}
+\vskip.2in
+
+\begin{exercise} Suppose $B = \begin{bmatrix} 5 & 1\\4 & 2\end{bmatrix}$. Find a sequence of row operations that row reduce $B$ to $I$. Then use this to express both $B^{-1}$ an $B$ as a product of elementary matrices.
+
+\end{exercise}
+
 
 
 
