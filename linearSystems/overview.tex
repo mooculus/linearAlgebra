@@ -44,7 +44,7 @@
 
 \begin{definition}
   A \dfn{system of equations} is a collection of linear equations in the same set of variables, or unknowns
-  \begin{alignat*}{5}\tag{2.2}\label{eqn:sys}
+  \begin{alignat*}{5}\tag{2}\label{eqn:sys}
     a_{11}x_1 &&+ a_{12}x_2 && + {}\ldots{} && + a_{1n}x_n && =  b_1 &\\
     a_{21}x_1 + && a_{22}x_2 + &&  {}\ldots{} && + a_{2n}x_n &&  = b_2 &\\
     \vdots &&  \vdots &&  {}\ldots{} &&  \vdots &&   \vdots &\\
@@ -79,4 +79,24 @@ In the following activities, the main questions we need to answer are the follow
 \item If it is consistent, what are the solutions?
 \end{itemize}
 
+An important concept involved in answering these questions is that of equivalence. We will say that two systems in the same set of unknowns are \dfn{equivalent} if they have the same set of solutions.
+
+\begin{example} The following $2\times 2$ systems of equations are equivalent
+
+\begin{alignat*}{3}
+    x_1 && - 2x_2 && =& -7 \\
+    2x_1 && + 4x_2 && =& \phantom{1}18 
+  \end{alignat*}
+  and \begin{alignat*}{3}
+    3x_1 && - x_2 && =& -1 \\
+    x_1 && + x_2 && =& \phantom{-}5 
+  \end{alignat*}
+because they both have the same unique solution $x_1 = 1; x_2 = 4$.
+\end{example}
+
+
+
+
+
 \end{document}
+

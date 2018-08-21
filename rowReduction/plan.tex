@@ -1,7 +1,7 @@
 \documentclass{ximera}
 \author{Crichton Ogle}
 
-\input{../../preamble.tex}
+\input{../preamble.tex}
 
 \title{Plan for Row Reduction}
 
@@ -35,7 +35,7 @@ Now to proceed in an efficient manner, it will be convenient to
 represent a system in terms of its essential information. This is
 accomplished by means of the \dfn{augmented coefficient matrix} or
 \dfn{ACM} corresponding to a given system. Starting with the
-$m\times n$ system, the augmented coefficient matrix is given by
+$m\times n$ system appearing in (\ref{eqn:sys}), its associated augmented coefficient matrix is given by
 \[
 A = 
 \begin{amatrix}{4}
@@ -120,9 +120,14 @@ rref(A) =
 0 & 0 & 0 & 0 & 1
 \end{amatrix}
 \]
-In this case, we would conclude that the system is {\it inconsistent}, because of the last row (to understand why a row like this makes the system inconsistent, the reader should write down the equation to which it corresponds, and see what they can say about solutions to that single equation).
+In this case, we would conclude that the system is {\it inconsistent}, because of the last row.
 \end{example}
 \vskip.2in
+
+\begin{exercise} Write down the set of equations corresponding to the ACM in the previous example. Is the final equation in the system consistent or inconsistent? How does this affect the overall system?
+\end{exercise}
+\vskip.2in
+
 \begin{example} The rref of the ACM is given by
 \[
 rref(A) = 
@@ -134,9 +139,14 @@ rref(A) =
 \end{amatrix}
 \]
 
-In this case, every column to the left of the bar dividing the {\it coefficient matrix} from the augmented part contains a leading 1. Hence there is a unique solution (the reader should write down the equations corresponding to this ACM, and see how those equations actually give the exact solution).
+In this case, every column to the left of the bar dividing the {\it coefficient matrix} from the augmented part contains a leading 1. Hence there is a unique solution.
 \end{example} 
 \vskip.2in
+
+\begin{exercise} Write down the equations corresponding to this ACM, and verify that there is a unique solution by writing it down explicitly.
+\end{exercise}
+\vskip.2in
+
 
 \begin{example} The rref of the ACM is given by
 \[
@@ -148,7 +158,10 @@ rref(A) =
 0 & 0 & 0 & 0 & 0
 \end{amatrix}
 \]
-Here we have a $4\times 4$ system which has infinitely many solutions; this is seen by noting i) it is consistent, and ii) the fourth column does not contains a leading 1 (the reader should write down the four equations corresponding to this matrix and then rewrite each equation so that they express the original four variables $x_1,x_2,x_3,x_4$ as linear functions in $x_4$, which is the independent parameter in this case. Since we only have one parameter, the result is a \dfn{one-parameter family of solutions}).
+Here we have a $4\times 4$ system which has infinitely many solutions; this is seen by noting i) it is consistent, and ii) the fourth column does not contains a leading 1.
 \end{example}
+
+\begin{exercise} Write down the four equations corresponding to this matrix and then rewrite each equation so that they express the original four variables $x_1,x_2,x_3,x_4$ as linear functions in $x_4$ only. Observe that the original variable $x_4$ plays the role of the independent parameter in this case, and that this is directly related to the fact that the fourth column of the ACM does not contain a leading 1. Since there is one parameter $x_4$, the result is a \dfn{one-parameter family of solutions}.
+\end{exercise}
 
 \end{document}

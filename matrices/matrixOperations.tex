@@ -34,22 +34,58 @@ The dimensions of the product are $m\times q$.
 These different types of products may both be viewed as extensions of ordinary multiplication of real numbers. In fact, if we identify numerical $1\times 1$ matrices with scalars, then in that dimension the two product operations both correspond to ordinary multiplication. It is important to note that matrix multiplication can be performed whenever the sum of products appearing on the right-hand side is well-defined; in other words, for more than just numerical matrices. This fact will come into play later on.
 \vskip.2in
 
+
+\begin{example} Suppose $A = \begin{bmatrix} 2 & 3\\-1 & 5\end{bmatrix}$ and $B = \begin{bmatrix} 4 & -1\\2 & -2\end{bmatrix}$. Then $A+B$ is well-defined because the two matrices have the same dimension, and is computed by adding entrywise:
+\[
+A + B = \begin{bmatrix} 6 & 2\\1 & 3\end{bmatrix}
+\]
+\end{example}
+\vskip.2in
+
+\begin{example} Suppose $A$ and $B$ are as in the previous example. Then the matrix product $A*B$ is well-defined because the internal dimensions agree (the number of columns of $A$ equals the number of rows of $B$), with the $(i,j)^{th}$ entry of the product computed by multiplying the $i^{th}$ row or $A$ with the $j^{th}$ column of $B$. The answer is
+\[
+A*B = \begin{bmatrix} (2*4 + 3*2) & (2*(-1) + 3*(-2))\\ ((-1)*4 + 5*2) & ((-1)*(-1) + 5*(-2)\end{bmatrix} =
+\begin{bmatrix} 14 & -8\\ 6 & -9\end{bmatrix}
+\]
+\end{example}
+\vskip.2in
+
+\begin{exercise} Suppose $C = \begin{bmatrix} 4 & 5\\-2 & 7\end{bmatrix}, D = \begin{bmatrix} -3 & 2\\ 6 & 4\\ 5 & -3\end{bmatrix}, E = \begin{bmatrix} 1 & -3 & 4\\2 & 5 & -1\end{bmatrix}$. Compute the following quantities by hand:
+\begin{itemize}
+\item $D*E$
+\item $E*D$
+\item $C + E*D$.
+\end{itemize}
+\end{exercise}
+\vskip.4in
+
 The operations for matrix algebra satisfy similar properties to those for addition and multiplication of real numbers. The following theorem lists those properties. In each case, the expression on the left is defined iff that on the right is also defined.
+
+
+
+
+
+
+
+
+
 
 \begin{theorem}\label{thm:matalg} Let $A,B,C$ denote matrices, and $\alpha,\beta$ scalars.
 
 \begin{enumerate}
-\item $A+B = B+A$ (commutativity of addition);
-\item $A+(B+C) = (A+B)+C$ (associativity of addition);
-\item $\alpha(A+B) = \alpha A + \alpha B$ (scalar multiplication distributes over matrix addition);
-\item $A*(B+C) = A*B + A*C$ (matrix multiplication left-distributes over matrix addition);
-\item $(A+B)*C = A*C + B*C$ (matrix multiplication right-distributes over matrix addition);
-\item $(\alpha\beta)A = \alpha(\beta A)$ (associativity of scalar multiplication);
-\item $A*(B*C) = (A*B)*C$ (associativity of matrix multiplication).
+\item[(3.2.1)] $A+B = B+A$ (commutativity of addition);
+\item[(3.2.2)] $A+(B+C) = (A+B)+C$ (associativity of addition);
+\item[(3.2.3)] $\alpha(A+B) = \alpha A + \alpha B$ (scalar multiplication distributes over matrix addition);
+\item[(3.2.4)] $A*(B+C) = A*B + A*C$ (matrix multiplication left-distributes over matrix addition);
+\item[(3.2.5)] $(A+B)*C = A*C + B*C$ (matrix multiplication right-distributes over matrix addition);
+\item[(3.2.6)] $(\alpha\beta)A = \alpha(\beta A)$ (associativity of scalar multiplication);
+\item[(3.2.7)] $A*(B*C) = (A*B)*C$ (associativity of matrix multiplication).
 \end{enumerate}
 \end{theorem}
+\vskip.2in
 
 This theorem is proven by showing that, in each case, the matrix on the left has the same $(i,j)^{th}$ entry as the one on the right. However, as with any proof, one needs to be clear from the beginning exactly what one is allowed to {\it assume} as being true. In this case, we have i) the definition of what it means for two matrices to be equal, ii) the explicit definition of each operation, and iii) the corresponding properties for addition and multiplication for real numbers (which will be taken as axioms for this proof). To see how this works, let's verify the first equality. 
+\vskip.2in
 
 \begin{proof} (of 3.2.1)
 \begin{align*}
@@ -58,25 +94,31 @@ This theorem is proven by showing that, in each case, the matrix on the left has
                &= (B+A)(i,j)\qquad\quad\ {\rm by\ the\ definition\ of\ matrix\ addition}
 \end{align*}
 \end{proof}
+\vskip.2in
 
 Notice that the proof consists of a sequence of equalities, beginning with the left-hand side of the equation we wish to verify, and ending with the right-hand side of that equation. Moreover, each equality in the sequence is justified by either a definition, or an axiom. Not all of the equalities are that easy; some may require more steps. To illustrate a more involved proof, we will verify property 7 (probably the most difficult to prove of the properties listed).
+\vskip.2in
 
 \begin{proof} (of 3.2.7) In this proof, $i,j,k,l$ will be used as indices (the reason for using four different indices will become apparent).
+\vskip.2in
+
 \begin{alignat*}{3}
 (A*(B*C))(i,l)  =& \sum_j A(i,j)(B*C)(j,l)&&\qquad{\rm by\ the\ definition\ of\ matrix\ multiplication}&\\
                 =& \sum_j A(i,j)\left(\sum_k B(j,k)C(k,l)\right)&&\qquad{\rm by\ the\ definition\ of\ matrix\ multiplication}&\\
-                =& \sum_j\left(\sum_k A(i,j)\Big(B(j,k)C(k,l)\Big)\right)&&\qquad{\rm by\ property\ 4\ for\ real\ numbers}&\\
-                =& \sum_j\left(\sum_k \Big(A(i,j)(B(j,k)\Big)C(k,l)\right)&&\qquad{\rm by\ property\ 7\ for\ real\ numbers}&\\
-                =& \sum_k\left(\sum_j \Big(A(i,j)(B(j,k)\Big)C(k,l)\right)&&\qquad{\rm by\ property\ 1\ for\ real\ numbers}&\\
-                =& \sum_k\left(\Big(\sum_j A(i,j)(B(j,k)\Big)C(k,l)\right)&&\qquad{\rm by\ property\ 5\ for\ real\ numbers}&\\
+                =& \sum_j\left(\sum_k A(i,j)\Big(B(j,k)C(k,l)\Big)\right)&&\qquad{\rm by\ property\ (3.2.4)\ for\ real\ numbers}&\\
+                =& \sum_j\left(\sum_k \Big(A(i,j)(B(j,k)\Big)C(k,l)\right)&&\qquad{\rm by\ property\ (3.2.7)\ for\ real\ numbers}&\\
+                =& \sum_k\left(\sum_j \Big(A(i,j)(B(j,k)\Big)C(k,l)\right)&&\qquad{\rm by\ property\ (3.2.1)\ for\ real\ numbers}&\\
+                =& \sum_k\left(\Big(\sum_j A(i,j)(B(j,k)\Big)C(k,l)\right)&&\qquad{\rm by\ property\ (3.2.5)\ for\ real\ numbers}&\\
                 =& \sum_k\left(\sum_k (A*B)(i,k)C(k,l)\right)&&\qquad{\rm by\ the\ definition\ of\ matrix\ multiplication}&\\
                 =& ((A*B)*C)(i,l)&&\qquad{\rm by\ the\ definition\ of\ matrix\ multiplication}&\\
 \end{alignat*}
 \end{proof}
 \vskip.2in
 
-\begin{exercise} Using the above two proofs as models, prove properties (3.2.2) - (3.2.6).
+
+\begin{exercise} Using the above two proofs as models, verify properties (3.2.2) - (3.2.6), carefully writing out each step.
 \end{exercise}
+\vskip.2in
 
 Before moving on to considering equations, we introduce a few more matrix operations.
 
@@ -163,8 +205,14 @@ Apriori, is seems there is no dimensional restriction on a matrix for it to be i
 \begin{theorem} A matrix $A$ can only be invertible if it is square ($m = n$). In this case $A*B =I$ iff $B*A = I$ (every one-sided inverse is a two-sided inverse).
 \end{theorem}
 
-\begin{exercise} Show that the inverse of an invertible matrix is unique.
-\end{exercise}
+\begin{proposition} The inverse of an invertible matrix is unique.
+\end{proposition}
+
+\begin{proof} Suppose $B_1$, $B_2$ are two possibly distinct inverses of the matrix $A$. Then using the previous theorem we have
+\[
+B_1 = I*B_1 = (B_2*A)*B_1 = B_2*(A*B_1) = B_2*I = B_2
+\]
+\end{proof}
 
 Given this, we will refer to {\it the} inverse of an invertible matrix $A$, and write it as $A^{-1}$. An alternative term for invertible is {\it non-singular} (so {\it singular} is equivalent to being  {\it non-invertible}). Two important questions are: under what conditions is a square matrix non-singular? And if a matrix is non-singular, how can one find its inverse? These questions are answered by 
 
@@ -179,9 +227,11 @@ rref([A\ \ I]) = [I\ \ A^{-1}]
 \]
 \end{theorem}
 
-\begin{exercise} Using the above theorem, show that the only matrix which is both invertible and in reduced row echelon form is the identity matrix (of a given dimension).
+\begin{corollary} The only matrix which is both invertible and in reduced row echelon form is the identity matrix (of a given dimension).
+\end{corollary}
 
-\end{exercise}
+\begin{proof} If $A$ is already in reduced row echelon form, then $A = rref(A)$. But by the previous theorem, it is invertible iff $rref(A) = I$. Thus if it satisfies both properties $A = rref(A) = I$.
+\end{proof}
 
 
 \end{document}
