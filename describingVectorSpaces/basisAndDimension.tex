@@ -7,7 +7,7 @@
 \begin{abstract}
   A basis is a collection of vectors which consists of enough vectors
   to span the space, but few enough vectors that they remain linearly
-  independent.
+  independent. It is the same as a minimal spanning set.
 \end{abstract}
 \maketitle
 
@@ -23,9 +23,9 @@ A set of vectors $S = \{{\bf v}_1,\dots, {\bf v}_n\}\subset V$ is a
 {\bf\underbar{Fundamental Properties}}
 
 \begin{description}
-\item[B1] $S = \{{\bf v}_1,\dots, {\bf v}_n\}\subset V$ is a basis for $V$ iff it is a minimal spanning set for $V$.
+\item[B1] A non-zero set $S = \{{\bf v}_1,\dots, {\bf v}_n\}\subset V$ is a basis for $V$ iff it is a minimal spanning set for $V$.
 \item[B2] Every non-zero vector space $V$ admits a basis.
-\item[B3] (finite case) If $S = \{{\bf v}_1,\dots, {\bf v}_n\}$ and $T = \{{\bf w}_1,\dots, {\bf w}_m\}$ are two bases for $V$, then $m=n$.
+\item[B3] (finite case) If $S = \{{\bf v}_1,\dots, {\bf v}_n\}$ and $T = \{{\bf w}_1,\dots, {\bf w}_m\}$ are two bases for $V\ne \{\bf 0\}$, then $m=n$.
 \end{description}
 \vskip.2in
 
@@ -53,5 +53,18 @@ The third property will require a bit more work; its proof will be deferred unti
 \end{definition}
 
 Property B3 indicates that the dimension of a (non-zero) vector space $V$ doesn't depend on the choice of basis for $V$; it only depends on $V$. The dimension of a vector space is the single most important numerical invariant one can attach to that space.
+\vskip.2in
+
+
+Suppose $W$ is a subspace of $\mathbb R^n$, and we wish to find a basis. The first step is to determine a spanning set $S = \{{\bf w}_1,\dots,{\bf w}_m\}$ in the event it is not already given. Then forming the matrix
+\[
+A = \begin{bmatrix} {\bf w}_1 & {\bf w}_2 & \dots & {\bf w}_m\end{bmatrix}
+\]
+we observe that (by construction) $W = C(A)$, the column space of $A$. We can then use the method described in the section {\it Spanning sets, row spaces, and column spaces} to find a minimal spanning set $T\subseteq S$ from among the original vectors in $S$. Thus we have an efficient algorithm for finding a basis for any vector space which is a subspace of $\mathbb R^n$ (for some $n$).
+\vskip.2in
+
+In the event the vector space $W$ is not naturally a subspace of $\mathbb R^n$ for some $n$ this algorithm still applies, but we need to do something else first. That is described in the next section.
+
+
 
 \end{document}

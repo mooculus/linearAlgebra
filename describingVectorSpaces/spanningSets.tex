@@ -1,13 +1,13 @@
 \documentclass{ximera}
 \input{../preamble.tex}
-\title{Spanning sets}
+\title{Spanning sets, row spaces, and column spaces}
 \author{Crichton Ogle}
 
 \begin{document}
 \begin{abstract}
   A collection of vectors spans a set if every vector in the set can
   be expressed as a linear combination of the vectors in the
-  collection.
+  collection. The set of rows or columns of a matrix are spanning sets for the row and column space of the matrix.
 \end{abstract}
 \maketitle
 
@@ -77,5 +77,115 @@ This lemma suggests that spanning sets are not only not unique, they can have va
 \item For any proper subset $T\subsetneq S$, $Span(T)\subsetneq V$.
 \end{itemize}
 \end{definition}
+\vskip.2in
+
+Recall that for a matrix $A$ we write $A(i,:)$ for the ith row, and $A(:,j)$ for the jth column. If $A$ is an $m\times n$ matrix, then each row $A(i,:)$ is a row vector in the vector space $\mathbb R^{1\times n}$, while each column is a vector in the vector space $\mathbb R^{m\times 1} = \mathbb R^m$. This leads to the following definition
+
+\begin{definition}If $A$ is an $m\times n$ matrix the \underbar{row space of $A$} is the subspace $R(A) := Span\{A(i,:)\}_{1\le i\le m}\subset\mathbb R^{1\times n}$, while the \underbar{column space of A} is the subspace $C(A) := Span\{A(:,j)\}_{1\le i\le n}\subset\mathbb R^{m\times 1}$.
+\end{definition}
+
+Note that the row and column spaces of a matrix are different vector spaces, unless $m=n=1$. If $m=n > 1$ then $\mathbb R^{1\times n}$ and $\mathbb R^{n\times 1}$ can be naturally identified via the transpose operation, but they are not the same space.
+\vskip.2in
+
+Finding spanning sets for $R(A)$ or $C(A)$ is not a problem; they are just the set of rows and columns of $A$. However if one wants to find a {\it minimal} spanning set then some work needs to be done. The main tool we will use is the following theorem.
+
+\begin{theorem} If $A$ and $B$ are matrices with $A$ row equivalent to $A$ then $R(A) = R(B)$ (their row spaces are the same). Moreover linear relations among the columns of $A$ and $B$ are the same. This applies in particular if $B = rref(A)$.
+\end{theorem}
+
+We also have the following useful lemma, which is relatively straightforward to prove.
+
+\begin{lemma} If $A$ is in reduced row echelon form, then 
+\begin{itemize}
+\item the columns of $A$ containing leading ones are a linearly independent set of column vectors. Moreover, the columns that don't contain leading ones can be written as linear combination of the ones that do. Consequently, the columns of $A$ which contain leading ones form a minimal spanning set for the column space $C(A)$;
+\item the rows of $A$ containing leading ones are a linearly independent set of row vectors. As all remaining rows must be identically zero, the rows of $A$ which contain leading ones form a minimal spanning set for the row space $R(A)$.
+\end{itemize}
+\end{lemma}
+
+This theorem and lemma provide an efficient algorithm for determining minimal spanning sets, as well as determining linear relations among vectors.
+\vskip.2in
+
+Given a matrix $A$, a minimal spanning set for $C(A)$ is found by
+\begin{itemize}
+\item computing $rref(A)$;
+\item identifying the set $D = \{i_1,\dots, i_k\}$ of pivot columns;
+\item choosing as your minimal spanning set for ${\cal C}(A)$ to be the subset of column vectors
+\[
+\{A(:,i_1),\dots, A(:,i_k)\}
+\]
+\end{itemize}
+
+Moreover, in the reduced row echelon form the columns that are not pivot columns are easily computed as linear combinations of the pivot columns. And since the row space remains unchanged under row operations, a minimal spanning set for $R(A)$ is found by
+\begin{itemize}
+\item computing $rref(A)$;
+\item identifying the set $D = \{1,\dots,k\}$ of indices corresponding to the non-zero rows of $rref(A)$;
+\item choosing as your minimal spanning set for $R(A)$ the subset of row vectors
+\[
+\{A(1,:),\dots, A(k,:)\}
+\]
+\end{itemize}
+
+Note that, unlike the column case, these rows typically won't be among the original set of rows of $A$; they will simply have the same span.
+
+
+\begin{example} Suppose $A$ is a $4\times 5$ matrix with 
+\[
+B = rref(A) = \begin{bmatrix}
+1 & 0 & 3 & 0 & 4\\
+0 & 1 & -2 & 0 & 5\\
+0 & 0 & 0 & 1 & 7\\
+0 & 0 & 0 & 0 & 0
+\end{bmatrix}
+\]
+We don't know what the original matrix is, but for $B = rref(A)$ we see that
+\begin{itemize}
+\item columns 1,2, and 4 of $B$ are linearly independent;
+\item $B(:,3) = 3B(:,1) - 2B(:,2)$;
+\item $B(:,5) = 4B(:,1) + 5B(:,2) + 7B(:,4)$.
+\end{itemize}
+So we can conclude the same must be true for $A$: 
+\begin{itemize}
+\item columns 1,2, and 4 of $A$ are linearly independent;
+\item $A(:,3) = 3A(:,1) - 2A(:,2)$;
+\item $A(:,5) = 4A(:,1) + 5A(:,2) + 7A(:,4)$.
+\end{itemize}
+Therefore, $\{A(:,1), A(:,2), A(:,4)\}$ form a minimal spanning set for the columns space $C(A)$, while the rows $B(1,:), B(2,:), B(3,:)$ form a minimal spanning set for the row space $R(B) = R(A)$.
+\end{example}
+
+\begin{exercise} Suppose $A$ is a $5\times 6$ matrix with
+\[
+rref(A) = \begin{bmatrix}
+1 & 0 & 6 & 0 & 0 & 7\\
+0 & 1 & -11 & 0 & 0 & 9\\
+0 & 0 & 0 & 1 & 0 & 11\\
+0 & 0 & 0 & 0 & 1 & 13\\
+0 & 0 & 0 & 0 & 0 & 0
+\end{bmatrix}
+\]
+\begin{itemize}
+\item Find a minimal spanning set for $C(A)$ from the original set of columns of $A$ (expressed simply in terms of the original set of column vectors);
+\item For each remaining column of $A$, write it explicitly as a linear combination of the minimal spanning set you have just constructed.
+\item Write down a minimal spanning set for the row space $R(A)$ (here you can give explicit numerical vectors).
+\end{itemize}
+
+\end{exercise}
+
+
+
+The above Theorem and Lemma have additional implications, which we summarize in the following corollary.
+
+
+\begin{corollary}If $A$ is an $m\times n$ matrix, then 
+\begin{itemize}
+\item the columns of $A$ are linearly independent precisely when every {\it column} of $rref(A)$ contains a leading 1 (is a pivot column);
+\item the columns of $A$ span $\mathbb R^m$ (that is, $C(A) = \mathbb R^m$) precisely when each {\it row} of $rref(A)$ contains a leading 1 (equivalently, is non-zero).
+\end{itemize}
+As a consequence, we see
+\begin{itemize}
+\item if $A$ is $m\times n$ with $m > n$ then the columns may be linearly independent, but they cannot span all of $\mathbb R^m$;
+\item if $A$ is $m\times n$ with $m < n$ then the columns may span all of $\mathbb R^m$ but cannot be linearly independent;
+\item if $A$ is $m\times n$ with $m = n$ then $C(A) = \mathbb R^m$ if and only if the columns of $A$ are linearly independent, if and only if the columns of $A$ are a basis for $\mathbb R^m$. Moreover this happens precisely when $rref(A) = Id$.
+\end{itemize}
+\end{corollary}
+
 
 \end{document}
