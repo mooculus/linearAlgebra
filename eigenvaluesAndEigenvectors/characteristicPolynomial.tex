@@ -22,12 +22,33 @@ In Observation \ref{obs:eigen} we noted that $\lambda$ is an eigenvalue of $A$ i
 \end{lemma}
 \vskip.2in
 
-\begin{example} Consider the matrix $A = \begin{bmatrix} 2 & 2\\1 & 3\end{bmatrix}$. Then $p_A(t) = Det\left(\begin{bmatrix} (2-t) & 3\\1 & (-4-t)\end{bmatrix}\right) = (2-t)(3-t) - 2 = t^2 - 5t + 4 = (t-1)(t-4)$, indicating that there are two eigenvalues; $\lambda = 1$ and $\lambda=4$.
+\begin{example} Consider the matrix $A = \begin{bmatrix} 2 & 2\\4 & -5\end{bmatrix}$. Then $p_A(t) = Det\left(\begin{bmatrix} (2-t) & 2\\4 & (-5-t)\end{bmatrix}\right) = (2-t)(-5-t) - 8 = t^2 + 3t - 18 = (t+6)(t-3)$, indicating that there are two eigenvalues; $\lambda = -6$ and $\lambda= 3$. Moreover, for each of these eigenvalues, we can find a basis for the corresponding eigenspace by computing a basis for the nullspace $N(A - \lambda Id)$.
+\begin{itemize}
+\item For $\lambda = -6$, E_{-6}(A) = N(A + 6Id) = N\left(\begin{bmatrix} 8 & 2\\4 & 1\end{bmatrix}\right)$. Then $E_{-6}(A) = N(A + 6Id) = Span\{\begin{bmatrix} -1\\4\end{bmatrix}\}$.
+\item For $\lambda = 3$, E_{3}(A) = N(A - 3Id) = N\left(\begin{bmatrix} -1 & 2\\4 & -8\end{bmatrix}\right)$. Then $E_{3}(A) = N(A - 3Id) = Span\{\begin{bmatrix} 2\\1\end{bmatrix}\}$.
+\end{itemize}
+
+\end{example}
+\vskip.3in
+
+\begin{exercise} Let $A = \begin{bmatrix} 3 & 6\\2 & -1\end{bmatrix}$. 
+\begin{itemize}
+\item Compute the characteristic polynomial $p_A(t)$ of $A$.
+\item For each eigenvalue of $A$, find an eigenvector corresponding to that eigenvalue.
+\end{itemize}
+\end{exercise}
+\vskip.2in
+
+\begin{example} Consider the matrix $A = \begin{bmatrix} 2 & -4\\1 & 3\end{bmatrix}$. Then $p_A(t) = Det\left(\begin{bmatrix} (2-t) & -4\\1 & (3-t)\end{bmatrix}\right) = (2-t)(3-t) + 4 = t^2 - 5t + 10$. In this case the quadratic formula shows that there are no {\it real} roots. There are, however, two complex roots which are conjugate. They can be computed using the quadratic formula:
+\[
+\lambda = \frac{5 \pm \sqrt{25 - 40}}{2} = \frac52 \pm\left(\frac{\sqrt{15}}{2}\right)i
+\]
+Complex eigenvalues and eigenvectors will be discussed in more detail below.
 \end{example}
 \vskip.2in
 
-\begin{example} Consider the matrix $A = \begin{bmatrix} 2 & -4\\1 & 3\end{bmatrix}$. Then $p_A(t) = Det\left(\begin{bmatrix} (2-t) & 3\\1 & (-4-t)\end{bmatrix}\right) = (2-t)(3-t) + 4 = t^2 - 5t + 10$. In this case the quadratic formula shows that there are no {\it real} roots. There are, however, complex roots (how exactly one handles this case is dicsussed below).
-\end{example}
+\begin{exercise} Let $A = \begin{bmatrix} 3 & -2\\5 & 1\end{bmatrix}$. Compute the characteristic polynomial of $A$ and find its roots (if necessary using the quadratic formula).
+\end{exercise}
 \vskip.2in
 
 The following is an immediate consequence of the definition of $p_A(t)$, and basic properties of polynomials.
