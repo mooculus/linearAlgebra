@@ -2,7 +2,7 @@
 \input{../preamble.tex}
 \title{Overview on linear systems}
 \author{Crichton Ogle}
-
+\pgfplotsset{compat=1.15}
 \begin{document}
 
 \begin{abstract}
@@ -50,18 +50,19 @@
     \vdots &&  \vdots &&  {}\ldots{} &&  \vdots &&   \vdots &\\
     a_{m1}x_1 &&+ a_{m2}x_2 && + {}\ldots{} && + a_{mn}x_n && =  b_m &
   \end{alignat*}
-  and a \dfn{solution} to that system is an assignment of values to the variables which make \dfn{each equation} hold true.
+  and a \dfn{solution} to that system is an assignment of values to the variables which make \dfn{each equation} hold true. The \dfn{solution set} of a system of equations is the collection, or set of all the solutions of that system (which will be empty if the system has no solutions). Given $m$ equations in the same set of $n$ unknowns, the ordered pair of integers $(m,n)$ are referred to as the \dfn{dimensions} of the system, and the system would be referred to as an \dfn{$m\times n$ system of equations} (read: \dfn{m-by-n system of equations}), or an \dfn{$m\times n$ system} for short.
 \end{definition}
 
+
 \begin{example}
-  Note that systems of equations, or even a single equation, need not have a solution. To illustrate, consider the equation
+  Systems of equations, or even a single equation, need not have a solution. To illustrate, consider the equation
   \[
     0x_1 + 0x_2 + 0x_3 = 4
   \]
   Obviously, any set of values substituted into the left-hand side of
   this equation will produce the value zero, which is not equal to
   4. But even non-zero systems might not have a solution. As an
-  example, consider
+  example, consider the
   \begin{alignat*}{3}
     x_1 && - 2x_2 && =& \phantom{1}7 \\
     2x_1 && - 4x_2 && =& 16 
@@ -73,7 +74,7 @@
 A system which has at least one solution is called \dfn{consistent}. If it doesn't have any solutions it is called \dfn{inconsistent}.
 \end{definition}
 
-In the following activities, the main questions we need to answer are the following.
+In the following activities, the main questions we need to answer are:
 \begin{itemize}
 \item Given a system of equations, does it have one or more solutions (in other words is it consistent)?
 \item If it is consistent, what are the solutions?
@@ -91,7 +92,7 @@ An important concept involved in answering these questions is that of equivalenc
     3x_1 && - x_2 && =& -1 \\
     x_1 && + x_2 && =& \phantom{-}5 
   \end{alignat*}
-because they both have the same unique solution $x_1 = 1; x_2 = 4$.
+because they both have the same unique solution $x_1 = 1, x_2 = 4$.
 \end{example}
 
 

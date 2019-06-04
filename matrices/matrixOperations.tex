@@ -2,42 +2,42 @@
 \input{../preamble.tex}
 \title{Matrix Operations and Matrix Algebra}
 \author{Crichton Ogle}
-
+\pgfplotsset{compat=1.15}
 \begin{document}
 \begin{abstract}
   Matrix algebra uses three different types of operations.
 \end{abstract}
 \maketitle
 
-{\bf\underbar{Matrix Addition}} If $A$ and $B$ have the same dimensions, then the sum $A+B$ is given by\footnote{ In what follows, the symbol \lq\lq$:=$\rq\rq\ is used to indicate that the expression to the left of the symbol is {\it defined to be} what appears to the right of the symbol.}
+{\bf\underbar{Matrix Addition}} If $A$ and $B$ have the same dimensions, then the sum $A+B$ is the matrix whose entries are given by\footnote{ In what follows, the symbol \lq\lq$:=$\rq\rq\ is used to indicate that the expression to the left of the symbol is {\it defined to be} what appears to the right of the symbol.}
 \[
 (A+B)(i,j) := A(i,j) + B(i,j)
 \]
 
-Note that the dimensions of $A+B$ are the same as those of (both) $A$ and $B$.
+Note that the dimensions of $A+B$ are the same as those of (both) $A$ and $B$. If $A$ and $B$ do \dfn{not} have the same dimensions, then the sum $A+B$ is not defined; in other words, it doesn't exist.
 \vskip.1in
 
-{\bf\underbar{Scalar Multiplication}} If $A$ is a matrix and $\alpha$ a scalar, the {scalar product} of $\alpha$ with $A$ is given by
+{\bf\underbar{Scalar Multiplication}} If $A$ is a matrix and $\alpha$ a scalar, the {scalar product} of $\alpha$ with $A$ is the matrix $\alpha A$ whose entries are given by
 \[
 (\alpha A)(i,j) := (\alpha)A(i,j)
 \]
-There are no restrictions on the dimension of $A$ for this operation to be defined.
+There are no restrictions on the dimensions of $A$ in order for this operation to be defined; the scalar product always exists.
 \vskip.1in
 
-{\bf\underbar{Matrix Multiplication}} This is the most complicated of the three operations. If $A$ is $m\times n$ and $B$ is $p\times q$, then in order for the product $A*B$ to be defined, we require that $n = p$; this condition is expressed by saying that {\it the internal dimensions agree}. In this case
+{\bf\underbar{Matrix Multiplication}} This is the most complicated of the three operations. If $A$ is $m\times n$ and $B$ is $p\times q$, then in order for the product $A*B$ to be defined, we require that $n = p$; this condition is expressed by saying that {\it the internal dimensions agree}. In this case the product $A*B$ is the matrix whose entries are given by
 \[
 (A*B)(i,k) := \sum_{j=1}^n A(i,j)B(j,k)
 \]
-The dimensions of the product are $m\times q$.
+The dimensions of the product are $m\times q$. If the internal dimensions of $A$ and $B$ do \dfn{not} agree, then the product $A*B$ doesn't exist.
 \vskip.1in
 
-These different types of products may both be viewed as extensions of ordinary multiplication of real numbers. In fact, if we identify numerical $1\times 1$ matrices with scalars, then in that dimension the two product operations both correspond to ordinary multiplication. It is important to note that matrix multiplication can be performed whenever the sum of products appearing on the right-hand side is well-defined; in other words, for more than just numerical matrices. This fact will come into play later on.
+The two different types of products may both be viewed as extensions of ordinary multiplication of real numbers. In fact, if we identify numerical $1\times 1$ matrices with scalars, then in that dimension the two product operations agree and correspond to ordinary multiplication. It is important to note that matrix multiplication can be performed whenever the sum of products appearing on the right-hand side of the defining equation makes sense algebraically; in other words, for more than just numerical matrices. This fact will come into play later on.
 \vskip.2in
 
 
 \begin{example} Suppose $A = \begin{bmatrix} 2 & 3\\-1 & 5\end{bmatrix}$ and $B = \begin{bmatrix} 4 & -1\\2 & -2\end{bmatrix}$. Then $A+B$ is well-defined because the two matrices have the same dimension, and is computed by adding entrywise:
 \[
-A + B = \begin{bmatrix} 6 & 2\\1 & 3\end{bmatrix}
+A + B = \begin{bmatrix} (2+4) & (3+(-1))\\(-1+2) & (5+(-2))\end{bmatrix} = \begin{bmatrix} 6 & 2\\1 & 3\end{bmatrix}
 \]
 \end{example}
 \vskip.2in
@@ -59,7 +59,7 @@ A*B = \begin{bmatrix} (2*4 + 3*2) & (2*(-1) + 3*(-2))\\ ((-1)*4 + 5*2) & ((-1)*(
 \end{exercise}
 \vskip.4in
 
-The operations for matrix algebra satisfy similar properties to those for addition and multiplication of real numbers. The following theorem lists those properties. In each case, the expression on the left is defined iff that on the right is also defined.
+The operations for matrix algebra satisfy similar properties to those for addition and multiplication of real numbers. The following theorem lists those properties for real-valued matrices (that is, matrices whose entries are real numbers). In each case, the expression on the left is defined iff that on the right is also defined.
 
 
 
@@ -70,7 +70,7 @@ The operations for matrix algebra satisfy similar properties to those for additi
 
 
 
-\begin{theorem}\label{thm:matalg} Let $A,B,C$ denote matrices, and $\alpha,\beta$ scalars.
+\begin{theorem}\label{thm:matalg} Let $A,B,C$ denote matrices whose entries are real numbers, and $\alpha,\beta$ scalars (real numbered).
 
 \begin{enumerate}
 %\item\label{thm:matalg:commutativity} $A+B = B+A$ (commutativity of addition);
@@ -177,13 +177,13 @@ In what follows, the horizontal type of concatenation will be used much more oft
 
 \begin{exercise} Let $A, B, C, D$ denote matrices all with the same number of rows. Show that
 \begin{enumerate}
-\item If the pairs $A,C$ and $B,D$ the same number of columns as well, then
+\item If the pairs $A,C$ and $B,D$ have the same number of columns as well, then
 \[
 \begin{bmatrix} A & B\end{bmatrix} + \begin{bmatrix} C & D\end{bmatrix} = \begin{bmatrix} (A+C) & (B+D)\end{bmatrix}.
 \]
-\item With respect to products, one has
+\item With respect to products, if $E$ is a $p\times q$ matrix where $q$ equals the number of rows of $A$, then
 \[
-A*\begin{bmatrix} B & C\end{bmatrix} = \begin{bmatrix} A*B & A*C\end{bmatrix}.
+E*\begin{bmatrix} B & C\end{bmatrix} = \begin{bmatrix} E*B & E*C\end{bmatrix}.
 \]
 \item With respect to transpose, one has
 \[

@@ -4,7 +4,7 @@
 \input{../preamble.tex}
 
 \title{Plan for Row Reduction}
-
+\pgfplotsset{compat=1.15}
 \begin{document}
 \begin{abstract}
   The operations used to perform row reduction are called row operations.
@@ -47,7 +47,7 @@ a_{m1} &a_{m2} &{}\ldots{} &a_{mn} &b_m
 \]
 This is a matrix with $m$ rows and $(n+1)$ columns. Executing a number
 of row operations and then computing the ACM gives the same result as
-first forming the ACM and performing the row operations on that
+first forming the ACM and performing the same set of row operations on that
 matrix. Because the ACM contains all of the information relevant for
 solving the system, and is less cumbersome to work with, we will
 always form the ACM \textit{first}, and perform row operations on that
@@ -64,7 +64,7 @@ matrices.
 \item the left-most non-zero entry of a non-zero row is 1 (called a \dfn{leading} 1);
 \item if both row $k$ and row $(k+1)$ are non-zero, the leading 1 in row $(k+1)$ appears to the right of the leading row in row $k$.
 \end{itemize}
-It is in \dfn{reduced row-echelon form} if in addition to being in row echelon form it satisfies the property
+It is in \dfn{reduced row-echelon form} if in addition to being in row echelon form it satisfies the property that
 \begin{itemize}
 \item In every column that contains a leading 1, that leading 1 is the only non-zero entry.
 \end{itemize}

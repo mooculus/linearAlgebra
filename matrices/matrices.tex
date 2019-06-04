@@ -2,7 +2,7 @@
 \input{../preamble.tex}
 \title{Matrices}
 \author{Crichton Ogle}
-
+\pgfplotsset{compat=1.15}
 \begin{document}
 \begin{abstract}
   A matrix is a rectangular array whose entries are of the same type.
@@ -16,5 +16,14 @@ We begin by recalling some notation and terminology. A {\it matrix} will mean a 
 \begin{definition} Two matrices $A$ and $B$ are {\it equal} if $A(i,j) = B(i,j)$ for all $i,j$.
 \end{definition}
 Note that this equality forces $A$ and $B$ to have the same dimensions, because if they had different dimensions, there would have to be a choice of indices $(i,j)$ for which one side of the equation exists, but the other does not. Thus, equality can be reformulated as saying: $A$ and $B$ have the same dimensions, and the same entry in each place.
+
+\begin{definition} A matrix $A$ is an $m\times n$ matrix if it has $m$ rows and $n$ columns. The numbers $m$ and $n$ are referred to as the dimensions of $A$.
+\end{definition}
+
+In this course we will only be concerned with \dfn{finite} matrices; those with finitely many rows and columns. Observe that in order to precisely specify what a given matrix $A$ is, it suffices to know i) its dimensions $m$ and $n$ and ii) the value of the entry $A(i,j)$ for each $1\le i\le m$ 
+and $1\le j\le n$.
+
+\begin{definition} When working with a fixed system of numbers such as $\mathbb R$ (real numbers) or $\mathbb C$ (complex numbers), the elements of that number system in linear algebra are oftern referred to as \dfn{scalars}.
+\end{definition}
 
 \end{document}
