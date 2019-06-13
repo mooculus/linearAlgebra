@@ -29,5 +29,67 @@ so ${\bf x}_h + {\bf x}$ is again a solution to the original equation. Thus
 where $S_0$ denotes the set of solutions to the associated homogeneous equation.
 \end{theorem}
 
+\begin{example} Suppose we are given a $3\times 5$ matrix $A$ and a $3\times 1$ vector $\bf b$ with
+\[
+A = \begin{bmatrix}
+-8 & 8 & 15 & 1 & 11\\
+10 & 11 & 2 & -2 & 13\\
+-19 & -7 & -14 & 8& -4
+\end{bmatrix},\quad
+{\bf b} = 
+\begin{bmatrix}
+35\\
+5\\
+21
+\end{bmatrix}
+\]
+and we want to describe the set of solutions to the equation $A*{\bf x} = {\bf b}$. Using Octave or MATLAB, we compute the rref(ACM):
+\[
+rref([A\ \  {\bf b}]) = 
+\begin{bmatrix}
+1 & 0 & 0 & -475/1419 & -853/4021 & -666/335\\
+0 & 1 & 0 & 636/4021 & 5619/4021 & 9041/4021\\
+0 & 0 & 1 & -789/4021 & -503/4021 & 297/4021
+\end{bmatrix}
+\]
+The columns (except the right-most) that do not contain leading ones are the fourth and fifth. We also see that the system is consistent. It follows that there is a 2-parameter family of solutions parametrized by the free, or independent variables $x_4$ and $x_5$, with the dependent variables $x_1, x_2, x_3$ expressable as linear functions in $x_4$ and $x_5$. Written in standard parametrized form, the full solution set is then given by
+\begin{align*}
+x_1 &= (475/1419)x_4 + (853/4021)x_5 + 666/335 \\
+x_2 &= (-636/4021)x_4 - (5619/4021)x_5 - 9041/4021\\
+x_3 &= (789/4021)x_4 + (503/4021)x_5 - 297/4021\\
+x_4 &= x_4\\
+x_5 &= x_5
+\end{align*}
+\vskip.2in
+To rewrite in superpositional format, we first choose a particular solution. The easiest one to compute is that corresponding to $x_4 = x_5 = 0$. In other words the vector determined by the constant terms appearing on the right-hand sides of the above set of equations:
+\[
+{\bf x}_p = 
+\begin{bmatrix}
+666/335\\ -9041/4021\\ -297/4021\\ 0\\ 0
+\end{bmatrix}
+\]
+The homogeneous part is then given as the 2-parameter set of vectors corresponding to the linear part of the same set of equations:
+\[
+{\bf x}_h = 
+\begin{bmatrix}
+(475/1419)x_4 + (853/4021)x_5\\
+(-636/4021)x_4 - (5619/4021)x_5\\
+(789/4021)x_4 + (503/4021)x_5\\
+x_4\\
+x_5
+\end{bmatrix} = x_4 \begin{bmatrix}
+475/1419\\ -636/4021\\ 789/4021\\ 1\\ 0
+\end{bmatrix} + x_5 \begin{bmatrix}
+853/4021\\ 5619/4021\\ 503/4021\\ 0\\ 1
+\end{bmatrix}
+\]
+The solution set given above can then be alternately expressed as
+\[
+{\bf x} = {\bf x}_p + {\bf x}_h
+\]
+where ${\bf x}_p$ and ${\bf x}_h$ are as computed above.
+\end{example}
+
+
 
 \end{document}
