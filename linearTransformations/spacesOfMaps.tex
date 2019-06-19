@@ -26,9 +26,25 @@ defined by the rule $(\lambda f)(v) = \lambda f(v)$ is also a linear
 transformation.
 
 \begin{theorem} Suppose $V$ and $W$ are vector spaces.  The collection
-  of linear transformations from $V$ to $W$ forms a vector space under
-  the above operations.
+  $Lin(V,W)$ of linear transformations from $V$ to $W$ forms a vector space under the above operations.
 \end{theorem}
+
+In fact, using bases we can say something more. If $S$ is a basis for an $n$-dimensional vector space $V$, and $T$ a basis for an $m$-dimensional vector space $W$, then as we have seen above this data can be used to associate to the linear transformation $L:V\to W$ an $m\times n$ matrix
+\[
+L\mapsto \phi_{S,T}(L) := {}_T L_S\in \mathbb R^{m\times n}
+\]
+which is essentially the coordinate representation of $L$ with respect to the pair of bases $S,T$. It is easily seen that under the above association
+\begin{align*}
+&\phi_{S,T}(L_1 + L_2) = {}_T (L_1)_S + {}_T (L_2)_S\\
+& \phi_{S,T}(\alpha L) = \alpha ({}_T L_S)
+\end{align*}
+
+In other words,
+
+\begin{theorem}
+Given a basis $S$ for an $n$-dimensional vector space $V$ and a basis $T$ for an $m$-dimensional vector space $W$, the map $\phi_{S,T}: Lin(V,W)\to \mathbb R^{m\times n}$ is an isomorphism between the vector space of linear transformations from $V$ to $W$ and the vector space of $m\times n$ matrices with entries in $\mathbb R$.
+\end{theorem}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -11,19 +11,34 @@
 \maketitle
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Generalizing the setup for $\mathbb R^n$, we have
 
-\begin{definition} A {\it vector space} is a set $V$ equipped with two operations - vector addition \lq\lq$+$\rq\rq\ and scalar multiplication \lq\lq$\cdot$\rq\rq - which satisfy the closure axioms for $V$:
+\begin{definition} A {\it vector space} is a set $V$ equipped with two operations - vector addition \lq\lq$+$\rq\rq\ and scalar multiplication \lq\lq$\cdot$\rq\rq - which satisfy the two closure axioms C1, C2 as well as the eight vector space axioms A1 - A8:
 \begin{description}
 \item[C1] (Closure under vector addition) Given ${\bf v}, {\bf w}\in V$, ${\bf v} + {\bf w}\in V$.
 \item[C2] (Closure under scalar multiplication) Given ${\bf v}\in V$ and a scalar $\alpha$, $\alpha{\bf v}\in V$.
 \end{description}
-together with the eight {\it vector space axioms} [A1] - [A8].
+\vskip.2in
+
+For $\bf u$, $\bf v$, $\bf w$ arbitrary vectors in $V$, and $\alpha,\beta$ arbitrary scalars in $\mathbb R$,
+
+\begin{description}
+\item[A1] (Commutativity of addition) ${\bf v} + {\bf w} = {\bf w} + {\bf v}$.
+\item[A2] (Associativity of addition) $({\bf u} + {\bf v}) + {\bf w} = {\bf u} + ({\bf v} + {\bf w})$.
+\item[A3] (Existence of a zero vector) There is a vector ${\bf z}\in V$ with ${\bf z} + {\bf v} = {\bf v} + {\bf z} = {\bf v}$.
+\item[A4] (Existence of additive inverses) For each $\bf v$, there is a vector $-{\bf v}\in V$ with ${\bf v} + (-{\bf v}) = (-{\bf v}) + {\bf v} = {\bf z}$.
+\item[A5] (Distributivity of scalar multiplication over vector addition) $\alpha({\bf v} + {\bf w}) = \alpha{\bf v} + \alpha{\bf w}$.
+\item[A6] (Distributivity of scalar addition over scalar multiplication) $(\alpha + \beta){\bf v} = \alpha{\bf v} + \beta{\bf v}$.
+\item[A7] (Associativity of scalar multiplication) $(\alpha \beta){\bf v}) = (\alpha(\beta {\bf v})$.
+\item[A8] (Scalar multiplication with 1 is the identity) $1{\bf v} = {\bf v}$.
+\end{description}
+\vskip.2in
 \end{definition}
 
 In this way, a vector space should properly be represented as a triple $(V,+,\cdot)$, to emphasize the fact that the algebraic structure depends not just on the underlying set of vectors, but on the choice of operations representing addition and scalar multiplication.
 \vskip.2in
 
-\begin{example} Let $V = \mathbb R^{m\times n}$, the space of $m\times n$ matrices, with addition given by matrix addition and scalar multiplication as defined for matrices. Then $(\mathbb R^{m\times n},+,\cdot)$ is a vector space. Again, as with $\mathbb R^n$, the closure axioms are seen to be satisfied as a direct consequence of the definitions, while the other properties follow from Theorem \ref{thm:matalg} together with direct construction of the $m\times n$ \lq\lq zero vector\rq\rq\ $0^{m\times n}$, as well as additive inverses as indicated in [A4].
+\begin{example}\label{example:Rmn} Let $V = \mathbb R^{m\times n}$, the space of $m\times n$ matrices, with addition given by matrix addition and scalar multiplication as previously defined for matrices. Then $(\mathbb R^{m\times n},+,\cdot)$ is a vector space. Again, as with $\mathbb R^n$, the closure axioms are seen to be satisfied as a direct consequence of the definitions, while the other properties follow from Theorem \ref{thm:matalg} together with direct construction of the $m\times n$ \lq\lq zero vector\rq\rq\ $0^{m\times n}$, as well as additive inverses as indicated in [A4].
 \end{example}
 
 Before proceeding to other examples, we need to discuss an important point regarding how theorems about vector spaces are typically proven. In any system of mathematics, one operates with a certain set of assumptions, called {\it axioms}, together with various results previously proven (possibly in other areas of mathematics) and which one is allowed to assume true without further verification.
@@ -131,7 +146,7 @@ The eight vector space axioms [A1] - [A8] are of two types. The third and fourth
 \end{proof}
 \vskip.2in
 
-\begin{exercise} Show that $(\mathbb R^{m\times n}, +,\cdot)$ is a vector space, where \lq\lq +\rq\rq\ denotes matrix addition, and \lq\lq$\cdot$\rq\rq\ denotes scalar multiplication for matrices (hint: use the results of Theorem \ref{thm:matalg}).
+\begin{exercise} Show that $(\mathbb R^{m\times n}, +,\cdot)$ is a vector space, where \lq\lq +\rq\rq\ denotes matrix addition, and \lq\lq$\cdot$\rq\rq\ denotes scalar multiplication for matrices (in other words, verify the claim in Example \ref{example:Rmn}. Hint: use the results of Theorem \ref{thm:matalg}).
 \end{exercise}
 \vskip.3in
 
