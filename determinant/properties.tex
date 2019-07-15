@@ -10,12 +10,48 @@
 \maketitle
 
 The determinant satisfies a number of useful properties, among them
-\begin{itemize}
-\item For any two square matrices $A,B$ of the same dimensions, $Det(A*B) = Det(A)Det(B)$.
-\item $A$ is singular iff $Det(A) = 0$.
-\item If $A$ is triangular (either upper or lower), then $Det(A) = A(1,1)A(2,2)\dots A(n,n) =$ the product of the diagonal entries.
-\item $Det(A) = Det(A^T)$.
-\end{itemize}
+\begin{enumerate}
+\item (Determinants commute with products) If $A,B$ are two square matrices of the same dimensions, then $Det(A*B) = Det(A)Det(B)$.
+\item (Test for singularity) If $A$ is a numerical square matrix, then $A$ is singular iff $Det(A) = 0$. Alternatively, $A$ is invertible as a matrix iff $Det(A)$ is invertible as a number.
+\item (Determinant of triangular matrices) If $A$ is triangular (either upper or lower), then $Det(A) = A(1,1)A(2,2)\dots A(n,n) =$ the product of the diagonal entries.
+\item (Invariance under transposition) $Det(A) = Det(A^T)$.
+\item (Determinants of elementary matrices)
+\begin{enumerate}
+\item For any type I elementary matrix $P_{ij}$, $Det(P_{ij}) = -1$.
+\item For any type II elementary matrix $D_i(r)$, $Det(D_i(r)) = r$.
+\item For any type III elementary matrix $E_{ij}(a)$, $Det(E_{ij}(a)) = 1$.
+\end{enumerate}
+\item (Cofactor expansions along rows or columns) If $A$ is an $n\times n$ matrix, then
+\begin{enumerate}
+\item (Rows) For any $1\le i\le n$, $Det(A) = \sum_{j=1}^n A(i,j)A_{ij}$. Moreover, if $1\le i\ne k\le n$, then $\sum_{j=1}^n A(i,j)A_{kj} = 0$.
+\item (Columns) For any $1\le j\le n$, $Det(A) = \sum_{i=1}^n A(i,j)A_{ij}$. Moreover, if $1\le j\ne k\le n$, then $\sum_{i=1}^n A(i,j)A_{ik} = 0$.
+\end{enumerate}
+\end{enumerate}
 \vskip.3in
 
+These properties can be used to produce algorithms for computing the determinant of a numerical matrix that are considerably more efficient than direct application of the definition (either using cofactor expansion along the first row, or the combinatorial sum over all permutations).
+\vskip.2in
+
+We will say that two matrices of the same dimension are {\it type III row equivalent} if one can be derived from the other by using only type III row operations, and are {\it type I-III row equivalent} if one can be derived from the other by using only type I and type III row operations.
+\vskip.2in
+
+The following is not difficult to prove.
+
+\begin{theorem} If $A$ is an $n\times n$ numerical matrix, then $A$ is I-III row equivalent to an upper triangular matrix.
+\end{theorem}
+
+\begin{exercise} Prove this result.
+\end{exercise}
+\vskip.2in
+
+A useful consequence of this theorem is the following algorithm for computing the determinant of a purely numerical matrix $A$:
+
+\begin{itemize}
+\item Using type I and III row operations, convert $A$ into an upper triangular matrix $B$.
+\item Compute $Det(B)$ as the product of its diagonal entries.
+\item Count the number of type I operations you used in going from $A$ to $B$. If it was an even number then $Det(A) = Det(B)$. If it was an odd number then $Det(A) = -Det(B)$.
+\end{itemize}
+\vskip.2in
+
+In practice the above procedure computes $Det(A)$ much more quickly than brute force application of either definition, and is used in many applications. However, it is only useful in the case $A$ is purely numerical (all of its entries are either real or complex numbers). For more general matrices that have non-numerical entries (for example, real-valued functions), Theorem 1 above no longer holds, and more sophisticated methods are needed for effectively computing the determinant.
 \end{document}

@@ -9,9 +9,13 @@
 \end{abstract}
 \maketitle
 
-Recall that a complex matrix $U$ is unitary if $U^* = U$. 
+If $A\in \mathbb C^{m\times n}$ is a complex $m\times n$ matrix, the {\it conjugate-transpose} of $A$ is defined entrywise by
+\[
+A^*(i,j) := \overline{A(j,i)}
+\]
+For complex matrices, this is the analogue of the transpose. A complex $n\times n$ matrix $U$ is said to be {\it unitary} if $U^* = U^{-1}$, and {\it Hermitian} if $U^* = U$ (these are the complex analogues of orthogonal and symmetric, respectively). The proof of the following theorem involves definitions and methods developed in the next module; it is included here for completeness. The theorem will allow us to determine necessary and sufficient conditions for diagonalizability.
 
-\begin{theorem} Let $A$ be a complex $n\times n$ matrix. Then there is a unitary matrix $U$ and upper triangular matrix $T$ such that
+\begin{theorem} (Shur's Theorem) Let $A$ be a complex $n\times n$ matrix. Then there is an $n\times n$ unitary matrix $U$ and an $n\times n$ upper triangular matrix $T$ such that
 \[
 U^**A*U = T
 \]
@@ -66,20 +70,8 @@ As a special case, when $A$ is a real $n\times n$ matrix, then it is Hermitian i
 \begin{corollary} If $A$ is an $n\times n$ real symmetric matrix, then it is diagonalizable and all of its eigenvalues are real.
 \end{corollary}
 
-We are now in a position to return to the question of how to decide when a sesquilinear conjugate-symmetric (complex) pairing - which in the real case reduces to a symmetric bilinear pairing - actually represents an inner product; in other words, is positive definite.
-
-\begin{theorem} Let $<_-,_->:\mathbb C^n\times\mathbb C^n\to \mathbb C, ({\bf v}, {\bf w})\mapsto <{\bf v}, {\bf w}>$ be a sesquilinear conjugate-symmetric pairing on $\mathbb C^n$, represented (with respect to the standard basis) by the Hermitian matrix $A$. Then $<_-,_->$ is positive-definite iff all of the eigenvalues of $A$ are positive (equivalently, iff $A$ is similar to a diagonal matrix $D$ with positive diagonal entries).
-\end{theorem}
-
-\begin{proof} Let $\{{\bf v}_1, {\bf v}_2, \dots, {\bf v}_n\}$ be an orthonormal basis for $\mathbb C^n$ consisting of eigenvectors of $A$, with $A*{\bf v}_i = \lambda_i{\bf v}_i, \lambda_i\in\mathbb R$ (this basis exists by the corollary above). If ${\bf v} = \sum\alpha_i{\bf v}_i$, then 
-\[
-<{\bf v}, {\bf v}> = {\bf v}^**A*{\bf v} = \sum_i|\alpha_i|^2\lambda_i
-\]
-It is easily seen that this sum satisfies condition (HIP3) iff $\lambda_i > 0\,\,\forall 1\le i\le n$.
-\end{proof}
-\vskip.2in
-
-A slightly more general class of Hermitian matrices are those that are {\it non-negative definite}, meaning that their eigenvalues are all non-negative. Now suppose $A$ is an arbitrary $n\times n$ complex matrix, and $B = A^**A$. Then clearly $B^* = (A^**A)^* = A^**A = B$ implying $B$ is Hermitian.
+A Hermitian matrix is said to be {\it positive definite} if all of its eignevalues are positive real numbers,
+and {\it non-negative definite}, if all of its eigenvalues are non-negative. Now suppose $A$ is an arbitrary $n\times n$ complex matrix, and $B = A^**A$. Then clearly $B^* = (A^**A)^* = A^**A = B$ implying $B$ is Hermitian.
 
 \begin{lemma} For any $n\times n$ matrix $A$, the matrix $B = A^**A$ is non-negative definite. Moreover, $B$ is positive definite iff $A$ is non-singular.
 \end{lemma}

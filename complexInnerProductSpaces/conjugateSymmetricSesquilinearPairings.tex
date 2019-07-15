@@ -43,7 +43,21 @@ P({\bf v}, {\bf v})\ge 0;\quad P({\bf v}, {\bf v}) = 0\,\text{ iff } {\bf v} = {
 \]
 \end{definition}
 
-In other words, it also satisfies property (HIP3). As in the real case, proper understanding of this last property will require a discussion of eigenspaces and diagonalizability for symmetric - and more generally Hermitian - matrices.
+In other words, it also satisfies property (HIP3).
+\vskip.2in
+
+It is important to know when a sesquilinear conjugate-symmetric (complex) pairing - which in the real case reduces to a symmetric bilinear pairing - actually represents an inner product; in other words, is positive definite. The following theorem does that for us.
+
+\begin{theorem} Let $<_-,_->:\mathbb C^n\times\mathbb C^n\to \mathbb C, ({\bf v}, {\bf w})\mapsto <{\bf v}, {\bf w}>$ be a sesquilinear conjugate-symmetric pairing on $\mathbb C^n$, represented (with respect to the standard basis) by the Hermitian matrix $A$. Then $<_-,_->$ is positive-definite iff all of the eigenvalues of $A$ are positive (equivalently, iff $A$ is similar to a diagonal matrix $D$ with positive diagonal entries).
+\end{theorem}
+
+\begin{proof} Let $\{{\bf v}_1, {\bf v}_2, \dots, {\bf v}_n\}$ be an orthonormal basis for $\mathbb C^n$ consisting of eigenvectors of $A$, with $A*{\bf v}_i = \lambda_i{\bf v}_i, \lambda_i\in\mathbb R$ (this basis exists as a consequence of Shur's Thoerem and its corrolaries). If ${\bf v} = \sum\alpha_i{\bf v}_i$, then 
+\[
+<{\bf v}, {\bf v}> = {\bf v}^**A*{\bf v} = \sum_i|\alpha_i|^2\lambda_i
+\]
+It is easily seen that this sum satisfies condition (HIP3) iff $\lambda_i > 0\,\,\forall 1\le i\le n$.
+\end{proof}
+\vskip.2in
 \vskip.3in
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

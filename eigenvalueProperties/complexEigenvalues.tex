@@ -9,12 +9,61 @@
 \end{abstract}
 \maketitle
 
-All of the constructions we have done so far over $\mathbb R$ extend naturally to $\mathbb C$, with some slight adjustment for the case of inner products (we will discuss this in more detail below). For now, the main reason for considering complex numbers has to do with the factorization of polynomials. The key result one want to know (whose proof involves techniques well beyond the scope of linear algebra) is
+All of the constructions we have done so far over $\mathbb R$ extend naturally to $\mathbb C$, with some slight adjustment for the case of inner products (we will discuss this in more detail below). For now, the main reason for considering complex numbers has to do with the factorization of polynomials. The key result one wants to know (whose proof involves techniques well beyond the scope of linear algebra) is
 
 \begin{theorem} {\rm ( The Fundamental Theorem of Algebra)} Any non-constant polynomial $p(z)$ with complex coefficients has a complex root. Consequently, any non-constant polynomial with real or complex coefficients can be factored over $\mathbb C$ into a product of linear terms
 \[
 p(z) = c(z - r_1)(z - r_2)\dots (z - r_n),\qquad c,r_1,r_2,\dots,r_n\in\mathbb C
 \]
+Moreover, this factorization of $p$ is unique up to reordering of the terms.
 \end{theorem}
+
+In particular, the characteristic polynomial of a real matrix which may not factor over the real numbers will factor completely over the complex numbers. The above theorem is part of a more general fact about polynomials, which tells us exactly what happens to a polynomial with real coefficients when one tries to factor it over the real numbers (in other words, write it as a product of smaller degree polynomials all of which have only real coefficients):
+
+\begin{theorem} If $p = p(x)$ is a polynomial of degree $n$ with real coefficients, then $p$ can be factored as a product
+\[
+p(x) = c(x - r_1)(x - r_2)\dots (x - r_k)q_1(x)q_2(x)\dots q_l(x)
+\]
+where 
+\begin{itemize}
+\item $r_i\in\mathbb R, 1\le i\le k$ are the real roots of $p$;
+\item each $q_j(x) = x^2 + b_jx + c_j$ is an irreducible quadratic that over $\mathbb C$ factors as $q_j(x) = (x - z_j)(x - \overline{z_j})$;
+\item $n = k + 2l$.
+\end{itemize}
+Moreover, this factorization of $p$ is unique up to reordering of the terms.
+\end{theorem}
+
+With these theorems in mind, let's take a closer look at the example from the previous section.
+
+\begin{example} The matrix $A = \begin{bmatrix} 0 & 1\\-1 & 0\end{bmatrix}$ has a characteristic polynomial $p_A(t) = t^2 + 1$, which is irreducible over $\mathbb R$ (has no real roots). consequently, it has no real eigenvectors in $\mathbb R^2$. And it is easy to see why, geometrically; the action of left-multiplication by $A$ corresponds to clockwise rotation by $90^\circ$. 
+\vskip.1in
+
+Factoring $q$ over $\mathbb C$, we get $q(t) = (t - i)(t + i)$, where $i = \sqrt{-1}$. Because an eigenspace must have dimension greater than or equal to 1, and the dimension of $\mathbb C^2$ (as a vector space over $\mathbb C$) is 2, we can conclude that both $E_{i}(A)$ and $E_{-i}(A)$ must be 1-dimensional vector spaces over $\mathbb C$. 
+\vskip.1in
+
+A vector ${\bf v} = \begin{bmatrix} z_1\\ z_2\end{bmatrix}$ is an eigenvector of $A$ corresponding to the eigenvector $i$ precisely when $iz_1 = z_2$. Similarly, it is an eigenvector of $A$ corresponding to the eigenvector $-i$ precisely when $-iz_1 = z_2$. Thus $E_{i}(A) = span\left\{\begin{bmatrix} 1\\ i\end{bmatrix}\right\}$, and $E_{-i}(A) = span\left\{\begin{bmatrix} 1\\ -i\end{bmatrix}\right\}$.
+\end{example}
+\vskip.1in
+
+The matrix $A$ is an example of a real matrix which is not real-diagonalizable, but is diagonalizable. If we set $S = \begin{bmatrix} 1 & 1\\i & -i\end{bmatrix}$, then
+\[
+S^{-1}*A*S = D = \begin{bmatrix} i & 0\\ 0 & -i\end{bmatrix}
+\]
+
+In general, we will say $A$ is {\it diagonalizable} if it is so over $\mathbb C$; this property can be expressed in various equivalent ways, just as before in the real case.
+
+\begin{theorem} Given $A\in\mathbb C^{n\times n}$, the following statements are equivalent:
+\begin{enumerate}
+\item $\mathbb C^n$ has a basis consisting of eigenvectors of $A$.
+\item $\mathbb C^n$ can be written as a direct sum of eigenspaces of $A$.
+\item $A$ is diagonalizable.
+\end{enumerate}
+\end{theorem}
+
+The proof is the same as before, and is left to the reader. For example, with the matrix $A = \begin{bmatrix} 0 & 1\\-1 & 0\end{bmatrix}$ examined above, the two eigenspaces combine to give a direct sum decomposition $\mathbb C^2 = E_{i}(A)\oplus E_{-i}(A)$. 
+\vskip.2in
+
+On the other hand, for the matrix $B = \begin{bmatrix} 1 & 1\\0 & 1\end{bmatrix}$ with characteristic polynomial $p_B(t) = (1-t)^2 = (t-1)(t-1)$, the only eigenvalue is $t=1$, and working over $\mathbb C$ instead of $\mathbb R$ doesn't change the picture in terms of diagonalizability. In order to better understand the conditions that can result in non-diagonalizable matrices, we need to discuss multiplicity. This is done next.
+
 
 \end{document}

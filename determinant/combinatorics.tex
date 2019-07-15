@@ -9,7 +9,7 @@
 \end{abstract}
 \maketitle
 
-Let $S_n = \{1,2,\dots,n\}$ be the set consisting of the intergers between $1$ and $n$ inclusive. We denote by $\Sigma_n$ the set of maps $\sigma:S_n\xrightarrow{\cong} S_n$ of $S_n$ to itself which are {\it isomorphisms}, meaning that they are 1-1 and onto. An element $\sigma\in\Sigma_n$ should be thought of as a {\it reordering} of the elements of $S_n$, with $\Sigma_n$ consisting of all such reorderings. Elements of $\Sigma_n$ can be {\it multiplied} (with multiplication given by composition), and with respect to that multiplication every element $\sigma\in\Sigma_n$ has an inverse $\sigma^{-1}\in\Sigma_n$ satisfying $\sigma \sigma^{-1} = Id$. A set satisfying these properties is called a {\it group}, and $\Sigma_n$ is typically referred to as {\it the permutation group on n letters}.
+Let $S_n = \{1,2,\dots,n\}$ be the set consisting of the integers between $1$ and $n$ inclusive. We denote by $\Sigma_n$ the set of maps $\sigma:S_n\xrightarrow{\cong} S_n$ of $S_n$ to itself which are {\it isomorphisms}, meaning that they are 1-1 and onto. An element $\sigma\in\Sigma_n$ should be thought of as a {\it reordering} of the elements of $S_n$, with $\Sigma_n$ consisting of all such reorderings. Elements of $\Sigma_n$ can be {\it multiplied} (with multiplication given by composition), and with respect to that multiplication every element $\sigma\in\Sigma_n$ has an inverse $\sigma^{-1}\in\Sigma_n$ satisfying $\sigma \sigma^{-1} = Id$. A set satisfying these properties is called a {\it group}, and $\Sigma_n$ is typically referred to as {\it the permutation group on n letters}.
 \vskip.2in
 Among the elements of $\Sigma_n$ are permutations of a particularly simple type, called {\it transpositions}. The permutation which switches two numbers $i$ and $j$, while leaving all others fixed, will be labeled $\tau_{ij}$ (note: $\tau_{ij}$ is often written as $(i,j)$, however this can be confused with the coordinate notation for points in $\mathbb R^2$, hence our choice not to use it).
 \vskip.2in
@@ -18,6 +18,7 @@ It is not hard to see that any permutation $\sigma\in\Sigma_n$ can be written as
 \sigma = \tau_{i_1,j_1}\tau_{i_2,j_2}\dots\tau_{i_m,j_m}
 \]
 The way of doing so is far from unique, but it turns out that - given $\sigma$ - the {\it number} of transpositions used rewriting $\sigma$ in this fashion is {\it always even or always odd}. This allows for the definition of the {\it sign} of a permutation:
+\vskip.2in
 
 \begin{definition} For $\sigma\in\Sigma_n$, the sign of $\sigma$, denoted by $sgn(\sigma)$ is given by
 \[
@@ -25,6 +26,7 @@ sgn(\sigma) := (-1)^m\quad\text{if } \sigma = \tau_{i_1,j_1}\tau_{i_2,j_2}\dots\
 \]
 where the product on the right is a product of transpositions.
 \end{definition}
+\vskip.2in
 
 With this concept established, the determinant may alternatively be defined as
 
@@ -33,5 +35,13 @@ With this concept established, the determinant may alternatively be defined as
 Det(A) = \sum_{\sigma\in\Sigma_n}sgn(\sigma) A(1,\sigma(1))A(2,\sigma(2))\dots A(n,\sigma(n))
 \]
 \end{definition}
+\vskip.2in
+
+\begin{exercise} Let A = $\begin{bmatrix} 2 & 3 & -1\\-2 & -4 & 5\\0 & -3 & 7\end{bmatrix}$, as in the last example of the previous section. Using the combinatorial definition above, compute $Det(A)$. Verify that you get the same answer as before.
+\end{exercise}
+\vskip.2in
+
+\begin{exercise} Let A = $\begin{bmatrix} a_{11} & a_{12} & a_{13}\\a_{21} & a_{22} & a_{23}\\a_{31} & a_{32} & a_{33}\end{bmatrix}$. Using the combinatorial definition above, compute $Det(A)$ as a sum of products of entries of $A$. Verify that you get the same answer by using the cofactor expansion definition.
+\end{exercise}
 
 \end{document}
