@@ -1,0 +1,56 @@
+\documentclass{ximera}
+\input{../preamble.tex}
+\title{Generalized Eigenvectors}
+\author{Crichton Ogle}
+
+\begin{document}
+\begin{abstract}
+  
+\end{abstract}
+\maketitle
+
+Schur's Theorem allowed us to identify precisely when a matrix was diagonalizable. We have also seen simple examples of matrices that are defective (not diagonalizable). 
+\vskip.2in
+
+Can we say more about the defective case? The answer is ``yes". To illustrate the basic idea, let's look again at the matrix $A = \bmatrix 1 & 1\\0 & 1\endbmatrix$. The eigenvalue $\lambda = 1$ has algebraic multiplicity $m_a = 2$ but geometric multiplicity $m_g = 1$, making $A$ defective. The eigenspace $E_1(A)$ is $1$-dimensional and is spanned by the vector ${\bf e}_1 = \bmatrix 1\\0\endbmatrix$.
+\vskip.2in
+Now $E_1(A) = N(A - Id) = N\left(\bmatrix 0 & 1\\0 & 0\endbmatrix\right)$. Notice in this case that
+\[
+(A - Id)^2 = \bmatrix 0 & 1\\0 & 0\endbmatrix^2 = \bmatrix 0 & 0\\0 & 0\endbmatrix
+\]
+
+and the nullspace of $(A - Id)^2$ is all of $R^2$, and strictly larger than the nullspace of $(A-Id)$. It also includes the vector ${\bf e}_2 = \bmatrix 0\\1\endbmatrix$; in fact, one has the equality
+\[
+(A - Id)*{\bf e}_2 = {\bf e}_1
+\]
+In other words, ${\bf e}_2$ is not an eigenvector of $A$ corresponding to the eigenvalue $\lambda = 1$, but $(A - Id)*{\bf e}_2$ is. Because of this, we refer to ${\bf e}_2$ as a {\it generalized eigenvector} of $A$ of order $2$. In general we have the following result
+\vskip.2in
+
+\begin{theorem} If $A$ is an $n\times n$ matrix with eigenvalue $\lambda$ of algebraic multiplicity $m_a(\lambda)$, then 
+\[
+dim\left((A - \lambda Id)^l\right) = m_a(\lambda)
+\]
+for all $l\ge m_a(\lambda)$.
+\end{theorem}
+
+For the eigenvalue $\lambda$ of $A$ and integer $k\ge 1$ we define the {\it kth order} eigenspace to be $E_\lambda^k(A) := N\left((A - Id)^k\right)$. There are inclusions
+\[
+E_\lambda(A) = E_\lambda^1(A) \subseteq 
+E_\lambda^2(A)\subseteq E_\lambda^3(A)\subseteq\dots 
+\subseteq E_\lambda^{m_a(\lambda)}(A) = E_\lambda^{m_a(\lambda)+1}(A)=\dots
+\]
+which become equalities by the above result once we reach order $m_a(\lambda)$. For each $k$, $E_\lambda^k(A)$ consists of the linear span of the generalized eigenvectors of $A$ or order $\le k$. The space $\tilde{E}_\lambda(A) := E_\lambda^{m_a(\lambda)}(A)$ is referred to as the {\it generalized eigenspace of A} corresponding to the eigenvalue $\lambda$.
+\vskip.2in
+
+\begin{theorem} Let $A$ be an $n\times n$ matrix with entries in $\mathbb C$, and let $\lambda_1,\dots,\lambda_r$ be the distinct eigenvalues of $A$. Then $\mathbb C^n$ can be written as a direct sum of the generalized eigenspaces of $A$:
+\[
+\tilde{E}_{\lambda_1}(A)\oplus \tilde{E}_{\lambda_2}(A)\oplus\dots\oplus \tilde{E}_{\lambda_r}(A) = \mathbb C^n
+\]
+\end{theorem}
+The proof amounts to showing that the sum of the generalized eigenspaces is actually a direct sum (just as it is for regular eigenspaces associated with distinct eigenvectors). Consequently
+\vskip.2in
+
+\begin{corollary} For any $n\times n$ complex matrix $A$, $\mathbb C^n$ admits a basis consisting of generalized eigenvectors of $A$.
+\end{corollary}
+
+\end{document}
