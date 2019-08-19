@@ -81,7 +81,7 @@ We will illustrate our final point by looking at what happens if we go one degre
 \[
 A3*{\bf c} = {\bf y}
 \]
-Where $A3 = \begin{bmatrix} 1 & 2 & 4\\1 & 4 & 16\\1 & 7 & 49\\1 & 9 & 81\\8 & 64 & 343 & 729\end{bmatrix}$, ${\bf c} = \begin{bmatrix}c_0\\c_1\\c_2\\c_3\end{bmatrix}$, and ${\bf y} = \begin{bmatrix} 3\\6\\10\\14\end{bmatrix}$. The matrix $A_3$ is still full rank (it has rank 34). Therefore least-squares solution is unique and given by
+Where $A3 = \begin{bmatrix} 1 & 2 & 4 & 8\\1 & 4 & 16 & 64\\1 & 7 & 49 & 343\\1 & 9 & 81 & 729\end{bmatrix}$, ${\bf c} = \begin{bmatrix}c_0\\c_1\\c_2\\c_3\end{bmatrix}$, and ${\bf y} = \begin{bmatrix} 3\\6\\10\\14\end{bmatrix}$. The matrix $A_3$ is still full rank (it has rank 4). Therefore least-squares solution is unique and given by
 \[
 {\bf c} = (A3^T*A3)^{-1}*A3^T*{\bf y} = \begin{bmatrix} -1.6\\ 2.890476\\-0.342857\\0.023810\end{bmatrix}
 \]

@@ -8,16 +8,32 @@
 \end{abstract}
 \maketitle
 
-The dot product defined in the previous section is a specific example of a {\it bilinear, symmetric pairing}. We consider these properties in sequence.
+The dot product defined in the previous section is a specific example of a {\it bilinear, symmetric, positive definite pairing} on the vector space $\mathbb R^n$. We consider these properties in sequence, for an arbitrary vector space $V$ over $\mathbb R$.
 \vskip.2in
 
-A {\it bilinear pairing} on $\mathbb R^n$ is a map $P:\mathbb R^n\times\mathbb R^n\to \mathbb R$ which simply satisfies property (IP2). A {\it symmetric bilinear pairing} is a bilinear pairing that also satisfies (IP1). These pairings admit a straightforward matrix representation, not unlike the matrix representation of linear transformations discussed previously. Again, we assume we are looking at coordinate vectors with respect to the standard basis for $\mathbb R^n$.
+A {\it bilinear pairing} on $V$ is a map $P:\mathbb V\times\mathbb V\to \mathbb \mathbb R$ which simply satisfies property
+\vskip.1in
+(IP2) \begin{gather*}
+P(\alpha_1{\bf v}_1 + \alpha_2{\bf v}_2,{\bf w}) = \alpha_1P({\bf v}_1,{\bf w}) + \alpha_2P({\bf v}_2,{\bf w})\\
+P({\bf v}, \beta_1{\bf w}_1 + \beta_2{\bf w}_2) = \beta_1P({\bf v},{\bf w}_1) + \beta_2P({\bf v},{\bf w}_2)
+\end{gather*}
+\vskip.1in
+A {\it symmetric bilinear pairing} is a bilinear pairing that also satisfies
+\vskip.1in
+(IP1) 
+\[ 
+P({\bf v},{\bf w}) = P({\bf w},{\bf v})
+\]
+\vskip.1in
+
+
+These pairings admit a straightforward matrix representation, not unlike the matrix representation of linear transformations discussed previously. Again, we assume we are looking at coordinate vectors with respect to the standard basis for $\mathbb R^n$.
 
 \begin{theorem}\label{thm:matrep} For any bilinear pairing $P$ on $\mathbb R^n$, there is a unique $n\times n$ matrix $A_P$ such that
 \[
 P({\bf v},{\bf w}) = {\bf v}^T*A_P*{\bf w}
 \]
-Moreover, if $P$ is symmetric then so is $A_P$. Conversely, any $n\times n$ matrix $A$, determines a unique bilinear pairing $P_A$ on $\mathbb R^n$ by
+Moreover, if $P$ is symmetric then so is $A_P$. Conversely, any $n\times n$ matrix $A$ determines a unique bilinear pairing $P_A$ on $\mathbb R^n$ by
 \[
 P_A({\bf v}, {\bf w}) = {\bf v}^T*A*{\bf w}
 \]
@@ -31,13 +47,97 @@ A_P(i,j) := P({\bf e}_i,{\bf e}_j),\quad 1\le i,j\le n
 By construction, the pairing $({\bf v},{\bf w})\mapsto {\bf v}^T*A_P*{\bf w}$ is bilinear, and agrees with $P$ on ordered pairs of basis vectors. Thus the two agree everywhere. This establishes a 1-1 correspondence (bilinear pairings on $\mathbb R^n$) $\Leftrightarrow$ ($n\times n$ matrices). Again, by construction, the matrix $A_P$ will be symmetric  iff $P$ is. Thus this correspondence restricts to a 1-1 correspondence (symmetric bilinear pairings on $\mathbb R^n$) $\Leftrightarrow$ ($n\times n$ symmetric matrices).
 \end{proof}
 
-\begin{definition} An {\it inner product} on $\mathbb R^n$ is a symmetric bilinear pairing $P$ that is also positive definite:
+\begin{definition} An {\it inner product} on $V$ is a symmetric bilinear pairing $P$ that is also positive definite:
+\end{definition}
+\vskip.1in
+(IP3)
 \[
 P({\bf v}, {\bf v})\ge 0;\quad P({\bf v}, {\bf v}) = 0\,\text{ iff } {\bf v} = {\bf 0}
 \]
-\end{definition}
 
-In other words, it also satisfies property (IP3). However, unlike properties (IP1) and (IP2), (IP3) is harder to translate into properties of the representing matrix. In fact, this last property will only come into focus after we have covered eigenspaces and diagonalizability for symmetric matrices, which is done below.
+
+However, unlike properties (IP1) and (IP2), (IP3) is harder to translate into properties of the representing matrix. In fact, this last property is closely related to the property of diagonalizability for symmetric matrices. 
+\vskip.2in
+
+\begin{theorem} Let $P$ be a symmetric bilinear pairing on $\mathbb R^n$, represented (as above) by the real symmetric matrix $A_P$. Then $P$ is positive definite precisely when all of the eigenvalues of $A_P$ are positive.
+\end{theorem}
+
+\begin{proof} As $A_P$ is symmetric, it is diagonalizable; hence $\mathbb R^n$ has a basis $S = {\bf v}_1,\dots, {\bf v}_n\}$ where each ${\bf v}_i$ is an eigenvector of $A_P: A_P*{\bf v}_i = \lambda_i{\bf v}_i; 1\le i\le n$.
+\vskip.2in
+
+Suppose $P$ is positive definite. Then for each $i$ one has
+\[
+P({\bf v}_i,{\bf v}_i) = {\bf v}_I^T*A_P*{\bf v}_i
+= {\bf v}_i^T*(\lambda_i{\bf v}_i) = \lambda_i \|{\bf v}_i\|^2 > 0
+\]
+and as $\|{\bf v}_i\|^2 > 0$ for each $i$ the last inequality implies $\lambda_i > 0$ for each $i$.
+\vskip.2in
+
+On the other hand, suppose all of the eigenvalues are positive. Let $\bf v$ be an arbitrary non-zero vector in $\mathbb R^n$. As $S$ is a basis $\bf v$ can be written uniquely as a linear combination of the vectors in $S$:
+\[
+{\bf v} = \alpha_1{\bf v}_1 + \alpha_2{\bf v}_2 +\dots + \alpha_n{\bf v}_n
+\]
+where at least one of the coefficients $\alpha_i\ne 0$. Then
+\begin{gather}
+P({\bf v},{\bf v}) = P(\sum_{i=1}^n \alpha_i{\bf v}_i, \sum_{j=1}^n \alpha_j{\bf v}_j)\\
+= \sum_{i=1}^n\sum_{j=1}^n (\alpha_i\alpha_j)P({\bf v}_i,{\bf v}_j)
+= \sum_{i=1}^n\sum_{j=1}^n (\alpha_i\alpha_j)({\bf v}_i^T*A_P*{\bf v}_j)
+\end{gather}
+\begin{claim} If $\lambda_i\ne \lambda_j$ then ${\bf v}_i^T*A_P*{\bf v}_j = 0$.
+\end{claim}
+To see why this is, consider the sequence of equalities
+\begin{gather*}
+\lambda_j({\bf v}_i\cdot{\bf v}_j) = \lambda_j{\bf v}_i^T*{\bf v}_j
+= {\bf v}_i^T*\lambda_j{\bf v}_j = {\bf v}_i^T*A_P*{\bf v}_j=\\
+\left({\bf v}_i^T*A_P*{\bf v}_j\right)^T = {\bf v}_j^T*A_P^T*{\bf v}_i = 
+{\bf v}_j^T*A_P*{\bf v}_i = {\bf v}_j^T*\lambda_i{\bf v}_i\\
+= \lambda_i {\bf v}_j\cdot{\bf v}_i = \lambda_i({\bf v}_i\cdot{\bf v}_j)
+\end{gather*}
+In other words, $\lambda_j({\bf v}_i\cdot{\bf v}_j) = \lambda_i({\bf v}_i\cdot{\bf v}_j)$. But since $\lambda_i\ne \lambda_j$ this must mean that ${\bf v}_i\cdot{\bf v}_j = 0$.
+\vskip.2in
+
+Now if $\lambda = \lambda_i = \lambda_j$ is a repeated eigenvalue, this argument doesn't work. The trick is to choose the basis $S$ with a bit of care. Let $\lambda$ be an eigenvalue of $A_P$, with corresponding eigenspace $E_\lambda(A_P)$. We will see below that the subspace $E_\lambda(A_P)$ has an {\it orthogonal} basis $S_\lambda := \{{\bf w}_1,\dots,{\bf w}_{k_\lambda}\}$; one where ${\bf w}_i\cdot{\bf w}_j = 0$ whenever $i\ne j$. So for each eigenvalue $\lambda$ choose an orthogonal basis $S_\lambda$. Then let $S$ be the union of all of the orthogonal basis sets $S_\lambda$. Because $A_P$ is diagonalizable, $\mathbb R^n = E(A_P)$, the direct sum of the eigenspaces of $A_P$. Since $S$, as just defined, is a basis for $E(A_P)$, it is a basis for $\mathbb R^n$.
+\vskip.2in
+\begin{claim} If ${\bf v}_i,{\bf v}_j\in S$ are distinct basis vectors, then
+${\bf v}_i^T*A_P*{\bf v}_j = 0$.
+\end{claim}
+By the previous claim, this is true if the two basis vectors lie in different eigenspaces. But if ${\bf v}_i,{\bf v}_j\in E_\lambda(A_P)$ for some eigenvalue $\lambda$ then
+\[
+{\bf v}_i^T*A_P*{\bf v}_j = {\bf v}_i^T*\lambda{\bf v}_j
+= \lambda {\bf v}_i\cdot{\bf v}_j = 0
+\]
+by the orthogonality of the basis for $E_\lambda(A_P)$, proving the claim.
+\vskip.2in
+
+Returning to the sum in eq. (0.2) above, using this basis $S$, we have
+\[
+P({\bf v},{\bf v}) = \sum_{i=1}^n\sum_{j=1}^n (\alpha_i\alpha_j) ({\bf v}_i^T*A_P*{\bf v}_j) = \sum_{i=1}^n (\alpha_i)^2 ({\bf v}_i^T*A_P*{\bf v}_i) = \sum_{i=1}^n (\alpha_i)^2 \lambda_i \|{\bf v}_i\|^2
+\]
+Since $\lambda_i\|{\bf v}_i\|^2 > 0$ for each $i$ and $\alpha_i^2\ge 0$, this sum must always be non-negative. Moreover, the only way it can be zero is if each term is zero, which can only happen if $\alpha_i = 0$ for each $i$. In other words, $P$ is positive definite, completing the proof.
+\end{proof}
+
+For this reason we call a real symmetric matrix {\it positive definite} iff all of its eigenvalues are positive.
+\vskip.2in
+
+It is conventional in mathematics to denote inner products, and more generally bilinear pairings, by the symbol $<_-,_->$. In other words, a bilinear pairing on a vector space $V$ is denoted by
+\[
+V\times V\ni ({\bf v}, {\bf w})\mapsto <{\bf v}, {\bf w}>\in \mathbb R
+\]
+\vskip.2in
+
+We have seen how a given bilinear pairing on $\mathbb R^n$ is represented by an $n\times n$ matrix, and conversely, how any $n\times n$ matrix can be used to define a bilinear pairing on $\mathbb R^n$. The same is true more generally for bilinear pairings on an $n$-dimensional vector space $V$. The proof of the following theorem follows exactly as in the case for $\mathbb R^n$ equipped with the standard basis (the case we looked at above).
+
+\begin{theorem} Let $V$ be a vector space over $\mathbb R$ of dimension $n$, and let $P = <_-,_->$ be a bilinear pairing on $V$. Then for any basis $S$ of $V$ (not necessarily orthogonal) there is a matrix $A = A_{P,S}$ depending on both $P$ and $S$ such that for every ${\bf v}, {\bf w}\in V$ there is an equality (of real numbers)
+\begin{equation}
+<{\bf v},{\bf w}> = {}_S{\bf v}^T*A*{}_S{\bf w}
+\end{equation}
+and, conversely, any $n\times n$ matrix $A$ determines a bilinear pairing on $<_-,_-> = <_-,_->_A$ on $V$ by the above equation (0.3). For fixed basis $S$ this establishes a 1-1 correspondence between the set of bilinear pairings on $V$ and the set of $n\times n$ real matrices. Moreover, the bilinear pairing is symmetric iff its matrix representation is a symmetric matrix, and the symmetric bilinear pairing is positive definite iff its symmetric matrix representation is positive definite (as defined above).
+\end{theorem}
+
+\begin{exercise} Write down a proof of this theorem, using the proofs of the previous two theorems as a guide.
+\end{exercise}
+
+
 \vskip.3in
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
