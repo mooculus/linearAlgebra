@@ -63,7 +63,22 @@ A = \begin{bmatrix} {\bf w}_1 & {\bf w}_2 & \dots & {\bf w}_m\end{bmatrix}
 we observe that (by construction) $W = C(A)$, the column space of $A$. We can then use the method described in the section {\it Spanning sets, row spaces, and column spaces} to find a minimal spanning set $T\subseteq S$ from among the original vectors in $S$. Thus we have an efficient algorithm for finding a basis for any vector space which is a subspace of $\mathbb R^n$ (for some $n$).
 \vskip.2in
 
-In the event the vector space $W$ is not naturally a subspace of $\mathbb R^n$ for some $n$ this algorithm still applies, but we need to do something else first. That is described in the next section.
+An important consequence of the above is
+
+\begin{proposition} If $V$ is a finite-dimensional vector space and $W\subset V$ is a subspace, then $Dim(W)\le Dim(V)$; moreover $Dim(W) = Dim(V)$ iff $W=V$.
+\end{proposition}
+
+\begin{proof} We can assume, without loss of generality, that both $W$ and $V$ are non-zero vector spaces. Let $\{ {\bf w}_1,\dots,{\bf w}_m\}$ be a basis for $W$. As the set is linearly independent in $W$, it is also linearly independent in $V$, and so extends to a basis $\{{\bf w}_1,\dots,{\bf w}_m,\dots, {\bf w}_{m+l}\}$ for $V$ where $l\ge 0$. Hence $Dim(W)\le Dim(V)$. And since the dimension is independent of the choice of basis, $W=V$ precisely when $l=0$.
+\end{proof}
+
+We will occasionally write ${\bf e}_i\in\mathbb R^n$ as ${\bf e}_i^n$ when we want to emphasize the fact that the vector lies in $\mathbb R^n$. Given the equivalence between bases and minimal spanning sets, we have
+
+\begin{proposition} For all $n\ge 1$, the set $\underline{e} := \{{\bf e}_1^n,\dots,{\bf e}_n^n\}$ is a basis for $\mathbb R^n$.
+\end{proposition}
+
+The basis $\underline{e}$ is referred to as the {\it standard basis} for $\mathbb R^n$.
+
+The above method works for finding a basis for a subspace of $\mathbb R^n$. In the event the finite-dimensional vector space $W$ is not naturally a subspace of $\mathbb R^n$ for any $n$ this method still applies, but we need to do something else first. That is described in the next section.
 
 
 

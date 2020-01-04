@@ -33,7 +33,7 @@ implying $Range(A)$ is closed under addition.
 \[
 A*(\alpha{\bf x}) = \alpha(A*{\bf x}) = \alpha{\bf v} 
 \]
-implying $N(A)$ is closed under scalar multiplication.
+implying $Range(A)$ is closed under scalar multiplication.
 \end{proof}
 
 In fact, we can identify the range precisely in terms of a subspace already defined.
@@ -42,7 +42,7 @@ In fact, we can identify the range precisely in terms of a subspace already defi
 \end{lemma}
 
 \begin{proof}
-The consistency theorem for matrix equations tells us that the matrix equation $A*{\bf x} = {\bf b}$ if and only if $\bf b$ can be written as a linear combination of the columns of $A$. But this is equivalent to saying that $\bf b$ is in the span of the columns of $A$; that is, ${\bf b}\in C(A)$.
+The consistency theorem for matrix equations tells us that the matrix equation $A*{\bf x} = {\bf b}$ is consistent if and only if $\bf b$ can be written as a linear combination of the columns of $A$. But this is equivalent to saying that $\bf b$ is in the span of the columns of $A$; that is, ${\bf b}\in C(A)$.
 \end{proof}
 
 Since we have already established an algorithm for computing a minimal spanning set for $C(A)$, that same algorithm applies to produce a minimal spanning set for the range of $A$.
@@ -53,7 +53,7 @@ If  $A = \begin{bmatrix}
 2 & 5 & -3 & 0 & -2\\
 -1 & 3 & 7 & 1 & 4\\
 2 & 6 & 9 & 8 & -3
-\end{bmatrix}$, compute a minimal spanning set for $Range(A)\subseteq \mathbb R^4$. Determine if $Range(A) = \mathbb R^4$, or if it is a proper subset.
+\end{bmatrix}$, compute a minimal spanning set for $Range(A)\subseteq \mathbb R^4$. Determine if $Range(A) = \mathbb R^4$, or if it is a proper subset. You may use MATLAB or Octave.
 \end{exercise}
 
 

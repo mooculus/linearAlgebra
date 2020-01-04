@@ -11,16 +11,17 @@
 \end{abstract}
 \maketitle
 
-If $S = \{{\bf v}_1,\dots, {\bf v}_n\}\subset V$ is a (finite) collection of vectors in a vector space $V$, then the {\it span} of $S$ is the set of all linear combinations of the vectors in $S$. That is
+If $S = \{{\bf v}_1,\dots, {\bf v}_n\}\subset V$ is a (finite) collection of vectors in a vector space $V$, then the {\it span} of $S$ is the set of \underbar{all} linear combinations of the vectors in $S$. That is
 \[
 Span(S) := \{\alpha_1{\bf v}_1 + \alpha_2{\bf v}_2 +\dots +\alpha_n{\bf v}_n\ |\ \alpha_i\in\mathbb R\}
 \] 
+\vskip.2in
 
 \begin{remark} If $S = \{{\bf v}_i\ |\ i\in\mathbb N\}$ is a countably infinite set of vectors, then the (linear, algebraic) span of the vectors is defined to be
 \[
 Span\{{\bf v}_i\ |\ i\in\mathbb N\} := \left\{\sum_i\alpha_i{\bf v}_i\ |\ \text{all but finitely many of the }\alpha_i\text{ are zero}\right\}
 \]
-the definition can be extended to arbitrarily large sets of vectors using a slightly different method of extension. Thus, if $S\subseteq V$ is an arbitrary set of vectors in $V$, then
+the definition can be extended to arbitrarily large sets of vectors using a slightly different method of extension. If $S\subseteq V$ is an arbitrary set of vectors in $V$, then
 \[
 Span(S) := \underset{T\text{ finite}}{\underset{T\subseteq S}{\bigcup}} Span(T)
 \]
@@ -69,7 +70,13 @@ Suppose now that $S$ is an infinite set. The first property is verified the same
 \begin{proof} Because we allow spanning sets to be arbitrarily large, we can take $S = V$ and observe that $V = Span(V)$ for trivial reasons.
 \end{proof}
 
-This lemma suggests that spanning sets are not only not unique, they can have vastly different sizes. For example, $\mathbb R^2$ is spanned by $\{{\bf e}_1, {\bf e}_2\}$. It is also spanned by the set $\mathbb R^2$ itself, which is much larger. It is natural to ask how small a spanning set can be. This leads to
+\begin{example} In $\mathbb R^n$ we write ${\bf e}_i$ for the $n\times 1$ column vector which is zero in each entry except the ith, where it is equal to $1$ (in other words, in matrix notation, ${\bf e}_i(i,1) = 1; {\bf e}_i(j,1) = 0, j\ne i$). Then the set $\{{\bf e}_1,{\bf e}_2,\dots, {\bf e}_n\}$ spans $\mathbb R^n$, since for any vector ${\bf v} = [a_1,a_2,\dots,a_n]^T$ we have
+\[
+[a_1,a_2,\dots,a_n]^T = \sum_{i=1}^n a_i{\bf e}_i
+\]
+\end{example}
+
+The lemma above suggests that spanning sets are not only not unique, they can have vastly different sizes. For example, $\mathbb R^2$ is spanned by $\{{\bf e}_1, {\bf e}_2\}$. It is also spanned by the set $\mathbb R^2$ itself, which is much larger. It is natural to ask how small a spanning set can be. This leads to
 
 \begin{definition} $S$ is a {\it minimal spanning set} for $V$ if
 \begin{itemize} 
@@ -78,6 +85,13 @@ This lemma suggests that spanning sets are not only not unique, they can have va
 \end{itemize}
 \end{definition}
 \vskip.2in
+
+\begin{proposition} For all $n\ge 1$ the set $S_n := \{{\bf e}_1,\dots, {\bf e}_n\}$ is a minimal spanning set for $\mathbb R^n$.
+\end{proposition}
+
+\begin{proof} As we have seen, $S_n$ spans $\mathbb R^n$, so it is a spanning set for $\mathbb R^n$. However, if we form the subset $T_i\subset S_n$ by removing ${\bf e}_i$ from the set, then any vector in the span of $T_i$ contains zero in its ith coordinate. So $Span(T_i)\ne \mathbb R^n$, and $S_n$ must be minimal. 
+\end{proof}
+
 
 Recall that for a matrix $A$ we write $A(i,:)$ for the ith row, and $A(:,j)$ for the jth column. If $A$ is an $m\times n$ matrix, then each row $A(i,:)$ is a row vector in the vector space $\mathbb R^{1\times n}$, while each column is a vector in the vector space $\mathbb R^{m\times 1} = \mathbb R^m$. This leads to the following definition
 
@@ -114,14 +128,15 @@ Given a matrix $A$, a minimal spanning set for $C(A)$ is found by
 \]
 \end{itemize}
 
-Moreover, in the reduced row echelon form the columns that are not pivot columns are easily computed as linear combinations of the pivot columns. And since the row space remains unchanged under row operations, a minimal spanning set for $R(A)$ is found by
+Moreover, in the reduced row echelon form the columns that are not pivot columns are easily computed as linear combinations of the pivot columns. And since the row space remains unchanged under row operations, a minimal spanning set for $R(A) = R(rref(A))$ is found by
 \begin{itemize}
 \item computing $rref(A)$;
 \item identifying the set $D = \{1,\dots,k\}$ of indices corresponding to the non-zero rows of $rref(A)$;
 \item choosing as your minimal spanning set for $R(A)$ the subset of row vectors
 \[
-\{A(1,:),\dots, A(k,:)\}
+\{B(1,:),\dots, B(k,:)\}
 \]
+where $B = rref(A)$.
 \end{itemize}
 
 Note that, unlike the column case, these rows typically won't be among the original set of rows of $A$; they will simply have the same span.

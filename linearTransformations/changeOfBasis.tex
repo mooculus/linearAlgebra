@@ -9,7 +9,7 @@
 \end{abstract}
 \maketitle
 
-Suppose now that $V$ is an $n$-dimensional vector space equipped with two bases $S_1 = \{{\bf v}_1,{\bf v}_2,\dots,{\bf v}_n\}$ and $S_2 = \{{\bf w}_1, {\bf w}_2,\dots,{\bf w}_n\}$ (we are assuming here the fact, listed above, that any two bases for $V$ must have the same number of elements). Taking $L=Id$, Theorem \ref{thm:matrep} yields the equation
+Suppose that $V$ is an $n$-dimensional vector space equipped with two bases $S_1 = \{{\bf v}_1,{\bf v}_2,\dots,{\bf v}_n\}$ and $S_2 = \{{\bf w}_1, {\bf w}_2,\dots,{\bf w}_n\}$ (as indicated above, any two bases for $V$ must have the same number of elements). Taking $L=Id$, Theorem \ref{thm:matrep} yields the equation
 \begin{equation}\label{eqn:basechange}
 {}_{S_2}({\bf v}) = {}_{S_2}(Id*{\bf v}) = {}_{S_2}Id_{S_1}*{}_{S_1}{\bf v}
 \end{equation}
@@ -21,15 +21,22 @@ The matrix ${}_{S_2}Id_{S_1}$ is referred to as a {\it base transition matrix}, 
 \vskip.2in
 
 \begin{theorem} Suppose $S_i,1\le i\le 3$ are three bases for $V$. Then one has the following equalities
-\begin{itemize}
+\begin{enumerate}
 \item ${}_{S_3}T_{S_1} = {}_{S_3}T_{S_2}*{}_{S_2}T_{S_1}$
 \item ${}_{S_i}T_{S_i} = Id$
 \item ${}_{S_i}T_{S_j} = \left({}_{S_j}T_{S_i}\right)^{-1}$
-\end{itemize}
+\end{enumerate}
 \end{theorem}
 
-\begin{exercise} Verify these three properties (notice that the second and third properties are closely related, in light of the first. Note also that the third property verifies that base transition matrices are always non-singular).
-\end{exercise}
+\begin{proof} To show that (a) is true, it is enough to observe that for any coordinate vector ${}_{S_1}{\bf v}$ there is an equality
+\[
+{}_{S_3}T_{S_1}*{}_{S_1}{\bf v} = {}_{S_3}{\bf v} = 
+{}_{S_3}T_{S_2}*({}_{S_2}{\bf v}) 
+= {}_{S_3}T_{S_2}*\left({}_{S_2}T_{S_1}*{}_{S_1}{\bf v}\right)
+= \left({}_{S_3}T_{S_2}*{}_{S_2}T_{S_1}\right)*{}_{S_1}{\bf v}
+\]
+which implies the equality of matrices ${}_{S_3}T_{S_1}*{}_{S_1} = {}_{S_3}T_{S_2}*{}_{S_2}T_{S_1}$. The second statement is clear; ${}_{S_i}T_{S_i}$ is the $n\times n$ matrix for which left multiplication by it leaves each coordinate vector ${}_{S_1}{\bf v}$ unchanged, and the only matrix satisfying this property is the $n\times n$ identity matrix. Finally (c) follows from (a) and (b) when $S_3 = S_1$.
+\end{proof}
 
 For vector spaces other than $\mathbb R^n$ (such as the function space $F[a,b]$ we looked at earlier) where the vectors do not naturally look like column vectors, we always use the above notation when working with their coordinate representations.
 \vskip.1in
@@ -55,7 +62,7 @@ To perform step 1, since $S$ has the right number of vectors to be a basis for $
 \vskip.1in
 Next, we look at the matrix $A$. The columns of $A$ are the coordinate representations of the vectors in $S$ with respect to the standard basis $\bf e$. But $S$ is a basis. So the matrix $A$ identifies as a base-transition matrix. We know it must be either ${}_S T_{\bf e}$ or ${}_{\bf e}T_S$. But which one?
 \vskip.1in
-This is where the notation being used helps us. The coordinate vectors of the columns of $A$ have ``$\bf e$" in the lower left. The rule is that this must match what appears in the notation of the transition matrix. So:
+This is where the notation being used helps us. The coordinate vectors of the columns of $A$ have ``$\bf e$" in the lower left. The rule is that this must match what appears in the notation of the transition matrix. So the only possibility is
 \[
 {}_{\bf e}T_S = A
 \]
@@ -70,11 +77,22 @@ Finally, we can use this to compute ${}_S {\bf v}$ as
 \end{example}
 \vskip.2in
 
+The following theorem combines base-transition in both the domain and range, together with matrix representations of linear transformations. It amounts to a ``base-transition" for matrix representations of linear transformations.
+
+\begin{theorem} If $S_1,S_1'$ are two bases for $V$, $S_2,S_2'$ two bases for $W$, and $L:V\to W$ a linear transformation from $V$ to $W$, then
+\[
+{}_{S_2'}L_{S_1'} = {}_{S_2'}T_{S_2}*{}_{S_2}L_{S_1}*{}_{S_1}T_{S_1'}
+\]
+
+\end{theorem}
+\vskip.2in
+
+
 \begin{exercise} Let $S_1,S_2$ be two bases for $V$, and $L:V\to V$ a linear transformation from $V$ to itself. We can consider The representations ${}_{S_1}L_{S_1}$ and ${}_{S_2}L_{S_2}$ of $L$ with respect to the bases $S_1$ and $S_2$. Using the above identities, show that
 \[
 {}_{S_1}L_{S_1} = A*{}_{S_2}L_{S_2}*A^{-1}
 \]
-where $A = {}_{S_1}T_{S_2}$.
+where $A = {}_{S_1}T_{S_2}$ (hint: apply the above theorem.)
 \end{exercise}
 
 Note: Square matrices $B,C$ which satisfy the equality $B = A*C*A^{-1}$ are called {\it similar}. This is an important relation between square matrices, and plays a prominent role in the theory of eigenvalues and eigenvectors as we will see later on.

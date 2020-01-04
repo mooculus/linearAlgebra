@@ -5,7 +5,7 @@
 
 \begin{document}
 \begin{abstract}
-  A subset is a subspace if it is non-empty and, using the restriction to the subset of the sum and scalar product operations, the subset satisfies the
+  A subset of a vector space is a subspace if it is non-empty and, using the restriction to the subset of the sum and scalar product operations, the subset satisfies the
   axioms of a vector space.
 \end{abstract}
 \maketitle
@@ -42,6 +42,15 @@ implying $(-1){\bf v} = -{\bf v}$ by the uniqueness of the additive inverse indi
 Axioms A3 and A4 then follow immediately for $W$, by virtue of the fact that $W$ is closed under scalar multiplication.
 \end{proof}
 
-We will explore how to construct subspaces using various different methods. However we first need to revisit the operation of forming linear combinations in the more general setting of vector spaces. 
+\begin{proposition} For a closed interval $[a,b]\subset\mathbb R$, let $C[a,b]\subset F[a,b]$ denote the subset of continuous (real-valued) functions on $[a,b]$. Then $C[a,b]$ is a subspace of $F[a,b]$.
+\end{proposition}
+
+\begin{proof} $C[a,b]$ contains the zero function, so it is non-empty. Now the sum of two continuous functions on $[a,b]$ is again continuous on $[a,b]$. Also, any scalar multiple of a continuous function is continuous (these results were verified in first-term Calculus). By the above theorem $C[a,b]$ is a subspace of $F[a,b]$.
+\end{proof}
+
+\begin{exercise} Let $P_\infty$ be the set of polynomials in $x$ with real coefficients, and let $P_n\subset P_\infty$ be the subset of $P_\infty$ consisting of polynomials in $x$ of degree less than $n$ ($n\ge 1$). Show that $P_\infty$ is a subspace of $F(-\infty,\infty)$, and that $P_n$ is a subspace of $P_\infty$ for all $n\ge 1$.
+\end{exercise}
+
+In the following sections we will explore how to construct subspaces using various different methods. However we first need to revisit the operation of forming linear combinations in the more general setting of vector spaces. 
 
 \end{document}

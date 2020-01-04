@@ -44,7 +44,7 @@ Suppose $A$ is a $5\times 5$ matrix for which $rref(A) =
 \begin{bmatrix} 1 & 0 & 0 & -1 & 2\\0 & 1 & 0 & 2 & 3\\0 & 0 & 1 & -4 & -3\\
 0 & 0 & 0 & 0 & 0\\0 & 0 & 0 & 0 & 0\end{bmatrix}$. The columns which do not contain leading ones are the fourth and fifth. Thus $x_4$ and $x_5$ are the natural parameters for the parametrized solution set. We can derive a spanning set for $N(A)$ as follows:
 \begin{itemize}
-\item Write the all of the original set of variables $x_1, x_2, x_3, x_5, x_5$ in terms of the free variables $x_4, x_5$:
+\item Write the all of the original set of variables $x_1, x_2, x_3, x_4, x_5$ in terms of the free variables $x_4, x_5$:
 \begin{gather*}
 x_1 = x_4 - 2x_5\\
 x_2 = -2x_4 - 3x_5\\
@@ -80,7 +80,7 @@ N(A) = Span\left\{\begin{bmatrix}1\\-2\\4\\1\\0\end{bmatrix},\begin{bmatrix}-2\\
 \begin{bmatrix} 3 & 4 & 7 & -1 & 1 & 5\\1 & -5 & 11 & 9 & -3 & 12\\8 & 13 & 15 & 11 & 6 & 0\\
 10 & 3 & 1 & 2 & -9 & -2\\4 & 0 & 3 & 0 & 2 & 1\end{bmatrix}
 \]
-Using MATLAB or Octave, compute $rref(A)$ (hint: do this in rational format by entering the command "format rat" before executing the rref command). Then use the resulting output to spanning set for $N(A)$. See if you can find a spanning set consisting of vectors with integer entries.
+Using MATLAB or Octave, compute $rref(A)$ (hint: do this in rational format by entering the command "format rat" before executing the rref command). Then use the resulting output to construct a spanning set for $N(A)$. See if you can find a spanning set consisting of vectors with integer entries.
 \end{exercise}
 
 \begin{exercise} For the same matrix $A$ as in Exercise 1, in either MATLAB or Octave use the ``null'' command applied to $A$ and enter ``null(A)'' on the command line. Compare your answer to that in Exercise 1. Is it the same? Next, enter ``help null'' in the command line to to read about what that command does, and how to interpret the output.

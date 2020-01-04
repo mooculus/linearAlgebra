@@ -95,7 +95,7 @@ The operations for matrix algebra satisfy similar properties to those for additi
 This theorem is proven by showing that, in each case, the matrix on the left has the same $(i,j)^{th}$ entry as the one on the right. However, as with any proof, one needs to be clear from the beginning exactly what one is allowed to {\it assume} as being true. In this case, we have i) the definition of what it means for two matrices to be equal, ii) the explicit definition of each operation, and iii) the corresponding properties for addition and multiplication for real numbers (which will be taken as axioms for this proof). To see how this works, let's verify the first equality. 
 \vskip.2in
 
-\begin{proof}[Proof of \ref{thm:matalg:commutativity}]
+\begin{proof}[Proof of (3.2.1)]
 \begin{align*}
 (A+B)(i,j) &= A(i,j) + B(i,j)\qquad{\rm by\ the\ definition\ of\ matrix\ addition}\\
                 &= B(i,j) + A(i,j)\qquad{\rm by\ commutativity\ of\ addition\ for\ real\ numbers}\\
@@ -109,7 +109,7 @@ Notice that the proof consists of a sequence of equalities, beginning with the l
 
 %\begin{proof}[Proof of \ref{thm:matalg:associativity}] In this proof, $i,j,k,l$ will be used as indices (the reason for using four different indices will become apparent).
 
-\begin{proof} (of 3.2.7) In this proof, $i,j,k,l$ will be used as indices (the reason for using four different indices will become apparent).
+\begin{proof}[Proof of (3.2.7)] In this proof, $i,j,k,l$ will be used as indices (the reason for using four different indices will become apparent).
 \vskip.2in
 
 \begin{alignat*}{3}
@@ -173,7 +173,7 @@ Concatenation can be done multiple times. Any matrix $A$ can be viewed as
 \item the vertical concatenation of its rows.
 \end{itemize}
 
-In what follows, the horizontal type of concatenation will be used much more often than vertical one; for that reason {\it concatenation} (direction unspecified) will refer to {\it horizontal concatenation}. The following exercise will allow the reader to better understand how concatenation interacts with the algebraic operations, and the transpose. It is not an exhaustive list.
+In what follows, the horizontal type of concatenation will be used much more often than the vertical one; for that reason {\it concatenation} (direction unspecified) will refer to {\it horizontal concatenation}. The following exercise will help the reader better understand how concatenation interacts with the algebraic operations, and the transpose. It is not an exhaustive list.
 
 \begin{exercise} Let $A, B, C, D$ denote matrices all with the same number of rows. Show that
 \begin{enumerate}
@@ -225,7 +225,13 @@ B_1 = I*B_1 = (B_2*A)*B_1 = B_2*(A*B_1) = B_2*I = B_2
 \]
 \end{proof}
 
-Given this, we will refer to {\it the} inverse of an invertible matrix $A$, and write it as $A^{-1}$. An alternative term for invertible is {\it non-singular} (so {\it singular} is equivalent to being  {\it non-invertible}). Two important questions are: under what conditions is a square matrix non-singular? And if a matrix is non-singular, how can one find its inverse? These questions are answered by 
+Given this, we will refer to {\it the} inverse of an invertible matrix $A$, and write it as $A^{-1}$. An alternative term for invertible is {\it non-singular} (so {\it singular} is equivalent to being  {\it non-invertible}). Two important questions are: 
+\begin{itemize}
+\item under what conditions is a square matrix non-singular? And 
+\item if a matrix is non-singular, how can one find its inverse? 
+\end{itemize}
+
+These questions are answered by 
 
 \begin{theorem} Let $A$ be an $n\times n$ matrix. Then either
 \begin{itemize}
@@ -234,9 +240,12 @@ Given this, we will refer to {\it the} inverse of an invertible matrix $A$, and 
 \end{itemize}
 Moreover, when $A$ is non-singular, one has
 \[
-rref([A\ \ I]) = [I\ \ A^{-1}]
+rref([A\ \ B]) = [I\ \ A^{-1}*B]
 \]
+for any $n\times p$ matrix $B$. Specifically, if $B = I$ then 
+$rref([A\ \ I]) = [I\ \ A^{-1}]$
 \end{theorem}
+\vskip.2in
 
 \begin{corollary} The only matrix which is both invertible and in reduced row echelon form is the identity matrix (of a given dimension).
 \end{corollary}

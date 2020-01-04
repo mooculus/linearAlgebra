@@ -7,10 +7,11 @@
 
 \begin{document}
 \begin{abstract}
-  A list of numbers can be used to represent an element of a vector space.
+  An array of numbers can be used to represent an element of a vector space.
 \end{abstract}
 \maketitle
 
+We have seen previously that the
 From the beginning we have adopted the convention that vectors in $\mathbb R^n$ are represented by $n\times 1$ matrices - column vectors - with entries in $\mathbb R$. Another, equivalent way to arrive at such a description is to start with the {standard basis} $\underline{e} := \{{\bf e}^n_1, {\bf e}^n_2,\dots, {\bf e}^n_n\}$, viewed simply as a linearly independent set, and then define $\mathbb R^n$ to be the span of these basis vectors. In this way, we realize that when writing down an $n\times 1$ column vector representing ${\bf v}$, we are simply recording (in columnar form) the coefficients that occur when representing $\bf v$ as a linear combination of standard basis vectors:
 \[
 {\bf v} = [a_1\ a_2\dots a_n]^T\quad \Leftrightarrow\quad {\bf v} = a_1 {\bf e}^n_1 + a_2{\bf e}^n_2 +\dots + a_n{\bf e}^n_n
@@ -23,7 +24,7 @@ We notice now that this can be done not just for the standard basis in $\mathbb 
 \]
 \end{definition}
 
-It is important here to distinguish between i) a vector ${\bf v}\in V$ and ii) its coordinate representation with respect to a particular basis for $V$. For that reason, vectors in $\mathbb R^n$ - written as $n\times 1$ column vectors - may some times be written with the decoration indicating that we are really looking at the representation of the vector with respect to the standard basis.
+It is important here to distinguish between i) a vector ${\bf v}\in V$ and ii) its coordinate representation with respect to a particular basis for $V$. For that reason, vectors in $\mathbb R^n$ - written as $n\times 1$ column vectors - may some times be written with the decoration indicating that we are really looking at the representation of the vector with respect to the standard basis. As we will see, this additional decoration provides necessary book-keeping in the event we are considering representations with respect to different bases in $\mathbb R^n$
 \vskip.2in
 
 \begin{example} Let ${\bf v}\in\mathbb R^n$ with ${}_{\underline{e}}{\bf v} = [2\ 3\ -1]^T$, and let $\{{\bf u}_1, {\bf u}_2, {\bf u}_3\}$ be the basis of $\mathbb R^3$ given by
@@ -75,7 +76,10 @@ from which we see that
 \]
 \end{example}
 
-This last example illustrates one of the basic computations we will want to be able to do; given the coordinate description of a vector with respect to one basis, find its coordinate representation with respect to a (specified) different basis. Of course one needs to know a bit more about the second basis. But given that information, we would want a systematic way to proceed. It turns out that this is most easily answered within the more general framework of linear transformations and their matrix representations, which we discuss next.
+This last example illustrates one of the basic computations we will want to be able to do; given the coordinate description of a vector with respect to one basis, find its coordinate representation with respect to a (specified) different basis. 
+\vskip.2in
+
+Of course one needs to know a bit more about the second basis. But given that information, we would want a systematic way to proceed. One way would be as in the previous example. However, it turns out that this problem is easier to handle within the more general framework of linear transformations and their matrix representations, which we discuss in the next section.
 \vskip.5in
 
 

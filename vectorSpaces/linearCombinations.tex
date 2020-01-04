@@ -31,7 +31,15 @@ In general, given vectors ${\bf v}_1,{\bf v}_2,\dots,{\bf v}_n$, it can be quite
 In other words, the only linear combination of the vectors that produces the zero vector is the {\it trivial} combination, where each coefficient $\alpha_i = 0$.
 \end{definition}
 
-Call $\{{\bf v}_1,\dots,{\bf v}_n\}$ {\it vectorwise independent} if no vector in the set can be written as a linear combination of the remaining vectors in the set. The following lemma records the equivalence of these two concepts.
+A collection of vectors ${\bf v}_1,\dots,{\bf v}_n$ is {\it linearly dependent} iff it is not linearly independent. More precisely,
+
+\begin{proposition} A set of vectors ${\bf v}_1,\dots,{\bf v}_n$ is linearly dependent precisely when there is a set of scalars $\alpha_1,\dots \alpha_n$ which are not all zero with 
+\[
+\alpha_1{\bf v}_1 + \alpha_2{\bf v}_2 +\dots + \alpha_n{\bf v}_n = {\bf z}
+\]
+\end{proposition}
+
+Call the set $\{{\bf v}_1,\dots,{\bf v}_n\}$ {\it vectorwise independent} if no vector in the set can be written as a linear combination of the remaining vectors in the set. The following lemma records the equivalence of these two concepts.
 
 
 \begin{lemma} A collection of vectors $\{{\bf v}_1,\dots,{\bf v}_n\}$ is linearly independent iff it is vectorwise independent.
@@ -52,6 +60,9 @@ or, equivalently
 from which we see that (vectorwise dependence)$\Rightarrow$(linear dependence) or, again by contraposition, (linear independence)$\Rightarrow$(vectorwise independence).
 \end{proof}
 \vskip.3in
+
+\begin{exercise} Following Example 1 above, show that the set of vectors $\{[1\ 0\ 0]^T, [0\ 1\ 0]^T\}$ is linearly independent, and that the set $\{[1\ 0\ 0]^T, [0\ 1\ 0]^T, [2\ 5\ 0]^T\}$ is linearly dependent.
+\end{exercise}
 
 Given a collection of vectors $S = \{{\bf v}_1,\dots {\bf v}_n\}$, a fundamental question one can ask is whether the collection (or set) $S$ is {\it linearly independent}. One of our main goals in the following sections will be to develop numerical methods for answering this question.
 \end{document}

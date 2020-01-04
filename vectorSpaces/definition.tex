@@ -13,7 +13,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Generalizing the setup for $\mathbb R^n$, we have
 
-\begin{definition} A {\it vector space} is a set $V$ equipped with two operations - vector addition \lq\lq$+$\rq\rq\ and scalar multiplication \lq\lq$\cdot$\rq\rq - which satisfy the two closure axioms C1, C2 as well as the eight vector space axioms A1 - A8:
+\begin{definition} A {\it vector space} is a non-empty set $V$ equipped with two operations - vector addition \lq\lq$+$\rq\rq\ and scalar multiplication \lq\lq$\cdot$\rq\rq - which satisfy the two closure axioms C1, C2 as well as the eight vector space axioms A1 - A8:
 \begin{description}
 \item[C1] (Closure under vector addition) Given ${\bf v}, {\bf w}\in V$, ${\bf v} + {\bf w}\in V$.
 \item[C2] (Closure under scalar multiplication) Given ${\bf v}\in V$ and a scalar $\alpha$, $\alpha{\bf v}\in V$.
@@ -35,7 +35,7 @@ For $\bf u$, $\bf v$, $\bf w$ arbitrary vectors in $V$, and $\alpha,\beta$ arbit
 \vskip.2in
 \end{definition}
 
-In this way, a vector space should properly be represented as a triple $(V,+,\cdot)$, to emphasize the fact that the algebraic structure depends not just on the underlying set of vectors, but on the choice of operations representing addition and scalar multiplication.
+A vector space can properly be represented as a triple $(V,+,\cdot)$, to emphasize the fact that the algebraic structure depends not just on the underlying set of vectors, but on the choice of operations representing addition and scalar multiplication.
 \vskip.2in
 
 \begin{example}\label{example:Rmn} Let $V = \mathbb R^{m\times n}$, the space of $m\times n$ matrices, with addition given by matrix addition and scalar multiplication as previously defined for matrices. Then $(\mathbb R^{m\times n},+,\cdot)$ is a vector space. Again, as with $\mathbb R^n$, the closure axioms are seen to be satisfied as a direct consequence of the definitions, while the other properties follow from Theorem \ref{thm:matalg} together with direct construction of the $m\times n$ \lq\lq zero vector\rq\rq\ $0^{m\times n}$, as well as additive inverses as indicated in [A4].
@@ -51,20 +51,20 @@ F[a,b] = \ \text{the space of real-valued functions on the closed interval }[a,b
 Recall that i) a function is completely determined by the values it takes on the elements of its domain, and therefore ii) two functions $f, g$ are {\it equal} iff they have the same domain and $f(x) = g(x)$ for all elements $x$ in their common domain. So in order to show two functions $f$ and $g$ on the closed interval $[a,b]$ are equal, it suffices to verify that $f(c) = g(c)$ for all $a\le c\le b$.
 \vskip.2in
 
-Next recall that the sum of two functions is given by
-\[
+Next recall that the sum of two functions is defined by the equality
+\begin{equation}\label{eqn:function-add}
 (f+g)(x) := f(x) + g(x)
-\]
+\end{equation}
 while the scalar multiple $\alpha f$ of the function $f$ is given by
-\[
+\begin{equation}\label{eqn:function-scalar-mult}
 (\alpha f)(x) := \alpha(f(x))
-\]
+\end{equation}
 
 \begin{theorem} Equipped with addition and scalar multiplication as just defined, $(F[a,b],+,\cdot)$ is a vector space.
 \end{theorem}
 
 
-\begin{proof} One begins by verifying the two closure axioms. If $f,g\in F[a,b]$, they are real-valued functions with common domain $[a,b]$; hence their sum is defined by the above equation, and has the same domain, making $f+g$ a function in $F[a,b]$. Similarly, if $f\in F[a,b]$ and $\alpha\in\mathbb R$, then multiplying $f$ by $\alpha$ leaves the domain unchanged, so $\alpha f\in F[a,b]$.
+\begin{proof} We begin by verifying the two closure axioms. If $f,g\in F[a,b]$, they are real-valued functions with common domain $[a,b]$; hence their sum is defined by the above equation, and has the same domain, making $f+g$ a function in $F[a,b]$. Similarly, if $f\in F[a,b]$ and $\alpha\in\mathbb R$, then multiplying $f$ by $\alpha$ leaves the domain unchanged, so $\alpha f\in F[a,b]$.
 \vskip.2in
 The eight vector space axioms [A1] - [A8] are of two types. The third and fourth are {\it existential} - they assert the existence of the zero element and additive inverses, respectively. To verify these, one simply has to produce the candidate satisfying the requisite properties. The remaining six are {\it universal}. They involve statements which hold for all collections of vectors for which the given equality makes sense. We will verify each of the eight axioms in detail. This example, then, can be used as a template for how to proceed in other cases with verification that a proposed candidate vector space is in fact one. 
 \vskip.2in
@@ -148,6 +148,12 @@ The eight vector space axioms [A1] - [A8] are of two types. The third and fourth
 
 \begin{exercise} Show that $(\mathbb R^{m\times n}, +,\cdot)$ is a vector space, where \lq\lq +\rq\rq\ denotes matrix addition, and \lq\lq$\cdot$\rq\rq\ denotes scalar multiplication for matrices (in other words, verify the claim in Example \ref{example:Rmn}. Hint: use the results of Theorem \ref{thm:matalg}).
 \end{exercise}
+
+\begin{exercise} Let $F(a,b)$ denote the set of functions on the open interval $(a,b)$ (where $-\infty\le a < b\le \infty$), with addition and scalar multiplication defined as above in (\ref{eqn:function-add}) and (\ref{eqn:function-scalar-mult}). Show that $F(a,b)$ is a vector space (Hint: Does the proof given above for $F[a,b]$ work just as well for $F(a,b)$?).
+\end{exercise}
+
+
+
 \vskip.3in
 
 \end{document}

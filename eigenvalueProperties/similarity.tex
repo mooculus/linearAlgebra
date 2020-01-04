@@ -18,7 +18,7 @@ The matrix $S$ appearing in this equation is referred to as a {\it similarity ma
 \begin{lemma} If $A$ and $B$ are similar, then $p_A(t) = p_B(t)$. In particular, $Det(A) = Det(B)$.
 \end{lemma}
 
-\begin{proof} Choose $S$ such that $B = S^{-1}*A*S$. Then the equality of the characteristic polynomials follows from the sequence of equalities
+\begin{proof} Choose $S$ such that $B = S*A*S^{-1}$. Then the equality of the characteristic polynomials follows from the sequence of equalities
 \[
 \begin{split}
 p_B(t) = Det(B - tI) &= Det(S*A*S^{-1} - tI)\\
@@ -43,7 +43,7 @@ In the previous section we considered the question: when does $\mathbb R^n$ deco
 \]
 \vskip.2in
 
-If $A\in\mathbb R^{n\times n}$, we will say that $A$ is {\it real-diagonalizable} if $A$ is similar to a diagonal matrix, where the similarity matrix is also in $\mathbb R^n$ (this is one of the places where one has to be careful whether one is working over the real or complex numbers). 
+If $A\in\mathbb R^{n\times n}$, we will say that $A$ is {\it real-diagonalizable} if $A$ is similar to a diagonal matrix, where the similarity matrix is also in $\mathbb R^{n\times n}$ (this is one of the places where one has to be careful whether one is working over the real or complex numbers). 
 
 \begin{theorem} Given $A\in\mathbb R^{n\times n}$, the following statements are equivalent:
 \begin{enumerate}
@@ -86,7 +86,7 @@ Many matrices are diagonalizable, but there are also many that are not. Moreover
 \end{exercise}
 \vskip.2in
 
-Closely related to the difference between real-diagonalizable and diagonalizable is the fact that real matrices tneed not have real eigenvalues. In fact, some real matrices have no eigenvalues over the real numbers. To illustrate
+Closely related to the difference between real-diagonalizable and diagonalizable is the fact that real matrices need not have real eigenvalues. In fact, some real matrices have no eigenvalues over the real numbers. To illustrate
 
 \begin{example} Let $A = \begin{bmatrix} 0 & 1\\-1 & 0\end{bmatrix}$. Then charactericstic polynomial of $A$ is $p_A(t) = t^2 + 1$, which is an irreducible quadratic polynomial with no real roots. Thus $A$ has no eigenvectors in $\mathbb R^2$.
 \end{example}

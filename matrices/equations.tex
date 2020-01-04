@@ -25,7 +25,7 @@ b_2\\
 b_m
 \end{bmatrix}
 \end{equation}
-The vector on the left above consists of entries which are linear homogeneous functions in the variables $x_1,x_2,\dots,x_n$. A {\it solution} to this vector equation will be exactly what it was before; and assignment of values to the variables $x_1,x_2,\dots,x_n$ which make the equation true. 
+The vector on the left above consists of entries which are linear homogeneous functions in the variables $x_1,x_2,\dots,x_n$. A {\it solution} to this vector equation will be exactly what it was before; an assignment of values to the variables $x_1,x_2,\dots,x_n$ which make the equation true. 
 \vskip.2in
 
 Now the expression on the left in (\ref{eqn:vec1}) can be written as a sum of its components, where the $x_i$ component can be derived by setting all of the other variables to zero. The result is 
@@ -102,13 +102,13 @@ b_m
 \end{equation}
 The left-hand side of this last equation leads us to one of the central constructions in all of Linear Algebra.
 
-\begin{definition} Given a collection of vectors $\{v_1,v_2,\dots,v_n\}$, a {\it linear combination} of these vectors is a sum of the form
+\begin{definition} Given a collection of vectors $\{{\bf v}_1,{\bf v}_2,\dots,{\bf v}_n\}$, a {\it linear combination} of these vectors is a sum of the form
 \[
-\alpha_1v_1 + \alpha_2v_2 +\dots + \alpha_nv_n
+\alpha_1{\bf v}_1 + \alpha_2{\bf v}_2 +\dots + \alpha_n{\bf v}_n
 \]
 where the coefficients $\alpha_i$ are scalars.
 \end{definition}
-In words, it is {\it a sum of scalar multiples of the vectors} $v_1,v_2,\dots v_n$. Now the expression on the left of (\ref{eqn:vec3}) is a linear combination of sorts, but where the coefficients are scalar-valued variables rather than actual scalars. So for any assignment of values to the variables $x_1,x_2,\dots x_n$ we get an actual linear combination.
+In words, it is {\it a sum of scalar multiples of the vectors} ${\bf v}_1,{\bf v}_2,\dots {\bf v}_n$. Now the expression on the left of (\ref{eqn:vec3}) is a linear combination of sorts, but where the coefficients are scalar-valued variables rather than actual scalars. So for any assignment of values to the variables $x_1,x_2,\dots x_n$ we get an actual linear combination.
 \vskip.2in
 
 Finally, going back to equation (\ref{eqn:vec1}) we observe that the left-hand side can be written as $A*{\bf x}$, where $A$ is the $m\times n$ {\it coefficient matrix}
@@ -146,7 +146,7 @@ x_1 A(:,1) + x_2 A(:,2) +\dots x_n A(:,n) = {\bf b}
  since any solution will yield a particular set of values for $x_1,x_2,\dots,x_n$ to take as scalars on the left so that the resulting linear combination produces {\bf b}, while a particular linear combination which results in {\bf b} would in turn produce a solution to (\ref{eqn:vec3}).
 \end{proof}
 
-The last part of this theorem is sometimes called the {\it consistency theorem for systems of equations}. We will occasionally refer to it in this way. 
+The last part of this theorem is often called the {\it consistency theorem for systems of equations}. We will refer to it in this way. 
 
 
 Finally, we consider the case of a matrix equation
@@ -174,7 +174,7 @@ is consistent, and has a unique solution given by ${\bf x} = A^{-1}*{\bf b}$.
 The above matrix formulations give us an equivalent perspective on the augmented coefficient matrix of the original system.
 \vskip.2in
 
-\begin{proposition} The original system of equations given in (2) has an ACM given as the concatenated matrix $[A\ b]$, where $A$ and $b$ are as in (0.6), the matrix equation corresponding to (2).
+\begin{proposition} The original system of equations given in (2) has an ACM given as the concatenated matrix $[A\ {\bf b}]$, where $A$ and ${\bf b}$ are as in (0.6), the matrix equation corresponding to (2).
 \end{proposition}
 
 \end{document}

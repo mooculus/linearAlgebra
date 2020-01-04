@@ -5,7 +5,7 @@
 
 \begin{document}
 \begin{abstract}
-  A linear transformation can be represented by a matrix.
+  A linear transformation can be represented in terms of multiplication by a matrix.
 \end{abstract}
 \maketitle
 
@@ -13,7 +13,16 @@ Suppose $V = \mathbb R^n, W = \mathbb R^m$, and $L_A:V\to W$ is given by
 \[
 L_A({\bf v}) = A*{\bf v}
 \]
-for some $m\times n$ real matrix $A$. Then it follows immediately from the properties of matrix algebra that $L_A$ is a linear transformation. Conversely, suppose the linear transformation $L$ is given. If we define a matrix by
+for some $m\times n$ real matrix $A$. Then it follows immediately from the properties of matrix algebra that $L_A$ is a linear transformation:
+\[
+L_A(\alpha{\bf v} + \beta{\bf w}) 
+= A*(\alpha{\bf v} + \beta{\bf w})
+= \alpha(A*{\bf v}) + \beta(A*{\bf w})
+= \alpha L_A({\bf v}) + \beta L_A({\bf w})
+\]
+\vskip.2in
+
+Conversely, suppose the linear transformation $L$ is given. Define the matrix $A_L$ by
 \[
 A_L = [L({\bf e}_1)\ L({\bf e}_2)\ \dots L({\bf e}_n)]
 \]
@@ -25,16 +34,16 @@ so that ${\bf v}\mapsto L({\bf v})$ and ${\bf v}\mapsto A_L*{\bf v}$ are two lin
 \[
 L({\bf v}) = A_L*({\bf v})\qquad \forall{\bf v}\in \mathbb R^n
 \]
-Because of this, the matrix $A_L$ is referred to as a {\it matrix representation} of $L$. Note that this representation is with respecto to the standard basis for $\mathbb R^n$ and $\mathbb R^m$.
+Because of this, the matrix $A_L$ is referred to as a {\it matrix representation} of $L$. Note that this representation is with respect to to the standard basis for $\mathbb R^n$ and $\mathbb R^m$.
 \vskip.2in
 
-We see now that the same type of representation applies for arbitrary vector spaces {\it once a basis has been fixed for both the domain and target}. Thus, given
+We see now that the same type of representation applies for arbitrary vector spaces {\it once a basis has been fixed for both the domain and target}. In other words, given
 \begin{itemize}
 \item A vector space $V$ with basis $S = \{{\bf v}_1,\dots,{\bf v}_n\}$,
 \item a vector space $W$ with basis $T = \{{\bf w}_1,\dots,{\bf w}_m\}$, and
 \item a linear transformation $L:V\to W$
 \end{itemize} 
-we could ask if there is a similar reprensentation of $L$ in terms of a matrix (which depends on these two choices of bases). The answer is given by
+we could ask if there is a similar representation of $L$ in terms of a matrix (which depends on these two choices of bases). The answer is ``yes".
 
 \begin{theorem}\label{thm:matrep} For any ${\bf v}\in V$
 \[
@@ -52,6 +61,22 @@ where ${}_TL_S$ is the $m\times n$ matrix defined  by
 \]
 completing the proof.
 \end{proof}
+
+\begin{example} Suppose $L:\mathbb R^3\to \mathbb R^2$ is the linear transformation given by
+\[
+L({\bf x}) = L\left(\bmatrix x_1\\x_2\\x_3\endbmatrix\right) = \bmatrix 2x_1 - 3x_2 + 7x_3\\ 4x_2 - 5x_3\endbmatrix
+\]
+To compute the matrix representation of $L$ with respect to the standard bases of $\mathbb R^3$ and $\mathbb R^2$, we evaluate $L$ on the basis vectors ${\bf e}_i, 1\le i\le 3$ and then form the matrix $A_L = \bmatrix {L(\bf e}_1) & L({\bf e}_2) & L({\bf e}_3)\endbmatrix$, yielding
+\[
+A_L = \bmatrix 2 & -3 & 7\\ 0 & 4 & -5 \endbmatrix
+\]
+\end{example}
+
+\begin{example} Recall that $P_n$ is the vector space of polynomials in one variable with real coefficients. Let $L:P_3\to P_3$ be given by $L(p(x)) = 2p'(x) - p(x)$, where $p'(x)$ denotes the derivative of $p(x)$. To find the matrix representation of $L$ with respect to the basis $\{1,x,x^2\}$ for $P_3$, we first compute $L(1) = -1; L(x) = 2 - 2x; L(x^2) = 4x - x^2$. Then
+\[
+A_L = \bmatrix L(1) & L(x) & L(x^2)\endbmatrix = \bmatrix -1 & 2 & 0\\0 & -2 & 4\\0 & 0 & -1\endbmatrix
+\]
+\end{example}
 \vskip.3in
 
 \end{document}

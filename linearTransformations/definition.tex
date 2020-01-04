@@ -9,18 +9,21 @@
 \end{abstract}
 \maketitle
 
-Suppose $V$ and $W$ are vector spaces (of arbitrary dimension). A {\it function} $f:V\to W$ is (as we recall) a rule which associates to each ${\bf v}\in V$ a unique vector $f({\bf v})\in W$. We will call such a function a {\it linear transformation} if it commutes with the linear sturucture in the domain and range:
+Suppose $V$ and $W$ are vector spaces (of arbitrary dimension). A {\it function} $f:V\to W$ is (as we recall) a rule which associates to each ${\bf v}\in V$ a unique vector $f({\bf v})\in W$. We will call such a function a {\it linear transformation} if it commutes with the linear structure in the domain and range:
 
 \begin{eqnarray*}
 f({\bf v} + {\bf w}) = f({\bf v}) + f({\bf w})\qquad\forall {\bf v,w}\in V\\
 f(\alpha{\bf v}) = \alpha f({\bf v})\qquad\qquad\forall \alpha\in\mathbb R, {\bf v}\in V
 \end{eqnarray*}
 
-In other words, $f$ takes sums to sums and scalar products to scalar products. These two properties can be combined into one, using linear combinations. Precisely, $f$ is a linear transformation if
+In other words, $f$ takes sums to sums and scalar products to scalar products. These two properties can be combined into one, using linear combinations. Precisely, 
 
+\begin{definition} Let $V,W$ be vector spaces. A function $f:V\to W$ is a linear transformation if
 \begin{equation}
 f(\alpha{\bf v} + \beta{\bf w}) = \alpha f({\bf v}) + \beta f({\bf w})\qquad\forall \alpha,\beta\in\mathbb R, {\bf v}, {\bf w}\in V
 \end{equation}
+\end{definition}
+
 
 \begin{exercise} Show that $f$ is a linear transformation iff
 \[
@@ -33,7 +36,7 @@ As a consequence of this exercise, we have
 \begin{corollary} If $f: V\to W$ is a linear transformation, then it is uniquely determined by its values on a basis for $V$. Conversely, if $S := \{{\bf v}_1,\dots {\bf v}_n\}$ is a basis for $V$ and $g:S\to W$ is a function from the set $S$ to $W$, then $g$ extends uniquely to a linear transformation $f:V\to W$ with $f({\bf v}_i) = g({\bf v}_i), 1\le i\le n$. Thus, if $f_1, f_2:V\to W$ are two linear transformations which agree on a basis for $V$, then $f_1 = f_2$.
 \end{corollary}
 
-We will often denote a linear transformation between two vector spaces by the letter $L$, when wanting to emphasize its linear nature.
+It is natural to ask: what does it mean for a map to be a linear transformation? For example, if $f:\mathbb R\to \mathbb R$, or more generally if $f:\mathbb R^n\to \mathbb R^m$ satisfies the above property, does it admit some simple description? We investigate this question next.
 \vskip.3in
 
 \end{document}
