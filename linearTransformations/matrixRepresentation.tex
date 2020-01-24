@@ -77,6 +77,18 @@ A_L = \bmatrix 2 & -3 & 7\\ 0 & 4 & -5 \endbmatrix
 A_L = \bmatrix L(1) & L(x) & L(x^2)\endbmatrix = \bmatrix -1 & 2 & 0\\0 & -2 & 4\\0 & 0 & -1\endbmatrix
 \]
 \end{example}
+
+Returning once more to the general case where $L:V\to W$ is linear, $S$ a basis for $V$, $T$ a basis for $W$, we note that the bases $S$ and $T$ can be used to identify the kernel and image of $L$. Precisely, we have
+
+\begin{theorem} Assume $Dim(V) = n$, $Dim(W) = m$. Let $A = {}_{T}L_{S}$ be the $m\times n$ matrix representation of $L$ with respect to the pair of bases $S,T$. Then
+\begin{itemize}
+\item ${\bf v}\in ker(L)\subset V$ iff ${}_{S}{\bf v}\in N(A)\subset\mathbb R^n$.
+\item ${\bf w}\in im(L)\subset W$ iff ${}_{T}{\bf w}\in C(A)\subset\mathbb R^m$.
+\end{itemize}
+
+
+\end{theorem}
+
 \vskip.3in
 
 \end{document}

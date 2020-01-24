@@ -43,7 +43,7 @@ In Observation \ref{obs:eigen} we noted that $\lambda$ is an eigenvalue of $A$ i
 \[
 \lambda = \frac{5 \pm \sqrt{25 - 40}}{2} = \frac52 \pm\left(\frac{\sqrt{15}}{2}\right)i
 \]
-Complex eigenvalues and eigenvectors will be discussed in more detail below.
+Because $A$ is a real matrix with complex eigenvalues, any eigenvectors will also be complex. Complex eigenvalues and eigenvectors will be discussed in more detail below.
 \end{example}
 \vskip.2in
 
@@ -55,5 +55,14 @@ The following is an immediate consequence of the definition of $p_A(t)$, and bas
 
 \begin{lemma} If $A$ is an $n\times n$ matrix, then $p_A(t)$ is a polynomial of degree $n$. Consequently, $A$ can have at most $n$ distinct eigenvalues.
 \end{lemma}
+
+Finally, suppose we are given a linear transformation $L:V\to V$ with $Dim(V) = n$. We would like to define the characteristic polynomial of $L$. The natural thing to do is to fix a basis $S$ of $V$ and set
+\[
+p_L(t) := p_A(t),\qquad A = {}_{S}L_{S}
+\]
+However, in order for this definition to be valid, we will want to know that the resulting polynomial does not depend on the particular choice of basis. The following result provides that; it will be proven in the section below on similarity.
+
+\begin{proposition} If $S,S'$ are two bases for $V$, and $A = {}_{S}L_{S}$, $A' = {}_{S'}L_{S'}$, then $p_A(t) = p_{A'}(t)$. Thus the expression for $p_L(t)$ given above is independent of the particular choice of basis for $V$.
+\end{proposition}
 
 \end{document}

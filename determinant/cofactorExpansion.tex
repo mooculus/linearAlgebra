@@ -9,7 +9,7 @@
 \end{abstract}
 \maketitle
 
-If $A$ is an $n\times n$ matrix, with $n > 1$, we define the $(i,j)^{th}$ minor of $A$ to be $M_{ij}(A)$ to be the $(n-1)\times(n-1)$ matrix derived from $A$ by deleting the $i^{th}$ row and $j^{th}$ column.
+If $A$ is an $n\times n$ matrix, with $n > 1$, we define the $(i,j)^{th}$ minor of $A$ - denoted $M_{ij}(A)$ - to be the $(n-1)\times(n-1)$ matrix derived from $A$ by deleting the $i^{th}$ row and $j^{th}$ column.
 \vskip.2in
 
 \begin{example} Suppose A = $\begin{bmatrix} 2 & 3 & -1\\-2 & -4 & 5\\0 & -3 & 7\end{bmatrix}$. Then $M_{23}(A)$ is the $2\times 2$ matrix gotten by deleting the second row and third column: $M_{23}(A) = \begin{bmatrix} 2 & 3\\0 & -3\end{bmatrix}$.
@@ -22,7 +22,7 @@ For the above matrix $A$, compute $M_{32}(A)$ and $M_{33}(A)$.
 \vskip.2in
 
 
- To define the determinant in the framework of cofactors, one proceeds with an {\it inductive} or {\it recursive} definition. In such a definition, we give an explicit formula in the case $n=1$, and that prior to defining the determinant for $n\times n$ matirices, that the determinant {\it has already been given for $(n-1)\times(n-1)$ matrices}. For indices $1\le i,j\le n$, define the $(i,j)^{th}$ cofactor of $A$ to be
+ To define the determinant in the framework of cofactors, one proceeds with an {\it inductive} or {\it recursive} definition. In such a definition, we give an explicit formula in the case $n=1$; then prior to defining the determinant for $n\times n$ matirices, we assume that the determinant {\it has already been given for $(n-1)\times(n-1)$ matrices}. Note that if we are given an $n\times n$ matrix $A$, all of its minors will be of dimensions $(n-1)\times (n-1)$, for which we can assume the determinant has already been defined. For indices $1\le i,j\le n$, define the $(i,j)^{th}$ cofactor of $A$ to be
 \[
 A_{ij} = (-1)^{i+j}Det(M_{ij}(A))
 \]
@@ -39,7 +39,7 @@ This is sometimes also referred to as {\it cofactor expansion along the first ro
 
 More generally, cofactor expansion can be easily applied to an arbitrary $2\times 2$ matrix to recover the usual expression for the determinant in that case. 
 
-\begin{example} Suppose $A = \begin{bmatrix} a_{11} & a_{12}\\a_{21} & a_{22}\end{bmatrix}$. Then $M_{11}(A) = [a_{22}], M_{12}(A) = [a_{21}]$, so $A_{11} = (-1)^{1+1}(a_{22}) = a_{22}$ and $A_{12} = (-1)^{1+2}(a_{21}) = a_{21}$. Then 
+\begin{example} Suppose $A = \begin{bmatrix} a_{11} & a_{12}\\a_{21} & a_{22}\end{bmatrix}$. Then $M_{11}(A) = [a_{22}], M_{12}(A) = [a_{21}]$, so $A_{11} = (-1)^{1+1}(a_{22}) = a_{22}$ and $A_{12} = (-1)^{1+2}(a_{21}) = -a_{21}$. Then 
 \[
 Det(A) = A(1,1)A_{11} + A(1,2)A_{12} = a_{11}a_{22} - a_{12}a_{21}
 \]
@@ -59,4 +59,6 @@ So for this matrix $Det(A) = A(1,1)A_{11} + A(1,2)A_{12} + A(1,3)A_{13} = 2*(-13
 \end{example}
 \vskip.2in
  
+ \begin{exercise} Suppose $A = \begin{bmatrix} a_{11} & a_{12} & a_{13}\\a_{21} & a_{22} & a_{23}\\ a_{31} & a_{32} & a_{33}\end{bmatrix}$. Use the above definition and the result of Example 3 above to express $Det(A)$ in the same manner as done in Example 3.
+ \end{exercise}
 \end{document}

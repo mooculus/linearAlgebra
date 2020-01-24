@@ -5,20 +5,34 @@
 
 \begin{document}
 \begin{abstract}
-  Establish algebraic criteria for determining exactly when a real number can occur as an eigenvalue of $A$.
+  The span of the eigenvectors associated with a fixed eigenvalue define the eigenspace corresponding to that eigenvalue.
 \end{abstract}
 \maketitle
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-As we saw above, $\lambda$ is an eigenvalue of $A$ iff $N(A-\lambda I)\ne 0$, with the non-zero vectors in this nullspace comprising the set of eigenvectors of $A$ with eigenvalue $\lambda$.
+Let $A$ be a real $n\times n$ matrix. As we saw above, $\lambda$ is an eigenvalue of $A$ iff $N(A-\lambda I)\ne 0$, with the non-zero vectors in this nullspace comprising the set of eigenvectors of $A$ with eigenvalue $\lambda$.
 
-\begin{definition} The eigenspace of $A$ corresponding to an eigenvalue $\lambda$ is $E_\lambda (A) := N(A-\lambda I)$.
+\begin{definition} The eigenspace of $A$ corresponding to an eigenvalue $\lambda$ is $E_\lambda (A) := N(A-\lambda I)\subset\mathbb R^n$.
 \end{definition}
 
 \begin{exercise} Suppose $A = \begin{bmatrix} 2 & 0\\0 & 3\end{bmatrix}$. Show that the two possible eigenvalues of $A$ are $\lambda = 2$ and $\lambda = 3$. Then show the two corresponding eigenspaces for these eigenvalues are $E_2(A) = Span\{{\bf e}_1\}$, $E_3(A) = Span\{{\bf e}_2\}$.
 \end{exercise}
 
+\begin{exercise} $A = \begin{bmatrix} 2 & 5\\0 & 2\end{bmatrix}$. Determine the eigenvalues of $A$, and a minimal spanning set (basis) for each eigenspace.
+\end{exercise}
+
 Note that the dimension of the eigenspace corresponding to a given eigenvalue must be at least 1, since eigenspaces must contain non-zero vectors by definition.
+\vskip.2in
+
+More generally, if $L:V\to V$ is a linear transformation, and $\lambda$ is an eigenvalue of $L$, then the eigenspace of $L$ corresponding to $\lambda$ is
+\[
+E_{\lambda}(L) := ker(L - \lambda Id_V)\subset V
+\]
+
+\begin{proposition} For each eigenvalue $\lambda$ of $L$, $E_{\lambda}(L)$ is a subspace of $V$. Moreover, if $S$ is a basis for $V$ and $A = {}_{S}L_{S}$ is the representation of $L$ with respect to $S$ (in both domain and range), then ${\bf v}\in E_{\lambda}(L)$ iff ${}_{S}{\bf v}\in E_{\lambda}(A)$.
+\end{proposition}
+
+In this way, fixing a basis for $V$ identifies the eigenspaces of $L$ (in $V$) with the eigenspaces of the matrix representation $A$ of $L$ (in $\mathbb R^n$).
 
 \end{document}

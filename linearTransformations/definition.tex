@@ -35,8 +35,35 @@ As a consequence of this exercise, we have
 
 \begin{corollary} If $f: V\to W$ is a linear transformation, then it is uniquely determined by its values on a basis for $V$. Conversely, if $S := \{{\bf v}_1,\dots {\bf v}_n\}$ is a basis for $V$ and $g:S\to W$ is a function from the set $S$ to $W$, then $g$ extends uniquely to a linear transformation $f:V\to W$ with $f({\bf v}_i) = g({\bf v}_i), 1\le i\le n$. Thus, if $f_1, f_2:V\to W$ are two linear transformations which agree on a basis for $V$, then $f_1 = f_2$.
 \end{corollary}
+\vskip.2in
 
-It is natural to ask: what does it mean for a map to be a linear transformation? For example, if $f:\mathbb R\to \mathbb R$, or more generally if $f:\mathbb R^n\to \mathbb R^m$ satisfies the above property, does it admit some simple description? We investigate this question next.
+Linear transformations may be used to define subspaces. Let $L:V\to W$ be a linear transformation. The {\it kernel} of $L$ is then
+\[
+ker(L) := \{{\bf v}\in V\ |\ L({\bf v}) = {\bf 0}\}\subset V
+\]
+The {\it image} of $L$ is defined as
+\[
+im(L) := \{ {\bf w}\in W\ |\ \exists {\bf v}\in V \text{ with } L({\bf v}) = {\bf w}\} \subset W
+\]
+The image of $L$ is sometimes denoted $L(V)$. It is also referred to as the {\it range} of $L$. These subspaces are useful in defining specific types of linear transformations. We say $L:V\to W$ is
+
+\begin{itemize}
+\item {\it surjective} or {\it an epimorphism} iff $im(L) = W$;
+\item {\it injective} or {\it a monomorphism} iff $ker(L) = \{\bf 0\}$;
+\item {\it bijective} or {\it an isomorphism} iff $L$ is both surjective and injective.
+\end{itemize}
+
+We say that two vector spaces $V$ and $W$ are {\it isomorphic} if there exists a linear transformation $L:V\to W$ which is an isomorphism.
+
+\begin{theorem}\label{thm:rank-null} For any linear transformation $L:V\to W$, $ker(L)$ is a subspace of $V$ and $im(L)$ is a subspace of $W$. Moreover, 
+\[
+Dim(V) = Dim(ker(L)) + Dim(im(L))
+\]
+
+\end{theorem}
+\vskip.2in
+
+It is natural to ask: what does it mean for a map to be a linear transformation? For example, if $f:\mathbb R^n\to \mathbb R^m$, or more generally if $f:V\to W$ satisfies the above property, does it admit some simple description? We investigate this question next.
 \vskip.3in
 
 \end{document}

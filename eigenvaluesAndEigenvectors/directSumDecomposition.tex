@@ -5,11 +5,11 @@
 
 \begin{document}
 \begin{abstract}
-  Establish algebraic criteria for determining exactly when a real number can occur as an eigenvalue of $A$.
+The subspace spanned by the eigenvectors of a matrix, or a linear transformation, can be expressed as a direct sum of eigenspaces. 
 \end{abstract}
 \maketitle
 
-A vector space $V$ can be written as a sum of subspaces $W_1$, $W_2$ - written as $V = W_1 + W_2$ - if every vector in ${\bf v}\in V$ can be written as ${\bf v} = {\bf w}_1 + {\bf w}_2$ with ${\bf w}_i\in W_i$ (another way to express this is to say $V = Span\{W_1, W_2\}$). The vector space $V$ can be written as a {\it direct sum} of two subspaces $W_1, W_2$ if
+A vector space $V$ is a sum of subspaces $W_1$, $W_2$ - written as $V = W_1 + W_2$ - if every vector in ${\bf v}\in V$ can be written as ${\bf v} = {\bf w}_1 + {\bf w}_2$ with ${\bf w}_i\in W_i$ (that is $V = Span\{W_1, W_2\}$). The vector space $V$ is a {\it direct sum} of two subspaces $W_1, W_2$ if
 \begin{itemize}
 \item $V = W_1 + W_2$;
 \item $W_1\cap W_2 = \{{\bf 0}\}$.
@@ -52,7 +52,7 @@ W_1 = Span\{{\bf v}_1, {\bf v}_1,\dots,{\bf v}_k\},\qquad W_2 = Span\{{\bf v}_{k
 Show that $V = W_1\oplus W_2$.
 \end{exercise}
 
-Direct sum decomposition applies just as well to subspaces of $\mathbb R^n$. Define $E(A)\subset\mathbb R^n$ to be the supspace of $\mathbb R^n$ spanned by the eigenvectors of $A$ (this may or may not be all of $\mathbb R^n$). As we have seen, the number of distinct possible eigenvalues of $A$ is at most $n$ when $A$ is an $n\times n$ matrix. In particular, it is finite.
+Define $E(A)\subset\mathbb R^n$ to be the supspace of $\mathbb R^n$ spanned by the eigenvectors of $A$ (this may or may not be all of $\mathbb R^n$). As we have seen, the number of distinct possible eigenvalues of $A$ is at most $n$ when $A$ is an $n\times n$ matrix. In particular, it is finite.
 
 \begin{theorem} Given a real $n\times n$ matrix $A$, let $\lambda_1,\dots,\lambda_m$ be the distinct real eigenvalues of $A$. Then 
 \[
@@ -89,8 +89,17 @@ E_{\lambda_i}(A)\cap\left(E_{\lambda_2}(A)\oplus E_{\lambda_3}(A)\oplus\dots\opl
 \]
 which together with the last equation implies ${\bf v}_i = {\bf 0}$ for all $2\le i\le m$. As ${\bf v}_1 = \sum_{i=2}^m {\bf v}_i$ we conclude finally that ${\bf v}_1 = {\bf 0}$. Since ${\bf v}_1$ was taken to be an arbitrary element of $E_{\lambda_1}(A)\cap (E_{\lambda_2}(A)\oplus\dots\oplus E_{\lambda_m}(A))$ this shows the intersection must be zero, completing the proof.
 \end{proof}
+\vskip.2in
 
-In the case $E(A) = \mathbb R^n$, this yields a direct sum decomposition of $\mathbb R^n$ into eigenspaces of $A$, which is a very useful thing to know (in the cases it occurs). We investigate this question next.
+More generally, let $L:V\to V$ be a linear self-map on $V$ (as before). Without appeal to bases, we write $E(L)$ for the linear span of the eigenvectors of $L$ in $V$. Then by exactly the same argument one has
+
+\begin{theorem} If $\lambda_1,\dots,\lambda_m$ are the distinct real eigenvalues of $L$, then
+\[
+E(L) = E_{\lambda_1}(L)\oplus E_{\lambda_2}(L)\oplus\dots\oplus E_{\lambda_m}(L)
+\]
+\end{theorem}
+
+In the case $E(L) = V$, this yields a direct sum decomposition of $V$ into eigenspaces of $L$, which is a very useful thing to know (in the cases it occurs). We will investigate this property in more detail next.
 \vskip.3in
 
 \end{document}

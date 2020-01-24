@@ -16,7 +16,7 @@ A*{\bf v} = \lambda{\bf v}
 In other words, if multiplying $\bf v$ on the left by the matrix $A$ has the same effect as multiplying it by the scalar $\lambda$. We note first that, in order for this to be at all  possible, $A*{\bf v}$ must also be an $n\times 1$ vector; in other words, $A$ must be a {\it square} matrix.
 \vskip.2in
 
-Given a square matrix, then, the {\it eigenvalue problem} is to find a complete description of the eigenvalues and associated eigenvectors for that matrix. Our goal in this section is to determine a systematic way of doing this.
+Given a square matrix, then, the {\it eigenvalue problem} is to find a complete description of the eigenvalues and associated eigenvectors for that matrix. In this section we will present a systematic way of doing this.
 \vskip.2in
 
 Before proceeding with examples, we note that
@@ -51,6 +51,22 @@ Thus
 \end{observation}
 \vskip.2in
 
-This suggests that in order to solve the eigenvalue problem, we should first determine the values $\lambda$ for which $A - \lambda I$ is singular; then, for each such $\lambda$, determine a basis for the nullspace of $A - \lambda I$. In other words, {\it eigenvalues first, then eigenvectors}. And to determine the values for which $A - \lambda I$ is singular, we will use the determinant.
+This suggests that in order to solve the eigenvalue problem for a matrix $A$, we should first determine the values $\lambda$ for which $A - \lambda I$ is singular; then, for each such $\lambda$, determine a basis for the nullspace of $A - \lambda I$. In other words, {\it eigenvalues first, eigenvectors second}. And to identify the values $\lambda$ for which $A - \lambda I$ is singular, we will use the determinant.
+\vskip.2in
 
+The above discussion for computing eigenvalues of square matrices can be easily extended to linear transformations.
+
+\begin{definition} If $L:V\to V$ is a linear transformation, we say $0\ne {\bf v}\in V$ is an eigenvector of $L$ with eigenvalue $\lambda$ iff $L({\bf v}) = \lambda{\bf v}$.
+\end{definition}
+
+Note that this definition is basis-free; it does not require the use of a particular basis. However, suppose we are given a basis $S = \{{\bf v}_1,\dots,{\bf v}_n\}$ for $V$. Let $A = {}_{S}L_{S}$ be the matrix representation of $L$ with respect to $S$ in both the domain and range, so that for all ${\bf v}\in V$ one has
+\[
+{}_{S}L({\bf v}) = A*{}_{S}{\bf v}
+\]
+Then 
+
+\begin{proposition} ${\bf v}$ is an eigenvector for $L$ with eigenvalue $\lambda$ precisely when the coordinate vector ${}_{S}{\bf v}$ is an eigenvalue for $A$ with eigenvalue $\lambda$.
+\end{proposition}
+
+In this way, fixing a basis for $V$ allows us to determine the eigenvalues and eigenvectors for $L$ by doing the same for the matrix representation $A$ of $L$. We will investigate this further in the following sections.
 \end{document}
