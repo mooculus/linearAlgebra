@@ -11,7 +11,6 @@
 \end{abstract}
 \maketitle
 
-We have seen previously that the
 From the beginning we have adopted the convention that vectors in $\mathbb R^n$ are represented by $n\times 1$ matrices - column vectors - with entries in $\mathbb R$. Another, equivalent way to arrive at such a description is to start with the {standard basis} $\underline{e} := \{{\bf e}^n_1, {\bf e}^n_2,\dots, {\bf e}^n_n\}$, viewed simply as a linearly independent set, and then define $\mathbb R^n$ to be the span of these basis vectors. In this way, we realize that when writing down an $n\times 1$ column vector representing ${\bf v}$, we are simply recording (in columnar form) the coefficients that occur when representing $\bf v$ as a linear combination of standard basis vectors:
 \[
 {\bf v} = [a_1\ a_2\dots a_n]^T\quad \Leftrightarrow\quad {\bf v} = a_1 {\bf e}^n_1 + a_2{\bf e}^n_2 +\dots + a_n{\bf e}^n_n
@@ -27,7 +26,7 @@ We notice now that this can be done not just for the standard basis in $\mathbb 
 It is important here to distinguish between i) a vector ${\bf v}\in V$ and ii) its coordinate representation with respect to a particular basis for $V$. For that reason, vectors in $\mathbb R^n$ - written as $n\times 1$ column vectors - may some times be written with the decoration indicating that we are really looking at the representation of the vector with respect to the standard basis. As we will see, this additional decoration provides necessary book-keeping in the event we are considering representations with respect to different bases in $\mathbb R^n$
 \vskip.2in
 
-\begin{example} Let ${\bf v}\in\mathbb R^n$ with ${}_{\underline{e}}{\bf v} = [2\ 3\ -1]^T$, and let $\{{\bf u}_1, {\bf u}_2, {\bf u}_3\}$ be the basis of $\mathbb R^3$ given by
+\begin{example} Let ${\bf v}\in\mathbb R^3$ with ${}_{\underline{e}}{\bf v} = [2\ 3\ -1]^T$, and let $\{{\bf u}_1, {\bf u}_2, {\bf u}_3\}$ be the basis of $\mathbb R^3$ given by
 \[
 {}_{\underline{e}}{\bf u}_1 = [1\ 1\ 0]^T,\quad {}_{\underline{e}}{\bf u}_2 = [1\ 0\ 1]^T,\quad {}_{\underline{e}}{\bf u}_3 = [0\ 1\ 1]^T
 \]
@@ -35,7 +34,7 @@ We wish to determine ${}_{\underline{b}}{\bf v}$, the coordinate representation 
 \[
 {\bf v} = x_1 {\bf u}_1 + x_2{\bf u}_2  + x_3{\bf u}_3
 \]
-Referring back to the consistency theorem for systems of equations, we see that solving for ${\bf x} = [x_1\ x_2\ x_3]^T$ is equivalent to solving for $\bf x$ in the matrix equation $A*{\bf x} = {}_{\underline{e}}{\bf v}^T$, where $A$ is the $3\times 3$ matrix whose columns are $\{{\bf u}_1, {\bf u}_2,{\bf u}_3\}$, or more precisely $\{{}_{\underline{e}}{\bf u}_1, {}_{\underline{e}}{\bf u}_2,{}_{\underline{e}}{\bf u}_3\}$:
+Referring back to the consistency theorem for systems of equations, we see that solving for ${\bf x} = [x_1\ x_2\ x_3]^T$ is equivalent to solving for $\bf x$ in the matrix equation $A*{\bf x} = {}_{\underline{e}}{\bf v}^T$, where $A$ is the $3\times 3$ matrix whose columns are $\{{\bf u}_1, {\bf u}_2,{\bf u}_3\}$, or more precisely $A = \bmatrix {}_{\underline{e}}{\bf u}_1 & {}_{\underline{e}}{\bf u}_2 &{}_{\underline{e}}{\bf u}_3\endbmatrix$:
 \[
 \begin{bmatrix}
 1 & 1 & 0\\
@@ -76,10 +75,29 @@ from which we see that
 \]
 \end{example}
 
-This last example illustrates one of the basic computations we will want to be able to do; given the coordinate description of a vector with respect to one basis, find its coordinate representation with respect to a (specified) different basis. 
+This last example illustrates one of the basic computations we will want to be able to do; given the coordinate description of a vector with respect to one basis, find its coordinate representation with respect to a (specified) different basis. The matrix $A$ in the above example is referred to as a {\it transition matrix}; specifically the {\it base transition matrix from the basis $S$ to the basis $\underline{e}$}, where $S = \{{\bf u}_1, {\bf u}_2, {\bf u}_3\}$ As we will see in more detail below, the notation for the base transition matrix from $S$ to $\underline{e}$ is
+\[
+{}_{\underline{e}}T_{S} := \bmatrix {}_{\underline{e}}{\bf u}_1 & {}_{\underline{e}}{\bf u}_2 &{}_{\underline{e}}{\bf u}_3\endbmatrix
+\]
 \vskip.2in
+For now we will simply define base transition matrices. The proof of the equality in equation (\ref{eqn:transition}) below will be given in the next section.
 
-Of course one needs to know a bit more about the second basis. But given that information, we would want a systematic way to proceed. One way would be as in the previous example. However, it turns out that this problem is easier to handle within the more general framework of linear transformations and their matrix representations, which we discuss in the next section.
+\begin{definition} If $S = \{{\bf u}_1, {\bf u}_2,\dots, {\bf u}_n\}$ is a basis for $\mathbb R^n$, then the base transition matrix from $S$ to $\underline{e}$ is the $n\times n$ non-singular matrix
+\[
+{}_{\underline{e}}T_{S} := \bmatrix {}_{\underline{e}}{\bf u}_1 & {}_{\underline{e}}{\bf u}_2 & \dots &{}_{\underline{e}}{\bf u}_n\endbmatrix
+\]
+where ${}_{\underline{e}}{\bf u}_i$ is the coordinate vector of ${\bf u}_i$ with respect to the standard basis $\underline{e}$ of $\mathbb R^n$. The base transition matrix ${}_{S}T_{\underline{e}}$ from $\underline{e}$ to $S$ is then given as the inverse of ${}_{\underline{e}}T_{S}$
+\[
+{}_{S}T_{\underline{e}} := {}_{\underline{e}}T_{S}^{-1}
+\]
+Finally, if ${}_{\underline{e}}{\bf v}$ is the coordinate representation of ${\bf v}\in\mathbb R^n$ with respect to the standard basis, then the coordinate representation of $\bf v$ with respect to the basis $S$, written as ${}_S{\bf v}$, can be computed as a product
+\begin{equation}\label{eqn:transition}
+{}_S{\bf v} = {}_{S}T_{\underline{e}}*{}_{\underline{e}}{\bf v}
+\end{equation}
+\end{definition}
+
+\vskip.2in
+The discussion of base change in $\mathbb R^n$ applies more generally to transitioning between two bases for an arbitrary vector space $V$. The setup for this (and the proof that it works as claimed) is best handled within the more general framework of linear transformations and their matrix representations, which we discuss in the next section.
 \vskip.5in
 
 

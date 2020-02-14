@@ -37,7 +37,7 @@ In the other direction, suppose it is a minimal spanning set. If it were not lin
 {\bf\underbar{Proof of B2}}\, Given the first property, there are two different ways one can go about constructing a basis. We present both. Note: they do require familiarity with the operations of union and intersection for sets.
 \vskip.05in
 
-\underbar{Method 1} Let $T_s = \{S\subset V\ |\ V = Span(S)\}$. We can partially order $T_s$ by defining $S\le S'$ if $S'\subset S$. Every chain is clearly bounded above as a set by $\empty$ (even though the bound is not an element of $T_s$). Choose a totally ordered subset of $T_s$; by Zorn's Lemma it contains a maximal element $S_m\in T_s$. Maximality with respect to this total ordering means $S_m$ is a minimal spanning set, hence a basis by {\bf B1}.
+\underbar{Method 1} Let $T_s = \{S\subset V\ |\ V = Span(S)\}$. We can partially order $T_s$ by defining $S\le S'$ if $S'\subset S$. Every chain is clearly bounded below as a set by the empty set $\emptyset$ (even though the bound is not an element of $T_s$). Choose a totally ordered subset of $T_s$; by Zorn's Lemma it contains a maximal element $S_m\in T_s$. Maximality with respect to this total ordering means $S_m$ is a minimal spanning set, hence a basis by {\bf B1}.
 \vskip.05in
 
 \underbar{Method 2} Let $T_l = \{S\subset V\ |\ S\ \text{is linearly independent}\}$, and partially order $T_l$ by $S\le S'$ iff $S\subset S'$. Again, every chain has an upper bound $S=V$ (which again will not be in $T_l$). Choose a totally ordered subset of $T_l$ and let $S_l$ be a maximal element, implying it is a maximal linearly independent subset of $V$, hence a basis.

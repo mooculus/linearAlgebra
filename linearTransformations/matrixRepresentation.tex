@@ -85,9 +85,34 @@ Returning once more to the general case where $L:V\to W$ is linear, $S$ a basis 
 \item ${\bf v}\in ker(L)\subset V$ iff ${}_{S}{\bf v}\in N(A)\subset\mathbb R^n$.
 \item ${\bf w}\in im(L)\subset W$ iff ${}_{T}{\bf w}\in C(A)\subset\mathbb R^m$.
 \end{itemize}
-
-
 \end{theorem}
+
+This theorem tells us that, once we have fixed a basis for $V$ and $W$, the representation of $L$ by the matrix $A={}_{T}L_{S}$ further identifies i) the kernel $ker(L)$ of $L$ with the nullspace $N(A)$ of $A$ and ii) the image $im(L)$ with the column space $C(A)$ of $A$.
+\vskip.2in
+
+\begin{example} Suppose $L: P_3\to P_3$ is the linear transformation represented with respect to the standard basis on $P_3$ by the matrix $ A = \bmatrix 2 & 3 & 1\\ 3 & 9 & 6\\ 1 & 6 & 5\endbmatrix$. Our objective is to find a minimal spanning set $ker(L)$ and $im(L)$ (with respect to the standard basis for $P^3$).
+\vskip.1in
+First we compute $rref(A) = \bmatrix 1 & 0 & -1\\0 & 1 & 1\\0 & 0 & 0\endbmatrix$. We then see
+\begin{itemize}
+\item The column space $C(A)$ of $A$ is $Span\{A(:,1), A(:,2)\} = Span\left\{\bmatrix 2\\3\\\1\endbmatrix, \bmatrix 3\\9\\6\endbmatrix\right\}$;
+\item  the nullspace $N(A)$ of $A$ is $Span\left\{\bmatrix 1\\-1\\1 \endbmatrix \right\}$. Note that these are coordinate vectors.
+\item The corresponding vectors, written as polynomials in $P_3$, give
+\[
+im(L) = Span\left\{(2 + 3x + x^2), (3 + 9x + 6x^2)\right\},\qqua ker(L) = Span\left\{(1 - x + x^2)\right\}
+\]
+\end{itemize} 
+\end{example}
+
+\begin{exercise} Suppose $L:P_4\to P_4$ is the linear transformation whose representation in the standard basis for $P_4$ is given by
+\[
+A =\bmatrix 10 & -16 & -2 & -2\\
+  -16 & 36 & 22 & 12\\
+   -2 & 22 & 53 & -4\\
+   -2 & 12 & -4 & 30\endbmatrix
+\]
+Following the method in the above example, write down a minimal spanning set for $ker(L)$ and $im(L)$ (the elements should be vectors in $P_4$ - i.e., polynomials, not their coordinate representations.)
+\end{exercise}
+
 
 \vskip.3in
 
