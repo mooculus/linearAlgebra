@@ -64,17 +64,17 @@ completing the proof.
 
 \begin{example} Suppose $L:\mathbb R^3\to \mathbb R^2$ is the linear transformation given by
 \[
-L({\bf x}) = L\left(\bmatrix x_1\\x_2\\x_3\endbmatrix\right) = \bmatrix 2x_1 - 3x_2 + 7x_3\\ 4x_2 - 5x_3\endbmatrix
+L({\bf x}) = L\left(\begin{bmatrix} x_1\\x_2\\x_3\end{bmatrix}\right) = \begin{bmatrix} 2x_1 - 3x_2 + 7x_3\\ 4x_2 - 5x_3\end{bmatrix}
 \]
-To compute the matrix representation of $L$ with respect to the standard bases of $\mathbb R^3$ and $\mathbb R^2$, we evaluate $L$ on the basis vectors ${\bf e}_i, 1\le i\le 3$ and then form the matrix $A_L = \bmatrix {L(\bf e}_1) & L({\bf e}_2) & L({\bf e}_3)\endbmatrix$, yielding
+To compute the matrix representation of $L$ with respect to the standard bases of $\mathbb R^3$ and $\mathbb R^2$, we evaluate $L$ on the basis vectors ${\bf e}_i, 1\le i\le 3$ and then form the matrix $A_L = \begin{bmatrix} {L(\bf e}_1) & L({\bf e}_2) & L({\bf e}_3)\end{bmatrix}$, yielding
 \[
-A_L = \bmatrix 2 & -3 & 7\\ 0 & 4 & -5 \endbmatrix
+A_L = \begin{bmatrix} 2 & -3 & 7\\ 0 & 4 & -5 \end{bmatrix}
 \]
 \end{example}
 
 \begin{example} Recall that $P_n$ is the vector space of polynomials in one variable with real coefficients. Let $L:P_3\to P_3$ be given by $L(p(x)) = 2p'(x) - p(x)$, where $p'(x)$ denotes the derivative of $p(x)$. To find the matrix representation of $L$ with respect to the basis $\{1,x,x^2\}$ for $P_3$, we first compute $L(1) = -1; L(x) = 2 - 2x; L(x^2) = 4x - x^2$. Then
 \[
-A_L = \bmatrix L(1) & L(x) & L(x^2)\endbmatrix = \bmatrix -1 & 2 & 0\\0 & -2 & 4\\0 & 0 & -1\endbmatrix
+A_L = \begin{bmatrix} L(1) & L(x) & L(x^2)\end{bmatrix} = \begin{bmatrix} -1 & 2 & 0\\0 & -2 & 4\\0 & 0 & -1\end{bmatrix}
 \]
 \end{example}
 
@@ -90,12 +90,12 @@ Returning once more to the general case where $L:V\to W$ is linear, $S$ a basis 
 This theorem tells us that, once we have fixed a basis for $V$ and $W$, the representation of $L$ by the matrix $A={}_{T}L_{S}$ further identifies i) the kernel $ker(L)$ of $L$ with the nullspace $N(A)$ of $A$ and ii) the image $im(L)$ with the column space $C(A)$ of $A$.
 \vskip.2in
 
-\begin{example} Suppose $L: P_3\to P_3$ is the linear transformation represented with respect to the standard basis on $P_3$ by the matrix $ A = \bmatrix 2 & 3 & 1\\ 3 & 9 & 6\\ 1 & 6 & 5\endbmatrix$. Our objective is to find a minimal spanning set $ker(L)$ and $im(L)$ (with respect to the standard basis for $P^3$).
+\begin{example} Suppose $L: P_3\to P_3$ is the linear transformation represented with respect to the standard basis on $P_3$ by the matrix $ A = \begin{bmatrix} 2 & 3 & 1\\ 3 & 9 & 6\\ 1 & 6 & 5\end{bmatrix}$. Our objective is to find a minimal spanning set $ker(L)$ and $im(L)$ (with respect to the standard basis for $P^3$).
 \vskip.1in
-First we compute $rref(A) = \bmatrix 1 & 0 & -1\\0 & 1 & 1\\0 & 0 & 0\endbmatrix$. We then see
+First we compute $rref(A) = \begin{bmatrix} 1 & 0 & -1\\0 & 1 & 1\\0 & 0 & 0\end{bmatrix}$. We then see
 \begin{itemize}
-\item The column space $C(A)$ of $A$ is $Span\{A(:,1), A(:,2)\} = Span\left\{\bmatrix 2\\3\\\1\endbmatrix, \bmatrix 3\\9\\6\endbmatrix\right\}$;
-\item  the nullspace $N(A)$ of $A$ is $Span\left\{\bmatrix 1\\-1\\1 \endbmatrix \right\}$. Note that these are coordinate vectors.
+\item The column space $C(A)$ of $A$ is $Span\{A(:,1), A(:,2)\} = Span\left\{\begin{bmatrix} 2\\3\\\1\end{bmatrix}, \begin{bmatrix} 3\\9\\6\end{bmatrix}\right\}$;
+\item  the nullspace $N(A)$ of $A$ is $Span\left\{\begin{bmatrix} 1\\-1\\1 \end{bmatrix} \right\}$. Note that these are coordinate vectors.
 \item The corresponding vectors, written as polynomials in $P_3$, give
 \[
 im(L) = Span\left\{(2 + 3x + x^2), (3 + 9x + 6x^2)\right\}, \quad ker(L) = Span\left\{(1 - x + x^2)\right\}
@@ -105,10 +105,10 @@ im(L) = Span\left\{(2 + 3x + x^2), (3 + 9x + 6x^2)\right\}, \quad ker(L) = Span\
 
 \begin{exercise} Suppose $L:P_4\to P_4$ is the linear transformation whose representation in the standard basis for $P_4$ is given by
 \[
-A =\bmatrix 10 & -16 & -2 & -2\\
+A =\begin{bmatrix} 10 & -16 & -2 & -2\\
   -16 & 36 & 22 & 12\\
    -2 & 22 & 53 & -4\\
-   -2 & 12 & -4 & 30\endbmatrix
+   -2 & 12 & -4 & 30\end{bmatrix}
 \]
 Following the method in the above example, write down a minimal spanning set for $ker(L)$ and $im(L)$ (the elements should be vectors in $P_4$ - i.e., polynomials, not their coordinate representations.)
 \end{exercise}
