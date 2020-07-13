@@ -60,7 +60,7 @@ E(A) = E_{\lambda_1}(A)\oplus E_{\lambda_2}(A)\oplus\dots\oplus E_{\lambda_m}(A)
 \]
 \end{theorem}
 
-\begin{proof} For $m=1$ the statement is trivially true. So suppose that $m=2$, and ${\bf v}\in E_{\lambda_1}(A)\cap E_{\lambda_2}(A)$ with $\lambda_1\ne \lambda_2$. Then
+\begin{proof} For $m=1$ the statement is trivially true. So suppose that $m=2$, and ${\bf 0}\ne {\bf v}\in E_{\lambda_1}(A)\cap E_{\lambda_2}(A)$ with $\lambda_1\ne \lambda_2$. Then
 \[
 A*{\bf v} = \lambda_1{\bf v} = \lambda_2{\bf v}
 \]
@@ -81,11 +81,11 @@ Subtracting gives
 \]
 As the eigenvalues are distinct, the coefficient $(\lambda_1 - \lambda_i)$ is non-zero for each $2\le i\le m$. Then
 \[
-{\bf v}_i = \left(\frac{-1}{(\lambda_1 - \lambda_i)}\right)\Big((\lambda_1 - \lambda_2){\bf v}_2  (\lambda_1 - \lambda_3){\bf v}_3 \dots + (\lambda_1 - \lambda_{i-1}){\bf v}_{i-1} + (\lambda_1 -\lambda_{i+1}){\bf v}_{i+1}\dots +(\lambda_1 - \lambda_m){\bf v}_m\Big)
+{\bf v}_2 = \left(\frac{-1}{(\lambda_1 - \lambda_2)}\right)\Big((\lambda_1 - \lambda_3){\bf v}_3 \dots + (\lambda_1 - \lambda_{i-1}){\bf v}_{i-1} + (\lambda_1 -\lambda_{i+1}){\bf v}_{i+1}\dots +(\lambda_1 - \lambda_m){\bf v}_m\Big)
 \]
 Induction allows us to assume
 \[
-E_{\lambda_i}(A)\cap\left(E_{\lambda_2}(A)\oplus E_{\lambda_3}(A)\oplus\dots\oplus E_{\lambda_{i-1}}(A)\oplus E_{\lambda_{i+1}}(A)\oplus\dots\oplus E_{\lambda_m}(A)\right) = {\bf 0}
+E_{\lambda_2}(A)\cap\left(E_{\lambda_3}(A)\oplus E_{\lambda_4}(A)\oplus\dots\oplus E_{\lambda_{i-1}}(A)\oplus E_{\lambda_{i+1}}(A)\oplus\dots\oplus E_{\lambda_m}(A)\right) = {\bf 0}
 \]
 which together with the last equation implies ${\bf v}_i = {\bf 0}$ for all $2\le i\le m$. As ${\bf v}_1 = \sum_{i=2}^m {\bf v}_i$ we conclude finally that ${\bf v}_1 = {\bf 0}$. Since ${\bf v}_1$ was taken to be an arbitrary element of $E_{\lambda_1}(A)\cap (E_{\lambda_2}(A)\oplus\dots\oplus E_{\lambda_m}(A))$ this shows the intersection must be zero, completing the proof.
 \end{proof}
