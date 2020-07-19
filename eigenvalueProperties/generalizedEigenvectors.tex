@@ -1,0 +1,119 @@
+\documentclass{ximera}
+\input{../preamble.tex}
+\title{Generalized eigenvectors}
+\author{Crichton Ogle}
+\pgfplotsset{compat=1.15}
+\begin{document}
+\begin{abstract}
+For an $n\times n$ complex matrix $A$, $\mathbb C^n$ does not necessarily have a basis consisting of eigenvectors of $A$. But it will always have a basis consisting of generalized eigenvectors of $A$.
+\end{abstract}
+\maketitle
+
+In this section we assume all vector spaces and matrices are complex. As we have already seen, the matrix $A = \begin{bmatrix} 1 & 1\\0 & 1\end{bmatrix}$ is not diagonalizable. In fact, $p_A(t) = (1-t)^2$, indicating that the single eigenvalue $\lambda=1$ has algebraic multiplicity $m_a(1) = 2$, while
+\[
+m_g(1) = Dim(E_1(A)) = Null(A - 1\cdot Id) = Null\left(\begin{bmatrix} 0 & 1\\0 & 0\end{bmatrix}\right) = 1
+\]
+implying that $A$ is defective. 
+\vskip.2in
+
+However this is not the end of the story. Letting $B = (A - 1\cdot Id)$, we see that
+\[
+B^2 = B*B = 0^{2\times 2}
+\]
+is the zero matrix. Moreover, ${\bf e}_1 = B*{\bf e}_2$, where $E_1(A) = Span\{{\bf e}_1\}$. We then see that ${\bf e}_2$ is not an eigenvector of $A$, but $B*{\bf e}_2$ is. There is an inclusion
+\[
+\mathbb C\cong E_1(A) = N(B)\subset N(B^2) = \mathbb C^2
+\]
+In this example, the vector ${\bf e}_2$ is referred to as a \textbf{\textit{generalized eigenvector}} of the matrix $A$; it satisfies the property that the vector itself is not necessarily an eigenvector of $A$, but $B^k*{\bf e}_2$ is for some $k\ge 1$.
+One other observation worth noting: in this example, the smallest exponent $m$ of $B$ satisfying the property
+\[
+N(B^m) = N(B^{m+1})
+\]
+is $m = m_a(1) = 2$, the algebraic multiplicity of the eigenvalue $\lambda = 1$. This is not an accident.
+
+\begin{theorem} If $A$ is an $n\times n$ numerical matrix and $\lambda$ is an eigenvalue of $A$, then
+\[
+Null\left((A - \lambda I)^{m_a(\lambda)}\right) = m_a(\lambda)
+\]
+\end{theorem}
+
+\begin{definition} The \textbf{\textit{generalized eigenspace of $\lambda$}} (for the matrix $A$) is the space $E^g_{\lambda}(A) := 
+N\left((A - \lambda I)^{m_a(\lambda)}\right)$. A non-zero element of $E^g_{\lambda}(A)$ is referred to as a \textbf{\textit{generalized eigenvector}} of $A$.
+\end{definition}
+
+Letting $E_\lambda^k(A) := N\left((A - \lambda I)^{k}\right)$, we have a sequence of inclusions
+\[
+E_\lambda(A) = E^1_\lambda(A)\subset E_\lambda^2(A)\subset\dots\subset E_\lambda^{m_a(\lambda)} = E^g_\lambda(A)
+\]
+
+\begin{theorem} If $\lambda_1\ne \lambda_2\ne\dots\ne \lambda_k$ are the distinct eigenvalues of an $n\times n$ matrix $A$ then
+\[
+E^g_{\lambda_1}(A) + E^g_{\lambda_2}(A) + \dots + E^g_{\lambda_k}(A) = 
+E^g_{\lambda_1}(A)\oplus E^g_{\lambda_2}(A)\oplus \dots \oplus E^g_{\lambda_k}(A) = \mathbb C^n
+\]
+\end{theorem}
+
+
+
+The generalized eigenvalue problem is to find a basis $S^g_\lambda$ for each generalized eigenspace compatible with this filtration. This means that for each $k$, the vectors of $S^g_\lambda$ lying in $E_\lambda^k(A)$ is a basis for that subspace.
+
+This turns out to be more involved than the earlier problem of finding a basis for $E_\lambda(A) = E_\lambda^1(A)$, and an algorithm for finding such a basis will be deferred until Module IV.
+
+One thing that can often be done, however, is to find a \textbf{\textit{Jordan chain}}. We will first need to define some terminology.
+
+\begin{definition} If ${\bf v}\in E^g_\lambda(A)$ is a generalized eigenvector of $A$, the \textbf{\textit{rank}} of ${\bf v}$ is the unique integer $m\ge 1$ for which $(A - \lambda I)^m*{\bf v} = {\bf 0}, (A - \lambda)^{m-1}*{\bf v}\ne {\bf 0}$.
+\end{definition}
+
+By the above Theorem, such an $m$ always exists. A generalized eigenvector of $A$, then, is an eigenvector of $A$ iff its rank equals $1$. For an eigenvalue $\lambda$ of $A$, we will abbreviate $(A - \lambda I)$ as $A_\lambda$.
+
+\begin{definition} Given a generalized eigenvector ${\bf v}_m$ of $A$ of rank $m$, the \textbf{\textit{Jordan chain}} associated to ${\bf v}_m$ is the sequence of vectors
+\[
+J({\bf v}_m) := \{{\bf v}_m,{\bf v}_{m-1},{\bf v}_{m-2},\dots,{\bf v}_1\}
+\]
+where ${\bf v}_{m-i} := A_\lambda^i*{\bf v}_m$
+\end{definition}
+
+By definition of rank, it is easy to see that every vector in a Jordan chain must be non-zero. In fact, more is true
+
+\begin{theorem} If ${\bf v}_m$ is a generalized eigenvector of $A$ of rank $m$ (corresponding to the eigenvalue $\lambda$), then the Jordan chain $J({\bf v}_m)$ corresponding to ${\bf v}_m$ consists of $m$ linearly independent eigenvectors.
+\end{theorem}
+
+In this way, a rank $m$ generalized eigenvector of $A$ ${\bf v}_m$ (corresponding to the eigenvalue $\lambda$) will generate an $m$-dimensional subspace $Span(J({\bf v}_m))$ of the generalized eigenspace $E^g_\lambda(A)$ with basis given by the Jordan chain $J({\bf v}_m)$ associated with ${\bf v}_m$.
+
+\begin{definition} A \textbf{\textit{Jordan canonical basis}} for $E^g_\lambda(A)$ is one that consists entirely of Jordan chains.
+\end{definition}
+
+\begin{example} Suppose $\lambda$ is a non-defective eigenvalue of $A$; that is, one with $m_g(\lambda) = m_a(\lambda)$. Then $E^g_\lambda(A) = E_\lambda(A)$ - every generalized eigenvector of $A$ has rank $1$. Therefore every Jordan chain has length $1$, and the number of Jordan chains we would need to find a basis for $E^g_\lambda(A)$ is $m_g(A) = m_a(A)$.
+\end{example}
+
+\begin{example} let $A = \begin{bmatrix} 1 & 1\\0 & 1\end{bmatrix}$, as above. Then $\lambda = 1$ is defective, as $1 = m_g(1) < m_a(1) = 2$. We also saw that $A_1*{\bf e}_2 = {\bf e}_1$, where ${\bf e}_1$ is an eigenvector of $A$ corresponding to the eigenvalue $\lambda = 1$.
+
+Thus ${\bf e}_2$ is a generalized eigenvector of $A$ of rank $2$, and the Jordan chain $\{{\bf e}_2, {\bf e}_1\}$ is a basis for $E^g_1(A) = \mathbb C^2$ (in fact, it is the standard basis).
+\end{example}
+
+\begin{example} let $A = \begin{bmatrix} 2 & 1 & 0\\0 & 2 & 1\\0 & 0 & 2\end{bmatrix}$. In this case, it is easy to see that the characteristic polynomial is $p_A(t) = (2-t)^3$, so that the only eigenvalue is $\lambda = 2$. Also $m_1(2) = 3$, and one can verify that $m_g(2) = 1$. 
+
+Thus there is a gap of two between the dimension of the generalized eigenspace $E^g_2(A) = \mathbb C^3$, and that of the regular eigenspace $E_1(A)$. Note also that ${\bf e}_1$ is an eigenvector for $A$.
+
+Can we find a Jordan chain which provides a basis for the generalized eigenspace $E^g_2(A)$, which we see is all of $\mathbb C^3$? If a single Jordan chain is going to do the job, it must have length $3$, and therefore be the Jordan chain associated to a generalized eigenvector of rank $3$.
+
+Now $A_2 = A - 2Id = \begin{bmatrix} 0 & 1 & 0\\  0 & 0 & 1\\ 0 & 0 & 0\end{bmatrix}$, $A_2^2 = \begin{bmatrix} 0 & 0 & 1\\ 0 & 0 & 0 \\ 0 & 0 & 0\end{bmatrix}$, with $A_2^3 = {\bf 0}^{3\times 3}$. We are then looking for a vector ${\bf v}\in\mathbb C^3$ with $A_2^3*{\bf v} = \bf 0}$ (which is automatically the case), but with $A_2^2*{\bf v}\ne 0$. We see that this last condition is satisfied iff the third coordinate of ${\bf v}$ is non-zero.
+
+There is clearly a choice involved. The simplest choice here is to take ${\bf v} = {\bf v}_3 = {\bf e}_3$.  Then ${\bf v}_2 = A_2*{\bf v}_3 = {\bf e}_2$, and ${\bf v}_1 = A_2*{\bf v}_2 = {\bf e}_1$. So in this case we see
+\[
+J({\bf e}_3) = \{{\bf e}_3, {\bf e}_2, {\bf e}_1\}
+\]
+\end{example}
+
+The previous examples were designed to be able to easily find a Jordan chain. The following is a bit more involved.
+
+\begin{example} Let $A = \begin{bmatrix} 1 & -1 & 0\\ -1 & 4 & -1\\ -4 & 13 & -3\end{bmatrix}$. Then $p_A(t) = (-t)(1-t)^2$. The eigenvalue $\lambda = 0$ has algebraic multiplicity $1$, and therefore cannot be defective. The eigenvalue $\lambda = 1$ has $m_a(1) = 2$, while $m_g(1) = 1$. Thus for $\lambda = 0$, $E^g_0(A) = E_0(A) = N(A)$, with basis given by any non-zero vector of the nullspace of $A$.
+
+For $\lambda = 1$, we cannot have two linearly independent Jordan chains of length $1$, because that would give $m_g(1) = 2$. So we must have a single Jordan chain of length 2. Now $A_1^2 = \begin{bmatrix} 1 & -3 & 1\\ 1 & -3 & 1\\ 3 & -9 & 3\end{bmatrix}$. Inspection shows the vector ${\bf v}_2 = \begin{bmatrix} 1\\ 1\\ 2\end{bmatrix}$ is in $N(A_1^2)$ but not in $N(A_1)$. Letting ${\bf v}_1 = A_1*{\bf v}_2 = \begin{bmatrix} -1\\ 0\\ 1\end{bmatrix}$ yields a Jordan chain of length 2:
+\[
+J({\bf v}_2) = \{{\bf v}_2, {\bf v}_1\}
+\]
+which is then a basis for $E_1^g(A)$.
+\end{example}
+
+\end{document}
