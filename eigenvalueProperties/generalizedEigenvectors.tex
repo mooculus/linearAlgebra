@@ -97,7 +97,7 @@ Thus there is a gap of two between the dimension of the generalized eigenspace $
 
 Can we find a Jordan chain which provides a basis for the generalized eigenspace $E^g_2(A)$, which we see is all of $\mathbb C^3$? If a single Jordan chain is going to do the job, it must have length $3$, and therefore be the Jordan chain associated to a generalized eigenvector of rank $3$.
 
-Now $A_2 = A - 2Id = \begin{bmatrix} 0 & 1 & 0\\  0 & 0 & 1\\ 0 & 0 & 0\end{bmatrix}$, $A_2^2 = \begin{bmatrix} 0 & 0 & 1\\ 0 & 0 & 0 \\ 0 & 0 & 0\end{bmatrix}$, with $A_2^3 = {\bf 0}^{3\times 3}$. We are then looking for a vector ${\bf v}\in\mathbb C^3$ with $A_2^3*{\bf v} = \bf 0}$ (which is automatically the case), but with $A_2^2*{\bf v}\ne 0$. We see that this last condition is satisfied iff the third coordinate of ${\bf v}$ is non-zero.
+Now $A_2 = A - 2Id = \begin{bmatrix} 0 & 1 & 0\\  0 & 0 & 1\\ 0 & 0 & 0\end{bmatrix}$, $A_2^2 = \begin{bmatrix} 0 & 0 & 1\\ 0 & 0 & 0 \\ 0 & 0 & 0\end{bmatrix}$, with $A_2^3 = {\bf 0}^{3\times 3}$. We are then looking for a vector ${\bf v}\in\mathbb C^3$ with $A_2^3*{\bf v} = \bf 0$ (which is automatically the case), but with $A_2^2*{\bf v}\ne 0$. We see that this last condition is satisfied iff the third coordinate of ${\bf v}$ is non-zero.
 
 There is clearly a choice involved. The simplest choice here is to take ${\bf v} = {\bf v}_3 = {\bf e}_3$.  Then ${\bf v}_2 = A_2*{\bf v}_3 = {\bf e}_2$, and ${\bf v}_1 = A_2*{\bf v}_2 = {\bf e}_1$. So in this case we see
 \[
