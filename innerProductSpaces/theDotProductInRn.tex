@@ -86,6 +86,48 @@ so that one can also recover the dot product from the norm;
 \end{itemize}
 \vskip.3in
 
+If $\bf v$, $\bf w$ are two non-zero vectors in $\mathbb R^n$, then there span is at most two-dimensional, and so we may choose a plane in $\mathbb R^n$ containing them. Within that plane the vectors determine two angles. We define $\theta_{{\bf v}, {\bf w}}$ to be the smaller of the two angles; this angle will always lie between $0$ and $\pi$ radians\vskip.2in
+
+[Note: Except in the case the two vectors are colinear and pointing in opposite directions, the smaller angle will be unique and less than $\pi$ radians. In that one remaining case the choice of angle representative will not be unique, but both angles will be equal to $\pi$, so the angle itself is well-defined.]
+\vskip.2in
+
+The angle formula is given by the following lemma.
+
+\begin{lemma} For $\mathbb R^n\ni {\bf v}, {\bf w}\ne 0$, one has
+\[
+{\bf v}\cdot{\bf w} = \|{\bf v}\| \|{\bf w}\|\cos(\theta_{{\bf v},{\bf w}})
+\]
+
+\end{lemma}
+
+As $\cos$ is 1-1 on the interval $[0,\pi]$, this equality implies
+
+\begin{corollary} For ${\bf v}, {\bf w}$ as above, one has
+\[
+\theta_{{\bf v},{\bf w}} = \arccos\left({\bf v}\cdot{\bf w}/(\|{\bf v}\| \|{\bf w}\|)\right)
+\]
+
+\end{corollary}
+
+
+\begin{example} Suppose ${\bf v} = \begin{bmatrix} 3\\ -1\\ 4  \end{bmatrix}, {\bf w} = \begin{bmatrix} -2\\ 1\\ 5\end{bmatrix}$, and we want to compute the angle $\theta_{{\bf v}, {\bf w}}$ determined by $\bf v$ and $bf w$.
+\vskip.1in
+Using Octave or MATLAB, we see that (using "short" format)
+\begin{itemize}
+\item ${\bf v}\cdot{\bf w} = 13$;
+\item $\|{\bf v}\| = 5.0990$;
+\item $\|{\bf w}\| = 5.4772$;
+\item Therefore
+\begin{gather*}
+\theta_{{\bf v},{\bf w}} = \arccos\left({\bf v}\cdot{\bf w}/(\|{\bf v}\| \|{\bf w}\|)\right)
+= \arccos(13/(5.0990*5.4772))
+= \arccos(0.4655) = 1.0866\mathtext{\rm\ radians}
+\end{gather*}
+\end{itemize}
+
+
+\end{example}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \end{document}
