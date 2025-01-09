@@ -1,0 +1,109 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "type": "shell",
+    "command": "xmlatex",
+    "windows": {
+        "command": ".\\xmScripts\\xmlatex.bat"
+    },    
+    "problemMatcher": [],
+    "tasks": [
+        {
+            "label": "PDF",
+            "args": [
+                "compilePdf",
+                "${relativeFile}"
+            ],
+        },
+        {
+            "label": "HTML",
+            "args": [
+                "--",
+                "--skip-mathjax",
+                "compile",
+                "${relativeFile}"
+            ],
+        },
+        {
+            "label": "Bake",
+            "args": [
+                "--",
+                "--skip-mathjax",
+                "bake"
+            ],
+        },
+        {
+            "label": "All",
+            "args": [
+                "-d", "all"
+            ],
+        },
+        {
+            "label": "Serve",
+            "args": [
+                "serve"
+            ],
+        },        
+        {
+            "label": "Start Ximera Server",
+            "args": [
+                "ximeraserver"
+            ],
+        },
+        {
+                "label": "Preview in Simple Browser",
+                "command": "${input:openSimpleBrowser}",
+        },
+        {
+            "label": "Bake standard",
+            "args": [
+                "bakestandaard"
+            ],
+        },
+        {
+            "label": "Bake handout",
+            "args": [
+                "bakehandout"
+            ],
+        },
+        {
+            "label": "Delete standard",
+            "args": [
+                "cleanstandaard"
+            ],
+        },
+        {
+            "label": "Delete handout",
+            "args": [
+                "cleanhandout"
+            ],
+        },
+        {
+            "label": "Delete all",
+            "args": [
+                "clean"
+            ],
+        },
+        {
+            "label": "Update DevEnv",
+            "args": [
+                "updateDevEnv"
+            ],
+        },
+    ],
+    "inputs": [
+        {
+          "id": "openSimpleBrowser",
+          "type": "command",
+          "command": "simpleBrowser.show",
+          "args": [ "http://localhost:2000/repositories" ],
+
+        }
+    ],
+    "options": {
+        "env": {
+          "PATH": "${env:PATH}:./xmScripts"  
+        }
+      },    
+}

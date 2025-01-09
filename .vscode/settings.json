@@ -1,0 +1,135 @@
+{
+    // Extend PATH to include ./xmScripts, so that 'xmlatex' is found even when not in a xake dockercontainer.
+    //   ( INSIDE a xake container, /usr/local/bin/xmlatex will and should be found!!!)
+    "terminal.integrated.env.linux": {
+        "PATH": "${env:PATH}:${workspaceFolder}/xmScripts"
+    },
+    // // No possibility to extend PATH ...?
+    // "latex-workshop.latex.external.build.command": "xmlatex",
+    // "latex-workshop.latex.external.build.args": [
+    //     "compilePdf",
+    //     "/code/%RELATIVE_DIR%/%DOCFILE_EXT%"
+    // ],
+    "latex-workshop.latex.recipes": [
+        {
+            "name": "xmlatex",
+            "tools": [
+                "xmlatex"
+            ]
+        }
+    ],
+    "latex-workshop.latex.tools": [
+        {
+            "name": "xmlatex",
+            "command": "bash",
+            // Terrible HACK to get PATH expanded, so that also when NOT in a container, 'xmlatex' is found
+            //  (This is only needed to make 'build' work, e.g. via F5 or the green 'Build LaTeX project' icon)
+            //  Note: when run from OUTSIDE a container, the (full) path INSIDE the container will be different !!!!
+            "args": [
+                "-c",
+                "cd %WORKSPACE_FOLDER%; export DEBUG=\"$DEBUG\" PATH=\"$PATH:%WORKSPACE_FOLDER%/xmScripts\";  xmlatex $DEBUG compilePdf ./%RELATIVE_DIR%/%DOCFILE_EXT%"
+            ],
+            "env": {
+                "DEBUG": "",
+                // "DEBUG": "-d",
+            }
+        }
+    ],
+    "latex-workshop.latex.autoBuild.run": "never",
+    "explorer.excludeGitIgnore": true,
+    // "remote.portsAttributes": {
+    //     "2000": {
+    //         "onAutoForward": "ignore"
+    //     }
+    // },    
+    // "task.problemMatchers.neverPrompt": true    ,
+    "VsCodeTaskButtons.showCounter": false,
+    "VsCodeTaskButtons.tasks": [
+        {
+            "label": "PDF",
+            "alignment": "right",
+            "task": "PDF",
+            "description": "Create a PDF of the current file.",
+            "tooltip": "Compile a PDF from the current file."
+        },
+        {
+            "label": "HTML",
+            "alignment": "right",
+            "task": "HTML",
+            "description": "Create HTML of the current file.",
+            "tooltip": "Compile a HTML from the current file."
+        },
+        {
+            "label": "SERVE",
+            "alignment": "right",
+            "task": "All",
+            "description": "Build and publish this project.",
+            "tooltip": "Build and publish this repo."
+        },
+        {
+            "label": "Extra",
+            "alignment": "right",
+            "tasks": [
+                {
+                    "task": "Start Ximera Server",
+                    "label": "Start Ximera Server",
+                    "description": "Start local Ximera webserver (NOT needed in devcontainer or Codespace).",
+                    "problemMatcher": [],
+                },
+                {
+                    "task": "Preview in Simple Browser",
+                    "label": "Preview in Simple Browser",
+                    // "description": "Start local Ximera webserver.",
+                    "problemMatcher": [],
+                },
+                {
+                    "label": "Bake",
+                    "alignment": "right",
+                    "task": "Bake",
+                    "description": "Bake this project (make .html files).",
+                    "tooltip": "Bake this project."
+                },
+                {
+                    "task": "Bake standard",
+                    "label": "Bake standard PDFs (with answers)",
+                    "description": "Make  full PDF's. ('standaard')",
+                    "problemMatcher": [],
+                },
+                {
+                    "task": "Bake handout",
+                    "label": "Bake handout PDF's (without answers)",
+                    "description": "Make handout PDF's.",
+                    "problemMatcher": [],
+                },
+                {
+                    "label": "Serve",
+                    "alignment": "right",
+                    "task": "Serve",
+                    "description": "Serve this project (does also 'frost', but no 'bake').",
+                    "tooltip": "Serve this project."
+                },
+                {
+                    "task": "Update DevEnv",
+                    "label": "Update the build environment",
+                    "description": "Updates the docker-container, xmScripts en .vscode config",
+                    "problemMatcher": [],
+                },
+                {
+                    "task": "Delete standard",
+                    "label": "Delete all standard PDFs",
+                    "problemMatcher": [],
+                },
+                {
+                    "task": "Delete handout",
+                    "label": "Delete all handout PDFs",
+                    "problemMatcher": [],
+                },
+                {
+                    "task": "Delete all",
+                    "label": "Delete all HTML and PDFs",
+                    "problemMatcher": [],
+                },
+            ],
+        },
+    ]
+}
